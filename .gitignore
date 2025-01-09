@@ -1,0 +1,38 @@
+# Ignore WordPress core files
+/wp-admin/
+/wp-includes/
+/wp-content/uploads/
+/wp-content/cache/
+/wp-content/upgrade/
+
+# Ignore environment and config files
+.env
+.env.local
+*.log
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore node modules and build files
+node_modules/
+dist/
+build/
+
+# Ignore Composer dependencies (if used)
+vendor/
+
+# Ignore compiled CSS/JS files
+*.css.map
+*.js.map
+
+# Ignore SASS/SCSS cache
+*.sass-cache
+*.scss-cache
+
+# Ignore other temporary or backup files
+*.bak
+*.tmp
+*.swp
+*.idea/
+.vscode/
