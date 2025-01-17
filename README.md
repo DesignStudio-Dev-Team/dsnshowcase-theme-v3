@@ -11,25 +11,24 @@ Next Generation WordPress Theme for complex data syndication, built with **Tailw
 - **WordPress Best Practices**: Includes theme support for featured images, menus, widgets, and more.
 
 ## File Structure
-
-dsnshowcase/ 
-├── /templates/ # Reusable templates for parts of the theme 
-    ├── header.php # Header template 
-    ├── footer.php # Footer template 
-    ├── content.php # Default content template 
-    ├── content-none.php # Fallback for no content 
-    ├── content-post.php # Template for single posts |
-├── index.php # Main template file 
-├── single.php # Template for single posts 
-├── page.php # Template for static pages 
-├── archive.php # Template for archives
-├── search.php # Template for search results
-├── 404.php # Template for 404 errors
-├── style.css # Theme's main stylesheet
-├── tailwind.config.js # TailwindCSS configuration 
-├── functions.php # Theme's main functionality file
-├── README.md # Documentation (this file)
-└── .gitignore # Git ignore rules
+dsnshowcase/
+├── /templates/  # Reusable templates for parts of the theme
+│   ├── header.php  # Header template
+│   ├── footer.php  # Footer template
+│   ├── content.php  # Default content template
+│   ├── content-none.php  # Fallback for no content
+│   └── content-post.php  # Template for single posts
+├── index.php  # Main template file
+├── single.php  # Template for single posts
+├── page.php  # Template for static pages
+├── archive.php  # Template for archives
+├── search.php  # Template for search results
+├── 404.php  # Template for 404 errors
+├── style.css  # Theme's main stylesheet
+├── tailwind.config.js  # TailwindCSS configuration
+├── functions.php  # Theme's main functionality file
+├── README.md  # Documentation
+└── .gitignore  # Git ignore rules
 
 
 ## Requirements
