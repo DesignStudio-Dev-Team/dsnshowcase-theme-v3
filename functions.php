@@ -8,8 +8,8 @@ function my_tailwind_theme_setup() {
 
     // Register navigation menus
     register_nav_menus(array(
-        'primary' => __('Primary Menu', 'dsshowcase-theme'),
-        'footer' => __('Footer Menu', 'dsshowcase-theme'),
+        'primary' => __('Primary Menu', 'dsnshowcase'),
+        'footer' => __('Footer Menu', 'dsnshowcase'),
     ));
 
     // Enable HTML5 support

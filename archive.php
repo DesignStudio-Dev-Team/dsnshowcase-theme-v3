@@ -1,17 +1,17 @@
 <?php get_template_part('templates/header'); ?>
-<main class="container mx-auto">
-    <header class="mb-4">
-        <h1 class="text-3xl font-bold"><?php the_archive_title(); ?></h1>
+<main class="dsn-container dsn-mx-auto">
+    <header class="dsn-mb-4">
+        <h1 class="dsn-text-3xl dsn-font-bold"><?php the_archive_title(); ?></h1>
         <p><?php the_archive_description(); ?></p>
     </header>
     <?php if (have_posts()): ?>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="dsn-grid dsn-grid-cols-1 md:dsn-grid-cols-2 lg:dsn-grid-cols-3 dsn-gap-4">
             <?php while (have_posts()): the_post(); ?>
-                <article id="post-<?php the_ID(); ?>" <?php post_class('border p-4 rounded-lg shadow-lg'); ?>>
-                    <h2 class="text-2xl font-bold">
-                        <a href="<?php the_permalink(); ?>" class="text-blue-600 hover:underline"><?php the_title(); ?></a>
+                <article id="post-<?php the_ID(); ?>" <?php post_class('dsn-border dsn-p-4 dsn-rounded-lg dsn-shadow-lg'); ?>>
+                    <h2 class="dsn-text-2xl dsn-font-bold">
+                        <a href="<?php the_permalink(); ?>" class="dsn-text-blue-600"><?php the_title(); ?></a>
                     </h2>
-                    <div class="text-gray-500 text-sm"><?php echo get_the_date(); ?></div>
+                    <div class="dsn-text-gray-500 dsn-text-sm"><?php echo get_the_date(); ?></div>
                     <p><?php the_excerpt(); ?></p>
                 </article>
             <?php endwhile; ?>

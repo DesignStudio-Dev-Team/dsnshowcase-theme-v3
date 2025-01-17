@@ -7,7 +7,7 @@
 </head>
 <body <?php body_class(); ?>>
     <?php get_template_part('templates/header'); ?>
-    <main class="container mx-auto">
+    <main class="dsn-container dsn-mx-auto">
         <?php if (have_posts()): while (have_posts()): the_post(); ?>
             <?php get_template_part('templates/content', get_post_type()); ?>
         <?php endwhile; else: ?>

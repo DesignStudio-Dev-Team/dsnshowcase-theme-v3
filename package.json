@@ -1,6 +1,6 @@
 {
-  "name": "dsshowcase-theme",
-  "version": "1.0.0",
+  "name": "dsnshowcase",
+  "version": "3.0.0",
   "main": "index.js",
   "scripts": {
   "build": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/style.css --minify",
