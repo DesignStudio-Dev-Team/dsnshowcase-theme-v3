@@ -1,5 +1,6 @@
 <?php
 require get_template_directory() . '/inc/woocommerce.php';
+require get_template_directory() . '/inc/acfs.php';
 
 function dsnshowcase_setup() {
     // Enable featured images

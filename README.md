@@ -48,6 +48,10 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.1.1
+- Added initial WooCommerce Styling with TailwindCSS
+- Added ACFs for Theme Settings
+
 ### 3.1.0
 - Initial push 
 - Installed TailwindCSS
