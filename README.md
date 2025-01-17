@@ -28,6 +28,12 @@ Next Generation WordPress Theme for complex data syndication, built with **Tailw
 ### 2. Install Dependencies
 npm install
 
+## Modifying The Theme
+1. npm run watch
+
+## Before pushing to git
+1. npm run build
+
 
 ## WordPress Plugins Needed
 

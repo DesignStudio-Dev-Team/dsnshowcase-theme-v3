@@ -8,7 +8,7 @@ if (function_exists('acf_add_options_page')) {
     acf_add_options_page(array(
         'page_title'     => 'Theme Settings',
         'menu_title'    => 'Theme Settings',
-        'menu_slug'     => 'dsnshowcase-theme-general-settings',
+        'menu_slug'     => 'dsnshowcase-theme-settings',
         'capability'    => 'edit_posts',
         'redirect'        => false
     ));
@@ -1092,7 +1092,7 @@ add_action( 'acf/include_fields', function() {
 			array(
 				'param' => 'options_page',
 				'operator' => '==',
-				'value' => 'theme-settings',
+				'value' => 'dsnshowcase-theme-settings',
 			),
 		),
 	),
