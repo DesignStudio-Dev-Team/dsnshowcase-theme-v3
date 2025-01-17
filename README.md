@@ -1,16 +1,37 @@
 # DesignStudio Network Showcase Theme
 
-Next Generation WordPress Theme for complex data syndication and product display.
+Next Generation WordPress Theme for complex data syndication, built with **TailwindCSS** for modern, responsive, and efficient design. This theme is structured for ease of use and maintainability, utilizing a `/templates` directory for modular content organization.
+
 
 ## Features
 
-- **Syndified Ready Theme**: Created to work best with the plugin Syndified
-- **TailwindCSS**: Created from the ground up using the latest tailwind CSS
+- **TailwindCSS Integration**: Highly customizable CSS framework for rapid UI development.
+- **Template-Based Structure**: Organized `/templates` directory for content parts like headers, footers, and post templates.
+- **Responsive Design**: Mobile-first approach using Tailwind's utility classes.
+- **WordPress Best Practices**: Includes theme support for featured images, menus, widgets, and more.
 
-## Software Stack
+## File Structure
 
-1. WordPress
-2. TailwindCSS.
+dsnshowcase/ │ ├── /templates/ # Reusable templates for parts of the theme │ ├── header.php # Header template │ ├── footer.php # Footer template │ ├── content.php # Default content template │ ├── content-none.php # Fallback for no content │ ├── content-post.php # Template for single posts │ ├── index.php # Main template file ├── single.php # Template for single posts ├── page.php # Template for static pages ├── archive.php # Template for archives ├── search.php # Template for search results ├── 404.php # Template for 404 errors ├── style.css # Theme's main stylesheet ├── tailwind.config.js # TailwindCSS configuration ├── functions.php # Theme's main functionality file ├── README.md # Documentation (this file) └── .gitignore # Git ignore rules
+
+
+## Requirements
+
+- **WordPress**: Version 6.0 or higher.
+- **PHP**: Version 8.1 or higher.
+- **Node.js**: For managing TailwindCSS
+
+
+
+## Setup
+
+### 1. Install and Activate
+1. Upload the theme to your WordPress installation /wp-content/themes/dsnshowcase
+2. Activate the theme via **Appearance > Themes**.
+
+### 2. Install Dependencies
+npm install
+
 
 ## WordPress Plugins Needed
 
