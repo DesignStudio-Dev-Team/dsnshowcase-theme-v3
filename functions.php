@@ -1,6 +1,7 @@
 <?php
 require get_template_directory() . '/inc/woocommerce.php';
 require get_template_directory() . '/inc/acfs.php';
+require get_template_directory() . '/inc/nav-items.php';
 
 function dsnshowcase_setup() {
     // Enable featured images
@@ -15,6 +16,8 @@ function dsnshowcase_setup() {
     // Register navigation menus
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'dsnshowcase'),
+		'utility_left' => __('Utility Left Menu', 'dsnshowcase'),
+		'utility_right' => __('Utility Right Menu', 'dsnshowcase'),
         'footer' => __('Footer Menu', 'dsnshowcase'),
     ));
 

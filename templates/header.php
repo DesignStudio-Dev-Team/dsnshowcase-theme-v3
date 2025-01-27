@@ -6,7 +6,9 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header class="dsn-bg-blue-600 dsn-text-white dsn-py-4 dsn-mb-10">
+	
+	<?php get_template_part('templates/header1'); ?>
+<!-- <header class="dsn-bg-blue-600 dsn-text-white dsn-py-4 dsn-mb-10">
     <div class="dsn-container dsn-mx-auto dsn-flex dsn-justify-between dsn-items-center">
         <h1 class="dsn-text-2xl dsn-font-bold"><a href="<?php
             echo esc_url(home_url('/'));
@@ -16,4 +18,4 @@
             'menu_class' => 'dsn-flex dsn-space-x-4',
         )); ?>
     </div>
-</header>
+</header> -->
