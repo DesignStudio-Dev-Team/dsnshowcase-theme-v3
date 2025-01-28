@@ -169,7 +169,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
                 $atts['class'] = '';
             }
 
-            $atts['class'] .= 'menu-item-link-class ';
+            //$atts['class'] .= 'menu-item-link-class';
 
             $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
