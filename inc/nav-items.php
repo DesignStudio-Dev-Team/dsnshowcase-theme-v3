@@ -3,17 +3,17 @@
 /* add_filter('nav_menu_css_class' , 'dsn_nav_class' , 10 , 2);
 
 function dsn_nav_class($classes, $item){
-    $classes[] = 'dsn-w-full dsn-flex dsn-items-center dsn-text-center hover:dsn-bg-white hover:dsn-text-[#076594]';
+    $classes[] = 'dsn:w-full dsn:flex dsn:items-center dsn:text-center dsn:hover:bg-white dsn:hover:text-[#076594]';
     return $classes;
 } */
 
  add_filter( 'nav_menu_css_class', 'dsn_add_class_nav_primary', 10, 3 );
 function dsn_add_class_nav_primary( $atts, $item, $args ) {
     if ( (int) $item->menu_item_parent === 0 ) {
-        $class         = 'dsn-w-full mega-menu dsn-text-center dsn-text-white hover:dsn-bg-white hover:dsn-text-[#076594] dsn-text-2xl dsn-relative';
+        $class         = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative';
         $atts['class'] = $class;
     } else {
-		$class         = 'dsn-block dsn-text-left dsn-w-full dsn-relative dsn-text-lg';
+		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg';
         $atts['class'] = $class;
 	}
 
@@ -31,7 +31,7 @@ add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
 
 function dsn_submenu_css_class( $classes ) {
 	
-    $classes[] = 'dsn-hidden md:dsn-drop-shadow-lg md:dsn-absolute dsn-left-auto dsn-right-auto md:dsn-top-[100%] dsn-bg-white dsn-p-4 dsn-w-48 dsn-z-30';
+    $classes[] = 'dsn:hidden dsn:md:drop-shadow-lg dsn:md:absolute dsn:left-auto dsn:right-auto dsn:md:top-[100%] dsn:bg-white dsn:p-4 dsn:w-48 dsn:z-30';
     return $classes;
 	 
 }
@@ -59,13 +59,13 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
         }
         $indent = str_repeat( $t, $depth );
 
-        $before_start_lvl = '<div class="mega-menu-inner dsn-hidden dsn-absolute dsn-left-auto dsn-right-auto dsn-top-[100%] dsn-text-black dsn-bg-white dsn-p-8 dsn-w-max dsn-drop-shadow-lg">';
+        $before_start_lvl = '<div class="mega-menu-inner dsn:hidden dsn:absolute dsn:left-auto dsn:right-auto dsn:top-[100%] dsn:text-black dsn:bg-white dsn:p-8 dsn:w-max dsn:drop-shadow-lg">';
 
         if($depth==0){
-            $output .= "{$n}{$indent}{$before_start_lvl}<ul id=\"$this->submenu_unique_id\" class=\"container megamenu-background dsn-sub-menu dsn-flex dsn-items-center dsn-gap-6 dropdown-content dsn-w-max \">{$n}";
+            $output .= "{$n}{$indent}{$before_start_lvl}<ul id=\"$this->submenu_unique_id\" class=\"container megamenu-background dsn-sub-menu dsn:flex dsn:items-center dsn:gap-6 dropdown-content dsn:w-max \">{$n}";
         }
         else{
-            $output .= "{$n}{$indent}<ul id=\"$this->submenu_unique_id\" class=\"sub-menu dropdown-content dsn-min-w-48 \">{$n}";
+            $output .= "{$n}{$indent}<ul id=\"$this->submenu_unique_id\" class=\"sub-menu dropdown-content dsn:min-w-48 \">{$n}";
         }
 
     }
@@ -134,7 +134,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
             $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 			 if( in_array('menu-item', $classes ) ) {
 			if( $depth === 0 ) {                    
-                    $class_names = $class_names ? 'hover:dsn-drop-shadow-md '.esc_attr( $class_names ) : '';
+                    $class_names = $class_names ? 'dsn:hover:drop-shadow-md '.esc_attr( $class_names ) : '';
                 } 
 			 } else{
                 $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
@@ -143,7 +143,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
             //adding col-md-3 class to column
             if( in_array('menu-item-has-children', $classes ) ) {
                  if( $depth === 1 ) {                    
-                    $class_names = $class_names ? ' class="dsn-w-max mega-menucolumn '.esc_attr( $class_names ) . '"' : '';
+                    $class_names = $class_names ? ' class="dsn:w-max mega-menucolumn '.esc_attr( $class_names ) . '"' : '';
                 } else {
                     $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
                 }

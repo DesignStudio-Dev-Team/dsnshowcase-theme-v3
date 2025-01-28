@@ -23,11 +23,11 @@ get_template_part('templates/header');
 ?>
 
 <!-- Main Content Wrapper -->
-<div class="dsn-container mx-auto p-6">
+<div class="dsn:container mx-auto p-6">
 
     <!-- WooCommerce Shop Page Header -->
-    <header class="dsn-mb-8">
-        <h1 class="dsn-text-3xl dsn-font-bold dsn-text-gray-800"><?php woocommerce_page_title(); ?></h1>
+    <header class="dsn:mb-8">
+        <h1 class="dsn:text-3xl dsn:font-bold dsn:text-gray-800"><?php woocommerce_page_title(); ?></h1>
         <?php
         /**
          * Display category description or other header content
@@ -37,7 +37,7 @@ get_template_part('templates/header');
     </header>
 
     <!-- WooCommerce Product Loop -->
-    <div class="dsn-grid dsn-grid-cols-1 sm:dsn-grid-cols-2 md:dsn-grid-cols-3 lg:dsn-grid-cols-4 gap-8">
+    <div class="dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:lg:grid-cols-4 gap-8">
 
         <?php if ( have_posts() ) : ?>
 
@@ -56,7 +56,7 @@ get_template_part('templates/header');
 
         <?php else : ?>
 
-            <p class="dsn-col-span-full dsn-text-center dsn-text-lg dsn-text-gray-500">
+            <p class="dsn:col-span-full dsn:text-center dsn:text-lg dsn:text-gray-500">
                 <?php esc_html_e( 'No products found', 'your-theme' ); ?>
             </p>
 
@@ -65,7 +65,7 @@ get_template_part('templates/header');
     </div>
 
     <!-- WooCommerce Pagination -->
-    <div class="dsn-mt-6">
+    <div class="dsn:mt-6">
         <?php
         // WooCommerce pagination
         woocommerce_pagination();

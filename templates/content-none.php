@@ -1,3 +1,3 @@
-<div class="dsn-text-center">
+<div class="dsn:text-center">
     <p>No content available.</p>
 </div>
