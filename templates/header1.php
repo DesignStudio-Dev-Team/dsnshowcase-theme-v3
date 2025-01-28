@@ -13,7 +13,7 @@ $header_logo = get_field('header_logo', 'options');
         <div class="util-left-nav dsn-w-4/12"><?php wp_nav_menu(array(
             'theme_location' => 'utility_left',
             'menu_class' => 'dsn-flex dsn-space-x-4',
-			'link_class' 		=> "dsn-text-[#0988c2]",
+			'link_class' => "dsn-text-[#0988c2]",
         )); ?>
 		</div>
 		<div class="dsn-logo dsn-w-4/12">
