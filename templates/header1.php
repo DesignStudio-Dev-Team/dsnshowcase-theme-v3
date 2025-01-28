@@ -10,10 +10,11 @@ $header_logo = get_field('header_logo', 'options');
 
 <header class="dsn-bg-white dsn-text-[#0988c2] dsn-py-4 dsn-mb-10 dsn-hidden md:dsn-block">
 	<div class="dsn-container dsn-mx-auto dsn-flex dsn-justify-between dsn-items-center">
-        <div class="util-left-nav dsn-w-4/12"><?php wp_nav_menu(array(
+        <div class="util-left-nav dsn-w-4/12">
+		<?php wp_nav_menu(array(
             'theme_location' => 'utility_left',
-            'menu_class' => 'dsn-flex dsn-space-x-4',
-			'link_class' => "dsn-text-[#0988c2]",
+            'menu_class' => 'dsn-flex dsn-items-center dsn-space-x-10 dsn-relative',
+			'link_class' => "dsn-text-[#0988c2] dsn-text-xl dsn-py-4",
         )); ?>
 		</div>
 		<div class="dsn-logo dsn-w-4/12">
@@ -21,9 +22,11 @@ $header_logo = get_field('header_logo', 'options');
             echo esc_url(home_url('/'));
         ?>"><img class="dsn-w-48 md:dsn-w-64 dsn-mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn-hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
-		<div class="util-left-nav dsn-w-4/12"><?php wp_nav_menu(array(
+		<div class="util-left-nav dsn-flex dsn-justify-end dsn-items-center dsn-gap-4 dsn-w-4/12">
+		<?php wp_nav_menu(array(
             'theme_location' => 'utility_right',
-            'menu_class' => 'dsn-flex dsn-space-x-4',
+            'menu_class' => 'dsn-flex dsn-items-center dsn-space-x-10 dsn-pr-4 dsn-relative',
+			'link_class' => "dsn-text-[#0988c2] dsn-text-xl dsn-py-4",
         )); ?>
 		<div class="cart-search-combo cf dsn-flex dsn-justify-end dsn-items-center dsn-gap-4">
 								
@@ -50,13 +53,14 @@ $header_logo = get_field('header_logo', 'options');
 			'container_class'	=> "dsn-bg-[#076594] dsn-rounded-md dsn-relative",
 			'link_class' 		=> "dsn-py-4 dsn-w-full dsn-block dsn-relative",
 			'depth'				=>	0,
+			'walker' => new DSN_Walker_Nav_Menu()
         )); ?>
     </div>
 	</div>
 	 
 </header>
-<div class="form-wrapper dsn-fixed dsn-flex-col dsn-w-full dsn-h-full dsn-top-0 dsn-left-0 dsn-flex dsn-justify-center dsn-items-center dsn-bg-[#076594]/70 dsn-z-40">
-        <div class="esc-form dsn-absolute dsn-right-[7%] dsn-top-[40%] md:dsn-right-[22%] md:dsn-top-[22%] dsn-w-8 dsn-h-8 dsn-rounded-full dsn-bg-white dsn-flex dsn-justify-center dsn-items-center"><a href="javascript:;" class="close-search dsn-text-2xl dsn-leading-0 dsn-pb-2">x</a></div>
+<div class="form-wrapper dsn-fixed dsn-flex-col dsn-w-full dsn-h-full dsn-top-0 dsn-left-0 dsn-flex dsn-justify-center dsn-items-center dsn-bg-[#076594]/95 dsn-z-40">
+        <div class="esc-form dsn-absolute dsn-right-[7%] dsn-top-[40%] md:dsn-right-[22%] md:dsn-top-[22%] dsn-w-8 dsn-h-8 dsn-rounded-full dsn-bg-white dsn-flex dsn-justify-center dsn-items-center"><a href="javascript:;" class="close-search dsn-text-2xl dsn-leading-0 dsn-pb-2 dsn-text-red-500">x</a></div>
 			<form id="fast-search-desktop" role="search" method="get" class="woocommerce-product-search dsn-w-10/12 md:dsn-w-1/2" action="<?php echo esc_url( home_url( '/'  ) ); ?>">
 				<label class="screen-reader-text" for="s"><?php _e( 'Search for:', 'woocommerce' ); ?></label>
 				<input class="popup-search-bar search dsn-p-4 dsn-rounded-md dsn-w-full" type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'Search Products&hellip;', 'placeholder', 'woocommerce' ); ?>" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'woocommerce' ); ?>" />
@@ -67,33 +71,31 @@ $header_logo = get_field('header_logo', 'options');
 
 <style>
 @media only screen and (min-width: 1024px) {
-	#dsn-primary-menu > li > a:after {
-		content: "|";
-		position: absolute;
-		right: 0;
+	
+	.open > .sub-menu {
+	display: block;
 	}
-	#dsn-primary-menu > li:last-child > a:after {
-		content: "";
-	}
-	#dsn-primary-menu > li > .sub-menu {
-		box-shadow: 0px 0px 3px 0px #eee;
-	}
-	#dsn-primary-menu > li > .sub-menu {
-		margin-top: 56px;
-	}
-	.open > .sub-menu { 
+	.open > .mega-menu-inner { 
 	display: flex;
 	}
-	.open > .sub-menu li ul {
-		position: relative;
-		display: block; 
-		padding: 0;
+		.util-left-nav ul li {
+			width: auto;
 		}
-		.mega-menu.open > .sub-menu > li > a { 
-			font-weight: 800;
+		nav > ul > li:after {
+			content: "";
+			width: 1px;
+			height: 100%;
+			background: #fff;
+			position: absolute;
+			right: 0;
+			top: 0;
 		}
-		.open > .sub-menu li {
-			min-width: 200px;
+		nav > ul > li:last-child:after {
+			content: "";
+			width: 0px;
+		}
+		.dropdown-content a {
+			padding: 0.5em 0;
 		}
 }
 </style>
@@ -127,8 +129,13 @@ $header_logo = get_field('header_logo', 'options');
 				$('div.esc-form').click(function(){
 					$('div.form-wrapper').fadeToggle();
 				});
+				
+				var clickable_desktop = $('.util-left-nav ul').attr('data-clickable');
+				$('.util-left-nav ul li:has(ul)').addClass('has-sub dsn-relative dsn-flex dsn-items-center dsn-gap-2');
+				$('.util-left-nav ul .has-sub>a').after('<span class="dsn_nav__caret dsn-text-[#0988c2] dsn-rotate-90"><svg fill="currentColor" width="20" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></span>');
 
               }(jQuery));
 			  
 			  
             </script>
+
