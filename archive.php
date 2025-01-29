@@ -2,7 +2,7 @@ Hello
 <?php get_template_part('templates/header'); ?>
 <main class="dsn:container dsn:mx-auto">
     <header class="dsn:mb-4">
-        <h1 class="dsn:text-3xl dsn:font-bold"><?php the_archive_title(); ?></h1>
+        <h1 class="dsn:text-3xl dsn:font-bold dsn:text-center dsn:md:text-left"><?php the_archive_title(); ?></h1>
         <p><?php the_archive_description(); ?></p>
     </header>
     <?php if (have_posts()): ?>
