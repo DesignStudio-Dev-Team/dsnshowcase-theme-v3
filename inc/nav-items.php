@@ -31,7 +31,7 @@ add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
 
 function dsn_submenu_css_class( $classes ) {
 	
-    $classes[] = 'dsn:hidden dsn:md:drop-shadow-lg dsn:md:absolute dsn:left-auto dsn:right-auto dsn:md:top-[100%] dsn:bg-white dsn:p-4 dsn:w-48 dsn:z-30';
+    $classes[] = 'dsn:hidden dsn:md:drop-shadow-lg dsn:md:absolute dsn:left-auto dsn:right-auto dsn:md:top-[100%] dsn:bg-white dsn:px-6 dsn:py-4 dsn:w-64 dsn:z-30';
     return $classes;
 	 
 }
@@ -59,7 +59,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
         }
         $indent = str_repeat( $t, $depth );
 
-        $before_start_lvl = '<div class="mega-menu-inner dsn:hidden dsn:absolute dsn:left-auto dsn:right-auto dsn:top-[100%] dsn:text-black dsn:bg-white dsn:p-8 dsn:w-max dsn:drop-shadow-lg">';
+        $before_start_lvl = '<div class="mega-menu-inner dsn:hidden dsn:absolute dsn:left-auto dsn:right-auto dsn:top-[100%] dsn:text-[#076594] dsn:bg-white dsn:p-8 dsn:w-max dsn:drop-shadow-lg">';
 
         if($depth==0){
             $output .= "{$n}{$indent}{$before_start_lvl}<ul id=\"$this->submenu_unique_id\" class=\"container megamenu-background dsn-sub-menu dsn:flex dsn:items-center dsn:gap-6 dropdown-content dsn:w-max \">{$n}";
@@ -140,7 +140,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
                 $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
             }
 
-            //adding col-md-3 class to column
+            //adding class to column
             if( in_array('menu-item-has-children', $classes ) ) {
                  if( $depth === 1 ) {                    
                     $class_names = $class_names ? ' class="dsn:w-max mega-menucolumn '.esc_attr( $class_names ) . '"' : '';
