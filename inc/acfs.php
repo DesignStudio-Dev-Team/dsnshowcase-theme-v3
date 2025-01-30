@@ -164,6 +164,7 @@ add_action( 'acf/include_fields', function() {
 			'max_size' => '',
 			'mime_types' => '',
 		),
+		
 		array(
 			'key' => 'field_6217f8ee263c8',
 			'label' => 'Hide/Show Banner',
@@ -231,6 +232,39 @@ add_action( 'acf/include_fields', function() {
 			'ui' => 0,
 			'ui_on_text' => '',
 			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_55599555e4189',
+			'label' => 'Sticky Header Logo',
+			'name' => 'header_sticky_logo',
+			'aria-label' => '',
+			'type' => 'image',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_61d866ed979b1',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'preview_size' => 'full',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
 		),
 		array(
 			'key' => 'field_61d866a7979b0',
@@ -1099,6 +1133,163 @@ add_action( 'acf/include_fields', function() {
 	'menu_order' => 0,
 	'position' => 'normal',
 	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'show_in_rest' => 0,
+) );
+} );
+
+add_action( 'acf/include_fields', function() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+	'key' => 'group_679a55711ef69',
+	'title' => 'Menu Images',
+	'fields' => array(
+		array(
+			'key' => 'field_679b5632e6c92',
+			'label' => 'Brand Logo',
+			'name' => 'brand_logo',
+			'aria-label' => '',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_679b5662e6c93',
+						'operator' => '!=',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'allow_in_bindings' => 0,
+			'ui' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_679a55713099c',
+			'label' => 'Menu Brand Logo',
+			'name' => 'menu_brand_logo',
+			'aria-label' => '',
+			'type' => 'image',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_679b5632e6c92',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+			'allow_in_bindings' => 0,
+			'preview_size' => 'medium',
+		),
+		array(
+			'key' => 'field_679b5662e6c93',
+			'label' => 'Menu Banner',
+			'name' => 'menu_banner',
+			'aria-label' => '',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_679b5632e6c92',
+						'operator' => '!=',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'allow_in_bindings' => 0,
+			'ui' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_679b568ee6c94',
+			'label' => 'Menu Banner Image',
+			'name' => 'menu_banner_image',
+			'aria-label' => '',
+			'type' => 'image',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_679b5662e6c93',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+			'allow_in_bindings' => 0,
+			'preview_size' => 'medium',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'nav_menu_item',
+				'operator' => '==',
+				'value' => 'location/primary',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'seamless',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
 	'hide_on_screen' => '',
