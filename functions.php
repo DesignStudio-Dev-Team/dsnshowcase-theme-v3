@@ -43,4 +43,31 @@ function dsnshowcase_get_template($slug, $name = null) {
 }
 
 
+add_filter('wp_nav_menu_objects', 'my_wp_nav_menu_objects', 10, 2);
+
+function my_wp_nav_menu_objects( $items, $args ) {
+  
+  // loop
+  foreach( $items as $item ) {
+    
+    // vars
+    $brand_logo_button = get_field('brand_logo', $item);
+    $brand_logo = get_field('menu_brand_logo', $item);
+    $banner_button = get_field('menu_banner', $item);
+    $banner_image = get_field('menu_banner_image', $item);
+    
+    // append icon
+    if( $brand_logo && $brand_logo_button == 'true' ) {
+        $item->title .= '<img class="dsn:w-48 dsn:h-20 dsn:object-contain dsn:bg-gray-200 dsn:p-4 dsn:-mt-6 dsn:z-10 dsn:relative" src="'.$brand_logo['url'].'" />';
+    } elseif( $banner_image && $banner_button == 'true' ) {
+        $item->title .= '<img class="dsn:w-48 dsn:-mt-6 dsn:z-10 dsn:relative" src="'.$banner_image['url'].'" />';
+    }
+    
+  }
+  
+  // return
+  return $items;
+  
+}
+
 ?>
