@@ -53,7 +53,7 @@
 		  cursor: pointer;
 		  border-radius: 1px;
 		  height: 5px;
-		  width: 44px;
+		  width: 30px;
 		  background: #fff;
 		  position: absolute;
 		  display: block;
@@ -64,7 +64,7 @@
 		  cursor: pointer;
 		  border-radius: 1px;
 		  height: 5px;
-		  width: 44px;
+		  width: 30px;
 		  background: #fff;
 		  position: absolute;
 		  display: block;
