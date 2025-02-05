@@ -42,10 +42,10 @@ function dsnshowcase_get_template($slug, $name = null) {
     get_template_part('templates/' . $slug, $name);
 }
 
+//Add mega menu logo and banner using ACF
+add_filter('wp_nav_menu_objects', 'dsn_wp_nav_menu_objects', 10, 2);
 
-add_filter('wp_nav_menu_objects', 'my_wp_nav_menu_objects', 10, 2);
-
-function my_wp_nav_menu_objects( $items, $args ) {
+function dsn_wp_nav_menu_objects( $items, $args ) {
   
   // loop
   foreach( $items as $item ) {
