@@ -1,5 +1,5 @@
 <header class="mobile block dsn:lg:hidden dsn:text-[#0988c2] dsn:border-b">
-	<div class="dsn:flex dsn:justify-between dsn:px-4 dsn:py-4 dsn:container">
+	<div class="dsn:flex dsn:justify-between dsn:px-4 dsn:py-4 dsn:container dsn:mx-auto">
 		<div class="dsn-mobile-logo dsn:w-1/2"><a class="dsn:block dsn:relative dsn:text-center" href="<?php
             echo esc_url(home_url('/'));
         ?>"><img class="dsn:w-48" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a></div>
