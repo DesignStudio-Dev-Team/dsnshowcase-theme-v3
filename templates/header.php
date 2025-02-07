@@ -7,7 +7,7 @@
 </head>
 <body <?php body_class(); ?>>
 	
-	<?php get_template_part('templates/header1'); ?>
+	<?php get_template_part('templates/header_1'); ?>
 <!-- <header class="dsn:bg-blue-600 dsn:text-white dsn:py-4 dsn:mb-10">
     <div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center">
         <h1 class="dsn:text-2xl dsn:font-bold"><a href="<?php

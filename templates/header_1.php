@@ -172,11 +172,11 @@ $header_sticky = get_field('sticky_header', 'options');
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 115px;
-    		width: 135px;
-			margin-left: -2em;
-			margin-right: 2em;
-			padding: 2em;
+			height: 110px;
+        	width: 130px;
+			margin-left: -1em;
+        	margin-right: 1em;
+			padding: 1em 1.5em;
 		}
 		.utility-sticky-nav ul > li li {
 			padding: 0;
@@ -280,9 +280,9 @@ $header_sticky = get_field('sticky_header', 'options');
 }
 @media only screen and (min-width: 1536px) and (max-width: 2300px){
 	.sticky-header-active .dsn-logo {
-		width: 187px;
-        height: 153px;
-        margin-bottom: -78px;
+		width: 190px;
+        height: 140px;
+        margin-bottom: -75px;
 	}
 }
 @media only screen and (min-width: 2301px) and (max-width: 2460px) {
