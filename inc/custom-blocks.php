@@ -9,9 +9,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
 
     // check if the display type is valid and what type for now is either slideshow or stack it
     if ($display_type === 'slideshow') {
-        echo '<div class="custom-blocks-slideshow dsn:relative dsn:-z-0">';
+        echo '<div class="custom-blocks-slideshow dsn:relative dsn:-z-10">';
     } else {
-        echo '<div class="custom-blocks-stacked dsn:relative dsn:-z-0">';
+        echo '<div class="custom-blocks-stacked dsn:relative dsn:-z-10">';
     }
 
     // Loop through the blocks
