@@ -102,9 +102,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         <div class="dsn:container dsn:relative dsn:z-0 dsn:mx-auto dsn:px-4 dsn:mb-15">
         <div class="dsn:flex dsn:flex-wrap dsn:lg:grid dsn:lg:grid-cols-3 dsn:gap-5">
       
-        <div class="dsn:order-1 dsn:lg:order-1
+        <div style="background:url('<?php echo $primaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1 dsn:lg:order-1
         dsn:relative dsn:w-full dsn:h-[400px] dsn:lg:h-[600px] dsn:lg:row-span-2 dsn:p-8 dsn:flex dsn:flex-col 
-        dsn:bg-[url(<?php echo $primaryBGImg; ?>)] dsn:bg-cover dsn:bg-center dsn:bg-no-repeat
+        
         <?php
         echo ' dsn:lg:order-' . $primaryCard . ' ' . $primaryTL; ?>">
           <h1 class="dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:text-white dsn:relative dsn:z-10">
@@ -124,7 +124,7 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         
         </div>
         
-        <div class="dsn:order-2 dsn:lg:order-2 dsn:bg-[url(<?php echo $secondaryBGImg; ?>)] dsn:bg-cover dsn:bg-center dsn:bg-no-repeat dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $secondaryCard; ?>">
+        <div style="background:url('<?php echo $secondaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:lg:order-2  dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $secondaryCard; ?>">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $secondaryLink; ?>">
             <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $secondaryTitle; ?>
@@ -134,7 +134,7 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         </div>
 
        
-        <div class="dsn:order-3 dsn:lg:order-3 dsn:bg-[url(<?php echo $thirdBGImg; ?>)] dsn:bg-cover dsn:bg-center dsn:bg-no-repeat dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $thirdCard; ?> ">
+        <div style="background:url('<?php echo $thirdBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-3 dsn:lg:order-3 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $thirdCard; ?> ">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $thirdLink; ?>">
 
             <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
@@ -145,7 +145,7 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         </div>
 
        
-        <div class="dsn:order-4 dsn:lg:order-4 dsn:bg-[url(<?php echo $fourthBGImg; ?>)] dsn:bg-cover dsn:bg-center dsn:bg-no-repeat dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fourthCard; ?> ">
+        <div style="background:url('<?php echo $fourthBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-4 dsn:lg:order-4 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fourthCard; ?> ">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fourthLink; ?>">
        
           <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
@@ -156,7 +156,7 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         </div>
 
     
-        <div class="dsn:order-5 dsn:lg:order-5 dsn:bg-[url(<?php echo $fifthBGImg; ?>)] dsn:bg-cover dsn:bg-center dsn:bg-no-repeat dsn:relative dsn:w-full  dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fifthCard; ?>">
+        <div style="background:url('<?php echo $fifthBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-5 dsn:lg:order-5 dsn:relative dsn:w-full  dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fifthCard; ?>">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fifthLink; ?>">
         
         <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
@@ -167,6 +167,7 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         </div>
       </div>
     </div>
+  
 
            <?php 
         }

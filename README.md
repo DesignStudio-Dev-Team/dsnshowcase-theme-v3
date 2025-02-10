@@ -41,18 +41,26 @@ npm install
 2. 301 Redirects
 3. Elementor Pro
 4. Gravity Forms
-5. Menu Image
-6. WooCommerce
-7. WP Mail SMTP
-8. WP Rocket
-9. Yoast SEO
-10. Classic Editor
+5. WooCommerce
+6. WP Mail SMTP
+7. WP Rocket
+8. Yoast SEO
+9. Classic Editor
 
 ## Support
 
 Use github issues to report any issues or contact us at our website https://designstudio.com
 
 ## Changelog
+
+### 3.1.6
+- Added a way to view different Headers (Display Only)
+
+### 3.1.5
+- Added Header 1
+- Added Footer 1
+- Added Custom Blocks (Custom Post Type)
+- Added Hero 1
 
 ### 3.1.1
 - Added initial WooCommerce Styling with TailwindCSS
