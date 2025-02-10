@@ -11,19 +11,19 @@ function dsn_nav_class($classes, $item){
 function dsn_add_class_nav_primary( $atts, $item, $args ) {
    if($args->theme_location == "primary") {
     if ( (int) $item->menu_item_parent === 0 ) {
-        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:font-bold dsn:border-t dsn:border-[#076594] dsn:hover:border-[#eeeeee]';
+        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:font-bold dsn:list-none';
         $atts['class'] = $class;
     } else {
-		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg';
+		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg dsn:list-none';
         $atts['class'] = $class;
 	}
         
    } else {
     if ( (int) $item->menu_item_parent === 0 ) {
-        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative';
+        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:list-none';
         $atts['class'] = $class;
     } else {
-		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg';
+		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg dsn:list-none';
         $atts['class'] = $class;
 	}
    }
@@ -72,10 +72,10 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
         $before_start_lvl = '<div class="mega-menu-inner dsn:hidden dsn:absolute dsn:left-auto dsn:right-auto dsn:top-[100%] dsn:text-[#076594] dsn:bg-white dsn:p-8 dsn:px-10 dsn:w-max dsn:drop-shadow-lg">';
 
         if($depth==0){
-            $output .= "{$n}{$indent}{$before_start_lvl}<ul id=\"$this->submenu_unique_id\" class=\"container megamenu-background dsn-sub-menu dsn:flex dsn:items-start dsn:gap-10 dropdown-content dsn:w-max \">{$n}";
+            $output .= "{$n}{$indent}{$before_start_lvl}<ul id=\"$this->submenu_unique_id\" class=\"container megamenu-background dsn-sub-menu dsn:flex dsn:items-start dsn:gap-10 dropdown-content dsn:w-max dsn:!m-0 dsn:!p-0 \">{$n}";
         }
         else{
-            $output .= "{$n}{$indent}<ul id=\"$this->submenu_unique_id\" class=\"sub-menu dropdown-content dsn:min-w-48 \">{$n}";
+            $output .= "{$n}{$indent}<ul id=\"$this->submenu_unique_id\" class=\"sub-menu dropdown-content dsn:min-w-48 dsn:!m-0 dsn:!p-0 \">{$n}";
         }
 
     }
@@ -144,7 +144,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
             $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 			 if( in_array('menu-item', $classes ) ) {
 			if( $depth === 0 ) {                    
-                    $class_names = $class_names ? 'dsn:hover:drop-shadow-md '.esc_attr( $class_names ) : '';
+                    $class_names = $class_names ? ' '.esc_attr( $class_names ) : '';
                 } 
 			 } else{
                 $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
