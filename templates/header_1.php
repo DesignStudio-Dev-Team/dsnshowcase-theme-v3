@@ -1,6 +1,6 @@
 <?php
 /***
- Header 1 
+ Header 01 
  ****/
  
 $header_logo = get_field('header_logo', 'options');
@@ -8,17 +8,17 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header class="dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:lg:block <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
+<header class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:lg:block <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
 <div class="dsn-logo dsn:w-auto dsn:mx-4 dsn:hidden">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
             echo esc_url(home_url('/'));
-        ?>"><img class="dsn:w-22 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2" src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
+        ?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2" src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 	<div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
         <div class="util-left-nav dsn:w-4/12">
 		<?php wp_nav_menu(array(
             'theme_location' => 'utility_left',
-            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative',
+            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
 			'link_class' => "dsn:text-[#0988c2] dsn:text-lg dsn:py-2 dsn:block",
         )); ?>
 		</div>
@@ -30,7 +30,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
 		<?php wp_nav_menu(array(
             'theme_location' => 'utility_right',
-            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative',
+            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
 			'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
         )); ?>
 		<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
@@ -56,7 +56,7 @@ $header_sticky = get_field('sticky_header', 'options');
         <?php wp_nav_menu(array(
             'theme_location' => 'primary',
 			'menu_id'			=> 'dsn-primary-menu',
-            'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-white dsn:w-full',
+            'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
 			'container'			=> "nav",
 			'container_class'	=> "dsn:bg-[#076594] dsn:rounded-md dsn:relative",
 			'link_class' 		=> "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
@@ -96,13 +96,13 @@ $header_sticky = get_field('sticky_header', 'options');
 								<?php wp_nav_menu(array(
 									'theme_location' => 'utility_left',
 									'container_class'	=> "dsn:w-full",
-									'menu_class' => 'dsn:space-x-10 dsn:relative',
+									'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0',
 									'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 								)); ?>
 								<?php wp_nav_menu(array(
 									'theme_location' => 'utility_right',
 									'container_class'	=> "dsn:w-full",
-									'menu_class' => 'dsn:space-x-10 dsn:relative',
+									'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0',
 									'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 								)); ?>
 								
@@ -123,7 +123,8 @@ $header_sticky = get_field('sticky_header', 'options');
 @media only screen and (min-width: 1024px) {
 	
 	.open > .sub-menu {
-	display: block;
+		display: block;
+		margin: 0;
 	}
 	.open > .mega-menu-inner { 
 	display: flex;
@@ -134,6 +135,13 @@ $header_sticky = get_field('sticky_header', 'options');
 		.util-left-nav ul li ul a {
 			font-weight: 600;
 		}
+		nav > ul > li {
+			border-top: 1px solid #076594;
+		}
+		nav > ul > li:hover {
+			border-top: 1px solid #eeeeee;
+			box-shadow: 0px 0px 3px 0px #ddd;
+		 }
 		nav > ul > li:after {
 			content: "";
 			width: 1px;
@@ -172,10 +180,10 @@ $header_sticky = get_field('sticky_header', 'options');
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 110px;
-        	width: 130px;
-			margin-left: -1em;
-        	margin-right: 1em;
+			height: 91px;
+			width: 150px;
+			margin-left: -10px;
+			margin-right: 1em;
 			padding: 1em 1.5em;
 		}
 		.utility-sticky-nav ul > li li {
@@ -255,13 +263,13 @@ $header_sticky = get_field('sticky_header', 'options');
         position: absolute;
         left: 0%;
         background: #076594;
-        height: 200px;
+        height: 127px;
         width: 200px;
         border-radius: 100%;
-        top: -37px;
+        top: -9px;
     }
 	.dsn-logo img {
-		width: 120px;
+		width: 80px;
 	}
 	.sticky-header-active .cart-search-combo {
 		display: flex;
@@ -281,8 +289,7 @@ $header_sticky = get_field('sticky_header', 'options');
 @media only screen and (min-width: 1536px) and (max-width: 2300px){
 	.sticky-header-active .dsn-logo {
 		width: 190px;
-        height: 140px;
-        margin-bottom: -75px;
+        height: 100px;
 	}
 }
 @media only screen and (min-width: 2301px) and (max-width: 2460px) {

@@ -1,6 +1,6 @@
 <?php
 /***
- Header 1 
+ Header 02 
  ****/
  
 $header_logo = get_field('header_logo', 'options');
@@ -8,34 +8,31 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header class="dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:lg:block <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
+<header class="header2 dsn:bg-white dsn:text-[#fff] dsn:mb-10 dsn:hidden dsn:lg:block <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
+	
 <div class="dsn-logo dsn:w-auto dsn:mx-4 dsn:hidden">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
             echo esc_url(home_url('/'));
-        ?>"><img class="dsn:w-22 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2" src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
+        ?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2" src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
+		<div class="dsn:bg-[#006197]">
 	<div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
-        <div class="util-left-nav dsn:w-4/12">
+        <div class="util-left-nav">
 		<?php wp_nav_menu(array(
             'theme_location' => 'utility_left',
-            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative',
-			'link_class' => "dsn:text-[#0988c2] dsn:text-lg dsn:py-2 dsn:block",
+            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0 dsn:!px-0',
+			'link_class' => "dsn:text-[#fff] dsn:text-lg dsn:py-2 dsn:block",
         )); ?>
 		</div>
-		<div class="dsn-logo dsn:w-4/12">
-		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
-            echo esc_url(home_url('/'));
-        ?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
-		</div>
+		
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
 		<?php wp_nav_menu(array(
             'theme_location' => 'utility_right',
-            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative',
-			'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
+            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
+			'link_class' => "dsn:text-[#fff] dsn:text-xl dsn:py-4",
         )); ?>
 		<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
-								
-		
+					
 				<a class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20"><path class="dsn:stroke-current dsn:fill-current" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></a>
 				<a href="/my-account/" class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
@@ -46,20 +43,25 @@ $header_sticky = get_field('sticky_header', 'options');
 			
 
             </div>
+			</div>
 		</div>
 		
     </div>
-	<div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:relative">
+	<div class="primary-nav dsn:block dsn:relative dsn:mx-auto dsn:relative">
 	
-    <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
-	
+    <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full dsn:flex dsn:items-center dsn:justify-between">
+	<div class="dsn-logo dsn:w-auto">
+		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
+            echo esc_url(home_url('/'));
+        ?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
+		</div>
         <?php wp_nav_menu(array(
             'theme_location' => 'primary',
 			'menu_id'			=> 'dsn-primary-menu',
-            'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-white dsn:w-full',
+            'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
 			'container'			=> "nav",
-			'container_class'	=> "dsn:bg-[#076594] dsn:rounded-md dsn:relative",
-			'link_class' 		=> "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
+			'container_class'	=> "dsn:relative dsn:w-full",
+			'link_class' 		=> "dsn:px-2 dsn:py-6 dsn:text-[#076594] dsn:w-full dsn:block dsn:relative",
 			'depth'				=>	0,
 			'walker' => new DSN_Walker_Nav_Menu()
         )); ?>
@@ -96,13 +98,13 @@ $header_sticky = get_field('sticky_header', 'options');
 								<?php wp_nav_menu(array(
 									'theme_location' => 'utility_left',
 									'container_class'	=> "dsn:w-full",
-									'menu_class' => 'dsn:space-x-10 dsn:relative',
+									'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0 dsn:!px-0',
 									'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 								)); ?>
 								<?php wp_nav_menu(array(
 									'theme_location' => 'utility_right',
 									'container_class'	=> "dsn:w-full",
-									'menu_class' => 'dsn:space-x-10 dsn:relative',
+									'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0 dsn:!px-0',
 									'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 								)); ?>
 								
@@ -121,20 +123,44 @@ $header_sticky = get_field('sticky_header', 'options');
 
 <style>
 @media only screen and (min-width: 1024px) {
-	
-	.open > .sub-menu {
-	display: block;
-	}
-	.open > .mega-menu-inner { 
-	display: flex;
-	}
-		.util-left-nav ul li {
+
+		.header2 .util-left-nav ul > li:hover {
+			background-color: transparent;
+		}
+		.header2 .util-left-nav ul > li:hover ul a {
+			color: #0988c2;
+		}
+		.header2 .util-left-nav ul li {
 			width: auto;
 		}
-		.util-left-nav ul li ul a {
+		.header2 .util-left-nav ul li ul a {
 			font-weight: 600;
+			color: #0988c2;
 		}
-		nav > ul > li:after {
+		.header2 nav > ul#dsn-primary-menu {
+			display: block;
+			text-align: right;
+		}
+		.header2 nav > ul#dsn-primary-menu > li {
+			display: inline-block;
+			padding: 0 1em;
+			width: auto;
+			position: initial;
+		}
+		.header2.sticky-header-active nav > ul#dsn-primary-menu > li { 
+			position: relative;
+		}
+		.header2 nav > ul#dsn-primary-menu > li:last-child {
+			padding-right: 0;
+		}
+		.header2 nav > ul#dsn-primary-menu > li > a {
+			border-bottom: 2px solid transparent;
+		}
+		.header2 nav > ul#dsn-primary-menu > li:hover > a {
+			border-bottom: 2px solid #006197;
+		}
+
+		.header2 nav > ul > li:after {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -143,11 +169,24 @@ $header_sticky = get_field('sticky_header', 'options');
 			right: 0;
 			top: 0;
 		}
-		nav > ul > li:last-child:after {
+		.header2 nav > ul > li:last-child:after {
 			content: "";
 			width: 0px;
 		}
-		.sticky-header-active nav > ul > li:first-child:before {
+		.header2.sticky-header-active .primary-nav .dsn-logo {
+			display: none;
+		}
+		.header2.sticky-header-active nav > ul#dsn-primary-menu {
+			display: flex;
+		}
+		.header2.sticky-header-active nav > ul#dsn-primary-menu > li {
+			width: 100%;
+			padding: 0;
+		}
+		.header2.sticky-header-active nav > ul#dsn-primary-menu > li:hover a, .header2.sticky-header-active .utility-sticky-nav ul > li a, .header2.sticky-header-active .utility-sticky-nav span.dsn_nav__caret {
+			color: #076594;
+		}
+		.header2.sticky-header-active nav > ul > li:first-child:before {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -156,15 +195,15 @@ $header_sticky = get_field('sticky_header', 'options');
 			left: 0;
 			top: 0;
 		}
-		.sticky-header-active nav > ul > li:last-child:after {
+		.header2.sticky-header-active nav > ul > li:last-child:after {
 			content: "";
 			width: 1px !important;
 		}
-		.sticky-header-active .util-left-nav ul li {
+		.header2.sticky-header-active .util-left-nav ul li {
 			width: 100%;
 			justify-content: center;
 		}
-		.sticky-header-active .dsn-logo {
+		.header2.sticky-header-active .dsn-logo {
 			background: #076594;
 			border-radius: 100%;
 			margin-bottom: -59px;
@@ -172,98 +211,122 @@ $header_sticky = get_field('sticky_header', 'options');
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 110px;
-        	width: 130px;
-			margin-left: -1em;
-        	margin-right: 1em;
+			height: 91px;
+			width: 150px;
+			margin-left: -10px;
+			margin-right: 1em;
 			padding: 1em 1.5em;
 		}
-		.utility-sticky-nav ul > li li {
+		.header2 .utility-sticky-nav ul > li li {
 			padding: 0;
 		}
-		header ul li ul a {
+		header.header2 ul li ul a {
 			font-size: 16px;
 		}
+		.header2 .open > .sub-menu {
+			display: block;
+			margin: 0;
+		}
+		.header2 .open > .mega-menu-inner { 
+			display: flex;
+		}
+		.header2 ul > li.open:first-child > .mega-menu-inner { 
+			right: 0;
+		}
+		.header2.sticky-header-active li.open:first-child > .mega-menu-inner { 
+			right: auto;
+		}
+		.primary-nav {
+			padding: 1em 0;
+			box-shadow: 0px 3px 6px 0px #ddd;
+		}
+		.header2.sticky-header-active .primary-nav {
+			padding: 0;
+			box-shadow: unset;
+		}
 		
-		.dropdown-content a {
+		.header2 .dropdown-content a {
 			padding: 0.5em 0;
 		}
-		.mega-menucolumn > a {
+		.header2 .mega-menucolumn > a {
 			pointer-events: none;
 			color: #000;
 			font-weight: 700;
 		}
-		.mega-menu > a {
+		.header2 .mega-menu > a {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-wrap: wrap;
 		}
-		span.dsn_nav__caret {
+		.header2 span.dsn_nav__caret {
 			margin-top: 3px;
 		}
-		.sticky-header-active {
+		.header2.sticky-header-active {
 			display: flex;
 		}
-		.sticky-header-active .dsn-header-top-container {
+		.header2.sticky-header-active .dsn-header-top-container {
 			display: none;
 		}
+		.header2.sticky-header-active .mega-menu > a {
+        	color: #fff;	
+    	}
 		
-	.sticky-header-active .cart-search-combo { 
+		.header2.sticky-header-active .cart-search-combo { 
 		display: flex;
-	}
-		.nav-close svg {
+		}
+		.header2 .nav-close svg {
 			display: none;
 		}
-		.nav-close span {
+		.header2 .nav-close span {
 			display: flex !important;
 			height: 32.927px !important;
         	width: 30px !important;
 			align-items: center;
 		}
-		.dsn-mobile-hamburger {
+		.header2 .dsn-mobile-hamburger {
 			height: 46px;
 		}
 		
-		header ul li ul a:hover {
+		header.header2 ul li ul a:hover {
 			opacity: 0.80;
 		}
-		li.non-mega ul {
+		.header2 li.non-mega ul {
 			display: block;
 			min-width: 200px;
 		}
-		.utility-sticky-nav .mega-menu > a {
+		.header2 .utility-sticky-nav .mega-menu > a {
 			justify-content: start;
 		}
 		.utility-sticky-nav ul > li {
 			padding: 10px 30px;
 		}
-		.utility-sticky-nav .open .sub-menu {
+		.header2 .utility-sticky-nav .open .sub-menu {
 			right: 100%;
 			top: 0;
 		}
-		.sticky-header-active .mega-menu > a {
+		.header2.sticky-header-active .mega-menu > a {
 			font-size: 20px;
 		}
 }
 @media only screen and (min-width: 2460px) {
 	
-	.sticky-header-active .dsn-logo {
+	.header2.sticky-header-active .dsn-logo {
         display: flex;
         align-items: center;
         justify-content: center;
         position: absolute;
         left: 0%;
         background: #076594;
-        height: 200px;
+        height: 127px;
         width: 200px;
         border-radius: 100%;
-        top: -37px;
+        top: -9px;
     }
-	.dsn-logo img {
-		width: 120px;
+	.header2 .dsn-logo img {
+		width: 80px;
 	}
-	.sticky-header-active .cart-search-combo {
+	.header2.sticky-header-active .cart-search-combo {
 		display: flex;
 		position: absolute;
 		right: 1%;
@@ -271,22 +334,21 @@ $header_sticky = get_field('sticky_header', 'options');
 	}
 }
 @media only screen and (min-width: 1024px) and (max-width: 1600px) {
-    .sticky-header-active .mega-menu > a {
+    .header2.sticky-header-active .mega-menu > a {
         font-size: 16px;
     }
-	.mega-menu > a {
+	.header2 .mega-menu > a {
 		font-size: 20px;
 	}
 }
 @media only screen and (min-width: 1536px) and (max-width: 2300px){
-	.sticky-header-active .dsn-logo {
+	.header2.sticky-header-active .dsn-logo {
 		width: 190px;
-        height: 140px;
-        margin-bottom: -75px;
+        height: 100px;
 	}
 }
 @media only screen and (min-width: 2301px) and (max-width: 2460px) {
-	.sticky-header-active .dsn-logo {
+	.header2.sticky-header-active .dsn-logo {
 		width: 95px;
 	}
 }
@@ -326,7 +388,7 @@ $header_sticky = get_field('sticky_header', 'options');
 				
 				var clickable_desktop = $('.util-left-nav ul, .util-right-nav ul, .utility-sticky-nav ul').attr('data-clickable');
 				$('.util-left-nav ul li:has(ul), .util-right-nav ul li:has(ul), .utility-sticky-nav ul li:has(ul)').addClass('has-sub dsn:relative dsn:flex dsn:items-center dsn:gap-2 dsn:cursor-pointer');
-				$('.util-left-nav ul .has-sub>a, .util-right-nav ul .has-sub>a, .utility-sticky-nav ul .has-sub>a').after('<span class="dsn_nav__caret dsn:text-[#0988c2] dsn:rotate-90"><svg fill="currentColor" width="20" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></span>');
+				$('.util-left-nav ul .has-sub>a, .util-right-nav ul .has-sub>a, .utility-sticky-nav ul .has-sub>a').after('<span class="dsn_nav__caret dsn:text-[#fff] dsn:rotate-90"><svg fill="currentColor" width="20" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></span>');
 
               }(jQuery));
 			  
@@ -355,13 +417,11 @@ $header_sticky = get_field('sticky_header', 'options');
 							header.addClass("sticky-header-active dsn:bg-[#076594]");
 							header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
 							$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
-							$('.primary-nav').removeClass("dsn:bg-gray-100");
 							$('.nav-container').removeClass("dsn:container");
 						} else {
 							header.removeClass("sticky-header-active dsn:bg-[#076594]");
-							header.addClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+							header.addClass("dsn:bg-white dsn:mb-10");
 							$('.primary-nav').removeClass("dsn:container");
-							$('.primary-nav').addClass("dsn:bg-gray-100");
 							$('.nav-container').addClass("dsn:container");
 							$('.the-navigation').hide();
 							$('.dsn-mobile-hamburger').removeClass('nav-close');

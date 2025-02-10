@@ -34,6 +34,12 @@ function dsnshowcase_enqueue_styles() {
         array(),
         filemtime(get_template_directory() . '/assets/css/style.css')
     );
+	    wp_enqueue_style(
+        'stylesheet',
+        get_template_directory_uri() . '/style.css',
+        array(),
+        filemtime(get_template_directory() . '/style.css')
+    );
 }
 add_action('wp_enqueue_scripts', 'dsnshowcase_enqueue_styles');
 
