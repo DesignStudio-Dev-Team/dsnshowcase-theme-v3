@@ -70,4 +70,19 @@ function dsn_wp_nav_menu_objects( $items, $args ) {
   
 }
 
+function enqueue_slick_slider_assets() {
+    if (is_page()) { // Load only on pages
+        // Slick Slider CSS
+        wp_enqueue_style('slick-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
+        wp_enqueue_style('slick-theme', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
+
+        // Slick Slider JS
+        wp_enqueue_script('slick-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', ['jquery'], null, true);
+
+        // Custom JS for initializing the slider
+        wp_enqueue_script('custom-blocks-slider', get_template_directory_uri() . '/js/custom-blocks-slider.js', ['slick-slider'], null, true);
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_slick_slider_assets');
+
 ?>
