@@ -86,7 +86,7 @@ function enqueue_slick_slider_assets() {
         wp_enqueue_script('slick-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', ['jquery'], null, true);
 
         // Custom JS for initializing the slider
-        wp_enqueue_script('custom-blocks-slider', get_template_directory_uri() . '/js/custom-blocks-slider.js', ['slick-slider'], null, true);
+        wp_enqueue_script('custom-blocks-slider', get_template_directory_uri() . '/assets/js/custom-blocks-slider.js', ['slick-slider'], null, true);
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_slick_slider_assets');

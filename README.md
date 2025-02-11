@@ -53,6 +53,10 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.1.8
+- Added Heroes to have a slideshow if there is more than one
+- added Header 2
+
 ### 3.1.6
 - Added a way to view different Headers (Display Only)
 
