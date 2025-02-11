@@ -8,10 +8,10 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
     if (!$blocks || !is_array($blocks)) return;
 
     // check if the display type is valid and what type for now is either slideshow or stack it
-    if ($display_type === 'slideshow') {
-        echo '<div class="custom-blocks-slideshow dsn:relative dsn:-z-10">';
+    if ($display_type === 'Slideshow') {
+        echo '<div class="custom-blocks-slideshow dsn:container dsn:mx-auto dsn:relative dsn:z-1">';
     } else {
-        echo '<div class="custom-blocks-stacked dsn:relative dsn:-z-10">';
+        echo '<div class="custom-blocks-stacked dsn:relative dsn:z-1">';
     }
 
     // Loop through the blocks
@@ -57,14 +57,20 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
             if($textLocation === 'Top'){
                 $primaryTL = 'dsn:justify-start';
                 $otherCardsTL = 'dsn:items-start';
+                $primaryTLShadow = 'dsn:top-0';
+                $shadowLocation = 'dsn:top-0';
             }
             if($textLocation === 'Middle'){
                 $primaryTL = 'dsn:justify-center';
                 $otherCardsTL = 'dsn:items-center';
+                $shadowLocation = 'dsn:top-[35%]';
+                $primaryTLShadow = 'dsn:top-[35%]';
             }
             if($textLocation === 'Bottom'){
                 $primaryTL = 'dsn:justify-end';
                 $otherCardsTL = 'dsn:items-end';
+                $shadowLocation = 'dsn:top-[67%]';
+                $primaryTLShadow = 'dsn:top-[67%]';
             }
 
             $heroContent = get_field('hero_1_content', $block_id);
@@ -120,8 +126,15 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
              </a>
             <?php } ?>
           </div>
-          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/2 dsn:top-[50%] dsn:z-0"></div>
-        
+
+          <?php if($textLocation === 'Top') { ?>
+          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/2 dsn:z-0 <?php echo $primaryTLShadow; ?>"></div>
+            <?php } if ($textLocation === 'Bottom') { ?>
+                <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 <?php echo $primaryTLShadow; ?>"></div>
+                <?php } if ($textLocation === 'Middle') { ?>
+                    <div class="dsn:absolute dsn:inset-0 dsn:bg-black dsn:opacity-65 dsn:h-1/3 dsn:z-0 <?php echo $primaryTLShadow; ?>"></div>
+                    <?php } ?>
+
         </div>
         
         <div style="background:url('<?php echo $secondaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:lg:order-2  dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $secondaryCard; ?>">
@@ -129,7 +142,14 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
             <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $secondaryTitle; ?>
           </h2>
-          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:top-[67%] dsn:z-0"></div>
+          
+          <?php if($textLocation === 'Top') { ?>
+          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Bottom') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Middle') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-black dsn:opacity-65 dsn:h-[25%] dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } ?>
           </a>
         </div>
 
@@ -140,8 +160,14 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
             <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
             <?php echo $thirdTitle; ?>
           </h2>
-          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:top-[67%] dsn:z-0"></div>
-        </a>
+          <?php if($textLocation === 'Top') { ?>
+          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Bottom') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Middle') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-black dsn:opacity-65 dsn:h-[25%] dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } ?>
+         </a>
         </div>
 
        
@@ -151,8 +177,14 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
           <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $fourthTitle; ?>
           </h2>
-          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:top-[67%] dsn:z-0"></div>
-        </a>
+          <?php if($textLocation === 'Top') { ?>
+          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Bottom') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Middle') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-black dsn:opacity-65 dsn:h-[25%] dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } ?>
+          </a>
         </div>
 
     
@@ -162,8 +194,14 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $fifthTitle; ?>
           </h2>
-          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:top-[67%] dsn:z-0"></div>
-       </a>
+          <?php if($textLocation === 'Top') { ?>
+          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Bottom') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } if($textLocation === 'Middle') { ?>
+            <div class="dsn:absolute dsn:inset-0 dsn:bg-black dsn:opacity-65 dsn:h-[25%] dsn:z-0 <?php echo $shadowLocation; ?>"></div>
+            <?php } ?>
+          </a>
         </div>
       </div>
     </div>
@@ -178,4 +216,22 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
     }
 
     echo '</div>';
+
+    ?>
+    <style>
+        .custom-blocks-slideshow .custom-block {
+    padding: 20px;
+    text-align: center;
+}
+
+.custom-blocks-slideshow .slick-dots {
+    bottom:20px;
+
+}
+
+.custom-blocks-slideshow .slick-dots li button:before {
+    font-size:20px;
+}  
+    </style>
+    <?php 
 }
