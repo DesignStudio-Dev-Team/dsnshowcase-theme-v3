@@ -195,7 +195,7 @@ $social_networks = !empty($content['social_icons']) && is_array($content['social
 </footer>
  <div id="footer-copyright" class="copyright dsn:py-4">
 			<div class="dsn:container dsn:mx-auto dsn:text-center dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1">
-		<span>&copy; <?php echo date('Y'); ?> <?php the_field('company_name', 'option'); ?>. All rights reserved. | Site by</span> <a href="https://designstudio.com/"><svg id="Group_171" data-name="Group 171" xmlns="http://www.w3.org/2000/svg" width="30.328" height="32" viewBox="0 0 30.328 32">
+		<span>&copy; <?php echo date('Y'); ?> <?php the_field('company_name', 'option'); ?>. All rights reserved. | Site by</span> <a href="https://designstudio.com/"><svg title="DesignStudio Logo" id="Group_171" data-name="Group 171" xmlns="http://www.w3.org/2000/svg" width="30.328" height="32" viewBox="0 0 30.328 32">
         <g id="Group_343" data-name="Group 343">
             <g id="Group_53" data-name="Group 53" transform="translate(0)">
             <path id="Path_1" data-name="Path 1" d="M99.815,21.97v1.97H96.77a1.015,1.015,0,0,0,0,2.03h14.149a1.015,1.015,0,0,0,0-2.03h-3.045V21.97h0l5.075-7.642L104.89,0h-.478l.478,12h3.045l-2.03,2.328.478,2.746-2.507-1.313-2.507,1.313.478-2.746L99.815,12h3.045L103.4,0h-.478L94.8,14.328Z" transform="translate(-88.71)" fill="#fff"/>
