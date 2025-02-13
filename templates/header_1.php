@@ -8,7 +8,7 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:lg:block <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
+<header class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
 <div class="dsn-logo dsn:w-auto dsn:mx-4 dsn:hidden">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
             echo esc_url(home_url('/'));
@@ -28,11 +28,13 @@ $header_sticky = get_field('sticky_header', 'options');
         ?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
-		<?php wp_nav_menu(array(
-            'theme_location' => 'utility_right',
-            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-			'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
-        )); ?>
+		<?php 
+		// wp_nav_menu(array(
+        //     'theme_location' => 'utility_right',
+        //     'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
+		// 	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
+        // )); 
+		?>
 		<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
 								
 		

@@ -53,7 +53,7 @@ $social_networks = !empty($content['social_icons']) && is_array($content['social
                             $partial_address = "{$location['city']}, {$location['state']} {$location['zip_code']}";
                             $full_address    = "{$location['address']}, {$location['city']}, {$location['state']} {$location['zip_code']}";
                             ?>
-                            <div class="dsn:mb-12 dsn:w-full dsn:sm:w-1/2 dsn:lg:w-1/2 <?php if($i==0){ echo 'dsn:border-r dsn:border-white'; } else {echo 'dsn:md:pl-10';} ?>" >
+                            <div class="dsn:mb-12 dsn:w-full dsn:sm:w-1/2 dsn:lg:w-1/2 <?php if($i==0){ echo 'dsn:md:border-r dsn:md:border-white dsn:border-b dsn:border-white dsn:md:border-0 dsn:pb-8 dsn:md:pb-0'; } else {echo 'dsn:md:pl-10';} ?>" >
                                 <h3 class="dsn:font-bold dsn:m-0 dsn:text-lg dsn:uppercase dsn:text-left text-footerPrimaryText">
                                 <div class="footer-address-title dsn:flex dsn:items-center dsn:justify-start dsn:text-lg">
                                     <div class="dsn:w-full dsn:flex dsn:justify-between">
@@ -160,7 +160,7 @@ $social_networks = !empty($content['social_icons']) && is_array($content['social
                 </span>
                 
             </div>
-            <div class="dsn:w-full dsn:pb-8 dsn:text-center dsn:md:hidden">
+            <div class="dsn:w-full dsn:pb-8 dsn:text-center dsn:hidden">
                 <?php
                 wp_nav_menu(
                     array(
