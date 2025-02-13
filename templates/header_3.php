@@ -1,6 +1,6 @@
 <?php
 /***
- Header 02 
+ Header 03
  ****/
  
 $header_logo = get_field('header_logo', 'options');
@@ -8,7 +8,7 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header class="header2 dsn:bg-white dsn:text-[#fff] dsn:mb-10 dsn:hidden dsn:lg:block dsn:z-20 <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
+<header class="header3 dsn:bg-white dsn:text-[#fff] dsn:mb-10 dsn:hidden dsn:lg:block dsn:z-20 <?php if($header_sticky == "1") {echo "dsn:sticky dsn:top-0 sticky-header";}else {echo "dsn:relative"; } ?>">
 	
 <div class="dsn-logo dsn:w-auto dsn:mx-4 dsn:hidden">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
@@ -16,23 +16,21 @@ $header_sticky = get_field('sticky_header', 'options');
         ?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2" src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="dsn:bg-[#006197]">
-	<div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
-        <div class="util-left-nav">
-		<?php wp_nav_menu(array(
-            'theme_location' => 'utility_left',
-            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0 dsn:!px-0',
-			'link_class' => "dsn:text-[#fff] dsn:text-lg dsn:py-2 dsn:block",
-        )); ?>
-		</div>
+	<div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-end dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
+        <!-- <div class="util-left-nav">
+		<?php //wp_nav_menu(array(
+            //'theme_location' => 'utility_left',
+            //'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0 dsn:!px-0',
+			//'link_class' => "dsn:text-[#fff] dsn:text-lg dsn:py-2 dsn:block",
+        //)); ?>
+		</div> -->
 		
-		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
-		<?php 
-		// wp_nav_menu(array(
-        //     'theme_location' => 'utility_right',
-        //     'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-		// 	'link_class' => "dsn:text-[#fff] dsn:text-xl dsn:py-4",
-        // ));
-		 ?>
+		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-8/12">
+		<?php wp_nav_menu(array(
+            'theme_location' => 'utility_right',
+            'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
+			'link_class' => "dsn:text-[#fff] dsn:text-xl dsn:py-4",
+        )); ?>
 		<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
 					
 				<a class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20"><path class="dsn:stroke-current dsn:fill-current" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></a>
@@ -52,7 +50,7 @@ $header_sticky = get_field('sticky_header', 'options');
 	<div class="primary-nav dsn:block dsn:relative dsn:mx-auto dsn:relative">
 	
     <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full dsn:flex dsn:items-center dsn:justify-between">
-	<div class="dsn-logo dsn:w-auto">
+	<div class="dsn-logo dsn:w-auto dsn:absolute dsn:h-58 dsn:bg-white dsn:-top-28 dsn:flex dsn:items-center dsn:justify-center dsn:p-6 dsn:rounded-b-2xl dsn:shadow-lg dsn:z-20">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
             echo esc_url(home_url('/'));
         ?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
@@ -121,48 +119,48 @@ $header_sticky = get_field('sticky_header', 'options');
 	</div>
 </header>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header.php"); ?>
+<?php include("mobile-header-3.php"); ?>
 
 <style>
 @media only screen and (min-width: 1024px) {
 
-		.header2 .util-left-nav ul > li:hover {
+		.header3 .util-left-nav ul > li:hover {
 			background-color: transparent;
 		}
-		.header2 .util-left-nav ul > li:hover ul a {
+		.header3 .util-left-nav ul > li:hover ul a {
 			color: #0988c2;
 		}
-		.header2 .util-left-nav ul li {
+		.header3 .util-left-nav ul li {
 			width: auto;
 		}
-		.header2 .util-left-nav ul li ul a {
+		.header3 .util-left-nav ul li ul a {
 			font-weight: 600;
 			color: #0988c2;
 		}
-		.header2 nav > ul#dsn-primary-menu {
+		.header3 nav > ul#dsn-primary-menu {
 			display: block;
 			text-align: right;
 		}
-		.header2 nav > ul#dsn-primary-menu > li {
+		.header3 nav > ul#dsn-primary-menu > li {
 			display: inline-block;
 			padding: 0 0.5em;
 			width: auto;
 			position: initial;
 		}
-		.header2.sticky-header-active nav > ul#dsn-primary-menu > li { 
+		.header3.sticky-header-active nav > ul#dsn-primary-menu > li { 
 			position: relative;
 		}
-		.header2 nav > ul#dsn-primary-menu > li:last-child {
+		.header3 nav > ul#dsn-primary-menu > li:last-child {
 			padding-right: 0;
 		}
-		.header2 nav > ul#dsn-primary-menu > li > a {
+		.header3 nav > ul#dsn-primary-menu > li > a {
 			border-bottom: 2px solid transparent;
 		}
-		.header2 nav > ul#dsn-primary-menu > li:hover > a {
+		.header3 nav > ul#dsn-primary-menu > li:hover > a {
 			border-bottom: 2px solid #006197;
 		}
 
-		.header2 nav > ul > li:after {
+		.header3 nav > ul > li:after {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -171,24 +169,24 @@ $header_sticky = get_field('sticky_header', 'options');
 			right: 0;
 			top: 0;
 		}
-		.header2 nav > ul > li:last-child:after {
+		.header3 nav > ul > li:last-child:after {
 			content: "";
 			width: 0px;
 		}
-		.header2.sticky-header-active .primary-nav .dsn-logo {
+		.header3.sticky-header-active .primary-nav .dsn-logo {
 			display: none;
 		}
-		.header2.sticky-header-active nav > ul#dsn-primary-menu {
+		.header3.sticky-header-active nav > ul#dsn-primary-menu {
 			display: flex;
 		}
-		.header2.sticky-header-active nav > ul#dsn-primary-menu > li {
+		.header3.sticky-header-active nav > ul#dsn-primary-menu > li {
 			width: 100%;
 			padding: 0;
 		}
-		.header2.sticky-header-active nav > ul#dsn-primary-menu > li:hover a, .header2.sticky-header-active .utility-sticky-nav ul > li a, .header2.sticky-header-active .utility-sticky-nav span.dsn_nav__caret {
+		.header3.sticky-header-active nav > ul#dsn-primary-menu > li:hover a, .header3.sticky-header-active .utility-sticky-nav ul > li a, .header3.sticky-header-active .utility-sticky-nav span.dsn_nav__caret {
 			color: #076594;
 		}
-		.header2.sticky-header-active nav > ul > li:first-child:before {
+		.header3.sticky-header-active nav > ul > li:first-child:before {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -197,15 +195,15 @@ $header_sticky = get_field('sticky_header', 'options');
 			left: 0;
 			top: 0;
 		}
-		.header2.sticky-header-active nav > ul > li:last-child:after {
+		.header3.sticky-header-active nav > ul > li:last-child:after {
 			content: "";
 			width: 1px !important;
 		}
-		.header2.sticky-header-active .util-left-nav ul li {
+		.header3.sticky-header-active .util-left-nav ul li {
 			width: 100%;
 			justify-content: center;
 		}
-		.header2.sticky-header-active .dsn-logo {
+		.header3.sticky-header-active .dsn-logo {
 			background: #076594;
 			border-radius: 100%;
 			margin-bottom: -59px;
@@ -219,30 +217,29 @@ $header_sticky = get_field('sticky_header', 'options');
 			margin-right: 1em;
 			padding: 1em 1.5em;
 		}
-		.header2 .utility-sticky-nav ul > li li {
+		.header3 .utility-sticky-nav ul > li li {
 			padding: 0;
 		}
-		header.header2 ul li ul a {
+		header.header3 ul li ul a {
 			font-size: 16px;
 		}
-		.header2 .open > .sub-menu {
+		.header3 .open > .sub-menu {
 			display: block;
 			margin: 0;
 		}
-		.header2 .open > .mega-menu-inner { 
+		.header3 .open > .mega-menu-inner { 
 			display: flex;
 		}
-		
-		.header2 ul > li.open > .mega-menu-inner { 
+		.header3 ul > li.open > .mega-menu-inner { 
 			right: 0;
 			transform: translateX(-12%);
 		}
-		.header2 ul > li.open.non-mega > .mega-menu-inner { 
+		.header3 ul > li.open.non-mega > .mega-menu-inner { 
 			left: auto;
 			right: auto;
 			transform: unset;
 		}
-		.header2.sticky-header-active li.open > .mega-menu-inner { 
+		.header3.sticky-header-active li.open > .mega-menu-inner { 
 			left: auto;
 			right: auto;
 		}
@@ -250,79 +247,100 @@ $header_sticky = get_field('sticky_header', 'options');
 			padding: 1em 0;
 			box-shadow: 0px 3px 6px 0px #ddd;
 		}
-		.header2.sticky-header-active .primary-nav {
+		.header3.sticky-header-active .primary-nav {
 			padding: 0;
 			box-shadow: unset;
 		}
 		
-		.header2 .dropdown-content a {
+		.header3 .dropdown-content a {
 			padding: 0.5em 0;
 		}
-		.header2 .mega-menucolumn > a {
+		.header3 .mega-menucolumn > a {
 			pointer-events: none;
 			color: #000;
 			font-weight: 700;
 		}
-		.header2 .mega-menu > a {
+		.header3 .mega-menu > a {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-wrap: wrap;
 			font-size: 20px;
 		}
-		.header2 span.dsn_nav__caret {
+		.header3 span.dsn_nav__caret {
 			margin-top: 3px;
 		}
-		.header2.sticky-header-active {
+		.header3.sticky-header-active {
 			display: flex;
 		}
-		.header2.sticky-header-active .dsn-header-top-container {
+		.header3.sticky-header-active .dsn-header-top-container {
 			display: none;
 		}
-		.header2.sticky-header-active .mega-menu > a {
+		.header3.sticky-header-active .mega-menu > a {
         	color: #fff;	
     	}
 		
-		.header2.sticky-header-active .cart-search-combo { 
+		.header3.sticky-header-active .cart-search-combo { 
 		display: flex;
 		}
-		.header2 .nav-close svg {
+		.header3 .nav-close svg {
 			display: none;
 		}
-		.header2 .nav-close span {
+		.header3 .nav-close span {
 			display: flex !important;
 			height: 32.927px !important;
         	width: 30px !important;
 			align-items: center;
 		}
-		.header2 .dsn-mobile-hamburger {
+		.header3 .dsn-mobile-hamburger {
 			height: 46px;
 		}
 		
-		header.header2 ul li ul a:hover {
+		header.header3 ul li ul a:hover {
 			opacity: 0.80;
 		}
-		.header2 li.non-mega ul {
+		.header3 li.non-mega ul {
 			display: block;
 			min-width: 200px;
 		}
-		.header2 .utility-sticky-nav .mega-menu > a {
+		.header3 .utility-sticky-nav .mega-menu > a {
 			justify-content: start;
 		}
 		.utility-sticky-nav ul > li {
 			padding: 10px 30px;
 		}
-		.header2 .utility-sticky-nav .open .sub-menu {
+		.header3 .utility-sticky-nav .open .sub-menu {
 			right: 100%;
 			top: 0;
 		}
-		.header2.sticky-header-active .mega-menu > a {
+		.header3.sticky-header-active .mega-menu > a {
 			font-size: 20px;
 		}
+		.header3 .util-left-nav ul li:after {
+			content: "";
+			height: 20px;
+			width: 1px;
+			background: rgb(255, 255, 255, 0.5);
+			position: absolute;
+			right: -18px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.header3 .util-left-nav ul li:first-child:before {
+			content: "";
+			height: 20px;
+			width: 1px;
+			background: rgb(255, 255, 255, 0.5);
+			position: absolute;
+			left: -18px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		
 }
 @media only screen and (min-width: 2460px) {
 	
-	.header2.sticky-header-active .dsn-logo {
+	.header3.sticky-header-active .dsn-logo {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -334,10 +352,13 @@ $header_sticky = get_field('sticky_header', 'options');
         border-radius: 100%;
         top: -9px;
     }
-	.header2 .dsn-logo img {
+	.header3 .dsn-logo img {
 		width: 80px;
 	}
-	.header2.sticky-header-active .cart-search-combo {
+	.header3 .primary-nav .dsn-logo img {
+        width: auto;
+    }
+	.header3.sticky-header-active .cart-search-combo {
 		display: flex;
 		position: absolute;
 		right: 1%;
@@ -345,21 +366,40 @@ $header_sticky = get_field('sticky_header', 'options');
 	}
 }
 @media only screen and (min-width: 1024px) and (max-width: 1600px) {
-    .header2.sticky-header-active .mega-menu > a {
+    .header3.sticky-header-active .mega-menu > a {
         font-size: 16px;
     }
-	.header2 .mega-menu > a {
+	.header3 .mega-menu > a {
 		font-size: 16px;
+	}
+	.cart-search-combo a {
+		width: 35px;
+		height: 35px;
+	}
+	.cart-search-combo a.wishlist, .cart-search-combo a.cart {
+		width: auto;
+	}
+	.dsn-header-top-container {
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+	.primary-nav {
+        padding: 0.5em 0; 
+	}
+	.primary-nav .dsn-logo {
+		height: 183px;
+    	top: -79px;
+		width: 317px;
 	}
 }
 @media only screen and (min-width: 1536px) and (max-width: 2300px){
-	.header2.sticky-header-active .dsn-logo {
+	.header3.sticky-header-active .dsn-logo {
 		width: 190px;
         height: 100px;
 	}
 }
 @media only screen and (min-width: 2301px) and (max-width: 2460px) {
-	.header2.sticky-header-active .dsn-logo {
+	.header3.sticky-header-active .dsn-logo {
 		width: 95px;
 	}
 }
@@ -376,14 +416,18 @@ $header_sticky = get_field('sticky_header', 'options');
                   });
                 }
 
-                $('.dsn-mobile-hamburger').click(function() {
-                  $(this).toggleClass('is-active');
+                $('.dsn-mobile-hamburger svg').click(function() {
+                  $('.dsn-mobile-hamburger').toggleClass('is-active');
 				  $(this).toggleClass("nav-close");
                   $('.the-navigation').fadeToggle();
+				  jQuery('#dsnHTML').toggleClass('dsnOpen');
+            		jQuery('.the-navigation').toggleClass('dsnMobileOpen');
                 });
-				 $('.nav-close').click(function() {
+				 $('.dsn-mobile-hamburger .nav-close').click(function() {
                   $('.dsn-mobile-hamburger').toggleClass('is-active');
 				  $('.dsn-mobile-hamburger').toggleClass('nav-close');
+				  jQuery('#dsnHTML').toggleClass('dsnOpen');
+				  jQuery('.the-navigation').toggleClass('dsnMobileOpen');
                   $('.the-navigation').fadeToggle();
                 });
 				
@@ -421,6 +465,10 @@ $header_sticky = get_field('sticky_header', 'options');
 					  jQuery(document).ready(function($) {
 						//caches a jQuery object containing the header element
 					var header = $(".sticky-header");
+					var width = $("body").width();
+					console.log(width);
+
+					if (width > 1024) {
 					$(window).scroll(function() {
 						var scroll = $(window).scrollTop();
 
@@ -438,6 +486,7 @@ $header_sticky = get_field('sticky_header', 'options');
 							$('.dsn-mobile-hamburger').removeClass('nav-close');
 						}
 					});
+				}
 				});
 				</script>
 			<?php 
