@@ -11,7 +11,7 @@ function dsn_nav_class($classes, $item){
 function dsn_add_class_nav_primary( $atts, $item, $args ) {
    if($args->theme_location == "primary") {
     if ( (int) $item->menu_item_parent === 0 ) {
-        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:font-bold dsn:list-none';
+        $class = 'dsn:w-full mega-menu dsn:text-center dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:font-bold dsn:list-none';
         $atts['class'] = $class;
     } else {
 		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg dsn:list-none';

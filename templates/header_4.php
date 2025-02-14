@@ -1,6 +1,6 @@
 <?php
 /***
- Header 01 
+ Header 04 
  ****/
 
 $header_logo = get_field('header_logo', 'options');
@@ -8,47 +8,45 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header
-	class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block <?php if ($header_sticky == "1") {
+<header	class="header1 dsn:bg-[#076594] dsn:text-white dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:flex <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
 		echo "dsn:relative";
 	} ?>">
-	<div class="dsn-logo dsn:w-auto dsn:mx-4 dsn:hidden">
+	<div class="dsn-logo dsn:w-[20%] dsn:mx-4 dsn-logo dsn:mx-4 dsn:flex dsn:items-center dsn:justify-center">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
 		echo esc_url(home_url('/'));
-		?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2"
-				src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span
-				class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
+		?>">
+			<img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto primary-logo" src="<?php echo $header_logo['url']; ?>"
+				alt="<?php bloginfo('name'); ?>" />
+			<img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2 dsn:hidden secondary-logo"
+				src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" />
+			<span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 	</div>
-	<div
-		class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
+	<div class="header-right dsn:w-[80%]">
+	<div class="dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
 		<div class="util-left-nav dsn:w-4/12">
-			<?php wp_nav_menu(array(
-				'theme_location' => 'utility_left',
-				'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
-				'link_class' => "dsn:text-[#0988c2] dsn:text-lg dsn:py-2 dsn:block",
-			)); ?>
-		</div>
-		<div class="dsn-logo dsn:w-4/12">
-			<a class="dsn:block dsn:relative dsn:text-center" href="<?php
-			echo esc_url(home_url('/'));
-			?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>"
-					alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
-		</div>
-		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
-			<?php
+		<p class="head-text dsn:mb-0 dsn:text-xl"><a href="tel:781-760-5535"><svg viewBox="0 0 20 20" fill="currentColor" class="phone dsn:w-6 dsn:h-6 fill-footerPrimaryText dsn:inline">
+        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg> Call Us @ (781)-760-5535</a></p>
+			<?php 
 			// wp_nav_menu(array(
-			//     'theme_location' => 'utility_right',
-			//     'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-			// 	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
+			// 	'theme_location' => 'utility_left',
+			// 	'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0 dsn:text-white dsn:pl-0',
+			// 	'link_class' => "dsn:text-lg dsn:py-2 dsn:block",
 			// )); 
 			?>
+		</div>
+		
+		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4">
+			<?php
+			wp_nav_menu(array(
+				'theme_location' => 'utility_right',
+				'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0 dsn:text-white dsn:pl-0',
+				'link_class' => "dsn:text-xl dsn:py-2 dsn:block",
+			));
+			?>
 			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
-
-
-				<a
-					class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
+				<a class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
 						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
@@ -58,41 +56,34 @@ $header_sticky = get_field('sticky_header', 'options');
 					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-						<path
-							d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+						<path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
 					</svg>
 				</a>
 				<a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
-					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-						<path
-							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20">
+						<path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
 					</svg>
-					<span
-						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
+					<span class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
 					href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
 							d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-					</svg><span
-						class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
-
-
+					</svg><span class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 			</div>
 		</div>
 
 	</div>
-	<div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:relative">
+	<div class="primary-nav dsn:block dsn:relative dsn:mx-auto dsn:relative">
 
-		<div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
+		<div class="dsn:mx-auto dsn:relative nav-container dsn:w-full">
 
 			<?php wp_nav_menu(array(
 				'theme_location' => 'primary',
 				'menu_id' => 'dsn-primary-menu',
-				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
+				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-gray-900 dsn:w-full dsn:!my-0 dsn:!px-0',
 				'container' => "nav",
-				'container_class' => "dsn:bg-[#076594] dsn:rounded-md dsn:relative",
+				'container_class' => "dsn:bg-white dsn:relative",
 				'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
 				'depth' => 0,
 				'walker' => new DSN_Walker_Nav_Menu()
@@ -101,8 +92,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		</div>
 
 	</div>
-	<div
-		class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-2 dsn:hidden dsn:text-white dsn:mx-4">
+	<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-2 dsn:hidden dsn:text-white dsn:mx-4">
 		<a
 			class="the-search-icon dsn:cursor-pointer dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current"
@@ -169,8 +159,7 @@ $header_sticky = get_field('sticky_header', 'options');
 				</g>
 			</svg></div>
 
-		<div
-			class="the-navigation dsn:hidden dsn:absolute dsn:right-0 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
+		<div class="the-navigation dsn:hidden dsn:absolute dsn:right-0 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
 			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3">
 
 				<a href="/my-account/"
@@ -218,6 +207,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		</div>
 
 	</div>
+	</div>
 </header>
 <?php include("search-form.php"); ?>
 <?php include("mobile-header.php"); ?>
@@ -237,13 +227,28 @@ $header_sticky = get_field('sticky_header', 'options');
 		.util-left-nav ul li {
 			width: auto;
 		}
-
+		
 		.util-left-nav ul li ul a {
 			font-weight: 600;
 		}
-
+		.util-left-nav ul#menu-utility-navigation-left > li:hover, .util-left-nav ul#menu-utility-navigation-right > li:hover {
+			background: transparent;
+		}
+		.util-left-nav ul#menu-utility-navigation-left > li:hover > a, .util-left-nav ul#menu-utility-navigation-right > li:hover > a {
+			color: #fff;
+		}
+		.util-left-nav span.dsn_nav__caret {
+			color: #fff;
+		}
 		nav>ul>li {
 			border-top: 1px solid #076594;
+			border-bottom: 1px solid #d3d3d3;
+		}
+		nav>ul>li:hover>a, .sticky-header-active nav>ul>li>a { 
+			border-bottom: 4px solid #076594;
+		}
+		nav>ul>li>a { 
+			border-bottom: 4px solid #fff;
 		}
 
 		nav>ul>li:hover {
@@ -252,6 +257,16 @@ $header_sticky = get_field('sticky_header', 'options');
 		}
 
 		nav>ul>li:after {
+			content: "";
+			width: 1px;
+			height: 100%;
+			background: #d3d3d3;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+
+		.sticky-header-active nav>ul>li:after {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -399,9 +414,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			top: -9px;
 		}
 
-		.dsn-logo img {
-			width: 80px;
-		}
+		
 
 		.sticky-header-active .cart-search-combo {
 			display: flex;
@@ -502,16 +515,31 @@ $header_sticky = get_field('sticky_header', 'options');
 					header.addClass("sticky-header-active dsn:bg-[#076594]");
 					header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
 					$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
-					$('.primary-nav').removeClass("dsn:bg-gray-100");
-					$('.nav-container').removeClass("dsn:container");
+					$('.primary-nav nav').addClass("dsn:bg-[#076594]");
+					$('.primary-nav nav').removeClass("dsn:bg-white");
+					$('.primary-nav nav > ul').addClass("dsn:text-white");
+					$('.primary-nav nav > ul').removeClass("dsn:text-gray-900");
+					$('.primary-logo').addClass("dsn:hidden");
+					$('.secondary-logo').addClass("dsn:block");
+					$('.secondary-logo').removeClass("dsn:hidden");
+					$('.header-right').addClass("dsn:flex dsn:w-full");
+					$('.header-right').removeClass("dsn:w-[80%]");
+					
 				} else {
-					header.removeClass("sticky-header-active dsn:bg-[#076594]");
-					header.addClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+					header.removeClass("sticky-header-active");
+					header.addClass("dsn:bg-[#076594] dsn:mb-10");
 					$('.primary-nav').removeClass("dsn:container");
-					$('.primary-nav').addClass("dsn:bg-gray-100");
-					$('.nav-container').addClass("dsn:container");
+					$('.primary-nav nav').removeClass("dsn:bg-[#076594]");
+					$('.primary-nav nav').addClass("dsn:bg-white");
+					$('.primary-nav nav > ul').removeClass("dsn:text-white");
+					$('.primary-nav nav > ul').addClass("dsn:text-gray-900");
 					$('.the-navigation').hide();
 					$('.dsn-mobile-hamburger').removeClass('nav-close');
+					$('.primary-logo').removeClass("dsn:hidden");
+					$('.header-right').removeClass("dsn:flex dsn:w-full");
+					$('.header-right').addClass("dsn:w-[80%]");
+					$('.secondary-logo').removeClass("dsn:block");
+					$('.secondary-logo').addClass("dsn:hidden");
 				}
 			});
 		}

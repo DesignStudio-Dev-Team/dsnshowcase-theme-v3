@@ -421,6 +421,10 @@ $header_sticky = get_field('sticky_header', 'options');
 					  jQuery(document).ready(function($) {
 						//caches a jQuery object containing the header element
 					var header = $(".sticky-header");
+					var width = $("body").width();
+					console.log(width);
+
+					if (width > 1024) {
 					$(window).scroll(function() {
 						var scroll = $(window).scrollTop();
 
@@ -438,6 +442,7 @@ $header_sticky = get_field('sticky_header', 'options');
 							$('.dsn-mobile-hamburger').removeClass('nav-close');
 						}
 					});
+					}
 				});
 				</script>
 			<?php 

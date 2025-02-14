@@ -16,7 +16,7 @@ $header_sticky = get_field('sticky_header', 'options');
         ?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2" src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="dsn:bg-[#006197]">
-	<div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-end dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
+	<div class="dsn:container dsn:mx-auto dsn:flex dsn:justify-end dsn:items-center dsn:px-6 dsn:py-2 dsn-header-top-container">
         <!-- <div class="util-left-nav">
 		<?php //wp_nav_menu(array(
             //'theme_location' => 'utility_left',
@@ -29,7 +29,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		<?php wp_nav_menu(array(
             'theme_location' => 'utility_right',
             'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-			'link_class' => "dsn:text-[#fff] dsn:text-xl dsn:py-4",
+			'link_class' => "dsn:text-[#fff] dsn:text-xl dsn:py-2 dsn:block",
         )); ?>
 		<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
 					
@@ -50,7 +50,7 @@ $header_sticky = get_field('sticky_header', 'options');
 	<div class="primary-nav dsn:block dsn:relative dsn:mx-auto dsn:relative">
 	
     <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full dsn:flex dsn:items-center dsn:justify-between">
-	<div class="dsn-logo dsn:w-auto dsn:absolute dsn:h-58 dsn:bg-white dsn:-top-28 dsn:flex dsn:items-center dsn:justify-center dsn:p-6 dsn:rounded-b-2xl dsn:shadow-lg dsn:z-20">
+	<div class="dsn-logo dsn:w-auto dsn:absolute dsn:h-48 dsn:bg-white dsn:-top-20 dsn:flex dsn:items-center dsn:justify-center dsn:p-6 dsn:rounded-b-2xl dsn:shadow-lg dsn:z-20">
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
             echo esc_url(home_url('/'));
         ?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
@@ -380,15 +380,15 @@ $header_sticky = get_field('sticky_header', 'options');
 		width: auto;
 	}
 	.dsn-header-top-container {
-		padding-bottom: 0;
-		padding-top: 0;
+		padding-bottom: 5px;
+		padding-top: 5px;
 	}
 	.primary-nav {
         padding: 0.5em 0; 
 	}
 	.primary-nav .dsn-logo {
-		height: 183px;
-    	top: -79px;
+		height: 155px;
+        top: -60px;
 		width: 317px;
 	}
 }

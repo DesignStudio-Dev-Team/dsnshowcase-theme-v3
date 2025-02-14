@@ -20,8 +20,8 @@ $social_networks = !empty($content['social_icons']) && is_array($content['social
 
 
 <footer id="dsFooter" class="dsn:relative clear-both">
-    <div class="footer-main bgImage">
-        <div class="dsn:px-0 dsn:pt-1 dsn:md:pt-0 dsn:container dsn:block dsn:md:flex dsn:px-0 dsn:pb-10 dsn:relative dsn:md:gap-6 dsn:md:z-10 dsn:md:justify-center">
+    <div class="footer-main bgImage dsn:bg-cover dsn:bg-center">
+        <div class="dsn:px-0 dsn:pt-1 dsn:md:pt-0 dsn:container dsn:block dsn:md:flex dsn:px-0 dsn:pb-10 dsn:relative dsn:md:gap-6 dsn:md:z-10 dsn:md:justify-center dsn:mx-auto">
             <div class="dsn:mt-24 dsn:w-full dsn:md:w-2/5 dsn:lg:w-1/3">
                 <div class="mx-auto">
                     <h4 class="dsn:font-bold dsn:m-0 dsn:text-lg dsn:text-center dsn:uppercase dsn:md:text-left text-footerPrimaryText dsn:md:hidden">How can we help?</h4>
