@@ -15,7 +15,6 @@
 		<div class="mobile-nav-right dsn:relative dsn:bg-white dsn:w-full dsn:h-full dsn:float-right">
 			<div class="nav-open-logo dsn:block dsn:w-1/2 dsn:mx-auto dsn:py-4"><img class="dsn:w-full dsn:mx-auto" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> </div>
 			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:px-4 dsn:py-4 dsn:gap-3 dsn:border-1">
-								
 		
 				<a class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20"><path class="dsn:stroke-current dsn:fill-current" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></a>
 				<a href="/my-account/" class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
@@ -29,7 +28,7 @@
 				<?php wp_nav_menu(array(
 					'theme_location' => 'primary',
 					'menu_id'			=> 'dsn-primary-menu',
-					'menu_class' => 'dsn:block dsn:w-full dsn:w-full dsn:pl-0',
+					'menu_class' => 'dsn:block dsn:w-full dsn:w-full dsn:pl-0 dsn:text-white dsn:!my-0',
 					'container'			=> "nav",
 					'container_class'	=> "dsn:bg-[#076594]",
 					'link_class' 		=> "dsn:py-4 dsn:w-full dsn:block dsn:relative dsn:text-left dsn:px-4 dsn:border-b dsn:border-cyan-700",
