@@ -1,0 +1,126 @@
+{
+    "header": {
+        "search_btn": "Chercher",
+        "search_placeholder": "Tapez pour rechercher..."
+    },
+    "footer": {
+        "help_title": "Comment pouvons nous aider?",
+        "locations_title": "Emplacements",
+        "social_title": "Social",
+        "site_details_title": "Détails du site",
+        "copyright": "droits d'auteur",
+        "site_by": "Site par",
+        "get_directions": "Obtenir des directions"
+    },
+    "search": {
+        "results": "résultats de recherche",
+        "view_link": "Voir",
+        "previous_link": "Précédent",
+        "next_link": "Prochain"
+    },
+    "error_404": {
+        "cannot_be_found": "Oops! Cette page est introuvable.",
+        "nothing_found": "Il semble que rien n'ait été trouvé à cet endroit.",
+        "text_placeholder": "Que pouvons-nous vous aider à trouver?"
+    },
+    "blog_page": {
+        "filter_by_category": "Filtrer par catégorie",
+        "search_blog": "Chercher Blog...",
+        "read_more_link_text": "Lire la suite"
+    },
+    "template_store": {
+        "products_to_explore": "Produits à explorer",
+        "search_placeholder": "Chercher...",
+        "sale_badge": "VENDRE",
+        "per_page_24": "24 Par Page",
+        "per_page_36": "36 Par Page",
+        "per_page_72": "72 Par Page",
+        "sort_by_title": "Trier par:",
+        "sort_by_price_low_to_high": "Prix (De bas en haut)",
+        "sort_by_price_high_to_low": "Prix (Haut en bas)",
+        "sort_by_name_A_to_Z": "Nom (A-Z)",
+        "sort_by_name_Z_to_A": "Nom (Z-A)",
+        "back_to_top": "Retour au sommet",
+        "clear_filters_link_text": "Dégager"
+    },
+    "woocommerce_cart": {
+        "back_link": "RETOUR",
+        "more_products_for_you": "Plus de produits pour vous",
+        "delete_link": "EFFACER",
+        "item_singular": "objet",
+        "item_plural": "éléments",
+        "order_summary_title": "Récapitulatif de la commande",
+        "order_sub_total": "Sous-total",
+        "order_total": "Total",
+        "coupon_discounts": "Remise",
+
+        "coupon_code": "Code promo",
+        "coupon_placeholder": "promo",
+        "checkout_btn": "VÉRIFIER",
+
+        "payment_details": "Détails de paiement",
+        "billing_details":"Détails de la facturation",
+        "street_address": "Adresse de rue",
+        "country": "Pays",
+        "shipping_different_question": "Adresse de livraison différente de la facturation?",
+        "shipping_notes": "Notes d'expédition",
+        "customer_notes_for_order": "Remarques concernant votre commande, par ex. notes spéciales pour la livraison.",
+        "payment_shipping_btn": "Soumettre la commande"
+    },
+    "woocommerce_thank_you": {
+        "title": "Nous vous remercions de votre commande!",
+        "overview_message": "Nous avons envoyé un e-mail de confirmation pour cette commande. Vous recevrez également un autre e-mail une fois que nous aurons expédié votre commande.",
+        "save_a_tree": "Sauvez un arbre, pas besoin d'imprimer cette page ! Une copie de votre reçu vous sera envoyée par e-mail.",
+        "order_number": "Votre numéro de commande",
+        "order_date": "Date de commande",
+        "order_total": "Total de la commande",
+        "payment_method": "Mode de paiement",
+        "shipping_to": "Expédition à",
+        "your_purchase_title": "Votre achat",
+        "right_side_questions": "Des questions?",
+        "right_side_call": "Appel",
+        "right_side_email_us": "Envoyez-nous un email",
+        "right_side_get_ready_to_be_happy": "Préparez-vous à être heureux!"
+    },
+    "my_account": {
+        "menu": {
+            "header": "Menu",
+            "dashboard": "Tableau de bord",
+            "order_history": "Historique des commandes",
+            "addresses": "Adresses",
+            "payment_methods": "Méthodes de payement",
+            "account_settings": "Paramètres du compte",
+            "sign_out": "Se déconnecter",
+            "back": "Retour"
+        },
+        "dashboard": {
+            "active_orders": "Commandes actives",
+            "previous_orders": "Commandes précédentes",
+            "total_spent": "Total dépensé",
+            "subscriptions": "Abonnements",
+            "addresses": "Adresses",
+            "payment_methods": "Méthodes de payement",
+            "account_settings": "Paramètres du compte"
+        },
+        "orders": {
+            "order_number": "Numéro de commande",
+            "order_details": "Détails de la commande",
+            "order_date": "Date de commande",
+            "order_total": "Total de la commande",
+            "status": "Statut",
+            "date_shipped": "Date d'expédition",
+            "shipping_total": "Frais d'expédition",
+            "tracking_number": "Suivi #",
+            "items_ordered": "Les articles commandés",
+            "quantity": "Quantité",
+            "total": "Total"
+        },
+        "account_settings": {
+            "change_password": "Changer le mot de passe",
+            "cancel_btn": "Annuler",
+            "current_password": "Mot de passe actuel",
+            "new_password": "Nouveau mot de passe"
+        }
+    }
+    
+} 

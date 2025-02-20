@@ -1,4 +1,3 @@
-Hello
 <?php get_template_part('templates/header'); ?>
 <main class="dsn:container dsn:mx-auto">
     <header class="dsn:mb-4">

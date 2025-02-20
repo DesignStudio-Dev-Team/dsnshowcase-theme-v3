@@ -1,0 +1,124 @@
+{
+    "header": {
+        "search_btn": "Search",
+        "search_placeholder": "Type to search..."
+    },
+    "footer": {
+        "help_title": "How can we help?",
+        "locations_title": "Locations",
+        "social_title": "Social",
+        "site_details_title": "Site details",
+        "copyright": "Copyright",
+        "site_by": "Site by",
+        "get_directions": "Get Directions"
+    },
+    "search": {
+        "results": "search results",
+        "view_link": "View",
+        "previous_link": "Previous",
+        "next_link": "Next"
+    },
+    "error_404": {
+        "cannot_be_found": "Oops! That page can&rsquo;t be found.",
+        "nothing_found": "It looks like nothing was found at this location.",
+        "text_placeholder": "What can we help you find?"
+    },
+    "blog_page": {
+        "filter_by_category": "Filter By Category",
+        "search_blog": "Search Blog...",
+        "read_more_link_text": "Read More"
+    },
+    "template_store": {
+        "products_to_explore": "Products to Explore",
+        "search_placeholder": "Search...",
+        "sale_badge": "SALE",
+        "per_page_24": "24 Per Page",
+        "per_page_36": "36 Per Page",
+        "per_page_72": "72 Per Page",
+        "sort_by_title": "Sort By:",
+        "sort_by_price_low_to_high": "Price (Low to High)",
+        "sort_by_price_high_to_low": "Price (High to Low)",
+        "sort_by_name_A_to_Z": "Name (A-Z)",
+        "sort_by_name_Z_to_A": "Name (Z-A)",
+        "back_to_top": "Back to Top",
+        "clear_filters_link_text": "Clear"
+    },
+    "woocommerce_cart": {
+        "back_link": "BACK",
+        "more_products_for_you": "More Products For You",
+        "delete_link": "DELETE",
+        "item_singular": "item",
+        "item_plural": "items",
+        "order_summary_title": "Order Summary",
+        "order_sub_total": "Sub Total",
+        "order_total": "Total",
+        "coupon_discounts": "Discounts",
+        "coupon_code": "Coupon Code",
+        "coupon_placeholder": "coupon",
+        "checkout_btn": "CHECKOUT",
+
+        "payment_details": "Payment Details",
+        "billing_details":"Billing Details",
+        "street_address": "Street Address",
+        "country": "Country",
+        "shipping_different_question":"Shipping Address Different From Billing?",
+        "shipping_notes": "Shipping Notes",
+        "customer_notes_for_order": "Notes about your order, e.g. special notes for delivery.",
+        "payment_shipping_btn": "Submit Order"
+    },
+    "woocommerce_thank_you": {
+        "title": "Thank You For Your Order!",
+        "overview_message": "We have sent a confirmation email for this order. You will also receive another email once we have shipped your order.",
+        "save_a_tree": "Save a tree, no need to print this page! A copy of your receipt will be sent to your email.",
+        "order_number": "Your Order Number",
+        "order_date": "Order Date",
+        "order_total": "Order Total",
+        "payment_method": "Payment Method",
+        "shipping_to": "Shipping To",
+        "your_purchase_title": "Your Purchase",
+        "right_side_questions": "Questions?",
+        "right_side_call": "Call",
+        "right_side_email_us": "Email Us",
+        "right_side_get_ready_to_be_happy": "Get Ready to be Happy!"
+    },
+    "my_account": {
+        "menu": {
+            "header": "Menu",
+            "dashboard": "Dashboard",
+            "order_history": "Order History",
+            "addresses": "Addresses",
+            "payment_methods": "Payment Methods",
+            "account_settings": "Account Settings",
+            "sign_out": "Sign Out",
+            "back": "Back"
+        },
+        "dashboard": {
+            "active_orders": "Active Orders",
+            "previous_orders": "Previous Orders",
+            "total_spent": "Total Spent",
+            "subscriptions": "Subscriptions",
+            "addresses": "Addresses",
+            "payment_methods": "Payment Methods",
+            "account_settings": "Account Settings"
+        },
+        "orders": {
+            "order_number": "Order #",
+            "order_details": "Order Details",
+            "order_date": "Order Date",
+            "order_total": "Order Total",
+            "status": "Status",
+            "date_shipped": "Date Shipped",
+            "shipping_total": "Shipping Total",
+            "tracking_number": "Tracking #",
+            "items_ordered": "Items Ordered",
+            "quantity": "Qty",
+            "total": "Total"
+        },
+        "account_settings": {
+            "change_password": "Change Password",
+            "cancel_btn": "Cancel",
+            "current_password": "Current Password",
+            "new_password": "New Password"
+        }
+    }
+} 
