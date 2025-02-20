@@ -202,6 +202,7 @@
 			position: relative;
 			padding: 0;
 			color: #000;
+			top: 0;
 		}
 
 		.mobile .has-sub.is-open ul span.dsn_nav__caret svg {
