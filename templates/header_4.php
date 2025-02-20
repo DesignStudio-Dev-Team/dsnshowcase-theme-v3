@@ -8,7 +8,7 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header	class="header1 dsn:bg-[#076594] dsn:text-white dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:flex <?php if ($header_sticky == "1") {
+<header	class="header4 dsn:bg-[#076594] dsn:text-white dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:flex <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
 		echo "dsn:relative";
@@ -37,11 +37,11 @@ $header_sticky = get_field('sticky_header', 'options');
 			?>
 		</div>
 		
-		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4">
+		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-full">
 			<?php
 			wp_nav_menu(array(
 				'theme_location' => 'utility_right',
-				'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0 dsn:text-white dsn:pl-0',
+				'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-4 dsn:xl:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0 dsn:text-white dsn:pl-0',
 				'link_class' => "dsn:text-xl dsn:py-2 dsn:block",
 			));
 			?>
@@ -81,7 +81,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			<?php wp_nav_menu(array(
 				'theme_location' => 'primary',
 				'menu_id' => 'dsn-primary-menu',
-				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-gray-900 dsn:w-full dsn:!my-0 dsn:!px-0',
+				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-gray-900 dsn:w-full dsn:!my-0 dsn:!px-0',
 				'container' => "nav",
 				'container_class' => "dsn:bg-white dsn:relative",
 				'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
@@ -160,7 +160,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			</svg></div>
 
 		<div class="the-navigation dsn:hidden dsn:absolute dsn:right-0 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
-			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3">
+			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3 dsn:px-6 dsn:my-4">
 
 				<a href="/my-account/"
 					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:block dsn:2xl:hidden">
@@ -188,18 +188,18 @@ $header_sticky = get_field('sticky_header', 'options');
 
 
 			</div>
-			<div class="dsn:relative dsn:bg-white dsn:bg-white utility-sticky-nav">
+			<div class="dsn:relative dsn:bg-white dsn:bg-white utility-sticky-nav dsn:mt-4">
 
 				<?php wp_nav_menu(array(
 					'theme_location' => 'utility_left',
 					'container_class' => "dsn:w-full",
-					'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0',
+					'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0 dsn:px-0',
 					'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 				)); ?>
 				<?php wp_nav_menu(array(
 					'theme_location' => 'utility_right',
 					'container_class' => "dsn:w-full",
-					'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0',
+					'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0 dsn:px-0',
 					'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 				)); ?>
 
@@ -215,48 +215,51 @@ $header_sticky = get_field('sticky_header', 'options');
 <style>
 	@media only screen and (min-width: 1024px) {
 
-		.open>.sub-menu {
+		.header4 .open>.sub-menu {
 			display: block;
 			margin: 0;
 		}
 
-		.open>.mega-menu-inner {
+		.header4 .open>.mega-menu-inner {
 			display: flex;
 		}
 
-		.util-left-nav ul li {
+		.header4 .util-left-nav ul li {
 			width: auto;
 		}
 		
-		.util-left-nav ul li ul a {
+		.header4 .util-left-nav ul li ul a {
 			font-weight: 600;
 		}
-		.util-left-nav ul#menu-utility-navigation-left > li:hover, .util-left-nav ul#menu-utility-navigation-right > li:hover {
+		.header4 .util-left-nav ul#menu-utility-navigation-left > li:hover, .header4 .util-left-nav ul#menu-utility-navigation-right > li:hover {
 			background: transparent;
 		}
-		.util-left-nav ul#menu-utility-navigation-left > li:hover > a, .util-left-nav ul#menu-utility-navigation-right > li:hover > a {
+		.header4 .util-left-nav ul#menu-utility-navigation-left > li:hover > a, .header4 .util-left-nav ul#menu-utility-navigation-right > li:hover > a {
 			color: #fff;
 		}
-		.util-left-nav span.dsn_nav__caret {
+		.header4 .util-left-nav span.dsn_nav__caret {
 			color: #fff;
 		}
-		nav>ul>li {
+		.header4 nav>ul>li {
 			border-top: 1px solid #076594;
 			border-bottom: 1px solid #d3d3d3;
 		}
-		nav>ul>li:hover>a, .sticky-header-active nav>ul>li>a { 
+		.header4 nav>ul>li:hover>a { 
 			border-bottom: 4px solid #076594;
 		}
-		nav>ul>li>a { 
+		.sticky-header-active nav>ul>li>a { 
+			border-bottom: 4px solid #076594 !important;
+		}
+		.header4 nav>ul>li>a { 
 			border-bottom: 4px solid #fff;
 		}
 
-		nav>ul>li:hover {
+		.header4 nav>ul>li:hover {
 			border-top: 1px solid #eeeeee;
 			box-shadow: 0px 0px 3px 0px #ddd;
 		}
 
-		nav>ul>li:after {
+		.header4 nav>ul>li:after {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -266,7 +269,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			top: 0;
 		}
 
-		.sticky-header-active nav>ul>li:after {
+		.header4.sticky-header-active nav>ul>li:after {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -276,12 +279,12 @@ $header_sticky = get_field('sticky_header', 'options');
 			top: 0;
 		}
 
-		nav>ul>li:last-child:after {
+		.header4 nav>ul>li:last-child:after {
 			content: "";
 			width: 0px;
 		}
 
-		.sticky-header-active nav>ul>li:first-child:before {
+		.header4.sticky-header-active nav>ul>li:first-child:before {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -291,17 +294,17 @@ $header_sticky = get_field('sticky_header', 'options');
 			top: 0;
 		}
 
-		.sticky-header-active nav>ul>li:last-child:after {
+		.header4.sticky-header-active nav>ul>li:last-child:after {
 			content: "";
 			width: 1px !important;
 		}
 
-		.sticky-header-active .util-left-nav ul li {
+		.header4.sticky-header-active .util-left-nav ul li {
 			width: 100%;
 			justify-content: center;
 		}
 
-		.sticky-header-active .dsn-logo {
+		.header4.sticky-header-active .dsn-logo {
 			background: #076594;
 			border-radius: 100%;
 			margin-bottom: -59px;
@@ -316,92 +319,95 @@ $header_sticky = get_field('sticky_header', 'options');
 			padding: 1em 1.5em;
 		}
 
-		.utility-sticky-nav ul>li li {
+		.header4 .utility-sticky-nav ul>li li {
 			padding: 0;
 		}
-
-		header ul li ul a {
+		
+		.header4 ul li ul a {
 			font-size: 16px;
 		}
 
-		.dropdown-content a {
+		.header4 .dropdown-content a {
 			padding: 0.5em 0;
 		}
 
-		.mega-menucolumn>a {
+		.header4 .mega-menucolumn>a {
 			pointer-events: none;
 			color: #000;
 			font-weight: 700;
 		}
 
-		.mega-menu>a {
+		.header4 .mega-menu>a {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-wrap: wrap;
+			height: 100%;
 		}
 
-		span.dsn_nav__caret {
+		.header4 span.dsn_nav__caret {
 			margin-top: 3px;
 		}
 
-		.sticky-header-active {
+		.header4.sticky-header-active {
 			display: flex;
+			padding: 0 1em;
 		}
 
-		.sticky-header-active .dsn-header-top-container {
+
+		.header4.sticky-header-active .dsn-header-top-container {
 			display: none;
 		}
 
-		.sticky-header-active .cart-search-combo {
+		.header4.sticky-header-active .cart-search-combo {
 			display: flex;
 		}
-
-		.nav-close svg {
+		
+		.header4 .nav-close svg {
 			display: none;
 		}
 
-		.nav-close span {
+		.header4 .nav-close span {
 			display: flex !important;
 			height: 32.927px !important;
 			width: 30px !important;
 			align-items: center;
 		}
 
-		.dsn-mobile-hamburger {
+		.header4 .dsn-mobile-hamburger {
 			height: 46px;
 		}
 
-		header ul li ul a:hover {
+		.header4 ul li ul a:hover {
 			opacity: 0.80;
 		}
 
-		li.non-mega ul {
+		.header4 li.non-mega ul {
 			display: block;
 			min-width: 200px;
 		}
 
-		.utility-sticky-nav .mega-menu>a {
+		.header4 .utility-sticky-nav .mega-menu>a {
 			justify-content: start;
 		}
 
-		.utility-sticky-nav ul>li {
-			padding: 10px 30px;
+		.header4 .utility-sticky-nav ul>li {
+			padding: 4px 30px;
 		}
 
-		.utility-sticky-nav .open .sub-menu {
+		.header4 .utility-sticky-nav .open .sub-menu {
 			right: 100%;
 			top: 0;
 		}
 
-		.sticky-header-active .mega-menu>a {
+		.header4 .sticky-header-active .mega-menu>a {
 			font-size: 20px;
 		}
 	}
 
 	@media only screen and (min-width: 2460px) {
 
-		.sticky-header-active .dsn-logo {
+		.header4.sticky-header-active .dsn-logo {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -416,36 +422,71 @@ $header_sticky = get_field('sticky_header', 'options');
 
 		
 
-		.sticky-header-active .cart-search-combo {
+		.header4.sticky-header-active .cart-search-combo {
 			display: flex;
 			position: absolute;
 			right: 1%;
 			top: 8px;
 		}
+		.header4.sticky-header-active .the-navigation .cart-search-combo a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+	}
 	}
 
 	@media only screen and (min-width: 1024px) and (max-width: 1600px) {
-		.sticky-header-active .mega-menu>a {
+		.header4.sticky-header-active .mega-menu>a {
 			font-size: 16px;
 		}
 
-		.mega-menu>a {
-			font-size: 20px;
+		.header4 .mega-menu>a, p.head-text {
+			font-size: 16px;
+		}
+		p.head-text svg {
+			width: 16px;
+		}
+		
+		.header4.sticky-header-active .cart-search-combo > a {
+			width: 46px;
+			height: 46px;
+		}
+		.header4.sticky-header-active .the-navigation .cart-search-combo > a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+	}
+	
+		.cart-search-combo a.wishlist, .cart-search-combo a.cart, .header4.sticky-header-active .cart-search-combo a.wishlist, .header4.sticky-header-active .cart-search-combo a.cart {
+			width: auto;
 		}
 	}
 
 	@media only screen and (min-width: 1536px) and (max-width: 2300px) {
-		.sticky-header-active .dsn-logo {
+		.header4.sticky-header-active .dsn-logo {
 			width: 190px;
 			height: 100px;
 		}
 	}
 
 	@media only screen and (min-width: 2301px) and (max-width: 2460px) {
-		.sticky-header-active .dsn-logo {
+		.header4.sticky-header-active .dsn-logo {
 			width: 95px;
 		}
 	}
+	@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+		
+	.header4 .mega-menu>a, p.head-text {
+        font-size: 14px;
+    }
+	.header4 .cart-search-combo a {
+		width: 35px;
+		height: 35px;
+		}
+		.cart-search-combo a.wishlist, .cart-search-combo a.cart, .header4.sticky-header-active .cart-search-combo a.wishlist, .header4.sticky-header-active .cart-search-combo a.cart {
+			width: auto;
+		}
+}
 </style>
 <script>
 	(function ($) {

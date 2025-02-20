@@ -55,7 +55,7 @@
 			</div>
 	</div>
 	<style>
-		.the-navigation.dsMobileOpen {
+		.mobile .the-navigation.dsMobileOpen {
 			display: flex;
 		}
 		.mobile nav > ul > li:hover {
@@ -114,6 +114,7 @@
 		.mobile ul#dsn-utility-menu span.dsn_nav__caret svg {
 			fill: #000;
 		}
+		@media only screen and (max-width: 1024px) {
 		#dsnHTML, .the-navigation {
 			position: relative;
 			right: 0;
@@ -203,7 +204,7 @@
 		display: block;
 		right: -285px;
 		}
-
+	}
 	</style>
 </header>
 <script>

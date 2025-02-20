@@ -132,7 +132,7 @@
 		.nav-close span::before {
 			cursor: pointer;
 			border-radius: 1px;
-			height: 5px;
+			height: 3px;
 			width: 30px;
 			background: #fff;
 			position: absolute;
@@ -144,7 +144,7 @@
 		.nav-close span::after {
 			cursor: pointer;
 			border-radius: 1px;
-			height: 5px;
+			height: 3px;
 			width: 30px;
 			background: #fff;
 			position: absolute;
@@ -202,6 +202,7 @@
 			position: relative;
 			padding: 0;
 			color: #000;
+			top: 0;
 		}
 
 		.mobile .has-sub.is-open ul span.dsn_nav__caret svg {
