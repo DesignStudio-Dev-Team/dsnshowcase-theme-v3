@@ -90,7 +90,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			<?php wp_nav_menu(array(
 				'theme_location' => 'primary',
 				'menu_id' => 'dsn-primary-menu',
-				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-center dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
+				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
 				'container' => "nav",
 				'container_class' => "dsn:bg-[#076594] dsn:rounded-md dsn:relative",
 				'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
@@ -170,8 +170,8 @@ $header_sticky = get_field('sticky_header', 'options');
 			</svg></div>
 
 		<div
-			class="the-navigation dsn:hidden dsn:absolute dsn:right-0 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
-			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3">
+			class="the-navigation dsn:hidden dsn:absolute dsn:right-4 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
+			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3 dsn:px-6 dsn:mt-4">
 
 				<a href="/my-account/"
 					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:block dsn:2xl:hidden">
@@ -199,18 +199,18 @@ $header_sticky = get_field('sticky_header', 'options');
 
 
 			</div>
-			<div class="dsn:relative dsn:bg-white dsn:bg-white utility-sticky-nav">
+			<div class="dsn:relative dsn:bg-white dsn:bg-white utility-sticky-nav dsn:mt-4">
 
 				<?php wp_nav_menu(array(
 					'theme_location' => 'utility_left',
 					'container_class' => "dsn:w-full",
-					'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0',
+					'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
 					'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 				)); ?>
 				<?php wp_nav_menu(array(
 					'theme_location' => 'utility_right',
 					'container_class' => "dsn:w-full",
-					'menu_class' => 'dsn:space-x-10 dsn:relative dsn:!my-0',
+					'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
 					'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 				)); ?>
 
@@ -324,6 +324,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			align-items: center;
 			justify-content: center;
 			flex-wrap: wrap;
+			height: 100%;
 		}
 
 		span.dsn_nav__caret {
@@ -332,6 +333,7 @@ $header_sticky = get_field('sticky_header', 'options');
 
 		.sticky-header-active {
 			display: flex;
+			padding: 0 1em;
 		}
 
 		.sticky-header-active .dsn-header-top-container {
@@ -371,7 +373,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		}
 
 		.utility-sticky-nav ul>li {
-			padding: 10px 30px;
+			padding: 4px 30px;
 		}
 
 		.utility-sticky-nav .open .sub-menu {
@@ -399,7 +401,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			top: -9px;
 		}
 
-		.dsn-logo img {
+		.sticky-header-active .dsn-logo img {
 			width: 80px;
 		}
 
@@ -419,6 +421,17 @@ $header_sticky = get_field('sticky_header', 'options');
 		.mega-menu>a {
 			font-size: 20px;
 		}
+			.header1.sticky-header-active .the-navigation .cart-search-combo > a {
+				width: 46px;
+				height: 46px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.cart-search-combo a.wishlist, .cart-search-combo a.cart, .header1.sticky-header-active .cart-search-combo a.wishlist, .header1.sticky-header-active .cart-search-combo a.cart {
+			width: auto;
+		}
+		
 	}
 
 	@media only screen and (min-width: 1536px) and (max-width: 2300px) {
@@ -433,6 +446,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			width: 95px;
 		}
 	}
+	
 </style>
 <script>
 	(function ($) {
