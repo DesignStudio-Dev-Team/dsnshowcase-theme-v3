@@ -1,0 +1,124 @@
+{
+    "header": {
+        "search_btn": "Zoeken",
+        "search_placeholder": "Typ om te zoeken..."
+    },
+    "footer": {
+        "help_title": "Hoe kunnen we helpen?",
+        "locations_title": "Locaties",
+        "social_title": "Sociaal",
+        "site_details_title": "Sitegegevens",
+        "copyright": "Copyright",
+        "site_by": "Website door",
+        "get_directions": "Routebeschrijving"
+    },
+    "search": {
+        "results": "zoekresultaten",
+        "view_link": "Bekijk",
+        "previous_link": "Vorige",
+        "next_link": "Volgende"
+    },
+    "error_404": {
+        "cannot_be_found": "Oeps! Die pagina kan niet worden gevonden.",
+        "nothing_found": "Het lijkt erop dat er niets is gevonden op deze locatie.",
+        "text_placeholder": "Waar kunnen we je mee helpen?"
+    },
+    "blog_page": {
+        "filter_by_category": "Filter op Categorie",
+        "search_blog": "Zoek Blog...",
+        "read_more_link_text": "Lees Meer"
+    },
+    "template_store": {
+        "products_to_explore": "Producten om te Verkennen",
+        "search_placeholder": "Zoeken...",
+        "sale_badge": "UITVERKOOP",
+        "per_page_24": "24 Per Pagina",
+        "per_page_36": "36 Per Pagina",
+        "per_page_72": "72 Per Pagina",
+        "sort_by_title": "Sorteren op:",
+        "sort_by_price_low_to_high": "Prijs (Laag naar Hoog)",
+        "sort_by_price_high_to_low": "Prijs (Hoog naar Laag)",
+        "sort_by_name_A_to_Z": "Naam (A-Z)",
+        "sort_by_name_Z_to_A": "Naam (Z-A)",
+        "back_to_top": "Terug naar Boven",
+        "clear_filters_link_text": "Wis"
+    },
+    "woocommerce_cart": {
+        "back_link": "TERUG",
+        "more_products_for_you": "Meer Producten Voor Jou",
+        "delete_link": "VERWIJDER",
+        "item_singular": "artikel",
+        "item_plural": "artikelen",
+        "order_summary_title": "Besteloverzicht",
+        "order_sub_total": "Subtotaal",
+        "order_total": "Totaal",
+        "coupon_discounts": "Kortingen",
+        "coupon_code": "Couponcode",
+        "coupon_placeholder": "coupon",
+        "checkout_btn": "AFREKENEN",
+
+        "payment_details": "Betalingsgegevens",
+        "billing_details": "Factuurgegevens",
+        "street_address": "Straatadres",
+        "country": "Land",
+        "shipping_different_question": "Verschilt het verzendadres van de factuur?",
+        "shipping_notes": "Verzendnotities",
+        "customer_notes_for_order": "Opmerkingen over je bestelling, bijv. speciale notities voor levering.",
+        "payment_shipping_btn": "Bestelling Indienen"
+    },
+    "woocommerce_thank_you": {
+        "title": "Bedankt Voor Je Bestelling!",
+        "overview_message": "We hebben een bevestigingsmail voor deze bestelling verstuurd. Je ontvangt ook een andere e-mail zodra we je bestelling hebben verzonden.",
+        "save_a_tree": "Bespaar een boom, je hoeft deze pagina niet af te drukken! Een kopie van je ontvangstbewijs wordt naar je e-mail gestuurd.",
+        "order_number": "Je Bestelnummer",
+        "order_date": "Besteldatum",
+        "order_total": "Bestel Totaal",
+        "payment_method": "Betalingsmethode",
+        "shipping_to": "Verzending Naar",
+        "your_purchase_title": "Je Aankoop",
+        "right_side_questions": "Vragen?",
+        "right_side_call": "Bel",
+        "right_side_email_us": "E-mail Ons",
+        "right_side_get_ready_to_be_happy": "Maak je klaar om Gelukkig te Zijn!"
+    },
+    "my_account": {
+        "menu": {
+            "header": "Menu",
+            "dashboard": "Dashboard",
+            "order_history": "Bestelgeschiedenis",
+            "addresses": "Adressen",
+            "payment_methods": "Betalingsmethoden",
+            "account_settings": "Accountinstellingen",
+            "sign_out": "Uitloggen",
+            "back": "Terug"
+        },
+        "dashboard": {
+            "active_orders": "Actieve Bestellingen",
+            "previous_orders": "Vorige Bestellingen",
+            "total_spent": "Totaal Besteed",
+            "subscriptions": "Abonnementen",
+            "addresses": "Adressen",
+            "payment_methods": "Betalingsmethoden",
+            "account_settings": "Accountinstellingen"
+        },
+        "orders": {
+            "order_number": "Bestelling #",
+            "order_details": "Bestelgegevens",
+            "order_date": "Besteldatum",
+            "order_total": "Bestel Totaal",
+            "status": "Status",
+            "date_shipped": "Verzenddatum",
+            "shipping_total": "Verzend Totaal",
+            "tracking_number": "Volgnummer #",
+            "items_ordered": "Bestelde Artikelen",
+            "quantity": "Aantal",
+            "total": "Totaal"
+        },
+        "account_settings": {
+            "change_password": "Wachtwoord Wijzigen",
+            "cancel_btn": "Annuleren",
+            "current_password": "Huidig Wachtwoord",
+            "new_password": "Nieuw Wachtwoord"
+        }
+    }
+}

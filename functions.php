@@ -2,6 +2,7 @@
 require get_template_directory() . '/inc/woocommerce.php';
 require get_template_directory() . '/inc/acfs.php';
 require get_template_directory() . '/inc/nav-items.php';
+require get_template_directory() . '/inc/other-functions.php';
 
 function dsnshowcase_setup() {
     // Enable featured images

@@ -1,0 +1,1375 @@
+<?php
+
+/**
+ * Functions which enhance the theme by hooking into WordPress
+ *
+ * @package dsShowcase Theme
+ */
+
+/**
+ * Adds custom classes to the array of body classes.
+ *
+ * @param array $classes Classes for the body element.
+ * @return array
+ */
+function dsShowcase_body_classes($classes)
+{
+    // Adds a class of hfeed to non-singular pages.
+    if (!is_singular()) {
+        $classes[] = 'hfeed';
+    }
+
+    return $classes;
+}
+
+add_filter('body_class', 'dsShowcase_body_classes');
+
+/**
+ * Add a pingback url auto-discovery header for single posts, pages, or attachments.
+ */
+function dsShowcase_pingback_header()
+{
+    if (is_singular() && pings_open()) {
+        printf('<link rel="pingback" href="%s">', esc_url(get_bloginfo('pingback_url')));
+    }
+}
+
+add_action('wp_head', 'dsShowcase_pingback_header');
+
+add_filter('woocommerce_add_to_cart_fragments', 'dealer_add_to_cart_fragment');
+
+function dealer_add_to_cart_fragment($fragments)
+{
+
+    global $dssSiteLanguage;
+   
+    global $woocommerce;
+    $item_counter = $woocommerce->cart->cart_contents_count;
+    if ($item_counter == 0) {
+
+        $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart text-xl px-4 border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>';
+        $fragments['.cart-counter'] = '<p class="cart-counter text-right uppercase font-semibold">the cart is empty</p>';
+    } else {
+        $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart text-xl px-4 border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="dealer-cart__counter align-top text-xs w-5 h-5 bg-orange-400 text-center text-black rounded-full -ml-2 -mt-2 inline-block">' . $item_counter . '</span></a>';
+        $fragments['.cart-counter'] = '<p class="cart-counter text-right uppercase font-semibold">';
+        
+        if ($item_counter == 1) $fragments['.cart-counter'] .= $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular; 
+        else $fragments['.cart-counter'] .= $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural; 
+                      
+        $fragments['.cart-counter'] .= '</p>';
+    }
+
+    return $fragments;
+}
+
+
+// Create pagination
+function foundation_pagination($query = '')
+{
+    if (empty($query)) {
+        global $wp_query;
+        $query = $wp_query;
+    }
+    $current = $_POST['paged'] ? $_POST['paged'] : get_query_var('paged');
+
+    $big = 999999999;
+    $links = paginate_links(array(
+        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+        'format' => '%#%',
+        'prev_next' => true,
+        'prev_text' => '&laquo;',
+        'next_text' => '&raquo;',
+        'current' => max(1, $current),
+        'total' => $query->max_num_pages,
+        'type' => 'list'
+    ));
+
+    $pagination = str_replace('page-numbers', 'pagination', $links);
+
+    echo $pagination;
+}
+
+
+add_action('wp_ajax_ds_filter', 'ds_filtration');
+add_action('wp_ajax_nopriv_ds_filter', 'ds_filtration');
+
+function ds_filtration()
+{
+
+    $catArgs = array(
+        'post_type'             => 'product',
+        'post_status'           => 'publish',
+        'posts_per_page'        => '24',
+        'order' => $_POST['order'],
+        'orderby' => $_POST['orderby'],
+        'tax_query'             => array(
+            array(
+                'taxonomy'  => 'product_cat',
+                'field'     => 'slug',
+                'terms'     => $_POST['search'],
+                'operator'  => 'IN',
+            )
+        )
+    );
+
+
+    $args = array(
+        'post_type' => 'product',
+        'order' => $_POST['order'],
+        'orderby' => $_POST['orderby'],
+        'post_status' => 'publish'
+    );
+
+    $sort_by = $_POST['orderby'] . '-' . $_POST['order'];
+
+    if ($_POST['orderby'] == 'price') {
+        $args['orderby'] = 'meta_value_num';
+        $args['meta_key'] = '_price';
+    }
+
+    if (isset($_POST['search']) && !empty($_POST['search'])) {
+        $args['s'] = $_POST['search'];
+    }
+
+    if (isset($_POST['paged']) && !empty($_POST['paged'])) {
+        $args['paged'] = $_POST['paged'];
+    }
+
+    if (isset($_POST['posts_per_page']) && !empty($_POST['posts_per_page'])) {
+        $args['posts_per_page'] = $_POST['posts_per_page'];
+    } else {
+        $args['posts_per_page'] = 24;
+    }
+
+    // for categories
+    if (isset($_POST['categories']) && !empty($_POST['categories'])) {
+        $cat_array = explode(',', $_POST['categories']);
+        $args['tax_query'] = array(
+            'relation ' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'id',
+                'terms' => $cat_array
+            ),
+        );
+    }
+
+    $specials = get_field('specials_category', 'options');
+    if (isset($_POST['specials']) && $_POST['specials'] == true && $specials) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'product_cat',
+            'field' => 'id',
+            'terms' => $specials
+        );
+    }
+
+    //
+    $args['meta_query']['relation'] = 'AND';
+
+    // create $args['meta_query'] array if one of the following fields is filled
+    if (isset($_POST['price_min']) && $_POST['price_min'] || isset($_POST['price_max']) && $_POST['price_max'] || isset($_POST['featured_image']) && $_POST['featured_image'] == 'on') {
+        $args['meta_query'][0] = array('relation' => 'AND');
+    } // AND means that all conditions of meta_query should be true
+
+    // if both minimum price and maximum price are specified we will use BETWEEN comparison
+    if (isset($_POST['price_min']) && $_POST['price_min'] && isset($_POST['price_max']) && $_POST['price_max']) {
+        $args['meta_query'][0][] = array(
+            'key' => '_price',
+            'value' => array($_POST['price_min'], $_POST['price_max']),
+            'type' => 'numeric',
+            'compare' => 'between'
+        );
+    } else {
+        // if only min price is set
+        if (isset($_POST['price_min']) && $_POST['price_min']) {
+            $args['meta_query'][0][] = array(
+                'key' => '_price',
+                'value' => $_POST['price_min'],
+                'type' => 'numeric',
+                'compare' => '>'
+            );
+        }
+
+        // if only max price is set
+        if (isset($_POST['price_max']) && $_POST['price_max']) {
+            $args['meta_query'][0][] = array(
+                'key' => '_price',
+                'value' => $_POST['price_max'],
+                'type' => 'numeric',
+                'compare' => '<'
+            );
+        }
+    }
+
+    // show only sale products
+    if (isset($_POST['sale']) && $_POST['sale'] == 'true') {
+        $args['meta_query'][1]['relation'] = 'OR';
+        $args['meta_query'][1][] = array( // Simple products type
+            'key' => '_sale_price',
+            'value' => 0,
+            'compare' => '>',
+            'type' => 'numeric'
+        );
+        $args['meta_query'][1][] = array( // Variable products type
+            'key' => '_min_variation_sale_price',
+            'value' => 0,
+            'compare' => '>',
+            'type' => 'numeric'
+        );
+    }
+
+    // Set our defaults to keep our code DRY
+    $defaults = [
+        'fields'                 => 'ids',
+        'update_post_term_cache' => false,
+        'update_post_meta_cache' => false,
+        'cache_results'          => false
+    ];
+
+    $cat_query = get_posts(array_merge($defaults, $catArgs));
+    $product_query = get_posts(array_merge($defaults, $args));
+
+    // used for counting posts
+    $post_query_count = new WP_Query(array_merge($defaults, $args));
+    $catArgs['posts_per_page'] = 10000000000000;
+    $post_cat_query_count = new WP_Query(array_merge($defaults, $catArgs));
+    //$count_post_count = count (array_merge ( get_posts( array_merge( $defaults, $catArgs  ) ), get_posts( array_merge( $defaults, $args ) )  ));
+    //$count_post_count = $post_cat_query_count->found_posts + $post_query_count->found_posts;
+    if (!$post_query_count->found_posts && $post_cat_query_count->found_posts)
+        $post_query_count->found_posts = $post_cat_query_count->found_posts;
+
+
+    // Merge the two results
+    $post_ids = array_merge($cat_query, $product_query); //. You can swop around here
+
+    $final_args = [
+        'post_type' => ['product'],
+        'post__in'  => $post_ids,
+        'orderby'   => 'post__in', // If you need to keep the order from $post_ids
+        'order'     => 'DESC', // If you need to keep the order from $post_ids
+    ];
+
+    if (isset($_POST['posts_per_page']) && !empty($_POST['posts_per_page'])) {
+        $final_args['posts_per_page'] = $_POST['posts_per_page'];
+    } else {
+        $final_args['posts_per_page'] = 24;
+    }
+
+    //print_r ($final_args);
+    $the_query = new WP_Query($final_args);
+
+    //print_r ($post_query_count);
+?>
+
+    <div class="flex-row ds-filters-nav w-full">
+        <div class="ds-filters-counter hidden md:block hide-for-medium-down">
+            <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
+            <?php _e(' Products to Explore', 'dealer-theme'); ?>
+        </div>
+        <div class="ds-filters-nav-right">
+            <button class="show-filters js-toggle-filters lg:hidden relative">Filters</button>
+            <form id="ds-filters-search-wrap" class="hide-for-medium-down hidden md:flex relative" action="<?php echo esc_url(home_url('/')); ?>">
+                <input type="search" name="ds-search" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $_POST['search']; ?>" />
+            </form>
+
+            <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page hidden lg:block">
+                <option value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?>>24
+                    Per Page
+                </option>
+                <option value="36" <?php echo $_POST['posts_per_page'] == '36' ? 'selected' : ''; ?>>36
+                    Per Page
+                </option>
+                <option value="72" <?php echo $_POST['posts_per_page'] == '72' ? 'selected' : ''; ?>>72
+                    Per Page
+                </option>
+            </select>
+            <select name="sort_by" id="ds-sort_by">
+                <option value="" disabled selected>Sort By:</option>
+                <option value="price-desc" <?php echo $sort_by == 'price-desc' ? 'selected' : ''; ?>>
+                    Price (High to Low)
+                </option>
+                
+                <option value="price-asc" <?php echo $sort_by == 'price-asc' ? 'selected' : ''; ?>>
+                    Price (Low to High)
+                </option>
+           
+                <option value="title-asc" <?php echo $sort_by == 'title-asc' ? 'selected' : ''; ?>>
+                    Name (A-Z)
+                </option>
+                <option value="title-desc" <?php echo $sort_by == 'title-desc' ? 'selected' : ''; ?>>
+                    Name (Z-A)
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
+        <div class="w-full flex -mr-4 flex-wrap">
+            <?php while ($the_query->have_posts()) :
+                $the_query->the_post(); ?>
+                <?php $product = wc_get_product(get_the_ID()); ?>
+                <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-12">
+                    <div class="ds-product">
+                        <a href="<?php echo get_permalink() ?>">
+                            <?php if ($product->is_on_sale()) : ?>
+                                <span class="ds-product__sale">Sale</span>
+                            <?php endif; ?>
+                            <span class="ds-product__image" style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')">
+                                <?php if ($product->get_price_html()) { ?>
+                                    <button class="single_add_to_cart_button dsw-primary-site-background" value="<?php echo get_the_ID(); ?>">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <i class="fas fa-spinner"></i>
+                                        <i class="far fa-check-circle"></i>
+                                    </button>
+                                <?php } ?>
+                            </span>
+                            <span class="ds-product__title"><?php the_title(); ?></span>
+                        </a>
+                        <div class="ds-product__meta">
+                            <div class="ds-product__price"><?php echo $product->get_price_html(); ?></div>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        </div>
+
+        <div class="flex-row ds-filters-footer-nav w-full">
+            <div class="hide-for-medium-down hidden lg:block">
+                <!--<select name="posts_per_page" id="ds-posts_per_page">
+                    <option value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?>>24
+                        Per Page
+                    </option>
+                    <option value="36" <?php echo $_POST['posts_per_page'] == '36' ? 'selected' : ''; ?>>36
+                        Per Page
+                    </option>
+                    <option value="72" <?php echo $_POST['posts_per_page'] == '72' ? 'selected' : ''; ?>>72
+                        Per Page
+                    </option>
+                </select>-->
+                <span class="ds-filters-counter"><?php echo $post_query_count->found_posts; ?>
+                Products to Explore </span>
+            </div>
+            <div class="js-pagination">
+                <?php foundation_pagination($post_query_count) ?>
+            </div>
+            <div class="ds-filters-footer-nav-right">
+                <?php if ($post_query_count->max_num_pages && $post_query_count->max_num_pages > 1) : ?>
+                    <div class="">
+                        Go to page
+                        <input type="number" name="paged" min="1" max="<?php echo $post_query_count->max_num_pages; ?>" id="ds-filters-paged">
+                        of
+                        <?php echo $post_query_count->max_num_pages; ?>
+                    </div>
+                <?php endif; ?>
+                <a href="#" class="dsw-primary-site-link" id="toTop">Back to Top</a>
+            </div>
+        </div>
+
+    <?php wp_reset_postdata();
+    else :
+        echo '<h2 class="text-center" style="width: 100%">No products found</h2>';
+    endif;
+
+    die();
+}
+
+add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+
+function woocommerce_ajax_add_to_cart()
+{
+
+    $product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
+    $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+    $passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+    $product_status = get_post_status($product_id);
+    $variation_id = $_POST['variation_id'];
+
+    //check if product from $product_id is a product id from woocommerce
+    $product = wc_get_product($product_id);
+    if($product->is_type('variable')){
+        //go to product page
+        $data = array(
+            'error' => true,
+            'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id)
+        );
+
+        echo wp_send_json($data);
+    
+
+    } else {
+
+        if (WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
+
+        do_action('woocommerce_ajax_added_to_cart', $product_id);
+
+        if ('yes' === get_option('woocommerce_cart_redirect_after_add')) {
+            wc_add_to_cart_message(array($product_id => $quantity), true);
+        }
+
+        WC_AJAX::get_refreshed_fragments();
+    
+        }
+    }
+    
+    wp_die();
+}
+
+add_action('wp_footer', 'custom_quantity_fields_script');
+function custom_quantity_fields_script()
+{
+    ?>
+    <script type='text/javascript'>
+        jQuery(function($) {
+            if (!String.prototype.getDecimals) {
+                String.prototype.getDecimals = function() {
+                    var num = this,
+                        match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+                    if (!match) {
+                        return 0;
+                    }
+                    return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+                }
+            }
+            // Quantity "plus" and "minus" buttons
+            $(document.body).on('click', '.plus, .minus', function() {
+                var $qty = $(this).closest('.quantity').find('.qty'),
+                    currentVal = parseFloat($qty.val()),
+                    max = parseFloat($qty.attr('max')),
+                    min = parseFloat($qty.attr('min')),
+                    step = $qty.attr('step');
+
+                // Format values
+                if (!currentVal || currentVal === '' || currentVal === 'NaN') currentVal = 0;
+                if (max === '' || max === 'NaN') max = '';
+                if (min === '' || min === 'NaN') min = 0;
+                if (step === 'any' || step === '' || step === undefined || parseFloat(step) === 'NaN') step = 1;
+
+                // Change the value
+                if ($(this).is('.plus')) {
+                    if (max && (currentVal >= max)) {
+                        $qty.val(max);
+                    } else {
+                        $qty.val((currentVal + parseFloat(step)).toFixed(step.getDecimals()));
+                    }
+                } else {
+                    if (min && (currentVal <= min)) {
+                        $qty.val(min);
+                    } else if (currentVal > 0) {
+                        $qty.val((currentVal - parseFloat(step)).toFixed(step.getDecimals()));
+                    }
+                }
+
+                // Trigger change event
+                $qty.trigger('change');
+            });
+        });
+    </script>
+<?php
+}
+
+/**
+ * @snippet       Display Coupon under Proceed to Checkout Button @ WooCommerce Cart
+ * @how-to        Get CustomizeWoo.com FREE
+ * @sourcecode    https://businessbloomer.com/?p=81542
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 3.5.1
+ */
+
+add_action('woocommerce_proceed_to_checkout', 'bbloomer_display_coupon_form_below_proceed_checkout', 25);
+
+function bbloomer_display_coupon_form_below_proceed_checkout()
+{
+    global $dssSiteLanguage;
+?>
+
+
+    <form class="woocommerce-coupon-form mb-6" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+        <?php if (wc_coupons_enabled()) { ?>
+
+            <p class="mb-4 mt-8 text-lg"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
+            <div class="coupon under-proceed border rounded h-12">
+                <input type="text" name="coupon_code" class="input-text text-lg px-3 ml-1 uppercase" id="coupon_code" value="" placeholder="<?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_placeholder; ?>" style="width: 100%" />
+                <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_attr_e('Apply', 'woocommerce'); ?></button>
+            </div>
+        <?php } ?>
+    </form>
+
+    <?php woocommerce_shipping_calculator("Caclulate Shipping"); ?>
+
+
+    <?php
+}
+
+
+/**
+ * Funtion to get post count from given term or terms and its/their children
+ *
+ * @param (string) $taxonomy
+ * @param (int|array|string) $term Single integer value, or array of integers or "all"
+ * @param (array) $args Array of arguments to pass to WP_Query
+ * @return $q->found_posts
+ *
+ */
+function get_term_post_count($taxonomy = 'category', $term = '', $args = [])
+{
+    // Lets first validate and sanitize our parameters, on failure, just return false
+    if (!$term)
+        return false;
+
+    if ($term !== 'all') {
+        if (!is_array($term)) {
+            $term = filter_var($term, FILTER_VALIDATE_INT);
+        } else {
+            $term = filter_var_array($term, FILTER_VALIDATE_INT);
+        }
+    }
+
+    if ($taxonomy !== 'category') {
+        $taxonomy = filter_var($taxonomy, FILTER_SANITIZE_STRING);
+        if (!taxonomy_exists($taxonomy))
+            return false;
+    }
+
+    if ($args) {
+        if (!is_array($args))
+            return false;
+    }
+
+    // Now that we have come this far, lets continue and wrap it up
+    // Set our default args
+    $defaults = [
+        'posts_per_page' => 1,
+        'fields' => 'ids'
+    ];
+
+    if ($term !== 'all') {
+        $defaults['tax_query'] = [
+            [
+                'taxonomy' => $taxonomy,
+                'terms' => $term
+            ]
+        ];
+    }
+    $combined_args = wp_parse_args($args, $defaults);
+    $q = new WP_Query($combined_args);
+
+    // Return the post count
+    return $q->found_posts;
+}
+
+remove_action('woocommerce_single_variation', 'woocommerce_single_variation_add_to_cart_button', 20);
+add_action('woocommerce_after_variations_form', 'woocommerce_single_variation_add_to_cart_button', 20);
+//add_action('woocommerce_single_product_summary', 'woocommerce_single_variation', 20);
+
+// Move "Order Summary" on the checkout page
+remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+add_action('woocommerce_checkout_before_customer_details', 'woocommerce_checkout_payment', 20);
+
+// Move coupon form on the checkout form
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
+add_action('woocommerce_review_order_after_order_total', 'woocommerce_checkout_coupon_form');
+
+// Move "place order" button
+function output_payment_button()
+{
+    global $dssSiteLanguage;
+    
+    $order_button_text = apply_filters('woocommerce_order_button_text', dssLang($dssSiteLanguage)->woocommerce_cart->payment_shipping_btn);
+    echo '<input type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr($order_button_text) . '" data-value="' . esc_attr($order_button_text) . '" />';
+}
+
+add_action('woocommerce_checkout_after_order_review', 'output_payment_button');
+
+
+
+
+add_filter('woocommerce_default_address_fields', 'custom_default_address_fields');
+function custom_default_address_fields($address_fields)
+{
+    global $dssSiteLanguage;
+
+    if (is_checkout()) {
+
+        // dssLang($dssSiteLanguage)->woocommerce_cart->street_address
+        $address_fields['address_1']['label'] = dssLang($dssSiteLanguage)->woocommerce_cart->street_address;
+        $address_fields['country']['label'] = dssLang($dssSiteLanguage)->woocommerce_cart->country;
+        $address_fields['postcode']['label'] = __('Postal Code', 'woocommerce');
+        $address_fields['city']['label'] = __('City', 'woocommerce');
+    }
+    return $address_fields;
+}
+
+add_filter('woocommerce_checkout_fields', 'remove_company_name_address_2');
+function remove_company_name_address_2($fields)
+{
+    global $dssSiteLanguage;
+
+    unset($fields['billing']['billing_company']);
+    unset($fields['billing']['billing_address_2']);
+    unset($fields['shipping']['shipping_company']);
+    unset($fields['shipping']['shipping_address_2']);
+
+    $fields['billing']['billing_phone']['label'] = __('Phone Number', 'woocommerce');
+    $fields['shipping']['shipping_phone']['label'] = __('Phone Number', 'woocommerce');
+
+    $fields['billing']['billing_postcode']['label'] = __('Postal Code', 'woocommerce');
+    $fields['shipping']['shipping_postcode']['label'] = __('Postal Code', 'woocommerce');
+
+    $fields['shipping']['shipping_email'] = array(
+        'label'     => __('Email Address', 'woocommerce'),
+        'placeholder'   => _x('Email Address', 'placeholder', 'woocommerce'),
+        'required'  => false,
+        'class'     => array('form-row-wide'),
+        'clear'     => true
+    );
+    $fields['shipping']['shipping_notes'] = array(
+        'type' => 'textarea',
+        'class' => array('notes'),
+        'label' => dssLang($dssSiteLanguage)->woocommerce_cart->shipping_notes,
+        'placeholder' => _x(dssLang($dssSiteLanguage)->woocommerce_cart->customer_notes_for_order, 'placeholder', 'woocommerce')
+    );
+
+    return $fields;
+}
+
+add_action( 'woocommerce_admin_order_data_after_shipping_address', 'my_custom_checkout_field_display_admin_order_meta', 10, 1 );
+
+function my_custom_checkout_field_display_admin_order_meta($order){
+    echo '<p><strong>'.__('Shipping Email').':</strong> ' . get_post_meta( $order->get_id(), '_shipping_email', true ) . '</p>';
+    echo '<p><strong>'.__('Shipping Notes').':</strong> ' . get_post_meta( $order->get_id(), '_shipping_notes', true ) . '</p>';
+}
+
+add_action('woocommerce_cart_is_empty', 'add_content_empty_cart');
+
+function add_content_empty_cart()
+{
+    if (WC()->cart->get_cart_contents_count() === 0) { ?>
+        <div class="md:h-48"></div>
+    <?php
+    }
+}
+
+
+
+add_action('wp_enqueue_scripts', 'wsis_dequeue_stylesandscripts_select2', 100);
+function wsis_dequeue_stylesandscripts_select2()
+{
+    if (class_exists('woocommerce')) {
+        wp_dequeue_style('selectWoo');
+        wp_deregister_style('selectWoo');
+
+        wp_dequeue_script('selectWoo');
+        wp_deregister_script('selectWoo');
+    }
+}
+
+add_filter('woocommerce_enable_order_notes_field', '__return_false');
+
+// Display the product thumbnail in order received page
+add_filter('woocommerce_order_item_name', 'order_received_item_thumbnail_image', 10, 3);
+function order_received_item_thumbnail_image($item_name, $item, $is_visible)
+{
+    // Targeting order received page only
+    if (!is_wc_endpoint_url('order-received')) return $item_name;
+
+    // Get the WC_Product object (from order item)
+    $product = $item->get_product();
+
+    if ($product->get_image_id() > 0) {
+        $product_image = '<span class="inline-block product-thumbnail mr-2">' . $product->get_image(array(60, 60)) . '</span>';
+        $item_name = $product_image . $item_name;
+    }
+
+    return $item_name;
+}
+
+
+/**
+ * Get Custom HTML for a gallery image.
+ */
+function ds_get_gallery_image_html($attachment_id, $main_image = false)
+{
+    $flexslider = (bool)apply_filters('woocommerce_single_product_flexslider_enabled', get_theme_support('wc-product-gallery-slider'));
+    $gallery_thumbnail = wc_get_image_size('gallery_thumbnail');
+    $thumbnail_size = apply_filters('woocommerce_gallery_thumbnail_size', array($gallery_thumbnail['width'], $gallery_thumbnail['height']));
+    $image_size = apply_filters('woocommerce_gallery_image_size', $flexslider || $main_image ? 'woocommerce_single' : $thumbnail_size);
+    $full_size = apply_filters('woocommerce_gallery_full_size', apply_filters('woocommerce_product_thumbnails_large_size', 'full'));
+    $thumbnail_src = wp_get_attachment_image_src($attachment_id, $thumbnail_size);
+    $full_src = wp_get_attachment_image_src($attachment_id, $full_size);
+    $alt_text = trim(wp_strip_all_tags(get_post_meta($attachment_id, '_wp_attachment_image_alt', true)));
+    $ds_product_id = 'ds_product_gallery_id_' . rand(0, 9999999);
+    $image = wp_get_attachment_image(
+        $attachment_id,
+        $image_size,
+        false,
+        apply_filters(
+            'woocommerce_gallery_image_html_attachment_image_params',
+            array(
+                'title' => _wp_specialchars(get_post_field('post_title', $attachment_id), ENT_QUOTES, 'UTF-8', true),
+                'data-caption' => _wp_specialchars(get_post_field('post_excerpt', $attachment_id), ENT_QUOTES, 'UTF-8', true),
+                'data-src' => esc_url($full_src[0]),
+                'data-large_image' => esc_url($full_src[0]),
+                'data-large_image_width' => esc_attr($full_src[1]),
+                'data-large_image_height' => esc_attr($full_src[2]),
+                'class' => esc_attr($main_image ? 'wp-post-image' : ''),
+                //                'id'                      => $ds_product_id
+            ),
+            $attachment_id,
+            $image_size,
+            $main_image
+        )
+    );
+
+    return '<div data-thumb="' . esc_url($thumbnail_src[0]) . '" data-thumb-alt="' . esc_attr($alt_text) . '" class="woocommerce-product-gallery__image ">'
+        //        . '<a href="' . esc_url($full_src[0]) . '">'
+        . $image
+        //        . '</a>'
+        . '</div>';
+}
+
+remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+
+/**
+ * Rename product data tabs
+ */
+add_filter('woocommerce_product_tabs', 'woo_rename_tabs', 98);
+function woo_rename_tabs($tabs)
+{
+    // Remove the description tab
+    unset($tabs['description']);
+
+    if (get_field('specs')) {
+        $tabs['additional_information'] = array(
+            'title' => __('Specs', 'woocommerce'),
+            'priority' => 10,
+            'callback' => 'woo_new_product_tab_specs'
+        );
+    }
+
+    if (get_field('more_content')) {
+        // Adds the new tab
+        $tabs['more'] = array(
+            'title' => __('More Details', 'woocommerce'),
+            'priority' => 5,
+            'callback' => 'woo_new_product_tab_more'
+        );
+    }
+
+    return $tabs;
+}
+
+function woo_new_product_tab_more()
+{
+    $more_content = get_field('more_content');
+    $video = get_field('video');
+    $video_position = get_field('video_position');
+    $content_class = $video ? 'md:w-1/2' : 'w-full';
+
+    if ($more_content) : ?>
+        <div class="content-default flex items-center <?php echo $video_position == 'Right' ? 'flex-col md:flex-row' : 'flex-col md:flex-row-reverse'; ?>">
+
+            <div class="px-2 md:px-8 mb-8 <?php echo $content_class; ?>">
+                <?php echo $more_content; ?>
+            </div>
+
+            <?php if ($video) : ?>
+                <div class="md:w-1/2 px-2 md:px-8 mb-8">
+                    <div class="responsive-iframe">
+                        <?php echo $video; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+
+    <?php endif;
+}
+
+function woo_new_product_tab_specs()
+{
+    if (have_rows('specs')) :
+        if ($specs_title = get_field('specs_title')) :
+            echo '<h2>' . $specs_title . '</h2>';
+        endif; ?>
+        <!--        <div class="woocommerce-table woocommerce-table--order-details shop_table order_details">-->
+        <table class="specs-table">
+            <?php
+            while (have_rows('specs')) : the_row();
+                $name = get_sub_field('name');
+                $value = get_sub_field('value');
+                if ($name && $value) : ?>
+                    <tr>
+                        <!--                    <div class="p-4 woocommerce-table__line-item order_item">-->
+                        <td>
+                            <span><?php echo $name; ?></span>
+                        </td>
+                        <td width="60%">
+                            <span><?php echo $value; ?></span>
+                        </td>
+                        <!--                    </div>-->
+                    </tr>
+            <?php endif;
+            endwhile;
+            ?>
+            <!--        </div>-->
+        </table>
+<?php
+
+    else :
+
+    endif;
+}
+
+/* Convert hexdec color string to rgb(a) string */
+function hex2rgba($color, $opacity = false)
+{
+    $default = 'rgb(0,0,0)';
+    //Return default if no color provided
+    if (empty($color))
+        return $default;
+    //Sanitize $color if "#" is provided 
+    if ($color[0] == '#') {
+        $color = substr($color, 1);
+    }
+    //Check if color has 6 or 3 characters and get values
+    if (strlen($color) == 6) {
+        $hex = array($color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5]);
+    } elseif (strlen($color) == 3) {
+        $hex = array($color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]);
+    } else {
+        return $default;
+    }
+    //Convert hexadec to rgb
+    $rgb =  array_map('hexdec', $hex);
+    //Check if opacity is set(rgba or rgb)
+    if ($opacity) {
+        if (abs($opacity) > 1)
+            $opacity = 1.0;
+        $output = 'rgba(' . implode(",", $rgb) . ',' . $opacity . ')';
+    } else {
+        $output = 'rgb(' . implode(",", $rgb) . ')';
+    }
+    //Return rgb(a) color string
+    return $output;
+}
+
+
+add_action('wp_ajax_ds_cat_slider_filter', 'ds_cat_slider_filter');
+add_action('wp_ajax_nopriv_ds_cat_slider_filter', 'ds_cat_slider_filter');
+
+function ds_cat_slider_filter() {
+        
+        $post_type = 'learning';
+        $taxonomy  = 'learning_cat';
+        $terms     = $_POST['term_id'];
+        $args = array(
+            'post_type'      => $post_type,
+            'posts_per_page' => -1,
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $terms,
+                ),
+            ),
+        );
+
+
+            $loop = new WP_Query( $args );
+
+            if ( $loop->have_posts() ) :
+
+                ?>
+                <div class="cat-slider flex flex-wrap pt-5 pb-16">
+                    <?php
+                while ( $loop->have_posts() ) : $loop->the_post(); ?>
+                    
+                        <?php get_template_part('template-parts/reuseable-block-templates/learning-slider-slides'); ?>
+
+                <?php endwhile; ?>
+
+                </div>
+                <div class="cat-nav flex justify-center items-center"></div>
+
+        <?php 
+            endif;
+            wp_reset_postdata();
+        die();
+
+}
+function retrieve_var1_replacement( $var1 ) {
+    return $_REQUEST[$var1];
+}
+function register_my_plugin_extra_replacements() {
+    wpseo_register_var_replacement( '%%hottub%%', 'retrieve_var1_replacement', 'advanced', 'Include "hottub" query string.' );
+    wpseo_register_var_replacement( '%%brand_name%%', 'retrieve_var1_replacement', 'advanced', 'Include "brand_name" query string.' );
+    wpseo_register_var_replacement( '%%product_name_field%%', 'retrieve_var1_replacement', 'advanced', 'Include "product_name_field" query string.' );
+    wpseo_register_var_replacement( '%%swimspa%%', 'retrieve_var1_replacement', 'advanced', 'Include "swimspa" query string.' );
+    wpseo_register_var_replacement( '%%model%%', 'retrieve_var1_replacement', 'advanced', 'Include "model" query string.' );
+}
+if (function_exists('wpseo_register_var_replacement'))
+    add_action( 'wpseo_register_extra_replacements', 'register_my_plugin_extra_replacements' );
+
+
+/* Google map ACF API Key */
+function my_acf_google_map_api($api)
+{
+    $api['key'] = 'AIzaSyAhqthofUu97xg_zGhgzQs5gVjNQfvFnOc';
+
+    return $api;
+}
+
+add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
+
+add_filter('gform_confirmation_anchor', '__return_false');
+
+
+
+
+/**
+ * Get bread crumbs HTML code
+ */
+function dswPageBreadCrumbs()
+{
+    if (get_field('have_breadcrumbs', 'option') && function_exists('yoast_breadcrumb')) {
+        $breadCrumbHtml = do_shortcode('[wpseo_breadcrumb]');
+        $breadCrumbHtml = str_replace('/product-category', '', $breadCrumbHtml); // english
+        $breadCrumbHtml = str_replace('/categorie-produit', '', $breadCrumbHtml); // french
+
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/shop/">Shop</a></span> ', "", $breadCrumbHtml); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/en/shop/">Shop</a></span> ', "", $breadCrumbHtml); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/shop/">Products</a></span> ', "", $breadCrumbHtml); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/en/shop/">Products</a></span> ', "", $breadCrumbHtml); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/boutique/">Boutique</a></span> ', "", $breadCrumbHtml); // remove "shop" link French
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/fr/boutique/">Boutique</a></span> ', "", $breadCrumbHtml); // remove "shop" link French
+
+        $breadCrumbHtml = str_replace('®', '<sup class="dsw-breadcrumb-sup">®</sup>', $breadCrumbHtml);
+        $breadCrumbHtml = str_replace('™', '<sup class="dsw-breadcrumb-sup">™</sup>', $breadCrumbHtml);
+
+        echo '<div class="dsw-breadcrumb-container-px-10 px-10 pt-1">
+            <div class="dsw-breadcrumb-container dsw-breadcrumb">' .
+            $breadCrumbHtml .
+            '</div>
+        </div>';
+    }
+}
+
+
+/**
+ * Custom template tags for this theme
+ *
+ * Eventually, some of the functionality here could be replaced by core features.
+ *
+ * @package dsShowcase Theme
+ */
+
+if ( ! function_exists( 'dsShowcase_posted_on' ) ) :
+	/**
+	 * Prints HTML with meta information for the current post-date/time and author.
+	 */
+	function dsShowcase_posted_on() {
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		}
+
+		$time_string = sprintf( $time_string,
+			esc_attr( get_the_date( 'c' ) ),
+			esc_html( get_the_date() ),
+			esc_attr( get_the_modified_date( 'c' ) ),
+			esc_html( get_the_modified_date() )
+		);
+
+		$posted_on = sprintf(
+			/* translators: %s: post date. */
+			esc_html_x( 'Posted on %s', 'post date', 'dsShowcase' ),
+			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+		);
+
+		$byline = sprintf(
+			/* translators: %s: post author. */
+			esc_html_x( 'by %s', 'post author', 'dsShowcase' ),
+			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		);
+
+		echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+
+	}
+endif;
+
+if ( ! function_exists( 'dsShowcase_entry_footer' ) ) :
+	/**
+	 * Prints HTML with meta information for the categories, tags and comments.
+	 */
+	function dsShowcase_entry_footer() {
+		// Hide category and tag text for pages.
+		if ( 'post' === get_post_type() ) {
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( esc_html__( ', ', 'dsShowcase' ) );
+			if ( $categories_list ) {
+				/* translators: 1: list of categories. */
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'dsShowcase' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+			}
+
+			/* translators: used between list items, there is a space after the comma */
+			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'dsShowcase' ) );
+			if ( $tags_list ) {
+				/* translators: 1: list of tags. */
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'dsShowcase' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+			}
+		}
+
+		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+			echo '<span class="comments-link">';
+			comments_popup_link(
+				sprintf(
+					wp_kses(
+						/* translators: %s: post title */
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'dsShowcase' ),
+						array(
+							'span' => array(
+								'class' => array(),
+							),
+						)
+					),
+					get_the_title()
+				)
+			);
+			echo '</span>';
+		}
+
+		edit_post_link(
+			sprintf(
+				wp_kses(
+					/* translators: %s: Name of current post. Only visible to screen readers */
+					__( 'Edit <span class="screen-reader-text">%s</span>', 'dsShowcase' ),
+					array(
+						'span' => array(
+							'class' => array(),
+						),
+					)
+				),
+				get_the_title()
+			),
+			'<span class="edit-link">',
+			'</span>'
+		);
+	}
+endif;
+
+if ( ! function_exists( 'dsShowcase_post_thumbnail' ) ) :
+/**
+ * Displays an optional post thumbnail.
+ *
+ * Wraps the post thumbnail in an anchor element on index views, or a div
+ * element when on single views.
+ */
+function dsShowcase_post_thumbnail() {
+	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+		return;
+	}
+
+	if ( is_singular() ) :
+	?>
+
+	<div class="post-thumbnail">
+		<?php the_post_thumbnail(); ?>
+	</div><!-- .post-thumbnail -->
+
+	<?php else : ?>
+
+	<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
+		<?php
+			the_post_thumbnail( 'post-thumbnail', array(
+				'alt' => the_title_attribute( array(
+					'echo' => false,
+				) ),
+			) );
+		?>
+	</a>
+
+	<?php endif; // End is_singular().
+}
+endif;
+
+
+function dss_publish_promotion ($promotion_id)
+{
+    // add it to the /promotions page
+    $promotion_pages = get_pages(array(
+        'meta_key' => '_wp_page_template',
+        'meta_value' => 'template-promotions.php'
+    ));
+    foreach($promotion_pages as $page){
+        $promotion_list = get_field( 'related_promotions_page_cpt', $page->ID );
+
+        $thePost = get_post ($promotion_id);
+        $new_promotion = $thePost;
+                        
+        if( !is_array($promotion_list) ):
+            $promotion_list = [];
+        endif;
+
+        array_push( $promotion_list, $new_promotion );
+        update_field( 'related_promotions_page_cpt', $promotion_list, $page->ID );
+    }
+}
+
+add_action('publish_promotions', 'dss_publish_promotion');
+
+//add a cron job to remove promotions that are out of date
+function dss_remove_add_promotions() {
+    $args = array(
+        'post_type' => 'promotions',
+        'posts_per_page' => -1,
+    );
+
+    $promotions = get_posts($args);
+
+    foreach($promotions as $promotion) {
+
+        $today = date('Ymd');
+        $startPromotion = get_field('promo_start_date', $promotion->ID);
+        $endPromotion = get_field('promo_end_date', $promotion->ID);
+
+        if($today < $startPromotion || $today > $endPromotion) {
+            //remove from the /promotions page
+            $promotion_pages = get_pages(array(
+                'meta_key' => '_wp_page_template',
+                'meta_value' => 'template-promotions.php'
+            ));
+            foreach($promotion_pages as $page){
+                $promotion_list = get_field( 'related_promotions_page_cpt', $page->ID );
+
+                $new_promotion_list = [];
+                foreach($promotion_list as $promo) {
+                    if($promo->ID != $promotion->ID) {
+                        array_push($new_promotion_list, $promo);
+                    }
+                }
+
+                update_field( 'related_promotions_page_cpt', $new_promotion_list, $page->ID );
+            }
+        } 
+        //add promotion if is on date range
+        else {
+            dss_publish_promotion($promotion->ID);
+        }
+    }
+}
+
+add_action('init', 'dss_remove_add_promotions');
+
+
+/* languages */
+$dssSiteLanguage = apply_filters( 'wpml_current_language', NULL );
+if (!$dssSiteLanguage)
+    $dssSiteLanguage = 'en';
+  
+// example for language:  echo dssLang($dssSiteLanguage)->footer->get_directions;     
+function dssLang($dssSiteLanguage = 'en')
+{
+    $data = file_get_contents(locate_template("languages/" . $dssSiteLanguage . ".json"), true);
+    $data = json_decode($data);
+
+    return $data;
+}
+
+function dssGetLanguageOptions()
+{
+
+    // for SVG flags:
+    // https://github.com/lipis/flag-icons/tree/main/flags
+    // has to be set in console
+
+    
+    // get the list of languages with the url for the page that loaded
+    $languages = apply_filters( 'wpml_active_languages', NULL, 'skip_missing=0&orderby=code' );
+
+    //check if file exists
+    if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/wp-content/plugins/syndified/website-content/json/site.json'))
+    {
+        $syndication_json = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/wp-content/plugins/syndified/website-content/json/site.json');
+        $syndication_json_data = json_decode($syndication_json, true);
+    }
+    else
+    {
+        $syndication_json_data = [];
+    }
+    // $syndication_json = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/wp-content/plugins/syndified/website-content/json/site.json');
+
+    // $syndication_json_data = json_decode($syndication_json, true);
+
+    $useLanguages = [];
+    // site's main language
+    if(is_array($languages)) {
+    foreach ($languages as $language)
+    {
+        if (explode ('_', $language['default_locale'])[0] == explode ('_', $syndication_json_data['main_language']['abbreviated_name'])[0])
+        {
+            $syndication_json_data['main_language']['url'] = $language['url'];
+            $syndication_json_data['main_language']['native_name'] = $language['native_name'];
+            $useLanguages[] = $syndication_json_data['main_language'];
+        }
+    }
+    // site's secondary languages
+    foreach ($languages as $language)
+    {
+        foreach ($syndication_json_data['languages'] as $console_lang)
+        {
+            if (explode ('_', $language['default_locale'])[0] == explode ('_', $console_lang['abbreviated_name'])[0])
+            {
+                $console_lang['url'] = $language['url'];
+                $console_lang['native_name'] = $language['native_name'];
+                $useLanguages[] = $console_lang;
+            }
+        }
+        
+    }
+    }
+    return $useLanguages;
+}
+
+function woocommerce_endpoint_titles( $title ) {
+    $sep = ' - ';
+    $sitetitle = get_bloginfo();
+
+    if ( is_wc_endpoint_url( 'view-order' ) ) {
+        $title = 'View Order: ' . $sep . $sitetitle;    
+    }
+    if ( is_wc_endpoint_url( 'edit-account' ) ) {
+        $title = 'Edit Account'. $sep . $sitetitle; 
+    }
+    if ( is_wc_endpoint_url( 'edit-address' ) ) {
+        $title = 'Edit Address'. $sep . $sitetitle; 
+    }
+    if ( is_wc_endpoint_url( 'lost-password' ) ) {
+        $title = 'Forgot Password'. $sep . $sitetitle;    
+    }
+    if ( is_wc_endpoint_url( 'customer-logout' ) ) {
+        $title = 'Logout'. $sep . $sitetitle;   
+    }
+    if ( is_wc_endpoint_url( 'order-pay' ) ) {
+        $title = 'Order Payment'. $sep . $sitetitle;    
+    }
+    if ( is_wc_endpoint_url( 'order-received' ) ) {
+        $title = 'Order Received'. $sep . $sitetitle;   
+    }
+    if ( is_wc_endpoint_url( 'add-payment-method' ) ) {
+        $title = 'Add Payment Method'. $sep . $sitetitle;   
+    }
+    return $title;
+}
+add_filter( 'wpseo_title','woocommerce_endpoint_titles');
+
+
+//disable support for comments on post types
+function disable_comments_post_types_support() {
+    $post_types = get_post_types();
+    foreach ($post_types as $post_type) {
+        if (post_type_supports($post_type, 'comments')) {
+            remove_post_type_support($post_type, 'comments');
+            remove_post_type_support($post_type, 'trackbacks');
+        }
+    }
+    
+}
+add_action('init', 'disable_comments_post_types_support');
+
+//remove comments from admin bar
+function remove_admin_bar_comments() {
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('comments');
+}
+add_action('wp_before_admin_bar_render', 'remove_admin_bar_comments');
+
+//remove comments from the admin sidebar
+function remove_comments_admin_menu() {
+    remove_menu_page('edit-comments.php');
+}
+add_action('admin_menu', 'remove_comments_admin_menu');
+
+// Close comments on the front-end
+function disable_comments_status() {
+    return false;
+}
+add_filter('comments_open', 'disable_comments_status', 20, 2);
+add_filter('pings_open', 'disable_comments_status', 20, 2);
+
+
+// Disable plugin update email notifications
+add_filter( 'auto_plugin_update_send_email', '__return_false' );
+
+
+// Register Custom Post Type
+function dsShowcase_promotions() {
+	
+    $labels = array(
+        'name'                  => _x( 'Promotions', 'Post Type General Name', 'dsShowcase' ),
+        'singular_name'         => _x( 'Promotion', 'Post Type Singular Name', 'dsShowcase' ),
+        'menu_name'             => __( 'Promotions', 'dsShowcase' ),
+        'name_admin_bar'        => __( 'Promotions', 'dsShowcase' ),
+        'archives'              => __( 'Promotions Archives', 'dsShowcase' ),
+        'attributes'            => __( 'Item Attributes', 'dsShowcase' ),
+        'parent_item_colon'     => __( 'Parent Item:', 'dsShowcase' ),
+        'all_items'             => __( 'All Items', 'dsShowcase' ),
+        'add_new_item'          => __( 'Add New Item', 'dsShowcase' ),
+        'add_new'               => __( 'Add New Promotion', 'dsShowcase' ),
+        'new_item'              => __( 'New Promotion', 'dsShowcase' ),
+        'edit_item'             => __( 'Edit Item', 'dsShowcase' ),
+        'update_item'           => __( 'Update Item', 'dsShowcase' ),
+        'view_item'             => __( 'View Item', 'dsShowcase' ),
+        'view_items'            => __( 'View Items', 'dsShowcase' ),
+        'search_items'          => __( 'Search Item', 'dsShowcase' ),
+        'not_found'             => __( 'Not found', 'dsShowcase' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'dsShowcase' ),
+        'featured_image'        => __( 'Featured Image', 'dsShowcase' ),
+        'set_featured_image'    => __( 'Set featured image', 'dsShowcase' ),
+        'remove_featured_image' => __( 'Remove featured image', 'dsShowcase' ),
+        'use_featured_image'    => __( 'Use as featured image', 'dsShowcase' ),
+        'insert_into_item'      => __( 'Insert into item', 'dsShowcase' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'dsShowcase' ),
+        'items_list'            => __( 'Items list', 'dsShowcase' ),
+        'items_list_navigation' => __( 'Items list navigation', 'dsShowcase' ),
+        'filter_items_list'     => __( 'Filter items list', 'dsShowcase' ),
+    );
+    $args = array(
+        'label'                 => __( 'Promotion', 'dsShowcase' ),
+        'description'           => __( 'Promotions', 'dsShowcase' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title', 'editor', 'thumbnail' ),
+        'taxonomies'            => array( 'category', 'post_tag' ),
+        'hierarchical'          => true,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-tickets',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+        'show_in_rest'          => true,
+        'rest_base'             => 'dsShowcasePromotions',
+    );
+    register_post_type( 'Promotions', $args );
+
+}
+add_action( 'init', 'dsShowcase_promotions', 0 );
+
+function prioritize_products($orderby, $query) {
+    if ($query->is_search() && $query->is_main_query()) {
+        global $wpdb;
+        return "CASE WHEN {$wpdb->posts}.post_type = 'product' THEN 1 ELSE 2 END, " . $orderby;
+    }
+    return $orderby;
+}
+add_filter('posts_orderby', 'prioritize_products', 10, 2);
