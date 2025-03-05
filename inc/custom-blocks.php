@@ -210,14 +210,64 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
            <?php 
         }
         
-        if($block_type === 'hero2'){
-            
+        if($block_type === 'Hero 2'){
+          $hero2Content = get_field('hero_2_content', $block_id);
+          $title_and_cta = $hero2Content['title_and_cta'];
+          $title = $title_and_cta['title'];
+          $cta = $title_and_cta['cta'];
+          //print_r($cards);
+          ?>
+          <div class="dsn:container dsn:flex dsn:justify-between dsn:gap-2"> 
+            <?php
+     
+        if( have_rows('hero_2_content', $block_id) ): while ( have_rows('hero_2_content', $block_id) ) : the_row(); 
+          if( have_rows( 'top_row_images_and_title', $block_id) ): while ( have_rows( 'top_row_images_and_title', $block_id) ) : the_row(); 
+
+        if( have_rows('cards', $block_id) ): while ( have_rows('cards', $block_id) ) : the_row();  
+          $card_image = get_sub_field('card_image');
+          $card_title = get_sub_field('card_title');
+          $card_link = get_sub_field('card_link');
+            ?>
+            <div class="dsn:w-full dsn:h-54 dsn:2xl:h-65 dsn:flex-grow-1 dsn:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center" style="background: url(<?php echo $card_image['url'];?>);">
+                 <a class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:bg-black dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-30" href="<?php echo $card_link['url']; ?>"><span class="dsn:z-10 dsn:text-xl"><?php echo $card_title; ?></span></a>
+           </div>
+        <?php endwhile; endif;
+          endwhile; endif;
+      endwhile; endif;
+      ?>
+      </div>
+      <div class="dsn:container">
+        <div class="dsn:flex dsn:gap-4 dsn:bg-[#65a23b] dsn:my-2 dsn:justify-center dsn:items-center dsn:px-4 dsn:py-6 dsn:text-white">
+          <h1 class="dsn:mb-0"><?php echo $title; ?></h1><a class="dsn:py-4 dsn:px-6 dsn:bg-white dsn:text-[#65a23b] dsn:text-xl" href="<?php echo $cta['url']; ?>" class=""><?php echo $cta['title']; ?></a>
+        </div>
+      </div>
+      <div class="dsn:container dsn:flex dsn:justify-between dsn:gap-2 dsn:mb-10"> 
+            <?php
+     
+        if( have_rows('hero_2_content', $block_id) ): while ( have_rows('hero_2_content', $block_id) ) : the_row(); 
+          if( have_rows( 'bottom_row_images_and_title', $block_id) ): while ( have_rows( 'bottom_row_images_and_title', $block_id) ) : the_row(); 
+
+        if( have_rows('cards', $block_id) ): while ( have_rows('cards', $block_id) ) : the_row();  
+          $card_image = get_sub_field('card_image');
+          $card_title = get_sub_field('card_title');
+          $card_link = get_sub_field('card_link');
+            ?>
+            <div class="dsn:w-full dsn:h-54 dsn:2xl:h-65 dsn:flex-grow-1 dsn:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center" style="background: url(<?php echo $card_image['url'];?>);">
+                 <a class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:bg-black dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-30" href="<?php echo $card_link['url']; ?>"><span class="dsn:z-10 dsn:text-xl"><?php echo $card_title; ?></span></a>
+           </div>
+        <?php endwhile; endif;
+          endwhile; endif;
+      endwhile; endif;
+      ?>
+      </div>
+      <?php
         }
     }
 
     echo '</div>';
 
     ?>
+  
     <style>
         .custom-blocks-slideshow .custom-block {
     padding: 20px;
