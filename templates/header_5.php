@@ -314,7 +314,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			$(window).scroll(function () {
 				var scroll = $(window).scrollTop();
 
-				if (scroll >= 5) {
+				if (scroll >= 20) {
 					header.addClass("sticky-header-active dsn:py-6");
 					header.removeClass("dsn:py-4 dsn:mb-10");
 					$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
