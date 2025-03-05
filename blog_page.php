@@ -4,7 +4,7 @@
  * Template Name: Blog Page
  * 
  */
-get_template_part('templates/header'); 
+get_header();
 
 $feature_blog_articles = get_field('feature_blog_articles');
 
@@ -118,7 +118,7 @@ $pageContent = get_the_content();
 ?>
 
 <!-- Hero -->
-<section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:py-5">
+<section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:py-5 dsn:mx-auto">
     <h1 class="dsn:text-4xl dsn:font-bold dsn:text-left dsn:md:text-right dsn:w-full dsn:md:w-1/2 dsn:md:pr-5"><?php echo $pageTitle; ?></h1>
     <p class="dsn:text-center dsn:md:text-left dsn:w-full dsn:md:w-1/2 dsn:md:pl-5"><?php echo $pageContent; ?></p>
 </section>
@@ -158,7 +158,7 @@ $pageContent = get_the_content();
 
 
 <!-- Filters -->
-<section class="dsn:container dsn:w-full dsn:flex dsn:flex-row dsn:md:py-8">
+<section class="dsn:container dsn:mx-auto dsn:w-full dsn:flex dsn:flex-row dsn:md:py-8">
     <div class="dsn:w-full dsn:md:w-9/12 dsn:md:pr-5 dsn:mb-3 dsn:md:mb-0">
         <form role="search" method="get" action="<?= esc_url(home_url('/')); ?>">
             <input type="search" size="16" value="" name="s" class="dsn:md:max-w-lg dsn:border dsn:dsw-border-gray-300 dsn:w-full dsn:p-2 dsn:h-10 dsn:color-black dsn:relative dsn:flex dsn:align-middle dsn:m-0 dsn:rounded-md dsn:text-xl dsn:md:text-xl dsn:lg:text-2xl dsn:leading-snug dsn:md:leading-snug dsn:lg:leading-snug" placeholder="<?php echo dssLang($dssSiteLanguage)->blog_page->search_blog; ?>" required>
@@ -196,7 +196,7 @@ $pageContent = get_the_content();
 
 
 <!-- Blog Posts -->
-<section id="dsPosts" class="dsn:container">
+<section id="dsPosts" class="dsn:container dsn:mx-auto">
     <div class="dsn:grid dsn:grid-cols-2 dsn:gap-10">
         <?php
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -319,4 +319,4 @@ $pageContent = get_the_content();
 
 <?php
 
- get_template_part('templates/footer'); ?>
+ get_footer(); ?>

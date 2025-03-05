@@ -1,5 +1,5 @@
-<?php get_template_part('templates/header'); 
-
+<?php 
+get_header();
 // Include custom blocks helper
 require_once get_template_directory() . '/inc/custom-blocks.php';
 
@@ -40,5 +40,4 @@ if ($selected_blocks_bot) {
     // Render the blocks using the helper function
     render_custom_blocks($selected_blocks_bot, $display_type_bot);
 }
-
- get_template_part('templates/footer'); ?>
+get_footer(); ?>

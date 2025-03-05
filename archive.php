@@ -1,4 +1,4 @@
-<?php get_template_part('templates/header'); ?>
+<?php get_header(); ?>
 <main class="dsn:container dsn:mx-auto">
     <header class="dsn:mb-4">
         <h1 class="dsn:text-3xl dsn:font-bold dsn:text-center dsn:md:text-left"><?php the_archive_title(); ?></h1>
@@ -20,4 +20,4 @@
         <p>No posts found.</p>
     <?php endif; ?>
 </main>
-<?php get_template_part('templates/footer'); ?>
+<?php get_footer(); ?>

@@ -23,7 +23,7 @@ $the_query = new WP_Query($args);
 
 $viewStyle = 'Grid';
 
-get_template_part('templates/header'); 
+get_header();
 
 
 global $dssSiteLanguage;
@@ -128,4 +128,4 @@ global $dssSiteLanguage;
 </script>
 
 <?php
-get_template_part('templates/footer');?> 
+get_footer(); ?> 

@@ -6,10 +6,15 @@
 $header_logo = get_field('header_logo', 'options');
 $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
+
+
+$dssLanguageOptions = dssGetLanguageOptions();
+global $dssSiteLanguage;
+
 ?>
 
 <header
-	class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block <?php if ($header_sticky == "1") {
+	class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-50 dsn:lg:block <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
 		echo "dsn:relative";
@@ -45,6 +50,43 @@ $header_sticky = get_field('sticky_header', 'options');
 			// )); 
 			?>
 			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
+			<?php 
+
+			if ($dssLanguageOptions && count($dssLanguageOptions) > 1) {
+				
+				?>
+                                <!-- start language -->
+                                <div id="dssLangagePickerGroupContainer" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer">
+                                    <a id="dssLangagePickerIcon" class="dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-6 dsn:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                        </svg>
+                                        <span class="dsn:hidden">Language Picker</span>
+                                    </a>
+
+                                    <div id="dssLangagePickerContainer" style="display: none;" class="dsn:absolute dsn:-right-16 dsn:w-44 dsn:z-10">
+
+                                        <svg class="dsn:w-5 dsn:h-5 dsn:m-auto dsn:-mt-0.5" style="fill: #fff; stroke: black;" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M236.77344,211.97656a23.75471,23.75471,0,0,1-20.79688,12.01563H40.02344a23.9925,23.9925,0,0,1-20.76563-36.02344L107.23437,35.97656h-.00781a24.00413,24.00413,0,0,1,41.54688,0l87.96875,151.99219A23.744,23.744,0,0,1,236.77344,211.97656Z" />
+                                        </svg>
+
+                                        <div class="dsn:z-20 dsn:-mt-2 dsn:py-2 dsn:px-3 dsn:bg-white dsn:border dsn:border-gray-100 dsn:rounded-lg dsn:shadow-sm dsn:inline-block dsn:w-full">
+                                            <?php foreach ($dssLanguageOptions as $lang) { ?>
+                                                <a href="<?php echo $lang['url']; ?>">
+                                                    <div class="dsn:flex dsn:m-2">
+                                                        <div class="dssLanguageSvgContainer dsn:border dsn:border-gray-200 dsn:mt-1.5" style="width: 24px; height: 18px;">
+                                                            <?php echo $lang['svg_flag_wp']; ?>
+                                                        </div>
+                                                        <div class="dsn:ml-2"><?php echo $lang['native_name']; ?></div>
+                                                    </div>
+                                                </a>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- end language -->
+                            <?php } ?>
 
 
 				<a
@@ -62,7 +104,7 @@ $header_sticky = get_field('sticky_header', 'options');
 							d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
 					</svg>
 				</a>
-				<a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
+				<!-- <a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
 					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path
@@ -70,6 +112,7 @@ $header_sticky = get_field('sticky_header', 'options');
 					</svg>
 					<span
 						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
+						 -->
 				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
 					href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -83,7 +126,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		</div>
 
 	</div>
-	<div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:relative">
+	<div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:relative dsn:z-50">
 
 		<div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
 
@@ -103,6 +146,44 @@ $header_sticky = get_field('sticky_header', 'options');
 	</div>
 	<div
 		class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-2 dsn:hidden dsn:text-white dsn:mx-4">
+		
+		<?php 
+		if ($dssLanguageOptions && count($dssLanguageOptions) > 1) {
+				
+				?>
+                                <!-- start language -->
+                                <div id="dssLangagePickerGroupContainer2" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer">
+                                    <a id="dssLangagePickerIcon2" class="dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-6 dsn:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                        </svg>
+                                        <span class="dsn:hidden">Language Picker</span>
+                                    </a>
+
+                                    <div id="dssLangagePickerContainer2" style="display: none;" class="dsn:absolute dsn:-right-16 dsn:w-44 dsn:z-10">
+
+                                        <svg class="dsn:w-5 dsn:h-5 dsn:m-auto dsn:-mt-0.5" style="fill: #fff; stroke: black;" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M236.77344,211.97656a23.75471,23.75471,0,0,1-20.79688,12.01563H40.02344a23.9925,23.9925,0,0,1-20.76563-36.02344L107.23437,35.97656h-.00781a24.00413,24.00413,0,0,1,41.54688,0l87.96875,151.99219A23.744,23.744,0,0,1,236.77344,211.97656Z" />
+                                        </svg>
+
+                                        <div class="dsn:z-20 dsn:-mt-2 dsn:py-2 dsn:px-3 dsn:bg-white dsn:border dsn:border-gray-100 dsn:rounded-lg dsn:shadow-sm dsn:inline-block dsn:w-full">
+                                            <?php foreach ($dssLanguageOptions as $lang) { ?>
+                                                <a href="<?php echo $lang['url']; ?>">
+                                                    <div class="dsn:flex dsn:m-2">
+                                                        <div class="dssLanguageSvgContainer2 dsn:border dsn:border-gray-200 dsn:mt-1.5" style="width: 24px; height: 18px;">
+                                                            <?php echo $lang['svg_flag_wp']; ?>
+                                                        </div>
+                                                        <div class="dsn:ml-2"><?php echo $lang['native_name']; ?></div>
+                                                    </div>
+                                                </a>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- end language -->
+                            <?php } ?>
+
 		<a
 			class="the-search-icon dsn:cursor-pointer dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current"
@@ -119,14 +200,14 @@ $header_sticky = get_field('sticky_header', 'options');
 					d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
 			</svg>
 		</a>
-		<a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
+		<!-- <a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
 			href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 				class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 				<path
 					d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
 			</svg>
 			<span
-				class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
+				class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a> -->
 		<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
 			href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 				class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -489,6 +570,31 @@ $header_sticky = get_field('sticky_header', 'options');
 
 	jQuery(document).ready(function ($) {
 
+		$('#dssLangagePickerIcon').click(function() {
+				console.log('clicked');
+            	$('#dssLangagePickerContainer').toggle();
+        	});
+
+			$('body').click(function(e) {
+				var container = $("#dssLangagePickerGroupContainer");
+
+				if (!container.is(e.target) && container.has(e.target).length === 0) {
+					$('#dssLangagePickerContainer').hide();
+				}
+			});
+
+			$('#dssLangagePickerIcon2').click(function() {
+				$('#dssLangagePickerContainer2').toggle();
+			});
+
+			$('body').click(function(e) {
+				var container = $("#dssLangagePickerGroupContainer2");
+
+				if (!container.is(e.target) && container.has(e.target).length === 0) {
+					$('#dssLangagePickerContainer2').hide();
+				}
+			});
+
 		$('.mega-menu > a').each(function () {
 			var $element = $(this);
 			$element.html($element.html().replace(/^(\w+)/, '<span>$1&nbsp;</span>'));
@@ -503,6 +609,7 @@ $header_sticky = get_field('sticky_header', 'options');
 <?php if ($header_sticky == 1) { ?>
 	<script>
 		jQuery(document).ready(function ($) {
+		
 			//caches a jQuery object containing the header element
 			var header = $(".sticky-header");
 			var width = $("body").width();

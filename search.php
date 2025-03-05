@@ -8,7 +8,7 @@
  * @package DSNShowcase Theme
  */
 
-get_template_part('templates/header'); 
+ get_header();
 
 global $dssSiteLanguage;
 
@@ -42,7 +42,7 @@ $viewStyle = 'Grid'; ?>
     }
 </style>
 
-<div class="dsn:container dsn:px-6">
+<div class="dsn:container dsn:mx-auto dsn:px-6">
     <section id="primary" class="content-area">
         <main id="main" class="site-main">
 
@@ -115,4 +115,5 @@ $viewStyle = 'Grid'; ?>
     </style>
 
 <?php
-get_template_part('templates/footer');
+get_footer();
+?>  
