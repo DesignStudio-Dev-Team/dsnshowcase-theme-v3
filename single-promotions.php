@@ -1,7 +1,5 @@
 <?php 
 
-get_template_part('templates/header'); 
-
 // Include custom blocks helper
 require_once get_template_directory() . '/inc/custom-blocks.php';
 

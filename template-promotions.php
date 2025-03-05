@@ -3,8 +3,7 @@
 /**
  * Template Name: Promotions
 */
-
-get_template_part('templates/header'); 
+get_header();
 
 $promotionsPost = get_field('related_promotions_page_cpt');
 
@@ -291,4 +290,4 @@ if ($selected_blocks_bot) {
     render_custom_blocks($selected_blocks_bot, $display_type_bot);
 }
 
- get_template_part('templates/footer'); ?>
+ get_footer(); ?>

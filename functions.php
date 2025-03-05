@@ -44,7 +44,6 @@ function dsnshowcase_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'dsnshowcase_enqueue_styles');
 
-
 function dsnshowcase_get_template($slug, $name = null) {
     get_template_part('templates/' . $slug, $name);
 }

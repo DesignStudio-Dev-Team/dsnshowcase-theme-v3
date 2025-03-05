@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-get_template_part('templates/header');
+get_header();
 ?>
 
 <!-- Main Content Wrapper -->
@@ -75,4 +75,4 @@ get_template_part('templates/header');
 </div>
 
 <?php
-get_template_part('templates/footer');
+get_footer(); ?>
