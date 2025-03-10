@@ -24,9 +24,10 @@
         "text_placeholder": "Que pouvons-nous vous aider à trouver?"
     },
     "blog_page": {
-        "filter_by_category": "Filtrer par catégorie",
+        "filter_by_category": "Filtrer par Catégorie",
         "search_blog": "Chercher Blog...",
-        "read_more_link_text": "Lire la suite"
+        "read_more_link_text": "Lire la suite",
+        "categories": "Catégorie"
     },
     "template_store": {
         "products_to_explore": "Produits à explorer",

@@ -112,15 +112,17 @@ foreach ($categories as $category) {
 } 
 
 
-$pageTitle = $category_for_title ? $category_for_title : 'Blog';
+$pageTitle = $category_for_title ? $category_for_title : get_the_title();
 //page content from get content
 $pageContent = get_the_content();
 ?>
 
 <!-- Hero -->
-<section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:py-5 dsn:mx-auto">
-    <h1 class="dsn:text-4xl dsn:font-bold dsn:text-left dsn:md:text-right dsn:w-full dsn:md:w-1/2 dsn:md:pr-5"><?php echo $pageTitle; ?></h1>
-    <p class="dsn:text-center dsn:md:text-left dsn:w-full dsn:md:w-1/2 dsn:md:pl-5"><?php echo $pageContent; ?></p>
+<section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:py-0 dsn:mx-auto">
+    <div class="dsn:bg-gray-50 dsn:h-full dsn:w-full dsn:md:w-1/2 dsn:py-5">
+        <h1 class="dsn:text-4xl dsn:m-0 dsn:font-bold dsn:text-left dsn:md:text-center dsn:w-full dsn:p-2"><?php echo $pageTitle; ?></h1>
+    </div>
+    <p class="dsn:text-center dsn:m-0 dsn:md:text-left dsn:w-full dsn:md:w-1/2 dsn:md:pl-5 dsn:p-2"><?php echo $pageContent; ?></p>
 </section>
 
 <!-- Featured Articles -->
@@ -129,15 +131,15 @@ $pageContent = get_the_content();
       
         <div style="background:url('<?php echo $firstArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1
         dsn:relative dsn:w-full dsn:h-[400px] dsn:lg:h-[600px] dsn:lg:row-span-2 dns:col-span-5 dsn:lg:col-span-3 dsn:p-8 dsn:flex dsn:flex-col dsn:lg:order-1 dsn:justify-end">
-          <h2 class="dsn:text-3xl dsn:font-bold dsn:mb-6 dsn:text-white dsn:relative dsn:z-10">
+          <h2 class="dsn:text-3xl dsn:font-bold dsn:mb-0 dsn:text-white dsn:relative dsn:z-10">
           <a href="<?php echo $firstArticle->permalink; ?>" > <?php echo $firstArticle->post_title; ?> </a> </h2>
          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 dsn:top-[67%]"></div>
                 
         </div>
         
         <div style="background:url('<?php echo $secondArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:col-span-2 dsn:lg:h-full  dsn:lg:order-2">
-        <a class="dsn:size-full dsn:p-6 dsn:flex dsn:items-end" href="<?php echo $secondArticle->permalink; ?>" >
-            <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
+        <a class="dsn:size-full dsn:p-6  dsn:flex dsn:items-end" href="<?php echo $secondArticle->permalink; ?>" >
+            <h2 class="dsn:relative dsn:z-10 dsn:mb-0 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $secondArticle->post_title; ?> </h2>
             <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 dsn:top-[67%]"></div>
             </a>
@@ -147,7 +149,7 @@ $pageContent = get_the_content();
         <div style="background:url('<?php echo $thirdArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-3 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full dsn:lg:col-span-2 dsn:lg:order-3 ">
         <a class="dsn:size-full dsn:p-6 dsn:flex dsn:items-end" href="<?php echo $thirdArticle->permalink; ?>">
        
-            <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
+            <h2 class="dsn:text-2xl dsn:mb-0 dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
              <?php echo $thirdArticle->post_title; ?>         </h2>
                       <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 dsn:top-[67%]"></div>
                      </a>
@@ -195,8 +197,34 @@ $pageContent = get_the_content();
 </section>
 
 
-<!-- Blog Posts -->
-<section id="dsPosts" class="dsn:container dsn:mx-auto">
+<section id="dsPostContainer" class="dsn:container dsn:mx-auto dsn:w-full dsn:grid dsn:grid-cols-5 dsn:gap-5">
+<!-- Sidebar with categories --> 
+<section class="dsn:col-span-1 dsn:bg-gray-100 dsn:p-5 dsn:mb-10">
+    <!-- Categories with checkboxes for filters -->
+    <h2 class="dsn:text-2xl dsn:font-bold dsn:mb-5"><?php echo dssLang($dssSiteLanguage)->blog_page->categories; ?></h2>
+    <ul class="dsn:pl-0">
+        <?php
+        if($categories && count($categories) > 1) { ?>
+        <form>
+        <?php
+        foreach ($categories as $category) {
+            $selected = '';
+            if ($selectedCat == $category['id']) {
+                $selected = 'checked';
+            }
+        ?>
+            <li class="blogCatsList dsn:mb-2">
+                <input type="checkbox" id="<?php echo $category['id']; ?>" name="categories" value="<?php echo $category['id']; ?>"
+                <?php echo $selected; ?>>
+                <label for="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></label>
+            </li>
+        <?php  } ?>
+        </form>
+        <?php } ?>
+    </ul> 
+</section>
+    <!-- Blog Posts -->
+<section id="dsPosts" class="dsn:col-span-4">
     <div class="dsn:grid dsn:grid-cols-2 dsn:gap-10">
         <?php
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -265,9 +293,19 @@ $pageContent = get_the_content();
     </div>
 
 <?php } ?>
-
+</section>
 
 </section>
+
+<script>
+    //filter by category sidebar
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', function() {
+            this.form.submit();
+        });
+    });
+</script>
 
 <style>
     #dsPagination {
@@ -314,6 +352,15 @@ $pageContent = get_the_content();
 
     #dsPagination ul li:before {
         display: none;
+    }
+
+    .blogCatsList {
+        list-style: none;
+    }
+    .blogCatsList input[type="checkbox"] {
+        /* make checkbox bigger */
+        transform: scale(1.5);
+        margin-right: 10px;
     }
 </style>
 
