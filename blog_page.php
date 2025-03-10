@@ -119,7 +119,7 @@ $pageContent = get_the_content();
 
 <!-- Hero -->
 <section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:py-0 dsn:mx-auto">
-    <div class="dsn:bg-gray-50 dsn:h-full dsn:w-full dsn:md:w-1/2 dsn:py-5">
+    <div class="dsn:bg-gray-100 dsn:h-full dsn:w-full dsn:md:w-1/2 dsn:py-5">
         <h1 class="dsn:text-4xl dsn:m-0 dsn:font-bold dsn:text-left dsn:md:text-center dsn:w-full dsn:p-2"><?php echo $pageTitle; ?></h1>
     </div>
     <p class="dsn:text-center dsn:m-0 dsn:md:text-left dsn:w-full dsn:md:w-1/2 dsn:md:pl-5 dsn:p-2"><?php echo $pageContent; ?></p>
