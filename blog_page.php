@@ -20,10 +20,17 @@ if (!$feature_blog_articles) {
 
 if(isset($feature_blog_articles[0])) {
 $firstArticle = $feature_blog_articles[0];
-//get post thumbnail
-$firstArticle->thumbnail = get_the_post_thumbnail_url($firstArticle->ID);
-//get permalink
-$firstArticle->permalink = get_permalink($firstArticle->ID);
+
+//check if is not an object find the post via id
+if(!is_object($firstArticle)) {
+    $firstArticle = get_post($firstArticle);
+}
+
+
+    //get post thumbnail
+    $firstArticle->thumbnail = get_the_post_thumbnail_url($firstArticle->ID);
+    $firstArticle->permalink = get_permalink($firstArticle->ID);
+
 } else {
     $firstArticle = new stdClass();
     $firstArticle->post_title = 'Coming Soon';
@@ -33,6 +40,12 @@ $firstArticle->permalink = get_permalink($firstArticle->ID);
 
 if(isset($feature_blog_articles[1])) {
 $secondArticle = $feature_blog_articles[1];
+
+//check if is an object
+if(!is_object($secondArticle)) {
+    $secondArticle = get_post($secondArticle);
+}
+
 //get featured image
 $secondArticle->thumbnail = get_the_post_thumbnail_url($secondArticle->ID);
 //get permalink
@@ -46,6 +59,12 @@ $secondArticle->permalink = get_permalink($secondArticle->ID);
 
 if(isset($feature_blog_articles[2])) {
 $thirdArticle = $feature_blog_articles[2];
+
+//check if is an object
+if(!is_object($thirdArticle)) {
+    $thirdArticle = get_post($thirdArticle);
+}
+
 //get post thumbnail
 $thirdArticle->thumbnail = get_the_post_thumbnail_url($thirdArticle->ID);
 //get permalink
@@ -118,15 +137,15 @@ $pageContent = get_the_content();
 ?>
 
 <!-- Hero -->
-<section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:py-0 dsn:mx-auto">
+<section class="dsn:container dsn:w-full dsn:flex dsn:flex-wrap dsn:items-center dsn:mb-5 dsn:justify-center dsn:py-0 dsn:mx-auto">
     <div class="dsn:bg-gray-100 dsn:h-full dsn:w-full dsn:md:w-1/2 dsn:py-5">
         <h1 class="dsn:text-4xl dsn:m-0 dsn:font-bold dsn:text-left dsn:md:text-center dsn:w-full dsn:p-2"><?php echo $pageTitle; ?></h1>
     </div>
-    <p class="dsn:text-center dsn:m-0 dsn:md:text-left dsn:w-full dsn:md:w-1/2 dsn:md:pl-5 dsn:p-2"><?php echo $pageContent; ?></p>
+    <p class="dsn:text-center dsn:py-5 dsn:m-0 dsn:md:text-left dsn:w-full dsn:md:w-1/2 dsn:md:pl-5 dsn:p-2"><?php echo $pageContent; ?></p>
 </section>
 
 <!-- Featured Articles -->
-<div class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15">
+<div class="dsn:container dsn:mx-auto dsn:mb-15">
         <div class="dsn:flex dsn:flex-wrap dsn:lg:grid dsn:lg:grid-cols-5 dsn:gap-5">
       
         <div style="background:url('<?php echo $firstArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1
@@ -160,10 +179,10 @@ $pageContent = get_the_content();
 
 
 <!-- Filters -->
-<section class="dsn:container dsn:mx-auto dsn:w-full dsn:flex dsn:flex-row dsn:md:py-8">
-    <div class="dsn:w-full dsn:md:w-9/12 dsn:md:pr-5 dsn:mb-3 dsn:md:mb-0">
+<section class="dsn:container  dsn:mx-auto dsn:w-full dsn:flex dsn:flex-row dsn:justify-center">
+    <div class="dsn:w-full  dsn:md:w-full dsn:justify-center dsn:flex dsn:md:py-8 dsn:mb-0 dsn:md:mb-0">
         <form role="search" method="get" action="<?= esc_url(home_url('/')); ?>">
-            <input type="search" size="16" value="" name="s" class="dsn:md:max-w-lg dsn:border dsn:dsw-border-gray-300 dsn:w-full dsn:p-2 dsn:h-10 dsn:color-black dsn:relative dsn:flex dsn:align-middle dsn:m-0 dsn:rounded-md dsn:text-xl dsn:md:text-xl dsn:lg:text-2xl dsn:leading-snug dsn:md:leading-snug dsn:lg:leading-snug" placeholder="<?php echo dssLang($dssSiteLanguage)->blog_page->search_blog; ?>" required>
+            <input type="search" size="16" value="" name="s" class="dsn:md:w-100 dsn:border dsn:dsw-border-gray-300 dsn:w-full dsn:p-2 dsn:h-10 dsn:color-black dsn:relative dsn:flex dsn:align-middle dsn:m-0 dsn:rounded-md dsn:text-xl dsn:md:text-xl dsn:lg:text-2xl dsn:leading-snug dsn:md:leading-snug dsn:lg:leading-snug" placeholder="<?php echo dssLang($dssSiteLanguage)->blog_page->search_blog; ?>" required>
             <input type="hidden" value="post" name="post_type" id="post_type" />
             <div class="dsn:absolute dsn:top-3 dsn:right-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -173,26 +192,7 @@ $pageContent = get_the_content();
         </form>
 
     </div>
-    <?php if ($categories && count($categories) > 1) { ?>
-        <div class="dsn:w-full dsn:md:w-3/12 dsn:mb-3 dsn:md:mb-0">
-            <div class="dsn:w-full">
-                <form>
-                    <select id="categories" name="categories" onchange="submit()" class="dsn:block dsn:w-full dsn:pl-3 dsn:pr-10 dsn:py-2 dsn:border dsn:border-gray-300 dsn:focus:outline-none dsn:focus:ring-black-500 dsn:focus:border-black-500 dsn:rounded-md dsn:text-xl dsn:md:text-xl dsn:lg:text-2xl dsn:leading-snug dsn:md:leading-snug dsn:lg:leading-snug">
-                        <option value='0'><?php echo dssLang($dssSiteLanguage)->blog_page->filter_by_category; ?></option>
-                        <?php
-                        foreach ($categories as $category) {
-                            $selected = '';
-                            if ($selectedCat == $category['id']) {
-                                $selected = 'selected';
-                            }
-
-                            echo "<option value='" . $category['id'] . "' " . $selected . ">" . $category['name'] . "</option>";
-                        } ?>
-                    </select>
-                </form>
-            </div>
-        </div>
-    <?php } ?>
+    
     <hr class="dsn:hidden dsn:md:block w-full">
 </section>
 
@@ -224,7 +224,7 @@ $pageContent = get_the_content();
     </ul> 
 </section>
     <!-- Blog Posts -->
-<section id="dsPosts" class="dsn:col-span-4">
+<section id="dsPosts" class="dsn:col-span-4 dsn:mt-5">
     <div class="dsn:grid dsn:grid-cols-2 dsn:gap-10">
         <?php
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;

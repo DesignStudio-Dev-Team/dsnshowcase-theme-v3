@@ -1148,9 +1148,10 @@ function dss_remove_add_promotions() {
 
                 $new_promotion_list = [];
                 foreach($promotion_list as $promo) {
-                    if($promo->ID != $promotion->ID) {
+                    if(isset($promo->ID) && $promo->ID != $promotion->ID) {
                         array_push($new_promotion_list, $promo);
                     }
+                  
                 }
 
                 update_field( 'related_promotions_page_cpt', $new_promotion_list, $page->ID );
