@@ -171,9 +171,13 @@ if ($selected_blocks) {
                             $dateEnd = DateTime::createFromFormat('F j, Y', $endPromotion);
                             if ($dateStart) {
                                 $echoStart = $dateStart->format('Ymd');
+                            } else {
+                                $echoStart = 0;
                             }
                             if ($dateEnd) {
                                 $echoEnd = $dateEnd->format('Ymd');
+                            } else {
+                                $echoEnd = 0;
                             }
                             $hide_title = get_field('hide_title');
 

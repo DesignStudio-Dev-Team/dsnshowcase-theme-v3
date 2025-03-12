@@ -26,7 +26,8 @@
     "blog_page": {
         "filter_by_category": "Filter op Categorie",
         "search_blog": "Zoek Blog...",
-        "read_more_link_text": "Lees Meer"
+        "read_more_link_text": "Lees Meer",
+        "categories": "Categorie"
     },
     "template_store": {
         "products_to_explore": "Producten om te Verkennen",

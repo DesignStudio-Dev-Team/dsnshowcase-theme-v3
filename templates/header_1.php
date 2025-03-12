@@ -49,14 +49,14 @@ global $dssSiteLanguage;
 			// 	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
 			// )); 
 			?>
-			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
+			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3 dsn:z-50">
 			<?php 
 
 			if ($dssLanguageOptions && count($dssLanguageOptions) > 1) {
 				
 				?>
                                 <!-- start language -->
-                                <div id="dssLangagePickerGroupContainer" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer">
+                                <div id="dssLangagePickerGroupContainer" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer dsn:z-50">
                                     <a id="dssLangagePickerIcon" class="dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-6 dsn:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -64,7 +64,7 @@ global $dssSiteLanguage;
                                         <span class="dsn:hidden">Language Picker</span>
                                     </a>
 
-                                    <div id="dssLangagePickerContainer" style="display: none;" class="dsn:absolute dsn:-right-16 dsn:w-44 dsn:z-10">
+                                    <div id="dssLangagePickerContainer" style="display: none;" class="dsn:absolute dsn:-right-16 dsn:w-44 dsn:z-50">
 
                                         <svg class="dsn:w-5 dsn:h-5 dsn:m-auto dsn:-mt-0.5" style="fill: #fff; stroke: black;" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M236.77344,211.97656a23.75471,23.75471,0,0,1-20.79688,12.01563H40.02344a23.9925,23.9925,0,0,1-20.76563-36.02344L107.23437,35.97656h-.00781a24.00413,24.00413,0,0,1,41.54688,0l87.96875,151.99219A23.744,23.744,0,0,1,236.77344,211.97656Z" />
@@ -126,7 +126,7 @@ global $dssSiteLanguage;
 		</div>
 
 	</div>
-	<div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:relative dsn:z-50">
+	<div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:z-40">
 
 		<div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
 
