@@ -203,9 +203,9 @@ $header_sticky = get_field('sticky_header', 'options');
 			margin-top: 3px;
 		}
 	
-		header ul li ul a:hover {
-			opacity: 0.80;
-		}
+		/* header ul li ul li ul li:hover {
+			opacity: 0.85;
+		} */
 
 		li.non-mega ul {
 			display: block;
@@ -261,6 +261,8 @@ $header_sticky = get_field('sticky_header', 'options');
 		top: 0;
 		filter: none;
 		padding: 0;
+		width: 100%;
+        min-width: 200px;
 	}
 	.util-left-nav ul > li.util-mega-menu > .sub-menu > li > a {
 		   font-weight: 700;
@@ -271,6 +273,9 @@ $header_sticky = get_field('sticky_header', 'options');
 		   color: #65a23b;
 		   font-weight: 600;
 		   text-transform: capitalize;
+	}
+	.util-left-nav ul li ul a:hover {
+    	color: #50852c;
 	}
 	.util-left-nav ul > li.util-mega-menu.about-us > .sub-menu > li:nth-child(1) > a, .util-left-nav ul > li.util-mega-menu.about-us > .sub-menu > li:nth-child(2) > a {
 		font-weight: 700;
@@ -291,6 +296,13 @@ $header_sticky = get_field('sticky_header', 'options');
 	.util-left-nav ul > li.util-mega-menu > .sub-menu li:nth-child(1) .sub-menu li, .util-left-nav ul > li.util-mega-menu > .sub-menu li:nth-child(2) .sub-menu li {
 		width: 150px;
 		background-color: #3e3124;
+		min-height: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+	}
+	.util-left-nav ul > li.util-mega-menu > .sub-menu li:nth-child(1) .sub-menu li:hover, .util-left-nav ul > li.util-mega-menu > .sub-menu li:nth-child(2) .sub-menu li:hover {
+    	background-color: #624e3b;
 	}
 	.util-left-nav ul > li.util-mega-menu > .sub-menu li:nth-child(1) .sub-menu li a, .util-left-nav ul > li.util-mega-menu > .sub-menu li:nth-child(2) .sub-menu li a {
 		color: #fff;
@@ -318,6 +330,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		background-color: transparent;
 		display: flex;
     	gap: 10px;
+		min-height: auto;
 	}
 	.util-left-nav ul > li.util-mega-menu.about-us > .sub-menu li:nth-child(1) .sub-menu li a, .util-left-nav ul > li.util-mega-menu.about-us > .sub-menu li:nth-child(2) .sub-menu li a {
 		color: #65a23b;
@@ -336,6 +349,9 @@ $header_sticky = get_field('sticky_header', 'options');
 	}
 	.header-text a {
     	font-weight: 600;
+	}
+	.header-text a:hover {
+    	color: #65a23b;
 	}
 	}
 
