@@ -26,14 +26,16 @@ $social_networks = !empty($content['social_icons']) && is_array($content['social
         background-size: cover;
         background-position: center;
     }
+
     .footer-link-color {
-        color: #00bfe6;
+        color: #089BF7;
+        
     }
     #footer-copyright {
-        background: #0073b1;
+       background: var(--dealerColor);
     }
     .help-icon-img {
-        background-color: #00bfe6;
+        background-color: var(--dealerColor);
     }
  </style>
 

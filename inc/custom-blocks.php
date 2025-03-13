@@ -31,6 +31,30 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Google Reviews') {
             include get_template_directory() . '/inc/customblocks/google-reviews.php';
         }
+        if($block_type === 'Grid Reasons') {
+            include get_template_directory() . '/inc/customblocks/grid-reasons.php';
+        } 
+        if($block_type === 'Grid Brands') {
+            include get_template_directory() . '/inc/customblocks/grid-brands.php';
+        }
+        if($block_type === 'Process List') {
+            include get_template_directory() . '/inc/customblocks/process-list.php';
+        }
+        if($block_type === 'Store Categories') {
+            include get_template_directory() . '/inc/customblocks/store-categories.php';
+        }
+        if($block_type === 'Video Block') {
+            include get_template_directory() . '/inc/customblocks/video-block.php';
+        }
+        if($block_type === 'Parallax Block') {
+            include get_template_directory() . '/inc/customblocks/parallax-block.php';
+        }
+        if($block_type === 'Timer Block') {
+            include get_template_directory() . '/inc/customblocks/timer-block.php';
+        }
+        if($block_type === 'Two Block') {
+            include get_template_directory() . '/inc/customblocks/two-block.php';
+        }
     }
   echo '</div>'; ?>
 <style>
