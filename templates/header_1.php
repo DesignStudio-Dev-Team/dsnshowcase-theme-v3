@@ -14,7 +14,7 @@ global $dssSiteLanguage;
 ?>
 
 <header
-	class="header1 dsn:bg-white dsn:text-[#0988c2] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-50 dsn:lg:block <?php if ($header_sticky == "1") {
+	class="header1 dsn:bg-white dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-50 dsn:lg:block <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
 		echo "dsn:relative";
@@ -32,7 +32,7 @@ global $dssSiteLanguage;
 			<?php wp_nav_menu(array(
 				'theme_location' => 'utility_left',
 				'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
-				'link_class' => "dsn:text-[#0988c2] dsn:text-lg dsn:py-2 dsn:block",
+				'link_class' => "dsn:text-lg dsn:py-2 dsn:block",
 			)); ?>
 		</div>
 		<div class="dsn-logo dsn:w-4/12">
@@ -57,7 +57,7 @@ global $dssSiteLanguage;
 				?>
                                 <!-- start language -->
                                 <div id="dssLangagePickerGroupContainer" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer dsn:z-50">
-                                    <a id="dssLangagePickerIcon" class="dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
+                                    <a id="dssLangagePickerIcon" class="dssLanguage dsn:text-white dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-6 dsn:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                                         </svg>
@@ -135,7 +135,7 @@ global $dssSiteLanguage;
 				'menu_id' => 'dsn-primary-menu',
 				'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
 				'container' => "nav",
-				'container_class' => "dsn:bg-[#076594] dsn:rounded-md dsn:relative",
+				'container_class' => "dsn:rounded-md dsn:relative",
 				'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
 				'depth' => 0,
 				'walker' => new DSN_Walker_Nav_Menu()
@@ -153,7 +153,7 @@ global $dssSiteLanguage;
 				?>
                                 <!-- start language -->
                                 <div id="dssLangagePickerGroupContainer2" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer">
-                                    <a id="dssLangagePickerIcon2" class="dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
+                                    <a id="dssLangagePickerIcon2" class="dssLanguage dsn:text-white dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-6 dsn:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                                         </svg>
@@ -185,7 +185,7 @@ global $dssSiteLanguage;
                             <?php } ?>
 
 		<a
-			class="the-search-icon dsn:cursor-pointer dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
+			class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current"
 				width="20" height="20">
 				<path class="dsn:stroke-current dsn:fill-current"
@@ -208,7 +208,7 @@ global $dssSiteLanguage;
 			</svg>
 			<span
 				class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a> -->
-		<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
+		<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
 			href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 				class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 				<path class="dsn:stroke-current dsn:fill-current"
@@ -217,7 +217,7 @@ global $dssSiteLanguage;
 				class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 
 		<div
-			class="dsn-mobile-hamburger dsn:cursor-pointer  dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full">
+			class="dsn-mobile-hamburger dsn:cursor-pointer  dsn:text-white dsn:p-2 dsn:rounded-full">
 			<span style="width: 25.927px; height: auto; display: none;"></span><svg
 				class="dsn:stroke-current dsn:fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 				width="30" height="30" preserveAspectRatio="xMidYMid meet">
@@ -255,14 +255,14 @@ global $dssSiteLanguage;
 			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3 dsn:px-6 dsn:mt-4">
 
 				<a href="/my-account/"
-					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:block dsn:2xl:hidden">
+					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:p-2 dsn:rounded-full dsn:block dsn:2xl:hidden">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path
 							d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
 					</svg>
 				</a>
-				<a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
+				<a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
 					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path
@@ -270,7 +270,7 @@ global $dssSiteLanguage;
 					</svg>
 					<span
 						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
-				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
+				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
 					href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
@@ -280,19 +280,19 @@ global $dssSiteLanguage;
 
 
 			</div>
-			<div class="dsn:relative dsn:bg-white dsn:bg-white utility-sticky-nav dsn:mt-4">
+			<div class="dsn:relative dsn:bg-white utility-sticky-nav dsn:mt-4">
 
 				<?php wp_nav_menu(array(
 					'theme_location' => 'utility_left',
-					'container_class' => "dsn:w-full",
+					'container_class' => "utility_left dsn:w-full",
 					'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
-					'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
+					'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 				)); ?>
 				<?php wp_nav_menu(array(
 					'theme_location' => 'utility_right',
-					'container_class' => "dsn:w-full",
+					'container_class' => "utility_right dsn:w-full",
 					'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
-					'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
+					'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
 				)); ?>
 
 			</div>
@@ -304,6 +304,14 @@ global $dssSiteLanguage;
 <?php include("mobile-header.php"); ?>
 
 <style>
+
+	.cart, .wishlist, .my-account-icon, .the-search-icon, .dsn-mobile-hamburger, .dssLanguage, #dsn-primary-menu{
+		background: var(--dealerColor);
+	}
+	.utility_left ul li a, .utility_right ul li a, #menu-utility li a, #dsn-primary-menu li a:hover, #dsn-primary-menu li:hover, #dsn-primary-menu li a:focus, #dsn-primary-menu li a:active, .util-left-nav li a, #menu-top-menu-left li a .mega-menu-inner ul li a, .mega-menu-inner, .mega-menu-inner > a {
+		color: var(--dealerColor);
+	}
+
 	@media only screen and (min-width: 1024px) {
 
 		.open>.sub-menu {
@@ -324,7 +332,7 @@ global $dssSiteLanguage;
 		}
 
 		nav>ul>li {
-			border-top: 1px solid #076594;
+			border-top: 1px solid var(--dealerColor);
 		}
 
 		nav>ul>li:hover {

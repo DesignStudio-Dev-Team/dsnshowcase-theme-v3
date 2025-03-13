@@ -44,6 +44,10 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+  .btn {
+    @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
+  }
+
   /* Headings */
   h1 {
     @apply dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:leading-tight;

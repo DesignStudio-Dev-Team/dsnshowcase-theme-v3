@@ -11,7 +11,7 @@ function dsn_nav_class($classes, $item){
 function dsn_add_class_nav_primary( $atts, $item, $args ) {
    if($args->theme_location == "primary") {
     if ( (int) $item->menu_item_parent === 0 ) {
-        $class = 'dsn:w-full mega-menu dsn:text-center dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:font-bold dsn:list-none';
+        $class = 'dsn:w-full mega-menu dsn:text-center dsn:hover:bg-white dsn:text-2xl dsn:relative dsn:font-bold dsn:list-none';
         $atts['class'] = $class;
     } else {
 		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg dsn:list-none';
@@ -20,7 +20,7 @@ function dsn_add_class_nav_primary( $atts, $item, $args ) {
         
    } else {
     if ( (int) $item->menu_item_parent === 0 ) {
-        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:hover:text-[#076594] dsn:text-2xl dsn:relative dsn:list-none';
+        $class = 'dsn:w-full mega-menu dsn:text-center dsn:text-white dsn:hover:bg-white dsn:text-2xl dsn:relative dsn:list-none';
         $atts['class'] = $class;
     } else {
 		$class         = 'dsn:block dsn:text-left dsn:w-full dsn:relative dsn:text-lg dsn:list-none';
@@ -69,7 +69,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
         }
         $indent = str_repeat( $t, $depth );
 
-        $before_start_lvl = '<div class="mega-menu-inner dsn:hidden dsn:absolute dsn:left-auto dsn:right-auto dsn:top-[100%] dsn:text-[#076594] dsn:bg-white dsn:p-8 dsn:px-10 dsn:w-max dsn:drop-shadow-lg">';
+        $before_start_lvl = '<div class="mega-menu-inner dsn:hidden dsn:absolute dsn:left-auto dsn:right-auto dsn:top-[100%] dsn:bg-white dsn:p-8 dsn:px-10 dsn:w-max dsn:drop-shadow-lg">';
 
         if($depth==0){
             $output .= "{$n}{$indent}{$before_start_lvl}<ul id=\"$this->submenu_unique_id\" class=\"container megamenu-background dsn-sub-menu dsn:flex dsn:items-start dsn:gap-10 dropdown-content dsn:w-max dsn:!m-0 dsn:!p-0 \">{$n}";

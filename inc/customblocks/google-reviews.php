@@ -4,7 +4,7 @@ $title = $googleReviews['title'];
 
 ?>
 <section id="google-reviews" class="dsn:container dsn:relative dsn:mx-auto dsn:my-20">
-    <h2 class="dsn:text-center"><?php echo $title; ?></h2>
+    <h1 class="dsn:text-center"><?php echo $title; ?></h1>
     <div class="dsn:relative dsn:text-center dsn:block dsn:md:absolute dsn:md:-top-3 dsn:md:right-0 dsn:z-10">
             <svg class="dsn:mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168" height="95" viewBox="0 0 168 95">
             <defs>
