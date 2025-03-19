@@ -314,6 +314,11 @@ global $dssSiteLanguage;
 		color: var(--dealerColor);
 	}
 
+	.mega-menu-inner {
+			border-top: 1px solid #eeeeee !important;
+			box-shadow: 0px 0px 3px 0px #ddd !important;
+		}
+
 	@media only screen and (min-width: 1024px) {
 
 		.open>.sub-menu {
@@ -337,9 +342,9 @@ global $dssSiteLanguage;
 			border-top: 1px solid var(--dealerColor);
 		}
 
-		nav>ul>li:hover {
-			border-top: 1px solid #eeeeee;
-			box-shadow: 0px 0px 3px 0px #ddd;
+		nav>ul>li:hover, .mega-menu-inner {
+			border-top: 1px solid #eeeeee !important;
+			box-shadow: 0px 0px 3px 0px #ddd !important;
 		}
 
 		nav>ul>li:after {
