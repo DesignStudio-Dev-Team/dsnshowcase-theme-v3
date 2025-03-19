@@ -7,9 +7,11 @@ $header_logo = get_field('header_logo', 'options');
 $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 
+if($header_sticky_logo) {}
 
 $dssLanguageOptions = dssGetLanguageOptions();
 global $dssSiteLanguage;
+
 
 ?>
 
@@ -23,7 +25,7 @@ global $dssSiteLanguage;
 		<a class="dsn:block dsn:relative dsn:text-center" href="<?php
 		echo esc_url(home_url('/'));
 		?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2"
-				src="<?php echo $header_sticky_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span
+				src="<?php echo '';?>" alt="<?php bloginfo('name'); ?>" /> <span
 				class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 	</div>
 	<div
@@ -185,7 +187,7 @@ global $dssSiteLanguage;
                             <?php } ?>
 
 		<a
-			class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
+			class="the-search-icon dsn:border-2 dsn:border-white dsn:cursor-pointer dsn:text-white dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="dsn:stroke-current dsn:fill-current"
 				width="20" height="20">
 				<path class="dsn:stroke-current dsn:fill-current"
@@ -193,7 +195,7 @@ global $dssSiteLanguage;
 			</svg></a>
 
 		<a href="/my-account/"
-			class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:hidden dsn:2xl:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
+			class="my-account-icon dsn:border-2 dsn:border-white dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:hidden dsn:2xl:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="dsn:stroke-current dsn:fill-current"
 				width="20" height="20">
 				<path
@@ -208,7 +210,7 @@ global $dssSiteLanguage;
 			</svg>
 			<span
 				class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a> -->
-		<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
+		<a class="cart dsn:border-2 dsn:border-white dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
 			href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 				class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 				<path class="dsn:stroke-current dsn:fill-current"
@@ -217,7 +219,7 @@ global $dssSiteLanguage;
 				class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 
 		<div
-			class="dsn-mobile-hamburger dsn:cursor-pointer  dsn:text-white dsn:p-2 dsn:rounded-full">
+			class="dsn-mobile-hamburger dsn:border-2 dsn:border-white dsn:cursor-pointer  dsn:text-white dsn:p-2 dsn:rounded-full">
 			<span style="width: 25.927px; height: auto; display: none;"></span><svg
 				class="dsn:stroke-current dsn:fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 				width="30" height="30" preserveAspectRatio="xMidYMid meet">
@@ -305,7 +307,7 @@ global $dssSiteLanguage;
 
 <style>
 
-	.cart, .wishlist, .my-account-icon, .the-search-icon, .dsn-mobile-hamburger, .dssLanguage, #dsn-primary-menu{
+	.cart, .wishlist, .my-account-icon, .the-search-icon, .dsn-mobile-hamburger, .dssLanguage, #dsn-primary-menu, .sticky-header-active{
 		background: var(--dealerColor);
 	}
 	.utility_left ul li a, .utility_right ul li a, #menu-utility li a, #dsn-primary-menu li a:hover, #dsn-primary-menu li:hover, #dsn-primary-menu li a:focus, #dsn-primary-menu li a:active, .util-left-nav li a, #menu-top-menu-left li a .mega-menu-inner ul li a, .mega-menu-inner, .mega-menu-inner > a {
@@ -376,7 +378,7 @@ global $dssSiteLanguage;
 		}
 
 		.sticky-header-active .dsn-logo {
-			background: #076594;
+			background: var(--dealerColor);
 			border-radius: 100%;
 			margin-bottom: -59px;
 			/* box-shadow: 0px 0px 3px 0px #ddd; */
@@ -483,7 +485,7 @@ global $dssSiteLanguage;
 			justify-content: center;
 			position: absolute;
 			left: 0%;
-			background: #076594;
+			background: var(--dealerColor);
 			height: 127px;
 			width: 200px;
 			border-radius: 100%;
@@ -628,13 +630,13 @@ global $dssSiteLanguage;
 				var scroll = $(window).scrollTop();
 
 				if (scroll >= 5) {
-					header.addClass("sticky-header-active dsn:bg-[#076594]");
+					header.addClass("sticky-header-active");
 					header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
 					$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
 					$('.primary-nav').removeClass("dsn:bg-gray-100");
 					$('.nav-container').removeClass("dsn:container");
 				} else {
-					header.removeClass("sticky-header-active dsn:bg-[#076594]");
+					header.removeClass("sticky-header-active");
 					header.addClass("dsn:bg-white dsn:py-4 dsn:mb-10");
 					$('.primary-nav').removeClass("dsn:container");
 					$('.primary-nav').addClass("dsn:bg-gray-100");

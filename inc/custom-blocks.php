@@ -40,8 +40,8 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Process List') {
             include get_template_directory() . '/inc/customblocks/process-list.php';
         }
-        if($block_type === 'Store Categories') {
-            include get_template_directory() . '/inc/customblocks/store-categories.php';
+        if($block_type === 'Grid Categories') {
+            include get_template_directory() . '/inc/customblocks/grid-categories.php';
         }
         if($block_type === 'Video Block') {
             include get_template_directory() . '/inc/customblocks/video-block.php';
