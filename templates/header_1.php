@@ -605,10 +605,10 @@ global $dssSiteLanguage;
 				}
 			});
 
-		$('.mega-menu > a').each(function () {
-			var $element = $(this);
-			$element.html($element.html().replace(/^(\w+)/, '<span>$1&nbsp;</span>'));
-		});
+		// $('.mega-menu > a').each(function () {
+		// 	var $element = $(this);
+		// 	$element.html($element.html().replace(/^(\w+)/, '<span>$1&nbsp;</span>'));
+		// });
 
 		$("ul#dsn-primary-menu li").filter(function () {
 			return $(this).find('ul').length == 1
