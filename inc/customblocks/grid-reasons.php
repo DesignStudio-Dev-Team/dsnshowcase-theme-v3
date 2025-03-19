@@ -20,7 +20,7 @@ $reasons = $gridReasons['reasons'];
                 <div class="card-reason dsn:p-15 dsn:text-center dsn:row-span-2 dsn:bg-white dsn:shadow-lg dsn:border dsn:border-gray-200 dsn:flex dsn:flex-col dsn:items-center dsn:justify-center <?php echo 'dsn:order-' . $x; ?>">
             <?php } ?>
                 <div class="hover-hide">
-                    <span class="dsn:text-[60px] dsn:font-bold dsn:text-[#65A23B]"><?php echo $x; ?></span>
+                    <span class="dsn:text-[60px] dsn:font-bold"><?php echo $x; ?></span>
                     <h2 class="dsn:text-4xl dsn:px-10"><?php echo $reason['label']; ?></h2>
                 </div>
                 <div class="hover-show">
@@ -36,7 +36,9 @@ $reasons = $gridReasons['reasons'];
 
 
 <style>
-
+.card-reason span {
+    color: var(--dealerColor);
+}
 .hover-show {
     display:none;
 }

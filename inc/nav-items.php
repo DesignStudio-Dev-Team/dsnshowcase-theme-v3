@@ -172,7 +172,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
             $atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 
             if( in_array('menu-item-has-children', $classes ) ) {
-                $atts['href']   = ' ';
+                $atts['href'] = ! empty( $item->url ) ? $item->url  : '';
                 $this->submenu_unique_id = 'dropdown-'.$item->ID;
             } else {
                 $atts['href']   = ! empty( $item->url ) ? $item->url  : '';
