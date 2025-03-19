@@ -247,6 +247,10 @@ $header_sticky = get_field('sticky_header', 'options');
 		.header4 nav>ul>li:hover>a { 
 			border-bottom: 4px solid #076594;
 		}
+
+		nav>ul>li:hover a {
+        	color: #076594;
+    	}
 		.sticky-header-active nav>ul>li>a { 
 			border-bottom: 4px solid #076594 !important;
 		}
@@ -333,7 +337,7 @@ $header_sticky = get_field('sticky_header', 'options');
 
 		.header4 .mega-menucolumn>a {
 			pointer-events: none;
-			color: #000;
+			color: #000 !important;
 			font-weight: 700;
 		}
 

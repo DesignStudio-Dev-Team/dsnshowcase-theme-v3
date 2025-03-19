@@ -1,4 +1,4 @@
-<div class="form-wrapper dsn:fixed dsn:flex-col dsn:w-full dsn:h-full dsn:top-0 dsn:left-0 dsn:flex dsn:justify-center dsn:items-center dsn:bg-[#076594]/95 dsn:z-40">
+<div class="form-wrapper dsn:fixed dsn:flex-col dsn:w-full dsn:h-full dsn:top-0 dsn:left-0 dsn:flex dsn:justify-center dsn:items-center dsn:bg-[#076594]/95 dsn:z-60">
         <div class="esc-form dsn:absolute dsn:right-[7%] dsn:top-[40%] dsn:md:right-[22%] dsn:md:top-[22%] dsn:w-8 dsn:h-8 dsn:rounded-full dsn:bg-white dsn:flex dsn:justify-center dsn:items-center"><a href="javascript:;" class="close-search dsn:text-2xl dsn:leading-0 dsn:pb-2 dsn:text-red-500">x</a></div>
 			<form id="fast-search-desktop" role="search" method="get" class="woocommerce-product-search dsn:w-10/12 dsn:md:w-1/2" action="<?php echo esc_url( home_url( '/'  ) ); ?>">
 				<h3 class="dsn:text-white dsn:text-xl">Search By..</h3>

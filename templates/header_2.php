@@ -260,7 +260,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		}
 		.header2 .mega-menucolumn > a {
 			pointer-events: none;
-			color: #000;
+			color: #000 !important;
 			font-weight: 700;
 		}
 		.header2 .mega-menu > a {
