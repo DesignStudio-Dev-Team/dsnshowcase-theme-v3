@@ -41,7 +41,7 @@ add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
 
 function dsn_submenu_css_class( $classes ) {
 	
-    $classes[] = 'dsn:hidden dsn:md:drop-shadow-lg dsn:md:absolute dsn:left-auto dsn:right-auto dsn:md:top-[100%] dsn:bg-white dsn:px-6 dsn:py-4 dsn:w-64 dsn:z-30';
+    $classes[] = 'dsn:hidden dsn:md:drop-shadow-lg dsn:md:absolute dsn:left-auto dsn:right-auto dsn:md:top-[100%] dsn:bg-white dsn:px-6 dsn:py-4 dsn:w-64 dsn:z-50';
     return $classes;
 	 
 }
