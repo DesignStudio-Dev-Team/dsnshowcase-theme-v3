@@ -133,6 +133,9 @@ $header_sticky = get_field('sticky_header', 'options');
 		nav>ul>li:hover {
 			background-color: #fff;
 		}
+		.sticky-header-active nav>ul>li:hover a {
+			color: #65a23b;
+		}
 		
 		nav>ul>li:hover {
 			border-top: 1px solid #eeeeee;
@@ -184,7 +187,7 @@ $header_sticky = get_field('sticky_header', 'options');
 
 		.mega-menucolumn>a {
 			pointer-events: none;
-			color: #000;
+			color: #000 !important;
 			font-weight: 700;
 			text-transform: uppercase;
 		}
@@ -228,12 +231,16 @@ $header_sticky = get_field('sticky_header', 'options');
 			display: none;
 		}
 		.sticky-header-active .primary-nav {
-			display: block;
+			display: flex;
+			height: 84px;
 		}
-
+		.dsn-header-top-container {
+			height: 84px;
+		}
 		.sticky-header-active .mega-menu>a {
 			font-size: 20px;
 		}
+		
 		.util-left-nav ul li.util-mega-menu {
 		display: block;
 	}
@@ -444,14 +451,14 @@ $header_sticky = get_field('sticky_header', 'options');
 				var scroll = $(window).scrollTop();
 
 				if (scroll >= 20) {
-					header.addClass("sticky-header-active dsn:py-6");
-					header.removeClass("dsn:py-4 dsn:mb-10");
+					header.addClass("sticky-header-active");
+					//header.removeClass("dsn:py-4 dsn:mb-10");
 					$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
 					$('.primary-nav').removeClass("dsn:bg-gray-100");
 					$('.nav-container').removeClass("dsn:container");
 				} else {
-					header.removeClass("sticky-header-active dsn:py-6");
-					header.addClass("dsn:py-4 dsn:mb-10");
+					header.removeClass("sticky-header-active");
+					//header.addClass("dsn:py-4 dsn:mb-10");
 					$('.primary-nav').removeClass("dsn:container");
 					$('.primary-nav').addClass("dsn:bg-gray-100");
 					$('.nav-container').addClass("dsn:container");
