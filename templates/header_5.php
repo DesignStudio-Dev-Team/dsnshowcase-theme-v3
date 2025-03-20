@@ -232,10 +232,10 @@ $header_sticky = get_field('sticky_header', 'options');
 		}
 		.sticky-header-active .primary-nav {
 			display: flex;
-			height: 84px;
+			height: 135px;
 		}
 		.dsn-header-top-container {
-			height: 84px;
+			height: 135px;
 		}
 		.sticky-header-active .mega-menu>a {
 			font-size: 20px;
@@ -267,8 +267,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		position: relative;
 		top: 0;
 		filter: none;
-		padding: 0;
-		width: 100%;
+		padding: 0px 24px 0px 0px;
         min-width: 200px;
 	}
 	.util-left-nav ul > li.util-mega-menu > .sub-menu > li > a {
@@ -371,6 +370,13 @@ $header_sticky = get_field('sticky_header', 'options');
 
 		.mega-menu>a {
 			font-size: 20px;
+		}
+		.sticky-header-active .primary-nav {
+			display: flex;
+			height: 85px;
+		}
+		.dsn-header-top-container {
+			height: 85px;
 		}
 			
 	}
