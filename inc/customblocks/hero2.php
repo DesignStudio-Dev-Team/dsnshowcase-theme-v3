@@ -4,6 +4,8 @@ $hero2Content = get_field('hero_2_content', $block_id);
 $title_and_cta = $hero2Content['title_and_cta'];
 $title = $title_and_cta['title'];
 $cta = $title_and_cta['cta'];
+$bg = $title_and_cta['container_background'];
+$text_color = $title_and_cta['text_color'];
 //print_r($cards);
 ?>
 <div
@@ -37,10 +39,10 @@ $cta = $title_and_cta['cta'];
   endif;
   ?>
   <div
-    class="dsn:flex dsn:flex-col dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:gap-4 dsn:bg-[#65a23b] dsn:my-2 dsn:justify-center dsn:items-center dsn:px-4 dsn:md:px-6 dsn:py-6 dsn:text-white dsn:col-span-2 dsn:md:col-span-3 dsn:order-1 dsn:md:order-2">
-    <h1 class="dsn:mb-0 dsn:text-center dsn:text-2xl dsn:lg:text-4xl dsn:font-medium"><?php echo $title; ?></h1><a
-      class="dsn:py-4 dsn:px-6 dsn:bg-white dsn:text-[#65a23b] dsn:hover:bg-[#65a23b] dsn:hover:text-white dsn:text-lg dsn:md:text-xl dsn:shadow-md dsn:border-1 dsn:hover:border-white"
-      href="<?php echo $cta['url']; ?>" class=""><?php echo $cta['title']; ?></a>
+    class="dsn:flex dsn:flex-col dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:gap-4 dsn:my-2 dsn:justify-center dsn:items-center dsn:px-4 dsn:md:px-6 dsn:py-6 dsn:col-span-2 dsn:md:col-span-3 dsn:order-1 dsn:md:order-2" style="background-color: <?php echo $bg; ?>">
+    <h1 class="dsn:mb-0 dsn:text-center dsn:text-2xl dsn:lg:text-4xl dsn:font-medium <?php if($text_color == 'yes') { echo 'dsn:text-black'; } else { echo 'dsn:text-white'; } ?>"><?php echo $title; ?></h1><a
+      class="dsn:py-4 dsn:px-6 dsn:bg-white dsn:hover:text-white dsn:text-lg dsn:md:text-xl dsn:shadow-md dsn:border-1 dsn:hover:border-white"
+      href="<?php echo $cta['url']; ?>" onmouseover="this.style.background='<?php echo $bg; ?>', this.style.color='white'"; onmouseout="this.style.background='white', this.style.color='<?php echo $bg; ?>'"; style="color: <?php echo $bg; ?>"><?php echo $cta['title']; ?></a>
   </div>
   <?php
 

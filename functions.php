@@ -91,4 +91,9 @@ function enqueue_slick_slider_assets() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_slick_slider_assets');
 
+add_shortcode('hello_code', 'custom_shortcode');
+function custom_shortcode () {
+    echo "Form goes here...";
+}
+
 ?>
