@@ -30,7 +30,7 @@ $header_sticky = get_field('sticky_header', 'options');
 					alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-5/12">
-			<div class="header-text dsn:mr-4"><a class="dsn:text-black dsn:border-b-3 dsn:border-b-[#65a23b] dsn:text-xl" href="/get-started/">GET STARTED</a></div>
+			<div class="header-text dsn:mr-4"><a href="javascript:;" class="get-started dsn:text-black dsn:border-b-3 dsn:border-b-[#65a23b] dsn:text-xl dsn:cursor-pointer">GET STARTED</a></div>
 			<?php
 			// wp_nav_menu(array(
 			//     'theme_location' => 'utility_right',
@@ -41,8 +41,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
 
 
-				<a
-					class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[40px] dsn:h-[40px]"><svg
+				<a href="javascript:;" class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[40px] dsn:h-[40px]"><svg
 						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
@@ -98,6 +97,7 @@ $header_sticky = get_field('sticky_header', 'options');
 </header>
 <?php include("search-form.php"); ?>
 <?php include("mobile-header.php"); ?>
+<?php include("get-started.php"); ?>
 
 <style>
 	@media only screen and (min-width: 1024px) {
@@ -421,6 +421,16 @@ $header_sticky = get_field('sticky_header', 'options');
 
 		$('div.esc-form').click(function () {
 			$('div.form-wrapper').fadeToggle();
+		});
+
+		$('div.form-wrapper, div.get-started-wrapper').hide();
+
+		$('a.get-started').click(function () {
+			$('div.get-started-wrapper').fadeToggle();
+		});
+
+		$('div.esc-get-started-form').click(function () {
+			$('div.get-started-wrapper').fadeToggle();
 		});
 
 		var clickable_desktop = $('.util-left-nav ul, .util-right-nav ul, .utility-sticky-nav ul').attr('data-clickable');
