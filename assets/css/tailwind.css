@@ -43,6 +43,22 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+  
+  input,
+  select,
+  textarea,
+  button {
+    @apply dsn:rounded-lg dsn:border-gray-300 dsn:focus-visible:ring-2 dsn:focus-visible:ring-blue-500 dsn:focus-visible:outline-none;
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    @apply dsn:rounded-full;
+  }
+
+  input[type='file'] {
+    @apply dsn:bg-gray-50;
+  }
 
   .btn {
     @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
@@ -133,3 +149,26 @@
     }
   }
 }
+
+/* default styles for form elements */
+  input[type='text'],
+  input[type='email'],
+  input[type='url'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='password'],
+  input[type='search'],
+  textarea,
+  select {
+    @apply dsn:py-2 dsn:px-4 dsn:border-gray-300 dsn:focus-visible:ring-2 dsn:focus-visible:ring-blue-500 dsn:focus-visible:outline-none;
+  }
+
+  button {
+    @apply dsn:bg-blue-500 dsn:text-white dsn:rounded-lg dsn:py-2 dsn:px-4;
+  }
+  button:hover {
+    @apply dsn:bg-blue-600;
+  }
+  button:disabled {
+    @apply dsn:bg-gray-300 dsn:text-gray-500;
+  }

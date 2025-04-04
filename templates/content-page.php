@@ -30,12 +30,24 @@ $container_pb = '';
 if ($container_padding_bottom != 0) {
 	$container_pb = 'padding-bottom: ' . $container_padding_bottom . 'px;';
 }
+
+
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('dsn:px-10 dsn:mt-10 dsn:mb-16'); ?> style="<?php echo $container_w; ?><?php echo $container_pt; ?><?php echo $container_pb; ?>">
 
     <?php if (!is_front_page() && !is_page('cart') && !is_page('checkout')) { ?>
-        <h2 class="dsn:text-2xl dsn:font-bold"><?php the_title(); ?></h2>
+        <?php if (get_field('title_alignment')) : ?>
+                    <?php
+                    $title_alignment = get_field('title_alignment');
+                    if (is_null($title_alignment) || empty($title_alignment)) {
+                        $title_alignment = "left";
+                    }
+                    ?>
+                <?php endif; ?>
+                <h1 class="dsn:text-<?php echo $title_alignment; ?>"><?php echo get_the_title(); ?></h1>
+     
     <?php } ?>
 
 

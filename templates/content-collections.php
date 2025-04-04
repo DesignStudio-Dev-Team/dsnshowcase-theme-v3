@@ -30,7 +30,7 @@
     $title_gradient_bg = get_field('title_gradient_bg');
     $title_gradient = '';
     if($title_gradient_bg != false) {
-        $title_gradient = '<div class="absolute w-full z-20 left-0 right-0 p-10 block" style="background: linear-gradient(rgba(0,0,0,1), rgba(255,255,255,0)); box-shadow: inset 0 31px 23px 0 rgb(0 0 0 / 70%);"></div>';
+        $title_gradient = '<div class="dsn:absolute dsn:w-full dsn:z-20 dsn:left-0 dsn:right-0 dsn:p-10 dsn:block" style="background: linear-gradient(rgba(0,0,0,1), rgba(255,255,255,0)); box-shadow: inset 0 31px 23px 0 rgb(0 0 0 / 70%);"></div>';
     }
     $collections = get_field('hot-tubs');
 
@@ -48,17 +48,20 @@
         $page_title = get_the_title();
     }
 ?>
-    <?php get_template_part('template-parts/block-hero'); ?>
-    
+ 
     <!-- Collection Page Title and Content -->
-    <div class="pt-5">
-    <?php page_title_dsw(); ?>
-    <div class="container">
+    <div class="dsn:pt-5">
+    <div class="dsn:container">
+        <div class="dsn:flex dsn:flex-wrap dsn:justify-center">
+            <h1 class="dsn:text-3xl dsn:font-bold dsn:text-center"><?php echo $page_title; ?></h1>
+        </div>
+    </div>
+    <div class="dsn:container">
     <div class="content-container" style="<?php echo $container_w; ?><?php echo $container_pt; ?><?php echo $container_pb; ?>">
             <?php the_content(); ?>
     </div>
     </div>
-    <?php get_template_part('template-parts/content', 'two-columns'); ?>
+    <?php get_template_part('template/content', 'two-columns'); ?>
 
     <?php
         //static Menu Links
@@ -83,11 +86,11 @@
             }
         }
     </style>
-        <div class="container px-6 mt-10">
-            <div class="flex flex-wrap">
+        <div class="dsn:container dsn:px-6 dsn:mt-10">
+            <div class="dsn:flex dsn:flex-wrap">
                 <?php foreach($static_links as $link): ?>
-                    <div class="w-full md:w-1/2 lg:w-1/3 px-2">
-                        <a href="<?php echo $link['collections_static_link_url']; ?>" class="dsw-collections-btn block p-2 text-center rounded-lg shadow-lg">
+                    <div class="dsn:w-full dsn:md:w-1/2 dsn:lg:w-1/3 dsn:px-2">
+                        <a href="<?php echo $link['collections_static_link_url']; ?>" class="dsw-collections-btn dsn:block dsn:p-2 dsn:text-center dsn:rounded-lg dsn:shadow-lg">
                             <?php echo $link['collections_static_link_title']; ?>
                         </a>
                     </div>
@@ -101,8 +104,8 @@
     <?php if($show_collection_boxes === true): ?>
         <!-- Featured Collections -->
         <?php if( $collections ): ?>
-            <div class="container pt-5">
-                <div class="flex flex-wrap justify-center">
+            <div class="dsn:container dsn:mx-auto dsn:pt-5">
+                <div class="dsn:flex fdsn:lex-wrap dsn:justify-center">
                     <?php foreach($collections as $item):
                             $title = $item['collection-title'];
                             $desc = $item['collection-description'];
@@ -122,15 +125,15 @@
                             //$img_height = $img['height'];
                             $link = $item['collection-link'];
                         ?>
-                        <div class="w-full md:w-1/2 lg:w-1/<?php echo $num_collections; ?> text-center relative mb-4">
-                            <div class="relative mx-3 group overflow-hidden">
+                        <div class="dsn:w-full dsn:md:w-1/2 dsn:lg:w-1/<?php echo $num_collections; ?> text-center relative mb-4">
+                            <div class="dsn:relative dsn:mx-3 dsn:group dsn:overflow-hidden">
 
                                 <?php if($link != ''): ?>
                                     <a href="<?php echo $link; ?>">
                                 <?php endif; ?>
                                     <?php echo $title_gradient; ?>
                                     <?php if ($title) { ?>
-                                    <h2 class="absolute z-30 top-0 left-0 right-0 py-4 text-xl text-bold text-center text-white"><?php echo $title; ?></h2>
+                                    <h2 class="dsn:absolute dsn:z-30 dsn:top-0 dsn:left-0 dsn:right-0 dsn:py-4 dsn:text-xl dsn:text-bold dsn:text-center dsn:text-white"><?php echo $title; ?></h2>
                                     <?php } ?>
                                     <?php if(!empty($img_src)): ?>
                                         <?php if (!$img_alt) {
@@ -143,11 +146,11 @@
                                                 $img_alt = $parts['filename']; 
                                             } 
                                         } ?>
-                                        <img class="w-full duration-500 relative z-10" src="<?php echo $img_src; ?>" alt="<?php echo $img_alt; ?>">
+                                        <img class="dsn:w-full dsn:duration-500 dsn:relative dsn:z-10" src="<?php echo $img_src; ?>" alt="<?php echo $img_alt; ?>">
                                     <?php endif; ?>
                                     <?php if($desc != ''): ?>
-                                        <div class="bg-gray-600 py-4 px-2 relative z-40">
-                                            <p class="text-center text-white"><?php echo $desc; ?></p>
+                                        <div class="dsn:bg-gray-600 dsn:py-4 dsn:px-2 dsn:relative dsn:z-40">
+                                            <p class="dsn:text-center dsn:text-white"><?php echo $desc; ?></p>
                                         </div>
                                     <?php endif; ?>
                                 <?php if($link != ''): ?>
@@ -181,29 +184,29 @@
                 );
                 $result = new WP_Query($args);
                 
-                $columnClass = 'w-full px-3 md:px-4 mb-4 md:mb-20 sm:w-1/2 md:w-1/3';
+                $columnClass = 'dsn:w-full dsn:px-3 dsn:md:px-4 dsn:mb-4 dsn:md:mb-20 dsn:sm:w-1/2 dsn:md:w-1/3';
                 if ($result->post_count == 2 || $result->post_count == 4)
                 {
-                     $columnClass = 'w-full px-3 md:px-4 mb-4 md:mb-20 sm:w-1/2';
+                     $columnClass = 'dsn:w-full dsn:px-3 dsn:md:px-4 dsn:mb-4 dsn:md:mb-20 dsn:sm:w-1/2';
                 }
             ?>
         
             <?php if ( $result->have_posts() ) : ?>
-                <div class="container py-5">
-                    <div class="flex flex-wrap justify-center">
+                <div class="dsn:container dsn:py-5">
+                    <div class="dsn:flex dsn:flex-wrap dsn:justify-center">
                         <?php while ( $result->have_posts() ):
                             $result->the_post();
                         ?>
                         <div class="<?php echo $columnClass;?>">
                             <a href="<?php echo get_permalink(); ?>">
-                                <div class="text-center thumbnail">
+                                <div class="dsn:text-center thumbnail">
                                     <?php if ( has_post_thumbnail() ): ?>
                                         <?php the_post_thumbnail(); ?>
                                     <?php else: ?>
                                         <?php echo wc_placeholder_img(); ?>
                                     <?php endif; ?>
                                 </div>
-                                <h3 class="text-center"><?php the_title(); ?></h3>
+                                <h3 class="dsn:text-center"><?php the_title(); ?></h3>
                             </a>
                         </div>
                         <?php endwhile; ?>
@@ -222,20 +225,20 @@
     
     <?php if($type_of_content_to_display === 'product'): ?>
         <?php if(!empty($set_of_products)):?>
-            <div class="container py-5">
-                <div class="flex flex-wrap justify-center">
+            <div class="dsn:container dsn:py-5">
+                <div class="dsn:flex dsn:flex-wrap dsn:justify-center">
                 <?php foreach($set_of_products as $post): 
                       setup_postdata($post); ?>
-                    <div class="w-full px-3 md:px-4 mb-4 sm:w-1/2 md:w-1/3">
+                    <div class="dsn:w-full dsn:px-3 dsn:md:px-4 dsn:mb-4 dsn:sm:w-1/2 dsn:md:w-1/3">
                         <a href="<?php echo get_permalink(); ?>">
-                            <div class="text-center thumbnail">
+                            <div class="dsn:text-center thumbnail">
                                     <?php if ( has_post_thumbnail() ): ?>
                                         <?php the_post_thumbnail(); ?>
                                     <?php else: ?>
                                         <?php echo wc_placeholder_img(); ?>
                                     <?php endif; ?>
                             </div>
-                           <h3 class="text-center"><?php the_title(); ?></h3>
+                           <h3 class="dsn:text-center"><?php the_title(); ?></h3>
                         </a>
                     </div>
             <?php endforeach; ?>
