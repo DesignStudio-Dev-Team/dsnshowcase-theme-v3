@@ -55,6 +55,12 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Two Block') {
             include get_template_directory() . '/inc/customblocks/two-block.php';
         }
+        if($block_type === 'Reviews Block') {
+            include get_template_directory() . '/inc/customblocks/reviews-block.php';
+        }
+        if($block_type === 'CTAs Block') {
+            include get_template_directory() . '/inc/customblocks/ctas-block.php';
+        }
     }
   echo '</div>'; ?>
 <style>

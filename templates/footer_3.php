@@ -163,19 +163,19 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                                 <?php if($network == 'Facebook') { ?>
                                     <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
                                     <!-- <img src="<?php echo  get_template_directory() . '\assets\svg\social\facebook.webp'; ?>" /> -->
-                                    <img class="dsn:w-14" src="./wp-content/uploads/theme-assets/social/facebook.webp" alt="<?php echo $network; ?>" />
+                                    <img class="dsn:w-14" src="/wp-content/uploads/theme-assets/social/facebook.webp" alt="<?php echo $network; ?>" />
                                     </a>
                                     <?php } elseif ($network == 'Instagram') {?>
                                     <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
-                                    <img class="dsn:w-14" src="./wp-content/uploads/theme-assets/social/Insta.webp" alt="<?php echo $network; ?>" />
+                                    <img class="dsn:w-14" src="/wp-content/uploads/theme-assets/social/Insta.webp" alt="<?php echo $network; ?>" />
                                     </a>
                                     <?php } elseif ($network == 'Youtube') {?>
                                     <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
-                                    <img class="dsn:w-14" src="./wp-content/uploads/theme-assets/social/Youtube.webp" alt="<?php echo $network; ?>" />
+                                    <img class="dsn:w-14" src="/wp-content/uploads/theme-assets/social/Youtube.webp" alt="<?php echo $network; ?>" />
                                     </a>
                                     <?php } elseif ($network == 'Pinterest') {?>
                                     <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
-                                    <img class="dsn:w-14" src="./wp-content/uploads/theme-assets/social/pin.webp" alt="<?php echo $network; ?>" />
+                                    <img class="dsn:w-14" src="/wp-content/uploads/theme-assets/social/pin.webp" alt="<?php echo $network; ?>" />
                                     </a>
                                     <?php } ?>
                                 </div>

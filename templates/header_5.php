@@ -120,29 +120,29 @@ $header_sticky = get_field('sticky_header', 'options');
 			color: #65a23b;
 		}
 
-		nav>ul>li {
+		.header5 nav>ul>li {
 			border-top: 1px solid #076594;
 			background-color: #076594;
 			margin-right: 1em;
     	}
-		nav>ul>li:last-child {
+		.header5 nav>ul>li:last-child {
 			margin-right: 0;
 			border-top: 1px solid #65a23b;
 			background-color: #65a23b;
 		}
-		nav>ul>li:hover {
+		.header5 nav>ul>li:hover {
 			background-color: #fff;
 		}
 		.sticky-header-active nav>ul>li:hover a {
 			color: #65a23b;
 		}
 		
-		nav>ul>li:hover {
+		.header5 nav>ul>li:hover {
 			border-top: 1px solid #eeeeee;
 			box-shadow: 0px 0px 3px 0px #ddd;
 		}
 
-		nav>ul>li:after {
+		.header5 nav>ul>li:after {
 			content: "";
 			width: 1px;
 			height: 100%;
@@ -152,7 +152,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			top: 0;
 		}
 
-		nav>ul>li:last-child:after {
+		.header5 nav>ul>li:last-child:after {
 			content: "";
 			width: 0px;
 		}
