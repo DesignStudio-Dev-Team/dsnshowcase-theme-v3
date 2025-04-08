@@ -27,7 +27,7 @@ if ($selected_blocks) {
 
   <main class="archive-promotions">
 
-    <div class="dsn:container">
+    <div class="dsn:container dsn:mx-auto">
         <div class="dsn:md:flex dsn:px-10 dsn:my-6 dsn:lg:my-10">
             <div class="dsn:w-full dsn:mx-auto dsn:inline-block dsn:relative">
                 <h1 class="dsn:my-4 dsn:text-3xl dsn:md:text-4xl dsn:lg:text-5xl dsn:md:text-center">Promotions</h1>
