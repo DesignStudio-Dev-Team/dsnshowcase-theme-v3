@@ -26,20 +26,11 @@ $viewStyle = 'Grid'; ?>
     }
 
     .nav-links a {
-        color: var(--dsw-main-dealer-color);
+        color: var(--dealerLinkColor);
     }
 
-    .nav-links a:hover {
-        color: var(--dsw-main-dealer-hover);
-    }
 
-    .nav-links .nav-previous {
-        float: right;
-    }
-
-    .nav-links .nav-next {
-        float: left;
-    }
+   
 </style>
 
 <div class="dsn:container dsn:mx-auto dsn:px-6">
@@ -50,10 +41,8 @@ $viewStyle = 'Grid'; ?>
             if (have_posts()) : ?>
                     <?php
                     global $wp_query;
-                    $args = array_merge($wp_query->query_vars, ['posts_per_page' => '12']);
+                    $args = array_merge(['posts_per_page' => 12], $wp_query->query_vars);
                     $search = new WP_Query($args);
-
-
                     ?>
 
                 <header class="page-header">
@@ -62,7 +51,7 @@ $viewStyle = 'Grid'; ?>
                     </h3>
                 </header><!-- .page-header -->
 
-                <div class="dsn:grid dsn:gap-4 dsn:grid-cols-3">
+                <div class="dsn:grid dsn:gap-4 dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:lg:grid-cols-3">
 
                     <?php
                     /* Start the Loop */
@@ -83,14 +72,14 @@ $viewStyle = 'Grid'; ?>
                 </div>
 
                 <div class="dsn:grid dsn:gap-4 dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:text-xl dsn:mt-4">
-                    <div>
-                        <?php the_posts_navigation(['prev_text' => '<span class="hidden">prev</span>', 'next_text' => '&laquo; ' . dssLang($dssSiteLanguage)->search->previous_link]); ?>
+                    <div class="dsn:text-left">
+                        <?php the_posts_navigation(['prev_text' => '<span class="dsn:hidden">prev</span>', 'next_text' => '&laquo; ' . dssLang($dssSiteLanguage)->search->previous_link]); ?>
                     </div>
                     <div>
                         <?php the_posts_pagination(['mid_size' => 3, 'prev_text' => 'previous', 'next_text' => 'next']); ?>
                     </div>
-                    <div>
-                        <?php the_posts_navigation(['prev_text' => dssLang($dssSiteLanguage)->search->next_link . ' &raquo;', 'next_text' => '<span class="hidden">next</span>']); ?>
+                    <div class="dsn:text-right">
+                        <?php the_posts_navigation(['prev_text' => dssLang($dssSiteLanguage)->search->next_link . ' &raquo;', 'next_text' => '<span class="dsn:hidden">next</span>']); ?>
                     </div>
                 </div>
 
