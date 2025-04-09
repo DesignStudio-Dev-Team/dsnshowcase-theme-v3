@@ -14,7 +14,7 @@ $cta = $parallax['cta'];
                <img class="dsn:mb-5" src="<?php echo $logo; ?>" alt="logo">
                <h2 class="dsn:text-6xl dsn:text-white"><?php echo $title; ?></h2>
                <p class="dsn:text-white dsn:mb-10"><?php echo $description; ?></p>
-               <a class="btn dsn:mt-15 dsn:justify-start dsn:self-start" href="<?php echo $cta['url']; ?>"><?php echo $cta['title']; ?></a>
+               <a class="btn dsn:mt-15 dsn:justify-start dsn:self-start" href="<?php echo $cta['url']; ?>" role="button"><?php echo $cta['title']; ?></a>
          </div>
       </div>
 </div>

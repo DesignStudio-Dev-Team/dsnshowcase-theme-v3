@@ -11,7 +11,7 @@ $bgImg = $processList['background_image'];
 <section class="dsn:my-10 dsn:py-25" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center">
-        <h1><?php echo $title; ?></h1>
+        <h2><?php echo $title; ?></h2>
         <p><?php echo $description; ?></p>
     </div>
     <div class="dsn:block dsn:lg:flex dsn:flex-row dsn:justify-center dsn:items-center dsn:py-10 dsn:w-full dsn:2xl:w-[1415px] dsn:mx-auto">
@@ -38,7 +38,7 @@ $bgImg = $processList['background_image'];
 
             <?php if($cta) { ?>
                 <div class="cta dsn:py-5">
-                <a class="btn" href="<?php echo $cta['url']; ?>"> <?php echo $cta['title']; ?></a>
+                <a class="btn" href="<?php echo $cta['url']; ?>" role="button"> <?php echo $cta['title']; ?></a>
                 </div> 
             <?php } ?>
         </div>

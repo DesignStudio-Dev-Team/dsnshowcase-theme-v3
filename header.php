@@ -6,7 +6,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-	
+<a class="screen-reader-text skip-link" href="#header">Skip to content</a>
 	<?php 
     $header = get_field('header');
 
