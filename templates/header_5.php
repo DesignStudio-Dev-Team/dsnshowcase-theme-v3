@@ -9,7 +9,7 @@ $header_sticky = get_field('sticky_header', 'options');
 ?>
 
 <header id="header"
-	class="header5 dsn:bg-white dsn:text-[#65a23b] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block dsn:shadow-xl <?php if ($header_sticky == "1") {
+	class="header5 dsn:bg-white dsn:text-[#65a23b] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
 		echo "dsn:relative";
@@ -26,7 +26,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		<div class="dsn-logo dsn:w-2/12">
 			<a class="dsn:block dsn:relative dsn:text-center" href="<?php
 			echo esc_url(home_url('/'));
-			?>"><img class="dsn:w-48 dsn:md:w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>"
+			?>"><img class="dsn:w-48 dsn:md:w-65 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>"
 					alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-5/12">
