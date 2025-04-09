@@ -7,7 +7,7 @@ $reviews = $reviews_block['reviews'];
 <section class="dsn:my-10 dsn:py-25">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center">
-        <h1><?php echo $title; ?></h1>
+        <h2><?php echo $title; ?></h2>
     </div>
     <div class="dsnReviewsBlock">
          <?php 
@@ -25,7 +25,7 @@ $reviews = $reviews_block['reviews'];
             </div>
             <div class="dsn:w-full dsn:h-[55%] dsn:left-[45%] dsn:p-15 dsn:lg:w-[800px] dsn:absolute dsn:bg-white dsn:shadow dsn:my-12 dsn:z-20">
                 <div class="dsn:absolute dsn:left-10 dsn:top-10 dsn:mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="55" height="105" viewBox="0 0 22 65">
+                    <svg role="presentation" xmlns="http://www.w3.org/2000/svg" width="55" height="105" viewBox="0 0 22 65">
                     <text id="_" data-name="&quot;" transform="translate(0 53)" fill="#65a23b" font-size="54" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">&quot;</tspan></text>
                     </svg>
                 </div>

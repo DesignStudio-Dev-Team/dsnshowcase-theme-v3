@@ -33,7 +33,7 @@ $youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocoo
                     foreach($list as $item) { ?>
                 <li class="dsn:flex dsn:items-center dsn:align-middle dsn:self-center dsn:gap-3 dsn:mt-0 dsn:py-2 dsn:list-none">
                     <div>
-                    <svg class="checkBoxesList" xmlns="http://www.w3.org/2000/svg" width="34.571" height="34.571" viewBox="0 0 34.571 34.571">
+                    <svg role="presentation" class="checkBoxesList" xmlns="http://www.w3.org/2000/svg" width="34.571" height="34.571" viewBox="0 0 34.571 34.571">
                     <path id="Path_6503" data-name="Path 6503" d="M21.786,4.5A17.286,17.286,0,1,0,39.071,21.786,17.305,17.305,0,0,0,21.786,4.5Zm9,11.493-11.169,13.3a1.33,1.33,0,0,1-1,.475h-.022a1.33,1.33,0,0,1-.988-.44L12.818,24a1.33,1.33,0,1,1,1.976-1.778l3.764,4.182L28.746,14.282a1.33,1.33,0,1,1,2.036,1.71Z" transform="translate(-4.5 -4.5)"/>
                     </svg>
                     </div>
@@ -45,7 +45,7 @@ $youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocoo
             </ul>
             <div class="dsn:w-full dsn:text-center dsn:mt-15">
                 <?php if(!empty($cta['url'])) { ?>
-            <a class="btn" href="<?php echo $cta['url']; ?>"><?php echo $cta['title']; ?></a>
+            <a class="btn" href="<?php echo $cta['url']; ?>" role="button"><?php echo $cta['title']; ?></a>
             <?php } ?>
             </div>
          </div>

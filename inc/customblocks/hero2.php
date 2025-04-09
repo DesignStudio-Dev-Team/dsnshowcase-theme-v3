@@ -32,7 +32,7 @@ $text_color = $title_and_cta['text_color'];
                                 class="dsn:flex-auto dsn:w-full dsn:h-60 dsn:2xl:h-90 dsn:flex-grow-1 dsn:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center dsn:order-2 dsn:md:order-1"
                                 style="background: url(<?php echo $card_image['url']; ?>);">
                                 <a class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
-                                    href="<?php echo $card_link['url']; ?>"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl"><?php echo $card_title; ?></span></a>
+                                    href="<?php echo $card_link['url']; ?>" role="button"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl"><?php echo $card_title; ?></span></a>
                             </div>
     <?php endwhile;
                     endif;
@@ -71,7 +71,7 @@ $text_color = $title_and_cta['text_color'];
                                 class="dsn:w-full dsn:h-60 dsn:2xl:h-90 dsn:flex-grow-1 dsn:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center dsn:order-2 dsn:md:order-3"
                                 style="background: url(<?php echo $card_image['url']; ?>);">
                                 <a class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
-                                    href="<?php echo $card_link['url']; ?>"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl dsn:mb-2"><?php echo $card_title; ?></span></a>
+                                    href="<?php echo $card_link['url']; ?>" role="button"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl dsn:mb-2"><?php echo $card_title; ?></span></a>
                             </div>
     <?php endwhile;
                     endif;

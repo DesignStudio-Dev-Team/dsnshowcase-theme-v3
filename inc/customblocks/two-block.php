@@ -27,7 +27,7 @@ $twoBlockContent = $twoBlock['two_block_content'];
                     <div class="dsn:w-full dsn:p-5 dsn:md:p-15 dsn:text-left dsn:flex dsn:flex-col <?php echo $order1 . ' ' . $dclass1; ?>">
                         <h2><?php echo $block['title']; ?></h2>
                         <p><?php echo $block['description']; ?></p>
-                        <a class="btn dsn:mt-5 dsn:justify-start dsn:self-start" href="<?php echo $block['cta']['url']; ?>"><?php echo $block['cta']['title']; ?></a>
+                        <a class="btn dsn:mt-5 dsn:justify-start dsn:self-start" href="<?php echo $block['cta']['url']; ?>" role="button"><?php echo $block['cta']['title']; ?></a>
                     </div>
                     <div class="dsn:p-0 dsn:w-full <?php echo $order2 . ' ' . $dclass2; ?>">
                         <img class="dsn:w-full dsn:h-full" src="<?php echo $block['main_image']; ?>" alt="image">
