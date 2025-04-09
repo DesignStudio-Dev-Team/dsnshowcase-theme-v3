@@ -1,30 +1,36 @@
 @import 'tailwindcss' prefix(dsn);
 
 @theme {
-  --breakpoint-max: 1800px;
+    --breakpoint-max: 1800px;
 }
 
 @utility container {
-  margin-inline: auto;
-  padding-inline: 1rem;
-  @media (width >= --theme(--breakpoint-max)) {
-    max-width: none;
-  }
-  @media (width >= 100%) {
-    max-width: 100%;
-  }
-  @media (width >= 100%) {
-    max-width: 100%;
-  }
-  @media (width >= 1200px) {
-    max-width: 1200px;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
-  @media (width >= 1800px) {
-    max-width: 1800px;
-  }
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @media (width >=--theme(--breakpoint-max)) {
+        max-width: none;
+    }
+
+    @media (width >=100%) {
+        max-width: 100%;
+    }
+
+    @media (width >=100%) {
+        max-width: 100%;
+    }
+
+    @media (width >=1200px) {
+        max-width: 1200px;
+    }
+
+    @media (width >=1400px) {
+        max-width: 1400px;
+    }
+
+    @media (width >=1800px) {
+        max-width: 1800px;
+    }
 }
 
 /*
@@ -36,100 +42,195 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
 
-  .btn {
-    @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
 
-  /* Headings */
-  h1 {
-    @apply dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
-  }
+    .btn {
+        @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
+    }
 
-  h2 {
-    @apply dsn:text-3xl dsn:font-semibold dsn:mb-5 dsn:leading-tight;
-  }
-
-  h3 {
-    @apply dsn:text-2xl dsn:font-medium dsn:mb-4 dsn:leading-snug;
-  }
-
-  h4 {
-    @apply dsn:text-xl dsn:font-medium dsn:mb-3 dsn:leading-snug;
-  }
-
-  h5 {
-    @apply dsn:text-lg dsn:font-medium dsn:mb-2 dsn:leading-normal;
-  }
-
-  /* Paragraphs */
-  p {
-    @apply dsn:text-lg dsn:leading-relaxed dsn:mb-4;
-  }
-  /* Primary unordered list */
-  ul {
-    @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
-  }
-
-  /* Second level unordered list */
-  ul ul {
-    @apply dsn:list-[circle] dsn:my-0.5;
-  }
-
-  /* Third level unordered list */
-  ul ul ul {
-    @apply dsn:list-[square] dsn:my-0.5;
-  }
-
-  /* Primary ordered list */
-  ol {
-    @apply dsn:block dsn:list-decimal dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
-  }
-
-  /* Second level ordered list */
-  ol ol {
-    @apply dsn:list-[lower-alpha] dsn:my-0.5;
-  }
- 
-  /* Larger screens */
-  @screen lg {
+    /* Headings */
     h1 {
-      @apply dsn:text-5xl;
+        @apply dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
     }
 
     h2 {
-      @apply dsn:text-4xl;
+        @apply dsn:text-3xl dsn:font-semibold dsn:mb-5 dsn:leading-tight;
     }
 
     h3 {
-      @apply dsn:text-3xl;
+        @apply dsn:text-2xl dsn:font-medium dsn:mb-4 dsn:leading-snug;
     }
 
     h4 {
-      @apply dsn:text-2xl;
+        @apply dsn:text-xl dsn:font-medium dsn:mb-3 dsn:leading-snug;
     }
 
     h5 {
-      @apply dsn:text-xl;
+        @apply dsn:text-lg dsn:font-medium dsn:mb-2 dsn:leading-normal;
     }
 
+    /* Paragraphs */
     p {
-      @apply dsn:text-lg;
+        @apply dsn:text-lg dsn:leading-relaxed dsn:mb-4;
     }
 
-    li {
-      @apply dsn:text-lg;
+    /* Primary unordered list */
+    ul {
+        @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
     }
-    ol > li::marker,
-    ul > li::marker {
-      @apply dsn:text-lg;  
+
+    /* Second level unordered list */
+    ul ul {
+        @apply dsn:list-[circle] dsn:my-0.5;
     }
-  }
+
+    /* Third level unordered list */
+    ul ul ul {
+        @apply dsn:list-[square] dsn:my-0.5;
+    }
+
+    /* Primary ordered list */
+    ol {
+        @apply dsn:block dsn:list-decimal dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
+    }
+
+    /* Second level ordered list */
+    ol ol {
+        @apply dsn:list-[lower-alpha] dsn:my-0.5;
+    }
+
+    /* Larger screens */
+    @screen lg {
+        h1 {
+            @apply dsn:text-5xl;
+        }
+
+        h2 {
+            @apply dsn:text-4xl;
+        }
+
+        h3 {
+            @apply dsn:text-3xl;
+        }
+
+        h4 {
+            @apply dsn:text-2xl;
+        }
+
+        h5 {
+            @apply dsn:text-xl;
+        }
+
+        p {
+            @apply dsn:text-lg;
+        }
+
+        li {
+            @apply dsn:text-lg;
+        }
+
+        ol>li::marker,
+        ul>li::marker {
+            @apply dsn:text-lg;
+        }
+    }
+
+
+
+    /* gravity forms */
+    .gform_wrapper.gravity-theme button, .gform_wrapper.gravity-theme input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button
+    {
+        background: var(--dealerColor);
+        @apply dsn:text-white dsn:cursor-pointer dsn:rounded-lg dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl;
+    }
+
+    .gform_wrapper.gravity-theme .gfield_header_item, .gform_wrapper.gravity-theme .gform_fileupload_rules, .gform_wrapper.gravity-theme .ginput_complex label
+    {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper.gravity-theme .gfield_label {
+        @apply dsn:!text-lg dsn:!mb-0;
+    }
+
+    .gform_wrapper.gravity-theme .ginput_complex legend {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper.gravity-theme .gfield_required {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper.gravity-theme .gfield {
+        @apply dsn:!mb-5;
+    }
+
+    .gform_wrapper.gravity-theme input[type=color],
+    .gform_wrapper.gravity-theme input[type=date],
+    .gform_wrapper.gravity-theme input[type=datetime-local],
+    .gform_wrapper.gravity-theme input[type=datetime],
+    .gform_wrapper.gravity-theme input[type=email],
+    .gform_wrapper.gravity-theme input[type=month],
+    .gform_wrapper.gravity-theme input[type=number],
+    .gform_wrapper.gravity-theme input[type=password],
+    .gform_wrapper.gravity-theme input[type=search],
+    .gform_wrapper.gravity-theme input[type=tel],
+    .gform_wrapper.gravity-theme input[type=text],
+    .gform_wrapper.gravity-theme input[type=time],
+    .gform_wrapper.gravity-theme input[type=url],
+    .gform_wrapper.gravity-theme input[type=week],
+    .gform_wrapper.gravity-theme select,
+    .gform_wrapper.gravity-theme textarea {
+        @apply dsn:border dsn:border-gray-300 dsn:rounded-lg dsn:focus:outline-none dsn:focus:ring-2 dsn:focus:ring-gray-500 dsn:focus:border-gray-500;
+        background: rgba(0,0,0,.02);
+    }
+
+    .gform_wrapper.gravity-theme input[type=color], .gform_wrapper.gravity-theme input[type=date], .gform_wrapper.gravity-theme input[type=datetime-local], .gform_wrapper.gravity-theme input[type=datetime], .gform_wrapper.gravity-theme input[type=email], .gform_wrapper.gravity-theme input[type=month], .gform_wrapper.gravity-theme input[type=number], .gform_wrapper.gravity-theme input[type=password], .gform_wrapper.gravity-theme input[type=search], .gform_wrapper.gravity-theme input[type=tel], .gform_wrapper.gravity-theme input[type=text], .gform_wrapper.gravity-theme input[type=time], .gform_wrapper.gravity-theme input[type=url], .gform_wrapper.gravity-theme input[type=week], .gform_wrapper.gravity-theme select, .gform_wrapper.gravity-theme textarea
+    {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper.gravity-theme .description, .gform_wrapper.gravity-theme .gfield_description, .gform_wrapper.gravity-theme .gsection_description, .gform_wrapper.gravity-theme .instruction
+    {
+        @apply dsn:!text-base dsn:italic dsn:text-gray-500 dsn:pt-2;
+    }
+
+    .gform_wrapper.gravity-theme .ginput_container_address span, .gform_wrapper.gravity-theme .ginput_full:not(:last-of-type)
+    {
+        @apply dsn:!mb-5;
+    }
+
+    .gform_wrapper.gravity-theme .gform_validation_errors>h2
+    {
+        @apply dsn:!text-lg;
+    }
+
+    @screen lg {
+
+        .gform_wrapper.gravity-theme input[type=color],
+        .gform_wrapper.gravity-theme input[type=date],
+        .gform_wrapper.gravity-theme input[type=datetime-local],
+        .gform_wrapper.gravity-theme input[type=datetime],
+        .gform_wrapper.gravity-theme input[type=email],
+        .gform_wrapper.gravity-theme input[type=month],
+        .gform_wrapper.gravity-theme input[type=number],
+        .gform_wrapper.gravity-theme input[type=password],
+        .gform_wrapper.gravity-theme input[type=search],
+        .gform_wrapper.gravity-theme input[type=tel],
+        .gform_wrapper.gravity-theme input[type=text],
+        .gform_wrapper.gravity-theme input[type=time],
+        .gform_wrapper.gravity-theme input[type=url],
+        .gform_wrapper.gravity-theme input[type=week],
+        .gform_wrapper.gravity-theme select,
+        .gform_wrapper.gravity-theme textarea {
+            @apply dsn:text-lg;
+        }
+    }
 }

@@ -15,7 +15,8 @@ if (!$feature_blog_articles) {
         'post_type' => 'post',
         'posts_per_page' => 3
     );
-    $feature_blog_articles = new WP_Query($args);
+    $feature_blog_articles_query = new WP_Query($args);
+    $feature_blog_articles = $feature_blog_articles_query->posts;
 }
 
 if(isset($feature_blog_articles[0])) {
