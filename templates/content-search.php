@@ -33,21 +33,16 @@ global $dssSiteLanguage;
 }
 
 .search-result-content .search-border{
-    border-color: var(--dsw-main-dealer-color);
+    border-color: var(--dealerLinkColor);
 }
 
-.search-result-content .search-border:hover{
-    border-color: var(--dsw-main-dealer-hover);
-}
 
 .search-result-content a,
 .search-result-content a .read-more{
-    color: var(--dsw-main-dealer-color);
+    color: var(--dealerLinkColor);
 }
 
-.search-result-content a:hover{
-    color: var(--dsw-main-dealer-hover);
-}
+
 </style>
 
 <?php
