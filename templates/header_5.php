@@ -8,7 +8,7 @@ $header_sticky_logo = get_field('header_sticky_logo', 'options');
 $header_sticky = get_field('sticky_header', 'options');
 ?>
 
-<header
+<header id="header"
 	class="header5 dsn:bg-white dsn:text-[#65a23b] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block dsn:shadow-xl <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
@@ -30,7 +30,7 @@ $header_sticky = get_field('sticky_header', 'options');
 					alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-5/12">
-			<div class="header-text dsn:mr-4"><a href="javascript:;" class="get-started dsn:text-black dsn:border-b-3 dsn:border-b-[#65a23b] dsn:text-xl dsn:cursor-pointer">GET STARTED</a></div>
+			<div class="header-text dsn:mr-4"><a href="javascript:;" class="get-started dsn:text-black dsn:border-b-3 dsn:border-b-[#65a23b] dsn:text-xl dsn:cursor-pointer" role="button">GET STARTED</a></div>
 			<?php
 			// wp_nav_menu(array(
 			//     'theme_location' => 'utility_right',
@@ -41,7 +41,7 @@ $header_sticky = get_field('sticky_header', 'options');
 			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
 
 
-				<a href="javascript:;" class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[40px] dsn:h-[40px]"><svg
+				<a href="javascript:;" class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[40px] dsn:h-[40px]" role="button"><svg role="presentation"
 						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
@@ -49,14 +49,14 @@ $header_sticky = get_field('sticky_header', 'options');
 					</svg></a>
 				<a href="/my-account/"
 					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[40px] dsn:h-[40px]">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+					<svg role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path
 							d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
 					</svg> 
 				</a>
 				<a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[40px]"
-					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+					href="/wishlist/" title="Wishlist"><svg role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path
 							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
@@ -64,7 +64,7 @@ $header_sticky = get_field('sticky_header', 'options');
 					<span
 						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#65a23b] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[40px]"
-					href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+					href="/cart/" title="Cart"><svg role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
 							d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
@@ -436,7 +436,7 @@ $header_sticky = get_field('sticky_header', 'options');
 		var clickable_desktop = $('.util-left-nav ul, .util-right-nav ul, .utility-sticky-nav ul').attr('data-clickable');
 		$('.util-left-nav ul li:has(ul), .util-right-nav ul li:has(ul), .utility-sticky-nav ul li:has(ul)').addClass('has-sub dsn:relative dsn:flex dsn:items-center dsn:gap-2 dsn:cursor-pointer');
 		//$('.util-left-nav ul .has-sub>a, .util-right-nav ul .has-sub>a, .utility-sticky-nav ul .has-sub>a').after('<span class="dsn_nav__caret dsn:text-[#65a23b] dsn:rotate-90"><svg fill="currentColor" width="20" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></span>');
-		$('.util-left-nav ul a[href^="tel:"]').before('<span class="dsn_nav__caret dsn:text-[#65a23b]"><svg fill="currentColor" width="28" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M347.1 24.6c7.7-18.6 28-28.5 47.4-23.2l88 24C499.9 30.2 512 46 512 64c0 247.4-200.6 448-448 448c-18 0-33.8-12.1-38.6-29.5l-24-88c-5.3-19.4 4.6-39.7 23.2-47.4l96-40c16.3-6.8 35.2-2.1 46.3 11.6L207.3 368c70.4-33.3 127.4-90.3 160.7-160.7L318.7 167c-13.7-11.2-18.4-30-11.6-46.3l40-96z"/></svg></span>');
+		$('.util-left-nav ul a[href^="tel:"]').before('<span class="dsn_nav__caret dsn:text-[#65a23b]"><svg role="presentation" fill="currentColor" width="28" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M347.1 24.6c7.7-18.6 28-28.5 47.4-23.2l88 24C499.9 30.2 512 46 512 64c0 247.4-200.6 448-448 448c-18 0-33.8-12.1-38.6-29.5l-24-88c-5.3-19.4 4.6-39.7 23.2-47.4l96-40c16.3-6.8 35.2-2.1 46.3 11.6L207.3 368c70.4-33.3 127.4-90.3 160.7-160.7L318.7 167c-13.7-11.2-18.4-30-11.6-46.3l40-96z"/></svg></span>');
 		
 
 	}(jQuery));
@@ -458,6 +458,14 @@ $header_sticky = get_field('sticky_header', 'options');
 	<script>
 		jQuery(document).ready(function ($) {
 			//caches a jQuery object containing the header element
+			$('#menu-utility-navigation-left').attr('role', 'menu');
+			jQuery('.mega-menu a').attr('aria-haspopup', 'true');
+				jQuery('.mega-menu a').attr('aria-expanded', 'false');
+				jQuery('.mega-menu a').hover(function(){
+				jQuery(this).attr('aria-expanded', 'true');
+			}, function() {
+				jQuery(this).attr('aria-expanded', 'false');
+			});
 			var header = $(".sticky-header");
 			var width = $("body").width();
 					console.log(width);
