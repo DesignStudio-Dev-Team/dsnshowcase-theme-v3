@@ -70,23 +70,23 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
             }
         }
      
-            div#footer-copyright #menu-footer-menu li:after {
+            div#footer-copyright ul li:after {
                 content: ".";
                 position: absolute;
                 top: -4px;
                 right: -1em;
             }
-            div#footer-copyright #menu-footer-menu li:last-child:after {
+            div#footer-copyright ul li:last-child:after {
                 content: "";
         }
-        div#footer-copyright #menu-footer-menu li {
+        div#footer-copyright ul li {
             width: auto;
         }
-        div#footer-copyright #menu-footer-menu li:hover {
+        div#footer-copyright ul li:hover {
             background-color: transparent;
         }
         @media only screen and (max-width: 1024px) {
-            div#footer-copyright #menu-footer-menu li:after {
+            div#footer-copyright ul li:after {
                 right: -0.5em;
             }
         }
@@ -99,14 +99,14 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
 			    <h4 class="dsn:font-bold m-0 dsn:text-3xl dsn:text-center"><?php echo $footer_contact_title; ?></h4>
 			 <div class="dsn:flex dsn:flex-wrap dsn:items-start dsn:justify-center dsn:mt-8 dsn:gap-10">
                 <div class="dsn:block dsn:relative dsn:h-full dsn:w-32 dsn:after:absolute dsn:after:h-full dsn:after:w-[1px] dsn:after:bg-white dsn:after:top-0 dsn:after:-right-5">
-                    <img class="dsn:w-full" src="http://localhost/project1/wp-content/uploads/2025/04/footer-logo.webp" alt="footer logo" />
+                    <img class="dsn:w-full" src="https://valleyhotspring.designstudio.host/wp-content/uploads/2025/04/footer-logo.webp" alt="footer logo" />
                 </div>
                         <?php foreach ($cta_buttons as $button) : ?>
                            
                             <a class="help-icon dsn:flex dsn:flex-col dsn:items-center dsn:justify-center dsn:md:items-start dsn:md:justify-start dsn:pb-8 dsn:w-auto" href="<?php echo esc_url_raw($button['link_url']); ?>">
                                 <div class="bg-footerPrimaryLink help-icon-img dsn:flex dsn:h-24 dsn:items-center dsn:justify-center dsn:rounded-full dsn:w-24 dsn:md:h-30 dsn:md:w-24">
                                   
-                                <img class="dsn:h-20 dsn:w-20 dsn:object-contain" src="<?php echo esc_url_raw($button['icon_url']); ?>" alt="<?php  echo esc_html($button['label']); ?> icon image">
+                                <img class="dsn:h-15 dsn:w-15 dsn:object-contain" src="<?php echo esc_url_raw($button['icon_url']); ?>" alt="<?php  echo esc_html($button['label']); ?> icon image">
                                 </div>
                                 <span class="dsn:font-medium dsn:mt-2 dsn:md:w-full dsn:text-center dsn:text-xl">
                                     <?php echo __(esc_html($button['label']), 'dsn-showcase-theme-v3'); ?>
@@ -139,7 +139,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                             <div class="dsn:mb-12 dsn:mt-12 dsn:md:w-1/3 dsn:w-2/3 dsn:md:px-5 dsn:mx-auto dsn:md:mx-0 <?php echo $first; ?>">
 								<img class="dsn:w-full" src="<?php echo esc_html($location['location_image']['url']); ?>" />
                             <h4 class="dsn:mt-4 dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:text-left  dsn:md:min-h-30 dsn:2xl:min-h-20"><?php echo esc_html($location['tab_title']); ?></h4>
-                            <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:flex-wrap dsn:gap-6">
+                            <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:flex-wrap dsn:gap-6 dsn:justify-between">
 								<div class="footer-address-body dsn:w-full dsn:md:w-5/12">
                                         <div class="dsn:mt-4 dsn:md:mt-4 dsn:text-base dsn:lg:text-xl dsn:w-full">
 											<p class="dsn:m-0 dsn:text-base dsn:font-normal dsn:lg:text-xl dsn:mb-2">
@@ -161,7 +161,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                                                         // Fix ext
                                                         $number = str_replace(',', ' x ', $location['phone']['title']);
                                                         ?>
-                                                        <span class="dsn:ml-2 dsn:text-base dsn:lg:text-xl dsn:hover:text-white"><?php echo esc_html($number); ?></span>
+                                                        <span class="dsn:ml-2 dsn:text-base dsn:2xl:text-xl dsn:hover:text-white"><?php echo esc_html($number); ?></span>
                                                     </a>
                                                 </div>
                                             <?php endif; ?>   
@@ -171,7 +171,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                                                     <svg viewBox="0 0 20 20" fill="currentColor" class="location-marker dsn:w-4 dsn:h-4 dsn:md:w-6 dsn:md:h-6">
                                                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                                     </svg>
-                                                    <a class="dsn:ml-2 dsn:text-base dsn:lg:text-xl dsn:hover:!text-white footer-link-color" href="<?php echo $location['directions']['url']; ?>" target="_blank">
+                                                    <a class="dsn:ml-2 dsn:text-base dsn:2xl:text-xl dsn:hover:!text-white footer-link-color" href="<?php echo $location['directions']['url']; ?>" target="_blank">
                                                         <?php echo $location['directions']['title'];?>
                                                     </a>
                                                 </div>
