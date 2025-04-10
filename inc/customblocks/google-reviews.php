@@ -45,7 +45,7 @@ $title = $googleReviews['title'];
                     <text id="_" data-name="&quot;" transform="translate(0 53)" fill="#65a23b" font-size="54" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">&quot;</tspan></text>
                     </svg>
                 </div>
-                <p class="dsn:px-10 dsn:h-80 dsn:overflow-y-scroll"><?php echo $review['review']; ?></p>
+                <p class="dsn:px-10 dsn:h-80 dsn:overflow-y-auto"><?php echo $review['review']; ?></p>
             </div>
             <div class="dsn:flex dsn:justify-self-start dsn:justify-start dsn:justify-items-start dsn:gap-2 dsn:mt-4 dsn:ml-10">
                 <img src="<?php echo $review['author_avatar']; ?>" alt="<?php echo $review['author_of_review']; ?>" class="dsn:w-10 dsn:h-10 dsn:rounded-full dsn:mx-auto dsn:mb-4">
