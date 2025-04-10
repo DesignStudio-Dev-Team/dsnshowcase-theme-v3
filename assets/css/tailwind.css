@@ -188,7 +188,7 @@
     .gform_wrapper input[type=week],
     .gform_wrapper select,
     .gform_wrapper textarea {
-        @apply dsn:border dsn:border-gray-300 dsn:rounded-lg dsn:focus:outline-none dsn:focus:ring-2 dsn:focus:ring-gray-500 dsn:focus:border-gray-500;
+        @apply dsn:h-10 dsn:!text-base dsn:border dsn:border-gray-300 dsn:rounded-lg dsn:focus:outline-none dsn:focus:ring-2 dsn:focus:ring-gray-500 dsn:focus:border-gray-500;
         background: rgba(0,0,0,.02);
     }
 
