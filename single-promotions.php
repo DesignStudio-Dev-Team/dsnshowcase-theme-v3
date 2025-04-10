@@ -37,7 +37,9 @@ if ($selected_blocks) {
     <main class="dsn:relative">
         <div class="dsn:relative dsn:pb-2 dsn:md:pb-0">
             <div class="dsn:md:absolute dsn:top-0 dsn:bg-gray-100 dsn:w-full dsn:md:h-48 dsn:pb-1 dsn:md:pb-0 dsn:pt-6 dsn:text-center">
-                <h1 class="dsn:text-4xl"><?php the_field('short_description_title'); ?></h1>
+                <h1 class="dsn:text-4xl">
+                <?php echo the_title(); ?>    
+                <?php //the_field('short_description_title'); ?></h1>
             </div>
         </div>
         <div class="dsn:md:flex dsn:px-10 dsn:md:pt-32">
