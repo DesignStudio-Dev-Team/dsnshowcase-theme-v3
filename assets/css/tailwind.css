@@ -145,10 +145,24 @@
 
 
     /* gravity forms */
+    .gform_wrapper {
+        @apply dsn:!my-0;
+    }
+
+    .gform_wrapper ul li.gfield
+    {
+        @apply dsn:!mt-0;
+    }
+
     .gform_wrapper button, .gform_wrapper input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button
     {
         background: var(--dealerColor);
         @apply dsn:text-white dsn:cursor-pointer dsn:rounded-lg dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl;
+    }
+
+    .gform_wrapper input[type="file"]
+    {
+        @apply dsn:!w-full;
     }
 
     .gform_wrapper .gfield_header_item, .gform_wrapper .gform_fileupload_rules, .gform_wrapper .ginput_complex label

@@ -305,6 +305,7 @@ global $dssSiteLanguage;
 
     </div>
 </header>
+<div class="dsn:hidden dsn:shadow-xl"></div>
 <?php include("search-form.php"); ?>
 <?php include("mobile-header.php"); ?>
 
