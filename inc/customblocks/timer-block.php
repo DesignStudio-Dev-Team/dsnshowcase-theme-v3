@@ -21,7 +21,7 @@ $dateTime = $timerBlock['date_time'];
         <h2><?php echo $title; ?></h2>
         <p><?php echo $description; ?></p>
         <div class="dsn:flex dsn:gap-10 dsn:my-5">
-            <a class="btn" href="<?php echo $cta['url']; ?>"><?php echo $cta['title']; ?></a>
+            <a class="btn" href="<?php echo $cta['url']; ?>" role="button"><?php echo $cta['title']; ?></a>
     <div id="dsnCountdownTimer" class="dsn:flex dsn:gap-3 dsn:items-center">
     <div class="dsn:w-1/4 dsn:flex dsn:flex-col dsn:items-center">
         <span class="dsn:text-4xl dsn:font-bold" id="dsnCTDays">00</span>

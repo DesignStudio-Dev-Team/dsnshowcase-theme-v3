@@ -1,5 +1,5 @@
 <?php 
-
+get_header();
 // Include custom blocks helper
 require_once get_template_directory() . '/inc/custom-blocks.php';
 
@@ -409,3 +409,4 @@ if ($selected_blocks_bot) {
 <?php } ?>
 
 </style>
+<?php get_footer(); ?>

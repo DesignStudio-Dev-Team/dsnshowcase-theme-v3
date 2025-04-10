@@ -1,30 +1,36 @@
 @import 'tailwindcss' prefix(dsn);
 
 @theme {
-  --breakpoint-max: 1800px;
+    --breakpoint-max: 1800px;
 }
 
 @utility container {
-  margin-inline: auto;
-  padding-inline: 1rem;
-  @media (width >= --theme(--breakpoint-max)) {
-    max-width: none;
-  }
-  @media (width >= 100%) {
-    max-width: 100%;
-  }
-  @media (width >= 100%) {
-    max-width: 100%;
-  }
-  @media (width >= 1200px) {
-    max-width: 1200px;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
-  @media (width >= 1800px) {
-    max-width: 1800px;
-  }
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @media (width >=--theme(--breakpoint-max)) {
+        max-width: none;
+    }
+
+    @media (width >=100%) {
+        max-width: 100%;
+    }
+
+    @media (width >=100%) {
+        max-width: 100%;
+    }
+
+    @media (width >=1200px) {
+        max-width: 1200px;
+    }
+
+    @media (width >=1400px) {
+        max-width: 1400px;
+    }
+
+    @media (width >=1800px) {
+        max-width: 1800px;
+    }
 }
 
 /*
@@ -36,139 +42,209 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-  
-  input,
-  select,
-  textarea,
-  button {
-    @apply dsn:rounded-lg dsn:border-gray-300 dsn:focus-visible:ring-2 dsn:focus-visible:ring-blue-500 dsn:focus-visible:outline-none;
-  }
 
-  input[type='checkbox'],
-  input[type='radio'] {
-    @apply dsn:rounded-full;
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
 
-  input[type='file'] {
-    @apply dsn:bg-gray-50;
-  }
+    .btn {
+        @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
+    }
 
-  .btn {
-    @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
-  }
-
-  /* Headings */
-  h1 {
-    @apply dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
-  }
-
-  h2 {
-    @apply dsn:text-3xl dsn:font-semibold dsn:mb-5 dsn:leading-tight;
-  }
-
-  h3 {
-    @apply dsn:text-2xl dsn:font-medium dsn:mb-4 dsn:leading-snug;
-  }
-
-  h4 {
-    @apply dsn:text-xl dsn:font-medium dsn:mb-3 dsn:leading-snug;
-  }
-
-  h5 {
-    @apply dsn:text-lg dsn:font-medium dsn:mb-2 dsn:leading-normal;
-  }
-
-  /* Paragraphs */
-  p {
-    @apply dsn:text-lg dsn:leading-relaxed dsn:mb-4;
-  }
-  /* Primary unordered list */
-  ul {
-    @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
-  }
-
-  /* Second level unordered list */
-  ul ul {
-    @apply dsn:list-[circle] dsn:my-0.5;
-  }
-
-  /* Third level unordered list */
-  ul ul ul {
-    @apply dsn:list-[square] dsn:my-0.5;
-  }
-
-  /* Primary ordered list */
-  ol {
-    @apply dsn:block dsn:list-decimal dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
-  }
-
-  /* Second level ordered list */
-  ol ol {
-    @apply dsn:list-[lower-alpha] dsn:my-0.5;
-  }
- 
-  /* Larger screens */
-  @screen lg {
+    /* Headings */
     h1 {
-      @apply dsn:text-5xl;
+        @apply dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
     }
 
     h2 {
-      @apply dsn:text-4xl;
+        @apply dsn:text-3xl dsn:font-semibold dsn:mb-5 dsn:leading-tight;
     }
 
     h3 {
-      @apply dsn:text-3xl;
+        @apply dsn:text-2xl dsn:font-medium dsn:mb-4 dsn:leading-snug;
     }
 
     h4 {
-      @apply dsn:text-2xl;
+        @apply dsn:text-xl dsn:font-medium dsn:mb-3 dsn:leading-snug;
     }
 
     h5 {
-      @apply dsn:text-xl;
+        @apply dsn:text-lg dsn:font-medium dsn:mb-2 dsn:leading-normal;
     }
 
+    /* Paragraphs */
     p {
-      @apply dsn:text-lg;
+        @apply dsn:text-lg dsn:leading-relaxed dsn:mb-4;
     }
 
-    li {
-      @apply dsn:text-lg;
+    /* Primary unordered list */
+    ul {
+        @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
     }
-    ol > li::marker,
-    ul > li::marker {
-      @apply dsn:text-lg;  
+
+    /* Second level unordered list */
+    ul ul {
+        @apply dsn:list-[circle] dsn:my-0.5;
     }
-  }
+
+    /* Third level unordered list */
+    ul ul ul {
+        @apply dsn:list-[square] dsn:my-0.5;
+    }
+
+    /* Primary ordered list */
+    ol {
+        @apply dsn:block dsn:list-decimal dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-lg;
+    }
+
+    /* Second level ordered list */
+    ol ol {
+        @apply dsn:list-[lower-alpha] dsn:my-0.5;
+    }
+
+    /* Larger screens */
+    @screen lg {
+        h1 {
+            @apply dsn:text-5xl;
+        }
+
+        h2 {
+            @apply dsn:text-4xl;
+        }
+
+        h3 {
+            @apply dsn:text-3xl;
+        }
+
+        h4 {
+            @apply dsn:text-2xl;
+        }
+
+        h5 {
+            @apply dsn:text-xl;
+        }
+
+        p {
+            @apply dsn:text-lg;
+        }
+
+        li {
+            @apply dsn:text-lg;
+        }
+
+        ol>li::marker,
+        ul>li::marker {
+            @apply dsn:text-lg;
+        }
+    }
+
+
+
+    /* gravity forms */
+    .gform_wrapper {
+        @apply dsn:!my-0;
+    }
+
+    .gform_wrapper ul li.gfield
+    {
+        @apply dsn:!mt-0;
+    }
+
+    .gform_wrapper button, .gform_wrapper input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button
+    {
+        background: var(--dealerColor);
+        @apply dsn:text-white dsn:cursor-pointer dsn:rounded-lg dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl;
+    }
+
+    .gform_wrapper input[type="file"]
+    {
+        @apply dsn:!w-full;
+    }
+
+    .gform_wrapper .gfield_header_item, .gform_wrapper .gform_fileupload_rules, .gform_wrapper .ginput_complex label
+    {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper .gfield_label {
+        @apply dsn:!text-lg dsn:!mb-0;
+    }
+
+    .gform_wrapper .ginput_complex legend {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper .gfield_required {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper .gfield {
+        @apply dsn:!mb-5;
+    }
+
+    .gform_wrapper input[type=color],
+    .gform_wrapper input[type=date],
+    .gform_wrapper input[type=datetime-local],
+    .gform_wrapper input[type=datetime],
+    .gform_wrapper input[type=email],
+    .gform_wrapper input[type=month],
+    .gform_wrapper input[type=number],
+    .gform_wrapper input[type=password],
+    .gform_wrapper input[type=search],
+    .gform_wrapper input[type=tel],
+    .gform_wrapper input[type=text],
+    .gform_wrapper input[type=time],
+    .gform_wrapper input[type=url],
+    .gform_wrapper input[type=week],
+    .gform_wrapper select,
+    .gform_wrapper textarea {
+        @apply dsn:h-10 dsn:!text-base dsn:border dsn:border-gray-300 dsn:rounded-lg dsn:focus:outline-none dsn:focus:ring-2 dsn:focus:ring-gray-500 dsn:focus:border-gray-500;
+        background: rgba(0,0,0,.02);
+    }
+
+    .gform_wrapper input[type=color], .gform_wrapper input[type=date], .gform_wrapper input[type=datetime-local], .gform_wrapper input[type=datetime], .gform_wrapper input[type=email], .gform_wrapper input[type=month], .gform_wrapper input[type=number], .gform_wrapper input[type=password], .gform_wrapper input[type=search], .gform_wrapper input[type=tel], .gform_wrapper input[type=text], .gform_wrapper input[type=time], .gform_wrapper input[type=url], .gform_wrapper input[type=week], .gform_wrapper select, .gform_wrapper textarea
+    {
+        @apply dsn:!text-base;
+    }
+
+    .gform_wrapper .description, .gform_wrapper .gfield_description, .gform_wrapper .gsection_description, .gform_wrapper .instruction
+    {
+        @apply dsn:!text-base dsn:italic dsn:text-gray-500 dsn:pt-2;
+    }
+
+    .gform_wrapper .ginput_container_address span, .gform_wrapper .ginput_full:not(:last-of-type)
+    {
+        @apply dsn:!mb-5;
+    }
+
+    .gform_wrapper .gform_validation_errors>h2
+    {
+        @apply dsn:!text-lg;
+    }
+
+    @screen lg {
+
+        .gform_wrapper input[type=color],
+        .gform_wrapper input[type=date],
+        .gform_wrapper input[type=datetime-local],
+        .gform_wrapper input[type=datetime],
+        .gform_wrapper input[type=email],
+        .gform_wrapper input[type=month],
+        .gform_wrapper input[type=number],
+        .gform_wrapper input[type=password],
+        .gform_wrapper input[type=search],
+        .gform_wrapper input[type=tel],
+        .gform_wrapper input[type=text],
+        .gform_wrapper input[type=time],
+        .gform_wrapper input[type=url],
+        .gform_wrapper input[type=week],
+        .gform_wrapper select,
+        .gform_wrapper textarea {
+            @apply dsn:text-lg;
+        }
+    }
 }
-
-/* default styles for form elements */
-  input[type='text'],
-  input[type='email'],
-  input[type='url'],
-  input[type='tel'],
-  input[type='number'],
-  input[type='password'],
-  input[type='search'],
-  textarea,
-  select {
-    @apply dsn:py-2 dsn:px-4 dsn:border-gray-300 dsn:focus-visible:ring-2 dsn:focus-visible:ring-blue-500 dsn:focus-visible:outline-none;
-  }
-
-  button {
-    @apply dsn:bg-blue-500 dsn:text-white dsn:rounded-lg dsn:py-2 dsn:px-4;
-  }
-  button:hover {
-    @apply dsn:bg-blue-600;
-  }
-  button:disabled {
-    @apply dsn:bg-gray-300 dsn:text-gray-500;
-  }

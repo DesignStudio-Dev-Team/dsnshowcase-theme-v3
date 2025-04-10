@@ -92,11 +92,11 @@ $configuration = get_field('configuration', $block_id);
            <?php echo $primaryTitle; ?>
           </h1>
           <div class="dsn:space-x-4 dsn:flex dsn:items-center dsn:relative dsn:z-10">
-            <a href="<?php echo $mainCTA['url']; ?>" target="<?php echo $mainCTA['target']; ?>" class="dsn:bg-orange-500 dsn:border dsn:rounded-lg dsn:border-white dsn:text-white dsn:px-8 dsn:py-3 dsn:font-medium">
+            <a href="<?php echo $mainCTA['url']; ?>" target="<?php echo $mainCTA['target']; ?>" class="dsn:bg-orange-500 dsn:border dsn:rounded-lg dsn:border-white dsn:text-white dsn:px-8 dsn:py-3 dsn:font-medium" role="button">
             <?php echo $mainCTA['title']; ?>
             </a>
             <?php if($secondaryCTA) { ?>
-            <a href="<?php echo $secondaryCTA['url']; ?>" target="<?php echo $mainCTA['target']; ?>" class="dsn:text-blue-600 dsn:font-medium">
+            <a href="<?php echo $secondaryCTA['url']; ?>" target="<?php echo $mainCTA['target']; ?>" class="dsn:text-blue-600 dsn:font-medium" role="button">
               <?php echo $secondaryCTA['title']; ?>
              </a>
             <?php } ?>
@@ -113,7 +113,7 @@ $configuration = get_field('configuration', $block_id);
         </div>
         
         <div style="background:url('<?php echo $secondaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:lg:order-2  dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $secondaryCard; ?>">
-        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $secondaryLink; ?>">
+        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $secondaryLink; ?>" role="button">
             <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $secondaryTitle; ?>
           </h2>
@@ -130,7 +130,7 @@ $configuration = get_field('configuration', $block_id);
 
        
         <div style="background:url('<?php echo $thirdBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-3 dsn:lg:order-3 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $thirdCard; ?> ">
-        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $thirdLink; ?>">
+        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $thirdLink; ?>" role="button">
 
             <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
             <?php echo $thirdTitle; ?>
@@ -147,7 +147,7 @@ $configuration = get_field('configuration', $block_id);
 
        
         <div style="background:url('<?php echo $fourthBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-4 dsn:lg:order-4 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fourthCard; ?> ">
-        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fourthLink; ?>">
+        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fourthLink; ?>" role="button">
        
           <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $fourthTitle; ?>
@@ -164,7 +164,7 @@ $configuration = get_field('configuration', $block_id);
 
     
         <div style="background:url('<?php echo $fifthBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-5 dsn:lg:order-5 dsn:relative dsn:w-full  dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fifthCard; ?>">
-        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fifthLink; ?>">
+        <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fifthLink; ?>" role="button">
         
         <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $fifthTitle; ?>
