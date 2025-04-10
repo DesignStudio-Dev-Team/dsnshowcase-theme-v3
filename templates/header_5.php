@@ -9,7 +9,7 @@ $header_sticky = get_field('sticky_header', 'options');
 ?>
 
 <header id="header"
-	class="header5 dsn:bg-white dsn:text-[#65a23b] dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block <?php if ($header_sticky == "1") {
+	class="header5 dsn:bg-white dsn:text-[#65a23b] dsn:py-4 dsn:hidden dsn:z-20 dsn:lg:block <?php if ($header_sticky == "1") {
 		echo "dsn:sticky dsn:top-0 sticky-header";
 	} else {
 		echo "dsn:relative";

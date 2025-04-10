@@ -43,7 +43,7 @@ $text_color = $title_and_cta['text_color'];
     ?>
     <div
         class="dsn:flex dsn:flex-col dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:gap-4 dsn:my-2 dsn:justify-center dsn:items-center dsn:px-4 dsn:md:px-6 dsn:py-6 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-1 dsn:md:order-2" style="background-color: <?php echo $bg; ?>">
-        <h1 class="dsn:mb-0 dsn:text-center dsn:text-2xl dsn:lg:text-4xl dsn:font-medium <?php if ($text_color == 'yes') {
+        <h1 class="dsn:mb-0 dsn:text-center dsn:text-2xl dsn:lg:text-5xl dsn:font-medium <?php if ($text_color == 'yes') {
                                                                                                 echo 'dsn:text-black';
                                                                                             } else {
                                                                                                 echo 'dsn:text-white';
