@@ -18,11 +18,11 @@ if ($selected_blocks) {
 }
 ?>
 <main class="dsn:container dsn:mx-auto dsn:md:pt-0 dsn:mb-10 dsn:py-4 dsn:px-10">
-    <?php if (have_posts()): while (have_posts()): the_post(); ?>
-        <article id="page-<?php the_ID(); ?>" <?php post_class('dsn-prose dsn:mx-auto'); ?>>
-           <div><?php the_content(); ?></div>
-        </article>
-    <?php endwhile; endif; ?>
+    <?php 
+    if (have_posts()): while (have_posts()): the_post();
+        get_template_part('templates/content', 'page');
+    endwhile; endif; 
+    ?>
 </main>
 
 
