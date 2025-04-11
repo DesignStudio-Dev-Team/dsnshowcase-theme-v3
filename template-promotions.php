@@ -295,3 +295,5 @@ if ($selected_blocks_bot) {
 }
 
  get_footer(); ?>
+
+<div class="dsn:-mb-3 dsn:hidden dsn:md:m-0"></div>

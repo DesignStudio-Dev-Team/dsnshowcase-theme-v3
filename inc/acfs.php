@@ -89,7 +89,7 @@ add_action( 'acf/include_fields', function() {
 				'Grid Categories' => 'Grid Categories',
 				'Process List' => 'Process List',
 				'Video Block' => 'Video Block',
-				'Parallax Block' => 'Parallax Block',
+				'Visual Block' => 'Visual Block',
 				'Timer Block' => 'Timer Block',
 				'Two Block' => 'Two Block',
 				'Reviews Block' => 'Reviews Block',
@@ -1979,8 +1979,8 @@ add_action( 'acf/include_fields', function() {
 		),
 		array(
 			'key' => 'field_67d3031273b9d',
-			'label' => 'Parallax Block',
-			'name' => 'parallax_block',
+			'label' => 'Visual Block',
+			'name' => 'visual_block',
 			'aria-label' => '',
 			'type' => 'group',
 			'instructions' => '',
@@ -1990,7 +1990,7 @@ add_action( 'acf/include_fields', function() {
 					array(
 						'field' => 'field_67a3a85cfd690',
 						'operator' => '==',
-						'value' => 'Parallax Block',
+						'value' => 'Visual Block',
 					),
 				),
 			),

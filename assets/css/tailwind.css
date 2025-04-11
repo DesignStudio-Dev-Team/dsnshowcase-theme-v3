@@ -247,4 +247,31 @@
             @apply dsn:text-lg;
         }
     }
+
+    /* slick slider */
+    .slick-slider {
+        margin-left: 65px;
+        margin-right: 65px;
+    }
+    .slick-dots li button:before {
+        @apply dsn:!text-sm;
+    }
+
+    .slick-next:before, .slick-prev:before {
+        color: var(--dealerLinkColor) !important;
+        @apply dsn:!text-5xl dsn:!opacity-100;
+    }
+
+    .slick-next, .slick-prev {
+        width: 48px !important;
+        height: 41px !important;
+    }
+
+    .slick-prev {
+        @apply dsn:!-left-14;
+    }
+
+    .slick-next {
+        @apply dsn:!-right-14;
+    }
 }

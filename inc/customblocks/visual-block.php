@@ -1,6 +1,6 @@
 <?php 
-$parallax = get_field('parallax_block', $block_id);
-$visualElement = $parallax['visual_element'];
+$visualBlock = get_field('visual_block', $block_id);
+$visualElement = $visualBlock['visual_element'];
 $bgType = $visualElement['background_type'];
 $bgImg = $visualElement['background_image'];
 $videoLink = $visualElement['video_link'];
@@ -12,7 +12,7 @@ if($container == 'full-width') {
     $containerClass = 'dsn:container dsn:mx-auto dsn:relative';
 }
 
-$content = $parallax['content'];
+$content = $visualBlock['content'];
 $logo = $content['logo'];
 $title = $content['title'];
 $description = $content['description'];
