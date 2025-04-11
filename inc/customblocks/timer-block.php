@@ -14,13 +14,13 @@ $dateTime = $timerBlock['date_time'];
          
               ?>
        <div class="dsn:w-full dsn:flex dsn:gap-10 dsn:my-10 dsn:justify-center dsn:items-center">
-        <div class="dsn:w-full dsn:lg:w-1/2 dsn:p-25 dsn:text-left dsn:flex dsn:flex-col">
+        <div class="dsn:w-full dsn:lg:w-1/2 dsn:p-10 dsn:md:p-25 dsn:text-left dsn:flex dsn:flex-col">
         <?php if($topUrgentMsg) { ?>
             <span class="dsn:text-[#D20000] dsn:font-bold"><?php echo $topUrgentMsg; ?></span>
         <?php } ?>
         <h2><?php echo $title; ?></h2>
         <p><?php echo $description; ?></p>
-        <div class="dsn:flex dsn:gap-10 dsn:my-5">
+        <div class="dsn:flex dsn:flex-col dsn:md:flex-row dsn:gap-10 dsn:my-5">
             <a class="btn" href="<?php echo $cta['url']; ?>" role="button"><?php echo $cta['title']; ?></a>
     <div id="dsnCountdownTimer" class="dsn:flex dsn:gap-3 dsn:items-center">
     <div class="dsn:w-1/4 dsn:flex dsn:flex-col dsn:items-center">

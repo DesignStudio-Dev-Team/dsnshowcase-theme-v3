@@ -62,7 +62,7 @@ if($position == 'bottom-right') {
       </video>
       <div class="dsn:absolute dsn:top-0 dsn:left-0 dsn:w-full dsn:h-full dsn:bg-black dsn:opacity-40"></div>
 <?php } ?>
-      <div class="dsn:container dsn:mx-auto dsn:relative dsn:flex dsn:flex-col dsn:p-20 dsn:h-full <?php echo $positionClass; ?>">
+      <div class="dsn:container dsn:mx-auto dsn:relative dsn:flex dsn:flex-col dsn:p-10 dsn:md:p-20 dsn:h-full <?php echo $positionClass; ?>">
          <div class="dsn:w-full dsn:md:w-1/4 ">   
             <?php if($logo) { ?>
             <img class="dsn:mb-5" src="<?php echo $logo; ?>" alt="logo">

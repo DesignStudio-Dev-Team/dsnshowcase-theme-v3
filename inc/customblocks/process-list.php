@@ -8,7 +8,7 @@ $list = $processList['list'];
 $cta = $processList['cta'];
 $bgImg = $processList['background_image'];
 ?>
-<section class="dsn:my-10 dsn:py-25" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
+<section class="dsn:my-10 dsn:py-25 dsn:px-10 dsn:md:px-0" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center">
         <h2><?php echo $title; ?></h2>
