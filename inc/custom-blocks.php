@@ -46,8 +46,8 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Video Block') {
             include get_template_directory() . '/inc/customblocks/video-block.php';
         }
-        if($block_type === 'Parallax Block') {
-            include get_template_directory() . '/inc/customblocks/parallax-block.php';
+        if($block_type === 'Visual Block') {
+            include get_template_directory() . '/inc/customblocks/visual-block.php';
         }
         if($block_type === 'Timer Block') {
             include get_template_directory() . '/inc/customblocks/timer-block.php';
@@ -60,6 +60,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         }
         if($block_type === 'CTAs Block') {
             include get_template_directory() . '/inc/customblocks/ctas-block.php';
+        }
+        if($block_type === 'Card Stack Block') {
+            include get_template_directory() . '/inc/customblocks/card-stack-block.php';
         }
     }
   echo '</div>'; ?>
