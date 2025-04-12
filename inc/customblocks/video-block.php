@@ -26,7 +26,7 @@ $youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocoo
          ?>
         </div>
         <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:md:col-span-2  dsn:flex dsn:flex-col">
-         <div class="dsn:bg-[#F1F0EC] dsn:p-4 dsn:md:p-15">
+         <div class="dsn:bg-[#F1F0EC] dsn:p-4 dsn:md:py-10 dsn:md:px-5">
             <h2 class="dsn:text-center"><?php echo $title; ?></h2>
             <ul>
                 <?php if($list) { 

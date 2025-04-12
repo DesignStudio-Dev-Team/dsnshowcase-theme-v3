@@ -48,6 +48,20 @@ if($position == 'bottom-right') {
 }
 
 
+
+$contentContainer = $content['content_container_size'];
+$contentContainerClass = 'dsn:md:w-1/4';
+
+if($contentContainer == 'Small') {
+    $contentContainerClass = 'dsn:md:w-1/4';
+}
+if($contentContainer == 'Medium') {
+    $contentContainerClass = 'dsn:md:w-1/3';
+}
+if($contentContainer == 'Large') {
+    $contentContainerClass = 'dsn:md:w-1/2';
+}
+
 ?>
 
 <section  class="dsn:my-10 <?php echo $containerClass; ?>">
@@ -63,12 +77,12 @@ if($position == 'bottom-right') {
       <div class="dsn:absolute dsn:top-0 dsn:left-0 dsn:w-full dsn:h-full dsn:bg-black dsn:opacity-40"></div>
 <?php } ?>
       <div class="dsn:container dsn:mx-auto dsn:relative dsn:flex dsn:flex-col dsn:p-20 dsn:h-full <?php echo $positionClass; ?>">
-         <div class="dsn:w-full dsn:md:w-1/4 ">   
+         <div class="dsn:w-full <?php echo $contentContainerClass; ?>">   
             <?php if($logo) { ?>
             <img class="dsn:mb-5" src="<?php echo $logo; ?>" alt="logo">
             <?php } ?>
             <?php if($title) { ?>
-               <h2 class="dsn:text-6xl dsn:text-white"><?php echo $title; ?></h2>
+               <h2 class="dsn:text-white"><?php echo $title; ?></h2>
             <?php } ?>
             <?php if($description) { ?>
                <p class="dsn:text-white dsn:mb-10"><?php echo $description; ?></p>
@@ -80,3 +94,4 @@ if($position == 'bottom-right') {
       </div>
 </div>
 </section>
+<div class="dsn:hidden dsn:md:w-1/2 dsn:md:w-1/3 dsn:md:w-1/4"></div>
