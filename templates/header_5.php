@@ -381,7 +381,17 @@ $header_sticky = get_field('sticky_header', 'options');
 			
 	}
 
-
+	@media only screen and (min-width: 1024px) {
+		.multi-brand ul {
+		display: flex !important;
+		flex-wrap: wrap;
+		width: 420px;
+		justify-content: space-between;
+		}
+		.multi-brand ul li {
+		width: 200px;
+		}
+	}
 	
 </style>
 <script>
