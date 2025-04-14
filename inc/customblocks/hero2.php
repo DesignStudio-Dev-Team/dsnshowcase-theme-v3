@@ -51,7 +51,7 @@ if ($bar_position == 'bottom') {
                             <div
                                 class="dsn:flex-auto dsn:w-full dsn:h-60 dsn:2xl:h-90 dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center dsn:order-2 dsn:md:<?php echo $top_row_order; ?>"
                                 style="background: url(<?php echo $card_image['url']; ?>);">
-                                <a class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
+                                <a id="<?php echo strtolower(str_replace(' ', '-', trim($card_title))); ?>" class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
                                     href="<?php echo $card_link['url']; ?>" role="button"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl"><?php echo $card_title; ?></span></a>
                             </div>
                         <?php endwhile;
@@ -71,9 +71,11 @@ if ($bar_position == 'bottom') {
                                                                                                 echo 'dsn:text-black';
                                                                                             } else {
                                                                                                 echo 'dsn:text-white';
-                                                                                            } ?>"><?php echo $title; ?></h1><a
+                                                                                            } ?>"><?php echo $title; ?></h1>
+                                                                                            
+                                                                                            <a
             class="dsn:py-4 dsn:px-6 dsn:bg-white dsn:hover:text-white dsn:text-lg dsn:md:text-xl dsn:shadow-md dsn:border-1 dsn:hover:border-white dsn:w-full dsn:md:w-auto dsn:text-center"
-            href="<?php echo $cta['url']; ?>" onmouseover="this.style.background='<?php echo $bg; ?>', this.style.color='white'" ; onmouseout="this.style.background='white', this.style.color='<?php echo $bg; ?>'" ; style="color: <?php echo $bg; ?>"><?php echo $cta['title']; ?></a>
+            id="" href="<?php echo $cta['url']; ?>" onmouseover="this.style.background='<?php echo $bg; ?>', this.style.color='white'" ; onmouseout="this.style.background='white', this.style.color='<?php echo $bg; ?>'" ; style="color: <?php echo $bg; ?>"><?php echo $cta['title']; ?></a>
     </div>
 
     <?php
@@ -97,7 +99,7 @@ if ($bar_position == 'bottom') {
                             <div
                                 class="dsn:w-full dsn:h-60 dsn:2xl:h-90 dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center dsn:order-2 dsn:md:<?php echo $bottom_row_order; ?>"
                                 style="background: url(<?php echo $card_image['url']; ?>);">
-                                <a class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
+                                <a id="<?php echo strtolower(str_replace(' ', '-', trim($card_title))); ?>" class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
                                     href="<?php echo $card_link['url']; ?>" role="button"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl dsn:mb-2"><?php echo $card_title; ?></span></a>
                             </div>
                     <?php endwhile;
