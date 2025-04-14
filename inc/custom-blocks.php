@@ -64,6 +64,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Card Stack Block') {
             include get_template_directory() . '/inc/customblocks/card-stack-block.php';
         }
+        if($block_type === 'Icon Block') {
+            include get_template_directory() . '/inc/customblocks/icon-block.php';
+        }
     }
   echo '</div>'; ?>
 <style>
