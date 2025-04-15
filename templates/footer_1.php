@@ -210,7 +210,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                         'menu' => 'footer_menu',
                         'theme_location' => 'footer',
                         'menu_class' => 'dsn:py-4 dsn:px-8 dsn:md:py-0 dsn:flex dsn:flex-wrap dsn:p-0 dsn:items-center dsn:md:items-start  dsn:justify-center dsn:md:justify-center dsn:space-x-4 dsn:md:space-x-10',
-                        'link_class'   => 'dsn:text-white dsn:text-sm dsn:md:text-xl'
+                        'link_class'   => 'dealerLinkColor dsn:text-sm dsn:md:text-xl'
                     )
                 );
 
@@ -228,3 +228,11 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
 		</div>
 
 </div>
+<style>
+    .dealerLinkColor {
+        color: #00BFE6;
+    }
+    .dealerLinkColor:hover {
+        color: #fff;
+    }
+</style>

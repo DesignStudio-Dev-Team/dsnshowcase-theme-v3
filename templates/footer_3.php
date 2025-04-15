@@ -150,7 +150,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
 							</div>
                             <?php $i++; ?>
                         <?php endforeach; ?>
-                    <div class="dsn:mt-4 dsn:md:mt-12 dsn:md:mt-12 dsn:w-full dsn:md:w-1/4 dsn:md:pl-4">
+                    <div class="dsn:mt-4 dsn:md:mt-12 dsn:w-full dsn:md:w-1/4 dsn:md:pl-4">
                 <div class="dsn:sm:w-full dsn:mx-auto dsn:md:px-10">
 					<div class="dsn:w-3/4 dsn:md:w-full dsn:mx-auto dsn:mt-8">
                             <h4 class="dsn:font-bold dsn:m-0 dsn:text-base dsn:lg:text-2xl dsn:text-left dsn:md:text-left"><?php echo "Follow Us"; ?></h4>
