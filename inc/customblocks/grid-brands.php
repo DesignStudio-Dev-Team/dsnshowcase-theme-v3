@@ -31,7 +31,7 @@ $brands = $gridBrands['brands'];
                         </div></a>
                     </div>
                     <div class="pt-5">
-                        <h2 class="dsn:text-2xl dsn:py-5"><a href="<?php echo $brand['link']; ?>"><?php echo $brand['name']; ?></a></h2>
+                        <h3 class="dsn:py-5"><a href="<?php echo $brand['link']; ?>"><?php echo $brand['name']; ?></a></h3>
                     </div>
              
                 
