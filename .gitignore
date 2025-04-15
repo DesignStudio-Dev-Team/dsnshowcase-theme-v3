@@ -6,8 +6,8 @@
 /wp-content/upgrade/
 
 # Ignore Lighthouse reports
-/.unlighthouse
-
+.unlighthouse/
+.unlighthouse/*
 # Ignore environment and config files
 .env
 .env.local
