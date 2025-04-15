@@ -6,8 +6,8 @@ $brands = $gridBrands['brands'];
 ?>
 
 
-<section id="gridBrands" class="dsn:py-20">
-    <div class="dsn:text-center dsn:mb-15">
+<section id="gridBrands" class="dsn:py-20 dsn:px-5 dsn:px-0">
+    <div class="dsn:text-left dsn:md:text-center dsn:mb-15">
         <h2><?php echo $title; ?></h2>
     </div>
 <?php if($brands) { ?>
@@ -20,7 +20,7 @@ $brands = $gridBrands['brands'];
             $hoverColor = hex2rgba($hoverColor, 0.8);
         ?>
             <?php if ($x == 1) { ?>
-                <div class="card-brand dsn:relative dsn:p-0 dsn:text-center dsn:col-span-2 dsn:row-span-4 dsn:bg-white dsn:flex dsn:flex-col dsn:min-h-[500px] dsn:lg:min-h-[800px] <?php echo 'dsn:order-' . $x; ?>">
+                <div class="card-brand dsn:relative dsn:p-0 dsn:text-center dsn:col-span-2 dsn:row-span-4 dsn:bg-white dsn:flex dsn:flex-col dsn:min-h-[350px] dsn:lg:min-h-[800px] <?php echo 'dsn:order-' . $x; ?>">
             <?php } else { ?>
                 <div class="card-brand dsn:cursor-pointer dsn:relative dsn:p-0 dsn:text-center dsn:lg:col-span-1 dsn:col-span-2 dsn:row-span-2 dsn:bg-white dsn:flex dsn:flex-col dsn:min-h-[500px] dsn:lg:min-h-[300px] <?php echo 'dsn:order-' . $x; ?>">
             <?php } ?>
