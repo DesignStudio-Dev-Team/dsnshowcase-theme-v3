@@ -1137,6 +1137,10 @@ function dss_remove_add_promotions() {
         $startPromotion = get_field('promo_start_date', $promotion->ID);
         $endPromotion = get_field('promo_end_date', $promotion->ID);
 
+        //convert $startPromotion and $endPromotion to Ymd
+        $startPromotion = date('Ymd', strtotime($startPromotion));
+        $endPromotion = date('Ymd', strtotime($endPromotion));
+
         if($today < $startPromotion || $today > $endPromotion) {
             //remove from the /promotions page
             $promotion_pages = get_pages(array(
