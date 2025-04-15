@@ -3,7 +3,7 @@ $googleReviews = get_field('google_reviews', $block_id);
 $title = $googleReviews['title'];
 
 ?>
-<section id="google-reviews" class="dsn:container dsn:relative dsn:mx-auto dsn:my-20">
+<section id="google-reviews" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:my-20">
     <h2 class="dsn:text-center"><?php echo $title; ?></h2>
     <div class="dsn:relative dsn:text-center dsn:block dsn:md:absolute dsn:md:-top-3 dsn:md:right-0 dsn:z-10">
             <svg role="presentation" class="dsn:mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" viewBox="0 0 168 95">
@@ -16,7 +16,7 @@ $title = $googleReviews['title'];
             </svg>
     </div>
 
-    <div id="gr-content" class="dsn:relative dsn:h-full dsn:block">
+    <div id="gr-content" class="dsn:relative dsn:h-full dsn:block dsn:mx-0">
         <?php foreach($googleReviews['reviews'] as $review): ?>
 
         <div class="dsn:block dsn:h-full dsn:m-5">
@@ -62,15 +62,21 @@ $title = $googleReviews['title'];
 <script>
     //slick slider #gr-content
 
-    jQuery(document).ready(function(){
-        jQuery('#gr-content').slick({
+    jQuery(document).ready(function($){
+        
+
+        $('#gr-content').on('init', function(event, slick){
+        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+slick.slideCount+'</span></p></div>');
+    });
+    $('#gr-content').slick({
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: true,
-            dots: true,
+            dots: false,
+            fade: false,
             responsive: [
                 {
                     breakpoint: 1225,
@@ -91,6 +97,38 @@ $title = $googleReviews['title'];
                
             ]
         });
+    $('#gr-content')
+        .on('afterChange', function(event, slick, currentSlide, nextSlide){
+            // finally let's do this after changing slides
+            $('.slider-count #current').html(currentSlide+1);
+        });
     });
 
 </script>
+
+<style>
+.slick-next, .slick-prev {
+    position: absolute;
+    bottom: -25px;
+    top: auto;
+}
+
+.slick-prev {
+    margin-left: 48%;
+}
+.slick-next {
+    margin-right: 48%;
+}
+button.slick-next:before, button.slick-prev:before {
+color: #076594 !important;
+}
+
+@media only screen and (max-width: 700px) {
+    .slick-prev {
+    margin-left: 42%;
+}
+.slick-next {
+    margin-right: 42%;
+}
+}
+</style>

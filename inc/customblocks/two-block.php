@@ -2,7 +2,7 @@
 $twoBlock = get_field('two_block', $block_id);
 $twoBlockContent = $twoBlock['two_block_content'];
 ?>
-<section class="dsn:my-10">
+<section class="dsn:my-10 dsn:px-5 dsn:px-0">
 <div class="dsn:container dsn:mx-auto">
         <?php if($twoBlockContent) { 
             foreach($twoBlockContent as $block) { 
@@ -28,11 +28,14 @@ $twoBlockContent = $twoBlock['two_block_content'];
             <h2><?php echo $block['title']; ?></h2>
             <p><?php echo $block['description']; ?></p>
             <?php if ($block['cta']) { ?>
-            <a class="btn dsn:mt-5 dsn:justify-start dsn:self-start" href="<?php echo $block['cta']['url']; ?>"><?php echo $block['cta']['title']; ?></a>
+            <a class="btn dsn:mt-5 dsn:justify-start dsn:self-start dsn:hidden dsn:md:block" href="<?php echo $block['cta']['url']; ?>"><?php echo $block['cta']['title']; ?></a>
             <?php } ?>
         </div>
         <div class="dsn:p-0 dsn:w-full <?php echo $order2 . ' ' . $dclass2; ?>">
             <img class="dsn:w-full dsn:h-full" src="<?php echo $block['main_image']; ?>" alt="image">
+            <?php if ($block['cta']) { ?>
+            <a class="btn dsn:mt-5 dsn:justify-center dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center dsn:self-start dsn:block dsn:md:hidden" href="<?php echo $block['cta']['url']; ?>"><?php echo $block['cta']['title']; ?></a>
+            <?php } ?>
         </div>
         </div>
         <?php } } ?>

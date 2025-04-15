@@ -28,7 +28,7 @@ $youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocoo
         <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:md:col-span-2  dsn:flex dsn:flex-col">
          <div class="dsn:bg-[#F1F0EC] dsn:p-4 dsn:md:py-10 dsn:md:px-5">
             <h2 class="dsn:text-center"><?php echo $title; ?></h2>
-            <ul>
+            <ul class="dsn:pl-0">
                 <?php if($list) { 
                     foreach($list as $item) { ?>
                 <li class="dsn:flex dsn:items-center dsn:align-middle dsn:self-center dsn:gap-3 dsn:mt-0 dsn:py-2 dsn:list-none">
@@ -43,7 +43,7 @@ $youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocoo
                 </li>
                 <?php } } ?>
             </ul>
-            <div class="dsn:w-full dsn:text-center dsn:mt-15">
+            <div class="dsn:w-full dsn:text-center dsn:mb-10 dsn:md:mt-15">
                 <?php if(!empty($cta['url'])) { ?>
             <a class="btn" href="<?php echo $cta['url']; ?>" role="button"><?php echo $cta['title']; ?></a>
             <?php } ?>

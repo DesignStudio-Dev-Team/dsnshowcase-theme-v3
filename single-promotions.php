@@ -45,7 +45,7 @@ if ($selected_blocks) {
         <div class="dsn:md:flex dsn:px-10 dsn:md:pt-32">
 
         
-            <div class="dsn:container promotion-card-list">
+            <div class="dsn:container dsn:mx-auto promotion-card-list">
                 <?php
                     if( have_posts(  ) ):
                         while( have_posts(  ) ):    the_post(  );   ?>

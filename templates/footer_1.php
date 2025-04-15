@@ -7,10 +7,7 @@ $footer_bg = get_field('footer_bg', 'option');
 // Footer content
 $content = get_field('footer_content_editor', 'option');
 
-// Make sure CTA buttons exists
-$cta_buttons = !empty(get_field('cta_buttons', 'option')) && is_array(get_field('cta_buttons', 'option'))
-    ? get_field('cta_buttons', 'option')
-    : [];
+
 
 // Make sure locations exists
 $locations = !empty($content) && is_array($content)
@@ -41,29 +38,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
     #footer-copyright {
        background: #333;
     }
-    .help-icon-img {
-        background-color: var(--dealerColor);
-    }
-	.get-footer {
-		background-image: url(<?php echo $footer_bg; ?>);
-		background-size: cover;
-		background-position: right center;
-		padding: 5em 0;
-	}
-	.get-footer:before {
-		content: "";
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-color: #000;
-		opacity: 0.8;
-	}
-	.help-icon-img {
-		  width: 7em;
-		  height: 7em;
-		}
+    
         @media only screen and (min-width: 1024px) and (max-width: 1400px) {
             .footer-inner {
                 max-width: 1400px;
@@ -94,28 +69,6 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
  </style>
 
 <footer id="dsFooter" class="dsn:relative dsn:clear-both">
-	<div class="get-footer dsn:relative">
-		 <div class="dsn:container dsn:mx-auto dsn:block dsn:relative dsn:text-white">
-			    <h4 class="dsn:font-bold m-0 dsn:text-3xl dsn:text-center"><?php echo $footer_contact_title; ?></h4>
-			 <div class="dsn:flex dsn:flex-wrap dsn:items-start dsn:justify-center dsn:mt-8 dsn:gap-10">
-                <div class="dsn:block dsn:relative dsn:h-full dsn:w-32 dsn:after:absolute dsn:after:h-full dsn:after:w-[1px] dsn:after:bg-white dsn:after:top-0 dsn:after:-right-5">
-                    <img class="dsn:w-full" src="https://valleyhotspring.designstudio.host/wp-content/uploads/2025/04/footer-logo.webp" alt="footer logo" />
-                </div>
-                        <?php foreach ($cta_buttons as $button) : ?>
-                           
-                            <a class="help-icon dsn:flex dsn:flex-col dsn:items-center dsn:justify-center dsn:md:items-start dsn:md:justify-start dsn:pb-8 dsn:w-auto" href="<?php echo esc_url_raw($button['link_url']); ?>">
-                                <div class="bg-footerPrimaryLink help-icon-img dsn:flex dsn:h-24 dsn:items-center dsn:justify-center dsn:rounded-full dsn:w-24 dsn:md:h-30 dsn:md:w-24">
-                                  
-                                <img class="dsn:h-15 dsn:w-15 dsn:object-contain" src="<?php echo esc_url_raw($button['icon_url']); ?>" alt="<?php  echo esc_html($button['label']); ?> icon image">
-                                </div>
-                                <span class="dsn:font-medium dsn:mt-2 dsn:md:w-full dsn:text-center dsn:text-xl">
-                                    <?php echo __(esc_html($button['label']), 'dsn-showcase-theme-v3'); ?>
-                                </span>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-		</div>
-	</div>
     <div class="footer-main bgImage">
         <div class="dsn:md:px-5 dsn:pt-1 dsn:md:pt-0 dsn:container dsn:mx-auto dsn:block dsn:md:flex dsn:flex-wrap dsn:px-0 dsn:pb-10 dsn:relative dsn:z-10 dsn:md:justify-start dsn:text-white footer-inner">
             
@@ -138,7 +91,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                             ?>
                             <div class="dsn:mb-12 dsn:mt-12 dsn:md:w-1/3 dsn:w-2/3 dsn:md:px-5 dsn:mx-auto dsn:md:mx-0 <?php echo $first; ?>">
 								<img class="dsn:w-full" src="<?php echo esc_html($location['location_image']['url']); ?>" />
-                            <h4 class="dsn:mt-4 dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:text-left  dsn:md:min-h-30 dsn:2xl:min-h-20"><?php echo esc_html($location['tab_title']); ?></h4>
+                            <h4 class="dsn:mt-4 dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:md:min-h-30 dsn:2xl:min-h-20 dsn:md:w-105 dsn:mx-auto dsn:text-center"><?php echo esc_html($location['tab_title']); ?></h4>
                             <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:flex-wrap dsn:gap-6 dsn:justify-between">
 								<div class="footer-address-body dsn:w-full dsn:md:w-5/12">
                                         <div class="dsn:mt-4 dsn:md:mt-4 dsn:text-base dsn:lg:text-xl dsn:w-full">
@@ -187,11 +140,11 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
 												HOURS:
 											</p>
                                     <?php foreach ($hours as $hour) : ?>
-                                        <div class="dsn:flex dsn:items-center dsn:w-full">
-                                        <div class="dsn:w-1/2 dsn:h-auto">
+                                        <div class="dsn:flex dsn:gap-4 dsn:items-center dsn:w-full">
+                                        <div class="dsn:w-22 dsn:h-auto">
                                         <?php echo $hour['days']; ?>
                                        </div>
-                                       <div class="dsn:w-1/2 dsn:h-auto">
+                                       <div class="dsn:w-auto dsn:shrink-0 dsn:h-auto">
                                         <?php echo $hour['times']; ?>
                                        </div>
                                     </div>
