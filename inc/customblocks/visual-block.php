@@ -64,7 +64,7 @@ if($contentContainer == 'Large') {
 
 ?>
 
-<section  class="dsn:my-10 <?php echo $containerClass; ?>">
+<section  class="dsn:mb-10 <?php echo $containerClass; ?>">
 <?php if($bgType == 'image') { ?>
 <div class="dsn:h-[1000px]" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <?php } ?>

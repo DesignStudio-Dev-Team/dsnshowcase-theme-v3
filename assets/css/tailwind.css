@@ -168,24 +168,50 @@
 
     .gform_wrapper .gfield_header_item, .gform_wrapper .gform_fileupload_rules, .gform_wrapper .ginput_complex label
     {
-        @apply dsn:!text-base;
+        @apply dsn:!text-2xl;
     }
 
-    .gform_wrapper .gfield_label {
-        @apply dsn:!text-lg dsn:!mb-0;
+    .gform_wrapper .gfield_label, .gform_wrapper.gravity-theme .gfield_label {
+        @apply dsn:!text-4xl dsn:!mb-0;
     }
 
     .gform_wrapper .ginput_complex legend {
-        @apply dsn:!text-base;
+        @apply dsn:!text-4xl;
     }
 
-    .gform_wrapper .gfield_required {
-        @apply dsn:!text-base;
+    .gform_wrapper .gfield_required, .gform_wrapper.gravity-theme .gchoice label, .gform_wrapper .gchoice label {
+        @apply dsn:!text-2xl;
     }
 
     .gform_wrapper .gfield {
         @apply dsn:!mb-5;
     }
+
+    .gform_wrapper input[type=checkbox],
+    .gform_wrapper input[type=radio],
+    .gform_wrapper input[type=checkbox]:checked,
+    .gform_wrapper input[type=radio]:checked,
+    .gform_wrapper input[type=checkbox]:not(:checked),
+    .gform_wrapper input[type=radio]:not(:checked) {
+        @apply dsn:!w-8 dsn:!h-8 dsn:!mr-2 dsn:!rounded-full dsn:!mb-2;
+    }
+    .gform_wrapper input[type=checkbox]:checked,
+    .gform_wrapper input[type=radio]:checked {
+        @apply dsn:bg-gray-500;
+    }
+    .gform_wrapper input[type=checkbox]:not(:checked),
+    .gform_wrapper input[type=radio]:not(:checked) {
+        @apply dsn:bg-gray-200;
+    }
+    .gform_wrapper input[type=checkbox]:checked:after,
+    .gform_wrapper input[type=radio]:checked:after {
+        @apply dsn:!text-2xl dsn:!text-white;
+    }
+    .gform_wrapper input[type=checkbox]:not(:checked):after,
+    .gform_wrapper input[type=radio]:not(:checked):after {
+        @apply dsn:!text-2xl dsn:!text-gray-500;
+    }
+
 
     .gform_wrapper input[type=color],
     .gform_wrapper input[type=date],

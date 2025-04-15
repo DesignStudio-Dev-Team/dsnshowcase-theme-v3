@@ -6,7 +6,7 @@ $brands = $gridBrands['brands'];
 ?>
 
 
-<section id="gridBrands" class="dsn:py-20 dsn:px-5 dsn:px-0">
+<section id="gridBrands" class="dsn:py-20 dsn:px-0">
     <div class="dsn:text-left dsn:md:text-center dsn:mb-15">
         <h2><?php echo $title; ?></h2>
     </div>

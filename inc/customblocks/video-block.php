@@ -1,26 +1,37 @@
 <?php 
 $videoBlock = get_field('video_block', $block_id);
-$video = $videoBlock['youtube_video'];
 $image = $videoBlock['image'];
 $list = $videoBlock['list'];
 $title = $videoBlock['title'];
 $cta = $videoBlock['cta'];
 
-//grab youtube url and create embed url
-$youtubeUrl = $video;
-$youtubeUrl = str_replace('watch?v=', 'embed/', $youtubeUrl);
-$youtubeUrl = str_replace('&', '?', $youtubeUrl);
-$youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocookie.com/', $youtubeUrl);
+$videoType = $videoBlock['video_type'];
+if($videoType == 'youtube') {
+    $video = $videoBlock['youtube_video'];
+    $youtubeUrl = $video;
+    $youtubeUrl = str_replace('watch?v=', 'embed/', $youtubeUrl);
+    $youtubeUrl = str_replace('&', '?', $youtubeUrl);
+    $youtubeUrl = str_replace('https://www.youtube.com/', 'https://www.youtube-nocookie.com/', $youtubeUrl);    
+} else {
+    $video = $videoBlock['mp4_link'];
+}
 
 ?>
-<section class="dsn:my-10">
+<section class="dsn:mb-10">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:grid dsn:grid-cols-1 dsn:xl:grid-cols-6 dsn:gap-10">
         <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:flex dsn:flex-col dsn:bg-cover dsn:bg-center dsn:h-66 dsn:md:h-auto" style="background-image: url(<?php echo $image['url']; ?>);">
          <?php 
-         if($video) {
+         if($video && $videoType == 'youtube') {
             //echo the video here
             echo '<iframe width="100%" height="100%" src="'.$youtubeUrl.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+         }
+         if($video && $videoType == 'link') {
+            //echo the video here
+            echo '<video class="dsn:w-full dsn:h-full dsn:object-cover" autoplay muted loop controls>
+                  <source src="'.$video.'" type="video/mp4">
+                  Your browser does not support the video tag.
+                  </video>';
          }
          
          ?>

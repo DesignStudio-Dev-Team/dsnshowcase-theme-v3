@@ -27,7 +27,7 @@ if ($bar_position == 'bottom') {
 
 
 <div
-    class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1">
+    class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15">
     
 
     <?php

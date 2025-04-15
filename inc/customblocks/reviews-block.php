@@ -4,7 +4,7 @@ $title = $reviews_block['title'];
 $reviews = $reviews_block['reviews'];
 ?>
 
-<section class="dsn:my-10 dsn:py-25">
+<section class="dsn:mb-10 dsn:py-25">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center">
         <h2><?php echo $title; ?></h2>
