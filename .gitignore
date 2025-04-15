@@ -5,6 +5,9 @@
 /wp-content/cache/
 /wp-content/upgrade/
 
+# Ignore Lighthouse reports
+/.unlighthouse
+
 # Ignore environment and config files
 .env
 .env.local
