@@ -33,7 +33,7 @@ $viewStyle = 'Grid'; ?>
    
 </style>
 
-<div class="dsn:container dsn:mx-auto dsn:px-6">
+<div class="dsn:container dsn:mx-auto dsn:px-6 dsn:pb-20">
     <section id="primary" class="content-area">
         <main id="main" class="site-main">
 

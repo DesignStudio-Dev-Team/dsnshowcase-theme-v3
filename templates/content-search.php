@@ -41,8 +41,25 @@ global $dssSiteLanguage;
 .search-result-content a .read-more{
     color: var(--dealerLinkColor);
 }
-
-
+.search-image-content img {
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+.search-result-content article {
+	min-height: 650px; 
+	position: relative;
+	}
+	footer.entry-footer {
+	  position: absolute;
+	  width: 100%;
+	  bottom: 0;
+	  left: 0;
+	}
+	header.entry-header {
+		  min-height: 100px;
+		}
 </style>
 
 <?php
@@ -50,33 +67,33 @@ $viewStyle = 'Grid';
 ?>
 
 <div class="search-result-content dsn:w-full dsn:border dsn:border-gray-400">
-    <a href="<?php echo get_permalink();?>">
-        <div class="dsn:text-xl dsn:p-5 dsn:border-t-8 dsn:cursor-pointer search-border">
+ 
+        <div class="dsn:text-xl dsn:p-5 dsn:border-t-8 search-border">
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            
+               <a class="dsn:cursor-pointer" href="<?php echo get_permalink();?>">
                 <header class="entry-header">
-                    <h3 class="entry-title font-bold truncate"><?php echo get_the_title ();?></h3>
+                    <h4 class="entry-title font-bold truncate"><?php echo substr ( strip_tags (get_the_title()), 0, 45); ?><?php if (strlen(get_the_title()) > 45 ) { ?>...<?php } ?></h4>
                 </header>
-
+				</a>
              
-                    <div class="search-result-image-holder my-4 hidden sm:block">
+                    <div class="search-result-image-holder dsn:my-4 hidden dsn:sm:block">
                         <?php if (get_the_post_thumbnail()) { ?>
-                            <div class="search-image-content h-88">
+                            <a class="dsn:cursor-pointer" href="<?php echo get_permalink();?>"><div class="search-image-content">
                                 <?php the_post_thumbnail('medium'); ?>
-                            </div>
+								</div></a>
                         <?php } else { ?>
                             
-                            <p class="truncate-lines"><?php echo substr ( strip_tags (get_the_excerpt()), 0, 500); ?><?php if (get_the_excerpt()) { ?>...<?php } ?></p>
+                            <p class="truncate-lines dsn:hidden"><?php echo substr ( strip_tags (get_the_excerpt()), 0, 100); ?><?php if (get_the_excerpt()) { ?>...<?php } ?></p>
                         <?php } ?>
                     </div>
              
                 
-                <div class="dsn:my-4<?php if ($viewStyle == 'Grid') { ?> block sm:hidden<?php } ?>">
-                    <p><?php echo substr ( strip_tags (get_the_excerpt()), 0, 500); ?><?php if (get_the_excerpt()) { ?>...<?php } ?></p>
+                <div class="dsn:my-4 <?php if ($viewStyle == 'Grid') { ?> block sm:hidden<?php } ?>">
+                    <p><?php echo substr ( strip_tags (get_the_excerpt()), 0, 100); ?><?php if (get_the_excerpt()) { ?>...<?php } ?></p>
                 </div>
 
                 <footer class="entry-footer">
-                    <div class="dsn:float-right read-more"><?php echo dssLang($dssSiteLanguage)->search->view_link;?></div>
+                    <div class="dsn:float-right read-more dsn:hidden"><?php echo dssLang($dssSiteLanguage)->search->view_link;?></div>
                     <div><?php
                         $post_type_object = get_post_type_object(get_post_type());
                         if ( $post_type_object ) {
@@ -86,5 +103,4 @@ $viewStyle = 'Grid';
                 </footer>
             </article><!-- #post-<?php the_ID(); ?> -->
         </div>
-    </a>
 </div>
