@@ -22,18 +22,18 @@ if ($bar_position == 'bottom') {
     $top_row_order = 'order-2';
     $bottom_row_order = 'order-3';
 }
-//print_r($cards);
+
 ?>
 
 
 <div
-    class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15">
+    class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15 dsn:px-4 dsn:md:px-0">
     
 
     <?php
 
     if (have_rows('hero_2_content', $block_id)): ?>
-    <div class="dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:gap-4 dsn:my-0 dsn:justify-center dsn:items-center dsn:px-4 dsn:md:px-0 dsn:py-2 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-2 dsn:md:<?php echo $top_row_order; ?>">
+    <div class="dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-2 dsn:md:<?php echo $top_row_order; ?>">
     <?php
         while (have_rows('hero_2_content', $block_id)):
             the_row();
@@ -81,7 +81,7 @@ if ($bar_position == 'bottom') {
     <?php
 
     if (have_rows('hero_2_content', $block_id)): ?> 
-        <div class="dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-4 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-3 dsn:md:<?php echo $bottom_row_order; ?>">
+        <div class="dsn:flex dsn:w-full dsn:flex-col dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-3 dsn:md:<?php echo $bottom_row_order; ?>">
         <?php 
         while (have_rows('hero_2_content', $block_id)):
             the_row();
@@ -113,4 +113,4 @@ if ($bar_position == 'bottom') {
     ?>
 </div>
 <?php ?>
-<div class="dsn:hidden dsn:order-1 dsn:order-2 dsn:order-3 dsn:md:order-1 dsn:md:order-2 dsn:md:order-3 dsn:md:order-4"></div>
+<div class="dsn:hidden dsn:w-full dsn:col-span-1 dsn:order-1 dsn:order-2 dsn:order-3 dsn:md:order-1 dsn:md:order-2 dsn:md:order-3 dsn:md:order-4"></div>

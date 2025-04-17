@@ -4,7 +4,11 @@ $image = $videoBlock['image'];
 $list = $videoBlock['list'];
 $title = $videoBlock['title'];
 $cta = $videoBlock['cta'];
-
+if($image) {
+    $bgImgUrl = $image['url']; 
+} else {
+    $bgImgUrl = '';
+}
 $videoType = $videoBlock['video_type'];
 if($videoType == 'youtube') {
     $video = $videoBlock['youtube_video'];
@@ -20,7 +24,7 @@ if($videoType == 'youtube') {
 <section class="dsn:mb-10">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:grid dsn:grid-cols-1 dsn:xl:grid-cols-6 dsn:gap-10">
-        <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:flex dsn:flex-col dsn:bg-cover dsn:bg-center dsn:h-66 dsn:md:h-auto" style="background-image: url(<?php echo $image['url']; ?>);">
+        <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:flex dsn:flex-col dsn:bg-cover dsn:bg-center dsn:h-66 dsn:md:h-auto" style="background-image: url(<?php echo $bgImgUrl; ?>);">
          <?php 
          if($video && $videoType == 'youtube') {
             //echo the video here

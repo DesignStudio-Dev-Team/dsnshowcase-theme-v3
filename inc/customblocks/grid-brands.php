@@ -26,7 +26,7 @@ $brands = $gridBrands['brands'];
             <?php } ?>
                 
                     <div class="dsn:h-[95%] dsn:relative dsn:w-full" style="background: url(<?php echo $brand['main_image']; ?>) no-repeat center center; background-size: cover;">
-                        <a href="<?php echo $brand['link']; ?>"><div class="hover-show dsn:h-[100%] dsn:w-full dsn:absolute dsn:top-0 dsn:left-0 dsn:flex dsn:justify-center dsn:justify-items-center dsn:place-content-center dsn:items-center " style="background-color:<?php echo $hoverColor; ?>; no-repeat center center; background-size: cover;">
+                        <a href="<?php echo $brand['link']; ?>" aria-label="<?php echo $brand['name']; ?>"><div class="hover-show dsn:h-[100%] dsn:w-full dsn:absolute dsn:top-0 dsn:left-0 dsn:flex dsn:justify-center dsn:justify-items-center dsn:place-content-center dsn:items-center " style="background-color:<?php echo $hoverColor; ?>; no-repeat center center; background-size: cover;">
                         <img src="<?php echo $brand['logo']; ?>" alt="<?php echo $brand['name']; ?>">   
                         </div></a>
                     </div>

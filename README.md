@@ -53,6 +53,14 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.3.0
+- Promotions Template / Promotions Content Type
+
+### 3.2.0
+- Added more Custom Blocks
+- Added more Footers and Headers
+- Added new way to sync ACFs via acf.php file
+
 ### 3.1.8
 - Added Heroes to have a slideshow if there is more than one
 - added Header 2

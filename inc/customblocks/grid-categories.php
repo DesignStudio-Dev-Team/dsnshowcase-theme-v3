@@ -14,7 +14,7 @@ $bgImg = $gridCategories['background_image'];
         <?php if($categories) { 
             foreach($categories as $category) { ?>
         <div class="dsn:relative dsn:p-0 dsn:text-center dsn:row-span-2 dsn:flex dsn:flex-col" style="background: url('<?php echo $category['image']; ?>') no-repeat center center; background-size: cover;">
-        <a class="dsn:h-full dsn:w-full dsn:absolute dsn:before:absolute dsn:before:w-full dsn:before:h-[35%] dsn:before:left-0 dsn:before:bottom-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black" href="<?php echo $category['url']; ?>">    
+        <a class="dsn:h-full dsn:w-full dsn:absolute dsn:before:absolute dsn:before:w-full dsn:before:h-[35%] dsn:before:left-0 dsn:before:bottom-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black" href="<?php echo $category['url']; ?>" aria-label="<?php echo $category['name']; ?>" role="button">   
             <h3 class="dsn:bottom-0 dsn:w-full dsn:absolute dsn:text-center dsn:text-white"><?php echo $category['name']; ?></h3>
             </a>
          </div>

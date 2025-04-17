@@ -152,7 +152,7 @@ $pageContent = get_the_content();
         <div style="background:url('<?php echo $firstArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1
         dsn:relative dsn:w-full dsn:h-[400px] dsn:lg:h-[600px] dsn:lg:row-span-2 dns:col-span-5 dsn:lg:col-span-3 dsn:p-8 dsn:flex dsn:flex-col dsn:lg:order-1 dsn:justify-end">
           <h2 class="dsn:text-3xl dsn:font-bold dsn:mb-0 dsn:text-white dsn:relative dsn:z-10">
-          <a href="<?php echo $firstArticle->permalink; ?>" > <?php echo $firstArticle->post_title; ?> </a> </h2>
+          <a href="<?php echo $firstArticle->permalink; ?>" aria-label="permalink" > <?php echo $firstArticle->post_title; ?> </a> </h2>
          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 dsn:top-[67%]"></div>
                 
         </div>
@@ -210,6 +210,13 @@ $pageContent = get_the_content();
         <?php
         foreach ($categories as $category) {
             $selected = '';
+            // get the number of posts in the category and add it to  ['posts_number']  
+            $category['posts_number'] = count(get_posts(array(
+                'category' => $category['id'],
+                'post_type' => 'post',
+                'numberposts' => -1,
+            )));
+            
             if ($selectedCat == $category['id']) {
                 $selected = 'checked';
             }
@@ -217,7 +224,7 @@ $pageContent = get_the_content();
             <li class="blogCatsList dsn:mb-2">
                 <input type="checkbox" id="<?php echo $category['id']; ?>" name="categories" value="<?php echo $category['id']; ?>"
                 <?php echo $selected; ?>>
-                <label for="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></label>
+                <label for="<?php echo $category['id']; ?>"><?php echo $category['name']; ?> (<?php echo $category['posts_number']; ?>)</label>
             </li>
         <?php  } ?>
         </form>
@@ -320,7 +327,7 @@ $pageContent = get_the_content();
     #dsPagination .page-numbers li a:hover {
         padding: 10px 14px !important;
         background: var(--dsw-main-dealer-color) !important;
-        color: #fff !important;
+        color: #666 !important;
     }
 
     #dsPagination .page-numbers .current,
@@ -332,7 +339,7 @@ $pageContent = get_the_content();
     #dsPagination .page-numbers a:visited {
         padding: 10px 14px !important;
         background: #fff !important;
-        color: #000 !important;
+        color: #00a5e6 !important;
         -webkit-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
         -moz-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
         box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
