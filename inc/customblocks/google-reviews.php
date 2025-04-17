@@ -1,10 +1,16 @@
 <?php 
 $googleReviews = get_field('google_reviews', $block_id);
 $title = $googleReviews['title'];
+$description = $googleReviews['description'];
 
 ?>
 <section id="google-reviews" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:mb-20">
     <h2 class="dsn:text-center"><?php echo $title; ?></h2>
+   <?php if($description) { ?>
+    <div class="dsn:mx-auto dsn:max-w-[900px]">
+        <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
+    </div>
+   <?php } ?>
     <div class="dsn:relative dsn:text-center dsn:block dsn:md:absolute dsn:md:-top-3 dsn:md:right-0 dsn:z-10">
             <svg role="presentation" class="dsn:mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" viewBox="0 0 168 95">
             <defs>

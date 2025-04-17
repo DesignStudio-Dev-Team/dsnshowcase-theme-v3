@@ -1124,13 +1124,15 @@ add_action('publish_promotions', 'dss_publish_promotion');
 
 //add a cron job to remove promotions that are out of date
 function dss_remove_add_promotions() {
+    if(is_page('promotions')) {
+    
     $args = array(
         'post_type' => 'promotions',
         'posts_per_page' => -1,
     );
 
     $promotions = get_posts($args);
-
+    if($promotions) {
     foreach($promotions as $promotion) {
 
         $today = date('Ymd');
@@ -1138,9 +1140,13 @@ function dss_remove_add_promotions() {
         $endPromotion = get_field('promo_end_date', $promotion->ID);
 
         //convert $startPromotion and $endPromotion to Ymd
-        $startPromotion = date('Ymd', strtotime($startPromotion));
-        $endPromotion = date('Ymd', strtotime($endPromotion));
-
+        if($startPromotion) {
+            $startPromotion = date('Ymd', strtotime($startPromotion));
+        }
+        if($endPromotion) {
+            $endPromotion = date('Ymd', strtotime($endPromotion));
+        }
+        
         if($today < $startPromotion || $today > $endPromotion) {
             //remove from the /promotions page
             $promotion_pages = get_pages(array(
@@ -1166,9 +1172,11 @@ function dss_remove_add_promotions() {
             dss_publish_promotion($promotion->ID);
         }
     }
+    }
+ }
 }
 
-add_action('init', 'dss_remove_add_promotions');
+add_action('template_redirect', 'dss_remove_add_promotions');
 
 
 /* languages */
@@ -1378,3 +1386,7 @@ function prioritize_products($orderby, $query) {
     return $orderby;
 }
 add_filter('posts_orderby', 'prioritize_products', 10, 2);
+
+//prevent emails being sent to site admin on every plugin update
+remove_action('admin_notices', 'update_nag');
+remove_action('wp_mails', 'send_plugin_update_notification');
