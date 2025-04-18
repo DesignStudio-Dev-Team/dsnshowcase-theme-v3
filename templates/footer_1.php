@@ -90,7 +90,7 @@ $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_arra
                             endif;
                             ?>
                             <div class="dsn:mb-12 dsn:mt-12 dsn:md:w-1/3 dsn:w-2/3 dsn:md:px-5 dsn:mx-auto dsn:md:mx-0 <?php echo $first; ?>">
-								<img class="dsn:w-full" src="<?php echo esc_html($location['location_image']['url']); ?>" />
+								<img class="dsn:w-full" src="<?php echo esc_html($location['location_image']['url']); ?>" alt="<?php echo $location['tab_title']; ?>" />
                             <h4 class="dsn:mt-4 dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:md:min-h-30 dsn:2xl:min-h-20 dsn:md:w-105 dsn:mx-auto dsn:text-center"><?php echo esc_html($location['tab_title']); ?></h4>
                             <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:flex-wrap dsn:gap-6 dsn:justify-between">
 								<div class="footer-address-body dsn:w-full dsn:md:w-5/12">

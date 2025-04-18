@@ -8,6 +8,7 @@
 # Ignore Lighthouse reports
 .unlighthouse/
 .unlighthouse/*
+
 # Ignore environment and config files
 .env
 .env.local
