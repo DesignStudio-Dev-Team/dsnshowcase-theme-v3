@@ -6,7 +6,7 @@ $reviews = $reviews_block['reviews'];
 
 <section class="dsn:mb-10 dsn:py-25">
 <div class="dsn:container dsn:mx-auto">
-    <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center">
+    <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center dsn:mb-20">
         <h2><?php echo $title; ?></h2>
     </div>
     <div class="dsnReviewsBlock">
@@ -19,21 +19,24 @@ $reviews = $reviews_block['reviews'];
             $reviewAuthorAvatar = $review['author_avatar'];
             $reviewImg = $review['image'];
             ?>
-        <div class="dsn:container dsn:mx-auto dsn:flex dsn:relative">
-            <div class="dsn:w-full dsn:lg:w-1/2 dsn:p-0 dsn:mb-5 dsn:z-10">
-                <img class="dsn:w-full dsn:h-full" src="<?php echo $reviewImg; ?>" alt="image">
+        <div class="dsn:container dsn:mx-auto dsn:flex dsn:flex-col dsn:md:flex-row dsn:items-center dsn:relative">
+            <div class="dsn:w-full dsn:lg:w-1/2 dsn:p-0 dsn:z-10 dsn:h-auto dsn:md:h-[72vh]">
+                <img class="dsn:w-full dsn:h-full dsn:object-cover" src="<?php echo $reviewImg; ?>" alt="image">
             </div>
-            <div class="dsn:w-full dsn:h-[55%] dsn:left-[45%] dsn:p-15 dsn:lg:w-[800px] dsn:absolute dsn:bg-white dsn:shadow dsn:my-12 dsn:z-20">
-                <div class="dsn:absolute dsn:left-10 dsn:top-10 dsn:mb-4">
-                    <svg role="presentation" xmlns="http://www.w3.org/2000/svg" width="55" height="105" viewBox="0 0 22 65">
+            <div class="dsn:w-full dsn:md:h-[82%] dsn:md:left-[45%] dsn:p-5 dsn:md:p-10 dsn:lg:max-w-[700px] dsn:md:absolute dsn:bg-white dsn:shadow dsn:z-20 dsn:flex dsn:flex-col dsn:justify-center dsn:relative dsn:left-0 dsn:h-auto">
+                <div class="dsn:relative">
+                  <div class="dsn:relative dsn:md:absolute dsn:left-0 dsn:-top-5 dsn:mt-4 dsn:md:mt-0 dsn:-mb-6 dsn:md:mb-4">
+                    <svg role="presentation" class="dsn:w-7 dsn:h-14 dsn:md:w-15 dsn:md:h-30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 65">
                     <text id="_" data-name="&quot;" transform="translate(0 53)" fill="#65a23b" font-size="54" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">&quot;</tspan></text>
                     </svg>
                 </div>
-                    <div>
-                        <h2 class="dsn:mb-0 dsn:pb-0 dsn:text-center"> <?php echo $reviewTitle; ?> </h2>
-                        <p> <?php echo $reviewContent; ?> </p>
+                <h3 class="dsn:mb-0 dsn:pb-0 dsn:text-center"> <?php echo $reviewTitle; ?> </h3>
+                  
+                </div>
+                    <div class="dsn:h-auto dsn:sm:h-50 dsn:lg:h-60 dsn:overflow-y-auto dsn:mt-4">
+                        <?php echo $reviewContent; ?>
                     </div>
-                    <div class="dsn:py-15 dsn:flex dsn:gap-5 dsn:items-center dsn:justify-center">
+                    <div class="dsn:py-5 dsn:flex dsn:gap-5 dsn:items-center dsn:justify-center">
                     <img src="<?php echo $reviewAuthorAvatar; ?>" alt="author avatar">
                     <p><?php echo $reviewAuthor; ?></p>
                 </div>
