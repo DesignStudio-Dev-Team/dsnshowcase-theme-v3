@@ -96,18 +96,15 @@ function custom_shortcode () {
     echo "Form goes here...";
 }
 
-// Search based on product priority
-add_action( 'pre_get_posts',  'ds_search_query'  );
-function ds_search_query( $query ) {
-
-  global $wp_the_query;
-
-  if ( ( ! is_admin() ) && ( $query === $wp_the_query ) && ( $query->is_search() ) ) {
-    $query->set('post_type', array('product', 'post', 'page'));
-     $query->set( 'orderby', 'relevance' );
-	  $query->set( 'posts_per_page', 24 );
-  }
-
-  return $query;
-}
+add_filter( 'posts_search_orderby', function( $search_orderby ) {
+    global $wpdb;
+    
+    $orderby = "{$wpdb->posts}.post_type LIKE 'product' DESC";
+    
+    if ( ! empty( $search_orderby ) ) {
+        $orderby .= ", {$search_orderby}";
+    }
+    
+    return $orderby;
+});
 ?>
