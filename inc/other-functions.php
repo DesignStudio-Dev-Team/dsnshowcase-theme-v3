@@ -47,11 +47,11 @@ function dealer_add_to_cart_fragment($fragments)
     $item_counter = $woocommerce->cart->cart_contents_count;
     if ($item_counter == 0) {
 
-        $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart text-xl px-4 border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>';
+        $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart dsn:text-xl dsn:px-4 dsn:border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>';
         $fragments['.cart-counter'] = '<p class="cart-counter text-right uppercase font-semibold">the cart is empty</p>';
     } else {
-        $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart text-xl px-4 border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="dealer-cart__counter align-top text-xs w-5 h-5 bg-orange-400 text-center text-black rounded-full -ml-2 -mt-2 inline-block">' . $item_counter . '</span></a>';
-        $fragments['.cart-counter'] = '<p class="cart-counter text-right uppercase font-semibold">';
+        $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart dsn:text-xl dsn:px-4 dsn:border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="dealer-cart__counter dsn:align-top dsn:text-xs dsn:w-5 dsn:h-5 dsn:bg-orange-400 dsn:text-center dsn:text-black dsn:rounded-full dsn:-ml-2 dsn:-mt-2 dsn:inline-block">' . $item_counter . '</span></a>';
+        $fragments['.cart-counter'] = '<p class="cart-counter dsn:text-right dsn:uppercase dsn:font-semibold">';
         
         if ($item_counter == 1) $fragments['.cart-counter'] .= $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular; 
         else $fragments['.cart-counter'] .= $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural; 
@@ -368,7 +368,7 @@ function ds_filtration()
 
     <?php wp_reset_postdata();
     else :
-        echo '<h2 class="text-center" style="width: 100%">No products found</h2>';
+        echo '<h2 class="dsn:text-center" style="width: 100%">No products found</h2>';
     endif;
 
     die();
@@ -485,12 +485,12 @@ function bbloomer_display_coupon_form_below_proceed_checkout()
 ?>
 
 
-    <form class="woocommerce-coupon-form mb-6" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+    <form class="woocommerce-coupon-form dsn:mb-6" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
         <?php if (wc_coupons_enabled()) { ?>
 
-            <p class="mb-4 mt-8 text-lg"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
-            <div class="coupon under-proceed border rounded h-12">
-                <input type="text" name="coupon_code" class="input-text text-lg px-3 ml-1 uppercase" id="coupon_code" value="" placeholder="<?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_placeholder; ?>" style="width: 100%" />
+            <p class="dsn:mb-4 dsn:mt-8 dsn:text-lg"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
+            <div class="coupon dsn:under-proceed dsn:border dsn:rounded dsn:h-12">
+                <input type="text" name="coupon_code" class="input-text dsn:text-lg dsn:px-3 dsn:ml-1 dsn:uppercase" id="coupon_code" value="" placeholder="<?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_placeholder; ?>" style="width: 100%" />
                 <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_attr_e('Apply', 'woocommerce'); ?></button>
             </div>
         <?php } ?>
@@ -1387,6 +1387,18 @@ function prioritize_products($orderby, $query) {
 }
 add_filter('posts_orderby', 'prioritize_products', 10, 2);
 
+
+
 //prevent emails being sent to site admin on every plugin update
 remove_action('admin_notices', 'update_nag');
 remove_action('wp_mails', 'send_plugin_update_notification');
+
+//remove the need for a sidebar in products / woocommerce templates
+function remove_sidebar() {
+    if (is_product() || is_product_category() || is_product_tag()) {
+        remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+    }
+}
+add_action('get_header', 'remove_sidebar');
+add_action('wp_head', 'remove_sidebar');
+add_action('wp_footer', 'remove_sidebar');  
