@@ -1,0 +1,10 @@
+{
+    "name": "DesignStudio Network Showcase Theme",
+    "version": "3.0.2",
+    "author": "DesignStudio Network Inc.",
+    "description": "Bug fixes and enhancements for complex data syndication.",
+    "changelog": "### 3.0.2\n- Improved performance\n- Fixed display issue on mobile\n- Minor refactors",
+    "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3",
+    "download_url": "https://github.com/yourusername/dsnshowcase/archive/refs/tags/v3.0.2.zip"
+  }
+  
