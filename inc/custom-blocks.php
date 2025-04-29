@@ -37,6 +37,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Grid Brands') {
             include get_template_directory() . '/inc/customblocks/grid-brands.php';
         }
+        if($block_type === 'Grid Block') {
+            include get_template_directory() . '/inc/customblocks/grid-block.php';
+        }
         if($block_type === 'Process List') {
             include get_template_directory() . '/inc/customblocks/process-list.php';
         }

@@ -1,0 +1,59 @@
+name: Update theme JSON and style.css on tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  update-theme-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Get version from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Fetch release info
+        id: release
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/${{ github.repository }}/releases/tags/v${{ env.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update theme-update-info.json and style.css
+        run: |
+          THEME_DIR="wp-content/themes/dsnshowcase"
+          JSON_FILE="${THEME_DIR}/theme-update-info.json"
+          STYLE_CSS="${THEME_DIR}/style.css"
+
+          CHANGELOG=$(echo '${{ steps.release.outputs.data }}' | jq -r .body | sed ':a;N;$!ba;s/\n/\\n/g')
+          DOWNLOAD_URL="https://github.com/${{ github.repository }}/archive/refs/tags/v${VERSION}.zip"
+
+          # Update JSON
+          jq --arg ver "$VERSION" \
+             --arg changelog "$CHANGELOG" \
+             --arg url "$DOWNLOAD_URL" \
+             '.version = $ver | .changelog = $changelog | .download_url = $url' \
+             "$JSON_FILE" > "${JSON_FILE}.tmp"
+          mv "${JSON_FILE}.tmp" "$JSON_FILE"
+
+          # Update Version in style.css
+          sed -i "s/^Version: .*/Version: ${VERSION}/" "$STYLE_CSS"
+
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add wp-content/themes/dsnshowcase/theme-update-info.json
+          git add wp-content/themes/dsnshowcase/style.css
+          git commit -m "Auto-update theme JSON and style.css for v${VERSION}"
+          git push origin main

@@ -96,18 +96,74 @@ function custom_shortcode () {
     echo "Form goes here...";
 }
 
-// Search based on product priority
-add_action( 'pre_get_posts',  'ds_search_query'  );
-function ds_search_query( $query ) {
+add_filter( 'posts_search_orderby', function( $search_orderby ) {
+    global $wpdb;
+    
+    $orderby = "{$wpdb->posts}.post_type LIKE 'product' DESC";
+    
+    if ( ! empty( $search_orderby ) ) {
+        $orderby .= ", {$search_orderby}";
+    }
+    
+    return $orderby;
+});
 
-  global $wp_the_query;
+add_filter('pre_set_site_transient_update_themes', 'dsn_custom_theme_update');
 
-  if ( ( ! is_admin() ) && ( $query === $wp_the_query ) && ( $query->is_search() ) ) {
-    $query->set('post_type', array('product', 'post', 'page'));
-     $query->set( 'orderby', 'relevance' );
-	  $query->set( 'posts_per_page', 24 );
-  }
+function dsn_custom_theme_update($transient) {
+    if (empty($transient->checked)) {
+        return $transient;
+    }
 
-  return $query;
+    $theme_slug = 'dsnshowcase';
+    $current_version = wp_get_theme($theme_slug)->get('Version');
+
+    $response = wp_remote_get('https://raw.githubusercontent.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/main/theme-update-info.json');
+
+    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+        return $transient;
+    }
+
+    $remote = json_decode(wp_remote_retrieve_body($response));
+
+    if (
+        isset($remote->version) &&
+        version_compare($current_version, $remote->version, '<')
+    ) {
+        $transient->response[$theme_slug] = [
+            'theme'       => $theme_slug,
+            'new_version' => $remote->version,
+            'url'         => $remote->details_url,
+            'package'     => $remote->download_url,
+        ];
+    }
+
+    return $transient;
 }
+
+add_filter('themes_api', 'dsn_custom_theme_api', 10, 3);
+function dsn_custom_theme_api($result, $action, $args) {
+    if ($action !== 'theme_information' || $args->slug !== 'dsnshowcase') {
+        return $result;
+    }
+
+    $response = wp_remote_get('https://raw.githubusercontent.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/main/theme-update-info.json');
+
+    if (is_wp_error($response)) return $result;
+
+    $remote = json_decode(wp_remote_retrieve_body($response));
+
+    return (object)[
+        'name'        => $remote->name,
+        'slug'        => 'dsnshowcase',
+        'version'     => $remote->version,
+        'author'      => $remote->author,
+        'homepage'    => $remote->details_url,
+        'sections'    => [
+            'description' => $remote->description,
+            'changelog'   => $remote->changelog,
+        ],
+    ];
+}
+
 ?>
