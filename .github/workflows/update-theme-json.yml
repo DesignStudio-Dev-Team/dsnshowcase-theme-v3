@@ -1,4 +1,4 @@
-name: Update theme JSON and style.css on tag
+name: Update Theme Version Info
 
 on:
   push:
@@ -12,57 +12,56 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          fetch-depth: 0
 
-      - name: Get version from tag
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - name: Set version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Fetch release info
-        id: release
-        uses: octokit/request-action@v2.x
+      - name: Create GitHub Release (if not exists)
+        uses: softprops/action-gh-release@v1
         with:
-          route: GET /repos/${{ github.repository }}/releases/tags/v${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          body: "Automated release for theme version ${{ env.VERSION }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update theme-update-info.json and style.css
+      - name: Get release info
+        id: get_release
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/${{ github.repository }}/releases/tags/${{ env.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update style.css version
         run: |
-          THEME_DIR="wp-content/themes/dsnshowcase"
-          JSON_FILE="${THEME_DIR}/theme-update-info.json"
-          STYLE_CSS="${THEME_DIR}/style.css"
+          sed -i "s/^Version: .*/Version: $VERSION/" wp-content/themes/dsnshowcase/style.css
 
-          CHANGELOG=$(echo '${{ steps.release.outputs.data }}' | jq -r .body | sed ':a;N;$!ba;s/\n/\\n/g')
-          DOWNLOAD_URL="https://github.com/${{ github.repository }}/archive/refs/tags/v${VERSION}.zip"
+      - name: Update theme-update-info.json
+        run: |
+          cat > wp-content/themes/dsnshowcase/theme-update-info.json <<EOF
+          {
+            "version": "${VERSION}",
+            "details_url": "https://github.com/${{ github.repository }}/releases/tag/${VERSION}",
+            "download_url": "https://github.com/${{ github.repository }}/archive/refs/tags/${VERSION}.zip",
+            "requires": "5.0",
+            "tested": "6.5",
+            "last_updated": "$(date +'%Y-%m-%d')",
+            "sections": {
+              "changelog": ${{
+                steps.get_release.outputs.data && fromJson(steps.get_release.outputs.data).body 
+              }}
+            }
+          }
+          EOF
 
-          # Update JSON
-          jq --arg ver "$VERSION" \
-             --arg changelog "$CHANGELOG" \
-             --arg url "$DOWNLOAD_URL" \
-             '.version = $ver | .changelog = $changelog | .download_url = $url' \
-             "$JSON_FILE" > "${JSON_FILE}.tmp"
-          mv "${JSON_FILE}.tmp" "$JSON_FILE"
-
-          # Update Version in style.css
-          sed -i "s/^Version: .*/Version: ${VERSION}/" "$STYLE_CSS"
-
-      - name: Commit and push
+      - name: Commit and push updated files
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add wp-content/themes/dsnshowcase/theme-update-info.json
-          git add wp-content/themes/dsnshowcase/style.css
-          git commit -m "Auto-update theme JSON and style.css for v${VERSION}"
+          git add wp-content/themes/dsnshowcase/style.css wp-content/themes/dsnshowcase/theme-update-info.json
+          git commit -m "Update theme version info for ${VERSION}"
           git push origin main
-          - name: Create GitHub Release (if it doesn't exist)
-          uses: softprops/action-gh-release@v1
-          if: startsWith(github.ref, 'refs/tags/v')
-          with:
-            files: |
-              wp-content/themes/dsnshowcase/theme-update-info.json
-              wp-content/themes/dsnshowcase/style.css
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
