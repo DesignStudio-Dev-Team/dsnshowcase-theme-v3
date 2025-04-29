@@ -64,4 +64,4 @@ jobs:
           git config user.email "actions@github.com"
           git add style.css theme-update-info.json
           git commit -m "Update theme version info for ${VERSION}" || echo "No changes to commit"
-          git push origin HEAD:refs/heads/${GITHUB_REF_NAME}
+          git push origin HEAD:refs/heads/main  # Push to main branch
