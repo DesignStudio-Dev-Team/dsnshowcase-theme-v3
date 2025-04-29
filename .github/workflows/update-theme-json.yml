@@ -57,3 +57,12 @@ jobs:
           git add wp-content/themes/dsnshowcase/style.css
           git commit -m "Auto-update theme JSON and style.css for v${VERSION}"
           git push origin main
+          - name: Create GitHub Release (if it doesn't exist)
+          uses: softprops/action-gh-release@v1
+          if: startsWith(github.ref, 'refs/tags/v')
+          with:
+            files: |
+              wp-content/themes/dsnshowcase/theme-update-info.json
+              wp-content/themes/dsnshowcase/style.css
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
