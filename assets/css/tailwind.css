@@ -172,7 +172,7 @@
     }
 
     .gform_wrapper .gfield_label, .gform_wrapper.gravity-theme .gfield_label {
-        @apply dsn:!text-4xl dsn:!mb-0;
+        @apply dsn:!text-4xl dsn:!mb-4;
     }
 
     .gform_wrapper .ginput_complex legend {
@@ -229,7 +229,7 @@
     .gform_wrapper input[type=week],
     .gform_wrapper select,
     .gform_wrapper textarea {
-        @apply dsn:h-10 dsn:!text-2xl dsn:border dsn:border-gray-300 dsn:rounded-lg dsn:focus:outline-none dsn:focus:ring-2 dsn:focus:ring-gray-500 dsn:focus:border-gray-500;
+        @apply dsn:h-15 dsn:px-6 dsn:!text-2xl dsn:border dsn:border-gray-300 dsn:rounded-lg dsn:focus:outline-none dsn:focus:ring-2 dsn:focus:ring-gray-500 dsn:focus:border-gray-500;
         background: rgba(0,0,0,.02);
     }
 
