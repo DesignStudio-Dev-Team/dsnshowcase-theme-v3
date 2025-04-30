@@ -117,53 +117,58 @@ function dsn_custom_theme_update($transient) {
 
     $theme_slug = 'dsnshowcase';
     $current_version = wp_get_theme($theme_slug)->get('Version');
+    error_log('Current Theme Version: ' . $current_version);
 
-    $response = wp_remote_get('https://raw.githubusercontent.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/main/theme-update-info.json');
+    $local_update_file = get_theme_root( $theme_slug ) . '/' . $theme_slug . '/theme-update-info.json';
 
-    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
-        return $transient;
-    }
+    if (file_exists($local_update_file)) {
+        $response_body = file_get_contents($local_update_file);
 
-    $remote = json_decode(wp_remote_retrieve_body($response));
+        if ($response_body === false) {
+            error_log('Error reading local update file: ' . $local_update_file);
+            return $transient;
+        }
 
-    if (
-        isset($remote->version) &&
-        version_compare($current_version, $remote->version, '<')
-    ) {
-        $transient->response[$theme_slug] = [
-            'theme'       => $theme_slug,
-            'new_version' => $remote->version,
-            'url'         => $remote->details_url,
-            'package'     => $remote->download_url,
-        ];
+        // Attempt to decode the local JSON
+        $decoded_response = json_decode($response_body, true);
+
+        // Basic check if decoding resulted in an array
+        if (is_array($decoded_response) && ! empty($decoded_response)) {
+            error_log('JSON decoded successfully from local file.');
+            error_log('Decoded Response (local): ' . print_r($decoded_response, true));
+
+            $remote_version = isset($decoded_response['version']) ? $decoded_response['version'] : null;
+            $details_url = isset($decoded_response['details_url']) ? $decoded_response['details_url'] : null;
+            $download_url = isset($decoded_response['download_url']) ? $decoded_response['download_url'] : null;
+
+            if ($remote_version && $details_url && $download_url) {
+                error_log('Remote Theme Version (from local): ' . $remote_version);
+
+                if (version_compare($current_version, $remote_version, '<')) {
+                    error_log('Version comparison (local): ' . $current_version . ' < ' . $remote_version . ' is TRUE. Adding update info.');
+                    $transient->response[$theme_slug] = [
+                        'theme'       => $theme_slug,
+                        'new_version' => $remote_version,
+                        'url'         => $details_url,
+                        'package'     => $download_url,
+                    ];
+                    error_log('Transient Response after adding update (local): ' . print_r($transient->response, true));
+                } else {
+                    error_log('Version comparison (local): ' . $current_version . ' < ' . $remote_version . ' is FALSE. No update added.');
+                }
+            } else {
+                error_log('Error: Missing required keys (version, details_url, download_url) in local JSON response.');
+            }
+        } else {
+            error_log('Error: Could not decode JSON or empty response from local file.');
+            error_log('Raw Response Body (local): ' . $response_body);
+        }
+
+    } else {
+        error_log('Local update file not found: ' . $local_update_file);
     }
 
     return $transient;
-}
-
-add_filter('themes_api', 'dsn_custom_theme_api', 10, 3);
-function dsn_custom_theme_api($result, $action, $args) {
-    if ($action !== 'theme_information' || $args->slug !== 'dsnshowcase') {
-        return $result;
-    }
-
-    $response = wp_remote_get('https://raw.githubusercontent.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/main/theme-update-info.json');
-
-    if (is_wp_error($response)) return $result;
-
-    $remote = json_decode(wp_remote_retrieve_body($response));
-
-    return (object)[
-        'name'        => $remote->name,
-        'slug'        => 'dsnshowcase',
-        'version'     => $remote->version,
-        'author'      => $remote->author,
-        'homepage'    => $remote->details_url,
-        'sections'    => [
-            'description' => $remote->description,
-            'changelog'   => $remote->changelog,
-        ],
-    ];
 }
 
 ?>
