@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Important to get all history
 
       - name: Set version from tag
         id: version
@@ -28,13 +28,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get release info
-        id: get_release
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /repos/${{ github.repository }}/releases/tags/${{ env.VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get last commit message
+        id: get_commit_message
+        run: |
+          # Get the commit message of the last commit for the tagged commit
+          LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B ${{ github.ref }})
+          # Escape double quotes for JSON
+          ESCAPED_COMMIT_MESSAGE=$(echo "$LAST_COMMIT_MESSAGE" | sed 's/"/\\"/g')
+          echo "COMMIT_MESSAGE=$ESCAPED_COMMIT_MESSAGE" >> $GITHUB_ENV
 
       - name: Update style.css version
         run: |
@@ -51,9 +52,7 @@ jobs:
             "tested": "6.5",
             "last_updated": "$(date +'%Y-%m-%d')",
             "sections": {
-              "changelog": ${{
-                steps.get_release.outputs.data && fromJson(steps.get_release.outputs.data).body 
-              }}
+              "changelog": "${{ env.COMMIT_MESSAGE }}"
             }
           }
           EOF
