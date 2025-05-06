@@ -63,7 +63,7 @@ $gallery_image_gallery = $gallery['image_gallery'];
         <!-- Gallery Section -->
         <div class="gallery dsn:py-20">
         <?php if ($gallery_title) { ?>
-        <h4 class="dsn:text-left dsn:pb-6"><?php echo $gallery_title; ?></h4>
+        <h4 class="dsn:text-center dsn:pb-6"><?php echo $gallery_title; ?></h4>
         <?php } ?>
         <?php 
 
@@ -129,12 +129,12 @@ if ($selected_blocks_bot) {
 }
  /* space the slides */
  .outdoor-kitchen-gallery .slick-slide {
-      margin: 0 27px;
+      margin: 0 15px;
   }
 
   /* space the parent */
   .outdoor-kitchen-gallery .slick-list {
-      margin: 0 -27px;
+      margin: 0 -15px;
   }
   .outdoor-kitchen-gallery .slick-slide img {
     display: block;

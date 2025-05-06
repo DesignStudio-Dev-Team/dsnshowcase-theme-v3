@@ -18,7 +18,7 @@ jQuery(document).ready(function ($) {
         slidesToShow: 4,        // Displays only one slide at a time
         slidesToScroll: 1,      // Scrolls one slide at a time
         infinite: true,         // Enables infinite looping
-        arrows: false,           // Shows navigation arrows
+        arrows: true,           // Shows navigation arrows
         dots: false,             // Shows navigation dots
         autoplay: false,         // Enables automatic sliding
         pauseOnHover: true,     // Pauses autoplay on hover
@@ -29,6 +29,7 @@ jQuery(document).ready(function ($) {
               settings: {
                 slidesToShow: 4,
                 slidesToScroll: 1,
+                arrows: true, 
                 infinite: true,
               }
             },
@@ -45,6 +46,7 @@ jQuery(document).ready(function ($) {
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
+                arrows: false,
                 dots: true,
               }
             }]
