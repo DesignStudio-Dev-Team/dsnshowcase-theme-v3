@@ -1,24 +1,18 @@
 <?php
-
-//Contat Title
-$footer_contact_title = get_field('footer_contact_title', 'option');
-
-$footer_bg = get_field('footer_bg', 'option');
-// Footer content
-$content = get_field('footer_content_editor', 'option');
-
-
+if(function_exists('get_field')) {
+    $footer_contact_title = get_field('footer_contact_title', 'option');
+    $footer_bg = get_field('footer_bg', 'option');
+    $content = get_field('footer_content_editor', 'option');
+    $social_networks = !empty(get_field('footer_social_icons', 'option')) && is_array(get_field('footer_social_icons', 'option'))
+        ? get_field('footer_social_icons', 'option')
+        : [];
+}
 
 // Make sure locations exists
 $locations = !empty($content) && is_array($content)
     ? $content
     : [];
 
-// Make sure social networks exists
-$social_networks = !empty(get_field('footer_social_icons', 'option')) && is_array(get_field('footer_social_icons', 'option'))
-    ? get_field('footer_social_icons', 'option')
-    : [];
-   
 ?>
 
 

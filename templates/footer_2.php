@@ -1,6 +1,7 @@
 <?php
-// Footer content
-$content = get_field('footer_content', 'option');
+if(function_exists('get_field')) {
+    $content = get_field('footer_content', 'option');
+}
 
 // Make sure CTA buttons exists
 $cta_buttons = !empty($content['cta_buttons']) && is_array($content['cta_buttons'])

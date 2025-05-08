@@ -4,9 +4,15 @@
  Header 01 
  ****/
 
-$header_logo = get_field('header_logo', 'options');
-$header_sticky_logo = get_field('header_sticky_logo', 'options');
-$header_sticky = get_field('sticky_header', 'options');
+$header_logo = '';
+$header_sticky_logo = '';
+$header_sticky = '';
+
+if (function_exists('get_field')) {
+    $header_logo = get_field('header_logo', 'options');
+    $header_sticky_logo = get_field('header_sticky_logo', 'options');
+    $header_sticky = get_field('sticky_header', 'options');
+}
 
 if ($header_sticky_logo) {
 }

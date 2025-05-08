@@ -1,5 +1,7 @@
-<?php 
-   $footer = get_field('footer');
+<?php
+if(function_exists('get_field')) {
+    $footer = get_field('footer');
+}
 if($footer) {
     if($footer == 1) {
         get_template_part('templates/footer_1');

@@ -8,24 +8,28 @@
  * @package dsnshowcase
  */
 
+if(function_exists('get_field')) {
+	$container_width = get_field('container_width');
+	$container_padding_top = get_field('container_padding_top');
+	$container_padding_bottom = get_field('container_padding_bottom');
+	$show_page_title = get_field('show_page_title');
+}
+
 // Container settings. Width, padding-top and padding-bottom
 
 // container_width
-$container_width = get_field('container_width');
 $container_w = '';
 if ($container_width != 0) {
 	$container_w = 'max-width: ' . $container_width . 'px; margin-left:auto; margin-right:auto;';
 }
 
 // container_padding_top
-$container_padding_top = get_field('container_padding_top');
 $container_pt = '';
 if ($container_padding_top != 0) {
 	$container_pt = 'padding-top: ' . $container_padding_top . 'px;';
 }
 
 // container_padding_bottom
-$container_padding_bottom = get_field('container_padding_bottom');
 $container_pb = '';
 if ($container_padding_bottom != 0) {
 	$container_pb = 'padding-bottom: ' . $container_padding_bottom . 'px;';
@@ -33,8 +37,10 @@ if ($container_padding_bottom != 0) {
 
 // Show Title
 
-$show_page_title = get_field('show_page_title');
-
+$title_alignment = get_field('title_alignment');
+if (is_null($title_alignment) || empty($title_alignment)) {
+	$title_alignment = "left";
+}
 
 ?>
 
@@ -43,7 +49,6 @@ $show_page_title = get_field('show_page_title');
     <?php if (!is_front_page() && !is_page('cart') && !is_page('checkout')) { ?>
         <?php if (get_field('title_alignment')) : ?>
                     <?php
-                    $title_alignment = get_field('title_alignment');
                     if (is_null($title_alignment) || empty($title_alignment)) {
                         $title_alignment = "left";
                     }
