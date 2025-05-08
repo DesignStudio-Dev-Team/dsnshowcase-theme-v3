@@ -5,23 +5,25 @@
 */
 get_header();
 
-$promotionsPost = get_field('related_promotions_page_cpt');
+if(function_exists('get_field')) {
+    $promotionsPost = get_field('related_promotions_page_cpt');
 
-// Include custom blocks helper
-require_once get_template_directory() . '/inc/custom-blocks.php';
+    // Include custom blocks helper
+    require_once get_template_directory() . '/inc/custom-blocks.php';
 
 
-// fetch the acf group top_custom_blocks
-$top_custom_blocks = get_field('top_custom_blocks');
-//get selecte_custom_blocks from the group
-$selected_blocks = $top_custom_blocks['select_custom_blocks'] ?? [];
-//get the display type from the group
-$display_type = $top_custom_blocks['how_to_display_blocks'] ?? [];
+    // fetch the acf group top_custom_blocks
+    $top_custom_blocks = get_field('top_custom_blocks');
+    //get selecte_custom_blocks from the group
+    $selected_blocks = $top_custom_blocks['select_custom_blocks'] ?? [];
+    //get the display type from the group
+    $display_type = $top_custom_blocks['how_to_display_blocks'] ?? [];
 
-//Render TOP Custom Blocks
-if ($selected_blocks) {
-    // Render the blocks using the helper function
-    render_custom_blocks($selected_blocks, $display_type);
+    //Render TOP Custom Blocks
+    if ($selected_blocks) {
+        // Render the blocks using the helper function
+        render_custom_blocks($selected_blocks, $display_type);
+    }
 }
 ?>
 
@@ -154,7 +156,7 @@ if ($selected_blocks) {
     <!-- small promotions -->
     <section class="dsn:container">
         <div class="dsn:md:flex px-10">
-            <ul class="dsn:md:masonry dsn:md:masonry-sm">
+            <ul class="dsn:grid dsn:grid-cols-1 dsn:md:grid-cols-3 dsn:gap-8">
                 <?php
                     
                     // Cont for differentiate classes
@@ -282,16 +284,18 @@ if ($selected_blocks) {
 
 <?php
 // fetch the acf group bottom_custom_blocks
-$bot_custom_blocks = get_field('bottom_custom_blocks');
-//get selecte_custom_blocks from the group
-$selected_blocks_bot = $bot_custom_blocks['select_custom_blocks_bottom'] ?? [];
-//get the display type from the group
-$display_type_bot = $bot_custom_blocks['how_to_display_blocks_bottom'] ?? [];
+if(function_exists('get_field')) {
+    $bot_custom_blocks = get_field('bottom_custom_blocks');
+    //get selecte_custom_blocks from the group
+    $selected_blocks_bot = $bot_custom_blocks['select_custom_blocks_bottom'] ?? [];
+    //get the display type from the group
+    $display_type_bot = $bot_custom_blocks['how_to_display_blocks_bottom'] ?? [];
 
-//Render Bottom Custom Blocks
-if ($selected_blocks_bot) {
-    // Render the blocks using the helper function
-    render_custom_blocks($selected_blocks_bot, $display_type_bot);
+    //Render Bottom Custom Blocks
+    if ($selected_blocks_bot) {
+        // Render the blocks using the helper function
+        render_custom_blocks($selected_blocks_bot, $display_type_bot);
+    }
 }
 
  get_footer(); ?>

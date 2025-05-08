@@ -3,9 +3,11 @@
  Header 04 
  ****/
 
-$header_logo = get_field('header_logo', 'options');
-$header_sticky_logo = get_field('header_sticky_logo', 'options');
-$header_sticky = get_field('sticky_header', 'options');
+if(function_exists('get_field')) {
+	$header_logo = get_field('header_logo', 'options');
+	$header_sticky_logo = get_field('header_sticky_logo', 'options');
+	$header_sticky = get_field('sticky_header', 'options');
+}
 ?>
 
 <header	class="header4 dsn:bg-[#076594] dsn:text-white dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:flex <?php if ($header_sticky == "1") {

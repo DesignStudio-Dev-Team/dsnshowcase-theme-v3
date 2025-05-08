@@ -3,9 +3,11 @@
  Header 05 
  ****/
 
-$header_logo = get_field('header_logo', 'options');
-$header_sticky_logo = get_field('header_sticky_logo', 'options');
-$header_sticky = get_field('sticky_header', 'options');
+if(function_exists('get_field')) {
+	$header_logo = get_field('header_logo', 'options');
+	$header_sticky_logo = get_field('header_sticky_logo', 'options');
+	$header_sticky = get_field('sticky_header', 'options');
+}
 ?>
 
 <header id="header"
