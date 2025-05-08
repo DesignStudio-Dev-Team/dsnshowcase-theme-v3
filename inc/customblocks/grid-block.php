@@ -58,7 +58,7 @@ $gridRowCount = count($gridContent);
                     <?php } ?>
 
                 <?php if($gridType == '3') { ?>
-                    <a href="<?php echo $cta['url']; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90">
+                    <a href="<?php echo !empty($cta['url']) ? $cta['url'] : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90">
                     <div>
                     <?php } ?>
                     <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:mb-5 dsn:w-full dsn:h-auto">

@@ -156,7 +156,7 @@ if(function_exists('get_field')) {
     <!-- small promotions -->
     <section class="dsn:container">
         <div class="dsn:md:flex px-10">
-            <ul class="dsn:md:masonry dsn:md:masonry-sm">
+            <ul class="dsn:grid dsn:grid-cols-1 dsn:md:grid-cols-3 dsn:gap-8">
                 <?php
                     
                     // Cont for differentiate classes
