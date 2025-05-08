@@ -17,11 +17,14 @@ $header_sticky = get_field('sticky_header', 'options');
 	<div
 		class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
 		<div class="util-left-nav dsn:w-5/12">
-			<?php wp_nav_menu(array(
+			
+			<?php  if (has_nav_menu('utility_left')) {
+				wp_nav_menu(array(
 				'theme_location' => 'utility_left',
 				'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
 				'link_class' => "dsn:text-[#000] dsn:text-lg dsn:py-2 dsn:block",
-			)); ?>
+			)); 
+			} ?>
 		</div>
 		<div class="dsn-logo dsn:w-2/12">
 			<a class="dsn:block dsn:relative dsn:text-center" href="<?php
@@ -30,14 +33,17 @@ $header_sticky = get_field('sticky_header', 'options');
 					alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
 		</div>
 		<div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-5/12">
-			<div class="header-text dsn:mr-4"><a href="javascript:;" class="get-started dsn:text-black dsn:border-b-3 dsn:border-b-[#65a23b] dsn:text-xl dsn:cursor-pointer" role="button">GET STARTED</a></div>
+			
 			<?php
-			// wp_nav_menu(array(
-			//     'theme_location' => 'utility_right',
-			//     'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-			// 	'link_class' => "dsn:text-[#000] dsn:text-xl dsn:py-4",
-			// )); 
+			if (has_nav_menu('utility_right')) {
+			wp_nav_menu(array(
+			    'theme_location' => 'utility_right',
+			    'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
+				'link_class' => "dsn:text-[#000] dsn:text-xl dsn:py-4",
+			)); 
+			}
 			?>
+			<div class="header-text dsn:mr-4"><a href="javascript:;" class="get-started dsn:text-black dsn:border-b-3 dsn:border-b-[#65a23b] dsn:text-xl dsn:cursor-pointer dsn:py-4" role="button">GET STARTED</a></div>
 			<div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3">
 
 
