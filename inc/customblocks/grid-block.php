@@ -23,13 +23,13 @@ $gridRowCount = count($gridContent);
     ?>
 
         <?php if($gridType == '1') { ?>
-        <div id="grid-block" class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div id="grid-block" class="dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
         <?php if($gridType == '2') { ?>
-        <div id="grid-block" class="dsn:container dsn:mx-auto dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3">
+        <div id="grid-block" class="dsn:container dsn:mb-5 dsn:mx-auto dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3">
         <?php } ?>
         <?php if($gridType == '3') { ?>
-        <div id="grid-block" class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div id="grid-block" class="dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
             <?php 
             foreach($gridColumns as $gridColumn){ 
@@ -59,17 +59,14 @@ $gridRowCount = count($gridContent);
 
                 <?php if($gridType == '3') { ?>
                     <a href="<?php echo !empty($cta['url']) ? $cta['url'] : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90">
-                    <div>
-                    <?php } ?>
-                    <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:mb-5 dsn:w-full dsn:h-auto">
-                    <?php if($title) { ?>
-                    <h2 class="dsn:text-4xl dsn:mb-8"><?php echo $title; ?></h2>
-                    <?php } ?>
-                    <?php if($cta && $gridType != '3') { ?>
-                    <a class="btn" href="<?php echo $cta['url']; ?>"><?php echo $cta['title']; ?></a>
-                    <?php } ?>
-                </div>
-                <?php if($gridType == '3') { ?>
+                    <div class="dsn:relative">
+                        <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
+                        <?php if($title) { ?>
+                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/2 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:flex dsn:items-end dsn:justify-center dsn:pb-6">
+                            <h2 class="dsn:text-4xl dsn:text-white dsn:text-center dsn:px-4"><?php echo $title; ?></h2>
+                        </div>
+                        <?php } ?>
+                    </div>
                 </a>
                 <?php } ?>
                <?php } ?>
