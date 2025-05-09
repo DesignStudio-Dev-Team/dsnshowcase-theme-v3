@@ -23,56 +23,95 @@ get_header();
 ?>
 
 <!-- Main Content Wrapper -->
-<div class="dsn:container mx-auto p-6">
+<div class="dsn:container dsn:mx-auto dsn:p-6 dsn:w-full">
+    <?php
+    /**
+     * Hook: woocommerce_before_main_content.
+     *
+     * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+     * @hooked woocommerce_breadcrumb - 20
+     * @hooked WC_Structured_Data::generate_website_data() - 30
+     */
+    do_action( 'woocommerce_before_main_content' );
+    ?>
 
     <!-- WooCommerce Shop Page Header -->
     <header class="dsn:mb-8">
-        <h1 class="dsn:text-3xl dsn:font-bold dsn:text-gray-800"><?php woocommerce_page_title(); ?></h1>
+        <?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+            <h1 class="dsn:text-3xl dsn:font-bold dsn:text-gray-800 dsn:mb-4"><?php woocommerce_page_title(); ?></h1>
+        <?php endif; ?>
+
         <?php
         /**
-         * Display category description or other header content
+         * Hook: woocommerce_archive_description.
+         *
+         * @hooked woocommerce_taxonomy_archive_description - 10
+         * @hooked woocommerce_product_archive_description - 10
          */
         do_action( 'woocommerce_archive_description' );
         ?>
     </header>
 
-    <!-- WooCommerce Product Loop -->
-    <div class="dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:lg:grid-cols-4 gap-8">
-
-        <?php if ( have_posts() ) : ?>
-
-            <?php
-            // Start the product loop
-            woocommerce_product_loop_start();
-
-            // Loop through products
-            while ( have_posts() ) : the_post();
-                wc_get_template_part( 'content', 'product' );
-            endwhile;
-
-            // End the product loop
-            woocommerce_product_loop_end();
-            ?>
-
-        <?php else : ?>
-
-            <p class="dsn:col-span-full dsn:text-center dsn:text-lg dsn:text-gray-500">
-                <?php esc_html_e( 'No products found', 'your-theme' ); ?>
-            </p>
-
-        <?php endif; ?>
-
-    </div>
-
-    <!-- WooCommerce Pagination -->
-    <div class="dsn:mt-6">
-        <?php
-        // WooCommerce pagination
-        woocommerce_pagination();
+    <?php
+    if ( woocommerce_product_loop() ) {
+        /**
+         * Hook: woocommerce_before_shop_loop.
+         *
+         * @hooked woocommerce_output_all_notices - 10
+         * @hooked woocommerce_result_count - 20
+         * @hooked woocommerce_catalog_ordering - 30
+         */
+        do_action( 'woocommerce_before_shop_loop' );
         ?>
-    </div>
 
+        <!-- WooCommerce Product Loop -->
+        <div class="dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:lg:grid-cols-4 dsn:gap-8 dsn:mt-10">
+            <?php
+            if ( wc_get_loop_prop( 'total' ) ) {
+                while ( have_posts() ) {
+                    the_post();
+                    /**
+                     * Hook: woocommerce_shop_loop.
+                     */
+                    do_action( 'woocommerce_shop_loop' );
+                    wc_get_template_part( 'content', 'product' );
+                }
+            }
+            ?>
+        </div>
+
+        <?php
+        /**
+         * Hook: woocommerce_after_shop_loop.
+         *
+         * @hooked woocommerce_pagination - 10
+         */
+        do_action( 'woocommerce_after_shop_loop' );
+    } else {
+        /**
+         * Hook: woocommerce_no_products_found.
+         *
+         * @hooked wc_no_products_found - 10
+         */
+        do_action( 'woocommerce_no_products_found' );
+    }
+    ?>
+
+    <?php
+    /**
+     * Hook: woocommerce_after_main_content.
+     *
+     * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+     */
+    do_action( 'woocommerce_after_main_content' );
+    ?>
 </div>
+
+<style>
+    li.product {
+        list-style: none;
+    }
+</style>
 
 <?php
 get_footer(); ?>
