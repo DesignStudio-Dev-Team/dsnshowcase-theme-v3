@@ -85,7 +85,7 @@ function foundation_pagination($query = '')
         'type' => 'list'
     ));
 
-    $pagination = str_replace('page-numbers', 'pagination', $links);
+    $pagination = str_replace('page-numbers', 'pagination', $links ?? '');
 
     echo $pagination;
 }
@@ -306,11 +306,11 @@ function ds_filtration()
     </div>
 
     <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
-        <div class="w-full flex -mr-4 flex-wrap">
+        <div class="dsn:w-full dsn:flex dsn:-mr-4 dsn:flex-wrap">
             <?php while ($the_query->have_posts()) :
                 $the_query->the_post(); ?>
                 <?php $product = wc_get_product(get_the_ID()); ?>
-                <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-12">
+                <div class="dsn:w-full dsn:sm:w-1/2 dsn:md:w-1/3 dsn:px-4 dsn:mb-12">
                     <div class="ds-product">
                         <a href="<?php echo get_permalink() ?>">
                             <?php if ($product->is_on_sale()) : ?>
@@ -530,7 +530,7 @@ function get_term_post_count($taxonomy = 'category', $term = '', $args = [])
     }
 
     if ($taxonomy !== 'category') {
-        $taxonomy = filter_var($taxonomy, FILTER_SANITIZE_STRING);
+        $taxonomy = filter_var($taxonomy, FILTER_UNSAFE_RAW );
         if (!taxonomy_exists($taxonomy))
             return false;
     }
@@ -941,18 +941,18 @@ function dswPageBreadCrumbs()
 {
     if (get_field('have_breadcrumbs', 'option') && function_exists('yoast_breadcrumb')) {
         $breadCrumbHtml = do_shortcode('[wpseo_breadcrumb]');
-        $breadCrumbHtml = str_replace('/product-category', '', $breadCrumbHtml); // english
-        $breadCrumbHtml = str_replace('/categorie-produit', '', $breadCrumbHtml); // french
+        $breadCrumbHtml = str_replace('/product-category', '', $breadCrumbHtml ?? ''); // english
+        $breadCrumbHtml = str_replace('/categorie-produit', '', $breadCrumbHtml ?? ''); // french
 
-        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/shop/">Shop</a></span> ', "", $breadCrumbHtml); // remove "shop" link
-        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/en/shop/">Shop</a></span> ', "", $breadCrumbHtml); // remove "shop" link
-        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/shop/">Products</a></span> ', "", $breadCrumbHtml); // remove "shop" link
-        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/en/shop/">Products</a></span> ', "", $breadCrumbHtml); // remove "shop" link
-        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/boutique/">Boutique</a></span> ', "", $breadCrumbHtml); // remove "shop" link French
-        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/fr/boutique/">Boutique</a></span> ', "", $breadCrumbHtml); // remove "shop" link French
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/shop/">Shop</a></span> ', "", $breadCrumbHtml ?? ''); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/en/shop/">Shop</a></span> ', "", $breadCrumbHtml ?? ''); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/shop/">Products</a></span> ', "", $breadCrumbHtml ?? ''); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/en/shop/">Products</a></span> ', "", $breadCrumbHtml ?? ''); // remove "shop" link
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/boutique/">Boutique</a></span> ', "", $breadCrumbHtml ?? ''); // remove "shop" link French
+        $breadCrumbHtml = str_replace('» <span><a href="' . get_site_url() . '/fr/boutique/">Boutique</a></span> ', "", $breadCrumbHtml ?? ''); // remove "shop" link French
 
-        $breadCrumbHtml = str_replace('®', '<sup class="dsw-breadcrumb-sup">®</sup>', $breadCrumbHtml);
-        $breadCrumbHtml = str_replace('™', '<sup class="dsw-breadcrumb-sup">™</sup>', $breadCrumbHtml);
+        $breadCrumbHtml = str_replace('®', '<sup class="dsw-breadcrumb-sup">®</sup>', $breadCrumbHtml ?? '');
+        $breadCrumbHtml = str_replace('™', '<sup class="dsw-breadcrumb-sup">™</sup>', $breadCrumbHtml ?? '');
 
         echo '<div class="dsw-breadcrumb-container-px-10 px-10 pt-1">
             <div class="dsw-breadcrumb-container dsw-breadcrumb">' .
