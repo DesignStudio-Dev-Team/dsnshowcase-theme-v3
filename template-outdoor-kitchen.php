@@ -73,7 +73,7 @@ if( $gallery_image_gallery ): ?>
             <?php foreach( $gallery_image_gallery as $image ): ?>
                 <div>
                 <a href="<?php echo $image['url'] ?>">
-                    <img src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_url($image['alt']); ?>" />
+                    <img class="dsn:w-full dsn:border-2 dsn:border-gray-500" src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_url($image['alt']); ?>" />
                 </a>
                 </div>
             <?php endforeach; ?>
