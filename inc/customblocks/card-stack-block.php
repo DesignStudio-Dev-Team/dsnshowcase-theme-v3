@@ -22,7 +22,7 @@ $cards = $cardStack['cards'];
         <div class="dsn:container dsn:mx-auto dsn:pb-15">
         <?php 
         if($cards) { ?> 
-        <div class="dsn:grid dsn:grid-cols-1 dsn:md:grid-cols-2 dsn:lg:grid-cols-4 dsn:gap-10">
+        <div class="dsn:grid dsn:grid-cols-1 dsn:md:grid-cols-2 dsn:lg:grid-cols-3 dsn:gap-10">
           <?php foreach($cards as $card) { ?>
                 <div class="dsn:relative dsn:text-center dsn:md:text-left dsn:my-12">
                     <img class="dsn:mx-auto dsn:text-center dsn:md:mx-1 dsn:md:text-left" src="<?php echo $card['image']['url']; ?>" alt="<?php echo $card['title']; ?>">
