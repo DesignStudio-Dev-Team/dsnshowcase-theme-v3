@@ -123,7 +123,7 @@ if ($title_overwrite) {
                     //$img_height = $img['height'];
                     $link = $item['collection-link'];
                 ?>
-                    <div class="dsn:w-full dsn:md:w-1/2 dsn:lg:w-1/<?php echo $num_collections; ?> dsn:text-center dsn:relative dsn:mb-4">
+                    <div class="dsn:w-full dsn:md:w-1/2 <?php if($num_collections == 2) { echo "dsn:lg:w-1/2"; } elseif($num_collections == 3) { echo "dsn:lg:w-1/3"; } else {echo "dsn:lg:w-1/4";}  ?> dsn:text-center dsn:relative dsn:mb-4">
                         <div class="dsn:relative dsn:mx-3 dsn:group dsn:overflow-hidden">
 
                             <?php if ($link != ''): ?>
