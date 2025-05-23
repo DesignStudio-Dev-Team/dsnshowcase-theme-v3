@@ -32,11 +32,13 @@ $this_obj = get_queried_object();
 $thumbnail_id = get_woocommerce_term_meta($all_categories, 'thumbnail_id', true);
 $image = wp_get_attachment_url($thumbnail_id);
 if ($image): ?>
+
     <div class="ds-archive-banner" style="background-image: url('<?php echo $image ?>')">
         <div class="dsn:container">
             <div class="dsn:flex dsn:justify-center">
                 <div class="dsn:w-full dsn:md:w-3/4 dsn:lg:w-1/2">
                     <h1 class="dsn:text-center dsn:text-white dsn:text-center"><?php woocommerce_page_title(); ?></h1>
+					
                     <div class="ds-estore-search">
                         <form role="search" class="blog-search" method="get" action="<?= esc_url(home_url('/')); ?>">
 
@@ -52,10 +54,19 @@ if ($image): ?>
     </div>
 
     <?php else: ?>
+<style>
+.taxonomy-description {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+</style>
 <div class="dsn:container dsn:mx-auto dsn:pt-10">
 	<div class="dsn:row">
 	<h1 class="dsn:text-center dsn:text-center"><?php woocommerce_page_title(); ?></h1>
-        <div class="dsn:h-10"></div>
+        <?php  
+		the_archive_description( '<div class="taxonomy-description">', '</div>' );
+		?>
 	</div>
 </div>
 
