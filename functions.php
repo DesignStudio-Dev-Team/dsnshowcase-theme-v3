@@ -170,5 +170,4 @@ function dsn_custom_theme_update($transient) {
 
     return $transient;
 }
-
 ?>
