@@ -4,6 +4,14 @@ require get_template_directory() . '/inc/acfs.php';
 require get_template_directory() . '/inc/nav-items.php';
 require get_template_directory() . '/inc/other-functions.php';
 
+// Custom debug logger for theme
+function dsn_theme_debug_log($message) {
+    $log_file = get_template_directory() . '/debug.log';
+    $date = date('Y-m-d H:i:s');
+    $formatted = "[$date] $message\n";
+    file_put_contents($log_file, $formatted, FILE_APPEND | LOCK_EX);
+}
+
 function dsnshowcase_setup() {
     // Enable featured images
     add_theme_support('post-thumbnails');
@@ -17,8 +25,8 @@ function dsnshowcase_setup() {
     // Register navigation menus
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'dsnshowcase'),
-		'utility_left' => __('Utility Left Menu', 'dsnshowcase'),
-		'utility_right' => __('Utility Right Menu', 'dsnshowcase'),
+        'utility_left' => __('Utility Left Menu', 'dsnshowcase'),
+        'utility_right' => __('Utility Right Menu', 'dsnshowcase'),
         'footer' => __('Footer Menu', 'dsnshowcase'),
     ));
 
@@ -35,7 +43,7 @@ function dsnshowcase_enqueue_styles() {
         array(),
         filemtime(get_template_directory() . '/assets/css/style.css')
     );
-	    wp_enqueue_style(
+        wp_enqueue_style(
         'stylesheet',
         get_template_directory_uri() . '/style.css',
         array(),
@@ -108,66 +116,129 @@ add_filter( 'posts_search_orderby', function( $search_orderby ) {
     return $orderby;
 });
 
-add_filter('pre_set_site_transient_update_themes', 'dsn_custom_theme_update');
+// Hook theme updater early
+function dsn_init_theme_updater() {
+    error_log('[Theme Update] Initializing theme updater hooks');
+    add_filter('pre_set_site_transient_update_themes', 'dsn_custom_theme_update', 10, 1);
+}
+
+// Force theme update check
+function dsn_force_theme_update_check() {
+    error_log('[Theme Update] Manually forcing theme update check');
+    delete_site_transient('update_themes');
+    wp_update_themes();
+    error_log('[Theme Update] Manual theme update check completed');
+}
+
+// Add init hooks
+add_action('init', 'dsn_init_theme_updater');
+add_action('admin_init', 'dsn_init_theme_updater');
+
+// Add a temporary admin menu item to force update check
+function dsn_add_force_update_menu() {
+    add_submenu_page(
+        'themes.php',
+        'Force Theme Update Check',
+        'Force Theme Update Check',
+        'manage_options',
+        'force-theme-update',
+        'dsn_force_theme_update_check'
+    );
+}
+add_action('admin_menu', 'dsn_add_force_update_menu');
 
 function dsn_custom_theme_update($transient) {
+  
+    if (!is_object($transient)) {
+        dsn_theme_debug_log('[Theme Update] $transient is not an object: ' . print_r($transient, true));
+        return $transient;
+    }
+
     if (empty($transient->checked)) {
+        dsn_theme_debug_log('[Theme Update] $transient->checked is empty');
         return $transient;
     }
 
     $theme_slug = 'dsnshowcase';
     $current_version = wp_get_theme($theme_slug)->get('Version');
-    error_log('Current Theme Version: ' . $current_version);
-
-    $local_update_file = get_theme_root( $theme_slug ) . '/' . $theme_slug . '/theme-update-info.json';
-
-    if (file_exists($local_update_file)) {
+  
+    // First try GitHub update info
+    $github_update_file = 'https://raw.githubusercontent.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/main/theme-update-info.json';
+    dsn_theme_debug_log('[Theme Update] Checking GitHub update file: ' . $github_update_file);
+    
+    // Use WordPress HTTP API instead of file_get_contents
+    $response = wp_safe_remote_get($github_update_file);
+    
+    if (is_wp_error($response)) {
+        dsn_theme_debug_log('[Theme Update] GitHub request failed: ' . $response->get_error_message());
+        // Fallback to local file
+        $local_update_file = get_theme_root($theme_slug) . '/' . $theme_slug . '/theme-update-info.json';
+        dsn_theme_debug_log('[Theme Update] Trying local file: ' . $local_update_file);
+        
+        if (!file_exists($local_update_file)) {
+            dsn_theme_debug_log('[Theme Update] Local update file not found');
+            return $transient;
+        }
         $response_body = file_get_contents($local_update_file);
+    } else {
+        dsn_theme_debug_log('[Theme Update] GitHub request successful');
+        $response_body = wp_remote_retrieve_body($response);
 
         if ($response_body === false) {
-            error_log('Error reading local update file: ' . $local_update_file);
+            dsn_theme_debug_log('[Theme Update] File read error: ' . error_get_last()['message']);
             return $transient;
         }
 
         // Attempt to decode the local JSON
         $decoded_response = json_decode($response_body, true);
+        $json_error = json_last_error();
 
         // Basic check if decoding resulted in an array
-        if (is_array($decoded_response) && ! empty($decoded_response)) {
-            error_log('JSON decoded successfully from local file.');
-            error_log('Decoded Response (local): ' . print_r($decoded_response, true));
+        if ($json_error !== JSON_ERROR_NONE) {
+            dsn_theme_debug_log('[Theme Update] JSON decode error: ' . json_last_error_msg());
+            return $transient;
+        }
+
+        if (is_array($decoded_response) && !empty($decoded_response)) {
+            dsn_theme_debug_log('[Theme Update] JSON decoded successfully from local file.');
+            dsn_theme_debug_log('[Theme Update] Decoded Response (local): ' . print_r($decoded_response, true));
 
             $remote_version = isset($decoded_response['version']) ? $decoded_response['version'] : null;
             $details_url = isset($decoded_response['details_url']) ? $decoded_response['details_url'] : null;
             $download_url = isset($decoded_response['download_url']) ? $decoded_response['download_url'] : null;
 
-            if ($remote_version && $details_url && $download_url) {
-                error_log('Remote Theme Version (from local): ' . $remote_version);
+            // Normalize versions by stripping leading 'v' or 'V'
+            $normalized_current = ltrim($current_version, 'vV');
+            $normalized_remote = ltrim($remote_version, 'vV');
 
-                if (version_compare($current_version, $remote_version, '<')) {
-                    error_log('Version comparison (local): ' . $current_version . ' < ' . $remote_version . ' is TRUE. Adding update info.');
+            if ($remote_version && $details_url && $download_url) {
+                dsn_theme_debug_log('[Theme Update] All required version info found');
+                dsn_theme_debug_log('[Theme Update] Comparing versions: current=' . $normalized_current . ' remote=' . $normalized_remote);
+
+                if (version_compare($normalized_current, $normalized_remote, '<')) {
+                    dsn_theme_debug_log('[Theme Update] Update available! Current: ' . $normalized_current . ', Remote: ' . $normalized_remote);
+                    // Use the download_url as-is. The ZIP must contain a folder named dsnshowcase at its root.
+                    $package_url = $download_url;
+                    dsn_theme_debug_log('[Theme Update] Using package URL: ' . $package_url);
                     $transient->response[$theme_slug] = [
                         'theme'       => $theme_slug,
                         'new_version' => $remote_version,
                         'url'         => $details_url,
-                        'package'     => $download_url,
+                        'package'     => $package_url,
                     ];
-                    error_log('Transient Response after adding update (local): ' . print_r($transient->response, true));
+                    dsn_theme_debug_log('[Theme Update] Update data added to transient');
+                    dsn_theme_debug_log('[Theme Update] Final transient data: ' . print_r($transient->response[$theme_slug], true));
                 } else {
-                    error_log('Version comparison (local): ' . $current_version . ' < ' . $remote_version . ' is FALSE. No update added.');
+                    dsn_theme_debug_log('[Theme Update] No update needed - current version ' . $normalized_current . ' >= ' . $normalized_remote);
                 }
             } else {
-                error_log('Error: Missing required keys (version, details_url, download_url) in local JSON response.');
+                dsn_theme_debug_log('[Theme Update] Missing required fields in theme-update-info.json');
             }
         } else {
-            error_log('Error: Could not decode JSON or empty response from local file.');
-            error_log('Raw Response Body (local): ' . $response_body);
+            dsn_theme_debug_log('[Theme Update] Invalid or empty JSON in theme-update-info.json');
+            dsn_theme_debug_log('[Theme Update] Raw file contents: ' . $response_body);
         }
-
-    } else {
-        error_log('Local update file not found: ' . $local_update_file);
-    }
-
+    } 
     return $transient;
 }
 ?>
