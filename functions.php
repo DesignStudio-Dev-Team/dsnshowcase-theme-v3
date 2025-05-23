@@ -171,4 +171,125 @@ function dsn_custom_theme_update($transient) {
     return $transient;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+add_action('save_post', 'sync_acf_fields_on_default_language_save', 20, 3);
+
+function sync_acf_fields_on_default_language_save($post_id, $post, $update) {
+    
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    
+    if (wp_is_post_revision($post_id)) return;
+    
+    $default_lang = apply_filters('wpml_default_language', null);
+
+    // Get language info of the current post, including trid
+    $language_args = [
+        'element_id'   => $post_id,
+        'element_type' => $post->post_type
+    ];
+    $current_lang = apply_filters('wpml_element_language_details', null, $language_args);
+
+    if (!$current_lang || $current_lang->language_code !== $default_lang) {
+        return;
+    }
+
+    
+    // Now get the trid from language info
+    $trid = $current_lang->trid ?? null;
+    if (!$trid) {
+        return;
+    }
+
+    // Get all translations for this trid
+    $translations = apply_filters('wpml_get_element_translations', null, $trid, $post->post_type);
+    if (!$translations || !is_array($translations)) {
+        return;
+    }
+
+    
+    foreach ($translations as $lang_code => $translation) {
+    
+        if ($lang_code === $default_lang) continue;
+
+        $translated_post_id = $translation->element_id;
+    
+        $fields = get_fields($post_id);
+        if ($fields) {
+            foreach ($fields as $key => $value) {
+                update_field($key, $value, $translated_post_id);
+            }
+        } 
+    }
+}
+
+
+add_action('wpml_pro_translation_completed', 'sync_acf_fields_after_translation', 10, 1);
+
+function sync_acf_fields_after_translation($translated_post_id) {
+    
+    if (!$translated_post_id) {
+        return;
+    }
+
+    $post_type = get_post_type($translated_post_id);
+    if (!$post_type) {
+        return;
+    }
+    
+    // Get language details for the translated post
+    $language_args = [
+        'element_id' => $translated_post_id,
+        'element_type' => $post_type,
+    ];
+    $translated_lang = apply_filters('wpml_element_language_details', null, $language_args);
+
+    if (!$translated_lang) {
+        return;
+    }
+    
+    $default_lang = apply_filters('wpml_default_language', null);
+    
+    if ($translated_lang->language_code === $default_lang) {
+        return;
+    }
+
+    // Find the original post ID in the default language
+    $original_post_id = apply_filters(
+        'wpml_object_id',
+        $translated_post_id,
+        $post_type,
+        true, // must be original (default language)
+        $default_lang
+    );
+
+    if (!$original_post_id) {
+        return;
+    }
+    
+    // Get ACF fields from original post
+    $fields = get_fields($original_post_id);
+    if (!$fields) {
+        return;
+    }
+
+    
+    foreach ($fields as $key => $value) {
+        update_field($key, $value, $translated_post_id);
+    }
+
+}
+
+
 ?>
