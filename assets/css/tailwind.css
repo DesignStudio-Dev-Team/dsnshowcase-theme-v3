@@ -56,7 +56,13 @@
     .btn {
         @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
     }
-
+    /* Link Color */
+     .page-content a {
+        @apply dsn:text-blue-700;
+    }
+    .page-content a:hover {
+        @apply dsn:text-blue-900;
+    }
     /* Headings */
     h1 {
         @apply dsn:text-6xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
