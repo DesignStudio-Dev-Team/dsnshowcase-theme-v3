@@ -1,3 +1,4 @@
+</div>
 <?php
 if(function_exists('get_field')) {
     $footer = get_field('footer');

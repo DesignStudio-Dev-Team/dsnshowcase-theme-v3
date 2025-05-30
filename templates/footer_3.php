@@ -100,7 +100,9 @@ $locations = !empty($content) && is_array($content)
                             endif;
                             ?>
                             <div class="dsn:mb-12 dsn:mt-12 dsn:md:w-1/3 dsn:w-2/3 dsn:md:px-10 dsn:mx-auto dsn:md:mx-0 <?php echo $first; ?>">
+                                <?php if (!empty($location['location_image'])) : ?>	
 								<img class="dsn:w-full" src="<?php echo esc_html($location['location_image']['url']); ?>" />
+                                <?php endif; ?>
                             <h4 class="dsn:mt-4 dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:text-left"><?php echo esc_html($location['tab_title']); ?></h4>
 								<div class="footer-address-body">
                                         <div class="dsn:mt-4 dsn:md:mt-4 dsn:text-base dsn:lg:text-xl dsn:w-full">

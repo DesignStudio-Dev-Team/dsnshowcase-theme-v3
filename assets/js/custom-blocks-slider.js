@@ -1,4 +1,6 @@
 jQuery(document).ready(function ($) {
+  //check if the class is present
+  if ($('.custom-blocks-slideshow').length > 0) {   
     $('.custom-blocks-slideshow').slick({
         centerMode: true,       // Enables center mode
         centerPadding: '0px',   // Ensures no neighboring slides are visible
@@ -12,6 +14,8 @@ jQuery(document).ready(function ($) {
         pauseOnHover: true,     // Pauses autoplay on hover
         pauseOnFocus: true,     // Pauses autoplay on focus
     });
+  }
+  if ($('.outdoor-kitchen-gallery').length > 0) {
     $('.outdoor-kitchen-gallery').slick({
         centerMode: true,       // Enables center mode
         centerPadding: '0px',   // Ensures no neighboring slides are visible
@@ -51,10 +55,13 @@ jQuery(document).ready(function ($) {
               }
             }]
     });
+  }
+  if ($('.outdoor-kitchen-gallery').length > 0) {
     $('.outdoor-kitchen-gallery').slickLightbox({ //Outdoor innerpage bottom gallery lightbox.
         itemSelector        : 'a',
         navigateByKeyboard  : true
     });
+  }
 });
 
   

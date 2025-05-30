@@ -41,13 +41,42 @@ jobs:
         run: |
           sed -i "s/^Version: .*/Version: $VERSION/" style.css
 
+
+      - name: Prepare theme ZIP for update
+        run: |
+          mkdir dsnshowcase
+          shopt -s extglob
+          cp -r !(dsnshowcase|dsnshowcase.zip|.git|.github) dsnshowcase/
+          zip -r dsnshowcase.zip dsnshowcase
+
+      - name: Upload theme ZIP to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dsnshowcase.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get release asset download URL
+        id: get_asset_url
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: process.env.VERSION
+            });
+            const asset = release.data.assets.find(a => a.name === 'dsnshowcase.zip');
+            if (!asset) throw new Error('dsnshowcase.zip not found in release assets');
+            core.setOutput('url', asset.browser_download_url);
+
       - name: Update theme-update-info.json
         run: |
           cat > theme-update-info.json <<EOF
           {
             "version": "${VERSION}",
             "details_url": "https://github.com/${{ github.repository }}/releases/tag/${VERSION}",
-            "download_url": "https://github.com/${{ github.repository }}/archive/refs/tags/${VERSION}.zip",
+            "download_url": "${{ steps.get_asset_url.outputs.url }}",
             "requires": "5.0",
             "tested": "6.5",
             "last_updated": "$(date +'%Y-%m-%d')",

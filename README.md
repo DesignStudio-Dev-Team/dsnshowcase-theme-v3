@@ -53,6 +53,13 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.4.1
+- Theme Updater
+
+### 3.4.0
+- Collections Page Template fixes
+- More WooCommerce Styling and fixes
+
 ### 3.3.0
 - Promotions Template / Promotions Content Type
 

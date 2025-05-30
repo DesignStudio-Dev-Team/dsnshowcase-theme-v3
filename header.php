@@ -34,3 +34,4 @@
         get_template_part('templates/header_1');
     }
     ?>
+<div class="page-content">
