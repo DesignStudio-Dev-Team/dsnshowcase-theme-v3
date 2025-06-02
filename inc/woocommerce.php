@@ -47,6 +47,17 @@ add_filter('woocommerce_product_tabs', function($tabs) {
 // Remove SKU and category/meta from single product summary
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
+// Move product description to appear after add to cart button
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
+add_action('woocommerce_single_product_summary', function() {
+    global $product;
+    if ($product && $product->get_description()) {
+        echo '<div class="product-description dsn:mt-6 dsn:border-t dsn:border-gray-200 dsn:pt-6">';
+        echo '<div class="dsn:prose dsn:prose-sm">' . wpautop($product->get_description()) . '</div>';
+        echo '</div>';
+    }
+}, 40); // Priority 40 places it after add to cart button (which is at 30)
+
 
 // Enhance stock status display
 add_filter('woocommerce_get_availability_text', function($availability, $product) {
