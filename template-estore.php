@@ -39,7 +39,7 @@ if($cat_cols == '4_column') {
 <div class="container ds-estore-banner-wrap mt-2">
     <?php if (have_rows('featured_categories')): ?>
     <div class="row flex-row -mx-4">
-        <div class="w-full px-4 mb-8 md:mb-0 <?php echo $col_1_classes; ?>">
+        <div class="dsn:w-full dsn:px-4 dsn:mb-8 dsn:md:mb-0 <?php echo $col_1_classes; ?>">
 
             <div class="ds-estore-search"
                  style="background-image: url('<?php echo get_field("search_image")['url'] ?>')">

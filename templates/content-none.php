@@ -39,7 +39,7 @@
 	}
 
 	.nav-links a {
-		color: var(--dsw-main-dealer-color);
+		color: var(--dealerColor);
 	}
 
 	.nav-links a:hover {

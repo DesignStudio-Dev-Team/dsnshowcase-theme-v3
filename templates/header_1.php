@@ -123,7 +123,7 @@ global $dssSiteLanguage;
 					<span
 						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 						 -->
-                <a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
+                <a class="cart-icon dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
                     href="<?php echo wc_get_cart_url();?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                         class="dsn:stroke-current dsn:fill-current" width="20" height="20">
                         <path class="dsn:stroke-current dsn:fill-current"
@@ -218,7 +218,7 @@ global $dssSiteLanguage;
 			</svg>
 			<span
 				class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a> -->
-        <a class="cart dsn:border-2 dsn:border-white dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
+        <a class="cart-icon dsn:border-2 dsn:border-white dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
             href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                 class="dsn:stroke-current dsn:fill-current" width="20" height="20">
                 <path class="dsn:stroke-current dsn:fill-current"
@@ -316,8 +316,8 @@ global $dssSiteLanguage;
 <?php include("mobile-header.php"); ?>
 
 <style>
-    .cart,
-    .wishlist,
+    .cart-icon,
+    .wishlist-icon,
     .my-account-icon,
     .the-search-icon,
     .dsn-mobile-hamburger,
@@ -555,9 +555,9 @@ global $dssSiteLanguage;
         }
 
         .cart-search-combo a.wishlist,
-        .cart-search-combo a.cart,
-        .header1.sticky-header-active .cart-search-combo a.wishlist,
-        .header1.sticky-header-active .cart-search-combo a.cart {
+        .cart-search-combo a.cart-icon,
+        .header1.sticky-header-active .cart-search-combo a.wishlist-icon,
+        .header1.sticky-header-active .cart-search-combo a.cart-icon {
             width: auto;
         }
 

@@ -268,12 +268,12 @@ function ds_filtration()
             <?php _e(' Products to Explore', 'dealer-theme'); ?>
         </div>
         <div class="ds-filters-nav-right">
-            <button class="show-filters js-toggle-filters lg:hidden relative">Filters</button>
-            <form id="ds-filters-search-wrap" class="hide-for-medium-down hidden md:flex relative" action="<?php echo esc_url(home_url('/')); ?>">
+            <button class="show-filters js-toggle-filters dsn:lg:hidden relative">Filters</button>
+            <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex relative" action="<?php echo esc_url(home_url('/')); ?>">
                 <input type="search" name="ds-search" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $_POST['search']; ?>" />
             </form>
 
-            <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page hidden lg:block">
+            <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:hidden dsn:lg:block">
                 <option value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?>>24
                     Per Page
                 </option>
@@ -738,96 +738,6 @@ remove_action('woocommerce_single_product_summary', 'woocommerce_template_single
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 
-/**
- * Rename product data tabs
- */
-add_filter('woocommerce_product_tabs', 'woo_rename_tabs', 98);
-function woo_rename_tabs($tabs)
-{
-    // Remove the description tab
-    unset($tabs['description']);
-
-    if (get_field('specs')) {
-        $tabs['additional_information'] = array(
-            'title' => __('Specs', 'woocommerce'),
-            'priority' => 10,
-            'callback' => 'woo_new_product_tab_specs'
-        );
-    }
-
-    if (get_field('more_content')) {
-        // Adds the new tab
-        $tabs['more'] = array(
-            'title' => __('More Details', 'woocommerce'),
-            'priority' => 5,
-            'callback' => 'woo_new_product_tab_more'
-        );
-    }
-
-    return $tabs;
-}
-
-function woo_new_product_tab_more()
-{
-    $more_content = get_field('more_content');
-    $video = get_field('video');
-    $video_position = get_field('video_position');
-    $content_class = $video ? 'md:w-1/2' : 'w-full';
-
-    if ($more_content) : ?>
-        <div class="content-default flex items-center <?php echo $video_position == 'Right' ? 'flex-col md:flex-row' : 'flex-col md:flex-row-reverse'; ?>">
-
-            <div class="px-2 md:px-8 mb-8 <?php echo $content_class; ?>">
-                <?php echo $more_content; ?>
-            </div>
-
-            <?php if ($video) : ?>
-                <div class="md:w-1/2 px-2 md:px-8 mb-8">
-                    <div class="responsive-iframe">
-                        <?php echo $video; ?>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-
-    <?php endif;
-}
-
-function woo_new_product_tab_specs()
-{
-    if (have_rows('specs')) :
-        if ($specs_title = get_field('specs_title')) :
-            echo '<h2>' . $specs_title . '</h2>';
-        endif; ?>
-        <!--        <div class="woocommerce-table woocommerce-table--order-details shop_table order_details">-->
-        <table class="specs-table">
-            <?php
-            while (have_rows('specs')) : the_row();
-                $name = get_sub_field('name');
-                $value = get_sub_field('value');
-                if ($name && $value) : ?>
-                    <tr>
-                        <!--                    <div class="p-4 woocommerce-table__line-item order_item">-->
-                        <td>
-                            <span><?php echo $name; ?></span>
-                        </td>
-                        <td width="60%">
-                            <span><?php echo $value; ?></span>
-                        </td>
-                        <!--                    </div>-->
-                    </tr>
-            <?php endif;
-            endwhile;
-            ?>
-            <!--        </div>-->
-        </table>
-<?php
-
-    else :
-
-    endif;
-}
-
 /* Convert hexdec color string to rgb(a) string */
 function hex2rgba($color, $opacity = false)
 {
@@ -918,20 +828,7 @@ function register_my_plugin_extra_replacements() {
 if (function_exists('wpseo_register_var_replacement'))
     add_action( 'wpseo_register_extra_replacements', 'register_my_plugin_extra_replacements' );
 
-
-/* Google map ACF API Key */
-function my_acf_google_map_api($api)
-{
-    $api['key'] = 'AIzaSyAhqthofUu97xg_zGhgzQs5gVjNQfvFnOc';
-
-    return $api;
-}
-
-add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
-
 add_filter('gform_confirmation_anchor', '__return_false');
-
-
 
 
 /**
@@ -1251,39 +1148,6 @@ function dssGetLanguageOptions()
     return $useLanguages;
 }
 
-function woocommerce_endpoint_titles( $title ) {
-    $sep = ' - ';
-    $sitetitle = get_bloginfo();
-
-    if ( is_wc_endpoint_url( 'view-order' ) ) {
-        $title = 'View Order: ' . $sep . $sitetitle;    
-    }
-    if ( is_wc_endpoint_url( 'edit-account' ) ) {
-        $title = 'Edit Account'. $sep . $sitetitle; 
-    }
-    if ( is_wc_endpoint_url( 'edit-address' ) ) {
-        $title = 'Edit Address'. $sep . $sitetitle; 
-    }
-    if ( is_wc_endpoint_url( 'lost-password' ) ) {
-        $title = 'Forgot Password'. $sep . $sitetitle;    
-    }
-    if ( is_wc_endpoint_url( 'customer-logout' ) ) {
-        $title = 'Logout'. $sep . $sitetitle;   
-    }
-    if ( is_wc_endpoint_url( 'order-pay' ) ) {
-        $title = 'Order Payment'. $sep . $sitetitle;    
-    }
-    if ( is_wc_endpoint_url( 'order-received' ) ) {
-        $title = 'Order Received'. $sep . $sitetitle;   
-    }
-    if ( is_wc_endpoint_url( 'add-payment-method' ) ) {
-        $title = 'Add Payment Method'. $sep . $sitetitle;   
-    }
-    return $title;
-}
-add_filter( 'wpseo_title','woocommerce_endpoint_titles');
-
-
 //disable support for comments on post types
 function disable_comments_post_types_support() {
     $post_types = get_post_types();
@@ -1395,24 +1259,3 @@ add_filter('posts_orderby', 'prioritize_products', 10, 2);
 //prevent emails being sent to site admin on every plugin update
 remove_action('admin_notices', 'update_nag');
 remove_action('wp_mails', 'send_plugin_update_notification');
-
-//remove the need for a sidebar in products / woocommerce templates
-function remove_sidebar() {
-    if (class_exists('WooCommerce')) {
-        if (function_exists('get_field')) {
-            $header_sticky = get_field('sticky_header', 'options');
-            if ($header_sticky == "1") {
-                if (is_product() || is_product_category() || is_product_tag()) {
-                    remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
-                }
-            }
-        } else {
-            if (is_product() || is_product_category() || is_product_tag()) {
-                remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
-            }
-        }
-    }
-}
-add_action('get_header', 'remove_sidebar');
-add_action('wp_head', 'remove_sidebar');
-add_action('wp_footer', 'remove_sidebar');  

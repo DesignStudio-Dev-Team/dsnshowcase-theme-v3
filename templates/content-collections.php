@@ -71,7 +71,7 @@ if ($title_overwrite) {
     ?>
         <style>
             .dsw-collections-btn {
-                background: var(--dsw-main-dealer-color);
+                background: var(--dealerColor);
                 color: #fff;
             }
 
