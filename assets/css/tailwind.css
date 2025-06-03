@@ -52,7 +52,9 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
-
+    body {
+        @apply dsn:overflow-x-hidden;
+    }
     .btn {
         @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
     }
@@ -292,7 +294,7 @@
     }
 
     .slick-next:before, .slick-prev:before {
-        color: var(--dealerLinkColor) !important;
+        color: var(--dealerColor) !important;
         @apply dsn:!text-5xl dsn:!opacity-100;
     }
 
