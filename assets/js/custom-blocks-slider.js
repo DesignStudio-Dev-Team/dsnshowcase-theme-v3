@@ -106,20 +106,41 @@ jQuery(document).ready(function ($) {
     });
   }
 //Product Showcase Tab Slider 
-
+ if ($('.slider-for').length > 0) {   
   var $carousel = $('.slider-for').slick({
    slidesToShow: 1,
    slidesToScroll: 1,
    arrows: false,
    fade: true,
+   draggable: false,
+    swipe: false,
+    touchMove: false,
+    swipeToSlide: false,
    initialSlide: 0,
+   responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      }
+    ]
  });
- 
+}
  $cat_val = $('.slider-nav').slick({
    slidesToShow: 8,
    slidesToScroll: 1,
    asNavFor: '.slider-for',
    dots: false,
+   arrows: false,
    initialSlide: 0,
    focusOnSelect: true,
    centerMode: false,
@@ -127,13 +148,17 @@ jQuery(document).ready(function ($) {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 1.7,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          arrows: false,
         }
       },
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 1.7,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: false,
         }
       }
     ]
@@ -142,6 +167,9 @@ jQuery(document).ready(function ($) {
   $("#category").change( function() { 
 if (select.prop('selectedIndex')) {
     goTo = select.prop('selectedIndex');
+     if (slick.slideCount <= 4) {
+      $('.progress').addClass('dsn:hidden');
+    }
 } else {
 	goTo = 0;
 }
@@ -149,13 +177,6 @@ if (select.prop('selectedIndex')) {
     $cat_val.slick( "goTo", goTo-1 );
   });
  
-
- $('a[data-slide]').click(function(e) {
-   e.preventDefault();
-   var slideno = $(this).data('slide');
-   $('.slider-nav').slick('slickGoTo', slideno - 1);
- });
-
 
 //Tab Slider
 $('.all-products').on('init', function(event, slick){
@@ -177,16 +198,51 @@ $('.all-products').on('init', function(event, slick){
   
   $slider.slick({
     slidesToShow: 5,
-    slidesToScroll: 1,
-    speed: 400
+    slidesToScroll: 5,
+    speed: 400,
+    responsive: [    
+       //Responsive Breakpoint settings
+       {
+              breakpoint: 1500, 
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                arrows: true, 
+                infinite: true,
+              }
+            },      
+            {
+              breakpoint: 1024, 
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows: true,
+                infinite: true,
+              }
+            },
+            {
+              breakpoint: 600, 
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                arrows: true,
+              }
+            },
+            {
+              breakpoint: 480, 
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+              }
+            }]
   });  
       $slider
         .on('afterChange', function(event, slick, currentSlide, nextSlide){
             // finally let's do this after changing slides
             $('.slider-count #current').html(currentSlide+1);
         });
+ 
   
 });
 
-
-  

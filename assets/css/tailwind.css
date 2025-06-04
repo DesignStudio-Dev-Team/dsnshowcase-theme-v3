@@ -285,17 +285,19 @@
     }
 
     /* slick slider */
+    @media only screen and (min-width: 1024px) {
     .slick-slider {
         margin-left: 65px;
         margin-right: 65px;
     }
+}
     .slick-dots li button:before {
         @apply dsn:!text-sm;
     }
 
     .slick-next:before, .slick-prev:before {
         color: var(--dealerColor) !important;
-        @apply dsn:!text-5xl dsn:!opacity-100;
+        @apply dsn:!text-2xl dsn:md:!text-5xl dsn:!opacity-100;
     }
 
     .slick-next, .slick-prev {
@@ -304,10 +306,10 @@
     }
 
     .slick-prev {
-        @apply dsn:!-left-14;
+        @apply dsn:!-left-8 dsn:md:!-left-14;
     }
 
     .slick-next {
-        @apply dsn:!-right-14;
+        @apply dsn:!-right-8 dsn:md:!-right-14;
     }
 }
