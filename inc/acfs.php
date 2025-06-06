@@ -4421,7 +4421,7 @@ add_action( 'acf/include_fields', function() {
 			array(
 				'param' => 'page_template',
 				'operator' => '==',
-				'value' => 'page.php',
+				'value' => 'template-outdoor-kitchen.php',
 			),
 		),
 	),
@@ -8208,6 +8208,27 @@ add_action( 'acf/include_fields', function() {
 			'selected' => 0,
 		),
 		array(
+			'key' => 'field_683d82787b57d',
+			'label' => 'Custom Block Title',
+			'name' => 'custom_block_title',
+			'aria-label' => '',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'maxlength' => '',
+			'allow_in_bindings' => 0,
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+		),
+		array(
 			'key' => 'field_683d7efdd91a1',
 			'label' => 'Content',
 			'name' => 'custom_block_content',
@@ -8309,3 +8330,4 @@ add_action( 'acf/init', function() {
 	'icon_url' => 'dashicons-admin-generic',
 ) );
 } );
+

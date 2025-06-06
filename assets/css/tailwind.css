@@ -52,7 +52,9 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
-
+    body {
+        @apply dsn:overflow-x-hidden;
+    }
     .btn {
         @apply dsn:py-4 dsn:px-10 dsn:text-lg dsn:md:text-xl dsn:shadow-md;
     }
@@ -179,7 +181,7 @@
     }
 
     .gform_wrapper .gfield_label, .gform_wrapper.gravity-theme .gfield_label {
-        @apply dsn:!text-4xl dsn:!mb-4;
+        @apply dsn:!text-2xl dsn:!mb-4;
     }
 
     .gform_wrapper .ginput_complex legend {
@@ -283,17 +285,19 @@
     }
 
     /* slick slider */
+    @media only screen and (min-width: 1024px) {
     .slick-slider {
         margin-left: 65px;
         margin-right: 65px;
     }
+}
     .slick-dots li button:before {
         @apply dsn:!text-sm;
     }
 
     .slick-next:before, .slick-prev:before {
-        color: var(--dealerLinkColor) !important;
-        @apply dsn:!text-5xl dsn:!opacity-100;
+        color: var(--dealerColor) !important;
+        @apply dsn:!text-2xl dsn:md:!text-5xl dsn:!opacity-100;
     }
 
     .slick-next, .slick-prev {
@@ -302,10 +306,10 @@
     }
 
     .slick-prev {
-        @apply dsn:!-left-14;
+        @apply dsn:!-left-8 dsn:md:!-left-14;
     }
 
     .slick-next {
-        @apply dsn:!-right-14;
+        @apply dsn:!-right-8 dsn:md:!-right-14;
     }
 }

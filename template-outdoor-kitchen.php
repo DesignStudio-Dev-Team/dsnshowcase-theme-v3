@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template Name: Outdoor Kitchen
 */
@@ -35,7 +34,7 @@ $gallery = get_field('gallery', $page_ID);
 $gallery_title = $gallery['title'];
 $gallery_image_gallery = $gallery['image_gallery'];
 ?>
-<main class="outdoor-kitchen-internal-pages dsn:py-20 dsn:px-4 dsn:md:px-0">
+<main class="outdoor-kitchen-internal-pages dsn:py-10 dsn:px-4 dsn:md:px-0">
     <div class="dsn:container dsn:mx-auto">
       <!-- Left - Right Section -->
         <div class="top-container dsn:flex dsn:flex-col dsn:md:flex-row dsn:md:gap-4">
@@ -107,6 +106,9 @@ if ($selected_blocks_bot) {
   .col-left img {
     position: sticky;
     top: 7em;
+    height: 74%;
+    object-fit: cover;
+    object-position: center;
 }
 .slick-lightbox {
     position: fixed;
@@ -178,6 +180,10 @@ button.slick-lightbox-close:after{
     transform:rotate(-45deg);
     right:2px;
 }
+.disabled-link {
+  filter: grayscale(100%);
+  pointer-events: none;
+}
 
 @media only screen and (max-width: 700px) {
     .outdoor-kitchen-gallery .slick-slide img {
@@ -187,4 +193,22 @@ button.slick-lightbox-close:after{
         bottom: -45px; 
     }
 }
+.page-template-template-outdoor-kitchen #gridBlock {
+  padding-top: 0;
+}
 </style>
+
+<script>
+jQuery(document).ready(function($) {
+  var currentUrl = window.location.href;
+  $('a').each(function() {
+    var linkUrl = $(this).attr('href');
+    if (linkUrl === currentUrl) {
+      $(this).click(function(e) {
+        e.preventDefault();
+      });
+      $(this).addClass('disabled-link'); // Add a class for styling
+    }
+  });
+});
+</script>
