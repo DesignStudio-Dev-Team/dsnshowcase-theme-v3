@@ -1,8 +1,8 @@
 <?php
-require get_template_directory() . '/inc/woocommerce.php';
 require get_template_directory() . '/inc/acfs.php';
 require get_template_directory() . '/inc/nav-items.php';
 require get_template_directory() . '/inc/other-functions.php';
+require get_template_directory() . '/inc/woocommerce.php';
 
 // Custom debug logger for theme
 function dsn_theme_debug_log($message) {
@@ -85,7 +85,7 @@ function dsn_wp_nav_menu_objects( $items, $args ) {
 }
 
 function enqueue_slick_slider_assets() {
-    if (is_page()) { // Load only on pages
+    if (is_page() || is_product()) { // Load on pages and single product pages
         // Slick Slider CSS
         wp_enqueue_style('slick-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
         wp_enqueue_style('slick-theme', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
@@ -95,6 +95,12 @@ function enqueue_slick_slider_assets() {
 
         // Custom JS for initializing the slider
         wp_enqueue_script('custom-blocks-slider', get_template_directory_uri() . '/assets/js/custom-blocks-slider.js', ['slick-slider'], null, true);
+
+        // Product slider initialization
+        if (is_product()) {
+            wp_enqueue_script('jquery');
+            wp_enqueue_script('product-slider', get_template_directory_uri() . '/assets/js/product-slider.js', ['jquery', 'slick-slider'], time(), true);
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_slick_slider_assets');
