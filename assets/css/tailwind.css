@@ -181,7 +181,7 @@
     }
 
     .gform_wrapper .gfield_label, .gform_wrapper.gravity-theme .gfield_label {
-        @apply dsn:!text-4xl dsn:!mb-4;
+        @apply dsn:!text-2xl dsn:!mb-4;
     }
 
     .gform_wrapper .ginput_complex legend {
