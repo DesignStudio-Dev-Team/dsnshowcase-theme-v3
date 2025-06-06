@@ -790,3 +790,11 @@ body.checkout .default-btn {
 #single_product_image_slider .slick-slide {
     cursor: zoom-in;
 }
+.woocommerce table.shop_attributes th p {
+  padding:0;
+  margin:0; 
+}
+.woocommerce table.shop_attributes td p {
+  padding:0;
+  margin:0;
+}

@@ -1259,3 +1259,255 @@ add_filter('posts_orderby', 'prioritize_products', 10, 2);
 //prevent emails being sent to site admin on every plugin update
 remove_action('admin_notices', 'update_nag');
 remove_action('wp_mails', 'send_plugin_update_notification');
+
+function dss_toggle_admin_bar() {
+    // Only output for administrators
+    if (current_user_can('administrator')) {
+        ?>
+        <style>
+            /* Your existing CSS - unchanged */
+            html {
+                margin-top: 0 !important;
+            }
+            #wpadminbar {
+                transform: translateY(-100%);
+                transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out !important;
+                opacity: 0;
+                display: block !important; /* Ensure it's block so transform works */
+                z-index: 999999; /* Ensure this is below the toggle button if they overlap */
+            }
+            #wpadminbar.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            .dss-toggle-admin-bar {
+                position: fixed;
+                top: 8px;
+                right: 8px;
+                z-index: 9999999; /* Higher than admin bar */
+                background-color: #0e0e0e;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                transform: rotate(180deg); /* Initial state: bar hidden, arrow points up to show */
+            }
+            .dss-toggle-admin-bar:hover {
+                background-color: #000;
+                transform: rotate(180deg) scale(1.1);
+            }
+            .dss-toggle-admin-bar.active { /* State when bar is visible, arrow points down to hide */
+                transform: rotate(0deg);
+            }
+            .dss-toggle-admin-bar.active:hover {
+                transform: rotate(0deg) scale(1.1);
+            }
+            .dss-toggle-admin-bar svg {
+                width: 16px;
+                height: 16px;
+                fill: #fff;
+            }
+            body.admin-bar-visible { /* If you want to manage body margin */
+                margin-top: 32px !important;
+            }
+            #broadly-widget { /* Example of adjusting other fixed elements if needed */
+                z-index: 99;
+            }
+            @media screen and (max-width: 782px) {
+                body.admin-bar-visible {
+                    margin-top: 46px !important;
+                }
+            }
+        </style>
+        <div class="dss-toggle-admin-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
+            </svg>
+        </div>
+        <script>
+            (function() {
+                    if (window.dssAdminBarInitialized) {
+                    console.log('DSS: Admin bar script already initialized. Skipping duplicate.');
+                    return; 
+                }
+                window.dssAdminBarInitialized = true; // Set the flag
+
+                
+                const toggleButtonSelector = '.dss-toggle-admin-bar';
+                const adminBarId = 'wpadminbar';
+                let listenerEffectivelyAttached = false; // Guard against multiple listener attachments
+                let domElementsFound = false; // To help with console logging
+
+                function initAdminBar() {
+                    const toggleButton = document.querySelector(toggleButtonSelector);
+                    const adminBar = document.getElementById(adminBarId);
+
+                    if (!toggleButton || !adminBar) {
+                        // Only log if elements haven't been found in any prior call to initAdminBar
+                        if (!domElementsFound) {
+                             console.log('DSS: Admin bar toggle elements not found yet. Waiting for DOMContentLoaded or other init call.');
+                        }
+                        return; // Elements not found, try again if DOMContentLoaded fires
+                    }
+                    domElementsFound = true; // Mark that we've found the DOM elements
+
+                    // If the core setup has already run, just ensure visual state is correct
+                    if (listenerEffectivelyAttached) {
+                        const body = document.body;
+                        let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+                        updateAdminBarVisualState(isVisible, adminBar, toggleButton, body);
+                        return;
+                    }
+
+                    console.log('DSS: Admin bar toggle elements found. Initializing now.');
+                    const body = document.body;
+                    let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+
+                    function updateAdminBarVisualState(visible, currentAdminBar, currentToggleButton, currentBody) {
+                        if (visible) {
+                            currentAdminBar.classList.add('show');
+                            currentToggleButton.classList.add('active');
+                            currentBody.classList.add('admin-bar-visible');
+                        } else {
+                            currentAdminBar.classList.remove('show');
+                            currentToggleButton.classList.remove('active');
+                            currentBody.classList.remove('admin-bar-visible');
+                        }
+                    }
+
+                    // Set initial state
+                    updateAdminBarVisualState(isVisible, adminBar, toggleButton, body);
+
+                    // Define the click handler
+                    function handleClick(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('DSS: Admin bar toggle clicked!'); // This is the key log
+
+                        // It's best to get the latest state from localStorage inside the handler
+                        let currentIsVisible = localStorage.getItem('adminBarVisible') === 'true';
+                        currentIsVisible = !currentIsVisible; // Toggle the state
+
+                        // adminBar, toggleButton, body are from the closure of initAdminBar.
+                        // This is usually fine unless they get completely replaced in the DOM.
+                        updateAdminBarVisualState(currentIsVisible, adminBar, toggleButton, body);
+                        localStorage.setItem('adminBarVisible', currentIsVisible);
+                        console.log('DSS: Admin bar visibility set to: ' + currentIsVisible);
+                    }
+
+                    // Add the click listener
+                    toggleButton.addEventListener('click', handleClick);
+                    listenerEffectivelyAttached = true; // Mark that the listener and setup are done
+                    console.log('DSS: Event listener attached to admin bar toggle.');
+                }
+
+                // DOM Ready handling:
+                // Call initAdminBar once immediately in case the script is at the end of the body
+                // and elements are already available.
+                initAdminBar();
+
+                // Also call on DOMContentLoaded to ensure it runs if elements weren't ready initially.
+                // The guards within initAdminBar (domElementsFound, listenerEffectivelyAttached)
+                // will prevent redundant operations.
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initAdminBar);
+                } else {
+                    // DOM is already ready, call it again if the first immediate call didn't find elements
+                    // or if listener wasn't attached (though the first call should handle it if elements are ready).
+                    // The internal guards in initAdminBar make this safe.
+                    initAdminBar();
+                }
+
+                // Optional: a final fallback on window.load if elements are extremely delayed.
+                // Use with caution as it might be redundant.
+                // window.addEventListener('load', function() {
+                //     if (!listenerEffectivelyAttached) {
+                //         console.log('DSS: Trying initAdminBar on window.load as a fallback.');
+                //         initAdminBar();
+                //     }
+                // });
+
+            })();
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'dss_toggle_admin_bar');
+
+/**
+ * Function to safely deactivate and delete plugins
+ * 
+ * @param string $plugin_slug The plugin slug/path relative to plugins directory
+ * @return bool|WP_Error True on success, WP_Error on failure
+ */
+function dss_deactivate_and_delete_plugin($plugin_slug) {
+    // Check if user has sufficient permissions
+    if (!current_user_can('delete_plugins')) {
+        return new WP_Error('insufficient_permissions', __('You do not have sufficient permissions to delete plugins.'));
+    }
+
+    // Validate plugin slug
+    if (empty($plugin_slug) || !is_string($plugin_slug)) {
+        return new WP_Error('invalid_plugin', __('Invalid plugin slug provided.'));
+    }
+
+    // Include required WordPress files if not already included
+    if (!function_exists('get_plugins')) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+
+    try {
+        // Check if plugin exists
+        $all_plugins = get_plugins();
+        if (!array_key_exists($plugin_slug, $all_plugins)) {
+            // return new WP_Error('plugin_not_found', __('Plugin not found.'));
+            //return nothing abort mission since it already completed
+            return true; // Plugin not found, nothing to do
+        }
+
+        // Deactivate plugin if active
+        if (is_plugin_active($plugin_slug)) {
+            deactivate_plugins($plugin_slug, true); // Second parameter true means network wide if applicable
+            
+            // Verify deactivation was successful
+            if (is_plugin_active($plugin_slug)) {
+                return new WP_Error('deactivation_failed', __('Failed to deactivate plugin.'));
+            }
+        }
+
+        // Delete plugin
+        $deleted = delete_plugins(array($plugin_slug));
+        if (is_wp_error($deleted)) {
+            return $deleted; // Return the error if deletion failed
+        }
+
+        if (!$deleted) {
+            return new WP_Error('deletion_failed', __('Failed to delete plugin.'));
+        }
+
+        return true;
+    } catch (Exception $e) {
+        return new WP_Error('unexpected_error', $e->getMessage());
+    }
+}
+
+// Hook for admin initialization
+add_action('admin_init', function() {
+    // Only run if we're in the admin area
+    if (!is_admin()) {
+        return;
+    }
+
+    // Deactivate and delete the Admin Bar Toggle plugin
+    $result = dss_deactivate_and_delete_plugin('admin-bar-toggle/jck-adminbar-toggle.php');
+    
+    if (is_wp_error($result)) {
+        // Log error or handle it appropriately
+        error_log('Plugin deactivation/deletion failed: ' . $result->get_error_message());
+    }
+});
