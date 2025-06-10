@@ -70,6 +70,12 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Icon Block') {
             include get_template_directory() . '/inc/customblocks/icon-block.php';
         }
+        if($block_type === 'Logo Slider') {
+            include get_template_directory() . '/inc/customblocks/logo-slider-block.php';
+        }
+        if($block_type === 'Products Showcase') {
+            include get_template_directory() . '/inc/customblocks/products-showcase-block.php';
+        }
     }
   echo '</div>'; ?>
 <style>

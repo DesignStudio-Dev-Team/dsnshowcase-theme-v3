@@ -53,6 +53,11 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.4.5
+- New Custom Blocks
+- New WooCommerce Single Product Template
+
+
 ### 3.4.1
 - Theme Updater
 
