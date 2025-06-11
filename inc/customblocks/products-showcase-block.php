@@ -6,13 +6,24 @@ $titleOfShowcase = $productsShowcaseBlock['title_of_showcase'];
 $set_of_products = $productsShowcaseBlock['set_of_products'];
 ?>
 
-<section id="product-showcase" class="dsn:my-10 dsn:md:px-10 dsn:md:py-20 dsn:text-white">
+<section id="product-showcase" class="dsn:my-10 dsn:md:px-10 dsn:md:py-20">
     <div class="dsn:container dsn:mx-auto dsn:relative">
-    <h2 class="dsn:text-left dsn:mb-10"><?php echo $title; ?></h2>
-    <p class="dsn:text-left dsn:lg:max-w-8/12"><?php echo $description; ?></p>
-    <div class="product-showcase-inner dsn:pt-10">
-    
-<div class="slider slider-nav dsn:mb-8">
+        <?php if($title) { ?>
+        <h2 class="dsn:text-center dsn:mb-10"><?php echo $title; ?></h2>
+        <?php } ?>
+        <?php if($description) { ?>
+        <p class="dsn:text-center dsn:lg:max-w-8/12 dsn:mx-auto"><?php echo $description; ?></p>
+        <?php } ?>
+    </div>
+
+    <div class="product-showcase-inner dsn:text-white dsn:pt-10">
+
+        <div class="dsn:container dsn:mx-auto dsn:relative">
+            <?php if($titleOfShowcase) { ?>
+            <h3 class="dsn:text-left dsn:mb-10"><?php echo $titleOfShowcase; ?></h3>
+            <?php } ?>
+
+    <div class="slider slider-nav dsn:mb-8">
 
     <?php 
     $i = 0;
@@ -84,7 +95,7 @@ wp_reset_postdata();
 </section>
 
 <style>
-    #product-showcase {
+    .product-showcase-inner{
     background: #286632; 
 }
 .product-title {
