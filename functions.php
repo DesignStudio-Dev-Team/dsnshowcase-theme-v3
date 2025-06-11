@@ -247,4 +247,183 @@ function dsn_custom_theme_update($transient) {
     } 
     return $transient;
 }
+
+
+
+
+function dss_toggle_admin_bar() {
+    if (current_user_can('administrator')) {
+        ?>
+        <style>
+            html {
+                margin-top: 0 !important;
+            }
+            #wpadminbar {
+                transform: translateY(-100%);
+                transition: all 0.3s ease-in-out !important;
+                opacity: 0;
+            }
+            #wpadminbar.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            .dss-toggle-admin-bar {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                z-index: 99999;
+                background-color: #0e0e0e;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                z-index: 999999999999999;
+            }
+            #wpadminbar {
+                z-index:  999;
+            }
+            .dss-toggle-admin-bar svg {
+                transition: transform 0.3s ease, fill 0.3s ease;
+            }
+
+            .dss-toggle-admin-bar:hover {
+                background-color: #000;
+                transform: scale(1.1);
+            }
+            .dss-toggle-admin-bar {
+                transform: rotate(180deg);
+            }
+            .dss-toggle-admin-bar.active {
+                transform: rotate(0deg);
+            }
+            .dss-toggle-admin-bar svg {
+                width: 16px;
+                height: 16px;
+                fill: #fff;
+            }
+            body.admin-bar-visible {
+                margin-top: 32px !important;
+            }
+            @media screen and (max-width: 782px) {
+                body.admin-bar-visible {
+                    margin-top: 46px !important;
+                }
+            }
+        </style>
+        <div class="dss-toggle-admin-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
+            </svg>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggleButton = document.querySelector('.dss-toggle-admin-bar');
+                const adminBar = document.getElementById('wpadminbar');
+                const body = document.body;
+                let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+
+                function updateAdminBarState(visible) {
+                    if (visible) {
+                        adminBar.classList.add('show');
+                        toggleButton.classList.add('active');
+                        body.classList.add('admin-bar-visible');
+                    } else {
+                        adminBar.classList.remove('show');
+                        toggleButton.classList.remove('active');
+                        body.classList.remove('admin-bar-visible');
+                    }
+                }
+
+                // Initialize state
+                updateAdminBarState(isVisible);
+
+                toggleButton.addEventListener('click', function() {
+                    isVisible = !isVisible;
+                    updateAdminBarState(isVisible);
+                    localStorage.setItem('adminBarVisible', isVisible);
+                });
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_head', 'dss_toggle_admin_bar');
+
+
+/**
+ * Function to safely deactivate and delete plugins
+ * 
+ * @param string $plugin_slug The plugin slug/path relative to plugins directory
+ * @return bool|WP_Error True on success, WP_Error on failure
+ */
+function dss_deactivate_and_delete_plugin($plugin_slug) {
+    // Check if user has sufficient permissions
+    if (!current_user_can('delete_plugins')) {
+        return new WP_Error('insufficient_permissions', __('You do not have sufficient permissions to delete plugins.'));
+    }
+
+    // Validate plugin slug
+    if (empty($plugin_slug) || !is_string($plugin_slug)) {
+        return new WP_Error('invalid_plugin', __('Invalid plugin slug provided.'));
+    }
+
+    // Include required WordPress files if not already included
+    if (!function_exists('get_plugins')) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+
+    try {
+        // Check if plugin exists
+        $all_plugins = get_plugins();
+        if (!array_key_exists($plugin_slug, $all_plugins)) {
+            // also return good since the plugin doesn't exists anymore so it doesn't keep running
+            return true; // Plugin does not exist, nothing to deactivate or delete
+        }
+
+        // Deactivate plugin if active
+        if (is_plugin_active($plugin_slug)) {
+            deactivate_plugins($plugin_slug, true); // Second parameter true means network wide if applicable
+            
+            // Verify deactivation was successful
+            if (is_plugin_active($plugin_slug)) {
+                return new WP_Error('deactivation_failed', __('Failed to deactivate plugin.'));
+            }
+        }
+
+        // Delete plugin
+        $deleted = delete_plugins(array($plugin_slug));
+        if (is_wp_error($deleted)) {
+            return $deleted; // Return the error if deletion failed
+        }
+
+        if (!$deleted) {
+            return new WP_Error('deletion_failed', __('Failed to delete plugin.'));
+        }
+
+        return true;
+    } catch (Exception $e) {
+        return new WP_Error('unexpected_error', $e->getMessage());
+    }
+}
+
+// Hook for admin initialization
+add_action('admin_init', function() {
+    // Only run if we're in the admin area
+    if (!is_admin()) {
+        return;
+    }
+
+    // Deactivate and delete the Admin Bar Toggle plugin
+    $result = dss_deactivate_and_delete_plugin('admin-bar-toggle/jck-adminbar-toggle.php');
+    
+    if (is_wp_error($result)) {
+        // Log error or handle it appropriately
+        error_log('Plugin deactivation/deletion failed: ' . $result->get_error_message());
+    }
+});
 ?>
