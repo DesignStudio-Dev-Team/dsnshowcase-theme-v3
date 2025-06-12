@@ -191,8 +191,6 @@ if (select.prop('selectedIndex')) {
  
  
 
-
-
 //Tab Slider
 $('.all-products').on('init', function(event, slick){
         $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+slick.slideCount+'</span></p></div>');
@@ -271,15 +269,7 @@ $('.all-products').on('init', function(event, slick){
     
     $progressBarLabel.text( calc + '% completed' );
   });
-
-      
  
-
- 
-
-
-
-
 
    $cat_val.on('afterChange', function(event, slick, currentSlide) {
  
@@ -291,7 +281,6 @@ $('.all-products').on('init', function(event, slick){
    //all carousels reset to the first slide
     $slider.slick('slickGoTo', 0); 
     //also reset  $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+totalSlides+'</span></p></div>');
-    $('#dsn-current').text(1);
 
   });
 

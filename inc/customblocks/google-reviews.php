@@ -113,27 +113,27 @@ $description = $googleReviews['description'];
 </script>
 
 <style>
-.slick-next, .slick-prev {
+#google-reviews .slick-next, #google-reviews .slick-prev {
     position: absolute;
     bottom: -25px;
     top: auto;
 }
 
-.slick-prev {
+#google-reviews .slick-prev {
     margin-left: 48%;
 }
-.slick-next {
+#google-reviews .slick-next {
     margin-right: 48%;
 }
-button.slick-next:before, button.slick-prev:before {
+#google-reviews button.slick-next:before, #google-reviews button.slick-prev:before {
 color: var(--dealerColor) !important;
 }
 
 @media only screen and (max-width: 700px) {
-    .slick-prev {
+   #google-reviews .slick-prev {
     margin-left: 42%;
 }
-.slick-next {
+#google-reviews .slick-next {
     margin-right: 42%;
 }
 }
