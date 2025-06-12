@@ -1,4 +1,4 @@
-<?php
+<?php 
 add_action( 'acf/include_fields', function() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;
@@ -3823,6 +3823,7 @@ add_action( 'acf/include_fields', function() {
 						1 => 'Type 1',
 						2 => 'Type 2',
 						3 => 'Type 3',
+						4 => 'Type 4',
 					),
 					'default_value' => false,
 					'return_format' => 'value',
@@ -4057,7 +4058,15 @@ add_action( 'acf/include_fields', function() {
 			'type' => 'group',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_67a3a85cfd690',
+						'operator' => '==',
+						'value' => 'Products Showcase',
+					),
+				),
+			),
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -8330,4 +8339,3 @@ add_action( 'acf/init', function() {
 	'icon_url' => 'dashicons-admin-generic',
 ) );
 } );
-

@@ -4,6 +4,7 @@
 @theme {
     --breakpoint-max: 1800px;
     --text-h2: 48px;
+    --color-black-500: #000;
 }
 
 @utility container {

@@ -137,7 +137,7 @@ wp_reset_postdata();
     background: #286632; 
 }
 .product-title {
-    color: #286632;
+    color: #007437;
 }
 .product-slider-nav:before {
     content: "";

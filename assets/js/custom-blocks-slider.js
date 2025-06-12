@@ -66,8 +66,8 @@ jQuery(document).ready(function ($) {
   }
 
   //Custom block logo slider
-  if ($('.logo-slider').length > 0) {   
-    $('.logo-slider').slick({
+  if ($('.dsn-logo-slider').length > 0) {   
+    $('.dsn-logo-slider').slick({
         rows: 2,
         slidesToShow: 3,        // Displays only one slide at a time
         slidesToScroll: 1,      // Scrolls one slide at a time
@@ -109,6 +109,11 @@ jQuery(document).ready(function ($) {
             }]
     });
   }
+
+
+
+
+
 //Product Showcase Tab Slider 
  if ($('.product-slider-for').length > 0) {   
   var $carousel = $('.product-slider-for').slick({
@@ -169,6 +174,9 @@ jQuery(document).ready(function ($) {
  });
  var select = $("#category");
   $("#category").change( function() { 
+  
+   
+    //get the selected value
 if (select.prop('selectedIndex')) {
     goTo = select.prop('selectedIndex');
      if (slick.slideCount <= 4) {
@@ -181,6 +189,9 @@ if (select.prop('selectedIndex')) {
     $cat_val.slick( "goTo", goTo-1 );
   });
  
+ 
+
+
 
 //Tab Slider
 $('.all-products').on('init', function(event, slick){
@@ -196,7 +207,7 @@ $('.all-products').on('init', function(event, slick){
       .attr('aria-valuenow', calc );
     $progressBarLabel.text( calc + '% completed' );
   });
-  
+
   $slider.slick({
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -237,12 +248,53 @@ $('.all-products').on('init', function(event, slick){
               }
             }]
   });  
-      $slider
-        .on('afterChange', function(event, slick, currentSlide, nextSlide){
-            // finally let's do this after changing slides
-            $('.slider-count #current').html(currentSlide+1);
-        });
- 
   
+
+
+  $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide) {   
+    var totalSlides = Math.ceil(slick.slideCount / slick.options.slidesToShow);
+    var calc = ( (nextSlide + 1) / totalSlides ) * 100;
+    //unless it resets can't be more then the total slides
+    if (calc > 100) {
+      calc = 100;
+    }
+    
+    //upddate the total slides count remeber this might be 5 at a time 
+    $(this).find('#dsn-total').text( totalSlides );
+    //update the current slide count
+    $(this).find('#dsn-current').text( Math.ceil((nextSlide + 1) / slick.options.slidesToShow) );
+    //update the progress bar
+    
+    $progressBar
+      .css('background-size', calc + '% 100%')
+      .attr('aria-valuenow', calc );
+    
+    $progressBarLabel.text( calc + '% completed' );
+  });
+
+      
+ 
+
+ 
+
+
+
+
+
+   $cat_val.on('afterChange', function(event, slick, currentSlide) {
+ 
+    var $progressBar = $('.progress');
+    $progressBar.css('background-size', '0% 100%');
+    $progressBar.attr('aria-valuenow', 0);
+    $progressBarLabel.text( '0% completed' );
+  //  console.log('category changed');
+   //all carousels reset to the first slide
+    $slider.slick('slickGoTo', 0); 
+    //also reset  $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+totalSlides+'</span></p></div>');
+    $('#dsn-current').text(1);
+
+  });
+
+
 });
 

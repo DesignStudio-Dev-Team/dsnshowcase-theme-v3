@@ -23,14 +23,18 @@ $logos = $logoSliderBlock['logos'];
             <?php endif; ?>
         </div>
         <div class="dsn:w-full dsn:lg:w-7/12">
-            <?php //print_r($logos); ?>
-            <div class="logo-slider dsn:w-full dsn:relative dsn:!mx-0">
+            <div class="dsn-logo-slider dsn:w-full dsn:relative dsn:!mx-0">
+
                 <?php if($logos) {
                     foreach($logos as $blocklogo) {
                     ?>
+                <?php if($blocklogo['logo'] && $blocklogo['url']) { ?>
                        <a href="<?php echo $blocklogo['url']['url']; ?>"><img class="dsn:w-full" src="<?php echo $blocklogo['logo']['url']; ?>" alt="<?php echo $blocklogo['url']['title']; ?>" /></a>
-                <?php } 
-                }?>
+                <?php } else if($blocklogo['logo']) { ?>
+                        <img class="dsn:w-full" src="<?php echo $blocklogo['logo']['url']; ?>" alt="<?php echo $blocklogo['logo']['alt']; ?>" />
+                <?php }    
+                }
+             } ?>
             </div>
         </div>
     </div>
@@ -52,27 +56,27 @@ $logos = $logoSliderBlock['logos'];
     margin-top: 15px;
     padding: 1em;
     }
-    .logo-slider.slick-slider {
+    .dsn-logo-slider.slick-slider {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
     /* space the slides */
- .logo-slider .slick-slide {
+ .dsn-logo-slider .slick-slide {
       margin: 0 15px;
   }
 
   /* space the parent */
-  .logo-slider .slick-list {
+  .dsn-logo-slider .slick-list {
       margin: 0 -15px;
   }
   
  @media only screen and (min-width: 2100px) {
-    .logo-slider .slick-slide div { 
+    .dsn-logo-slider .slick-slide div { 
         height: 6vw;
     }
  }
  @media only screen and (max-width: 700px) {
-    .logo-slider .slick-slide div {
+    .dsn-logo-slider .slick-slide div {
         height: 25vw;
     }
     .logo-slider.slick-slider button.slick-prev.slick-arrow {
