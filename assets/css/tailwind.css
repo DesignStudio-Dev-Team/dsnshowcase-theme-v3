@@ -68,6 +68,57 @@
     }
     /* Headings */
     h1 {
+        @apply dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
+    }
+
+    h2 {
+        @apply dsn:text-3xl dsn:font-semibold dsn:mb-5 dsn:leading-tight;
+    }
+
+    h3 {
+        @apply dsn:text-2xl dsn:font-medium dsn:mb-4 dsn:leading-snug;
+    }
+
+    h4 {
+        @apply dsn:text-xl dsn:font-medium dsn:mb-3 dsn:leading-snug;
+    }
+
+    h5 {
+        @apply dsn:text-base dsn:font-medium dsn:mb-2 dsn:leading-normal;
+    }
+
+    /* Paragraphs */
+    p {
+        @apply dsn:text-xl dsn:leading-relaxed dsn:mb-4;
+    }
+
+    /* Primary unordered list */
+    ul {
+        @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-xl;
+    }
+
+    /* Second level unordered list */
+    ul ul {
+        @apply dsn:list-[circle] dsn:my-0.5;
+    }
+
+    /* Third level unordered list */
+    ul ul ul {
+        @apply dsn:list-[square] dsn:my-0.5;
+    }
+
+    /* Primary ordered list */
+    ol {
+        @apply dsn:block dsn:list-decimal dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-2xl;
+    }
+
+    /* Second level ordered list */
+    ol ol {
+        @apply dsn:list-[lower-alpha] dsn:my-0.5;
+    }
+     @screen md { 
+        /* Headings */
+    h1 {
         @apply dsn:text-6xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
     }
 
@@ -96,26 +147,7 @@
     ul {
         @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-2xl;
     }
-
-    /* Second level unordered list */
-    ul ul {
-        @apply dsn:list-[circle] dsn:my-0.5;
-    }
-
-    /* Third level unordered list */
-    ul ul ul {
-        @apply dsn:list-[square] dsn:my-0.5;
-    }
-
-    /* Primary ordered list */
-    ol {
-        @apply dsn:block dsn:list-decimal dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-2xl;
-    }
-
-    /* Second level ordered list */
-    ol ol {
-        @apply dsn:list-[lower-alpha] dsn:my-0.5;
-    }
+     }
 
     /* Larger screens */
     @screen lg {
