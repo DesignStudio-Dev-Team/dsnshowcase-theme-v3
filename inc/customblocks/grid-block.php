@@ -5,7 +5,6 @@ $description = $gridBlock['description'];
 $gridContent = $gridBlock['grid_content_rows'];
 $mainCTA = $gridBlock['cta'];
 $gridType = $gridBlock['grid_type'];
-
 $gridRowCount = count($gridContent);
 
 
@@ -14,7 +13,12 @@ $gridRowCount = count($gridContent);
 <section id="gridBlock" class="dsn:py-20 dsn:mb-10 dsn:px-10 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
-        <p><?php echo $description; ?></p>
+        <?php if($description) { ?>
+            <div class="dsn:mx-auto dsn:max-w-[900px]">
+                <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
+            </div>
+        <?php } ?>
+        
     </div>
 <?php if($gridContent) { 
     foreach($gridContent as $gridRows){
@@ -30,6 +34,9 @@ $gridRowCount = count($gridContent);
         <?php } ?>
         <?php if($gridType == '3') { ?>
         <div id="grid-block" class="grid-block3 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <?php } ?>
+          <?php if($gridType == '4') { ?>
+        <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
             <?php 
             foreach($gridColumns as $gridColumn){ 
@@ -84,13 +91,35 @@ $gridRowCount = count($gridContent);
                     <div class="dsn:relative">
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
-                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/2 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:flex dsn:items-end dsn:justify-center dsn:pb-6">
+                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/4 dsn:flex dsn:items-end dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:justify-center dsn:pb-6">
                             <h2 class="dsn:text-4xl dsn:text-white dsn:text-center dsn:px-4"><?php echo $title; ?></h2>
                         </div>
                         <?php } ?>
                     </div>
                 </a>
                 <?php } ?>
+
+                <?php if($gridType == '4') { ?>
+                    <div>
+                    <div class="dsn:relative">
+                        <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
+                        <?php if($title) { ?>
+                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:p-4 dsn:h-1/3 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:justify-between dsn:pb-0">
+                            <h2 class="dsn:text-3xl dsn:text-white dsn:text-left"><?php echo $title; ?></h2>
+
+                            <?php 
+                            if($cta) { ?>
+                            <div class="dsn:mt-2 dsn:text-left">
+                                <a href="<?php echo !empty($cta['url']) ? $cta['url'] : '#'; ?>" class="btn"><?php echo $cta['title']; ?></a>
+                            </div>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
+                    </div>
+                
+                </div>
+                <?php } ?>
+
                <?php } ?>
             <?php } ?>   
         </div>
