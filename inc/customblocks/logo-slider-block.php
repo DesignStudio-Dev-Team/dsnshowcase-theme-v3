@@ -9,14 +9,18 @@ $contentCTA = $content['cta'];
 $logos = $logoSliderBlock['logos'];
 ?>
 
-<section class="dsn:container dsn:mx-auto dsn:my-10 logo-slider-container">
-    <h2 class="dsn:text-center dsn:mb-10"><?php echo $title; ?></h2>
-    <p class="dsn:text-center dsn:lg:max-w-8/12 dsn:mx-auto"><?php echo $description; ?></p>
-    <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:items-center dsn:gap-20 dsn:my-20 dsn:px-10 dsn:lg:px-0">
+<section class="logo-slider-container">
+    <div class="dsn:container dsn:mx-auto dsn:py-20 dsn:px-4">
+    <h2 class="dsn:text-center dsn:mb-10 dsn:text-2xl dsn:md:text-5xl"><?php if($title) { 
+        echo $title; } ?></h2>
+    <p class="dsn:text-center dsn:lg:max-w-8/12 dsn:mx-auto"><?php if($description) {  echo $description; } ?></p>
+    <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:items-center dsn:gap-20 dsn:my-10 dsn:md:my-20 dsn:px-0 dsn:text-center dsn:md:text-left dsn:lg:px-0">
         <div class="dsn:w-full dsn:lg:w-5/12">
-            <h3><?php echo $contentTitle; ?></h3>
-            <p class="dsn:mb-12"><?php echo $contentDescription; ?></p>
+            <h3><?php if($contentTitle) { echo $contentTitle; } ?></h3>
+            <p class="dsn:mb-12"><?php if($contentDescription) { echo $contentDescription; }?></p>
+            <?php if($contentCTA): ?>
             <a class="btn dsn:my-6" href="<?php echo $contentCTA['url']?>"><?php echo $contentCTA['title']; ?></a>
+            <?php endif; ?>
         </div>
         <div class="dsn:w-full dsn:lg:w-7/12">
             <?php //print_r($logos); ?>
@@ -30,10 +34,12 @@ $logos = $logoSliderBlock['logos'];
             </div>
         </div>
     </div>
-    
-
+</div>
 </section>
 <style>
+    .logo-slider-container {
+        background: linear-gradient(180deg, #f1f1f1 0.00%, #f9f9f9 34.30%,rgba(255,255,255,0 ) 100.00%);
+    }
     .logo-slider .slick-slide div {
 	background-color: white;
 	display: flex !important;
@@ -59,6 +65,7 @@ $logos = $logoSliderBlock['logos'];
   .logo-slider .slick-list {
       margin: 0 -15px;
   }
+  
  @media only screen and (min-width: 2100px) {
     .logo-slider .slick-slide div { 
         height: 6vw;
@@ -68,5 +75,27 @@ $logos = $logoSliderBlock['logos'];
     .logo-slider .slick-slide div {
         height: 25vw;
     }
+    .logo-slider.slick-slider button.slick-prev.slick-arrow {
+    top: 100%;
+    right: 0% !important;
+    left: unset !important;
+    transform: translateX(42vw);
+    }
+    .logo-slider.slick-slider button.slick-next.slick-arrow {
+    top: 100%;
+    left: 50%;
+    transform: translateX(0%);
+    }
+     .logo-slider .slick-slide {
+      margin: 0 8px;
+  }
+
+  /* space the parent */
+  .logo-slider .slick-list {
+      margin: 0 -8px;
+  }
+  .logo-slider .slick-slide div { 
+  margin-bottom: 16px;
+  }
  }
 </style>

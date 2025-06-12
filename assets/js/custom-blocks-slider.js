@@ -84,30 +84,34 @@ jQuery(document).ready(function ($) {
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 1,
-                arrows: false, 
+                arrows: true, 
                 infinite: true,
               }
             },
             {
               breakpoint: 600, 
               settings: {
+                rows: 1,
                 slidesToShow: 2,
                 slidesToScroll: 1,
+                arrows: true, 
               }
             },
             {
               breakpoint: 480, 
               settings: {
+                rows: 1,
                 slidesToShow: 2,
                 slidesToScroll: 1,
-                arrows: false,
+                arrows: true,
+                
               }
             }]
     });
   }
 //Product Showcase Tab Slider 
- if ($('.slider-for').length > 0) {   
-  var $carousel = $('.slider-for').slick({
+ if ($('.product-slider-for').length > 0) {   
+  var $carousel = $('.product-slider-for').slick({
    slidesToShow: 1,
    slidesToScroll: 1,
    arrows: false,
@@ -135,10 +139,10 @@ jQuery(document).ready(function ($) {
     ]
  });
 }
- $cat_val = $('.slider-nav').slick({
+ $cat_val = $('.product-slider-nav').slick({
    slidesToShow: 8,
    slidesToScroll: 1,
-   asNavFor: '.slider-for',
+   asNavFor: '.product-slider-for',
    dots: false,
    arrows: false,
    initialSlide: 0,
@@ -156,7 +160,7 @@ jQuery(document).ready(function ($) {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           arrows: false,
         }
@@ -182,24 +186,25 @@ if (select.prop('selectedIndex')) {
 $('.all-products').on('init', function(event, slick){
         $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+slick.slideCount+'</span></p></div>');
     });
- var $slider = $('.all-products');
+  var $slider = $('.all-products');
   var $progressBar = $('.progress');
   var $progressBarLabel = $( '.slider__label' );
-  
   $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide) {   
     var calc = ( (nextSlide) / (slick.slideCount-1) ) * 100;
-    
     $progressBar
       .css('background-size', calc + '% 100%')
       .attr('aria-valuenow', calc );
-    
     $progressBarLabel.text( calc + '% completed' );
   });
   
   $slider.slick({
     slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToScroll: 1,
     speed: 400,
+    infinite: true,
+    arrows: true,
+    prevArrow:"<button type='button' class='pull-left'></button>",
+    nextArrow:"<button type='button' class='pull-right'></button>",
     responsive: [    
        //Responsive Breakpoint settings
        {
@@ -208,7 +213,6 @@ $('.all-products').on('init', function(event, slick){
                 slidesToShow: 4,
                 slidesToScroll: 1,
                 arrows: true, 
-                infinite: true,
               }
             },      
             {
@@ -216,8 +220,6 @@ $('.all-products').on('init', function(event, slick){
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 1,
-                arrows: true,
-                infinite: true,
               }
             },
             {
@@ -225,7 +227,6 @@ $('.all-products').on('init', function(event, slick){
               settings: {
                 slidesToShow: 2,
                 slidesToScroll: 1,
-                arrows: true,
               }
             },
             {
@@ -233,7 +234,6 @@ $('.all-products').on('init', function(event, slick){
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                arrows: true,
               }
             }]
   });  
