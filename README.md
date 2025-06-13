@@ -53,6 +53,9 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.5.0
+- Major Fixes to WooCommerce
+
 ### 3.4.6
 - New Custom Blocks
 - More CSS Updates and Bug Fixes on Templates
