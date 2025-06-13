@@ -1,11 +1,11 @@
 {
-  "version": "v3.4.6",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.4.6",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.4.6/dsnshowcase.zip",
+  "version": "v3.5.0",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.0",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.0/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-06-13",
   "sections": {
-    "changelog": "Merge branch 'juan'"
+    "changelog": "fix issues with workflow"
   }
 }
