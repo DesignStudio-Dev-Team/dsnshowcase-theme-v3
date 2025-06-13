@@ -6,12 +6,15 @@ $titleOfShowcase = $productsShowcaseBlock['title_of_showcase'];
 $set_of_products = $productsShowcaseBlock['set_of_products'];
 ?>
 
-<section id="product-showcase" class="dsn:my-20 dsn:py-20 dsn:px-4 dsn:md:px-10 dsn:text-white">
+<section id="product-showcase" class="dsn:my-20">
+    <div class="product-showcase-title-block dsn:container dsn:mx-auto dsn:relative dsn:text-center">
+    <?php if ($title) { ?> <h2 class="dsn:mb-4"><?php echo $title; ?></h2> <?php } ?>
+    <?php if ($description) { ?>  <p class="dsn:mb-10"><?php echo $description; ?></p> <?php } ?>
+    </div>
+    <div class="product-showcase-inner dsn:py-10 dsn:md:py-10 dsn:px-4 dsn:md:px-10 dsn:text-white">
     <div class="dsn:container dsn:mx-auto dsn:relative">
-    <h2 class="dsn:text-left dsn:mb-10"><?php if ($title) { echo $title; } ?></h2>
-    <p class="dsn:text-left dsn:lg:max-w-8/12"><?php if($description) { echo $description; } ?></p>
-    <div class="product-showcase-inner dsn:pt-10 dsn:relative">
-    
+    <div class="dsn:pt-10 dsn:relative">
+    <?php if ($titleOfShowcase) { ?> <h3 class="dsn:text-left dsn:mb-10"><?php echo $titleOfShowcase; ?></h3> <?php } ?>    
 <div class="slider product-slider-nav dsn:mb-8">
 
     <?php 
@@ -30,16 +33,24 @@ foreach($set_of_products as $category => $value ) {
   <div class="slider product-slider-for">
     <?php 
     $AllProducts = array();
+    $Product_Showcase_all_products = array();
     if ($set_of_products) {
 	foreach($set_of_products as $all_category => $value ) { 
-        $AllProducts[] = $value['products'][0];
+        $AllProducts[] = $value['products'];
     }
 }
-
+$get_all_products = call_user_func_array ('array_merge', $AllProducts);
+$get_all_products = array_values($get_all_products);
+foreach ( $get_all_products as $product) {
+    if ( ! in_array($product, $Product_Showcase_all_products)) {
+        $Product_Showcase_all_products[] = $product;
+    }
+}
+//print_r($Product_Showcase_all_products );
 ?> 
     <div class="all-products dsn:w-full" data-slide="0">
         <?php 
-        foreach ($AllProducts as $post):
+        foreach ($Product_Showcase_all_products as $post):
                     setup_postdata($post); 
                     $postID = $post->ID;
                     $product = wc_get_product($postID); 
@@ -130,16 +141,17 @@ wp_reset_postdata();
     <span class="slider__label sr-only"></span>
 </div>
 </div>
+</div>
 </section>
 
 <style>
-    #product-showcase, .product_shocase_add_to_cart {
+    .product-showcase-inner, .product_shocase_add_to_cart {
     background: #286632; 
 }
-.product-title {
+#product-showcase .product-title {
     color: #007437;
 }
-.product-slider-nav:before {
+#product-showcase .product-slider-nav:before {
     content: "";
     width: 20%;
     background: linear-gradient(45deg, transparent, #286632);
@@ -148,7 +160,7 @@ wp_reset_postdata();
     right: 0;
     z-index: 99;
 }
-    .progress {
+    #product-showcase .progress {
         display: block;
         width: 90%;
         height: 10px;
@@ -163,39 +175,39 @@ wp_reset_postdata();
         left: 0;
         bottom: 1em;
     }
-    .slider-count {
+    #product-showcase .all-products .slider-count {
         position: absolute;
         right: 27px;
         bottom: -6px;
         width: 44px;
     }
-    .slider-count p {
+     #product-showcase .all-products  .slider-count p {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
 }
-    .all-products {
+    #product-showcase .all-products {
         padding-bottom: 4em;
         margin-left: 0;
         margin-right: 0;
     }
-    .product-slider-for {
+    #product-showcase .product-slider-for {
        margin-left: 0;
         margin-right: 0; 
     }
-    .product-slider-nav {
+    #product-showcase .product-slider-nav {
     margin-left: 0;
     margin-right: 0;
     }
-   .product-box {
+   #product-showcase .product-box {
     min-height: 370px;
     background: #fff;
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
    }
-.sr-only {
+#product-showcase .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -205,24 +217,24 @@ wp_reset_postdata();
   clip: rect(0,0,0,0);
   border: 0;
 }
-.product-slider-nav .slide-nav-label:hover {
+#product-showcase .product-slider-nav .slide-nav-label:hover {
     background: #1e4925;
 }
-  .thumbnail img {
+  #product-showcase .thumbnail img {
     margin-left: auto;
     margin-right: auto;
     }
-    .product-slider-nav .slick-track {
+    #product-showcase .product-slider-nav .slick-track {
         margin-left: 0;
     }
-    .product-slider-nav .slick-list {
+    #product-showcase .product-slider-nav .slick-list {
         z-index: 9;
     }
-    .product-slider-nav .slide-nav-label {
+    #product-showcase .product-slider-nav .slide-nav-label {
         text-align: center;
         cursor: pointer;
     }
-    .slide-nav-label.slick-slide.slick-current.slick-active:after {
+    #product-showcase .slide-nav-label.slick-slide.slick-current.slick-active:after {
     content: "";
     width: 100%;
     height: 4px;
@@ -232,7 +244,7 @@ wp_reset_postdata();
     bottom: 0px;
     z-index: 99999;
 }
-.product-slider-nav:after {
+#product-showcase .product-slider-nav:after {
     content: "";
     width: 100%;
     height: 2px;
@@ -242,13 +254,13 @@ wp_reset_postdata();
     left: 0;
     z-index: 1;
 }
-.product-bottom {
+#product-showcase .product-bottom {
     background-color: #f3f4f6;
 }
 /* .product-bottom .single_add_to_cart_button.added {
     display: none;
 } */
- .product-bottom a.added_to_cart.wc-forward {
+ #product-showcase .product-bottom a.added_to_cart.wc-forward {
     position: absolute;
     left: 0;
     top: 0;
@@ -262,36 +274,36 @@ wp_reset_postdata();
     font-size: 2em;
     color: #fff;
 }
-.product-bottom span.product-prices {
+#product-showcase .product-bottom span.product-prices {
     margin-bottom: 0;
 }
-.product-bottom span.product-prices .amount {
+#product-showcase .product-bottom span.product-prices .amount {
     display: flex;
     align-items: center;
     margin-bottom: 0 !important;
 }
-a.product-inner .thumbnail img {
+#product-showcase a.product-inner .thumbnail img {
     min-height: 170px;
     width: 100%;
     object-fit: cover;
 }
-.slider-count p {
+#product-showcase .slider-count p {
     font-size: 18px;
 }
 
-.pull-left, .pull-right {
+#product-showcase .pull-left, #product-showcase .pull-right {
     width: 10px;
     height: 10px;
     position: absolute;
     bottom: 27px;
 }
-.pull-left {
+#product-showcase .pull-left {
     right: 65px;
 }
-.pull-right {
+#product-showcase .pull-right {
     right: 26px;
 }
-.pull-left:before, .pull-right:after {
+#product-showcase .pull-left:before, #product-showcase .pull-right:after {
     color: white;
     border-right: 2px solid currentcolor;
     border-bottom: 2px solid currentcolor;
@@ -302,61 +314,61 @@ a.product-inner .thumbnail img {
     cursor: pointer;
 }
 
-.pull-left:before{
+#product-showcase .pull-left:before{
     left: -16px;
     transform: rotate(135deg)
 }
-.pull-right:after{
+#product-showcase .pull-right:after{
     right: -16px;
     transform: rotate(-45deg)
 }
-span.loading-icon { 
+#product-showcase span.loading-icon { 
     display: none;
 }
-span.loading-icon svg { 
+#product-showcase span.loading-icon svg { 
     width: 20px;
 } 
-.loading span.loading-icon {
+#product-showcase .loading span.loading-icon {
     display: block;
 }
-.loading span.add-to-cart-icon {
+#product-showcase .loading span.add-to-cart-icon {
     display: none;
 }
 
 @media only screen and (max-width: 1800px) {
-    .product-box {
+    #product-showcase .product-box {
         margin-left: 5px;
         margin-right: 5px;
     }
-    a.product-inner .thumbnail img {
+    #product-showcase a.product-inner .thumbnail img {
     min-height: 250px;
 }
 }
 @media only screen and (max-width: 1024px) {
-    .all-products {
+    #product-showcase .all-products {
         margin-left: 20px;
         margin-right: 20px;
     }
-    .progress {
+    #product-showcase .progress {
         width: 70%;
     }
-    .progress {
+    #product-showcase .progress {
         bottom: 1.5em;
     }
-    .slider-count {
+    #product-showcase .slider-count {
         bottom: 0;
         right: 0;
     }
-    .pull-left, .pull-right {
+    #product-showcase .pull-left, #product-showcase .pull-right {
         bottom: 33px;
     }
-    .pull-left {
+    #product-showcase .pull-left {
     right: 35px;
     }
-     .pull-right {
+    #product-showcase .pull-right {
     right: 0px;
     }
-    .product-slider-nav:before {
+    #product-showcase .product-slider-nav:before {
     content: "";
     width: 20%;
     background: linear-gradient(45deg, transparent, #286632);

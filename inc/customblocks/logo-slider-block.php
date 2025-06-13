@@ -41,10 +41,10 @@ $logos = $logoSliderBlock['logos'];
 </div>
 </section>
 <style>
-    .logo-slider-container {
+    .dsn-logo-slider-container {
         background: linear-gradient(180deg, #f1f1f1 0.00%, #f9f9f9 34.30%,rgba(255,255,255,0 ) 100.00%);
     }
-    .logo-slider .slick-slide div {
+    .dsn-logo-slider .slick-slide div {
 	background-color: white;
 	display: flex !important;
 	justify-content: center;
@@ -79,26 +79,26 @@ $logos = $logoSliderBlock['logos'];
     .dsn-logo-slider .slick-slide div {
         height: 25vw;
     }
-    .logo-slider.slick-slider button.slick-prev.slick-arrow {
+    .dsn-logo-slider.slick-slider button.slick-prev.slick-arrow {
     top: 100%;
     right: 0% !important;
     left: unset !important;
     transform: translateX(42vw);
     }
-    .logo-slider.slick-slider button.slick-next.slick-arrow {
+    .dsn-logo-slider.slick-slider button.slick-next.slick-arrow {
     top: 100%;
     left: 50%;
     transform: translateX(0%);
     }
-     .logo-slider .slick-slide {
+     .dsn-dsn-logo-slider .slick-slide {
       margin: 0 8px;
   }
 
   /* space the parent */
-  .logo-slider .slick-list {
+  .dsn-logo-slider .slick-list {
       margin: 0 -8px;
   }
-  .logo-slider .slick-slide div { 
+  .dsn-logo-slider .slick-slide div { 
   margin-bottom: 16px;
   }
  }

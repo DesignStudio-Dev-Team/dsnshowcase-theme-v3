@@ -72,7 +72,7 @@ $description = $googleReviews['description'];
         
 
         $('#gr-content').on('init', function(event, slick){
-        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+slick.slideCount+'</span></p></div>');
+        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="review-current">1</span> / <span id="review-total">'+slick.slideCount+'</span></p></div>');
     });
     $('#gr-content').slick({
             infinite: true,
@@ -106,34 +106,34 @@ $description = $googleReviews['description'];
     $('#gr-content')
         .on('afterChange', function(event, slick, currentSlide, nextSlide){
             // finally let's do this after changing slides
-            $('.slider-count #current').html(currentSlide+1);
+            $('.slider-count #review-current').html(currentSlide+1);
         });
     });
 
 </script>
 
 <style>
-.slick-next, .slick-prev {
+#google-reviews .slick-next, #google-reviews .slick-prev {
     position: absolute;
     bottom: -25px;
     top: auto;
 }
 
-.slick-prev {
+#google-reviews .slick-prev {
     margin-left: 48%;
 }
-.slick-next {
+#google-reviews .slick-next {
     margin-right: 48%;
 }
-button.slick-next:before, button.slick-prev:before {
+#google-reviews button.slick-next:before, #google-reviews button.slick-prev:before {
 color: var(--dealerColor) !important;
 }
 
 @media only screen and (max-width: 700px) {
-    .slick-prev {
+   #google-reviews .slick-prev {
     margin-left: 42%;
 }
-.slick-next {
+#google-reviews .slick-next {
     margin-right: 42%;
 }
 }
