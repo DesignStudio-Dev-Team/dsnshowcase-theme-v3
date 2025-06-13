@@ -72,7 +72,7 @@ $description = $googleReviews['description'];
         
 
         $('#gr-content').on('init', function(event, slick){
-        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+slick.slideCount+'</span></p></div>');
+        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="review-current">1</span> / <span id="review-total">'+slick.slideCount+'</span></p></div>');
     });
     $('#gr-content').slick({
             infinite: true,
@@ -106,7 +106,7 @@ $description = $googleReviews['description'];
     $('#gr-content')
         .on('afterChange', function(event, slick, currentSlide, nextSlide){
             // finally let's do this after changing slides
-            $('.slider-count #current').html(currentSlide+1);
+            $('.slider-count #review-current').html(currentSlide+1);
         });
     });
 

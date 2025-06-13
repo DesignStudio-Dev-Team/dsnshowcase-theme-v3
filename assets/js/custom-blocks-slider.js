@@ -193,7 +193,7 @@ if (select.prop('selectedIndex')) {
 
 //Tab Slider
 $('.all-products').on('init', function(event, slick){
-        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+slick.slideCount+'</span></p></div>');
+        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="dsn-current">1</span> / <span id="dsn-total">'+slick.slideCount+'</span></p></div>');
     });
   var $slider = $('.all-products');
   var $progressBar = $('.progress');

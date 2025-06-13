@@ -33,16 +33,24 @@ foreach($set_of_products as $category => $value ) {
   <div class="slider product-slider-for">
     <?php 
     $AllProducts = array();
+    $Product_Showcase_all_products = array();
     if ($set_of_products) {
 	foreach($set_of_products as $all_category => $value ) { 
-        $AllProducts[] = $value['products'][0];
+        $AllProducts[] = $value['products'];
     }
 }
-
+$get_all_products = call_user_func_array ('array_merge', $AllProducts);
+$get_all_products = array_values($get_all_products);
+foreach ( $get_all_products as $product) {
+    if ( ! in_array($product, $Product_Showcase_all_products)) {
+        $Product_Showcase_all_products[] = $product;
+    }
+}
+//print_r($Product_Showcase_all_products );
 ?> 
     <div class="all-products dsn:w-full" data-slide="0">
         <?php 
-        foreach ($AllProducts as $post):
+        foreach ($Product_Showcase_all_products as $post):
                     setup_postdata($post); 
                     $postID = $post->ID;
                     $product = wc_get_product($postID); 
