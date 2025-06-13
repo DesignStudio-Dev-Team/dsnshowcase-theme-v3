@@ -53,13 +53,17 @@ Use github issues to report any issues or contact us at our website https://desi
 
 ## Changelog
 
+### 3.4.6
+- New Custom Blocks
+- More CSS Updates and Bug Fixes on Templates
+- Added new feature to hide the WordPress Admin Bar
+
 ### 3.4.5
 - New Custom Blocks
 - New WooCommerce Single Product Template
 
-
 ### 3.4.1
-- Theme Updater
+- Theme Updater via WordPress Dashboard
 
 ### 3.4.0
 - Collections Page Template fixes
