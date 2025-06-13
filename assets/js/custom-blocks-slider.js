@@ -193,13 +193,17 @@ if (select.prop('selectedIndex')) {
 
 //Tab Slider
 $('.all-products').on('init', function(event, slick){
-        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="dsn-current">1</span> / <span id="dsn-total">'+slick.slideCount+'</span></p></div>');
+        $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="dsn-ps-current">1</span> / <span id="dsn-ps-total">'+slick.slideCount+'</span></p></div>');
     });
   var $slider = $('.all-products');
   var $progressBar = $('.progress');
   var $progressBarLabel = $( '.slider__label' );
   $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide) {   
-    var calc = ( (nextSlide) / (slick.slideCount-1) ) * 100;
+    var totalSlides = slick.slideCount;
+    var calc = Math.ceil(slick.slideCount / slick.options.slidesToShow);
+    
+    $(this).find('#dsn-ps-total').text( totalSlides );
+    //unless it resets can't be more then the total slides
     $progressBar
       .css('background-size', calc + '% 100%')
       .attr('aria-valuenow', calc );
@@ -250,38 +254,29 @@ $('.all-products').on('init', function(event, slick){
 
 
   $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide) {   
-    var totalSlides = Math.ceil(slick.slideCount / slick.options.slidesToShow);
-    var calc = ( (nextSlide + 1) / totalSlides ) * 100;
-    //unless it resets can't be more then the total slides
-    if (calc > 100) {
-      calc = 100;
-    }
-    
-    //upddate the total slides count remeber this might be 5 at a time 
-    $(this).find('#dsn-total').text( totalSlides );
+    var totalSlides = slick.slideCount;
+    //upddate the total slides count remeber this might be 1 at a time 
+    $(this).find('#dsn-ps-total').text( totalSlides );
     //update the current slide count
-    $(this).find('#dsn-current').text( Math.ceil((nextSlide + 1) / slick.options.slidesToShow) );
-    //update the progress bar
+    $(this).find('#dsn-ps-current').text( nextSlide + 1 );
+    //calculate the percentage of completion
+    var calc = Math.ceil(( (nextSlide + 1) / totalSlides ) * 100);
     
     $progressBar
       .css('background-size', calc + '% 100%')
       .attr('aria-valuenow', calc );
-    
     $progressBarLabel.text( calc + '% completed' );
+  
   });
  
 
-   $cat_val.on('afterChange', function(event, slick, currentSlide) {
- 
+  $cat_val.on('afterChange', function(event, slick, currentSlide) {
     var $progressBar = $('.progress');
     $progressBar.css('background-size', '0% 100%');
     $progressBar.attr('aria-valuenow', 0);
     $progressBarLabel.text( '0% completed' );
-  //  console.log('category changed');
-   //all carousels reset to the first slide
     $slider.slick('slickGoTo', 0); 
-    //also reset  $(this).append('<div class="slider-count dsn:w-max dsn:mx-auto dsn:mt-10"><p><span id="current">1</span> / <span id="total">'+totalSlides+'</span></p></div>');
-
+  
   });
 
 
