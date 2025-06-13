@@ -6,6 +6,14 @@ $twoBlockContent = $twoBlock['two_block_content'];
 <div class="dsn:container dsn:mx-auto">
         <?php if($twoBlockContent) { 
             foreach($twoBlockContent as $block) { 
+               $background = $block['background_color'];
+               $textColor = $block['text_color'];
+                $gap = $block['gap'];
+                if($gap) {
+                    $gap = ' dsn:gap-10';
+                } else {
+                    $gap = 'dsn:gap-0';
+                }
               $position = $block['layout']['position'];
               if($position == 'Left Image') { 
                   $order1 = 'dsn:order-1';
@@ -23,8 +31,8 @@ $twoBlockContent = $twoBlock['two_block_content'];
                   $dclass2 = ' dsn:lg:w-2/3';
               }
               ?>
-       <div class="dsn:w-full dsn:flex dsn:flex-col dsn:md:flex-row dsn:gap-10 dsn:my-10 dsn:justify-center dsn:items-center">
-        <div class="dsn:w-full dsn:p-5 dsn:md:p-15 dsn:text-left dsn:flex dsn:flex-col <?php echo $order1 . ' ' . $dclass1; ?>">
+       <div class="dsn:w-full dsn:flex dsn:flex-col dsn:md:flex-row <?php echo $gap; ?> dsn:my-10 dsn:justify-between">
+        <div class="dsn-twoblock-content-<?php echo $block_id; ?> dsn:w-full dsn:p-5 dsn:md:p-15 dsn:md:pt-30 dsn:text-left dsn:flex dsn:flex-col <?php echo $order1 . ' ' . $dclass1; ?>">
             <h2><?php echo $block['title']; ?></h2>
             <p><?php echo $block['description']; ?></p>
             <?php if ($block['cta']) { ?>
@@ -40,4 +48,10 @@ $twoBlockContent = $twoBlock['two_block_content'];
         </div>
         <?php } } ?>
 </div>
+<style>
+    .dsn-twoblock-content-<?php echo $block_id; ?> {
+        background-color: <?php echo $background; ?>;
+        color: <?php echo $textColor; ?>;
+    }
+</style>
 </section>

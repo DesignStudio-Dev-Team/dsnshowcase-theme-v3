@@ -57,7 +57,7 @@ foreach ( $get_all_products as $product) {
                     ?>
                     <div class="dsn:w-full dsn:mx-3 dsn:sm:mx-2 dsn:lg:mx-4 dsn:mb-4 dsn:relative product-box dsn:shadow-lg">
                         <a class="product-inner dsn:bg-white dsn:p-6 dsn:block" href="<?php echo get_permalink($postID); ?>">
-                            <div class="dsn:text-center thumbnail">
+                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:min-h-[300px]">
                                 <?php if (has_post_thumbnail($postID)): ?>
                                     <?php echo get_the_post_thumbnail($postID, 'medium'); ?>
                                 <?php else: ?>
@@ -145,7 +145,7 @@ wp_reset_postdata();
 </section>
 
 <style>
-    .product-showcase-inner, .product_shocase_add_to_cart {
+.product-showcase-inner, .product_shocase_add_to_cart {
     background: #286632; 
 }
 #product-showcase .product-title {
