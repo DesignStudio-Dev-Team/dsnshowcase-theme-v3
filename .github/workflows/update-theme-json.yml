@@ -50,29 +50,46 @@ jobs:
           zip -r dsnshowcase.zip dsnshowcase
 
       - name: Upload theme ZIP to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v1
         with:
           files: dsnshowcase.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Wait for release assets to be available
+        run: sleep 10
+
       - name: Get release asset download URL
         id: get_asset_url
         uses: actions/github-script@v7
         with:
+          retries: 3
           script: |
-            const release = await github.rest.repos.getReleaseByTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: process.env.VERSION
-            });
-            const asset = release.data.assets.find(a => a.name === 'dsnshowcase.zip');
-            if (!asset) throw new Error('dsnshowcase.zip not found in release assets');
-            core.setOutput('url', asset.browser_download_url);
+            const getAssetUrl = async () => {
+              const release = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: process.env.VERSION
+              });
+              
+              const asset = release.data.assets.find(a => a.name === 'dsnshowcase.zip');
+              if (!asset) {
+                throw new Error('dsnshowcase.zip not found in release assets');
+              }
+              return asset.browser_download_url;
+            };
+
+            try {
+              const url = await getAssetUrl();
+              core.setOutput('url', url);
+            } catch (error) {
+              core.setFailed(`Failed to get asset URL: ${error.message}`);
+            }
 
       - name: Update theme-update-info.json
         run: |
-          cat > theme-update-info.json <<EOF
+          if [ -n "${{ steps.get_asset_url.outputs.url }}" ]; then
+            cat > theme-update-info.json <<EOF
           {
             "version": "${VERSION}",
             "details_url": "https://github.com/${{ github.repository }}/releases/tag/${VERSION}",
@@ -85,6 +102,10 @@ jobs:
             }
           }
           EOF
+          else
+            echo "Error: No asset URL available"
+            exit 1
+          fi
 
       - name: Commit and push updated files
         run: |
