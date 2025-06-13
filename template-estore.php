@@ -9,24 +9,24 @@ $this_id = get_the_ID();
 $all_categories = []; // used to show only items from categories that exist in filter
 $cat_cols = get_field('category_columns');
 
-$col_1_classes = 'md:w-1/3';
-$col_2_classes = 'md:w-2/3';
-$col_2_item_classes = 'sm:w-1/2';
+$col_1_classes = 'dsn:md:w-1/3';
+$col_2_classes = 'dsn:md:w-2/3';
+$col_2_item_classes = 'dsn:sm:w-1/2';
 
 if($cat_cols == '2_column') {
-    $col_1_classes = 'md:w-1/3';
-    $col_2_classes = 'md:w-2/3';
-    $col_2_item_classes = 'sm:w-1/2';
+    $col_1_classes = 'dsn:md:w-1/3';
+    $col_2_classes = 'dsn:md:w-2/3';
+    $col_2_item_classes = 'dsn:sm:w-1/2';
 }
 if($cat_cols == '3_column') {
-    $col_1_classes = 'md:w-1/3';
-    $col_2_classes = 'md:w-2/3';
-    $col_2_item_classes = 'sm:w-1/2 md:w-1/3';
+    $col_1_classes = 'dsn:md:w-1/3';
+    $col_2_classes = 'dsn:md:w-2/3';
+    $col_2_item_classes = 'dsn:sm:w-1/2 dsn:md:w-1/3';
 }
 if($cat_cols == '4_column') {
-    $col_1_classes = 'md:w-1/3';
-    $col_2_classes = 'md:w-2/3';
-    $col_2_item_classes = 'sm:w-1/2 md:w-1/4';
+    $col_1_classes = 'dsn:md:w-1/3';
+    $col_2_classes = 'dsn:md:w-2/3';
+    $col_2_item_classes = 'dsn:sm:w-1/2 dsn:md:w-1/4';
 }
 ?>
 <style>
@@ -38,7 +38,7 @@ if($cat_cols == '4_column') {
 <!--<div class="row">-->
 <div class="container ds-estore-banner-wrap mt-2">
     <?php if (have_rows('featured_categories')): ?>
-    <div class="row flex-row -mx-4">
+    <div class="dsn:row dsn:flex-row dsn:-mx-4">
         <div class="dsn:w-full dsn:px-4 dsn:mb-8 dsn:md:mb-0 <?php echo $col_1_classes; ?>">
 
             <div class="ds-estore-search"
@@ -50,22 +50,22 @@ if($cat_cols == '4_column') {
                 <?php endif; ?>
                 <form role="search" class="blog-search" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="ds-filter">
 
-                    <input type="search" size="16" value="" name="ds-search" class="search-field form-control" placeholder="<?php echo dssLang($dssSiteLanguage)->template_store->search_placeholder;?>" required>
+                    <input type="search" size="16" value="" name="s" class="search-field form-control" placeholder="<?php echo dssLang($dssSiteLanguage)->template_store->search_placeholder;?>" required>
 
                 </form>
                 </div>
             </div>
         </div>
-        <div class="w-full px-4 <?php echo $col_2_classes; ?>">
-            <div class="row flex-row -mx-4 h-full">
+        <div class="dsn:w-full dsn:px-4 <?php echo $col_2_classes; ?>">
+            <div class="dsn:row dsn:flex-row dsn:-mx-4 dsn:h-full">
                 <?php while (have_rows('featured_categories')):
                     the_row(); ?>
                     <?php
                     $category = get_sub_field('category');
                     $image = get_sub_field('image');
                     if ($category && $image): ?>
-                        <div class="w-full featured-cat__wrap px-4 <?php echo $col_2_item_classes; ?>">
-                            <a class="featured-cat cursor-pointer dsw-primary-site-background" id="id-<?php echo $category->slug; ?>">
+                        <div class="dsn:w-full featured-cat__wrap dsn:px-4 <?php echo $col_2_item_classes; ?>">
+                            <a class="featured-cat dsn:cursor-pointer dsw-primary-site-background" id="id-<?php echo $category->slug; ?>">
                                 <?php
                                 $attr = array(
                                     'class' => 'featured-cat__image',
@@ -84,28 +84,28 @@ if($cat_cols == '4_column') {
 </div>
 <!--</div>-->
 <!--<div class="ds-filters-wrap row">-->
-<div id="above-product-results" class="h-10 md:h-32 -mt-32"></div>  
+<div id="above-product-results" class="dsn:h-10 dsn:md:h-32 dsn:-mt-32"></div>  
 <div class="container ds-estore-banner-wrap">
 <div class="ds-filters-page-content-wrap">
-            <div class="ds-filters-page-content mb-4">
+            <div class="ds-filters-page-content dsn:mb-4">
                 <?php the_content(); ?>
             </div>
         </div>
         <div class="ds-filters-over"></div>
 
-    <div class="flex justify-between">
+    <div class="dsn:flex dsn:justify-between">
         <?php while (have_posts()) : the_post(); ?>
-            <div class="w-0 md:w-1/4 top-24 z-50 md:z-10" style="min-height:400px;">
+            <div class="dsn:w-0 dsn:md:w-1/4 dsn:top-24 dsn:z-50 dsn:md:z-10" style="min-height:400px;">
                 <?php if (have_rows('filter', 'options')): ?>
                     <div class="ds-filters dsw-primary-site-svg">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 js-toggle-filters md:hidden absolute right-4 cursor-pointer " viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-10 dsn:w-10 js-toggle-filters dsn:md:hidden dsn:absolute dsn:right-4 dsn:cursor-pointer " viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 </svg>
                         <!--<button class="hide-filters js-toggle-filters md:hidden ">X</button>--->
-                        <form class="mb-4" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="ds-filter">
+                        <form class="dsn:mb-4" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="ds-filter">
                             
                             <?php if ($title_p_f = get_field('title_p_f', 'options')) : ?>
-                                <h5 class="text-center md:text-left"><?php echo $title_p_f; ?></h5>
+                                <h5 class="dsn:text-center dsn:md:text-left"><?php echo $title_p_f; ?></h5>
                                 <!--<div class="ds-filters-counter lg:hidden show-for-medium-down">
                                     <span
                                             class="ds-filters-counter__value"></span>
@@ -113,7 +113,7 @@ if($cat_cols == '4_column') {
                                 </div>-->
                             <?php endif; ?>
                             <?php $clear_filter_label = get_field('clear_filter_label', 'options'); ?>
-                            <a id="clearFiltersLink" class="dsw-primary-site-link cursor-pointer"><?php echo $clear_filter_label ? $clear_filter_label : dssLang($dssSiteLanguage)->template_store->clear_filters_link_text; ?></a>
+                            <a id="clearFiltersLink" class="dsw-primary-site-link dsn:cursor-pointer"><?php echo $clear_filter_label ? $clear_filter_label : dssLang($dssSiteLanguage)->template_store->clear_filters_link_text; ?></a>
                             <div id="accordion" class="accordion-container">
                                 <?php while (have_rows('filter', 'options')) : the_row();
 
@@ -348,11 +348,11 @@ if($cat_cols == '4_column') {
                                         <?php endif; ?>
                                             <div class="accordion-content">
                                                 <div class="ds-prices-wrap">
-                                                    <input class="px-4 py-2" id="price_min" type="number" name="price_min"
+                                                    <input class="dsn:px-4 dsn:py-2" id="price_min" type="number" name="price_min"
                                                            placeholder="Min price"/>
-                                                    <input class="px-4 py-2" id="price_max" type="number" name="price_max"
+                                                    <input class="dsn:px-4 dsn:py-2" id="price_max" type="number" name="price_max"
                                                            placeholder="Max price"/>
-                                                    <button class="mt-3 mb-2 w-full bg-ldBlueLight uppercase text-white py-4 px-4">search</button>
+                                                    <button class="dsn:mt-3 dsn:mb-2 dsn:w-full bg-ldBlueLight dsn:uppercase dsn:text-white dsn:py-4 dsn:px-4">search</button>
                                                 </div>
                                             </div>
                                             <?php
@@ -384,9 +384,9 @@ if($cat_cols == '4_column') {
 
 
                                 endwhile; ?>
-                                <div class="text-center">
+                                <div class="dsn:text-center">
                                     <button
-                                            class="js-toggle-filters text-center apply-button md:hidden dsw-primary-site-btn">
+                                            class="js-toggle-filters dsn:text-center apply-button dsn:md:hidden dsw-primary-site-btn">
                                         Apply Filter
                                     </button>
                                 </div>
@@ -395,7 +395,7 @@ if($cat_cols == '4_column') {
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="w-full md:w-3/4 flex flex-col" style="min-height:600px;">
+            <div class="dsn:w-full dsn:md:w-3/4 dsn:flex dsn:flex-col" style="min-height:600px;">
                 <?php   
                 // use ACF if it exists. if not - take all categories from the filter
                 $estore_main_cat = get_field('main_estore_category', 'options');
@@ -417,25 +417,25 @@ if($cat_cols == '4_column') {
                 );
                 $the_query = new WP_Query($arg);
                 if ($the_query->have_posts()) : ?>
-                    <div class="row flex-row w-full md:pl-4" id="response" data-counter="<?php echo $the_query->found_posts; ?>"
+                    <div class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4" id="response" data-counter="<?php echo $the_query->found_posts; ?>"
                          data-categories="<?php echo json_encode($all_categories); ?>">
-                        <div class="flex-row ds-filters-nav w-full">
+                        <div class="dsn:flex-row ds-filters-nav dsn:w-full">
                             <div class="ds-filters-counter hidden md:block hide-for-medium-down">
                                 <span class="ds-filters-counter__value"><?php echo $the_query->found_posts; ?> </span>
                                 <?php echo dssLang($dssSiteLanguage)->template_store->products_to_explore;?>
                             </div>
                             <div class="ds-filters-nav-right">
-                                <button class="show-filters js-toggle-filters md:hidden relative">Filters
+                                <button class="show-filters js-toggle-filters dsn:md:hidden dsn:relative">Filters
                                 </button>
-                                <form id="ds-filters-search-wrap" class="hidden md:flex relative"
+                                <form id="ds-filters-search-wrap" class="hidden dsn:md:flex dsn:relative"
                                       action="<?php echo esc_url(home_url('/')); ?>">
-                                    <input type="search" name="ds-search" id="ds-filters-search" class="search__input"
+                                    <input type="search" name="s" id="ds-filters-search" class="search__input"
                                            placeholder="<?php echo dssLang($dssSiteLanguage)->template_store->search_placeholder;?>"
                                            value="<?php echo get_search_query(); ?>"/>
                                 </form>
 
                                 <select name="posts_per_page" id="ds-posts_per_page"
-                                        class="ds-posts_per_page hidden lg:block">
+                                        class="ds-posts_per_page dsn:hidden dsn:lg:block">
                                     <option
                                             value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?> >
                                         <?php echo dssLang($dssSiteLanguage)->template_store->per_page_24;?>
@@ -471,11 +471,11 @@ if($cat_cols == '4_column') {
                             </div>
 
                         </div>
-                        <div class="w-full flex -mr-4 flex-wrap">
+                        <div class="dsn:w-full dsn:flex dsn:-mr-4 dsn:flex-wrap">
                         <?php while ($the_query->have_posts()) :
                             $the_query->the_post(); ?>
                             <?php $product = wc_get_product(get_the_ID()); ?>
-                            <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-12">
+                            <div class="dsn:w-full dsn:sm:w-1/2 dsn:md:w-1/3 dsn:px-4 dsn:mb-12">
                                 <div class="ds-product">
                                     <a href="<?php echo get_permalink() ?>">
                                         <?php if ($product->is_on_sale()): ?>
@@ -501,8 +501,8 @@ if($cat_cols == '4_column') {
                             </div>
                         <?php endwhile; ?>
                         </div>
-                        <div class="flex-row ds-filters-footer-nav w-full">
-                            <div class="hidden lg:block">
+                        <div class="dsn:flex-row ds-filters-footer-nav dsn:w-full">
+                            <div class="dsn:hidden dsn:lg:block">
                                 <!--<select name="posts_per_page" id="ds-posts_per_page">
                                     <option
                                             value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?> >

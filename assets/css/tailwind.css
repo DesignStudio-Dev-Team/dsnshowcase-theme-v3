@@ -353,3 +353,7 @@ p a {
 p a:hover {
     @apply dsn:text-blue-900;
 }
+
+.aligncenter {
+    @apply dsn:mx-auto;
+}

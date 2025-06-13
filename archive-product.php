@@ -37,7 +37,7 @@ if ($image): ?>
         <div class="dsn:container">
             <div class="dsn:flex dsn:justify-center">
                 <div class="dsn:w-full dsn:md:w-3/4 dsn:lg:w-1/2">
-                    <h1 class="dsn:text-center dsn:text-white dsn:text-center"><?php woocommerce_page_title(); ?></h1>
+                    <h1 class="dsn:text-center dsn:text-white"><?php woocommerce_page_title(); ?></h1>
 					
                     <div class="ds-estore-search">
                         <form role="search" class="blog-search" method="get" action="<?= esc_url(home_url('/')); ?>">
@@ -63,7 +63,7 @@ if ($image): ?>
 </style>
 <div class="dsn:container dsn:mx-auto dsn:pt-10">
 	<div class="dsn:row">
-	<h1 class="dsn:text-center dsn:text-center"><?php woocommerce_page_title(); ?></h1>
+	<h1 class="dsn:text-center"><?php woocommerce_page_title(); ?></h1>
         <?php  
 		the_archive_description( '<div class="taxonomy-description">', '</div>' );
 		?>
@@ -89,7 +89,7 @@ if ($image): ?>
                             <div class="ds-filters-counter dsn:lg:hidden show-for-medium-down">
                                 <span
                                         class="ds-filters-counter__value"></span>
-                                <?php _e('Products to Explore', 'dealer-theme'); ?>
+                                <?php _e('Products to Explore', 'dsnshowcase'); ?>
                             </div>
                         <?php endif; ?>
                         <?php $clear_filter_label = get_field('clear_filter_label', 'options'); ?>
@@ -262,15 +262,15 @@ if ($image): ?>
                     <div class="dsn:flex ds-filters-nav dsn:w-full">
                         <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
                             <span class="ds-filters-counter__value"><?php echo $product_count; ?> </span>
-                            <?php _e(' Products to Explore', 'dealer-theme'); ?>
+                            <?php _e(' Products to Explore', 'dsnshowcase'); ?>
                         </div>
                         <div class="ds-filters-nav-right">
                             <button class="show-filters js-toggle-filters dsn:md:hidden dsn:relative">Filters
                             </button>
                             <form id="ds-filters-search-wrap" class="dsn:hidden dsn:md:flex dsn:relative"
                                   action="<?php echo esc_url(home_url('/')); ?>">
-                                <input type="search" name="ds-search" id="ds-filters-search" class="search__input"
-                                       placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>"
+                                <input type="search" name="s" id="ds-filters-search" class="search__input"
+                                       placeholder="<?php _e('Search by keyword', 'dsnshowcase'); ?>"
                                        value="<?php echo get_search_query(); ?>"/>
                             </form>
 
@@ -502,7 +502,8 @@ if ($image): ?>
                         price_min: $('#price_min').val(),
                         price_max: $('#price_max').val(),
                         sale: sale,
-                        this_id: <?php echo $this_id ?>
+                        this_id: <?php echo $this_id; ?>
+                        
                     }
 
                     // check if "Specials" enabled

@@ -270,7 +270,7 @@ function ds_filtration()
         <div class="ds-filters-nav-right">
             <button class="show-filters js-toggle-filters dsn:lg:hidden relative">Filters</button>
             <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex relative" action="<?php echo esc_url(home_url('/')); ?>">
-                <input type="search" name="ds-search" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $_POST['search']; ?>" />
+                <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $_POST['search']; ?>" />
             </form>
 
             <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:hidden dsn:lg:block">
