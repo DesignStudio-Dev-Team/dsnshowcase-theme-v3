@@ -57,7 +57,7 @@ foreach ( $get_all_products as $product) {
                     ?>
                     <div class="dsn:w-full dsn:mx-3 dsn:sm:mx-2 dsn:lg:mx-4 dsn:mb-4 dsn:relative product-box dsn:shadow-lg">
                         <a class="product-inner dsn:bg-white dsn:p-6 dsn:block" href="<?php echo get_permalink($postID); ?>">
-                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:min-h-[300px]">
+                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:h-[300px]">
                                 <?php if (has_post_thumbnail($postID)): ?>
                                     <?php echo get_the_post_thumbnail($postID, 'medium'); ?>
                                 <?php else: ?>
@@ -102,7 +102,7 @@ foreach ( $get_all_products as $product) {
                     ?>
                     <div class="dsn:w-full dsn:mx-3 dsn:sm:mx-2 dsn:lg:mx-4 dsn:mb-4 dsn:relative product-box dsn:shadow-lg">
                         <a class="product-inner dsn:bg-white dsn:p-6 dsn:block" href="<?php echo get_permalink($postID); ?>">
-                            <div class="dsn:text-center thumbnail">
+                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:h-[300px]">
                                 <?php if (has_post_thumbnail($postID)): ?>
                                     <?php echo get_the_post_thumbnail($postID, 'medium'); ?>
                                 <?php else: ?>
@@ -150,6 +150,7 @@ wp_reset_postdata();
 }
 #product-showcase .product-title {
     color: #007437;
+    height: 130px;
 }
 #product-showcase .product-slider-nav:before {
     content: "";
@@ -283,7 +284,7 @@ wp_reset_postdata();
     margin-bottom: 0 !important;
 }
 #product-showcase a.product-inner .thumbnail img {
-    min-height: 170px;
+    height: 170px;
     width: 100%;
     object-fit: cover;
 }
@@ -341,7 +342,7 @@ wp_reset_postdata();
         margin-right: 5px;
     }
     #product-showcase a.product-inner .thumbnail img {
-    min-height: 250px;
+    height: 250px;
 }
 }
 @media only screen and (max-width: 1024px) {
