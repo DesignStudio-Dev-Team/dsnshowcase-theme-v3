@@ -9,7 +9,7 @@ $contentCTA = $content['cta'];
 $logos = $logoSliderBlock['logos'];
 ?>
 
-<section class="logo-slider-container">
+<section class="dsn-logo-slider-container">
     <div class="dsn:container dsn:mx-auto dsn:py-20 dsn:px-4">
     <h2 class="dsn:text-center dsn:mb-10 dsn:text-2xl dsn:md:text-5xl"><?php if($title) { 
         echo $title; } ?></h2>
