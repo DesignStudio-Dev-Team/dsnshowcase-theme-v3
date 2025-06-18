@@ -283,7 +283,7 @@ wp_reset_postdata();
     margin-bottom: 0 !important;
 }
 #product-showcase a.product-inner .thumbnail img {
-    min-height: 170px;
+    height: 170px;
     width: 100%;
     object-fit: cover;
 }
@@ -341,7 +341,7 @@ wp_reset_postdata();
         margin-right: 5px;
     }
     #product-showcase a.product-inner .thumbnail img {
-    min-height: 250px;
+    height: 250px;
 }
 }
 @media only screen and (max-width: 1024px) {
