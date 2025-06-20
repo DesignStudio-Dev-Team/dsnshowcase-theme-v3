@@ -424,18 +424,18 @@ if ($image): ?>
                     $(this).toggleClass('open');
                 });
 
-                $body.on('click', '.js-pagination a', function () {
-                    event.preventDefault();
-                    var urlThis = $(this).attr('href'),
-                        paged = '';
-                    if (urlThis.includes('admin-ajax.php')) {
-                        paged = urlThis.split('?paged=')[1];
-                    } else {
-                        var pagedStr = urlThis.split('/page/')[1];
-                        paged = pagedStr.split('/')[0];
-                    }
-                    dsFilter(paged, '');
-                });
+                // $body.on('click', '.js-pagination a', function () {
+                //     event.preventDefault();
+                //     var urlThis = $(this).attr('href'),
+                //         paged = '';
+                //     if (urlThis.includes('admin-ajax.php')) {
+                //         paged = urlThis.split('?paged=')[1];
+                //     } else {
+                //         var pagedStr = urlThis.split('/page/')[1];
+                //         paged = pagedStr.split('/')[0];
+                //     }
+                //     dsFilter(paged, '');
+                // });
 
                 var dsFilter = function (paged, posts_per_page) {
                     event.preventDefault();
