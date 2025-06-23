@@ -97,7 +97,7 @@ $locations = !empty($content) && is_array($content)
 	}
  </style>
 
-<footer id="dsFooter" class="footer4 dsn:relative dsn:clear-both">
+<footer id="dsFooter" class="footer4 dsn:relative dsn:clear-both dsn:z-0">
 	<div class="get-footer dsn:relative">
 		<div class="dsn:container dsn:mx-auto dsn:flex dsn:flex-col dsn:md:flex-row dsn:relative">
 		 <div class=" dsn:block dsn:relative dsn:text-white dsn:w-full dsn:md:w-1/3">
