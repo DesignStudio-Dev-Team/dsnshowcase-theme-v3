@@ -52,6 +52,9 @@ npm install
 Use github issues to report any issues or contact us at our website https://designstudio.com
 
 ## Changelog
+### 3.5.1
+- New Custom Blocks
+- Update WooCommerce Category Page
 
 ### 3.5.0
 - Major Fixes to WooCommerce
