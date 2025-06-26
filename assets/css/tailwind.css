@@ -294,6 +294,7 @@
     {
         @apply dsn:!text-5xl;
     }
+    
 
     @screen lg {
 
@@ -323,6 +324,14 @@
         margin-left: 65px;
         margin-right: 65px;
     }
+}
+@media only screen and (max-width: 641px) {
+    .gform_legacy_markup_wrapper ul.gfield_checkbox li label, .gform_legacy_markup_wrapper ul.gfield_radio li label { 
+        @apply dsn:!w-auto;
+    }
+    .gform_wrapper input[type=checkbox], .gform_wrapper input[type=radio], .gform_wrapper input[type=checkbox]:checked, .gform_wrapper input[type=radio]:checked, .gform_wrapper input[type=checkbox]:not(:checked), .gform_wrapper input[type=radio]:not(:checked) {
+    @apply dsn:!w-6 dsn:!h-6 dsn:!mr-0 dsn:!rounded-full dsn:!mb-0;
+}
 }
     .slick-dots li button:before {
         @apply dsn:!text-sm;

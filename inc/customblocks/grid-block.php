@@ -10,7 +10,7 @@ $gridRowCount = count($gridContent);
 
 ?>
 
-<section id="gridBlock" class="dsn:py-20 dsn:mb-10 dsn:px-10 dsn:md:px-0">
+<section id="gridBlock" class="dsn:py-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
@@ -37,6 +37,9 @@ $gridRowCount = count($gridContent);
         <?php } ?>
           <?php if($gridType == '4') { ?>
         <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <?php } ?>
+        <?php if($gridType == '5') { ?>
+        <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
             <?php 
             foreach($gridColumns as $gridColumn){ 
@@ -119,6 +122,24 @@ $gridRowCount = count($gridContent);
                 
                 </div>
                 <?php } ?>
+
+               <?php } ?>
+
+               <?php
+                if($gridContentContent[0]['acf_fc_layout'] == 'card_with_stacked_logo') {
+                    $cardImage = $gridContentContent[0]['card_image'];
+                    $cardLogo = $gridContentContent[0]['card_logo'];
+                    $cardLink = $gridContentContent[0]['card_link']; 
+                ?>
+                   <?php if($gridType == '5') { ?>
+                    <div class="dsn:relative dsn:h-74 dsn:lg:min-h-84 dsn:xl:min-h-120 dsn:mb-15">
+                        <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90 dsn:h-full dsn:w-full dsn:!bg-cover dsn:!bg-center dsn:flex dsn:items-end dsn:justify-center" style="background: url(<?php echo $cardImage['url']; ?>)">
+                    <div class="dsn:relative dsn:bg-white dsn:-mb-10 dsn:p-6 dsn:rounded-full dsn:w-10/12 dsn:shadow-lg">
+                        <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:w-full dsn:h-10 dsn:object-contain">
+                    </div>
+                </a>
+                </div>
+                    <?php } ?>
 
                <?php } ?>
             <?php } ?>   

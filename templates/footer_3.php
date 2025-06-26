@@ -59,7 +59,7 @@ $locations = !empty($content) && is_array($content)
 		}
  </style>
 
-<footer id="dsFooter" class="dsn:relative dsn:clear-both">
+<footer id="dsFooter" class="dsn:relative dsn:clear-both dsn:z-0">
 	<div class="get-footer dsn:relative">
 		 <div class="dsn:container dsn:mx-auto dsn:block dsn:relative dsn:text-white">
 			    <h4 class="dsn:font-bold m-0 dsn:text-3xl dsn:text-center"><?php echo $footer_contact_title; ?></h4>

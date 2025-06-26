@@ -28,6 +28,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Hero 2'){
             include get_template_directory() . '/inc/customblocks/hero2.php';
         }
+        if($block_type === 'Hero 3'){
+            include get_template_directory() . '/inc/customblocks/hero3.php';
+        }
         if($block_type === 'Google Reviews') {
             include get_template_directory() . '/inc/customblocks/google-reviews.php';
         }
