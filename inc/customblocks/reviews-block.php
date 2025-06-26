@@ -37,7 +37,7 @@ $reviews = $reviews_block['reviews'];
                         <?php echo $reviewContent; ?>
                     </div>
                     <div class="dsn:py-5 dsn:flex dsn:gap-5 dsn:items-center dsn:justify-center">
-                    <img src="<?php echo $reviewAuthorAvatar; ?>" alt="author avatar">
+                    <?php if($reviewAuthorAvatar) { ?><img src="<?php echo $reviewAuthorAvatar; ?>" alt="author avatar"> <?php } ?>
                     <p><?php echo $reviewAuthor; ?></p>
                 </div>
                 </div>

@@ -4,14 +4,14 @@ $title = $googleReviews['title'];
 $description = $googleReviews['description'];
 
 ?>
-<section id="google-reviews" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:mb-20">
+<section id="google-reviews" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:pt-10 dsn:mb-20">
     <h2 class="dsn:text-center"><?php echo $title; ?></h2>
    <?php if($description) { ?>
     <div class="dsn:mx-auto dsn:max-w-[900px]">
         <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
     </div>
    <?php } ?>
-    <div class="dsn:relative dsn:text-center dsn:block dsn:md:absolute dsn:md:-top-3 dsn:md:right-0 dsn:z-10">
+    <div class="dsn:relative dsn:text-center dsn:block dsn:md:absolute dsn:md:-top-2 dsn:md:right-0 dsn:z-10">
             <svg role="presentation" class="dsn:mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" viewBox="0 0 168 95">
             <defs>
                 <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 3840 2160">
@@ -47,14 +47,14 @@ $description = $googleReviews['description'];
             </div>
             <div class="dsn:relative">
                 <div class="dsn:absolute dsn:left-4 dsn:-top-3 dsn:mb-4">
-                    <svg role="presentation" xmlns="http://www.w3.org/2000/svg" width="15" height="45" viewBox="0 0 22 65">
-                    <text id="_" data-name="&quot;" transform="translate(0 53)" fill="#65a23b" font-size="54" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">&quot;</tspan></text>
+                    <svg role="presentation" xmlns="http://www.w3.org/2000/svg" width="20" height="45" viewBox="0 0 22 65">
+                    <text id="_" data-name="&quot;" transform="translate(0 53)" fill="current" font-size="54" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">&quot;</tspan></text>
                     </svg>
                 </div>
                 <p class="dsn:px-10 dsn:h-80 dsn:overflow-y-auto"><?php echo $review['review']; ?></p>
             </div>
             <div class="dsn:flex dsn:justify-self-start dsn:justify-start dsn:justify-items-start dsn:gap-2 dsn:mt-4 dsn:ml-10">
-                <img src="<?php echo $review['author_avatar']; ?>" alt="<?php echo $review['author_of_review']; ?>" class="dsn:w-10 dsn:h-10 dsn:rounded-full dsn:mx-auto dsn:mb-4">
+                <?php if($review['author_avatar']) { ?> <img src="<?php echo $review['author_avatar']; ?>" alt="<?php echo $review['author_of_review']; ?>" class="dsn:w-10 dsn:h-10 dsn:rounded-full dsn:mx-auto dsn:mb-4"> <?php } ?>
                 <p class="dsn:pt-1"><?php echo $review['author_of_review']; ?></p>
                 
             </div>
