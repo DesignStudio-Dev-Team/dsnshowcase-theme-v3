@@ -72,6 +72,7 @@ if ($image): ?>
 
     <?php endif; ?>
 
+
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:row dsn:flex-row">
         <div class="ds-filters-over"></div>
@@ -224,8 +225,32 @@ if ($image): ?>
                 </div>
             <?php endif; ?>
         </div>
+
+                          </div>
+      </div>
+      
         <div class="dsn:w-full">
             <?php
+            //set up posts per page and paged 
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $posts_per_page = get_option('posts_per_page');
+
+            // Handle posts per page from URL
+            if (isset($_GET['posts_per_page']) && is_numeric($_GET['posts_per_page'])) {
+                $posts_per_page = intval($_GET['posts_per_page']);
+            }
+
+            // Handle sorting from URL
+            $orderby = 'menu_order';
+            $order = 'ASC';
+            if (isset($_GET['sort_by']) && !empty($_GET['sort_by'])) {
+                $sort_parts = explode('-', sanitize_text_field($_GET['sort_by']));
+                if (count($sort_parts) == 2) {
+                    $orderby = $sort_parts[0];
+                    $order = strtoupper($sort_parts[1]);
+                }
+            }
+
             $arg = array(
                 'post_type' => 'product',
                 'tax_query' => array(
@@ -235,9 +260,10 @@ if ($image): ?>
                         'terms' => $all_categories
                     )
                 ),
-                'order' => 'ASC',
-                'orderby' => 'menu_order',
-                'posts_per_page' => 36
+                'orderby' => $orderby,
+                'order' => $order,
+                'posts_per_page' => $posts_per_page,
+                'paged' => $paged,
             );
             $the_query = new WP_Query($arg);
             ?>
@@ -257,6 +283,9 @@ if ($image): ?>
                 ];
                 $product_count = get_term_post_count('product_cat', $all_categories, $args);
                 ?>
+
+                <div class="dsn:container dsn:mx-auto">
+
                 <div class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap" id="response" data-counter="<?php echo $product_count; ?>"
                      data-categories="<?php echo $all_categories; ?>">
                     <div class="dsn:flex ds-filters-nav dsn:w-full">
@@ -276,51 +305,32 @@ if ($image): ?>
 
                             <select name="posts_per_page" id="ds-posts_per_page"
                                     class="ds-posts_per_page dsn:hidden dsn:lg:block">
-                                <option
-                                        value="36" <?php echo $_POST['posts_per_page'] == '36' ? 'selected' : ''; ?> >36
-                                    Per Page
-                                </option>
-                                <option
-                                        value="72" <?php echo $_POST['posts_per_page'] == '72' ? 'selected' : ''; ?> >72
-                                    Per Page
-                                </option>
-                                <option
-                                        value="144" <?php echo $_POST['posts_per_page'] == '144' ? 'selected' : ''; ?> >144
-                                    Per Page
-                                </option>
+                                <option value="36" <?php echo (isset($_GET['posts_per_page']) && $_GET['posts_per_page'] == '36') || (!isset($_GET['posts_per_page']) && $posts_per_page == 36) ? 'selected' : ''; ?>>36 Per Page</option>
+                                <option value="72" <?php echo isset($_GET['posts_per_page']) && $_GET['posts_per_page'] == '72' ? 'selected' : ''; ?>>72 Per Page</option>
+                                <option value="144" <?php echo isset($_GET['posts_per_page']) && $_GET['posts_per_page'] == '144' ? 'selected' : ''; ?>>144 Per Page</option>
                             </select>
                             <select name="sort_by" id="ds-sort_by">
-                                <option value="" disabled selected>Sort By:</option>
-                                <option
-                                        value="price-asc" <?php echo $_POST['sort_by'] == 'price-asc' ? 'selected' : ''; ?> >
-                                    Price (Low to High)
-                                </option>
-                                <option
-                                        value="price-desc" <?php echo $_POST['sort_by'] == 'price-desc' ? 'selected' : ''; ?> >
-                                    Price (High to Low)
-                                </option>
-                                <option
-                                        value="title-asc" <?php echo $_POST['sort_by'] == 'title-asc' ? 'selected' : ''; ?> >
-                                    Name (A-Z)
-                                </option>
-                                <option
-                                        value="title-desc" <?php echo $_POST['sort_by'] == 'title-desc' ? 'selected' : ''; ?> >
-                                    Name (Z-A)
-                                </option>
+                                <option value="">Sort By:</option>
+                                <option value="price-asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price-asc' ? 'selected' : ''; ?>>Price (Low to High)</option>
+                                <option value="price-desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price-desc' ? 'selected' : ''; ?>>Price (High to Low)</option>
+                                <option value="title-asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'title-asc' ? 'selected' : ''; ?>>Name (A-Z)</option>
+                                <option value="title-desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'title-desc' ? 'selected' : ''; ?>>Name (Z-A)</option>
                             </select>
                         </div>
 
                     </div>
-
-
+              </div>
+              </div>
+                <div class="dsn:bg-gray-100 dsn:py-5">
+                <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
                     <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                         <?php $product = wc_get_product(get_the_ID()); ?>
                         <div class="dsn:w-full dsn:sm:w-1/2 dsn:md:w-1/3 dsn:px-4 dsn:mb-12">
-                            <div class="ds-product">
+                            <div class="ds-product dsn:bg-white dsn:p-5">
                                 <a href="<?php echo get_permalink() ?>">
-                                    <?php if ($product->is_on_sale()): ?>
+                                    <!-- <?php if ($product->is_on_sale()): ?>
                                         <span class="ds-product__sale">Sale</span>
-                                    <?php endif; ?>
+                                    <?php endif; ?> -->
                                     <span class="ds-product__image"
                                           style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')">
                                         <button class="single_add_to_cart_button dsn:hidden"
@@ -333,28 +343,28 @@ if ($image): ?>
                                     <span class="ds-product__title"><?php the_title(); ?></span>
                                 </a>
                                 <div class="ds-product__meta">
-                                    <div class="ds-product__price"><?php echo $product->get_price_html(); ?></div>
+                                  <?php //check if $product has a price or look for the price under _regular_price meta 
+                                  $product_price = $product->get_price_html();
+                                  if (!$product_price) {
+                                      $product_price = get_post_meta(get_the_ID(), '_regular_price', true);
+                                  }
+                                  ?>  
+                                  <div class="ds-product__price"><?php echo $product_price; ?></div>
+                                  
+                                 
+
                                 </div>
                             </div>
                         </div>
 
                     <?php endwhile; // end of the loop. ?>
-
+             
                     <div class="dsn:flex ds-filters-footer-nav dsn:w-full">
                         <div class="dsn:hidden dsn:lg:block">
                             <select name="posts_per_page" id="ds-posts_per_page">
-                                <option
-                                        value="36" <?php echo $_POST['posts_per_page'] == '36' ? 'selected' : ''; ?> >36
-                                    Per Page
-                                </option>
-                                <option
-                                        value="72" <?php echo $_POST['posts_per_page'] == '72' ? 'selected' : ''; ?> >72
-                                    Per Page
-                                </option>
-                                <option
-                                        value="144" <?php echo $_POST['posts_per_page'] == '144' ? 'selected' : ''; ?> >144
-                                    Per Page
-                                </option>
+                                <option value="36" <?php echo $posts_per_page == 36 ? 'selected' : ''; ?>>36 Per Page</option>
+                                <option value="72" <?php echo $posts_per_page == 72 ? 'selected' : ''; ?>>72 Per Page</option>
+                                <option value="144" <?php echo $posts_per_page == 144 ? 'selected' : ''; ?>>144 Per Page</option>
                             </select>
                             <span class="ds-filters-counter__value">of <?php echo $product_count; ?>
                                 products </span>
@@ -377,6 +387,9 @@ if ($image): ?>
                         </div>
                     </div>
                 </div>
+
+                   </div>
+                </div>
                 <?php do_action('woocommerce_after_main_content'); ?>
             <?php endif;
             wp_reset_query(); ?>
@@ -388,7 +401,34 @@ if ($image): ?>
 
                 var $body = $('body');
 
-                $body.on('submit', '#ds-filter, #ds-filters-search-wrap, .ds-estore-search form', function () {
+                // Handle URL parameter changes for sorting and posts per page
+                $body.on('change', '#ds-sort_by, #ds-posts_per_page', function() {
+                    var currentUrl = new URL(window.location.href);
+                    var params = new URLSearchParams(currentUrl.search);
+                    
+                    // Update the relevant parameter based on which select changed
+                    if (this.id === 'ds-sort_by') {
+                        if (this.value) {
+                            params.set('sort_by', this.value);
+                        } else {
+                            params.delete('sort_by');
+                        }
+                    } else { // Assuming it's #ds-posts_per_page
+                        if (this.value) {
+                            params.set('posts_per_page', this.value);
+                        } else {
+                            params.delete('posts_per_page');
+                        }
+                    }
+                    
+                    // Preserve existing parameters that we want to keep
+                    currentUrl.search = params.toString();
+                    window.location.href = currentUrl.toString();
+                });
+
+                // Handle other filter changes with AJAX
+                $body.on('submit', '#ds-filter, #ds-filters-search-wrap, .ds-estore-search form', function (e) {
+                    e.preventDefault();
                     dsFilter();
                 });
 
@@ -397,18 +437,14 @@ if ($image): ?>
                     dsFilter();
                 });
 
-                $body.on('change', '#ds-filter :checkbox, #ds-filter :radio, #ds-sort_by', function () {
-                    // $('#ds-filter :checkbox, #ds-filter :radio, #ds-posts_per_page').on('change', function () {
+                $body.on('change', '#ds-filter :checkbox, #ds-filter :radio', function () {
                     dsFilter();
-                });
-
-                $body.on('change', '#ds-posts_per_page', function () {
-                    dsFilter('', $(this).val());
                 });
 
                 $body.on('change', '#ds-filters-paged', function () {
                     dsFilter($(this).val());
                 });
+
                 $body.on('click', '.js-toggle-filters', function () {
                     $('.ds-filters').toggleClass('active');
                 });
@@ -424,19 +460,35 @@ if ($image): ?>
                     $(this).toggleClass('open');
                 });
 
-                // $body.on('click', '.js-pagination a', function () {
-                //     event.preventDefault();
-                //     var urlThis = $(this).attr('href'),
-                //         paged = '';
-                //     if (urlThis.includes('admin-ajax.php')) {
-                //         paged = urlThis.split('?paged=')[1];
-                //     } else {
-                //         var pagedStr = urlThis.split('/page/')[1];
-                //         paged = pagedStr.split('/')[0];
-                //     }
-                //     dsFilter(paged, '');
-                // });
+                $body.on('click', '.js-pagination a', function (e) {
+                    e.preventDefault();
+                    var urlThis = $(this).attr('href');
+                    var url = new URL(urlThis);
+                    var paged = url.searchParams.get('paged');
+                    
+                    // Fallback for URL structures without ?paged=
+                    if (!paged) {
+                        var pagedMatch = url.pathname.match(/\/page\/(\d+)/);
+                        if (pagedMatch && pagedMatch[1]) {
+                            paged = pagedMatch[1];
+                        }
+                    }
 
+                    // Update the paged parameter in the current URL and reload
+                    var currentUrl = new URL(window.location.href);
+                    var params = new URLSearchParams(currentUrl.search);
+                    
+                    if (paged) {
+                         params.set('paged', paged);
+                    } else {
+                         params.delete('paged');
+                    }
+
+                    currentUrl.search = params.toString();
+                    window.location.href = currentUrl.toString();
+                });
+
+                // Keep the dsFilter function for other AJAX filters
                 var dsFilter = function (paged, posts_per_page) {
                     event.preventDefault();
 
@@ -1089,9 +1141,9 @@ if ($image): ?>
 }
 .ds-filters-nav {
   justify-content:space-between;
-  border-bottom:2px solid #c6c6c6;
+
   padding:0!important;
-  margin:0 0 35px 1rem
+  margin:0 0 0px 0rem
 }
 .ds-filters-nav-right {
   display:flex;
@@ -1189,7 +1241,6 @@ if ($image): ?>
   background-size:contain;
   background-repeat:no-repeat;
   background-position:50%;
-  background-color:#f7f7f7;
   margin-bottom:25px
 }
 .ds-product__title {
