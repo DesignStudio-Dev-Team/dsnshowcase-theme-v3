@@ -66,7 +66,7 @@ $gridRowCount = count($gridContent);
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
                         <div class="dsn:pt-4">
-                            <h2 class="dsn:text-4xl dsn:text-center dsn:px-4"><?php echo $title; ?></h2>
+                            <h3 class="dsn:text-center dsn:px-4"><?php echo $title; ?></h3>
                         </div>
                         <?php } ?>
                     </div>
@@ -81,7 +81,7 @@ $gridRowCount = count($gridContent);
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
                         <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/2 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:flex dsn:items-end dsn:justify-center dsn:pb-6">
-                            <h2 class="dsn:text-4xl dsn:text-white dsn:text-center dsn:px-4"><?php echo $title; ?></h2>
+                            <h3 class="dsn:text-white dsn:text-center dsn:px-4"><?php echo $title; ?></h3>
                         </div>
                         <?php } ?>
                     </div>
@@ -94,8 +94,8 @@ $gridRowCount = count($gridContent);
                     <div class="dsn:relative">
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
-                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/4 dsn:flex dsn:items-end dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:justify-center dsn:pb-6">
-                            <h2 class="dsn:text-4xl dsn:text-white dsn:text-center dsn:px-4"><?php echo $title; ?></h2>
+                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/4 dsn:flex dsn:items-end dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:justify-center dsn:pb-3">
+                            <h3 class="dsn:text-white dsn:text-center dsn:px-4 dsn:mb-0"><?php echo $title; ?></h3>
                         </div>
                         <?php } ?>
                     </div>
@@ -108,7 +108,7 @@ $gridRowCount = count($gridContent);
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
                         <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/3 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
-                            <h2 class="dsn:text-3xl dsn:text-white dsn:text-left dsn:mb-0"><?php echo $title; ?></h2>
+                            <h3 class="dsn:text-white dsn:text-left dsn:mb-0"><?php echo $title; ?></h3>
 
                             <?php 
                             if($cta) { ?>

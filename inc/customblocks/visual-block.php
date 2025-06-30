@@ -70,7 +70,7 @@ if($contentContainer == 'Large') {
 <div class="dsn:h-auto dsn:lg:h-max" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <?php } ?>
 <?php if($bgType == 'video') { ?>
-<div class="dsn:h-auto dsn:lg:h-[85vh] dsn:relative">
+<div class="dsn:h-auto dsn:lg:h-[70vh] dsn:relative">
       <video class="dsn:w-full dsn:h-full dsn:object-cover dsn:absolute" autoplay muted loop>
             <source src="<?php echo $videoLink; ?>" type="video/mp4">
             Your browser does not support the video tag.

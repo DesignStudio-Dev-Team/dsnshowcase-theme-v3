@@ -40,7 +40,7 @@ $twoBlockContent = $twoBlock['two_block_content'];
             <?php } ?>
         </div>
         <div class="dsn:p-0 dsn:w-full <?php echo $order2 . ' ' . $dclass2; ?>">
-            <img class="dsn:w-full dsn:h-76 dsn:md:h-full dsn:object-cover" src="<?php echo $block['main_image']; ?>" alt="image">
+            <img class="dsn:w-full dsn:h-76 dsn:md:h-auto dsn:object-cover" src="<?php echo $block['main_image']; ?>" alt="image">
         </div>
         </div>
         <?php } } ?>
