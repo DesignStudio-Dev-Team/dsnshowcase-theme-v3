@@ -65,9 +65,9 @@ if($contentContainer == 'Large') {
 
 ?>
 
-<section  class="dsn:mb-10 <?php echo $containerClass; ?>">
+<section id="grid-block-<?php echo $block_id; ?>" class="dsn:mb-10 <?php echo $containerClass; ?>">
 <?php if($bgType == 'image') { ?>
-<div class="dsn:h-auto dsn:lg:h-max" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
+<div class="dsn:h-auto dsn:lg:h-max visual-block-inner" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <?php } ?>
 <?php if($bgType == 'video') { ?>
 <div class="dsn:h-auto dsn:lg:h-[70vh] dsn:relative">

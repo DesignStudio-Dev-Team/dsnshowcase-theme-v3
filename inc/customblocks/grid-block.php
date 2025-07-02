@@ -10,7 +10,7 @@ $gridRowCount = count($gridContent);
 
 ?>
 
-<section id="gridBlock" class="dsn:py-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
+<section id="grid-block-<?php echo $block_id; ?>" class="dsn:py-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
@@ -39,7 +39,10 @@ $gridRowCount = count($gridContent);
         <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
         <?php if($gridType == '5') { ?>
-        <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div id="grid-block" class="grid-block5 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <?php } ?>
+         <?php if($gridType == '6') { ?>
+        <div id="grid-block" class="grid-block6 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-4 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5 dsn:items-center dsn:items-stretch">
         <?php } ?>
             <?php 
             foreach($gridColumns as $gridColumn){ 
@@ -107,7 +110,7 @@ $gridRowCount = count($gridContent);
                     <div class="dsn:relative">
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
-                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/3 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
+                        <div class="grid-block-bottom dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/3 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
                             <h3 class="dsn:text-white dsn:text-left dsn:mb-0"><?php echo $title; ?></h3>
 
                             <?php 
@@ -140,8 +143,27 @@ $gridRowCount = count($gridContent);
                 </a>
                 </div>
                     <?php } ?>
-
                <?php } ?>
+               <?php
+                if($gridContentContent[0]['acf_fc_layout'] == 'grid_icon') {
+                    $cardTitle = $gridContentContent[0]['card_title'];
+                    $cardLogo = $gridContentContent[0]['card_logo'];
+                    $cardLink = $gridContentContent[0]['card_link']; 
+                ?>
+                    <?php if($gridType == '6') { ?>
+              
+               <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:border-2 dsn:rounded-md dsn:flex dsn:items-center dsn:justify-start dsn:gap-4 dsn:p-2 dsn:min-h-30">
+                 <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:h-15 dsn:object-contain dsn:w-3/12">
+                 <p class="dsn:text-black dsn:w-9/12 dsn:mb-0 dsn:text-xl dsn:text-base"><?php echo $cardTitle; ?></p>
+                </a>
+              
+                    <?php } ?>
+                    <style>
+                        .grid-block6 a {
+                            color: var(--dealerLinkColor);
+                        }   
+                    </style>
+                     <?php } ?>
             <?php } ?>   
         </div>
     <?php } ?>
@@ -152,4 +174,5 @@ if($mainCTA) { ?>
         <a href="<?php echo $mainCTA['url']; ?>" class="btn"><?php echo $mainCTA['title']; ?></a>
     </div>
 <?php } ?>
+<div class="dsn:hidden dsn:xl:grid-cols-1 dsn:xl:grid-cols-2 dsn:xl:grid-cols-3 dsn:xl:grid-cols-4 dsn:xl:grid-cols-5"></div>
 </section>

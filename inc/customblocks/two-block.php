@@ -2,7 +2,7 @@
 $twoBlock = get_field('two_block', $block_id);
 $twoBlockContent = $twoBlock['two_block_content'];
 ?>
-<section class="dsn:mb-10 dsn:px-0">
+<section id="grid-block-<?php echo $block_id; ?>" class="dsn:mb-10 dsn:px-0">
 <div class="dsn:container dsn:mx-auto">
         <?php if($twoBlockContent) { 
             foreach($twoBlockContent as $block) { 
@@ -31,8 +31,8 @@ $twoBlockContent = $twoBlock['two_block_content'];
                   $dclass2 = ' dsn:lg:w-2/3';
               }
               ?>
-       <div class="dsn:w-full dsn:flex dsn:flex-col dsn:md:flex-row <?php echo $gap; ?> dsn:my-10 dsn:justify-between">
-        <div class="dsn-twoblock-content-<?php echo $block_id; ?> dsn:w-full dsn:p-15 dsn:md:p-15 dsn:md:pt-30 dsn:text-center dsn:md:text-left dsn:flex dsn:flex-col <?php echo $order1 . ' ' . $dclass1; ?>">
+       <div class="dsn:w-full dsn:flex dsn:flex-col dsn:md:flex-row <?php echo $gap; ?> dsn:my-10 dsn:justify-between dsn:items-stretch">
+        <div class="dsn-twoblock-content-<?php echo $block_id; ?> dsn:w-full dsn:p-15 dsn:md:p-15 dsn:md:pt-30 dsn:text-center dsn:md:text-left dsn:flex dsn:flex-col dsn:justify-center <?php echo $order1 . ' ' . $dclass1; ?>">
             <h2><?php echo $block['title']; ?></h2>
             <p><?php echo $block['description']; ?></p>
             <?php if ($block['cta']) { ?>
@@ -40,7 +40,7 @@ $twoBlockContent = $twoBlock['two_block_content'];
             <?php } ?>
         </div>
         <div class="dsn:p-0 dsn:w-full <?php echo $order2 . ' ' . $dclass2; ?>">
-            <img class="dsn:w-full dsn:h-76 dsn:md:h-auto dsn:object-cover" src="<?php echo $block['main_image']; ?>" alt="image">
+            <img class="dsn:w-full dsn:h-76 dsn:lg:h-full dsn:object-cover" src="<?php echo $block['main_image']; ?>" alt="image">
         </div>
         </div>
         <?php } } ?>
