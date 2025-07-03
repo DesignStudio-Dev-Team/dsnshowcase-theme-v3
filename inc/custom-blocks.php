@@ -79,6 +79,9 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
         if($block_type === 'Products Showcase') {
             include get_template_directory() . '/inc/customblocks/products-showcase-block.php';
         }
+        if($block_type === 'Left Right Block') {
+            include get_template_directory() . '/inc/customblocks/left-right-block.php';
+        }
     }
   echo '</div>'; ?>
 <style>
