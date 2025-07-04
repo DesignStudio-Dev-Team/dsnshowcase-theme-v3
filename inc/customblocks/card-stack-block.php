@@ -6,7 +6,7 @@ $CTA = $cardStack['cta'];
 $cards = $cardStack['cards'];
 ?>
 
-<section class="dsn:mb-10">
+<section id="card-stack-block-<?php echo $block_id; ?>" class="dsn:mb-10">
     <?php if($bgImg) { ?>
         <div class="dsn:min-h-[1000px] dsn:h-auto" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
     <?php } else { ?>

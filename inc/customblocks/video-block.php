@@ -21,7 +21,7 @@ if($videoType == 'youtube') {
 }
 
 ?>
-<section class="dsn:mb-10">
+<section id="video-block-<?php echo $block_id; ?>" class="dsn:mb-10">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:grid dsn:grid-cols-1 dsn:xl:grid-cols-6 dsn:gap-10">
         <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:flex dsn:flex-col dsn:bg-cover dsn:bg-center dsn:h-66 dsn:md:h-auto" style="background-image: url(<?php echo $bgImgUrl; ?>);">

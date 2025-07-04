@@ -5,7 +5,7 @@ $reasons = $gridReasons['reasons'];
 
 ?>
 
-<section id="gridReasons" class="dsn:py-20 dsn:bg-gradient-to-b dsn:from-[#F2F9FF] dsn:to-transparent dsn:px-10 dsn:md:px-0">
+<section id="gridReasons-<?php echo $block_id; ?>" class="dsn:py-20 dsn:bg-gradient-to-b dsn:from-[#F2F9FF] dsn:to-transparent dsn:px-10 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
     </div>

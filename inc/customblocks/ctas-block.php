@@ -6,7 +6,7 @@ $cta2 = $ctas_banner['cta2'];
 $bgImg = $ctas_banner['background'];
 ?>
 
-<section style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;" class="dsnctasBlock dsn:min-h-[245px] dsn:w-full dsn:block dsn:lg:flex dsn:gap-10 dsn:my-10 dsn:justify-center dsn:align-middle dsn:items-center">
+<section id="cta-block-<?php echo $block_id; ?>" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;" class="dsnctasBlock dsn:min-h-[245px] dsn:w-full dsn:block dsn:lg:flex dsn:gap-10 dsn:my-10 dsn:justify-center dsn:align-middle dsn:items-center">
     <div class="dsnctasContent dsn:w-full dsn:lg:w-1/2 dsn:p-5 dsn:lg:p-10 dsn:lg:pt-25 dsn:block dsn:lg:flex dsn:flex-col">
         <?php echo $cta_content; ?>
     </div>

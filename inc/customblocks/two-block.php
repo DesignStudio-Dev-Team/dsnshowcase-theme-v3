@@ -2,7 +2,7 @@
 $twoBlock = get_field('two_block', $block_id);
 $twoBlockContent = $twoBlock['two_block_content'];
 ?>
-<section id="grid-block-<?php echo $block_id; ?>" class="dsn:mb-10 dsn:px-0">
+<section id="two-block-<?php echo $block_id; ?>" class="dsn:mb-10 dsn:px-0">
 <div class="dsn:container dsn:mx-auto">
         <?php if($twoBlockContent) { 
             foreach($twoBlockContent as $block) { 
