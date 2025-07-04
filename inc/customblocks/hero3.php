@@ -29,7 +29,7 @@
 
         
 
-        <div class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15">
+        <section id="hero-block-<?php echo $block_id; ?>" class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15">
         <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:gap-5">
       
         <div style="background:url('<?php if($primaryBGtype == 'img') { echo $primaryBGImg['url']; }?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1 dsn:lg:order-1 dsn:relative dsn:w-full dsn:h-full dsn:min-h-[400px] dsn:lg:min-h-[600px] dsn:lg:w-7/12 dsn:lg:row-span-2 dsn:p-0 dsn:flex dsn:flex-col dsn:lg:order-1 dsn:justify-end dsn:overflow-hidden">
@@ -100,7 +100,7 @@
         </div>   
        </div>
       </div>
-    </div>
+                 </section>
     
 
 <style>

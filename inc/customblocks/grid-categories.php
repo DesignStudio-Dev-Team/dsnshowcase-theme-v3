@@ -5,7 +5,7 @@ $cta = $gridCategories['cta'];
 $categories = $gridCategories['categories'];
 $bgImg = $gridCategories['background_image'];
 ?>
-<section class="dsn:my-0 dsn:py-50"  style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
+<section id="grid-category-<?php echo $block_id; ?>" class="dsn:my-0 dsn:py-50"  style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
     <div class="dsn:w-2/3 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:xl:grid-cols-4 dsn:grid-rows-4 dsn:gap-10">
       <div class="dsn:p-10 dsn:text-left dsn:row-span-4 dsn:flex dsn:flex-col dsn:items-center dsn:justify-center dsn:xl:min-h-[700px]">
             <h2><?php echo $title; ?></h2>

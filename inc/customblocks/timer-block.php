@@ -8,7 +8,7 @@ $description = $timerBlock['description'];
 $cta = $timerBlock['cta'];
 $dateTime = $timerBlock['date_time'];
 ?>
-<section class="dsn:mb-10">
+<section id="timer-block-<?php echo $block_id; ?>" class="dsn:mb-10">
 <div class="dsn:container dsn:mx-auto">
         <?php if($timerBlock) { 
          

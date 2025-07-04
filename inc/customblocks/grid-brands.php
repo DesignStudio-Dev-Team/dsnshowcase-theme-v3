@@ -6,7 +6,7 @@ $brands = $gridBrands['brands'];
 ?>
 
 
-<section id="gridBrands" class="dsn:py-20 dsn:px-0">
+<section id="gridBrands-<?php echo $block_id; ?>" class="dsn:py-20 dsn:px-0">
     <div class="dsn:text-left dsn:md:text-center dsn:mb-15">
         <h2><?php echo $title; ?></h2>
     </div>
@@ -45,7 +45,7 @@ $brands = $gridBrands['brands'];
 </section>
 
 <style>
-    #grid-brands h2 {
+    #grid-brands-<?php echo $block_id; ?> h2 {
         color: var(--dealerColor);
     }
 

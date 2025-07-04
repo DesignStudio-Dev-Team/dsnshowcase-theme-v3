@@ -5,7 +5,7 @@ $reasons = $gridReasons['reasons'];
 
 ?>
 
-<section id="gridReasons" class="dsn:py-20 dsn:bg-gradient-to-b dsn:from-[#F2F9FF] dsn:to-transparent dsn:px-10 dsn:md:px-0">
+<section id="gridReasons-<?php echo $block_id; ?>" class="dsn:py-20 dsn:bg-gradient-to-b dsn:from-[#F2F9FF] dsn:to-transparent dsn:px-10 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
     </div>
@@ -21,7 +21,7 @@ $reasons = $gridReasons['reasons'];
             <?php } ?>
                 <div class="hover-hide">
                     <span class="dsn:text-[60px] dsn:font-bold"><?php echo $x; ?></span>
-                    <h2 class="dsn:text-4xl dsn:px-10"><?php echo $reason['label']; ?></h2>
+                    <h3 class="dsn:px-10"><?php echo $reason['label']; ?></h3>
                 </div>
                 <div class="hover-show">
                     <p class="dsn:text-lg dsn:xl:text-2xl"><?php echo $reason['reason']; ?></p>

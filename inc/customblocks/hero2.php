@@ -27,7 +27,7 @@ if ($bar_position == 'bottom') {
 
 
 <div
-    class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15 dsn:px-4 dsn:md:px-0">
+    id="hero-block-<?php echo $block_id; ?>" class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15 dsn:px-4 dsn:md:px-0">
     
 
     <?php

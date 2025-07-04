@@ -43,7 +43,7 @@ $cta_buttons = !empty($iconBlockCtaBtns) && is_array($iconBlockCtaBtns)
 		}
 </style>
 
-<div class="get-footer dsn:relative">
+<div id="icon-block-<?php echo $block_id; ?>" class="get-footer dsn:relative">
 		 <div class="dsn:container dsn:mx-auto dsn:block dsn:relative dsn:text-white">
 			    <h4 class="dsn:font-bold m-0 dsn:text-3xl dsn:text-center"><?php echo $title; ?></h4>
 			 <div class="dsn:flex dsn:flex-wrap dsn:items-start dsn:justify-center dsn:mt-8 dsn:gap-10">

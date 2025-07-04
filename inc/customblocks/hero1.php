@@ -80,7 +80,7 @@ $configuration = get_field('configuration', $block_id);
 
         
 
-        <div class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15">
+        <div id="hero-block-<?php echo $block_id; ?>" class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15">
         <div class="dsn:flex dsn:flex-wrap dsn:lg:grid dsn:lg:grid-cols-3 dsn:gap-5">
       
         <div style="background:url('<?php echo $primaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1 dsn:lg:order-1

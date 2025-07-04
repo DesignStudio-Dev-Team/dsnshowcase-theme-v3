@@ -6,7 +6,7 @@ $titleOfShowcase = $productsShowcaseBlock['title_of_showcase'];
 $set_of_products = $productsShowcaseBlock['set_of_products'];
 ?>
 
-<section id="product-showcase" class="dsn:my-20">
+<section id="product-showcase-<?php echo $block_id; ?>" class="dsn:my-20">
     <div class="product-showcase-title-block dsn:container dsn:mx-auto dsn:relative dsn:text-center">
     <?php if ($title) { ?> <h2 class="dsn:mb-4"><?php echo $title; ?></h2> <?php } ?>
     <?php if ($description) { ?>  <p class="dsn:mb-10"><?php echo $description; ?></p> <?php } ?>
@@ -165,11 +165,11 @@ wp_reset_postdata();
 .product-showcase-inner, .product_shocase_add_to_cart {
     background: #286632; 
 }
-#product-showcase .product-title {
+#product-showcase-<?php echo $block_id; ?> .product-title {
     color: #007437;
     height: 130px;
 }
-#product-showcase .product-slider-nav:before {
+#product-showcase-<?php echo $block_id; ?> .product-slider-nav:before {
     content: "";
     width: 20%;
     background: linear-gradient(45deg, transparent, #286632);
@@ -178,7 +178,7 @@ wp_reset_postdata();
     right: 0;
     z-index: 99;
 }
-    #product-showcase .progress {
+    #product-showcase-<?php echo $block_id; ?> .progress {
         display: block;
         width: 90%;
         height: 10px;
@@ -193,39 +193,39 @@ wp_reset_postdata();
         left: 0;
         bottom: 1em;
     }
-    #product-showcase .all-products .slider-count {
+    #product-showcase-<?php echo $block_id; ?> .all-products .slider-count {
         position: absolute;
         right: 27px;
         bottom: -6px;
         width: 44px;
     }
-     #product-showcase .all-products  .slider-count p {
+     #product-showcase-<?php echo $block_id; ?> .all-products  .slider-count p {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
 }
-    #product-showcase .all-products {
+    #product-showcase-<?php echo $block_id; ?> .all-products {
         padding-bottom: 4em;
         margin-left: 0;
         margin-right: 0;
     }
-    #product-showcase .product-slider-for {
+    #product-showcase-<?php echo $block_id; ?> .product-slider-for {
        margin-left: 0;
         margin-right: 0; 
     }
-    #product-showcase .product-slider-nav {
+    #product-showcase-<?php echo $block_id; ?> .product-slider-nav {
     margin-left: 0;
     margin-right: 0;
     }
-   #product-showcase .product-box {
+   #product-showcase-<?php echo $block_id; ?> .product-box {
     min-height: 370px;
     background: #fff;
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
    }
-#product-showcase .sr-only {
+#product-showcase-<?php echo $block_id; ?> .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -235,24 +235,24 @@ wp_reset_postdata();
   clip: rect(0,0,0,0);
   border: 0;
 }
-#product-showcase .product-slider-nav .slide-nav-label:hover {
+#product-showcase-<?php echo $block_id; ?> .product-slider-nav .slide-nav-label:hover {
     background: #1e4925;
 }
-  #product-showcase .thumbnail img {
+  #product-showcase-<?php echo $block_id; ?> .thumbnail img {
     margin-left: auto;
     margin-right: auto;
     }
-    #product-showcase .product-slider-nav .slick-track {
+    #product-showcase-<?php echo $block_id; ?> .product-slider-nav .slick-track {
         margin-left: 0;
     }
-    #product-showcase .product-slider-nav .slick-list {
+    #product-showcase-<?php echo $block_id; ?> .product-slider-nav .slick-list {
         z-index: 9;
     }
-    #product-showcase .product-slider-nav .slide-nav-label {
+    #product-showcase-<?php echo $block_id; ?> .product-slider-nav .slide-nav-label {
         text-align: center;
         cursor: pointer;
     }
-    #product-showcase .slide-nav-label.slick-slide.slick-current.slick-active:after {
+    #product-showcase-<?php echo $block_id; ?> .slide-nav-label.slick-slide.slick-current.slick-active:after {
     content: "";
     width: 100%;
     height: 4px;
@@ -262,7 +262,7 @@ wp_reset_postdata();
     bottom: 0px;
     z-index: 99999;
 }
-#product-showcase .product-slider-nav:after {
+#product-showcase-<?php echo $block_id; ?> .product-slider-nav:after {
     content: "";
     width: 100%;
     height: 2px;
@@ -272,13 +272,13 @@ wp_reset_postdata();
     left: 0;
     z-index: 1;
 }
-#product-showcase .product-bottom {
+#product-showcase-<?php echo $block_id; ?> .product-bottom {
     background-color: #f3f4f6;
 }
 /* .product-bottom .single_add_to_cart_button.added {
     display: none;
 } */
- #product-showcase .product-bottom a.added_to_cart.wc-forward {
+ #product-showcase-<?php echo $block_id; ?> .product-bottom a.added_to_cart.wc-forward {
     position: absolute;
     left: 0;
     top: 0;
@@ -292,36 +292,36 @@ wp_reset_postdata();
     font-size: 2em;
     color: #fff;
 }
-#product-showcase .product-bottom span.product-prices {
+#product-showcase-<?php echo $block_id; ?> .product-bottom span.product-prices {
     margin-bottom: 0;
 }
-#product-showcase .product-bottom span.product-prices .amount {
+#product-showcase-<?php echo $block_id; ?> .product-bottom span.product-prices .amount {
     display: flex;
     align-items: center;
     margin-bottom: 0 !important;
 }
-#product-showcase a.product-inner .thumbnail img {
+#product-showcase-<?php echo $block_id; ?> a.product-inner .thumbnail img {
     height: 170px;
     width: 100%;
     object-fit: cover;
 }
-#product-showcase .slider-count p {
+#product-showcase-<?php echo $block_id; ?> .slider-count p {
     font-size: 18px;
 }
 
-#product-showcase .pull-left, #product-showcase .pull-right {
+#product-showcase-<?php echo $block_id; ?> .pull-left, #product-showcase-<?php echo $block_id; ?> .pull-right {
     width: 10px;
     height: 10px;
     position: absolute;
     bottom: 27px;
 }
-#product-showcase .pull-left {
+#product-showcase-<?php echo $block_id; ?> .pull-left {
     right: 65px;
 }
-#product-showcase .pull-right {
+#product-showcase-<?php echo $block_id; ?> .pull-right {
     right: 26px;
 }
-#product-showcase .pull-left:before, #product-showcase .pull-right:after {
+#product-showcase-<?php echo $block_id; ?> .pull-left:before, #product-showcase-<?php echo $block_id; ?> .pull-right:after {
     color: white;
     border-right: 2px solid currentcolor;
     border-bottom: 2px solid currentcolor;
@@ -332,61 +332,61 @@ wp_reset_postdata();
     cursor: pointer;
 }
 
-#product-showcase .pull-left:before{
+#product-showcase-<?php echo $block_id; ?> .pull-left:before{
     left: -16px;
     transform: rotate(135deg)
 }
-#product-showcase .pull-right:after{
+#product-showcase-<?php echo $block_id; ?> .pull-right:after{
     right: -16px;
     transform: rotate(-45deg)
 }
-#product-showcase span.loading-icon { 
+#product-showcase-<?php echo $block_id; ?> span.loading-icon { 
     display: none;
 }
-#product-showcase span.loading-icon svg { 
+#product-showcase-<?php echo $block_id; ?> span.loading-icon svg { 
     width: 20px;
 } 
-#product-showcase .loading span.loading-icon {
+#product-showcase-<?php echo $block_id; ?> .loading span.loading-icon {
     display: block;
 }
-#product-showcase .loading span.add-to-cart-icon {
+#product-showcase-<?php echo $block_id; ?> .loading span.add-to-cart-icon {
     display: none;
 }
 
 @media only screen and (max-width: 1800px) {
-    #product-showcase .product-box {
+    #product-showcase-<?php echo $block_id; ?> .product-box {
         margin-left: 5px;
         margin-right: 5px;
     }
-    #product-showcase a.product-inner .thumbnail img {
+    #product-showcase-<?php echo $block_id; ?> a.product-inner .thumbnail img {
     height: 250px;
 }
 }
 @media only screen and (max-width: 1024px) {
-    #product-showcase .all-products {
+    #product-showcase-<?php echo $block_id; ?> .all-products {
         margin-left: 20px;
         margin-right: 20px;
     }
-    #product-showcase .progress {
+    #product-showcase-<?php echo $block_id; ?> .progress {
         width: 70%;
     }
-    #product-showcase .progress {
+    #product-showcase-<?php echo $block_id; ?> .progress {
         bottom: 1.5em;
     }
-    #product-showcase .all-products .slider-count {
+    #product-showcase-<?php echo $block_id; ?> .all-products .slider-count {
         bottom: 0;
         right: 0;
     }
-    #product-showcase .pull-left, #product-showcase .pull-right {
+    #product-showcase-<?php echo $block_id; ?> .pull-left, #product-showcase .pull-right {
         bottom: 33px;
     }
-    #product-showcase .pull-left {
+    #product-showcase-<?php echo $block_id; ?> .pull-left {
     right: 35px;
     }
-    #product-showcase .pull-right {
+    #product-showcase-<?php echo $block_id; ?> .pull-right {
     right: 0px;
     }
-    #product-showcase .product-slider-nav:before {
+    #product-showcase-<?php echo $block_id; ?> .product-slider-nav:before {
     content: "";
     width: 20%;
     background: linear-gradient(45deg, transparent, #286632);

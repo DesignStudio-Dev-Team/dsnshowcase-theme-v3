@@ -21,10 +21,10 @@ if($videoType == 'youtube') {
 }
 
 ?>
-<section class="dsn:mb-10">
+<section id="video-block-<?php echo $block_id; ?>" class="dsn:mb-10">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:grid dsn:grid-cols-1 dsn:xl:grid-cols-6 dsn:gap-10">
-        <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:flex dsn:flex-col dsn:bg-cover dsn:bg-center dsn:h-66 dsn:md:h-auto" style="background-image: url(<?php echo $bgImgUrl; ?>);">
+        <div id="left-col-<?php echo $block_id; ?>" class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:flex dsn:flex-col dsn:bg-cover dsn:bg-center dsn:h-66 dsn:md:h-auto" style="background-image: url(<?php echo $bgImgUrl; ?>);">
          <?php 
          if($video && $videoType == 'youtube') {
             //echo the video here
@@ -40,7 +40,7 @@ if($videoType == 'youtube') {
          
          ?>
         </div>
-        <div class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:md:col-span-2  dsn:flex dsn:flex-col">
+        <div id="right-col-<?php echo $block_id; ?>" class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:md:col-span-2  dsn:flex dsn:flex-col">
          <div class="dsn:bg-[#F1F0EC] dsn:p-4 dsn:md:py-10 dsn:md:px-5">
             <h2 class="dsn:text-center"><?php echo $title; ?></h2>
             <ul class="dsn:pl-0">
