@@ -68,11 +68,11 @@ if(function_exists('get_field')) {
                             if( ( $echoStart <= $today ) && ( $today <= $echoEnd ) ){
                                 // $thePost = array('ID' => get_the_ID() , 'post_status' => 'publish');
                                 // wp_update_post($thePost);
-                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden dsn:break-inside dsn:mb-8 dsn:border"> <?php
+                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden dsn:break-inside dsn:mb-8 dsn:border dsn:list-none"> <?php
                             } else {
                                 // $thePost = array('ID' => get_the_ID() , 'post_status' => 'draft');
                                 // wp_update_post($thePost);
-                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden" style="display:none"> <?php
+                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden dsn:list-none" style="display:none"> <?php
                             }
 
                             
@@ -166,59 +166,52 @@ if(function_exists('get_field')) {
                         <?php
                         $size = get_field('promotion_card_size');
                         if ($size == 'small') {
-                            $today = date('Ymd');
+                             $today = date('Ymd');
                             $startPromotion = get_field('promo_start_date');
                             $endPromotion = get_field('promo_end_date');
                             $dateStart = DateTime::createFromFormat('F j, Y', $startPromotion);
                             $dateEnd = DateTime::createFromFormat('F j, Y', $endPromotion);
-                            if ($dateStart) {
+                            if ($dateStart)
                                 $echoStart = $dateStart->format('Ymd');
-                            } else {
-                                $echoStart = 0;
-                            }
-                            if ($dateEnd) {
+                            if ($dateEnd)
                                 $echoEnd = $dateEnd->format('Ymd');
-                            } else {
-                                $echoEnd = 0;
-                            }
                             $hide_title = get_field('hide_title');
-
-                            if(($echoStart <= $today) && ($today <= $echoEnd)) {
-                                $thePost = array('ID' => get_the_ID() , 'post_status' => 'publish');
-                                wp_update_post($thePost);
-                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden dsn:break-inside dsn:mb-8 dsn:border"> <?php
+                            
+                            if( ( $echoStart <= $today ) && ( $today <= $echoEnd ) ){
+                                // $thePost = array('ID' => get_the_ID() , 'post_status' => 'publish');
+                                // wp_update_post($thePost);
+                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden dsn:break-inside dsn:mb-8 dsn:border dsn:list-none"> <?php
                             } else {
-                                //$thePost = array('ID' => get_the_ID() , 'post_status' => 'draft');
-                                //wp_update_post($thePost);
-                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden" style="display:none"> <?php
+                                // $thePost = array('ID' => get_the_ID() , 'post_status' => 'draft');
+                                // wp_update_post($thePost);
+                                ?> <li class="dsn:w-full dsn:relative dsn:text-white dsn:overflow-hidden dsn:list-none" style="display:none"> <?php
                             }
-                            ?>
+
+                            
+                                ?>
                             <a href="<?php the_permalink(); ?>">
-                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="w-full" style="height:unset;"/>
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="dsn:w-full" style="height:unset;"/>
                                 
                                         <div class="dsn:absolute dsn:top-0 dsn:w-full dsn:h-full gradient_card_<?php echo $cont; ?>">
                                             <?php
-                        //  CSS styles
-                        $gradient_card    =   get_field('color_gradient');
-                        wp_register_style('custom', false);
-                        wp_enqueue_style('custom');
+                            //  CSS styles
+                            $gradient_card    =   get_field('color_gradient');
+                            wp_register_style('custom', false);
+                            wp_enqueue_style('custom');
 
-                        $color_gradient_card_css   =   "
-                                                                        .gradient_card_$cont {
-                                                                            background: linear-gradient(to right, $gradient_card, transparent);
-                                                                            opacity: .9;
-                                                                        }
-                                                                    ";
-                        wp_add_inline_style('custom', $color_gradient_card_css);
-                        ?>
-                                                            </div> 
-                                        
-                                                    <?php
-                                                    $bubble = false;
-                        if(!empty(get_field('call_action_bubble')) && !empty(get_field('call_to_action_sub_title'))  && !empty(get_field('call_to_action_text'))) {
-                            $bubble = true;
-                        }
-                        ?>
+                            $color_gradient_card_css   =   "
+                                .gradient_card_$cont {
+                                                background: linear-gradient(to right, $gradient_card, transparent);
+                                                opacity: .9;
+                                            }";
+                            wp_add_inline_style('custom', $color_gradient_card_css); ?>
+                            </div> 
+                            <?php
+                             $bubble = false;
+                            if(!empty(get_field('call_action_bubble')) && !empty(get_field('call_to_action_sub_title'))  && !empty(get_field('call_to_action_text'))) {
+                                $bubble = true;
+                            }
+                            ?>
                                 <section class="dsn:absolute dsn:top-0 dsn:md:w-full dsn:h-full dsn:p-2 dsn:px-4 dsn:sm:p-8 dsn:md:p-2 dsn:md:px-4 dsn:lg:p-8">
                                     <?php if (get_field('promo_title')) { ?>
                                         <h3 class="dsn:font-extrabold dsn:text-white dsn:w-full"> <?php echo get_field('promo_title'); ?></h3>
@@ -240,7 +233,7 @@ if(function_exists('get_field')) {
                                 
                                 <?php if($bubble) { ?>
                                     
-                                    <section class="dsn:relative dsn:text-center dsn:bg-red-500 dsn:z-10 dsn:flex dsn:items-center dsn:justify-center dsn:md:justify-start dsn:md:absolute dsn:md:-bottom-32 dsn:md:-right-10 dsn:md:rounded-full dsn:p-2 dsn:md:pt-6 dsn:md:pr-2 dsn:flex-col bubble-card bubble_cont_<?php echo $cont; ?>"> 
+                                    <section class="dsn:relative dsn:text-center dsn:bg-red-500 dsn:z-10 dsn:flex dsn:items-center dsn:justify-center dsn:md:justify-start dsn:md:absolute dsn:md:-bottom-32 dsn:d:-right-10 dsn:md:rounded-full dsn:p-2 dsn:md:pt-6 dsn:md:pr-2 dsn:flex-col bubble-card bubble_cont_<?php echo $cont; ?>"> 
                                     <!--<section class="relative text-center bg-red-500 z-10 flex items-center justify-center lg:justify-start lg:absolute lg:-bottom-16 lg:-right-10 lg:rounded-full lg:pt-6 md:pr-2 lg:flex-col bubble-card bubble_cont_<?php echo $cont; ?>">-->    
                                     
                                         <?php
