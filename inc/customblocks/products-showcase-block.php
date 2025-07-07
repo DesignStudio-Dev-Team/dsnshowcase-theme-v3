@@ -396,7 +396,19 @@ wp_reset_postdata();
     z-index: 99;
 }
 }
+..all-products, .product-slider-nav, .product-slider-for {
+    opacity: 0;
+    visibility: hidden;
+	display: none;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+}
 
+..all-products.slick-initialized, .product-slider-nav.slick-initialized, .product-slider-for.slick-initialized {
+    visibility: visible;
+    opacity: 1;   
+	display: block;
+}
 </style>
 
 <script>

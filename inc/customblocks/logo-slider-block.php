@@ -102,4 +102,17 @@ $logos = $logoSliderBlock['logos'];
   margin-bottom: 16px;
   }
  }
+	.dsn-logo-slider {
+    opacity: 0;
+    visibility: hidden;
+	display: none;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+}
+
+.dsn-logo-slider.slick-initialized {
+    visibility: visible;
+    opacity: 1;   
+	display: block;
+}
 </style>
