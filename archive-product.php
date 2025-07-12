@@ -38,7 +38,7 @@ if ($image): ?>
             <div class="dsn:flex dsn:justify-center">
                 <div class="dsn:w-full dsn:md:w-3/4 dsn:lg:w-1/2">
                     <h1 class="dsn:text-center dsn:text-white"><?php woocommerce_page_title(); ?></h1>
-					
+          
                     <div class="ds-estore-search">
                         <form role="search" class="blog-search" method="get" action="<?= esc_url(home_url('/')); ?>">
 
@@ -62,12 +62,12 @@ if ($image): ?>
 }
 </style>
 <div class="dsn:container dsn:mx-auto dsn:pt-10">
-	<div class="dsn:row">
-	<h1 class="dsn:text-center"><?php woocommerce_page_title(); ?></h1>
+  <div class="dsn:row">
+  <h1 class="dsn:text-center"><?php woocommerce_page_title(); ?></h1>
         <?php  
-		the_archive_description( '<div class="taxonomy-description">', '</div>' );
-		?>
-	</div>
+    the_archive_description( '<div class="taxonomy-description">', '</div>' );
+    ?>
+  </div>
 </div>
 
     <?php endif; ?>
@@ -231,26 +231,39 @@ if ($image): ?>
       
         <div class="dsn:w-full">
             <?php
-            //set up posts per page and paged 
+            // Get the paged parameter
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $posts_per_page = get_option('posts_per_page');
-
-            // Handle posts per page from URL
-            if (isset($_GET['posts_per_page']) && is_numeric($_GET['posts_per_page'])) {
+            
+            // Handle posts per page
+            $posts_per_page = 36; // Default value
+            if (isset($_GET['posts_per_page']) && in_array($_GET['posts_per_page'], array('36', '72', '144'))) {
                 $posts_per_page = intval($_GET['posts_per_page']);
             }
 
-            // Handle sorting from URL
-            $orderby = 'menu_order';
-            $order = 'ASC';
+            // Handle sorting
+            $orderby = 'menu_order'; // Default value
+            $order = 'ASC'; // Default value
+            
             if (isset($_GET['sort_by']) && !empty($_GET['sort_by'])) {
                 $sort_parts = explode('-', sanitize_text_field($_GET['sort_by']));
                 if (count($sort_parts) == 2) {
-                    $orderby = $sort_parts[0];
-                    $order = strtoupper($sort_parts[1]);
+                    switch($sort_parts[0]) {
+                        case 'price':
+                            $orderby = 'dsn_price';
+                            $order = strtoupper($sort_parts[1]);
+                            break;
+                        case 'title':
+                            $orderby = 'title';
+                            $order = strtoupper($sort_parts[1]);
+                            break;
+                        default:
+                            $orderby = 'menu_order';
+                            $order = 'ASC';
+                    }
                 }
             }
 
+            // Set up the main query arguments
             $arg = array(
                 'post_type' => 'product',
                 'tax_query' => array(
@@ -265,6 +278,7 @@ if ($image): ?>
                 'posts_per_page' => $posts_per_page,
                 'paged' => $paged,
             );
+
             $the_query = new WP_Query($arg);
             ?>
             
@@ -305,9 +319,9 @@ if ($image): ?>
 
                             <select name="posts_per_page" id="ds-posts_per_page"
                                     class="ds-posts_per_page dsn:hidden dsn:lg:block">
-                                <option value="36" <?php echo (isset($_GET['posts_per_page']) && $_GET['posts_per_page'] == '36') || (!isset($_GET['posts_per_page']) && $posts_per_page == 36) ? 'selected' : ''; ?>>36 Per Page</option>
-                                <option value="72" <?php echo isset($_GET['posts_per_page']) && $_GET['posts_per_page'] == '72' ? 'selected' : ''; ?>>72 Per Page</option>
-                                <option value="144" <?php echo isset($_GET['posts_per_page']) && $_GET['posts_per_page'] == '144' ? 'selected' : ''; ?>>144 Per Page</option>
+                                <option value="36" <?php echo ($posts_per_page == 36) ? 'selected' : ''; ?>>36 Per Page</option>
+                                <option value="72" <?php echo ($posts_per_page == 72) ? 'selected' : ''; ?>>72 Per Page</option>
+                                <option value="144" <?php echo ($posts_per_page == 144) ? 'selected' : ''; ?>>144 Per Page</option>
                             </select>
                             <select name="sort_by" id="ds-sort_by">
                                 <option value="">Sort By:</option>
@@ -347,6 +361,10 @@ if ($image): ?>
                                   $product_price = $product->get_price_html();
                                   if (!$product_price) {
                                       $product_price = get_post_meta(get_the_ID(), '_regular_price', true);
+                                      //convert it with the woocommerce_price_format function
+                                      if ($product_price) {
+                                          $product_price = wc_price($product_price);
+                                      }
                                   }
                                   ?>  
                                   <div class="ds-product__price"><?php echo $product_price; ?></div>
@@ -360,16 +378,16 @@ if ($image): ?>
                     <?php endwhile; // end of the loop. ?>
              
                     <div class="dsn:flex ds-filters-footer-nav dsn:w-full">
-                        <div class="dsn:hidden dsn:lg:block">
-                            <select name="posts_per_page" id="ds-posts_per_page">
-                                <option value="36" <?php echo $posts_per_page == 36 ? 'selected' : ''; ?>>36 Per Page</option>
-                                <option value="72" <?php echo $posts_per_page == 72 ? 'selected' : ''; ?>>72 Per Page</option>
-                                <option value="144" <?php echo $posts_per_page == 144 ? 'selected' : ''; ?>>144 Per Page</option>
-                            </select>
-                            <span class="ds-filters-counter__value">of <?php echo $product_count; ?>
-                                products </span>
-                        </div>
-                        <div class="js-pagination">
+                    <div class="dsn:hidden dsn:lg:block">
+                        <select name="posts_per_page" class="ds-posts_per_page-footer" id="ds-posts_per_page_footer">
+                            <option value="36" <?php echo ($posts_per_page == 36) ? 'selected' : ''; ?>>36 Per Page</option>
+                            <option value="72" <?php echo ($posts_per_page == 72) ? 'selected' : ''; ?>>72 Per Page</option>
+                            <option value="144" <?php echo ($posts_per_page == 144) ? 'selected' : ''; ?>>144 Per Page</option>
+                        </select>
+                        <span class="ds-filters-counter__value">of <?php echo $product_count; ?>
+                            products </span>
+                    </div>
+                        <div id="dsPagination" class="js-pagination">
                             <?php foundation_pagination($the_query) ?>
                         </div>
                         <div class="ds-filters-footer-nav-right">
@@ -402,29 +420,30 @@ if ($image): ?>
                 var $body = $('body');
 
                 // Handle URL parameter changes for sorting and posts per page
-                $body.on('change', '#ds-sort_by, #ds-posts_per_page', function() {
+                function handlePerPageSortChange(e) {
                     var currentUrl = new URL(window.location.href);
                     var params = new URLSearchParams(currentUrl.search);
-                    
-                    // Update the relevant parameter based on which select changed
-                    if (this.id === 'ds-sort_by') {
-                        if (this.value) {
-                            params.set('sort_by', this.value);
+                    var changedId = e.target.id;
+                    var changedValue = e.target.value;
+                    if (changedId === 'ds-sort_by') {
+                        if (changedValue) {
+                            params.set('sort_by', changedValue);
                         } else {
                             params.delete('sort_by');
                         }
-                    } else { // Assuming it's #ds-posts_per_page
-                        if (this.value) {
-                            params.set('posts_per_page', this.value);
+                    } else if (changedId === 'ds-posts_per_page' || changedId === 'ds-posts_per_page_footer') {
+                        if (changedValue) {
+                            params.set('posts_per_page', changedValue);
                         } else {
                             params.delete('posts_per_page');
                         }
                     }
-                    
-                    // Preserve existing parameters that we want to keep
+                    // Always reset paged to 1 when changing per page or sort
+                    params.delete('paged');
                     currentUrl.search = params.toString();
                     window.location.href = currentUrl.toString();
-                });
+                }
+                $body.on('change', '#ds-sort_by, #ds-posts_per_page, #ds-posts_per_page_footer', handlePerPageSortChange);
 
                 // Handle other filter changes with AJAX
                 $body.on('submit', '#ds-filter, #ds-filters-search-wrap, .ds-estore-search form', function (e) {
@@ -554,7 +573,6 @@ if ($image): ?>
                         price_min: $('#price_min').val(),
                         price_max: $('#price_max').val(),
                         sale: sale,
-                        this_id: <?php echo $this_id; ?>
                         
                     }
 
@@ -651,25 +669,6 @@ if ($image): ?>
 
 <style>
 
-
-.pagination li
-{
-    list-style: none;
-}
-
-.ds-filters-footer-nav-right div
-{
-    display: none;
-}
-
-.pagination li .current
-{
-    color: #000 !important;
-    font-size: 26px;
-    margin-top: -6px;
-}
-
-
     /* Fix for dsn:container stuff */
     .page-template-template-estore #dsShowcaseContent{
        padding-left: 2.5rem;
@@ -728,6 +727,53 @@ if ($image): ?>
          }
      }
      
+        #dsPagination {
+        display: block;
+        width: auto;
+        margin: 50px 0px;
+        text-align: center;
+    }
+
+    #dsPagination .page-numbers .current,
+    #dsPagination .page-numbers li a:hover {
+        padding: 10px 14px !important;
+        background: #fff !important;
+        color: #666 !important;
+    }
+
+    #dsPagination .page-numbers .current,
+    #dsPagination .page-numbers a {
+        font-size: 1rem;
+    }
+
+    #dsPagination .page-numbers a:link,
+    #dsPagination .page-numbers a:visited {
+        padding: 10px 14px !important;
+        background: #fff !important;
+        color: #00a5e6 !important;
+        -webkit-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
+        box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
+        border: 1px solid #f0f0f0 !important;
+    }
+
+    #dsPagination .page-numbers {
+        border: none !important;
+        margin: 0;
+    }
+
+    #dsPagination ul li {
+        border-right: 4px solid #fff;
+        background: #fff !important;
+        display: inline-block;
+        padding: 0;
+    }
+
+    #dsPagination ul li:before {
+        display: none;
+    }
+
+
 .ds-filters {
   background-color:#f7f7f7;
   position:relative;

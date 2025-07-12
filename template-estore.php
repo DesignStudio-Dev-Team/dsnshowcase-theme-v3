@@ -523,7 +523,7 @@ if($cat_cols == '4_column') {
                                 <span class="ds-filters-counter__value"><?php echo $the_query->found_posts; ?>
                                 <?php echo dssLang($dssSiteLanguage)->template_store->products_to_explore;?> </span>
                             </div>
-                            <div class="js-pagination">
+                            <div id="dsPagination" class="js-pagination">
                                 <?php foundation_pagination($the_query) ?>
                             </div>
                             <div class="ds-filters-footer-nav-right">
@@ -857,24 +857,51 @@ if($cat_cols == '4_column') {
 
 
 <style>
+    #dsPagination {
+        display: block;
+        width: auto;
+        margin: 50px 0px;
+        text-align: center;
+    }
 
+    #dsPagination .page-numbers .current,
+    #dsPagination .page-numbers li a:hover {
+        padding: 10px 14px !important;
+        background: #fff !important;
+        color: #666 !important;
+    }
 
-.pagination li
-{
-    list-style: none;
-}
+    #dsPagination .page-numbers .current,
+    #dsPagination .page-numbers a {
+        font-size: 1rem;
+    }
 
-.ds-filters-footer-nav-right div
-{
-    display: none;
-}
+    #dsPagination .page-numbers a:link,
+    #dsPagination .page-numbers a:visited {
+        padding: 10px 14px !important;
+        background: #fff !important;
+        color: #00a5e6 !important;
+        -webkit-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
+        box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
+        border: 1px solid #f0f0f0 !important;
+    }
 
-.pagination li .current
-{
-    color: #000 !important;
-    font-size: 26px;
-    margin-top: -6px;
-}
+    #dsPagination .page-numbers {
+        border: none !important;
+        margin: 0;
+    }
+
+    #dsPagination ul li {
+        border-right: 4px solid #fff;
+        background: #fff !important;
+        display: inline-block;
+        padding: 0;
+    }
+
+    #dsPagination ul li:before {
+        display: none;
+    }
 
 .ds-estore-search-content h1 {
              font-size: 30px;
