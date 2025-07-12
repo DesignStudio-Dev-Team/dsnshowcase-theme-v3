@@ -65,12 +65,12 @@ if($contentContainer == 'Large') {
 
 ?>
 
-<section  class="dsn:mb-10 <?php echo $containerClass; ?>">
+<section id="visual-block-<?php echo $block_id; ?>" class="dsn:mb-10 <?php echo $containerClass; ?>">
 <?php if($bgType == 'image') { ?>
-<div class="dsn:h-auto dsn:lg:h-max" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
+<div class="dsn:h-auto dsn:lg:h-max visual-block-inner" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <?php } ?>
 <?php if($bgType == 'video') { ?>
-<div class="dsn:h-auto dsn:lg:h-[85vh] dsn:relative">
+<div class="dsn:h-auto dsn:lg:h-[70vh] dsn:relative">
       <video class="dsn:w-full dsn:h-full dsn:object-cover dsn:absolute" autoplay muted loop>
             <source src="<?php echo $videoLink; ?>" type="video/mp4">
             Your browser does not support the video tag.

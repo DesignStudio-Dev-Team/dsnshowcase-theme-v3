@@ -9,7 +9,7 @@ $contentCTA = $content['cta'];
 $logos = $logoSliderBlock['logos'];
 ?>
 
-<section class="dsn-logo-slider-container">
+<section id="logo-slider-<?php echo $block_id; ?>" class="dsn-logo-slider-container">
     <div class="dsn:container dsn:mx-auto dsn:py-20 dsn:px-4">
     <h2 class="dsn:text-center dsn:mb-10 dsn:text-2xl dsn:md:text-5xl"><?php if($title) { 
         echo $title; } ?></h2>
@@ -102,4 +102,17 @@ $logos = $logoSliderBlock['logos'];
   margin-bottom: 16px;
   }
  }
+	.dsn-logo-slider {
+    opacity: 0;
+    visibility: hidden;
+	display: none;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+}
+
+.dsn-logo-slider.slick-initialized {
+    visibility: visible;
+    opacity: 1;   
+	display: block;
+}
 </style>

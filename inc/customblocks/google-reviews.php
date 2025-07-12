@@ -4,7 +4,7 @@ $title = $googleReviews['title'];
 $description = $googleReviews['description'];
 
 ?>
-<section id="google-reviews" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:pt-10 dsn:mb-20">
+<section id="google-reviews-<?php echo $block_id; ?>" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:pt-10 dsn:mb-20">
     <h2 class="dsn:text-center"><?php echo $title; ?></h2>
    <?php if($description) { ?>
     <div class="dsn:mx-auto dsn:max-w-[900px]">
@@ -113,27 +113,27 @@ $description = $googleReviews['description'];
 </script>
 
 <style>
-#google-reviews .slick-next, #google-reviews .slick-prev {
+#google-reviews-<?php echo $block_id; ?> .slick-next, #google-reviews-<?php echo $block_id; ?> .slick-prev {
     position: absolute;
     bottom: -25px;
     top: auto;
 }
 
-#google-reviews .slick-prev {
+#google-reviews-<?php echo $block_id; ?> .slick-prev {
     margin-left: 48%;
 }
-#google-reviews .slick-next {
+#google-reviews-<?php echo $block_id; ?> .slick-next {
     margin-right: 48%;
 }
-#google-reviews button.slick-next:before, #google-reviews button.slick-prev:before {
+#google-reviews-<?php echo $block_id; ?> button.slick-next:before, #google-reviews-<?php echo $block_id; ?> button.slick-prev:before {
 color: var(--dealerColor) !important;
 }
 
 @media only screen and (max-width: 700px) {
-   #google-reviews .slick-prev {
+   #google-reviews-<?php echo $block_id; ?> .slick-prev {
     margin-left: 42%;
 }
-#google-reviews .slick-next {
+#google-reviews-<?php echo $block_id; ?> .slick-next {
     margin-right: 42%;
 }
 }
