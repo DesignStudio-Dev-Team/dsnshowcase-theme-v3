@@ -316,9 +316,9 @@ $pageContent = get_the_content();
 </script>
 
 <style>
-    #dsPagination {
+       #dsPagination {
         display: block;
-        width: 100%;
+        width: auto;
         margin: 50px 0px;
         text-align: center;
     }
@@ -326,7 +326,7 @@ $pageContent = get_the_content();
     #dsPagination .page-numbers .current,
     #dsPagination .page-numbers li a:hover {
         padding: 10px 14px !important;
-        background: var(--dsw-main-dealer-color) !important;
+        background: #fff !important;
         color: #666 !important;
     }
 
