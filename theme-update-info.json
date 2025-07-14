@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.1",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.1",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.1/dsnshowcase.zip",
+  "version": "v3.5.22",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.22",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.22/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-06-26",
+  "last_updated": "2025-07-14",
   "sections": {
-    "changelog": "new release"
+    "changelog": "Merge pull request #86 from DesignStudio-Dev-Team/juan\n\nfixing an issue with updater"
   }
 }
