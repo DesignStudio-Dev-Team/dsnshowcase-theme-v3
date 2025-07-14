@@ -212,10 +212,11 @@ $('.all-products').on('init', function(event, slick){
 
   $slider.slick({
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     speed: 400,
     infinite: true,
     arrows: true,
+    draggable: true,
     prevArrow:"<button type='button' class='pull-left'></button>",
     nextArrow:"<button type='button' class='pull-right'></button>",
     responsive: [    

@@ -1318,3 +1318,21 @@ add_filter('posts_orderby', 'prioritize_products', 10, 2);
 //prevent emails being sent to site admin on every plugin update
 remove_action('admin_notices', 'update_nag');
 remove_action('wp_mails', 'send_plugin_update_notification');
+
+
+add_filter( 'acf/load_value/type=post_object', 'format_order_for_wpml' );
+add_filter( 'acf/load_value/type=relationship', 'format_order_for_wpml' );
+function format_order_for_wpml( $value ){
+    // Only apply if $value is an array and not empty
+    if ( ! is_array( $value ) || empty( $value ) ) {
+        return $value;
+    }
+
+    $lang = apply_filters( 'wpml_current_language', null );
+
+    foreach ( $value as $key => $id ) {
+        $type = get_post_type( $id );
+        $value[$key] = apply_filters( 'wpml_object_id', $id, $type, true, $lang);
+    }
+    return $value;
+}
