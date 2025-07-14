@@ -33,9 +33,9 @@ jobs:
         run: |
           # Get the commit message of the last commit for the tagged commit
           LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B ${{ github.ref }})
-          # Escape double quotes for JSON
-          ESCAPED_COMMIT_MESSAGE=$(echo "$LAST_COMMIT_MESSAGE" | sed 's/"/\\"/g')
-          echo "COMMIT_MESSAGE=$ESCAPED_COMMIT_MESSAGE" >> $GITHUB_ENV
+          # Escape for JSON: backslashes, quotes, and newlines to create a single-line string.
+          ESCAPED_COMMIT_MESSAGE=$(echo "$LAST_COMMIT_MESSAGE" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e ':a;N;$!ba;s/\n/\\n/g')
+          echo "COMMIT_MESSAGE=${ESCAPED_COMMIT_MESSAGE}" >> $GITHUB_ENV
 
       - name: Update style.css version
         run: |
