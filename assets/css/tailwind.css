@@ -68,7 +68,7 @@
     }
     /* Headings */
     h1 {
-        @apply dsn:text-4xl dsn:md:text-6xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
+        @apply dsn:text-4xl dsn:md:text-6xl dsn:font-bold dsn:lg:mb-15 dsn:leading-tight;
     }
 
     h2 {
@@ -96,7 +96,9 @@
     ul {
         @apply dsn:list-disc dsn:my-4 dsn:mx-0 dsn:pl-10 dsn:text-xl;
     }
-
+    li {
+        @apply dsn:text-xl dsn:leading-relaxed dsn:mb-1;
+    }
     /* Second level unordered list */
     ul ul {
         @apply dsn:list-[circle] dsn:my-0.5;
@@ -119,7 +121,7 @@
     @layer md { 
         /* Headings */
     h1 {
-        @apply dsn:text-6xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
+        @apply dsn:text-6xl dsn:font-bold dsn:mb-15 dsn:leading-tight;
     }
 
     h2 {

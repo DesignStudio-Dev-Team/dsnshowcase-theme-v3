@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<main class="dsn:container dsn:mx-auto">
+<main class="dsn:container dsn:mx-auto dsn:pt-15">
     <?php if (have_posts()): while (have_posts()): the_post(); ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class('dsn-prose dsn:mx-auto'); ?>>
             <h1 class="dsn:text-4xl dsn:font-bold"><?php the_title(); ?></h1>
