@@ -169,3 +169,60 @@ function add_description_below_add_to_cart() {
     }
 }
 add_action('woocommerce_single_product_summary', 'add_description_below_add_to_cart', 125);
+
+//Check if Stock Status is on_reserve and remove cart button and change it to a button to reserve
+function dsn_stock_status_reserve() {
+    if (class_exists('WooCommerce')) {
+        global $product;
+
+        if (!$product) {
+            return;
+        }
+
+        $stock_status = $product->get_stock_status();
+
+        if ($stock_status == 'on_reserve') {
+            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+
+            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
+        }
+    }
+}
+add_action('woocommerce_single_product_summary', 'dsn_stock_status_reserve', 1);
+
+function dsn_reserve_button() {
+    global $product;
+
+    if (!$product) {
+        return;
+    }
+    $product_name = $product->get_name();
+
+    $base_field_name = 'Syndified®_ecomm_cta_url_setting';
+    $reserve_url_base = get_option( $base_field_name );
+
+
+  // WPML Support
+        if ( function_exists( 'wpml_get_current_language' ) ) {
+            $current_language = wpml_get_current_language();
+            if ( $current_language && $current_language !== wpml_get_default_language() ) {
+    
+                $translated_field_name = $base_field_name . '_' . $current_language . '_BE';
+                $translated_field_value = get_option( $translated_field_name );
+                
+                if ( ! empty( $translated_field_value ) ) {
+                    $reserve_url_base = $translated_field_value;
+                }
+            }
+        }
+
+
+
+ if ( $reserve_url_base ) {
+            $product_name_encoded = urlencode( $product->get_name() );
+            $reserve_url = $reserve_url_base . '?pn=' . $product_name_encoded;
+        echo '<a href="' . esc_url($reserve_url) . '" class="button alt">' . __('Reserve', 'dsnshowcase') . '</a>';
+    } else {
+        echo '<p>' . __('Contact us to reserve this product', 'dsnshowcase') . '</p>';
+    }
+}
