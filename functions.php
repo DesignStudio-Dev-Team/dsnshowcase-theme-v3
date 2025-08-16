@@ -426,4 +426,13 @@ add_action('admin_init', function() {
         error_log('Plugin deactivation/deletion failed: ' . $result->get_error_message());
     }
 });
+
+
+// disable xmlrpc
+add_filter('xmlrpc_methods', function () {
+    return [];
+}, PHP_INT_MAX);
+
+add_filter('xmlrpc_enabled', '__return_false');
+
 ?>
