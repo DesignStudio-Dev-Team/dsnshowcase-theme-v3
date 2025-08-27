@@ -85,7 +85,7 @@ function foundation_pagination($query = '')
         'type' => 'list'
     ));
 
-    $pagination = str_replace('page-numbers', 'pagination', $links ?? '');
+    $pagination = str_replace( "class='page-numbers'", "class='pagination'", $links ?? '' );
 
     echo $pagination;
 }
@@ -124,8 +124,8 @@ function ds_filtration()
     $sort_by = $_POST['orderby'] . '-' . $_POST['order'];
 
     if ($_POST['orderby'] == 'price') {
-        $args['orderby'] = 'meta_value_num';
-        $args['meta_key'] = '_price';
+        $args['orderby'] = 'dsn_price';
+        // $args['meta_key'] is no longer needed, handled by custom SQL filters
     }
 
     if (isset($_POST['search']) && !empty($_POST['search'])) {
@@ -828,6 +828,65 @@ function register_my_plugin_extra_replacements() {
 if (function_exists('wpseo_register_var_replacement'))
     add_action( 'wpseo_register_extra_replacements', 'register_my_plugin_extra_replacements' );
 
+/**
+ * Custom sorting for product price to consider _price and _regular_price.
+ *
+ * @param string $orderby_sql The ORDERBY clause of the query.
+ * @param WP_Query $query The WP_Query instance.
+ * @return string The modified ORDERBY clause.
+ */
+function dsn_orderby_price_dual_key( $orderby_sql, $query ) {
+    // Only apply to our specific price sort
+    if ( 'dsn_price' !== $query->get( 'orderby' ) ) {
+        return $orderby_sql;
+    }
+
+    global $wpdb;
+    $order = $query->get( 'order' );
+    if ( ! in_array( strtoupper( $order ), array( 'ASC', 'DESC' ) ) ) {
+        $order = 'ASC';
+    }
+
+    // Order by _price if it exists, otherwise by _regular_price
+    $orderby_sql = "CAST(COALESCE(price_meta.meta_value, regular_price_meta.meta_value) AS DECIMAL(10,2)) $order, {$wpdb->posts}.post_date DESC";
+
+    return $orderby_sql;
+}
+add_filter( 'posts_orderby', 'dsn_orderby_price_dual_key', 10, 2 );
+
+/**
+ * Custom join for product price to consider _price and _regular_price.
+ *
+ * @param string $join The JOIN clause of the query.
+ * @param WP_Query $query The WP_Query instance.
+ * @return string The modified JOIN clause.
+ */
+function dsn_join_price_dual_key( $join, $query ) {
+    // Only apply to our specific price sort
+    if ( 'dsn_price' !== $query->get( 'orderby' ) ) {
+        return $join;
+    }
+
+    global $wpdb;
+    // Join for _price
+    $join .= " LEFT JOIN {$wpdb->postmeta} AS price_meta ON ({$wpdb->posts}.ID = price_meta.post_id AND price_meta.meta_key = '_price')";
+    // Join for _regular_price
+    $join .= " LEFT JOIN {$wpdb->postmeta} AS regular_price_meta ON ({$wpdb->posts}.ID = regular_price_meta.post_id AND regular_price_meta.meta_key = '_regular_price')";
+    
+    return $join;
+}
+add_filter( 'posts_join', 'dsn_join_price_dual_key', 10, 2 );
+
+/**
+ * Ensure products with either price key are included when sorting by price.
+ */
+add_filter( 'posts_where', function( $where, $query ) {
+    if ( 'dsn_price' === $query->get( 'orderby' ) ) {
+        $where .= " AND (price_meta.meta_key IS NOT NULL OR regular_price_meta.meta_key IS NOT NULL) ";
+    }
+    return $where;
+}, 10, 2 );
+
 add_filter('gform_confirmation_anchor', '__return_false');
 
 
@@ -1259,3 +1318,21 @@ add_filter('posts_orderby', 'prioritize_products', 10, 2);
 //prevent emails being sent to site admin on every plugin update
 remove_action('admin_notices', 'update_nag');
 remove_action('wp_mails', 'send_plugin_update_notification');
+
+
+add_filter( 'acf/load_value/type=post_object', 'format_order_for_wpml' );
+add_filter( 'acf/load_value/type=relationship', 'format_order_for_wpml' );
+function format_order_for_wpml( $value ){
+    // Only apply if $value is an array and not empty
+    if ( ! is_array( $value ) || empty( $value ) ) {
+        return $value;
+    }
+
+    $lang = apply_filters( 'wpml_current_language', null );
+
+    foreach ( $value as $key => $id ) {
+        $type = get_post_type( $id );
+        $value[$key] = apply_filters( 'wpml_object_id', $id, $type, true, $lang);
+    }
+    return $value;
+}
