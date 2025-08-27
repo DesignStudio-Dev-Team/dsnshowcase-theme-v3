@@ -442,6 +442,15 @@ add_action( 'wp_head', function() {
     }
 });
 
+// Prevent Google indexing of pages that start with /wp-content/ or /wp-json
+add_action( 'template_redirect', function() {
+    $request_uri = $_SERVER['REQUEST_URI'];
+
+    if ( strpos( $request_uri, '/wp-content/' ) === 0 || strpos( $request_uri, '/wp-json' ) === 0 ) {
+        header( 'X-Robots-Tag: noindex, nofollow', true );
+    }
+});
+
 
 // disable xmlrpc
 add_filter('xmlrpc_methods', function () {
