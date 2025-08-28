@@ -429,18 +429,18 @@ add_action('admin_init', function() {
 
 
 // Add canonical tag for all pages with query strings
-add_action( 'wp_head', function() {
-    global $wp;
+// add_action( 'wp_head', function() {
+//     global $wp;
 
-    // Check if the request has query parameters
-    if ( ! empty( $_GET ) ) {
-        // Get the current URL without query string
-        $base_url = home_url( add_query_arg( array(), $wp->request ) );
+//     // Check if the request has query parameters
+//     if ( ! empty( $_GET ) ) {
+//         // Get the current URL without query string
+//         $base_url = home_url( add_query_arg( array(), $wp->request ) );
 
-        // Output the canonical tag
-        echo '<link rel="canonical" href="' . esc_url( $base_url ) . '" />' . "\n";
-    }
-});
+//         // Output the canonical tag
+//         echo '<link rel="canonical" href="' . esc_url( $base_url ) . '" />' . "\n";
+//     }
+// });
 
 // Prevent Google indexing of pages that start with /wp-content/ or /wp-json
 add_action( 'template_redirect', function() {
