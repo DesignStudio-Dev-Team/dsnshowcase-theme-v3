@@ -442,6 +442,14 @@ add_action('admin_init', function() {
 //     }
 // });
 
+// For Yoast SEO so the titles are not too long
+add_filter('wpseo_title', function($title) {
+    if (strlen($title) > 60) {
+        $title = substr($title, 0, 57) . '…';
+    }
+    return $title;
+});
+
 // Prevent Google indexing of pages that start with /wp-content/ or /wp-json
 add_action( 'template_redirect', function() {
     $request_uri = $_SERVER['REQUEST_URI'];
