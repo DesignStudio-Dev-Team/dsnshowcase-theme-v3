@@ -426,4 +426,45 @@ add_action('admin_init', function() {
         error_log('Plugin deactivation/deletion failed: ' . $result->get_error_message());
     }
 });
+
+
+// Add canonical tag for all pages with query strings
+// add_action( 'wp_head', function() {
+//     global $wp;
+
+//     // Check if the request has query parameters
+//     if ( ! empty( $_GET ) ) {
+//         // Get the current URL without query string
+//         $base_url = home_url( add_query_arg( array(), $wp->request ) );
+
+//         // Output the canonical tag
+//         echo '<link rel="canonical" href="' . esc_url( $base_url ) . '" />' . "\n";
+//     }
+// });
+
+// For Yoast SEO so the titles are not too long
+add_filter('wpseo_title', function($title) {
+    if (strlen($title) > 60) {
+        $title = substr($title, 0, 57) . '…';
+    }
+    return $title;
+});
+
+// Prevent Google indexing of pages that start with /wp-content/ or /wp-json
+add_action( 'template_redirect', function() {
+    $request_uri = $_SERVER['REQUEST_URI'];
+
+    if ( strpos( $request_uri, '/wp-content/' ) === 0 || strpos( $request_uri, '/wp-json' ) === 0 ) {
+        header( 'X-Robots-Tag: noindex, nofollow', true );
+    }
+});
+
+
+// disable xmlrpc
+add_filter('xmlrpc_methods', function () {
+    return [];
+}, PHP_INT_MAX);
+
+add_filter('xmlrpc_enabled', '__return_false');
+
 ?>
