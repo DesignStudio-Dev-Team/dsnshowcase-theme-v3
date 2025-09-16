@@ -603,7 +603,7 @@ if ($image): ?>
                         },
                         success: function (data) {
                             $('.ds-filters-over').removeClass('show');
-                            $('#response').html(data); // insert data
+                            $('html').html(data); // insert data
 
                             // update value for product counter in filter section
                             if ($('.ds-filters-counter.hide-for-medium-down').length) {
