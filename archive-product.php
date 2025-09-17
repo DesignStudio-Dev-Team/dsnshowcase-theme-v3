@@ -335,7 +335,7 @@ if ($image): ?>
                     </div>
               </div>
               </div>
-                <div class="dsn:bg-gray-100 dsn:py-5">
+                <div id="dsw-server-rendered-response" class="dsn:bg-gray-100 dsn:py-5">
                 <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
                     <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                         <?php $product = wc_get_product(get_the_ID()); ?>
@@ -406,7 +406,7 @@ if ($image): ?>
                     </div>
                 </div>
 
-                   </div>
+                </div>
                 </div>
                 <?php do_action('woocommerce_after_main_content'); ?>
             <?php endif;
