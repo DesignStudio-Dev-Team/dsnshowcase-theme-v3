@@ -109,7 +109,7 @@ if ($image): ?>
   text-align: center;
 }
 </style>
-<div class="dsn:container dsn:mx-auto dsn:pt-10">
+<div class="dsn:container dsn:mx-auto">
   <div class="dsn:row">
   <h1 class="dsn:text-center"><?php woocommerce_page_title(); ?></h1>
         <?php  
