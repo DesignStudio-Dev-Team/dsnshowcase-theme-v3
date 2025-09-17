@@ -31,6 +31,54 @@ $this_obj = get_queried_object();
 
 $thumbnail_id = get_woocommerce_term_meta($all_categories, 'thumbnail_id', true);
 $image = wp_get_attachment_url($thumbnail_id);
+
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+// Handle posts per page
+$posts_per_page = 36; // Default value
+if (isset($_GET['posts_per_page']) && in_array($_GET['posts_per_page'], array('36', '72', '144'))) {
+  $posts_per_page = intval($_GET['posts_per_page']);
+}
+
+// Handle sorting
+$orderby = 'menu_order'; // Default value
+$order = 'ASC'; // Default value
+
+if (isset($_GET['sort_by']) && !empty($_GET['sort_by'])) {
+  $sort_parts = explode('-', sanitize_text_field($_GET['sort_by']));
+  if (count($sort_parts) == 2) {
+    switch($sort_parts[0]) {
+      case 'price':
+        $orderby = 'dsn_price';
+        $order = strtoupper($sort_parts[1]);
+        break;
+      case 'title':
+        $orderby = 'title';
+        $order = strtoupper($sort_parts[1]);
+        break;
+      default:
+        $orderby = 'menu_order';
+        $order = 'ASC';
+    }
+  }
+}
+
+// Set up the main query arguments
+$arg = array(
+  'post_type' => 'product',
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'product_cat',
+      'field' => 'id',
+      'terms' => $all_categories
+    )
+  ),
+  'orderby' => $orderby,
+  'order' => $order,
+  'posts_per_page' => $posts_per_page,
+  'paged' => $paged,
+);
+
 if ($image): ?>
 
     <div class="ds-archive-banner" style="background-image: url('<?php echo $image ?>')">
@@ -298,115 +346,13 @@ if ($image): ?>
                 $product_count = get_term_post_count('product_cat', $all_categories, $args);
                 ?>
 
-                <div class="dsn:container dsn:mx-auto">
+                <?php
+                  ds_filtration($all_categories, null,
+                    null, null, null,
+                    null, null, $orderby,
+                    $order, $posts_per_page, $paged);
+                ?>
 
-                <div id="response" class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap"  data-counter="<?php echo $product_count; ?>"
-                     data-categories="<?php echo $all_categories; ?>">
-                    <div class="dsn:flex ds-filters-nav dsn:w-full">
-                        <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
-                            <span class="ds-filters-counter__value"><?php echo $product_count; ?> </span>
-                            <?php _e(' Products to Explore', 'dsnshowcase'); ?>
-                        </div>
-                        <div class="ds-filters-nav-right">
-                            <button class="show-filters js-toggle-filters dsn:md:hidden dsn:relative">Filters
-                            </button>
-                            <form id="ds-filters-search-wrap" class="dsn:hidden dsn:md:flex dsn:relative"
-                                  action="<?php echo esc_url(home_url('/')); ?>">
-                                <input type="search" name="s" id="ds-filters-search" class="search__input"
-                                       placeholder="<?php _e('Search by keyword', 'dsnshowcase'); ?>"
-                                       value="<?php echo get_search_query(); ?>"/>
-                            </form>
-
-                            <select name="posts_per_page" id="ds-posts_per_page"
-                                    class="ds-posts_per_page dsn:hidden dsn:lg:block">
-                                <option value="36" <?php echo ($posts_per_page == 36) ? 'selected' : ''; ?>>36 Per Page</option>
-                                <option value="72" <?php echo ($posts_per_page == 72) ? 'selected' : ''; ?>>72 Per Page</option>
-                                <option value="144" <?php echo ($posts_per_page == 144) ? 'selected' : ''; ?>>144 Per Page</option>
-                            </select>
-                            <select name="sort_by" id="ds-sort_by">
-                                <option value="">Sort By:</option>
-                                <option value="price-asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price-asc' ? 'selected' : ''; ?>>Price (Low to High)</option>
-                                <option value="price-desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price-desc' ? 'selected' : ''; ?>>Price (High to Low)</option>
-                                <option value="title-asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'title-asc' ? 'selected' : ''; ?>>Name (A-Z)</option>
-                                <option value="title-desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'title-desc' ? 'selected' : ''; ?>>Name (Z-A)</option>
-                            </select>
-                        </div>
-
-                    </div>
-              </div>
-              </div>
-                <div id="dsw-server-rendered-response" class="dsn:bg-gray-100 dsn:py-5">
-                <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
-                    <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                        <?php $product = wc_get_product(get_the_ID()); ?>
-                        <div class="dsn:w-full dsn:sm:w-1/2 dsn:md:w-1/3 dsn:px-4 dsn:mb-12">
-                            <div class="ds-product dsn:bg-white dsn:p-5">
-                                <a href="<?php echo get_permalink() ?>">
-                                    <!-- <?php if ($product->is_on_sale()): ?>
-                                        <span class="ds-product__sale">Sale</span>
-                                    <?php endif; ?> -->
-                                    <span class="ds-product__image"
-                                          style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')">
-                                        <button class="single_add_to_cart_button dsn:hidden"
-                                                value="<?php echo get_the_ID(); ?>">
-                                              <i class="fas fa-shopping-cart"></i>
-                                                <i class="fas fa-spinner"></i>
-                                                <i class="far fa-check-circle"></i>
-                                        </button>
-                                    </span>
-                                    <span class="ds-product__title"><?php the_title(); ?></span>
-                                </a>
-                                <div class="ds-product__meta">
-                                  <?php //check if $product has a price or look for the price under _regular_price meta 
-                                  $product_price = $product->get_price_html();
-                                  if (!$product_price) {
-                                      $product_price = get_post_meta(get_the_ID(), '_regular_price', true);
-                                      //convert it with the woocommerce_price_format function
-                                      if ($product_price) {
-                                          $product_price = wc_price($product_price);
-                                      }
-                                  }
-                                  ?>  
-                                  <div class="ds-product__price"><?php echo $product_price; ?></div>
-                                  
-                                 
-
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php endwhile; // end of the loop. ?>
-             
-                    <div class="dsn:flex ds-filters-footer-nav dsn:w-full">
-                    <div class="dsn:hidden dsn:lg:block">
-                        <select name="posts_per_page" class="ds-posts_per_page-footer" id="ds-posts_per_page_footer">
-                            <option value="36" <?php echo ($posts_per_page == 36) ? 'selected' : ''; ?>>36 Per Page</option>
-                            <option value="72" <?php echo ($posts_per_page == 72) ? 'selected' : ''; ?>>72 Per Page</option>
-                            <option value="144" <?php echo ($posts_per_page == 144) ? 'selected' : ''; ?>>144 Per Page</option>
-                        </select>
-                        <span class="ds-filters-counter__value">of <?php echo $product_count; ?>
-                            products </span>
-                    </div>
-                        <div id="dsPagination" class="js-pagination">
-                            <?php foundation_pagination($the_query) ?>
-                        </div>
-                        <div class="ds-filters-footer-nav-right">
-                            <?php if ($the_query->max_num_pages && $the_query->max_num_pages > 1): ?>
-                                <div class="">
-                                    Go to page
-                                    <input type="number" name="paged" min="1"
-                                           max="<?php echo $the_query->max_num_pages; ?>"
-                                           id="ds-filters-paged">
-                                    of
-                                    <?php echo $the_query->max_num_pages; ?>
-                                </div>
-                            <?php endif; ?>
-                            <a href="#" id="toTop">Back to Top</a>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
                 </div>
                 <?php do_action('woocommerce_after_main_content'); ?>
             <?php endif;
@@ -414,7 +360,6 @@ if ($image): ?>
         </div>
 
         <script>
-            ;
             (function ($) {
 
                 var $body = $('body');
@@ -509,8 +454,6 @@ if ($image): ?>
 
                 // Keep the dsFilter function for other AJAX filters
                 var dsFilter = function (paged, posts_per_page) {
-                    event.preventDefault();
-
                     var filter = $('#ds-filter');
 
                     // gather categories
@@ -567,7 +510,8 @@ if ($image): ?>
                         posts_per_page: posts_per_page ?? $('#ds-posts_per_page').val(),
                         orderby: orderBy,
                         order: order,
-                        categories: categoriesCheckboxValue,
+                        categories: '<?php echo $all_categories; ?>',
+                        categories_checkbox: categoriesCheckboxValue,
                         brands: brandsCheckboxValue,
                         product_use: prUseCheckboxValue,
                         price_min: $('#price_min').val(),
@@ -607,7 +551,7 @@ if ($image): ?>
                         },
                         success: function (data) {
                             $('.ds-filters-over').removeClass('show');
-                            $('#response').html(data); // insert data
+                            $('#main').html(data);
 
                             // update value for product counter in filter section
                             if ($('.ds-filters-counter.hide-for-medium-down').length) {
@@ -667,6 +611,7 @@ if ($image): ?>
                 });
 
                 $(document).on('ready', function () {
+                    //dsFilter();
                     $('.ds-filters .ds-filters-counter__value').html($('#response').data('counter'));
                 });
             }(jQuery));

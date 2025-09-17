@@ -94,57 +94,66 @@ function foundation_pagination($query = '')
 add_action('wp_ajax_ds_filter', 'ds_filtration');
 add_action('wp_ajax_nopriv_ds_filter', 'ds_filtration');
 
-function ds_filtration()
+function ds_filtration($categories = null, $specials = null, $featured_image = null, $price_min = null, $price_max = null, $sale = null, $search = null, $order_by = null, $order = null, $posts_per_page = null, $paged = null)
 {
+  $categories     = $categories ?: $_POST['categories'];
+  $order          = $order ?: $_POST['order'];
+  $search         = $search ?: $_POST['search'];
+  $order_by       = $order_by ?: $_POST['orderby'];
+  $specials       = $specials ?: $_POST['specials'];
+  $featured_image = $featured_image ?: $_POST['featured_image'];
+  $price_min      = $price_min ?: $_POST['price_min'];
+  $price_max      = $price_max ?: $_POST['price_max'];
+  $sale           = $sale ?: $_POST['sale'];
+  $posts_per_page = $posts_per_page ?: $_POST['posts_per_page'];
+  $paged          = $paged ?: $_POST['paged'];
 
-    $catArgs = array(
-        'post_type'             => 'product',
-        'post_status'           => 'publish',
-        'posts_per_page'        => '24',
-        'order' => $_POST['order'],
-        'orderby' => $_POST['orderby'],
-        'tax_query'             => array(
+  $catArgs  = array(
+    'post_type'             => 'product',
+    'post_status'           => 'publish',
+    'posts_per_page'        => '24',
+    'order' => $order,
+    'orderby' => $order_by,
+    'tax_query'             => array(
             array(
-                'taxonomy'  => 'product_cat',
-                'field'     => 'slug',
-                'terms'     => $_POST['search'],
-                'operator'  => 'IN',
+              'taxonomy'  => 'product_cat',
+              'field'     => 'slug',
+              'terms'     => $search,
+              'operator'  => 'IN',
             )
         )
     );
 
 
     $args = array(
-        'post_type' => 'product',
-        'order' => $_POST['order'],
-        'orderby' => $_POST['orderby'],
-        'post_status' => 'publish'
+      'post_type' => 'product',
+      'order' => $order,
+      'orderby' => $order_by,
+      'post_status' => 'publish'
     );
 
-    $sort_by = $_POST['orderby'] . '-' . $_POST['order'];
+    $sort_by = $order_by. '-' .$order;
 
-    if ($_POST['orderby'] == 'price') {
+    if ($order_by === 'price') {
         $args['orderby'] = 'dsn_price';
-        // $args['meta_key'] is no longer needed, handled by custom SQL filters
     }
 
-    if (isset($_POST['search']) && !empty($_POST['search'])) {
-        $args['s'] = $_POST['search'];
+    if ( !empty($search)) {
+        $args['s'] = $search;
     }
 
-    if (isset($_POST['paged']) && !empty($_POST['paged'])) {
-        $args['paged'] = $_POST['paged'];
+    if ( !empty($paged)) {
+        $args['paged'] = $paged;
     }
 
-    if (isset($_POST['posts_per_page']) && !empty($_POST['posts_per_page'])) {
-        $args['posts_per_page'] = $_POST['posts_per_page'];
+    if ( !empty($posts_per_page)) {
+        $args['posts_per_page'] = $posts_per_page;
     } else {
         $args['posts_per_page'] = 24;
     }
 
-    // for categories
-    if (isset($_POST['categories']) && !empty($_POST['categories'])) {
-        $cat_array = explode(',', $_POST['categories']);
+  if ( !empty($categories)) {
+        $cat_array = explode(',', $categories);
         $args['tax_query'] = array(
             'relation ' => 'AND',
             array(
@@ -155,8 +164,7 @@ function ds_filtration()
         );
     }
 
-    $specials = get_field('specials_category', 'options');
-    if (isset($_POST['specials']) && $_POST['specials'] == true && $specials) {
+    if (!empty($specials) && get_field('specials_category', 'options')) {
         $args['tax_query'][] = array(
             'taxonomy' => 'product_cat',
             'field' => 'id',
@@ -164,38 +172,36 @@ function ds_filtration()
         );
     }
 
-    //
     $args['meta_query']['relation'] = 'AND';
 
-    // create $args['meta_query'] array if one of the following fields is filled
-    if (isset($_POST['price_min']) && $_POST['price_min'] || isset($_POST['price_max']) && $_POST['price_max'] || isset($_POST['featured_image']) && $_POST['featured_image'] == 'on') {
+    if (!empty($price_min) || !empty($price_max) || (isset($featured_image) && $featured_image === 'on')) {
         $args['meta_query'][0] = array('relation' => 'AND');
-    } // AND means that all conditions of meta_query should be true
+    }
 
     // if both minimum price and maximum price are specified we will use BETWEEN comparison
-    if (isset($_POST['price_min']) && $_POST['price_min'] && isset($_POST['price_max']) && $_POST['price_max']) {
+    if (!empty($price_min) && !empty($price_max)) {
         $args['meta_query'][0][] = array(
             'key' => '_price',
-            'value' => array($_POST['price_min'], $_POST['price_max']),
+            'value' => array($price_min, $price_max),
             'type' => 'numeric',
             'compare' => 'between'
         );
     } else {
         // if only min price is set
-        if (isset($_POST['price_min']) && $_POST['price_min']) {
+        if (!empty($price_min)) {
             $args['meta_query'][0][] = array(
                 'key' => '_price',
-                'value' => $_POST['price_min'],
+                'value' => $price_min,
                 'type' => 'numeric',
                 'compare' => '>'
             );
         }
 
         // if only max price is set
-        if (isset($_POST['price_max']) && $_POST['price_max']) {
+        if (!empty($price_max)) {
             $args['meta_query'][0][] = array(
                 'key' => '_price',
-                'value' => $_POST['price_max'],
+                'value' => $price_max,
                 'type' => 'numeric',
                 'compare' => '<'
             );
@@ -203,7 +209,7 @@ function ds_filtration()
     }
 
     // show only sale products
-    if (isset($_POST['sale']) && $_POST['sale'] == 'true') {
+    if (isset($sale) && $sale === 'true') {
         $args['meta_query'][1]['relation'] = 'OR';
         $args['meta_query'][1][] = array( // Simple products type
             'key' => '_sale_price',
@@ -234,10 +240,10 @@ function ds_filtration()
     $post_query_count = new WP_Query(array_merge($defaults, $args));
     $catArgs['posts_per_page'] = 10000000000000;
     $post_cat_query_count = new WP_Query(array_merge($defaults, $catArgs));
-    //$count_post_count = count (array_merge ( get_posts( array_merge( $defaults, $catArgs  ) ), get_posts( array_merge( $defaults, $args ) )  ));
-    //$count_post_count = $post_cat_query_count->found_posts + $post_query_count->found_posts;
-    if (!$post_query_count->found_posts && $post_cat_query_count->found_posts)
-        $post_query_count->found_posts = $post_cat_query_count->found_posts;
+
+    if (!$post_query_count->found_posts && $post_cat_query_count->found_posts) {
+      $post_query_count->found_posts = $post_cat_query_count->found_posts;
+    }
 
 
     // Merge the two results
@@ -250,37 +256,37 @@ function ds_filtration()
         'order'     => 'DESC', // If you need to keep the order from $post_ids
     ];
 
-    if (isset($_POST['posts_per_page']) && !empty($_POST['posts_per_page'])) {
-        $final_args['posts_per_page'] = $_POST['posts_per_page'];
+    if ( !empty($posts_per_page)) {
+        $final_args['posts_per_page'] = $posts_per_page;
     } else {
         $final_args['posts_per_page'] = 24;
     }
 
-    //print_r ($final_args);
     $the_query = new WP_Query($final_args);
-
-    //print_r ($post_query_count);
 ?>
-
-    <div class="flex-row ds-filters-nav w-full">
-        <div class="ds-filters-counter hidden md:block hide-for-medium-down">
-            <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
-            <?php _e(' Products to Explore', 'dealer-theme'); ?>
-        </div>
+    <div class="dsn:container dsn:mx-auto">
+    <div class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap"    data-counter="<?php echo $post_query_count->found_posts; ?>"
+        data-categories="<?php echo $categories; ?>"
+    >
+      <div class="dsn:flex ds-filters-nav dsn:w-full">
+        <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
+              <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
+              <?php _e(' Products to Explore', 'dealer-theme'); ?>
+          </div>
         <div class="ds-filters-nav-right">
             <button class="show-filters js-toggle-filters dsn:lg:hidden relative">Filters</button>
             <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex relative" action="<?php echo esc_url(home_url('/')); ?>">
-                <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $_POST['search']; ?>" />
+                <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $search; ?>" />
             </form>
 
             <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:hidden dsn:lg:block">
-                <option value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?>>24
+                <option value="24" <?php echo $posts_per_page == '24' ? 'selected' : ''; ?>>24
                     Per Page
                 </option>
-                <option value="36" <?php echo $_POST['posts_per_page'] == '36' ? 'selected' : ''; ?>>36
+                <option value="36" <?php echo $posts_per_page == '36' ? 'selected' : ''; ?>>36
                     Per Page
                 </option>
-                <option value="72" <?php echo $_POST['posts_per_page'] == '72' ? 'selected' : ''; ?>>72
+                <option value="72" <?php echo $posts_per_page == '72' ? 'selected' : ''; ?>>72
                     Per Page
                 </option>
             </select>
@@ -289,11 +295,11 @@ function ds_filtration()
                 <option value="price-desc" <?php echo $sort_by == 'price-desc' ? 'selected' : ''; ?>>
                     Price (High to Low)
                 </option>
-                
+
                 <option value="price-asc" <?php echo $sort_by == 'price-asc' ? 'selected' : ''; ?>>
                     Price (Low to High)
                 </option>
-           
+
                 <option value="title-asc" <?php echo $sort_by == 'title-asc' ? 'selected' : ''; ?>>
                     Name (A-Z)
                 </option>
@@ -302,11 +308,12 @@ function ds_filtration()
                 </option>
             </select>
         </div>
-
+      </div>
     </div>
-
-    <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
-        <div class="dsn:w-full dsn:flex dsn:-mr-4 dsn:flex-wrap">
+  </div>
+    <div class="dsn:bg-gray-100 dsn:py-5">
+      <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
+        <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
             <?php while ($the_query->have_posts()) :
                 $the_query->the_post(); ?>
                 <?php $product = wc_get_product(get_the_ID()); ?>
@@ -333,46 +340,58 @@ function ds_filtration()
                     </div>
                 </div>
             <?php endwhile; ?>
-        </div>
-
-        <div class="flex-row ds-filters-footer-nav w-full">
-            <div class="hide-for-medium-down hidden lg:block">
-                <!--<select name="posts_per_page" id="ds-posts_per_page">
-                    <option value="24" <?php echo $_POST['posts_per_page'] == '24' ? 'selected' : ''; ?>>24
+            <div class='dsn:flex ds-filters-footer-nav dsn:w-full'>
+            <div class='dsn:hidden dsn:lg:block'>
+              <!--<select name='posts_per_page' id='ds-posts_per_page'>
+                    <option value='24' <?php
+              echo $posts_per_page == '24' ? 'selected' : ''; ?>>24
                         Per Page
                     </option>
-                    <option value="36" <?php echo $_POST['posts_per_page'] == '36' ? 'selected' : ''; ?>>36
+                    <option value="36" <?php
+              echo $posts_per_page == '36' ? 'selected' : ''; ?>>36
                         Per Page
                     </option>
-                    <option value="72" <?php echo $_POST['posts_per_page'] == '72' ? 'selected' : ''; ?>>72
+                    <option value="72" <?php
+              echo $posts_per_page == '72' ? 'selected' : ''; ?>>72
                         Per Page
                     </option>
                 </select>-->
-                <span class="ds-filters-counter"><?php echo $post_query_count->found_posts; ?>
+              <span class="ds-filters-counter"><?php
+                echo $post_query_count->found_posts; ?>
                 Products to Explore </span>
             </div>
-            <div class="js-pagination">
-                <?php foundation_pagination($post_query_count) ?>
+            <div id="dsPagination" class="js-pagination">
+              <?php
+              foundation_pagination($post_query_count) ?>
             </div>
             <div class="ds-filters-footer-nav-right">
-                <?php if ($post_query_count->max_num_pages && $post_query_count->max_num_pages > 1) : ?>
-                    <div class="">
-                        Go to page
-                        <input type="number" name="paged" min="1" max="<?php echo $post_query_count->max_num_pages; ?>" id="ds-filters-paged">
-                        of
-                        <?php echo $post_query_count->max_num_pages; ?>
-                    </div>
-                <?php endif; ?>
-                <a href="#" class="dsw-primary-site-link" id="toTop">Back to Top</a>
+              <?php
+              if ($post_query_count->max_num_pages
+                && $post_query_count->max_num_pages > 1
+              ) : ?>
+                <div class="">
+                  Go to page
+                  <input type="number" name="paged" min="1" max="<?php
+                  echo $post_query_count->max_num_pages; ?>"
+                         id="ds-filters-paged">
+                  of
+                  <?php
+                  echo $post_query_count->max_num_pages; ?>
+                </div>
+              <?php
+              endif; ?>
+              <a href="#" class="dsw-primary-site-link" id="toTop">Back to
+                Top</a>
             </div>
+          </div>
         </div>
-
-    <?php wp_reset_postdata();
-    else :
-        echo '<h2 class="dsn:text-center" style="width: 100%">No products found</h2>';
-    endif;
-
-    die();
+      <?php wp_reset_postdata();
+        else :
+          echo '<h2 class="dsn:text-center" style="width: 100%">No products found</h2>';
+        endif;
+      ?>
+    </div>
+  <?php
 }
 
 add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
