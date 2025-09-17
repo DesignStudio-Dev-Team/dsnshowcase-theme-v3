@@ -300,7 +300,7 @@ if ($image): ?>
 
                 <div class="dsn:container dsn:mx-auto">
 
-                <div class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap" id="response" data-counter="<?php echo $product_count; ?>"
+                <div id="response" class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap"  data-counter="<?php echo $product_count; ?>"
                      data-categories="<?php echo $all_categories; ?>">
                     <div class="dsn:flex ds-filters-nav dsn:w-full">
                         <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
@@ -594,16 +594,20 @@ if ($image): ?>
                         data.search = dsEstoreSearch.val();
                     }
 
+                  const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
+                  console.log('dsFilter → AJAX URL', ajaxUrl, 'data', data);
+
                     $.ajax({
-                        url: filter.attr('action'),
+                        url: ajaxUrl,
                         data: data,
-                        type: filter.attr('method'), // POST
+                        type: 'POST',
+                        dataType: 'html',
                         beforeSend: function (xhr) {
                             $('.ds-filters-over').addClass('show');
                         },
                         success: function (data) {
                             $('.ds-filters-over').removeClass('show');
-                            $('body').innerHTML(data); // insert data
+                            $('#response').html(data); // insert data
 
                             // update value for product counter in filter section
                             if ($('.ds-filters-counter.hide-for-medium-down').length) {
@@ -611,6 +615,11 @@ if ($image): ?>
                             } else {
                                 $('.ds-filters-counter.show-for-medium-down').html('No products found')
                             }
+                        },
+                        error: function (xhr, status, error) {
+                            $('.ds-filters-over').removeClass('show');
+                            console.error('Filter AJAX error:', status, error);
+                            console.debug('Response:', xhr && xhr.responseText ? xhr.responseText.substring(0, 500) : '(no response)');
                         }
                     });
                     return false;
