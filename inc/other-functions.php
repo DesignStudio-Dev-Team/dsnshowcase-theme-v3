@@ -311,31 +311,50 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
       </div>
     </div>
   </div>
-    <div class="dsn:bg-gray-100 dsn:py-5">
+    <div class="dsn:py-5">
       <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
         <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
             <?php while ($the_query->have_posts()) :
                 $the_query->the_post(); ?>
                 <?php $product = wc_get_product(get_the_ID()); ?>
                 <div class="dsn:w-full dsn:sm:w-1/2 dsn:md:w-1/3 dsn:px-4 dsn:mb-12">
-                    <div class="ds-product dsn:bg-white dsn:p-5">
+                    <div class="ds-product dsn:bg-white dsn:border-1 dsn:border-solid dsn:border-gray-300">
                         <a href="<?php echo get_permalink() ?>">
                           <?php if ($product->is_on_sale()) : ?>
                               <span class="ds-product__sale">Sale</span>
                           <?php endif ?>
 
-                          <span class="ds-product__image" style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')">
-                              <?php if ($product->get_price_html()) { ?>
-                                  <button class="single_add_to_cart_button dsw-primary-site-background" value="<?php echo get_the_ID(); ?>">
-                                    <?php     dsn_icon('shopping-cart', 'dsw-w-5 dsw-h-5'); ?>
-
-                                  </button>
-                              <?php } ?>
-                          </span>
-                          <span class="ds-product__title"><?php the_title(); ?></span>
+                          <span class="ds-product__image" style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')"></span>
                         </a>
-                        <div class="ds-product__meta">
-                            <div class="ds-product__price"><?php echo $product->get_price_html(); ?></div>
+
+                        <h6 class='ds-product__brand dsn:p-4'>
+                          <?php get_the_brand($product); ?>
+                        </h6>
+
+                        <a href='<?php echo get_permalink() ?>'>
+                          <span class="ds-product__title dsn:px-4 dsn:mb-5">
+                            <?php the_title(); ?>
+                          </span>
+                        </a>
+                        <h6 class="ds-product__categories dsn:px-4 dsn:pb-5 dsn:normal-case dsn:m-0 dsn:text-base md:dsn:text-base lg:dsn:text-base dsn:font-dsw dsn:font-normal dsn:truncate dsn:grid-category">
+                          <?php get_the_categories($product); ?>
+                        </h6>
+                        <div class="ds-product__footer dsn:bg-gray-100 dsn:p-4">
+                          <div class='ds-product__meta'>
+                            <div class='ds-product__price'>
+                              <?php echo $product->get_price_html(); ?>
+                            </div>
+                            <?php if ($product->get_price_html()) { ?>
+                              <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>">
+                                    <span class='dsn:flex dsn:items-center'>
+                                      <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
+                                    </span>
+                                    <span class="dsn:flex dsn:items-center">
+                                      <?php     dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
+                                    </span>
+                              </button>
+                            <?php } ?>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -392,6 +411,25 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
       ?>
     </div>
   <?php
+}
+
+function get_the_categories(WC_Product $product)
+{
+  $category_ids    = $product->get_category_ids();
+  $category_titles = [];
+  foreach ($category_ids as $categoryId) {
+    $cat = get_term($categoryId, 'product_cat');
+
+    if ($cat && ! is_wp_error($cat)) {
+      $category_titles[] = $cat->name;
+    }
+  }
+  echo implode(' / ', $category_titles);
+}
+
+function get_the_brand(WC_Product $product)
+{
+    echo 'STIHL';
 }
 
 add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
