@@ -327,12 +327,18 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                           <span class="ds-product__image" style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')"></span>
                         </a>
 
+                        <h6 class='ds-product__brand dsn:p-4'>
+                          <?php get_the_brand($product); ?>
+                        </h6>
+
                         <a href='<?php echo get_permalink() ?>'>
                           <span class="ds-product__title dsn:px-4 dsn:mb-5">
                             <?php the_title(); ?>
                           </span>
                         </a>
-
+                        <h6 class="ds-product__categories dsn:px-4 dsn:pb-5 dsn:normal-case dsn:m-0 dsn:text-base md:dsn:text-base lg:dsn:text-base dsn:font-dsw dsn:font-normal dsn:truncate dsn:grid-category">
+                          <?php get_the_categories($product); ?>
+                        </h6>
                         <div class="ds-product__footer dsn:bg-gray-100 dsn:p-4">
                           <div class='ds-product__meta'>
                             <div class='ds-product__price'>
@@ -405,6 +411,25 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
       ?>
     </div>
   <?php
+}
+
+function get_the_categories(WC_Product $product)
+{
+  $category_ids    = $product->get_category_ids();
+  $category_titles = [];
+  foreach ($category_ids as $categoryId) {
+    $cat = get_term($categoryId, 'product_cat');
+
+    if ($cat && ! is_wp_error($cat)) {
+      $category_titles[] = $cat->name;
+    }
+  }
+  echo implode(' / ', $category_titles);
+}
+
+function get_the_brand(WC_Product $product)
+{
+    echo 'STIHL';
 }
 
 add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
