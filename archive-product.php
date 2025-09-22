@@ -8,7 +8,10 @@
  * @package    WooCommerce/Templates
  * @version     8.6.0
  */
-if (!defined('ABSPATH')) {
+const DSN_ALLOWED_PAGINATION_VALUES = ['24', '36', '72'];
+const DSN_DEFAULT_PAGINATION_VALUE  = 36;
+
+if ( ! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
@@ -35,9 +38,9 @@ $image = wp_get_attachment_url($thumbnail_id);
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 // Handle posts per page
-$posts_per_page = 36; // Default value
-if (isset($_GET['posts_per_page']) && in_array($_GET['posts_per_page'], array('36', '72', '144'))) {
-  $posts_per_page = intval($_GET['posts_per_page']);
+$posts_per_page = DSN_DEFAULT_PAGINATION_VALUE; // Default value
+if (isset($_GET['posts_per_page']) && in_array($_GET['posts_per_page'], DSN_ALLOWED_PAGINATION_VALUES, true)) {
+  $posts_per_page = (int) $_GET['posts_per_page'];
 }
 
 // Handle sorting
@@ -282,12 +285,6 @@ if ($image): ?>
             // Get the paged parameter
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
             
-            // Handle posts per page
-            $posts_per_page = 36; // Default value
-            if (isset($_GET['posts_per_page']) && in_array($_GET['posts_per_page'], array('36', '72', '144'))) {
-                $posts_per_page = intval($_GET['posts_per_page']);
-            }
-
             // Handle sorting
             $orderby = 'menu_order'; // Default value
             $order = 'ASC'; // Default value
@@ -360,34 +357,33 @@ if ($image): ?>
         </div>
 
         <script>
-            (function ($) {
+          const handlePerPageSortChange = e => {
+            const currentUrl = new URL(window.location.href);
+            const params = new URLSearchParams(currentUrl.search);
+            const changedId = e.target.id;
+            const changedValue = e.target.value;
+            
+            switch (changedId) {
+              case 'ds-sort_by':
+                changedValue ? params.set('sort_by', changedValue) : params.delete('sort_by');
+                break;
+              case 'ds-posts_per_page':
+              case 'ds-posts_per_page_footer':
+                console.log('posts_per_page', changedValue);
+                changedValue ? params.set('posts_per_page', changedValue) : params.delete('posts_per_page');
+                break;
+            }
+            // Always reset paged to 1 when changing per page or sort
+            params.delete('paged');
+            currentUrl.search = params.toString();
+            window.location.href = currentUrl.toString();
+          };
 
-                var $body = $('body');
+          (function ($) {
+
+                const $body = $('body');
 
                 // Handle URL parameter changes for sorting and posts per page
-                function handlePerPageSortChange(e) {
-                    var currentUrl = new URL(window.location.href);
-                    var params = new URLSearchParams(currentUrl.search);
-                    var changedId = e.target.id;
-                    var changedValue = e.target.value;
-                    if (changedId === 'ds-sort_by') {
-                        if (changedValue) {
-                            params.set('sort_by', changedValue);
-                        } else {
-                            params.delete('sort_by');
-                        }
-                    } else if (changedId === 'ds-posts_per_page' || changedId === 'ds-posts_per_page_footer') {
-                        if (changedValue) {
-                            params.set('posts_per_page', changedValue);
-                        } else {
-                            params.delete('posts_per_page');
-                        }
-                    }
-                    // Always reset paged to 1 when changing per page or sort
-                    params.delete('paged');
-                    currentUrl.search = params.toString();
-                    window.location.href = currentUrl.toString();
-                }
                 $body.on('change', '#ds-sort_by, #ds-posts_per_page, #ds-posts_per_page_footer', handlePerPageSortChange);
 
                 // Handle other filter changes with AJAX

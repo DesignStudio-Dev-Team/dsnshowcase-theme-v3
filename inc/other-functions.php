@@ -280,27 +280,27 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
             </form>
 
             <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:hidden dsn:lg:block">
-                <option value="24" <?php echo $posts_per_page == '24' ? 'selected' : ''; ?>>24
+                <option value="24" <?php echo $posts_per_page === 24 ? 'selected' : ''; ?>>24
                     Per Page
                 </option>
-                <option value="36" <?php echo $posts_per_page == '36' ? 'selected' : ''; ?>>36
+                <option value="36" <?php echo $posts_per_page === 36 ? 'selected' : ''; ?>>36
                     Per Page
                 </option>
-                <option value="72" <?php echo $posts_per_page == '72' ? 'selected' : ''; ?>>72
+                <option value="72" <?php echo $posts_per_page === 72 ? 'selected' : ''; ?>>72
                     Per Page
                 </option>
             </select>
             <select name="sort_by" id="ds-sort_by">
                 <option value="" disabled selected>Sort By:</option>
-                <option value="price-desc" <?php echo $sort_by == 'price-desc' ? 'selected' : ''; ?>>
+                <option value="price-desc" <?php echo $sort_by === 'price-desc' ? 'selected' : ''; ?>>
                     Price (High to Low)
                 </option>
 
-                <option value="price-asc" <?php echo $sort_by == 'price-asc' ? 'selected' : ''; ?>>
+                <option value="price-asc" <?php echo $sort_by === 'price-asc' ? 'selected' : ''; ?>>
                     Price (Low to High)
                 </option>
 
-                <option value="title-asc" <?php echo $sort_by == 'title-asc' ? 'selected' : ''; ?>>
+                <option value="title-asc" <?php echo $sort_by === 'title-asc' ? 'selected' : ''; ?>>
                     Name (A-Z)
                 </option>
                 <option value="title-desc" <?php echo $sort_by == 'title-desc' ? 'selected' : ''; ?>>
@@ -326,10 +326,6 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
 
                           <span class="ds-product__image" style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')"></span>
                         </a>
-
-                        <h6 class='ds-product__brand dsn:p-4'>
-                          <?php get_the_brand($product); ?>
-                        </h6>
 
                         <a href='<?php echo get_permalink() ?>'>
                           <span class="ds-product__title dsn:px-4 dsn:mb-5">
@@ -361,20 +357,6 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
             <?php endwhile; ?>
             <div class='dsn:flex ds-filters-footer-nav dsn:w-full'>
             <div class='dsn:hidden dsn:lg:block'>
-              <!--<select name='posts_per_page' id='ds-posts_per_page'>
-                    <option value='24' <?php
-              echo $posts_per_page == '24' ? 'selected' : ''; ?>>24
-                        Per Page
-                    </option>
-                    <option value="36" <?php
-              echo $posts_per_page == '36' ? 'selected' : ''; ?>>36
-                        Per Page
-                    </option>
-                    <option value="72" <?php
-              echo $posts_per_page == '72' ? 'selected' : ''; ?>>72
-                        Per Page
-                    </option>
-                </select>-->
               <span class="ds-filters-counter"><?php
                 echo $post_query_count->found_posts; ?>
                 Products to Explore </span>
@@ -427,10 +409,6 @@ function get_the_categories(WC_Product $product)
   echo implode(' / ', $category_titles);
 }
 
-function get_the_brand(WC_Product $product)
-{
-    echo 'STIHL';
-}
 
 add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
 add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
