@@ -360,16 +360,13 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
     <div class="dsn:row dsn:flex-row dsn:w-full dsn:flex dsn:flex-wrap"    data-counter="<?php echo $post_query_count->found_posts; ?>"
         data-categories="<?php echo $categories; ?>"
     >
-      <div class="dsn:flex ds-filters-nav dsn:w-full dsn:gap-3 dsn:flex-wrap">
+      <div class="dsn:flex ds-filters-nav dsn:w-full dsn:gap-3 dsn:flex-wrap dsn:pt-4">
         <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
               <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
               <?php _e(' Products to Explore', 'dealer-theme'); ?>
           </div>
         <div class="ds-filters-nav-right dsn:flex-1 dsn:min-w-0 dsn:justify-end dsn:gap-3 dsn:flex flex-wrap">
             <button class="show-filters js-toggle-filters dsn:lg:hidden relative">Filters</button>
-            <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex dsn:flex-1 dsn:max-w-sm dsn:min-w-[220px] relative" action="<?php echo esc_url(home_url('/')); ?>">
-                <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $search; ?>" />
-            </form>
 
             <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:hidden dsn:lg:block"">
                 <option value="24" <?php echo $posts_per_page === 24 ? 'selected' : ''; ?>>24
@@ -400,6 +397,13 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                     Name (Z-A)
                 </option>
             </select>
+
+            <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex dsn:flex-1 dsn:max-w-sm dsn:min-w-[220px] relative" action="<?php echo esc_url(home_url('/')); ?>">
+                <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $search; ?>" />
+                <button type='button' id='ds-filters-search-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Search', 'dealer-theme'); ?>'>
+                    <?php dsn_icon('search', 'dsn:w-5 dsn:h-5'); ?>
+                </button>
+            </form>
         </div>
       </div>
     </div>

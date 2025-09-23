@@ -477,9 +477,22 @@ if ($image): ?>
                 $body.on('change', '#ds-sort_by, #ds-posts_per_page, #ds-posts_per_page_footer', handlePerPageSortChange);
 
                 // Handle other filter changes with AJAX
-                $body.on('submit', '#ds-filter, #ds-filters-search-wrap, .ds-estore-search form', function (e) {
+                $body.on('submit', '#ds-filter, .ds-estore-search form', function (e) {
                     e.preventDefault();
                     dsFilter();
+                });
+
+                // Click-to-search for header search input
+                $body.on('click', '#ds-filters-search-go', function () {
+                    dsFilter();
+                });
+
+                // Disable Enter key submit on header search input; only button triggers
+                $body.on('keydown', '#ds-filters-search', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        return false;
+                    }
                 });
 
                 $body.on('click', '.special_link', function () {
@@ -1124,7 +1137,6 @@ if ($image): ?>
 .ds-filters-nav {
   justify-content:space-between;
 
-  padding:0!important;
   margin:0 0 0px 0rem
 }
 .ds-filters-nav-right {
