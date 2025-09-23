@@ -697,7 +697,7 @@ if ($image): ?>
         padding: 0;
     }
 
-    #dsPagination ul li a.next.page-numbers{
+    #dsPagination ul li a.next.page-numbers, #dsPagination ul li a.prev.page-numbers{
       color: var(--dealerLinkColor) !important;
     }
 
@@ -1141,7 +1141,7 @@ if ($image): ?>
   padding:10px 15px
 }
 #ds-posts_per_page {
-  width:135px
+  width:150px
 }
 #ds-posts_per_page,
 #ds-sort_by {
