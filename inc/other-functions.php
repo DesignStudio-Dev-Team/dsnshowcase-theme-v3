@@ -484,7 +484,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                 </div>
               <?php
               endif; ?>
-              <a href="#" class="dsn-primary-site-link" id="toTop">Back to
+              <a href="#" class="dsn-primary-site-link dsn:hidden dsn:lg:block" id="toTop">Back to
                 Top</a>
             </div>
           </div>
