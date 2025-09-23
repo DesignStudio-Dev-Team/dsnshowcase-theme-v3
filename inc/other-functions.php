@@ -407,11 +407,11 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
 
     <div class="dsn:py-5">
       <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
-        <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:flex dsn:flex-wrap">
+        <div class="dsn:container dsn:mx-auto dsn:row dsn:w-full dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:gap-8 dsn:gap-y-12">
             <?php while ($the_query->have_posts()) :
                 $the_query->the_post(); ?>
                 <?php $product = wc_get_product(get_the_ID()); ?>
-                <div class="dsn:w-full dsn:sm:w-1/2 dsn:md:w-1/3 dsn:px-4 dsn:mb-12">
+                <div>
                     <div class="ds-product dsn:bg-white dsn:border-1 dsn:border-solid dsn:border-gray-300">
                         <a href="<?php echo get_permalink() ?>">
                           <?php if ($product->is_on_sale()) : ?>
@@ -449,7 +449,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                     </div>
                 </div>
             <?php endwhile; ?>
-            <div class='dsn:flex ds-filters-footer-nav dsn:w-full'>
+            <div class='dsn:flex ds-filters-footer-nav dsn:w-full dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3'>
             <div class='dsn:hidden dsn:lg:block'>
               <span class="ds-filters-counter"><?php
                 echo $post_query_count->found_posts; ?>
