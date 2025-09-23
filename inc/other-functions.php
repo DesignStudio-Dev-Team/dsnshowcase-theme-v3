@@ -407,7 +407,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
 
     <div class="dsn:py-5">
       <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
-        <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
+        <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:flex dsn:flex-wrap">
             <?php while ($the_query->have_posts()) :
                 $the_query->the_post(); ?>
                 <?php $product = wc_get_product(get_the_ID()); ?>
