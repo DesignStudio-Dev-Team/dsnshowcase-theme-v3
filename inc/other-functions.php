@@ -82,10 +82,10 @@ function foundation_pagination($query = '')
         'next_text' => '&raquo;',
         'current' => max(1, $current),
         'total' => $query->max_num_pages,
-        'type' => 'list'
+        'type' => 'list',
     ));
 
-    $pagination = str_replace( "class='page-numbers'", "class='pagination'", $links ?? '' );
+    $pagination = str_replace( 'class="page-numbers"', 'class="pagination dsn-primary-site-link"', $links ?? '' );
 
     echo $pagination;
 }
@@ -464,7 +464,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
               if ($post_query_count->max_num_pages
                 && $post_query_count->max_num_pages > 1
               ) : ?>
-                <div class="">
+                <div class="dsn:flex dsn:items-center dsn:gap-2">
                   Go to page
                   <input type="number" name="paged"
                          min="1" 
@@ -475,13 +475,16 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                   of
                   <?php echo $post_query_count->max_num_pages; ?>
 
-                  <button type='button' id='ds-filters-paged-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:bg-black dsn:text-white dsn:rounded' aria-label='Go to page'>
-                    <?php dsn_icon('enter', 'dsn:w-4 dsn:h-4'); ?>
+                  <button type='button' id='ds-filters-paged-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='Go to page'>
+                    <?php dsn_icon('enter', 'dsn:w-6 dsn:h-6'); ?>
                   </button>
+                  <style>
+                    #ds-filters-paged-go:hover{background-color:#2b2b2b!important;}
+                  </style>
                 </div>
               <?php
               endif; ?>
-              <a href="#" class="dsw-primary-site-link" id="toTop">Back to
+              <a href="#" class="dsn-primary-site-link" id="toTop">Back to
                 Top</a>
             </div>
           </div>

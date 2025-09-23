@@ -659,18 +659,18 @@ if ($image): ?>
          }
      }
      
-        #dsPagination {
+    #dsPagination {
         display: block;
         width: auto;
         margin: 50px 0px;
         text-align: center;
+        color:#ff8812 !important;
     }
 
     #dsPagination .page-numbers .current,
     #dsPagination .page-numbers li a:hover {
         padding: 10px 14px !important;
         background: #fff !important;
-        color: #666 !important;
     }
 
     #dsPagination .page-numbers .current,
@@ -682,7 +682,6 @@ if ($image): ?>
     #dsPagination .page-numbers a:visited {
         padding: 10px 14px !important;
         background: #fff !important;
-        color: #00a5e6 !important;
         -webkit-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
         -moz-box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
         box-shadow: -1px 2px 18px -9px rgba(0, 0, 0, 0.25);
@@ -701,6 +700,10 @@ if ($image): ?>
         padding: 0;
     }
 
+    #dsPagination ul li a.next.page-numbers{
+      color: #ff8812 !important;
+    }
+    
     #dsPagination ul li:before {
         display: none;
     }
@@ -1109,8 +1112,12 @@ if ($image): ?>
 }
 #toTop {
   margin-left:30px;
-  color:#ff8812
 }
+
+.dsn-primary-site-link{
+  color:#ff8812 !important;
+}
+
 .ds-filters-footer-nav #ds-filters-paged {
   border:1px solid #ccc;
   padding:10px 0 10px 6px;
@@ -1250,7 +1257,8 @@ if ($image): ?>
 .js-pagination .pagination {
   margin:0;
   display:flex;
-  list-style-type:none
+  list-style-type:none;
+  color: #ff8812 !important;
 }
 .js-pagination .pagination li {
   margin:0 5px
