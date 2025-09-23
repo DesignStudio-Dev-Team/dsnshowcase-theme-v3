@@ -357,7 +357,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
     $the_query = new WP_Query($final_args);
 ?>
     <div class="dsn:container dsn:mx-auto">
-    <div class="dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap"    data-counter="<?php echo $post_query_count->found_posts; ?>"
+    <div class="dsn:row dsn:flex-row dsn:w-full dsn:flex dsn:flex-wrap"    data-counter="<?php echo $post_query_count->found_posts; ?>"
         data-categories="<?php echo $categories; ?>"
     >
       <div class="dsn:flex ds-filters-nav dsn:w-full">
