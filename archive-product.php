@@ -362,7 +362,123 @@ if ($image): ?>
 
           (function ($) {
 
-                const $body = $('body');
+            // Keep the dsFilter function for other AJAX filters
+            const dsFilter = function (paged, posts_per_page) {
+              const filter = $('#ds-filter');
+
+              // gather categories
+              let categoriesCheckboxValue = "";
+              $(".content-categories :checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    var thisVal = $(this).val();
+
+                    if (ischecked) {
+                        if ($(this).parent().hasClass('filter-menu') && $(this).next().next().find('input:checkbox:checked').length > 0) {
+                            categoriesCheckboxValue.replace(thisVal, '');
+                        } else {
+                            categoriesCheckboxValue += thisVal + ",";
+                        }
+                    }
+                });
+
+                if (categoriesCheckboxValue === '') {
+                    categoriesCheckboxValue = $('#response').data('categories');
+                    categoriesCheckboxValue = categoriesCheckboxValue + '';
+                }
+
+                // gather brands
+                var brandsCheckboxValue = "";
+                $(".content-brands :checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    if (ischecked) {
+                        brandsCheckboxValue += $(this).val() + ",";
+                    }
+                });
+
+                // gather product use
+                var prUseCheckboxValue = "";
+                $(".content-product-use :checkbox").each(function () {
+                    var ischecked = $(this).is(":checked");
+                    if (ischecked) {
+                        prUseCheckboxValue += $(this).val() + ",";
+                    }
+                });
+
+                var sale = $('#sale_sale').is(':checked'),
+                    orderItem = $('#ds-sort_by'),
+                    orderBy = 'date',
+                    order = 'desc';
+
+                if (orderItem.length > 0 && orderItem.val() !== null) {
+                    var orderStr = orderItem.val();
+                    orderBy = orderStr.split('-')[0];
+                    order = orderStr.split('-')[1];
+                }
+
+              const data = {
+                action: 'ds_filter',
+                posts_per_page: posts_per_page ?? $('#ds-posts_per_page').val(),
+                orderby: orderBy,
+                order: order,
+                categories: '<?php echo $all_categories; ?>',
+                categories_checkbox: categoriesCheckboxValue,
+                brands: brandsCheckboxValue,
+                product_use: prUseCheckboxValue,
+                price_min: $('#price_min').val(),
+                price_max: $('#price_max').val(),
+                sale: sale,
+
+              };
+
+              // check if "Specials" enabled
+                if ($('.special_link').hasClass('active')) {
+                    data.specials = true;
+                }
+
+                if (paged) {
+                    data.paged = paged;
+                }
+
+              const dsFiltersSearch = $('#ds-filters-search');
+              const dsEstoreSearch = $('.ds-estore-search .search-field');
+
+              if (dsFiltersSearch.val() !== '') {
+                    data.search = dsFiltersSearch.val();
+                } else if (dsEstoreSearch.val() !== '') {
+                    data.search = dsEstoreSearch.val();
+                }
+
+              const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
+              console.log('dsFilter → AJAX URL', ajaxUrl, 'data', data);
+
+                $.ajax({
+                    url: ajaxUrl,
+                    data: data,
+                    type: 'POST',
+                    dataType: 'html',
+                    beforeSend: function (xhr) {
+                        $('.ds-filters-over').addClass('show');
+                    },
+                    success: function (data) {
+                        $('.ds-filters-over').removeClass('show');
+                        $('#main').html(data);
+
+                        // update value for product counter in filter section
+                        if ($('.ds-filters-counter.hide-for-medium-down').length) {
+                            $('.ds-filters-counter.show-for-medium-down').html($('.ds-filters-counter.hide-for-medium-down').html());
+                        } else {
+                            $('.ds-filters-counter.show-for-medium-down').html('No products found')
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $('.ds-filters-over').removeClass('show');
+                        console.error('Filter AJAX error:', status, error);
+                        console.debug('Response:', xhr && xhr.responseText ? xhr.responseText.substring(0, 500) : '(no response)');
+                    }
+                });
+                return false;
+            };
+            const $body = $('body');
 
                 // Handle URL parameter changes for sorting and posts per page
                 $body.on('change', '#ds-sort_by, #ds-posts_per_page, #ds-posts_per_page_footer', handlePerPageSortChange);
@@ -382,8 +498,17 @@ if ($image): ?>
                     dsFilter();
                 });
 
-                $body.on('change', '#ds-filters-paged', function () {
-                    dsFilter($(this).val());
+                // Only navigate when clicking Go
+                $body.on('click', '#ds-filters-paged-go', function(){
+                  var n = parseInt($('#ds-filters-paged').val(), 10) || 1;
+                  var currentUrl = new URL(window.location.href);
+                  var path = currentUrl.pathname.replace(/\/page\/\d+\/?/, '/');
+                  if (n > 1) {
+                      if (!/\/$/.test(path)) path += '/';
+                      path += 'page/' + n + '/';
+                  }
+                  currentUrl.pathname = path;
+                  window.location.href = currentUrl.toString();
                 });
 
                 $body.on('click', '.js-toggle-filters', function () {
@@ -404,147 +529,23 @@ if ($image): ?>
                 $body.on('click', '.js-pagination a', function (e) {
                     e.preventDefault();
                     var urlThis = $(this).attr('href');
-                    var url = new URL(urlThis);
+                    var url = new URL(urlThis, window.location.origin);
                     var paged = url.searchParams.get('paged');
-                    
-                    // Fallback for URL structures without ?paged=
                     if (!paged) {
-                        var pagedMatch = url.pathname.match(/\/page\/(\d+)/);
-                        if (pagedMatch && pagedMatch[1]) {
-                            paged = pagedMatch[1];
-                        }
+                        var m = url.pathname.match(/\/page\/(\d+)/);
+                        if (m && m[1]) paged = m[1];
                     }
 
-                    // Update the paged parameter in the current URL and reload
                     var currentUrl = new URL(window.location.href);
-                    var params = new URLSearchParams(currentUrl.search);
-                    
-                    if (paged) {
-                         params.set('paged', paged);
-                    } else {
-                         params.delete('paged');
+                    var path = currentUrl.pathname.replace(/\/page\/\d+\/?/, '/');
+                    var n = parseInt(paged, 10) || 1;
+                    if (n > 1) {
+                        if (!/\/$/.test(path)) path += '/';
+                        path += 'page/' + n + '/';
                     }
-
-                    currentUrl.search = params.toString();
+                    currentUrl.pathname = path;
                     window.location.href = currentUrl.toString();
                 });
-
-                // Keep the dsFilter function for other AJAX filters
-                var dsFilter = function (paged, posts_per_page) {
-                    var filter = $('#ds-filter');
-
-                    // gather categories
-                    var categoriesCheckboxValue = "";
-                    $(".content-categories :checkbox").each(function () {
-                        var ischecked = $(this).is(":checked");
-                        var thisVal = $(this).val();
-
-                        if (ischecked) {
-                            if ($(this).parent().hasClass('filter-menu') && $(this).next().next().find('input:checkbox:checked').length > 0) {
-                                categoriesCheckboxValue.replace(thisVal, '');
-                            } else {
-                                categoriesCheckboxValue += thisVal + ",";
-                            }
-                        }
-                    });
-
-                    if (categoriesCheckboxValue === '') {
-                        categoriesCheckboxValue = $('#response').data('categories');
-                        categoriesCheckboxValue = categoriesCheckboxValue + '';
-                    }
-
-                    // gather brands
-                    var brandsCheckboxValue = "";
-                    $(".content-brands :checkbox").each(function () {
-                        var ischecked = $(this).is(":checked");
-                        if (ischecked) {
-                            brandsCheckboxValue += $(this).val() + ",";
-                        }
-                    });
-
-                    // gather product use
-                    var prUseCheckboxValue = "";
-                    $(".content-product-use :checkbox").each(function () {
-                        var ischecked = $(this).is(":checked");
-                        if (ischecked) {
-                            prUseCheckboxValue += $(this).val() + ",";
-                        }
-                    });
-
-                    var sale = $('#sale_sale').is(':checked'),
-                        orderItem = $('#ds-sort_by'),
-                        orderBy = 'date',
-                        order = 'desc';
-
-                    if (orderItem.length > 0 && orderItem.val() !== null) {
-                        var orderStr = orderItem.val();
-                        orderBy = orderStr.split('-')[0];
-                        order = orderStr.split('-')[1];
-                    }
-
-                    var data = {
-                        action: 'ds_filter',
-                        posts_per_page: posts_per_page ?? $('#ds-posts_per_page').val(),
-                        orderby: orderBy,
-                        order: order,
-                        categories: '<?php echo $all_categories; ?>',
-                        categories_checkbox: categoriesCheckboxValue,
-                        brands: brandsCheckboxValue,
-                        product_use: prUseCheckboxValue,
-                        price_min: $('#price_min').val(),
-                        price_max: $('#price_max').val(),
-                        sale: sale,
-                        
-                    }
-
-                    // check if "Specials" enabled
-                    if ($('.special_link').hasClass('active')) {
-                        data.specials = true;
-                    }
-
-                    if (paged) {
-                        data.paged = paged;
-                    }
-
-                    var dsFiltersSearch = $('#ds-filters-search');
-                    var dsEstoreSearch = $('.ds-estore-search .search-field');
-
-                    if (dsFiltersSearch.val() !== '') {
-                        data.search = dsFiltersSearch.val();
-                    } else if (dsEstoreSearch.val() !== '') {
-                        data.search = dsEstoreSearch.val();
-                    }
-
-                  const ajaxUrl = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
-                  console.log('dsFilter → AJAX URL', ajaxUrl, 'data', data);
-
-                    $.ajax({
-                        url: ajaxUrl,
-                        data: data,
-                        type: 'POST',
-                        dataType: 'html',
-                        beforeSend: function (xhr) {
-                            $('.ds-filters-over').addClass('show');
-                        },
-                        success: function (data) {
-                            $('.ds-filters-over').removeClass('show');
-                            $('#main').html(data);
-
-                            // update value for product counter in filter section
-                            if ($('.ds-filters-counter.hide-for-medium-down').length) {
-                                $('.ds-filters-counter.show-for-medium-down').html($('.ds-filters-counter.hide-for-medium-down').html());
-                            } else {
-                                $('.ds-filters-counter.show-for-medium-down').html('No products found')
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            $('.ds-filters-over').removeClass('show');
-                            console.error('Filter AJAX error:', status, error);
-                            console.debug('Response:', xhr && xhr.responseText ? xhr.responseText.substring(0, 500) : '(no response)');
-                        }
-                    });
-                    return false;
-                }
 
                 $(document).on('click', '.single_add_to_cart_button', function (e) {
                     e.preventDefault();

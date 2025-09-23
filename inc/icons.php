@@ -15,5 +15,10 @@ return array(
     
     'check-circle' => '<svg class="%s" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
         <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
-    </svg>'
+    </svg>',
+
+    'enter' => '<svg class="%s" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 4h10v14a2 2 0 0 1-2 2H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 15l3-3-3-3M15 12H5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>',
 );

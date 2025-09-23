@@ -466,12 +466,18 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
               ) : ?>
                 <div class="">
                   Go to page
-                  <input type="number" name="paged" min="1" max="<?php
-                  echo $post_query_count->max_num_pages; ?>"
-                         id="ds-filters-paged">
+                  <input type="number" name="paged"
+                         min="1" 
+                         value="<?php echo $post_query_count->query_vars['paged']; ?>"
+                         max="<?php echo $post_query_count->max_num_pages; ?>"
+                         id="ds-filters-paged"
+                  >
                   of
-                  <?php
-                  echo $post_query_count->max_num_pages; ?>
+                  <?php echo $post_query_count->max_num_pages; ?>
+
+                  <button type='button' id='ds-filters-paged-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:bg-black dsn:text-white dsn:rounded' aria-label='Go to page'>
+                    <?php dsn_icon('enter', 'dsn:w-4 dsn:h-4'); ?>
+                  </button>
                 </div>
               <?php
               endif; ?>
