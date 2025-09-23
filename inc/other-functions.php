@@ -106,14 +106,96 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
   $price_max      = $price_max ?: $_POST['price_max'];
   $sale           = $sale ?: $_POST['sale'];
   $posts_per_page = $posts_per_page ?: $_POST['posts_per_page'];
-  $paged          = $paged ?: $_POST['paged'];
+  // Determine current page from POST, then GET, then WP query var
+  $paged          = $paged ?: (isset($_POST['paged']) ? intval($_POST['paged']) : null);
+  if (!$paged && isset($_GET['paged'])) {
+      $paged = intval($_GET['paged']);
+  }
+  if (!$paged && isset($_GET['page'])) { // fallback some themes use 'page'
+      $paged = intval($_GET['page']);
+  }
+  if (!$paged) {
+      $qv_paged = get_query_var('paged');
+      if ($qv_paged) {
+          $paged = intval($qv_paged);
+      }
+  }
+
+  // Accept unified sort_by (e.g., price-asc, title-desc, date_desc) and map to WP_Query orderby/order
+  $sort_by        = isset($_POST['sort_by']) ? sanitize_text_field($_POST['sort_by']) : null;
+  if (!$sort_by && isset($_POST['sort'])) {
+      $sort_by = sanitize_text_field($_POST['sort']);
+  }
+  if (!$sort_by && isset($_GET['sort_by'])) {
+      $sort_by = sanitize_text_field($_GET['sort_by']);
+  }
+  if (!$sort_by && isset($_GET['sort'])) {
+      $sort_by = sanitize_text_field($_GET['sort']);
+  }
+
+  // Normalize incoming values and set defaults
+  if (!$order_by && !$sort_by) {
+      $order_by = 'date';
+  }
+  if (!$order) {
+      $order = 'DESC';
+  }
+
+  // If only legacy orderby provided, normalize price alias
+  if ($order_by && !$sort_by) {
+      $lower_ob = strtolower($order_by);
+      if ($lower_ob === 'price') {
+          $order_by = 'dsn_price'; // use custom price sorting (joins provided by filters below)
+      } elseif (in_array($lower_ob, ['title','date'], true)) {
+          $order_by = $lower_ob;
+      }
+  }
+
+  // If sort_by is provided, it is authoritative
+  if ($sort_by) {
+      $sort_by = str_replace('_', '-', strtolower($sort_by));
+      switch ($sort_by) {
+          case 'price-asc':
+              $order_by = 'dsn_price';
+              $order = 'ASC';
+              break;
+          case 'price-desc':
+              $order_by = 'dsn_price';
+              $order = 'DESC';
+              break;
+          case 'title-asc':
+              $order_by = 'title';
+              $order = 'ASC';
+              break;
+          case 'title-desc':
+              $order_by = 'title';
+              $order = 'DESC';
+              break;
+          case 'date-asc':
+              $order_by = 'date';
+              $order = 'ASC';
+              break;
+          case 'date-desc':
+              $order_by = 'date';
+              $order = 'DESC';
+              break;
+          default:
+              // fallback
+              $order_by = $order_by ?: 'date';
+              $order = $order ?: 'DESC';
+              break;
+      }
+  }
+
+  // Use a safe orderby for category query (get_posts suppresses filters; avoid custom keys like dsn_price)
+  $category_orderby = ($order_by === 'dsn_price') ? 'date' : $order_by;
 
   $categoryArgs  = array(
     'post_type'             => 'product',
     'post_status'           => 'publish',
     'posts_per_page'        => '24',
     'order' => $order,
-    'orderby' => $order_by,
+    'orderby' => $category_orderby,
     'tax_query'             => array(
             array(
               'taxonomy'  => 'product_cat',
@@ -129,10 +211,12 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
       'post_type' => 'product',
       'post_status' => 'publish',
       'order' => $order,
-      'order_by' => $order_by,
+      'orderby' => $order_by,
     );
 
-    $order_selector = strtolower($order_by. '-' .$order);
+    // Compute UI selector (map custom dsn_price back to 'price')
+    $ui_orderby = ($order_by === 'dsn_price') ? 'price' : $order_by;
+    $order_selector = strtolower($ui_orderby . '-' . $order);
 
     if ( !empty($search)) {
         $args['s'] = $search;
@@ -229,8 +313,17 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
         'cache_results'          => false
     ];
 
-    $category_query = get_posts(array_merge($defaults, $categoryArgs));
-    $product_query = get_posts(array_merge($defaults, $args));
+    // Build complete candidate lists for post__in (fetch all matching IDs for pagination to work)
+    $categoryArgsForIds = $categoryArgs;
+    $categoryArgsForIds['posts_per_page'] = -1;
+    unset($categoryArgsForIds['paged']);
+
+    $argsForIds = $args;
+    $argsForIds['posts_per_page'] = -1;
+    unset($argsForIds['paged']);
+
+    $category_query = get_posts(array_merge($defaults, $categoryArgsForIds));
+    $product_query = get_posts(array_merge($defaults, $argsForIds));
 
     // used for counting posts
     $post_query_count = new WP_Query(array_merge($defaults, $args));
@@ -257,6 +350,9 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
     } else {
         $final_args['posts_per_page'] = 24;
     }
+
+    // Add pagination to final query
+    $final_args['paged'] = max(1, intval($paged ?: 1));
 
     $the_query = new WP_Query($final_args);
 ?>
