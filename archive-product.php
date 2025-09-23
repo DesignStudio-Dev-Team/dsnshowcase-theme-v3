@@ -356,7 +356,7 @@ if ($image): ?>
           (function ($) {
 
             // Keep the dsFilter function for other AJAX filters
-            const dsFilter = function (paged, posts_per_page) {
+                const dsFilter = function (paged, posts_per_page) {
               const filter = $('#ds-filter');
 
               // gather categories
@@ -406,6 +406,18 @@ if ($image): ?>
                     var orderStr = orderItem.val();
                     orderBy = orderStr.split('-')[0];
                     order = orderStr.split('-')[1];
+                }
+                
+                // When clearing search, restore default sort if none selected
+                if (!orderItem.length || !orderItem.val()) {
+                    const $root = $('#ds-filters-root');
+
+                    const defaultOrderby = $root.data('default-orderby');
+                    const defaultOrder = $root.data('default-order');
+                    if (defaultOrderby && defaultOrder) {
+                        orderBy = defaultOrderby;
+                        order = defaultOrder;
+                    }
                 }
 
               const data = {
@@ -505,7 +517,8 @@ if ($image): ?>
                   $('#ds-filters-search').val('');
                   $('#ds-filters-search-clear').hide();
                   $('#ds-filters-search-go').show();
-                  dsFilter();
+                  // Reset pagination and use defaults
+                  dsFilter(1);
                 });
 
                 $body.on('click', '.special_link', function () {
