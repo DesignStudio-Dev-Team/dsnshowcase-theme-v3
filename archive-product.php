@@ -346,6 +346,7 @@ if ($image): ?>
             switch (changedId) {
               case 'ds-sort_by':
                 changedValue ? params.set('sort_by', changedValue) : params.delete('sort_by');
+
                 break;
               case 'ds-posts_per_page':
               case 'ds-posts_per_page_footer':
@@ -354,8 +355,8 @@ if ($image): ?>
                 break;
             }
             // Always reset paged to 1 when changing per page or sort
-            params.delete('paged');
             currentUrl.search = params.toString();
+            currentUrl.pathname = currentUrl.pathname.replace(/\/page\/\d+\/?/, '/');
             window.location.href = currentUrl.toString();
           };
 
