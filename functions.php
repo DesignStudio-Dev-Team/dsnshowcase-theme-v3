@@ -270,7 +270,7 @@ function dss_toggle_admin_bar() {
 
                 .dss-toggle-admin-bar {
                     position: fixed;
-                    bottom: 0px;
+                    bottom: 32px;
                     right: 32px;
                     background-color: #0e0e0e;
                     width: 32px;
