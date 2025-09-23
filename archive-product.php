@@ -593,8 +593,6 @@ if ($image): ?>
 
 
 <style>
-    :root { --dsn-theme-color: #ff8812; }
-    
     .taxonomy-description {
       max-width: 1000px;
       margin: 0 auto;
@@ -663,7 +661,7 @@ if ($image): ?>
         width: auto;
         margin: 50px 0px;
         text-align: center;
-        color: var(--dsn-theme-color) !important;
+        color: var(--dealerLinkColor) !important;
     }
 
     #dsPagination .page-numbers .current,
@@ -700,7 +698,7 @@ if ($image): ?>
     }
 
     #dsPagination ul li a.next.page-numbers{
-      color: var(--dsn-theme-color) !important;
+      color: var(--dealerLinkColor) !important;
     }
 
     #dsPagination ul li:before {
@@ -1114,7 +1112,7 @@ if ($image): ?>
 }
 
 .dsn-primary-site-link{
-  color: var(--dsn-theme-color) !important;
+  color: var(--dealerLinkColor) !important;
 }
 
 .ds-filters-footer-nav #ds-filters-paged {
@@ -1257,7 +1255,7 @@ if ($image): ?>
   margin:0;
   display:flex;
   list-style-type:none;
-  color: var(--dsn-theme-color) !important;
+  color: var(--dealerLinkColor) !important;
 }
 .js-pagination .pagination li {
   margin:0 5px
@@ -1430,7 +1428,7 @@ body .ds-estore-banner-wrap {
   background:url(../img/ardsn:row.png) 0 no-repeat;
   background-size:contain;
   font-size:16px;
-  color: var(--dsn-theme-color);
+  color: var(--dealerLinkColor);
   padding:7px 0 7px 45px;
   margin-bottom:30px
 }
