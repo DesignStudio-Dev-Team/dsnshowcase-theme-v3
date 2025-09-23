@@ -108,13 +108,6 @@ if ($image): ?>
     </div>
 
     <?php else: ?>
-<style>
-.taxonomy-description {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-}
-</style>
 <div class="dsn:container dsn:mx-auto">
   <div class="dsn:row">
   <h1 class="dsn:text-center"><?php woocommerce_page_title(); ?></h1>
@@ -600,7 +593,13 @@ if ($image): ?>
 
 
 <style>
-
+    :root { --dsn-theme-color: #ff8812; }
+    
+    .taxonomy-description {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
     /* Fix for dsn:container stuff */
     .page-template-template-estore #dsShowcaseContent{
        padding-left: 2.5rem;
@@ -664,7 +663,7 @@ if ($image): ?>
         width: auto;
         margin: 50px 0px;
         text-align: center;
-        color:#ff8812 !important;
+        color: var(--dsn-theme-color) !important;
     }
 
     #dsPagination .page-numbers .current,
@@ -701,9 +700,9 @@ if ($image): ?>
     }
 
     #dsPagination ul li a.next.page-numbers{
-      color: #ff8812 !important;
+      color: var(--dsn-theme-color) !important;
     }
-    
+
     #dsPagination ul li:before {
         display: none;
     }
@@ -1115,7 +1114,7 @@ if ($image): ?>
 }
 
 .dsn-primary-site-link{
-  color:#ff8812 !important;
+  color: var(--dsn-theme-color) !important;
 }
 
 .ds-filters-footer-nav #ds-filters-paged {
@@ -1258,7 +1257,7 @@ if ($image): ?>
   margin:0;
   display:flex;
   list-style-type:none;
-  color: #ff8812 !important;
+  color: var(--dsn-theme-color) !important;
 }
 .js-pagination .pagination li {
   margin:0 5px
@@ -1431,7 +1430,7 @@ body .ds-estore-banner-wrap {
   background:url(../img/ardsn:row.png) 0 no-repeat;
   background-size:contain;
   font-size:16px;
-  color:#ff8812;
+  color: var(--dsn-theme-color);
   padding:7px 0 7px 45px;
   margin-bottom:30px
 }
