@@ -47,12 +47,15 @@ if (isset($_GET['posts_per_page']) && in_array($_GET['posts_per_page'], DSN_ALLO
 $orderby = 'menu_order'; // Default value
 $order = 'ASC'; // Default value
 
-if (isset($_GET['sort_by']) && !empty($_GET['sort_by'])) {
+if ( !empty($_GET['sort_by'])) {
   $sort_parts = explode('-', sanitize_text_field($_GET['sort_by']));
-  if (count($sort_parts) == 2) {
+
+  if (count($sort_parts) === 2) {
+
     switch($sort_parts[0]) {
+
       case 'price':
-        $orderby = 'dsn_price';
+        $orderby = 'price';
         $order = strtoupper($sort_parts[1]);
         break;
       case 'title':
@@ -284,29 +287,6 @@ if ($image): ?>
             <?php
             // Get the paged parameter
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            
-            // Handle sorting
-            $orderby = 'menu_order'; // Default value
-            $order = 'ASC'; // Default value
-            
-            if (isset($_GET['sort_by']) && !empty($_GET['sort_by'])) {
-                $sort_parts = explode('-', sanitize_text_field($_GET['sort_by']));
-                if (count($sort_parts) == 2) {
-                    switch($sort_parts[0]) {
-                        case 'price':
-                            $orderby = 'dsn_price';
-                            $order = strtoupper($sort_parts[1]);
-                            break;
-                        case 'title':
-                            $orderby = 'title';
-                            $order = strtoupper($sort_parts[1]);
-                            break;
-                        default:
-                            $orderby = 'menu_order';
-                            $order = 'ASC';
-                    }
-                }
-            }
 
             // Set up the main query arguments
             $arg = array(

@@ -108,7 +108,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
   $posts_per_page = $posts_per_page ?: $_POST['posts_per_page'];
   $paged          = $paged ?: $_POST['paged'];
 
-  $catArgs  = array(
+  $categoryArgs  = array(
     'post_type'             => 'product',
     'post_status'           => 'publish',
     'posts_per_page'        => '24',
@@ -127,16 +127,12 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
 
     $args = array(
       'post_type' => 'product',
+      'post_status' => 'publish',
       'order' => $order,
-      'orderby' => $order_by,
-      'post_status' => 'publish'
+      'order_by' => $order_by,
     );
 
-    $sort_by = $order_by. '-' .$order;
-
-    if ($order_by === 'price') {
-        $args['orderby'] = 'dsn_price';
-    }
+    $order_selector = strtolower($order_by. '-' .$order);
 
     if ( !empty($search)) {
         $args['s'] = $search;
@@ -233,13 +229,13 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
         'cache_results'          => false
     ];
 
-    $cat_query = get_posts(array_merge($defaults, $catArgs));
+    $category_query = get_posts(array_merge($defaults, $categoryArgs));
     $product_query = get_posts(array_merge($defaults, $args));
 
     // used for counting posts
     $post_query_count = new WP_Query(array_merge($defaults, $args));
-    $catArgs['posts_per_page'] = 10000000000000;
-    $post_cat_query_count = new WP_Query(array_merge($defaults, $catArgs));
+    $categoryArgs['posts_per_page'] = 10000000000000;
+    $post_cat_query_count = new WP_Query(array_merge($defaults, $categoryArgs));
 
     if (!$post_query_count->found_posts && $post_cat_query_count->found_posts) {
       $post_query_count->found_posts = $post_cat_query_count->found_posts;
@@ -247,13 +243,13 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
 
 
     // Merge the two results
-    $post_ids = array_merge($cat_query, $product_query); //. You can swop around here
+    $post_ids = array_merge($category_query, $product_query); //. You can swop around here
 
     $final_args = [
         'post_type' => ['product'],
         'post__in'  => $post_ids,
-        'orderby'   => 'post__in', // If you need to keep the order from $post_ids
-        'order'     => 'DESC', // If you need to keep the order from $post_ids
+        'orderby'   => $order_by,
+        'order'     => $order,
     ];
 
     if ( !empty($posts_per_page)) {
@@ -290,20 +286,21 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                     Per Page
                 </option>
             </select>
+
             <select name="sort_by" id="ds-sort_by">
                 <option value="" disabled selected>Sort By:</option>
-                <option value="price-desc" <?php echo $sort_by === 'price-desc' ? 'selected' : ''; ?>>
+                <option value="price-desc" <?php echo $order_selector === 'price-desc' ? 'selected' : ''; ?>>
                     Price (High to Low)
                 </option>
 
-                <option value="price-asc" <?php echo $sort_by === 'price-asc' ? 'selected' : ''; ?>>
+                <option value="price-asc" <?php echo $order_selector === 'price-asc' ? 'selected' : ''; ?>>
                     Price (Low to High)
                 </option>
 
-                <option value="title-asc" <?php echo $sort_by === 'title-asc' ? 'selected' : ''; ?>>
+                <option value="title-asc" <?php echo $order_selector === 'title-asc' ? 'selected' : ''; ?>>
                     Name (A-Z)
                 </option>
-                <option value="title-desc" <?php echo $sort_by == 'title-desc' ? 'selected' : ''; ?>>
+                <option value="title-desc" <?php echo $order_selector === 'title-desc' ? 'selected' : ''; ?>>
                     Name (Z-A)
                 </option>
             </select>
@@ -311,6 +308,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
       </div>
     </div>
   </div>
+
     <div class="dsn:py-5">
       <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
         <div class="dsn:container dsn:mx-auto dsn:row dsn:flex-row dsn:w-full dsn:md:pl-4 dsn:flex dsn:flex-wrap">
