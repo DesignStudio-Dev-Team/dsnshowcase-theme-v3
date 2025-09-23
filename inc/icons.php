@@ -26,4 +26,9 @@ return array(
         <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" />
         <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
     </svg>',
+
+    'clear' => '<svg class="%s" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+        <path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>',
 );

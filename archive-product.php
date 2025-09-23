@@ -485,6 +485,11 @@ if ($image): ?>
                 // Click-to-search for header search input
                 $body.on('click', '#ds-filters-search-go', function () {
                     dsFilter();
+                    // After a successful search, swap to clear mode
+                    $('#ds-filters-search-go').hide();
+                    if ($('#ds-filters-search-clear').length) {
+                      $('#ds-filters-search-clear').show();
+                    }
                 });
 
                 // Disable Enter key submit on header search input; only button triggers
@@ -493,6 +498,14 @@ if ($image): ?>
                         e.preventDefault();
                         return false;
                     }
+                });
+
+                // Clear search
+                $body.on('click', '#ds-filters-search-clear', function(){
+                  $('#ds-filters-search').val('');
+                  $('#ds-filters-search-clear').hide();
+                  $('#ds-filters-search-go').show();
+                  dsFilter();
                 });
 
                 $body.on('click', '.special_link', function () {

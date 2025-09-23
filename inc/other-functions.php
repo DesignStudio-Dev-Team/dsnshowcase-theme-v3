@@ -400,8 +400,11 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
 
             <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex dsn:flex-1 dsn:max-w-sm dsn:min-w-[220px] relative" action="<?php echo esc_url(home_url('/')); ?>">
                 <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $search; ?>" />
-                <button type='button' id='ds-filters-search-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Search', 'dealer-theme'); ?>'>
+                <button type='button' id='ds-filters-search-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Search', 'dealer-theme'); ?>' style='<?php echo !empty($search) ? "display:none;" : ""; ?>'>
                     <?php dsn_icon('search', 'dsn:w-5 dsn:h-5'); ?>
+                </button>
+                <button type='button' id='ds-filters-search-clear' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Clear search', 'dealer-theme'); ?>' style='<?php echo !empty($search) ? "" : "display:none;"; ?>'>
+                    <?php dsn_icon('clear', 'dsn:w-5 dsn:h-5'); ?>
                 </button>
             </form>
         </div>
