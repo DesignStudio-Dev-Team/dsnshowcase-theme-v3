@@ -104,7 +104,7 @@ $arg = array(
           </div>
       </div>
   <?php else: ?>
-    <div class="dsn-header-container dsn:container dsn:mx-auto">
+    <div class="dsn-header-container dsn:container dsn:mx-auto dsn:pt-5 dsn:md:pt-0">
         <h1 class="dsn-taxonomy-title dsn:text-center"><?php woocommerce_page_title(); ?></h1>
         <div class="dsn-taxonomy-description dsn:py-8">
           <?php echo dsn_get_archive_description_excerpt() ?>

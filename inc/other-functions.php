@@ -444,7 +444,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
                                     <span class='dsn:flex dsn:items-center'>
                                       <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
                                     </span>
-                                    <span class="dsn:flex dsn:items-center">
+                                    <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
                                       <?php     dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
                                     </span>
                               </button>
