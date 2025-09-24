@@ -1169,7 +1169,6 @@ $arg = array(
     }
     .ds-filters-nav-right {
       display: flex;
-      align-items: flex-start
     }
     #ds-filters-search {
       box-shadow: inherit;
@@ -1181,11 +1180,9 @@ $arg = array(
       padding: 10px 15px
     }
     #ds-posts_per_page {
-      width: 150px
     }
     #ds-posts_per_page,
     #ds-sort_by {
-      margin: 0 0 0 15px;
       border: 1px solid #ccc
     }
 
@@ -1325,9 +1322,6 @@ $arg = array(
         width: 100%;
         justify-content: space-between;
         margin-bottom: 25px
-      }
-      #ds-sort_by {
-        width: auto
       }
       #ds-filter > a {
         left: 35px;
