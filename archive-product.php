@@ -322,7 +322,7 @@ $arg = array(
   </div>
 </div>
 
-<?php add_action('wp_footer', function () { ?>
+<?php add_action('wp_footer', function () use ($all_categories) { ?>
   <script>
     const handlePerPageSortChange = e => {
       const currentUrl = new URL(window.location.href);
@@ -373,7 +373,7 @@ $arg = array(
         });
 
         if (categoriesCheckboxValue === '') {
-          categoriesCheckboxValue = $('#response').data('categories');
+          categoriesCheckboxValue = $('#ds-filters-root').data('categories');
           categoriesCheckboxValue = categoriesCheckboxValue + '';
         }
 
@@ -629,7 +629,7 @@ $arg = array(
       $(document).on('ready', function() {
         //dsFilter();
         $('.ds-filters .ds-filters-counter__value').
-          html($('#response').data('counter'));
+          html($('#ds-filters-root').data('counter'));
       });
     }(jQuery));
   </script>

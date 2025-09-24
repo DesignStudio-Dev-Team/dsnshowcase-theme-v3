@@ -233,7 +233,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
   if ( !empty($categories)) {
         $cat_array = explode(',', $categories);
         $args['tax_query'] = array(
-            'relation ' => 'AND',
+            'relation' => 'AND',
             array(
                 'taxonomy' => 'product_cat',
                 'field' => 'id',
@@ -353,154 +353,29 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
     $final_args['paged'] = max(1, intval($paged ?: 1));
 
     $the_query = new WP_Query($final_args);
-?>
-    <div class="dsn:container dsn:mx-auto">
-    <div id="ds-filters-root" class="dsn:row dsn:flex-row dsn:w-full dsn:flex dsn:flex-wrap"    data-counter="<?php echo $post_query_count->found_posts; ?>"
-        data-categories="<?php echo $categories; ?>" data-default-orderby="<?php echo esc_attr($order_by); ?>" data-default-order="<?php echo esc_attr($order); ?>"
-    >
-      <div class="dsn:flex ds-filters-nav dsn:w-full dsn:gap-3 dsn:flex-wrap dsn:pt-4">
-        <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
-              <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
-              <?php _e(' Products to Explore', 'dealer-theme'); ?>
-          </div>
-        <div class="ds-filters-nav-right dsn:flex-1 dsn:min-w-0 dsn:justify-end dsn:gap-3 dsn:flex flex-wrap">
-            <button class="show-filters js-toggle-filters dsn:lg:hidden relative">Filters</button>
 
-            <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:hidden dsn:lg:block"">
-                <option value="24" <?php echo $posts_per_page === 24 ? 'selected' : ''; ?>>24
-                    Per Page
-                </option>
-                <option value="36" <?php echo $posts_per_page === 36 ? 'selected' : ''; ?>>36
-                    Per Page
-                </option>
-                <option value="72" <?php echo $posts_per_page === 72 ? 'selected' : ''; ?>>72
-                    Per Page
-                </option>
-            </select>
+    // Render via template part to avoid HTML duplication
+    $template_args = array(
+        'the_query' => $the_query,
+        'post_ids' => $post_ids,
+        'post_query_count' => $post_query_count,
+        'order_selector' => $order_selector,
+        'posts_per_page' => is_numeric($posts_per_page) ? intval($posts_per_page) : 24,
+        'order_by' => $order_by,
+        'order' => $order,
+        'categories' => $categories,
+        'search' => $search,
+    );
 
-            <select name="sort_by" id="ds-sort_by">
-                <option value="" disabled selected>Sort By:</option>
-                <option value="price-desc" <?php echo $order_selector === 'price-desc' ? 'selected' : ''; ?>>
-                    Price (High to Low)
-                </option>
+    ob_start();
+    wc_get_template( 'loop/ds-products-loop.php', $template_args );
+    $html = ob_get_clean();
 
-                <option value="price-asc" <?php echo $order_selector === 'price-asc' ? 'selected' : ''; ?>>
-                    Price (Low to High)
-                </option>
+    echo $html;
 
-                <option value="title-asc" <?php echo $order_selector === 'title-asc' ? 'selected' : ''; ?>>
-                    Name (A-Z)
-                </option>
-                <option value="title-desc" <?php echo $order_selector === 'title-desc' ? 'selected' : ''; ?>>
-                    Name (Z-A)
-                </option>
-            </select>
-
-            <form id="ds-filters-search-wrap" class="hide-for-medium-down dsn:hidden dsn:md:flex dsn:flex-1 dsn:max-w-sm dsn:min-w-[220px] relative" action="<?php echo esc_url(home_url('/')); ?>">
-                <input type="search" name="s" id="ds-filters-search" class="search__input" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $search; ?>" />
-                <button type='button' id='ds-filters-search-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Search', 'dealer-theme'); ?>' style='<?php echo !empty($search) ? "display:none;" : ""; ?>'>
-                    <?php dsn_icon('search', 'dsn:w-5 dsn:h-5'); ?>
-                </button>
-                <button type='button' id='ds-filters-search-clear' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Clear search', 'dealer-theme'); ?>' style='<?php echo !empty($search) ? "" : "display:none;"; ?>'>
-                    <?php dsn_icon('clear', 'dsn:w-5 dsn:h-5'); ?>
-                </button>
-            </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="dsn:py-5">
-      <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
-        <div class="dsn:container dsn:mx-auto dsn:row dsn:w-full dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:gap-8 dsn:gap-y-12">
-            <?php while ($the_query->have_posts()) :
-                $the_query->the_post(); ?>
-                <?php $product = wc_get_product(get_the_ID()); ?>
-                <div>
-                    <div class="ds-product dsn:bg-white dsn:border-1 dsn:border-solid dsn:border-gray-300">
-                        <a href="<?php echo get_permalink() ?>">
-                          <?php if ($product->is_on_sale()) : ?>
-                              <span class="ds-product__sale">Sale</span>
-                          <?php endif ?>
-
-                          <span class="ds-product__image" style="background-image: url('<?php echo get_the_post_thumbnail_url() ?>')"></span>
-                        </a>
-
-                        <a href='<?php echo get_permalink() ?>'>
-                          <span class="ds-product__title dsn:px-4 dsn:mb-5">
-                            <?php the_title(); ?>
-                          </span>
-                        </a>
-                        <h6 class="ds-product__categories dsn:px-4 dsn:pb-5 dsn:normal-case dsn:m-0 dsn:text-base md:dsn:text-base lg:dsn:text-base dsn:font-dsw dsn:font-normal dsn:truncate dsn:grid-category">
-                          <?php get_the_categories($product); ?>
-                        </h6>
-                        <div class="ds-product__footer dsn:bg-gray-100 dsn:p-4">
-                          <div class='ds-product__meta'>
-                            <div class='ds-product__price'>
-                              <?php echo $product->get_price_html(); ?>
-                            </div>
-                            <?php if ($product->get_price_html()) { ?>
-                              <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>">
-                                    <span class='dsn:flex dsn:items-center'>
-                                      <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
-                                    </span>
-                                    <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
-                                      <?php     dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
-                                    </span>
-                              </button>
-                            <?php } ?>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-            <div class='dsn:flex ds-filters-footer-nav dsn:w-full dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3'>
-            <div class='dsn:hidden dsn:lg:block'>
-              <span class="ds-filters-counter"><?php
-                echo $post_query_count->found_posts; ?>
-                Products to Explore </span>
-            </div>
-            <div id="dsPagination" class="js-pagination">
-              <?php
-              foundation_pagination($post_query_count) ?>
-            </div>
-            <div class="ds-filters-footer-nav-right">
-              <?php
-              if ($post_query_count->max_num_pages
-                && $post_query_count->max_num_pages > 1
-              ) : ?>
-                <div class="dsn:flex dsn:items-center dsn:gap-2">
-                  Go to page
-                  <input type="number" name="paged"
-                         min="1" 
-                         value="<?php echo $post_query_count->query_vars['paged']; ?>"
-                         max="<?php echo $post_query_count->max_num_pages; ?>"
-                         id="ds-filters-paged"
-                  >
-                  of
-                  <?php echo $post_query_count->max_num_pages; ?>
-
-                  <button type='button' id='ds-filters-paged-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='Go to page'>
-                    <?php dsn_icon('enter', 'dsn:w-6 dsn:h-6'); ?>
-                  </button>
-                  <style>
-                    #ds-filters-paged-go:hover{background-color:#2b2b2b!important;}
-                  </style>
-                </div>
-              <?php
-              endif; ?>
-              <a href="#" class="dsn-primary-site-link dsn:hidden dsn:lg:block" id="toTop">Back to
-                Top</a>
-            </div>
-          </div>
-        </div>
-      <?php wp_reset_postdata();
-        else :
-          echo '<h2 class="dsn:text-center" style="width: 100%">No products found</h2>';
-        endif;
-      ?>
-    </div>
-  <?php
+    if (defined('DOING_AJAX') && DOING_AJAX) {
+        wp_die();
+    }
 }
 
 function get_the_categories(WC_Product $product)
