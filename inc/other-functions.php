@@ -410,7 +410,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
     </div>
   </div>
 
-    <div class="dsn:py-5">
+  <div class="dsn:py-5">
       <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
         <div class="dsn:container dsn:mx-auto dsn:row dsn:w-full dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:gap-8 dsn:gap-y-12">
             <?php while ($the_query->have_posts()) :
