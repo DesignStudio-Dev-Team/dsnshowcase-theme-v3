@@ -63,7 +63,6 @@ function dealer_add_to_cart_fragment($fragments)
     return $fragments;
 }
 
-
 // Create pagination
 function foundation_pagination($query = '')
 {
@@ -89,7 +88,6 @@ function foundation_pagination($query = '')
 
     echo $pagination;
 }
-
 
 add_action('wp_ajax_ds_filter', 'ds_filtration');
 add_action('wp_ajax_nopriv_ds_filter', 'ds_filtration');
@@ -1500,4 +1498,21 @@ function dsn_icon($icon_name, $classes = '') {
     }
     
     echo sprintf($icons[$icon_name], esc_attr($classes));
+}
+
+if ( ! function_exists( 'dsn_get_term_meta' ) ) {
+  /**
+   * Safe wrapper for term meta (replaces deprecated get_woocommerce_term_meta).
+  */
+  function dsn_get_term_meta(int $term_id, string $key, bool $single = true ) {
+    if (function_exists( 'get_term_meta' )) {
+      return get_term_meta( $term_id, $key, $single );
+    }
+
+    if (function_exists( 'get_woocommerce_term_meta' )) {
+      return get_woocommerce_term_meta( $term_id, $key, $single );
+    }
+
+    return false;
+  }
 }
