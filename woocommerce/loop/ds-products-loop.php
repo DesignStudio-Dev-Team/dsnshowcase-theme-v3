@@ -3,7 +3,7 @@ global $dssSiteLanguage;
 
 $translatedText = dssLang($dssSiteLanguage);
 /**
- * Custom DSN products loop template used by AJAX ds_filtration and archive page.
+ * Custom DSN products loop the template used by AJAX ds_filtration and archive page.
  * Expected variables (passed via wc_get_template args):
  * - $the_query (WP_Query)
  * - $post_ids (array<int>)
@@ -153,8 +153,9 @@ $translatedText = dssLang($dssSiteLanguage);
                 </div>
               <?php
               endif; ?>
-              <a href="#" class="dsn-primary-site-link dsn:hidden dsn:lg:block" id="toTop">Back to
-                Top</a>
+              <a href="#" class="dsn-primary-site-link dsn:hidden dsn:lg:block" id="toTop">
+                <?php echo $translatedText->template_store->back_to_top;?>
+              </a>
             </div>
           </div>
         </div>
