@@ -48,7 +48,7 @@ global $dssSiteLanguage;
         <div class="dsn-logo dsn:w-4/12">
             <a class="dsn:block dsn:relative dsn:text-center" href="<?php
                                                                     echo esc_url(home_url('/'));
-                                                                    ?>"><img class="dsn:max-w-48 dsn:md:max-w-80 dsn:mx-auto" src="<?php echo $header_logo['url']; ?>"
+                                                                    ?>"><img class="dsn:max-w-48 dsn:md:max-w-80 dsn:mx-auto" src="<?php echo isset($header_logo['url']) ? $header_logo['url'] : ''; ?>"
                     alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
         </div>
         <div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
