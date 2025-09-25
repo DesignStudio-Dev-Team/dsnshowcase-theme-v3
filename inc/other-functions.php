@@ -94,28 +94,31 @@ add_action('wp_ajax_nopriv_ds_filter', 'ds_filtration');
 
 function ds_filtration($categories = null, $specials = null, $featured_image = null, $price_min = null, $price_max = null, $sale = null, $search = null, $order_by = null, $order = null, $posts_per_page = null, $paged = null)
 {
-  $categories     = $categories ?: $_POST['categories'];
-  $order          = $order ?: $_POST['order'];
-  $search         = $search ?: $_POST['search'];
-  $order_by       = $order_by ?: $_POST['orderby'];
-  $specials       = $specials ?: $_POST['specials'];
-  $featured_image = $featured_image ?: $_POST['featured_image'];
-  $price_min      = $price_min ?: $_POST['price_min'];
-  $price_max      = $price_max ?: $_POST['price_max'];
-  $sale           = $sale ?: $_POST['sale'];
-  $posts_per_page = $posts_per_page ?: $_POST['posts_per_page'];
-  // Determine current page from POST, then GET, then WP query var
-  $paged          = $paged ?: (isset($_POST['paged']) ? intval($_POST['paged']) : null);
+  $categories     = $categories ?? $_POST['categories'] ?? null;
+  $order          = $order ?? $_POST['order'] ?? null;
+  $search         = $search ?? $_POST['search'] ?? null;
+  $order_by       = $order_by ?? $_POST['orderby'] ?? null;
+  $specials       = $specials ?? $_POST['specials'] ?? null;
+  $featured_image = $featured_image ?? $_POST['featured_image'] ?? null;
+  $price_min      = $price_min ?? $_POST['price_min'] ?? null;
+  $price_max      = $price_max ?? $_POST['price_max'] ?? null;
+  $sale           = $sale ?? $_POST['sale'] ?? null;
+  $posts_per_page = $posts_per_page ?? $_POST['posts_per_page'] ?? null;
+
+  if (!$paged && isset($_POST['paged'])) {
+      $paged = (int) $_POST['paged'];
+  }
   if (!$paged && isset($_GET['paged'])) {
-      $paged = intval($_GET['paged']);
+      $paged = (int) $_GET['paged'];
   }
-  if (!$paged && isset($_GET['page'])) { // fallback some themes use 'page'
-      $paged = intval($_GET['page']);
+  if (!$paged && isset($_GET['page'])) {
+      $paged = (int) $_GET['page'];
   }
+
   if (!$paged) {
       $qv_paged = get_query_var('paged');
       if ($qv_paged) {
-          $paged = intval($qv_paged);
+          $paged = (int) $qv_paged;
       }
   }
 

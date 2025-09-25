@@ -32,7 +32,7 @@ $pages = get_posts($args);
 
 wp_reset_postdata();
 
-$this_id = $pages[0];
+$this_id = (is_array($pages) && !empty($pages)) ? $pages[0] : 0;
 $all_categories = get_queried_object_id();
 $this_obj = get_queried_object();
 $thumbnail_id = dsn_get_term_meta($all_categories, 'thumbnail_id', true);
