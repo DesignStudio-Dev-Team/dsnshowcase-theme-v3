@@ -42,7 +42,9 @@
         "sort_by_name_A_to_Z": "Naam (A-Z)",
         "sort_by_name_Z_to_A": "Naam (Z-A)",
         "back_to_top": "Terug naar Boven",
-        "clear_filters_link_text": "Wis"
+        "clear_filters_link_text": "Wis",
+        "no_products_found" : "Geen producten gevonden",
+        "go_to_page": "Ga naar pagina"
     },
     "woocommerce_cart": {
         "back_link": "TERUG",

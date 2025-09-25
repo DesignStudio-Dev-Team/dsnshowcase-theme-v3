@@ -1,4 +1,7 @@
 <?php
+global $dssSiteLanguage;
+
+$translatedText = dssLang($dssSiteLanguage);
 /**
  * Custom DSN products loop template used by AJAX ds_filtration and archive page.
  * Expected variables (passed via wc_get_template args):
@@ -19,42 +22,45 @@
     >
       <div class="dsn:flex ds-filters-nav dsn:w-full dsn:gap-3 dsn:flex-wrap dsn:pt-10 dsn:pb-4">
         <div class="ds-filters-counter dsn:hidden dsn:md:block hide-for-medium-down">
-              <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
-              <?php _e(' Products to Explore', 'dealer-theme'); ?>
-          </div>
+            <span class="ds-filters-counter__value"><?php echo $post_query_count->found_posts; ?> </span>
+            <?php echo $translatedText->template_store->products_to_explore;?>
+        </div>
+
         <div class="ds-filters-nav-right dsn:flex-1 dsn:justify-end dsn:gap-6 dsn:flex flex-wrap dsn:flex-col dsn:md:flex-row dsn:items-center dsn:md:items-start">
             <select name="posts_per_page" id="ds-posts_per_page" class="ds-posts_per_page dsn:w-full dsn:lg:w-1/4">
-                <option value="24" <?php echo $posts_per_page === 24 ? 'selected' : ''; ?>>24
-                    Per Page
+                <option value="24" <?php echo $posts_per_page === 24 ? 'selected' : ''; ?>>
+                  <?php echo $translatedText->template_store->per_page_24;?>
                 </option>
-                <option value="36" <?php echo $posts_per_page === 36 ? 'selected' : ''; ?>>36
-                    Per Page
+                <option value="36" <?php echo $posts_per_page === 36 ? 'selected' : ''; ?>>
+                  <?php echo $translatedText->template_store->per_page_36;?>
                 </option>
-                <option value="72" <?php echo $posts_per_page === 72 ? 'selected' : ''; ?>>72
-                    Per Page
+                <option value="72" <?php echo $posts_per_page === 72 ? 'selected' : ''; ?>>
+                  <?php echo $translatedText->template_store->per_page_72;?>
                 </option>
             </select>
 
             <select name="sort_by" id="ds-sort_by" class="dsn:w-full dsn:lg:w-1/4">
-                <option value="" disabled selected>Sort By:</option>
+                <option value="" disabled selected>
+                  <?php echo $translatedText->template_store->sort_by_title;?>
+                </option>
                 <option value="price-desc" <?php echo $order_selector === 'price-desc' ? 'selected' : ''; ?>>
-                    Price (High to Low)
+                  <?php echo $translatedText->template_store->sort_by_price_high_to_low;?>
                 </option>
 
                 <option value="price-asc" <?php echo $order_selector === 'price-asc' ? 'selected' : ''; ?>>
-                    Price (Low to High)
+                  <?php echo $translatedText->template_store->sort_by_price_low_to_high;?>
                 </option>
 
                 <option value="title-asc" <?php echo $order_selector === 'title-asc' ? 'selected' : ''; ?>>
-                    Name (A-Z)
+                  <?php echo $translatedText->template_store->sort_by_name_A_to_Z;?>
                 </option>
                 <option value="title-desc" <?php echo $order_selector === 'title-desc' ? 'selected' : ''; ?>>
-                    Name (Z-A)
+                  <?php echo $translatedText->template_store->sort_by_name_Z_to_A;?>
                 </option>
             </select>
 
             <form id="ds-filters-search-wrap" class="dsn:flex dsn:w-full dsn:lg:w-1/2" action="<?php echo esc_url(home_url('/')); ?>">
-                <input type="search" name="s" id="ds-filters-search" class="search__input dsn:w-full" placeholder="<?php _e('Search by keyword', 'dealer-theme'); ?>" value="<?php echo $search; ?>" />
+                <input type="search" name="s" id="ds-filters-search" class="search__input dsn:w-full" placeholder="<?php echo $translatedText->template_store->search_placeholder;?>" value="<?php echo $search; ?>" />
 
                 <button type='button' id='ds-filters-search-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-10 dsn:h-12 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='<?php _e('Search', 'dealer-theme'); ?>' style='<?php echo !empty($search) ? "display:none;" : ""; ?>'>
                     <?php dsn_icon('search', 'dsn:w-5 dsn:h-5'); ?>
@@ -115,21 +121,20 @@
             <?php endwhile; ?>
             <div class='dsn:flex ds-filters-footer-nav dsn:w-full dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3'>
             <div class='dsn:hidden dsn:lg:block'>
-              <span class="ds-filters-counter"><?php
-                echo $post_query_count->found_posts; ?>
-                Products to Explore </span>
+              <span class="ds-filters-counter">
+                <?php echo $post_query_count->found_posts; ?>
+                <?php echo $translatedText->template_store->products_to_explore;?>
+              </span>
             </div>
             <div id="dsPagination" class="js-pagination">
               <?php
               foundation_pagination($post_query_count) ?>
             </div>
             <div class="ds-filters-footer-nav-right">
-              <?php
-              if ($post_query_count->max_num_pages
-                && $post_query_count->max_num_pages > 1
-              ) : ?>
+              <?php if ($post_query_count->max_num_pages && $post_query_count->max_num_pages > 1) : ?>
                 <div class="dsn:flex dsn:items-center dsn:gap-2">
-                  Go to page
+                  <?php echo $translatedText->template_store->go_to_page;?>
+
                   <input type="number" name="paged"
                          min="1" 
                          value="<?php echo $post_query_count->query_vars['paged']; ?>"
@@ -153,10 +158,11 @@
             </div>
           </div>
         </div>
-      <?php wp_reset_postdata();
-        else :
-          echo '<h2 class="dsn:text-center" style="width: 100%">No products found</h2>';
-        endif;
-      ?>
+      <?php wp_reset_postdata(); ?>
+      <?php else : ?>
+        <h2 class="dsn:text-center" style="width: 100%">
+          <?php echo $translatedText->template_store->no_products_found;?>
+        </h2>
+      <?php endif; ?>
     </div>
 

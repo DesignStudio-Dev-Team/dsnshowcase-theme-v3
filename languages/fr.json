@@ -42,7 +42,9 @@
         "sort_by_name_A_to_Z": "Nom (A-Z)",
         "sort_by_name_Z_to_A": "Nom (Z-A)",
         "back_to_top": "Retour au sommet",
-        "clear_filters_link_text": "Dégager"
+        "clear_filters_link_text": "Dégager",
+        "no_products_found": "Aucun produit trouvé",
+        "go_to_page": "Aller à la page"
     },
     "woocommerce_cart": {
         "back_link": "RETOUR",
