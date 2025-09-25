@@ -70,7 +70,7 @@ function foundation_pagination($query = '')
         global $wp_query;
         $query = $wp_query;
     }
-    $current = $_POST['paged'] ? $_POST['paged'] : get_query_var('paged');
+    $current = isset($_POST['paged']) && $_POST['paged'] ? $_POST['paged'] : get_query_var('paged');
 
     $big = 999999999;
     $links = paginate_links(array(
