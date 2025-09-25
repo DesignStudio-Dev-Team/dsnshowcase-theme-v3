@@ -122,7 +122,6 @@ $arg = array(
 
               <?php if (have_rows('filter', 'options')): ?>
                   <div class="ds-filters">
-                      <button class="hide-filters js-toggle-filters dsn:md:hidden ">X</button>
                       <form class="dsn:mb-4" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="ds-filter">
                           <?php if ($title_p_f = get_field('title_p_f', 'options')) : ?>
                               <h5 class="dsn:text-center dsn:md:text-left"><?php echo $title_p_f; ?></h5>
@@ -253,12 +252,6 @@ $arg = array(
 
 
                               endwhile; ?>
-                              <div class="dsn:text-center">
-                                  <button
-                                          class="js-toggle-filters dsn:text-center apply-button dsn:md:hidden">
-                                      Apply Filter
-                                  </button>
-                              </div>
                           </div><!--/#accordion-->
                       </form>
                   </div>
@@ -545,10 +538,6 @@ $arg = array(
         }
         currentUrl.pathname = path;
         window.location.href = currentUrl.toString();
-      });
-
-      $body.on('click', '.js-toggle-filters', function() {
-        $('.ds-filters').toggleClass('active');
       });
 
       $body.on('click', '#toTop', function() {
