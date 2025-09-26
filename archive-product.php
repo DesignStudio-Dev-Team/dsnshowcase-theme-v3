@@ -116,10 +116,6 @@ $arg = array(
       <div class="dsn:row dsn:flex-row">
           <div class="ds-filters-over"></div>
           <div class="dsn:w-full dsn:md:w-1/4 dsn:hidden">
-              <div class="dsn:w-full dsn:mb-4 dsn:hidden dsn:md:block">
-  <!--                <a class="ds-back-link " href="--><?php //echo get_permalink($this_id); ?><!--">Back to All categories</a>-->
-              </div>
-
               <?php if (have_rows('filter', 'options')): ?>
                   <div class="ds-filters">
                       <form class="dsn:mb-4" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="ds-filter">
@@ -249,10 +245,8 @@ $arg = array(
                                           <?php
                                           break;
                                   }
-
-
                               endwhile; ?>
-                          </div><!--/#accordion-->
+                          </div>
                       </form>
                   </div>
               <?php endif; ?>
@@ -628,6 +622,9 @@ $arg = array(
     }(jQuery));
   </script>
   <style>
+    #ds-filters-paged-go:hover{
+      background-color:#2b2b2b!important;
+    }
     .dsn-taxonomy-description {
       max-width: 1000px;
       margin: 0 auto;
