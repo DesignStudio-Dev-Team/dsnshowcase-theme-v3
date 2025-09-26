@@ -501,11 +501,16 @@ $arg = array(
         }
       });
 
-      // Disable Enter key submit on header search input; only button triggers
       $body.on('keydown', '#ds-filters-search', function(e) {
         if (e.key === 'Enter') {
           e.preventDefault();
-          return false;
+
+          dsFilter();
+          // After a successful search, swap to clear mode
+          $('#ds-filters-search-go').hide();
+          if ($('#ds-filters-search-clear').length) {
+            $('#ds-filters-search-clear').show();
+          }
         }
       });
 
