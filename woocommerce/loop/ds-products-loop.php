@@ -147,9 +147,6 @@ $translatedText = dssLang($dssSiteLanguage);
                   <button type='button' id='ds-filters-paged-go' class='dsn:cursor-pointer dsn:inline-flex dsn:items-center dsn:justify-center dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded' aria-label='Go to page'>
                     <?php dsn_icon('enter', 'dsn:w-6 dsn:h-6'); ?>
                   </button>
-                  <style>
-                    #ds-filters-paged-go:hover{background-color:#2b2b2b!important;}
-                  </style>
                 </div>
               <?php
               endif; ?>
