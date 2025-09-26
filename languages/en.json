@@ -13,7 +13,11 @@
         "get_directions": "Get Directions"
     },
     "global_site_search": {
-        "search_title": "Search Our Website"
+        "search_title": "Search Our Website",
+        "option_all": "All",
+        "option_products": "Products",
+        "option_blog": "Blog",
+        "search_placeholder": "Search..."
     },
     "search": {
         "results": "search results",

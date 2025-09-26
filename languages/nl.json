@@ -13,7 +13,11 @@
         "get_directions": "Routebeschrijving"
     },
     "global_site_search": {
-        "search_title": "Zoek op onze website"
+        "search_title": "Zoek op onze website",
+        "option_all": "Alles",
+        "option_products": "Producten",
+        "option_blog": "Blog",
+        "search_placeholder": "Zoeken..."
     },
     "search": {
         "results": "zoekresultaten",
