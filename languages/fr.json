@@ -13,7 +13,11 @@
         "get_directions": "Obtenir des directions"
     },
     "global_site_search": {
-        "search_title": "Rechercher sur notre site web"
+        "search_title": "Rechercher sur notre site web",
+        "option_all": "Tout",
+        "option_products": "Produits",
+        "option_blog": "Blog",
+        "search_placeholder": "Chercher..."
     },
     "search": {
         "results": "résultats de recherche",
