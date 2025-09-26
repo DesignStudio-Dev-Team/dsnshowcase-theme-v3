@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.25",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.25",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.25/dsnshowcase.zip",
+  "version": "v3.5.26",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.26",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.26/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-08-28",
+  "last_updated": "2025-09-26",
   "sections": {
-    "changelog": "Merge pull request #93 from DesignStudio-Dev-Team/mark\n\nf"
+    "changelog": "Merge branch 'bug--issue-with-dsfilterssearch-rerendering-conten-fix'"
   }
 }
