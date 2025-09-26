@@ -12,6 +12,9 @@
         "site_by": "Site by",
         "get_directions": "Get Directions"
     },
+    "global_site_search": {
+        "search_title": "Search Our Website"
+    },
     "search": {
         "results": "search results",
         "view_link": "View",
