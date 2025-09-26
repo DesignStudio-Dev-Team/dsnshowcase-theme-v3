@@ -12,6 +12,9 @@
         "site_by": "Site by",
         "get_directions": "Get Directions"
     },
+    "global_site_search": {
+        "search_title": "Search Our Website"
+    },
     "search": {
         "results": "search results",
         "view_link": "View",
@@ -42,7 +45,9 @@
         "sort_by_name_A_to_Z": "Name (A-Z)",
         "sort_by_name_Z_to_A": "Name (Z-A)",
         "back_to_top": "Back to Top",
-        "clear_filters_link_text": "Clear"
+        "clear_filters_link_text": "Clear",
+        "no_products_found": "No products were found.",
+        "go_to_page": "Go to page"
     },
     "woocommerce_cart": {
         "back_link": "BACK",

@@ -255,67 +255,42 @@ function dss_toggle_admin_bar() {
     if (current_user_can('administrator')) {
         ?>
         <style>
-            html {
-                margin-top: 0 !important;
-            }
-            #wpadminbar {
-                transform: translateY(-100%);
-                transition: all 0.3s ease-in-out !important;
-                opacity: 0;
-            }
-            #wpadminbar.show {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            .dss-toggle-admin-bar {
-                position: fixed;
-                top: 0px;
-                right: 0px;
-                z-index: 99999;
-                background-color: #0e0e0e;
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                z-index: 999999999999999;
-            }
-            #wpadminbar {
-                z-index:  999;
-            }
-            .dss-toggle-admin-bar svg {
-                transition: transform 0.3s ease, fill 0.3s ease;
-            }
+            /* Toggle is hidden by default (desktop). Mobile-specific tweaks below */
+            .dss-toggle-admin-bar { display: none; }
 
-            .dss-toggle-admin-bar:hover {
-                background-color: #000;
-                transform: scale(1.1);
-            }
-            .dss-toggle-admin-bar {
-                transform: rotate(180deg);
-            }
-            .dss-toggle-admin-bar.active {
-                transform: rotate(0deg);
-            }
-            .dss-toggle-admin-bar svg {
-                width: 16px;
-                height: 16px;
-                fill: #fff;
-            }
-            body.admin-bar-visible {
-                margin-top: 32px !important;
-            }
-            @media screen and (max-width: 782px) {
-                body.admin-bar-visible {
-                    margin-top: 46px !important;
+            @media screen and (max-width: 768px) {
+                html { margin-top: 0 !important; }
+                #wpadminbar {
+                    transform: translateY(-100%);
+                    transition: all 0.3s ease-in-out !important;
+                    opacity: 0;
+                    z-index: 999;
                 }
+                #wpadminbar.show { transform: translateY(0); opacity: 1; }
+
+                .dss-toggle-admin-bar {
+                    position: fixed;
+                    bottom: 32px;
+                    right: 32px;
+                    background-color: #0e0e0e;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                    z-index: 999999;
+                }
+                .dss-toggle-admin-bar svg { transition: transform 0.3s ease, fill 0.3s ease; }
+                .dss-toggle-admin-bar:hover { background-color: #000; transform: scale(1.1); }
+                .dss-toggle-admin-bar svg { width: 16px; height: 16px; fill: #fff; }
+                body.admin-bar-visible { margin-top: 46px !important; }
             }
         </style>
-        <div class="dss-toggle-admin-bar">
+        <div class="dss-toggle-admin-bar" role="button" aria-label="Back to top">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                 <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
             </svg>
@@ -323,30 +298,23 @@ function dss_toggle_admin_bar() {
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const toggleButton = document.querySelector('.dss-toggle-admin-bar');
-                const adminBar = document.getElementById('wpadminbar');
-                const body = document.body;
-                let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+                const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
-                function updateAdminBarState(visible) {
-                    if (visible) {
-                        adminBar.classList.add('show');
-                        toggleButton.classList.add('active');
-                        body.classList.add('admin-bar-visible');
-                    } else {
-                        adminBar.classList.remove('show');
-                        toggleButton.classList.remove('active');
-                        body.classList.remove('admin-bar-visible');
-                    }
+                function updateVisibility() {
+                    if (!toggleButton) return;
+                    toggleButton.style.display = isMobile() ? 'flex' : 'none';
                 }
 
-                // Initialize state
-                updateAdminBarState(isVisible);
+                updateVisibility();
+                window.addEventListener('resize', updateVisibility);
 
-                toggleButton.addEventListener('click', function() {
-                    isVisible = !isVisible;
-                    updateAdminBarState(isVisible);
-                    localStorage.setItem('adminBarVisible', isVisible);
-                });
+                if (toggleButton) {
+                    toggleButton.addEventListener('click', function(e) {
+                        if (!isMobile()) return;
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                }
             });
         </script>
         <?php
