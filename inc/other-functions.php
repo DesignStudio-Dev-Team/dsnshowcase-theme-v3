@@ -1173,7 +1173,7 @@ function dssLang($dssSiteLanguage = 'en')
     return $data;
 }
 
-function dssGetLanguageOptions()
+function dssGetLanguageOptions(): array
 {
 
     // for SVG flags:
@@ -1396,45 +1396,51 @@ if ( ! function_exists( 'dsn_get_term_meta' ) ) {
 }
 
 if ( ! function_exists( 'dsn_get_reserve_cta_url' ) ) {
-  /**
-   * Get the call-to-action URL for reserve button from Syndified plugin settings.
-   * 
-   * @param int $product_id The product ID
-   * @return string The CTA URL or product permalink as fallback
-   */
-  function dsn_get_reserve_cta_url( $product_id ) {
-    global $dssSiteLanguage;
-    
-    // Get the current language, fallback to 'en'
-    $language = $dssSiteLanguage ?: 'en';
-    
+  function dsn_get_reserve_cta_url($product_id)
+  {
     // Get the CTA URL from Syndified plugin settings
-    $cta_url = get_option( 'dss_syndified_ecomm_cta_url_setting_' . $language );
-    
-    if ( $cta_url ) {
+    $cta_url = get_option('Syndified®_ecomm_cta_url_setting_'.dsn_get_current_active_locale());
+
+    if ($cta_url) {
       // Add product name and article ID parameters like in Syndified templates
-      $product = wc_get_product( $product_id );
-      if ( $product ) {
+      $product = wc_get_product($product_id);
+      if ($product) {
         $product_title = $product->get_name();
-        
+
         // Add product name parameter
-        if ( strpos( $cta_url, '?' ) === false ) {
-          $cta_url .= '?pn=' . urlencode( $product_title );
+        if (strpos($cta_url, '?') === false) {
+          $cta_url .= '?pn='.urlencode($product_title);
         } else {
-          $cta_url .= '&pn=' . urlencode( $product_title );
+          $cta_url .= '&pn='.urlencode($product_title);
         }
-        
+
         // Add article ID if available (from Syndified plugin)
-        $article_id = get_post_meta( $product_id, 'console_id', true );
-        if ( $article_id ) {
-          $cta_url .= '&an=' . urlencode( $article_id );
+        $article_id = get_post_meta($product_id, 'console_id', true);
+        if ($article_id) {
+          $cta_url .= '&an='.urlencode($article_id);
         }
       }
-      
+
       return $cta_url;
     }
-    
+
     // Fallback to product permalink if no CTA URL is configured
-    return get_permalink( $product_id );
+    return get_permalink($product_id);
+  }
+
+  if ( ! function_exists('dsn_get_current_active_locale')) {
+    function dsn_get_current_active_locale()
+    {
+      $currentLocale = '';
+      foreach (apply_filters('wpml_active_languages', null) as $languages__value) {
+        if ($languages__value['active']) {
+          $currentLocale = $languages__value['default_locale'];
+          break;
+        }
+      }
+
+      return $currentLocale;
+    }
   }
 }
+
