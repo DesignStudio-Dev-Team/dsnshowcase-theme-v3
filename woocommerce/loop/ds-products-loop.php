@@ -1,6 +1,9 @@
 <?php
 global $dssSiteLanguage;
 
+const ON_RESERVE_STOCK_STATUS = 'on_reserve';
+
+
 $translatedText = dssLang($dssSiteLanguage);
 /**
  * Custom DSN products loop the template used by AJAX ds_filtration and archive page.
@@ -78,9 +81,12 @@ $translatedText = dssLang($dssSiteLanguage);
   <div class="dsn:py-5">
       <?php if (count($post_ids) > 0 && $the_query->have_posts()) : ?>
         <div class="dsn:container dsn:mx-auto dsn:row dsn:w-full dsn:grid dsn:grid-cols-1 dsn:sm:grid-cols-2 dsn:md:grid-cols-3 dsn:gap-8 dsn:gap-y-12">
-            <?php while ($the_query->have_posts()) :
-                $the_query->the_post(); ?>
-                <?php $product = wc_get_product(get_the_ID()); ?>
+            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+                <?php
+                  $product = wc_get_product(get_the_ID());
+                  $product_price_html = $product->get_price_html();
+                  $stock_status = $product->get_stock_status();
+                ?>
                 <div>
                     <div class="ds-product dsn:bg-white dsn:border-1 dsn:border-solid dsn:border-gray-300">
                         <a href="<?php echo get_permalink() ?>">
@@ -102,18 +108,26 @@ $translatedText = dssLang($dssSiteLanguage);
                         <div class="ds-product__footer dsn:bg-gray-100 dsn:p-4">
                           <div class='ds-product__meta'>
                             <div class='ds-product__price'>
-                              <?php echo $product->get_price_html(); ?>
+                              <?php echo $product_price_html; ?>
                             </div>
-                            <?php if ($product->get_price_html()) { ?>
-                              <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>">
-                                    <span class='dsn:flex dsn:items-center'>
-                                      <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
-                                    </span>
-                                    <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
-                                      <?php     dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
-                                    </span>
-                              </button>
-                            <?php } ?>
+                            <?php if ($stock_status === ON_RESERVE_STOCK_STATUS) : ?>
+                              <a href="<?php echo get_permalink(); ?>" class="ds-reserve-button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:bg-black dsn:text-white dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150 dsn:rounded">
+                                 <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
+                                   <?php dsn_icon('reserve', 'dsn:w-4 dsn:h-4'); ?>
+                                 </span>
+                              </a>
+                            <?php else: ?>
+                              <?php if ( $product_price_html ) : ?>
+                                <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>">
+                                      <span class='dsn:flex dsn:items-center'>
+                                        <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
+                                      </span>
+                                      <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
+                                        <?php     dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
+                                      </span>
+                                </button>
+                              <?php endif; ?>
+                            <?php endif; ?>
                           </div>
                         </div>
                     </div>
