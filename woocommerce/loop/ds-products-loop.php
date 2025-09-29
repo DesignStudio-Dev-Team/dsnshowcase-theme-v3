@@ -115,7 +115,7 @@ $translatedText = dssLang($dssSiteLanguage);
                             
                             <?php if (dsn_get_syndified_show_action_btn()) : ?>
                                 <?php if ($stock_status === ON_RESERVE_STOCK_STATUS && dsn_get_syndified_show_reserve_btn()) : ?>
-                                  <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-8 dsn:h-8 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->reserve_button); ?>">
+                                  <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->reserve_button); ?>">
                                     <span class="dsn:flex dsn:items-center">
                                       <?php dsn_icon('reserve', 'dsn:w-4 dsn:h-4'); ?>
                                     </span>
