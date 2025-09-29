@@ -66,6 +66,7 @@
         "coupon_code": "Code promo",
         "coupon_placeholder": "promo",
         "checkout_btn": "VÉRIFIER",
+        "add_to_cart_btn": "Ajouter au panier",
         "reserve_button": "Réserver",
         "payment_details": "Détails de paiement",
         "billing_details":"Détails de la facturation",

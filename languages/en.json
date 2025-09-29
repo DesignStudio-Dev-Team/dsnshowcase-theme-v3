@@ -66,6 +66,7 @@
         "coupon_code": "Coupon Code",
         "coupon_placeholder": "coupon",
         "checkout_btn": "CHECKOUT",
+        "add_to_cart_btn": "Add to Cart",
         "reserve_button": "Reserve",
         "payment_details": "Payment Details",
         "billing_details":"Billing Details",

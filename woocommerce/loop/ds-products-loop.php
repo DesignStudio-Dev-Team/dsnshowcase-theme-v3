@@ -118,7 +118,7 @@ $translatedText = dssLang($dssSiteLanguage);
                                </a>
                             <?php else: ?>
                               <?php if ( $product_price_html ) : ?>
-                                <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>">
+                                <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>" title="<?php echo esc_attr($translatedText->woocommerce_cart->add_to_cart_btn); ?>">
                                       <span class='dsn:flex dsn:items-center'>
                                         <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
                                       </span>
