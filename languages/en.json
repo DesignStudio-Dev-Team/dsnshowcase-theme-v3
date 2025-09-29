@@ -68,6 +68,7 @@
         "checkout_btn": "CHECKOUT",
         "add_to_cart_btn": "Add to Cart",
         "reserve_button": "Reserve",
+        "info_button": "Get Info",
         "payment_details": "Payment Details",
         "billing_details":"Billing Details",
         "street_address": "Street Address",

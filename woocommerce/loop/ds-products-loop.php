@@ -120,7 +120,13 @@ $translatedText = dssLang($dssSiteLanguage);
                                         <?php dsn_icon('reserve', 'dsn:w-5 dsn:h-5'); ?>
                                       </span>
                                     </a>
-                                  <?php endif; ?>
+                                  <?php elseif (dsn_get_syndified_show_get_info_btn()) : ?>
+                                    <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->info_button); ?>">
+                                      <span class="dsn:flex dsn:items-center">
+                                        <?php dsn_icon('info', 'dsn:w-5 dsn:h-5'); ?>
+                                      </span>
+                                    </a>
+                                  <?php endif;?>
                               <?php endif; ?>
 
                               <?php if ($product_price_html && dsn_get_syndified_show_add_to_cart()) : ?>
