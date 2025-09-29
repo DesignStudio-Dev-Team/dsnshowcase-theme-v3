@@ -368,3 +368,14 @@ p a:hover {
 .aligncenter {
     @apply dsn:mx-auto;
 }
+
+@layer utilities {
+
+    .dsn\:primary-site-background {
+      background: var(--dealerColor);
+    }
+
+    .dsn\:primary-site-background:hover {
+        opacity: 0.85;
+    }
+  }

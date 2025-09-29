@@ -67,6 +67,8 @@
         "coupon_placeholder": "coupon",
         "checkout_btn": "CHECKOUT",
         "reserve_button": "Reserve",
+        "add_to_cart_btn": "Add to Cart",
+        "info_button": "Get Info",
         "payment_details": "Payment Details",
         "billing_details":"Billing Details",
         "street_address": "Street Address",

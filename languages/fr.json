@@ -67,6 +67,8 @@
         "coupon_placeholder": "promo",
         "checkout_btn": "VÉRIFIER",
         "reserve_button": "Réserver",
+        "add_to_cart_btn": "Ajouter au panier",
+        "info_button": "Plus d'informations",
         "payment_details": "Détails de paiement",
         "billing_details":"Détails de la facturation",
         "street_address": "Adresse de rue",

@@ -1173,7 +1173,7 @@ function dssLang($dssSiteLanguage = 'en')
     return $data;
 }
 
-function dssGetLanguageOptions()
+function dssGetLanguageOptions(): array
 {
 
     // for SVG flags:
@@ -1394,3 +1394,112 @@ if ( ! function_exists( 'dsn_get_term_meta' ) ) {
     return false;
   }
 }
+
+if ( ! function_exists( 'dsn_get_reserve_cta_url' ) ) {
+  function dsn_get_reserve_cta_url($product_id)
+  {
+    // Get the CTA URL from Syndified plugin settings
+    $cta_url = get_option('Syndified®_ecomm_cta_url_setting_'.dsn_get_current_active_locale());
+
+    if ($cta_url) {
+      // Add product name and article ID parameters like in Syndified templates
+      $product = wc_get_product($product_id);
+      if ($product) {
+        $product_title = $product->get_name();
+
+        // Add product name parameter
+        if (strpos($cta_url, '?') === false) {
+          $cta_url .= '?pn='.urlencode($product_title);
+        } else {
+          $cta_url .= '&pn='.urlencode($product_title);
+        }
+
+        // Add article ID if available (from Syndified plugin)
+        $article_id = get_post_meta($product_id, 'console_id', true);
+        if ($article_id) {
+          $cta_url .= '&an='.urlencode($article_id);
+        }
+      }
+
+      return $cta_url;
+    }
+
+    // Fallback to product permalink if no CTA URL is configured
+    return get_permalink($product_id);
+  }
+
+   if ( ! function_exists('dsn_get_current_active_locale')) {
+     function dsn_get_current_active_locale()
+     {
+       $currentLocale = '';
+       foreach (apply_filters('wpml_active_languages', null) as $languages__value) {
+         if ($languages__value['active']) {
+           $currentLocale = $languages__value['default_locale'];
+           break;
+         }
+       }
+
+       return $currentLocale;
+     }
+   }
+ }
+
+/**
+ * Get Syndified plugin setting for showing add to cart button
+ * 
+ * @return bool True if add to cart button should be shown, false otherwise
+ */
+if ( ! function_exists( 'dsn_get_syndified_show_add_to_cart' ) ) {
+  function dsn_get_syndified_show_add_to_cart() {
+    $setting = get_option( 'Syndified®_ecomm_show_add_to_cart_btn_setting' );
+    return $setting === 'yes';
+  }
+}
+
+/**
+ * Get Syndified plugin setting for showing product price
+ * 
+ * @return bool True if product price should be shown, false otherwise
+ */
+if ( ! function_exists( 'dsn_get_syndified_show_price' ) ) {
+  function dsn_get_syndified_show_price(): bool
+  {
+    $setting = get_option( 'Syndified®_ecomm_show_price_setting' );
+    return $setting === 'yes';
+  }
+}
+
+/**
+ * Get Syndified plugin setting for showing action button
+ * 
+ * @return bool True if action button should be shown, false otherwise
+ */
+if ( ! function_exists( 'dsn_get_syndified_show_action_btn' ) ) {
+  function dsn_get_syndified_show_action_btn(): bool
+  {
+    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+    return $setting !== 'no';
+  }
+}
+
+if ( ! function_exists( 'dsn_get_syndified_show_reserve_btn' ) ) {
+  function dsn_get_syndified_show_reserve_btn(): bool
+  {
+    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+    return $setting === 'show_reserve_btn';
+  }
+}
+
+
+
+if ( ! function_exists( 'dsn_get_syndified_show_get_info_btn' ) ) {
+  function dsn_get_syndified_show_get_info_btn(): bool
+  {
+    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+    return $setting === 'show_get_info_btn';
+  }
+}
+
