@@ -1428,19 +1428,56 @@ if ( ! function_exists( 'dsn_get_reserve_cta_url' ) ) {
     return get_permalink($product_id);
   }
 
-  if ( ! function_exists('dsn_get_current_active_locale')) {
-    function dsn_get_current_active_locale()
-    {
-      $currentLocale = '';
-      foreach (apply_filters('wpml_active_languages', null) as $languages__value) {
-        if ($languages__value['active']) {
-          $currentLocale = $languages__value['default_locale'];
-          break;
-        }
-      }
+   if ( ! function_exists('dsn_get_current_active_locale')) {
+     function dsn_get_current_active_locale()
+     {
+       $currentLocale = '';
+       foreach (apply_filters('wpml_active_languages', null) as $languages__value) {
+         if ($languages__value['active']) {
+           $currentLocale = $languages__value['default_locale'];
+           break;
+         }
+       }
 
-      return $currentLocale;
-    }
+       return $currentLocale;
+     }
+   }
+ }
+
+/**
+ * Get Syndified plugin setting for showing add to cart button
+ * 
+ * @return bool True if add to cart button should be shown, false otherwise
+ */
+if ( ! function_exists( 'dsn_get_syndified_show_add_to_cart' ) ) {
+  function dsn_get_syndified_show_add_to_cart() {
+    $setting = get_option( 'Syndified®_ecomm_show_add_to_cart_btn_setting' );
+    return $setting === 'yes';
+  }
+}
+
+/**
+ * Get Syndified plugin setting for showing product price
+ * 
+ * @return bool True if product price should be shown, false otherwise
+ */
+if ( ! function_exists( 'dsn_get_syndified_show_price' ) ) {
+  function dsn_get_syndified_show_price() {
+    $setting = get_option( 'Syndified®_ecomm_show_price_setting' );
+    return $setting === 'yes';
+  }
+}
+
+/**
+ * Get Syndified plugin setting for showing action button
+ * 
+ * @return bool True if action button should be shown, false otherwise
+ */
+if ( ! function_exists( 'dsn_get_syndified_show_action_btn' ) ) {
+  function dsn_get_syndified_show_action_btn() {
+    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+    return $setting !== 'no';
   }
 }
 
