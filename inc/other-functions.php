@@ -1462,7 +1462,8 @@ if ( ! function_exists( 'dsn_get_syndified_show_add_to_cart' ) ) {
  * @return bool True if product price should be shown, false otherwise
  */
 if ( ! function_exists( 'dsn_get_syndified_show_price' ) ) {
-  function dsn_get_syndified_show_price() {
+  function dsn_get_syndified_show_price(): bool
+  {
     $setting = get_option( 'Syndified®_ecomm_show_price_setting' );
     return $setting === 'yes';
   }
@@ -1474,10 +1475,31 @@ if ( ! function_exists( 'dsn_get_syndified_show_price' ) ) {
  * @return bool True if action button should be shown, false otherwise
  */
 if ( ! function_exists( 'dsn_get_syndified_show_action_btn' ) ) {
-  function dsn_get_syndified_show_action_btn() {
+  function dsn_get_syndified_show_action_btn(): bool
+  {
     $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
 
     return $setting !== 'no';
+  }
+}
+
+if ( ! function_exists( 'dsn_get_syndified_show_reserve_btn' ) ) {
+  function dsn_get_syndified_show_reserve_btn(): bool
+  {
+    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+    return $setting === 'show_reserve_btn';
+  }
+}
+
+
+
+if ( ! function_exists( 'dsn_get_syndified_show_get_info_btn' ) ) {
+  function dsn_get_syndified_show_get_info_btn(): bool
+  {
+    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+    return $setting === 'show_get_info_btn';
   }
 }
 
