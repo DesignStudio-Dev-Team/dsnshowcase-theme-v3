@@ -112,27 +112,28 @@ $translatedText = dssLang($dssSiteLanguage);
                                 <?php echo $product_price_html; ?>
                               </div>
                             <?php endif; ?>
-                            
-                            <?php if (dsn_get_syndified_show_action_btn()) : ?>
-                                <?php if ($stock_status === ON_RESERVE_STOCK_STATUS && dsn_get_syndified_show_reserve_btn()) : ?>
-                                  <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->reserve_button); ?>">
-                                    <span class="dsn:flex dsn:items-center">
-                                      <?php dsn_icon('reserve', 'dsn:w-4 dsn:h-4'); ?>
-                                    </span>
-                                  </a>
-                                <?php endif; ?>
-                            <?php endif; ?>
+                            <div class="ds-product__action_buttons dsn:flex dsn:gap-2">
+                              <?php if (dsn_get_syndified_show_action_btn()) : ?>
+                                  <?php if ($stock_status === ON_RESERVE_STOCK_STATUS && dsn_get_syndified_show_reserve_btn()) : ?>
+                                    <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->reserve_button); ?>">
+                                      <span class="dsn:flex dsn:items-center">
+                                        <?php dsn_icon('reserve', 'dsn:w-5 dsn:h-5'); ?>
+                                      </span>
+                                    </a>
+                                  <?php endif; ?>
+                              <?php endif; ?>
 
-                            <?php if ($product_price_html && dsn_get_syndified_show_add_to_cart()) : ?>
-                              <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>" title="<?php echo esc_attr($translatedText->woocommerce_cart->add_to_cart_btn); ?>">
-                                    <span class='dsn:flex dsn:items-center'>
-                                      <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
-                                    </span>
-                                <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
-                                      <?php dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
-                                    </span>
-                              </button>
-                            <?php endif; ?>
+                              <?php if ($product_price_html && dsn_get_syndified_show_add_to_cart()) : ?>
+                                <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>" title="<?php echo esc_attr($translatedText->woocommerce_cart->add_to_cart_btn); ?>">
+                                      <span class='dsn:flex dsn:items-center'>
+                                        <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
+                                      </span>
+                                  <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
+                                        <?php dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
+                                      </span>
+                                </button>
+                              <?php endif; ?>
+                            </div>
                           </div>
                         </div>
                     </div>
