@@ -63,11 +63,10 @@
         "order_sub_total": "Sous-total",
         "order_total": "Total",
         "coupon_discounts": "Remise",
-
         "coupon_code": "Code promo",
         "coupon_placeholder": "promo",
         "checkout_btn": "VÉRIFIER",
-
+        "reserve_button": "Réserver",
         "payment_details": "Détails de paiement",
         "billing_details":"Détails de la facturation",
         "street_address": "Adresse de rue",
