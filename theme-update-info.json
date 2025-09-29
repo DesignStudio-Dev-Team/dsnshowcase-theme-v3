@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.28",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.28",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.28/dsnshowcase.zip",
+  "version": "v3.5.29",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.29",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.29/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-09-29",
   "sections": {
-    "changelog": "Merge pull request #104 from DesignStudio-Dev-Team/bug-incorrect-button-displayed-for-on-reserve-prod-fix\n\nBug: Incorrect button displayed for 'On Reserve' products - Fix"
+    "changelog": "Merge pull request #106 from DesignStudio-Dev-Team/bug-reserve-button-is-nonfunctional-and-has-incorr-fix\n\nBug: 'Reserve' button is non-functional and has incorrect styling - Fix"
   }
 }
