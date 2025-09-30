@@ -9,17 +9,19 @@
 const NO                                                      = 'no';
 const YES                                                     = 'yes';
 
-const STOCK_STATUS_POST_META_KEY                              = '_stock_status';
-const MANAGE_STOCK_POST_META_KEY                              = '_manage_stock';
-const STOCK_POST_META_KEY                                     = '_stock';
-const BACKORDERS_POST_META_KEY                                = '_backorders';
-const BRAND_APPROVES_PRODUCT_TO_SELL_POST_META_KEY            = 'brand_approves_product_to_sell';
+const SYNDIFIED_FIELDS_POST_META_KEY                                  = 'dss_syndified';
+const SYNDIFIED_CONSOLE_POST_META_KEY                                 = 'console_id';
+const STOCK_STATUS_POST_META_KEY                                      = '_stock_status';
+const MANAGE_STOCK_POST_META_KEY                                      = '_manage_stock';
+const STOCK_POST_META_KEY                                             = '_stock';
+const BACKORDERS_POST_META_KEY                                        = '_backorders';
+const BRAND_APPROVES_PRODUCT_TO_SELL_SYNDIFIED_POST_META_KEY_ACCESSOR = 'brand_approves_product_to_sell';
 
 const SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY     = 'Syndified®_brand_approves_product_to_sell';
 const SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY = 'Syndified®_ecomm_show_add_to_cart_btn_setting';
 
-const STOCK_STATUS_OUT_OF_STOCK                               = 'outofstock';
-const STOCK_STATUS_ON_RESERVE                                 = 'on_reserve';
+const STOCK_STATUS_OUT_OF_STOCK = 'outofstock';
+const STOCK_STATUS_ON_RESERVE   = 'on_reserve';
 /**
  * Adds custom classes to the array of body classes.
  *
@@ -1441,8 +1443,9 @@ if ( ! function_exists( 'dsn_get_reserve_cta_url' ) ) {
     // Fallback to product permalink if no CTA URL is configured
     return get_permalink($product_id);
   }
+}
 
-   if ( ! function_exists('dsn_get_current_active_locale')) {
+if ( ! function_exists('dsn_get_current_active_locale')) {
      function dsn_get_current_active_locale()
      {
        $currentLocale = '';
@@ -1455,75 +1458,73 @@ if ( ! function_exists( 'dsn_get_reserve_cta_url' ) ) {
 
        return $currentLocale;
      }
-   }
- }
+}
 
-/**
- * Get Syndified plugin setting for showing add to cart button
- * 
- * @return bool True if add to cart button should be shown, false otherwise
- */
-if ( ! function_exists( 'dsn_get_syndified_show_add_to_cart' ) ) {
-  function dsn_get_syndified_show_add_to_cart(int $productID): bool {
-      // Base setting from the global option
-      $show = get_option(SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY) === YES;
+if ( ! function_exists('dsn_show_add_to_cart') ) {
+  function dsn_show_add_to_cart(int $productID): bool {
+      $show = false;
 
-      // Brand approval (stored as product meta or option fallback)
-      $brandApproved = get_post_meta($productID, BRAND_APPROVES_PRODUCT_TO_SELL_POST_META_KEY, true);
-      if (empty($brandApproved)) {
+      if(dsn_is_syndicated_content($productID)) {
+        // Base setting from the global option
+        $show = get_option(SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY) === YES; //true
+
+        // Get Syndified Post meta
+        $syndifiedPostMeta = json_decode(get_post_meta($productID,
+          SYNDIFIED_FIELDS_POST_META_KEY, true), false);
+
+        // Brand approval (stored as product meta or option fallback)
+        $brandApproved = $syndifiedPostMeta->{BRAND_APPROVES_PRODUCT_TO_SELL_SYNDIFIED_POST_META_KEY_ACCESSOR};
+        if (empty($brandApproved)) {
           $brandApproved = get_option(SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY);
-      }
-      if ($brandApproved === '0' || $brandApproved === false) {
+        }
+        if ($brandApproved === '0' || $brandApproved === false) {
           $show = false;
-      }
+        }
 
-      // Stock-related logic
-      $stockStatus    = get_post_meta($productID, STOCK_STATUS_POST_META_KEY, true);        // instock | outofstock | onbackorder | custom (on_reserve)
-      $manageStock    = get_post_meta($productID, MANAGE_STOCK_POST_META_KEY, true);        // yes | no
-      $stockQty       = get_post_meta($productID, STOCK_POST_META_KEY, true);
-      $backordersMode = get_post_meta($productID, BACKORDERS_POST_META_KEY, true);          // no | notify | yes
+        // Stock-related logic
+        $stockStatus = get_post_meta($productID, STOCK_STATUS_POST_META_KEY, true);
+        $manageStock = get_post_meta($productID, MANAGE_STOCK_POST_META_KEY, true);
+        $stockQty = get_post_meta($productID, STOCK_POST_META_KEY, true);
+        $backordersMode = get_post_meta($productID, BACKORDERS_POST_META_KEY, true);
 
-      $stockQty = empty($stockQty) ? null : (int)$stockQty;
+        $stockQty = empty($stockQty) ? null : (int) $stockQty;
 
-      // Out of stock (no managed stock)
-      if ($show && $stockStatus === STOCK_STATUS_OUT_OF_STOCK && $manageStock === NO) {
+        // Out of stock (no managed stock)
+        if ($show && $stockStatus === STOCK_STATUS_OUT_OF_STOCK
+          && $manageStock === NO
+        ) {
           $show = false;
-      }
+        }
 
-      // Managed stock but no quantity and backorders not allowed
-      if ($show && $manageStock === YES && $backordersMode === NO && ($stockQty === null || $stockQty <= 0)) {
+        // Managed stock but no quantity and backorders not allowed
+        if ($show && $manageStock === YES && $backordersMode === NO
+          && ($stockQty === null || $stockQty <= 0)
+        ) {
           $show = false;
-      }
+        }
 
-      // Custom reserve state
-      if ($show && $stockStatus === STOCK_STATUS_ON_RESERVE) {
+        // Custom reserve state
+        if ($show && $stockStatus === STOCK_STATUS_ON_RESERVE) {
           $show = false;
+        }
+      }else{
+        $show = !dsn_show_reserve_btn($productID);
       }
 
-      return (bool)apply_filters('dsn_show_add_to_cart', $show, $productID);
+      return (bool)apply_filters('dsn_show_add_to_cart_filter', $show, $productID);
   }
 }
 
-/**
- * Get Syndified plugin setting for showing product price
- * 
- * @return bool True if product price should be shown, false otherwise
- */
-if ( ! function_exists( 'dsn_get_syndified_show_price' ) ) {
-  function dsn_get_syndified_show_price(): bool
+if ( ! function_exists('dsn_show_price') ) {
+  function dsn_show_price(): bool
   {
     $setting = get_option( 'Syndified®_ecomm_show_price_setting' );
     return $setting === YES;
   }
 }
 
-/**
- * Get Syndified plugin setting for showing action button
- * 
- * @return bool True if action button should be shown, false otherwise
- */
-if ( ! function_exists( 'dsn_get_syndified_show_action_btn' ) ) {
-  function dsn_get_syndified_show_action_btn(): bool
+if ( ! function_exists('dsn_show_action_btn') ) {
+  function dsn_show_action_btn(): bool
   {
     $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
 
@@ -1531,23 +1532,43 @@ if ( ! function_exists( 'dsn_get_syndified_show_action_btn' ) ) {
   }
 }
 
-if ( ! function_exists( 'dsn_get_syndified_show_reserve_btn' ) ) {
-  function dsn_get_syndified_show_reserve_btn(): bool
-  {
-    $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+if ( ! function_exists('dsn_show_reserve_btn') ) {
+  function dsn_show_reserve_btn(int $productID): bool {
+    $show = false;
 
-    return $setting === 'show_reserve_btn';
+    if(dsn_is_syndicated_content($productID)){
+      $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
+
+      if($setting === 'show_reserve_btn'){
+        $show = true;
+      }
+    }else{
+      $product = wc_get_product($productID);
+
+      if( $product->get_stock_status() === 'on-reserve' ||
+        empty($product->get_price()) ||
+        ($product->managing_stock() && $product->get_stock_quantity() === 0) ) {
+        $show = true;
+      }
+    }
+
+    return $show;
   }
 }
 
-
-
-if ( ! function_exists( 'dsn_get_syndified_show_get_info_btn' ) ) {
-  function dsn_get_syndified_show_get_info_btn(): bool
+if ( ! function_exists('dsn_show_get_info_btn') ) {
+  function dsn_show_get_info_btn(): bool
   {
     $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
 
     return $setting === 'show_get_info_btn';
+  }
+}
+
+if ( ! function_exists('dsn_is_syndicated_content') ) {
+  function dsn_is_syndicated_content(int $productId): bool
+  {
+    return (bool) get_post_meta($productId, SYNDIFIED_CONSOLE_POST_META_KEY, true);
   }
 }
 
