@@ -9,19 +9,19 @@
 const NO                                                      = 'no';
 const YES                                                     = 'yes';
 
-const SYNDIFIED_FIELDS_POST_META_KEY  = 'dss_syndified';
-const SYNDIFIED_CONSOLE_POST_META_KEY = 'console_id';
-const STOCK_STATUS_POST_META_KEY      = '_stock_status';
-const MANAGE_STOCK_POST_META_KEY = '_manage_stock';
-const STOCK_POST_META_KEY                          = '_stock';
-const BACKORDERS_POST_META_KEY                     = '_backorders';
+const SYNDIFIED_FIELDS_POST_META_KEY                                  = 'dss_syndified';
+const SYNDIFIED_CONSOLE_POST_META_KEY                                 = 'console_id';
+const STOCK_STATUS_POST_META_KEY                                      = '_stock_status';
+const MANAGE_STOCK_POST_META_KEY                                      = '_manage_stock';
+const STOCK_POST_META_KEY                                             = '_stock';
+const BACKORDERS_POST_META_KEY                                        = '_backorders';
 const BRAND_APPROVES_PRODUCT_TO_SELL_SYNDIFIED_POST_META_KEY_ACCESSOR = 'brand_approves_product_to_sell';
 
 const SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY     = 'Syndified®_brand_approves_product_to_sell';
 const SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY = 'Syndified®_ecomm_show_add_to_cart_btn_setting';
 
-const STOCK_STATUS_OUT_OF_STOCK                               = 'outofstock';
-const STOCK_STATUS_ON_RESERVE                                 = 'on_reserve';
+const STOCK_STATUS_OUT_OF_STOCK = 'outofstock';
+const STOCK_STATUS_ON_RESERVE   = 'on_reserve';
 /**
  * Adds custom classes to the array of body classes.
  *
