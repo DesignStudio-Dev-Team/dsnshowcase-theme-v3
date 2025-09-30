@@ -6,6 +6,20 @@
  * @package dsShowcase Theme
  */
 
+const NO                                                      = 'no';
+const YES                                                     = 'yes';
+
+const STOCK_STATUS_POST_META_KEY                              = '_stock_status';
+const MANAGE_STOCK_POST_META_KEY                              = '_manage_stock';
+const STOCK_POST_META_KEY                                     = '_stock';
+const BACKORDERS_POST_META_KEY                                = '_backorders';
+const BRAND_APPROVES_PRODUCT_TO_SELL_POST_META_KEY            = 'brand_approves_product_to_sell';
+
+const SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY     = 'Syndified®_brand_approves_product_to_sell';
+const SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY = 'Syndified®_ecomm_show_add_to_cart_btn_setting';
+
+const STOCK_STATUS_OUT_OF_STOCK                               = 'outofstock';
+const STOCK_STATUS_ON_RESERVE                                 = 'on_reserve';
 /**
  * Adds custom classes to the array of body classes.
  *
@@ -425,7 +439,7 @@ function woocommerce_ajax_add_to_cart()
         if (WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
             do_action('woocommerce_ajax_added_to_cart', $product_id);
 
-            if ('yes' === get_option('woocommerce_cart_redirect_after_add')) {
+            if (YES === get_option('woocommerce_cart_redirect_after_add')) {
                 wc_add_to_cart_message(array($product_id => $quantity), true);
             }
 
@@ -1450,9 +1464,43 @@ if ( ! function_exists( 'dsn_get_reserve_cta_url' ) ) {
  * @return bool True if add to cart button should be shown, false otherwise
  */
 if ( ! function_exists( 'dsn_get_syndified_show_add_to_cart' ) ) {
-  function dsn_get_syndified_show_add_to_cart() {
-    $setting = get_option( 'Syndified®_ecomm_show_add_to_cart_btn_setting' );
-    return $setting === 'yes';
+  function dsn_get_syndified_show_add_to_cart(int $productID): bool {
+      // Base setting from the global option
+      $show = get_option(SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY) === YES;
+
+      // Brand approval (stored as product meta or option fallback)
+      $brandApproved = get_post_meta($productID, BRAND_APPROVES_PRODUCT_TO_SELL_POST_META_KEY, true);
+      if (empty($brandApproved)) {
+          $brandApproved = get_option(SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY);
+      }
+      if ($brandApproved === '0' || $brandApproved === false) {
+          $show = false;
+      }
+
+      // Stock-related logic
+      $stockStatus    = get_post_meta($productID, STOCK_STATUS_POST_META_KEY, true);        // instock | outofstock | onbackorder | custom (on_reserve)
+      $manageStock    = get_post_meta($productID, MANAGE_STOCK_POST_META_KEY, true);        // yes | no
+      $stockQty       = get_post_meta($productID, STOCK_POST_META_KEY, true);
+      $backordersMode = get_post_meta($productID, BACKORDERS_POST_META_KEY, true);          // no | notify | yes
+
+      $stockQty = empty($stockQty) ? null : (int)$stockQty;
+
+      // Out of stock (no managed stock)
+      if ($show && $stockStatus === STOCK_STATUS_OUT_OF_STOCK && $manageStock === NO) {
+          $show = false;
+      }
+
+      // Managed stock but no quantity and backorders not allowed
+      if ($show && $manageStock === YES && $backordersMode === NO && ($stockQty === null || $stockQty <= 0)) {
+          $show = false;
+      }
+
+      // Custom reserve state
+      if ($show && $stockStatus === STOCK_STATUS_ON_RESERVE) {
+          $show = false;
+      }
+
+      return (bool)apply_filters('dsn_show_add_to_cart', $show, $productID);
   }
 }
 
@@ -1465,7 +1513,7 @@ if ( ! function_exists( 'dsn_get_syndified_show_price' ) ) {
   function dsn_get_syndified_show_price(): bool
   {
     $setting = get_option( 'Syndified®_ecomm_show_price_setting' );
-    return $setting === 'yes';
+    return $setting === YES;
   }
 }
 
@@ -1479,7 +1527,7 @@ if ( ! function_exists( 'dsn_get_syndified_show_action_btn' ) ) {
   {
     $setting = get_option( 'Syndified®_ecomm_show_action_btn_setting' );
 
-    return $setting !== 'no';
+    return $setting !== NO;
   }
 }
 
