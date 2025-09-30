@@ -129,7 +129,7 @@ $translatedText = dssLang($dssSiteLanguage);
                                   <?php endif;?>
                               <?php endif; ?>
 
-                              <?php if ($stock_status !== ON_RESERVE_STOCK_STATUS && $product_price_html && dsn_get_syndified_show_add_to_cart()) : ?>
+                              <?php if ( $product_price_html && dsn_get_syndified_show_add_to_cart(get_the_ID())) : ?>
                                 <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>" title="<?php echo esc_attr($translatedText->woocommerce_cart->add_to_cart_btn); ?>">
                                       <span class='dsn:flex dsn:items-center'>
                                         <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
