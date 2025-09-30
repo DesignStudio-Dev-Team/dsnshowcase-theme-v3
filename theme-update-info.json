@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.30",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.30",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.30/dsnshowcase.zip",
+  "version": "v3.5.31",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.31",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.31/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-09-30",
   "sections": {
-    "changelog": "Merge pull request #108 from DesignStudio-Dev-Team/call-to-action-buttons-should-be-showing-at-the-sa-fix\n\nCall to action buttons should be showing at the same time - Fix"
+    "changelog": "Merge pull request #110 from DesignStudio-Dev-Team/incorrect-button-display-for-syndicated-products-o-fix\n\nIncorrect button display for syndicated products on category template - Fix"
   }
 }
