@@ -107,20 +107,20 @@ $translatedText = dssLang($dssSiteLanguage);
                         </h6>
                         <div class="ds-product__footer dsn:bg-gray-100 dsn:p-4">
                           <div class='ds-product__meta'>
-                            <?php if (dsn_get_syndified_show_price()) : ?>
+                            <?php if (dsn_show_price()) : ?>
                               <div class='ds-product__price'>
                                 <?php echo $product_price_html; ?>
                               </div>
                             <?php endif; ?>
                             <div class="ds-product__action_buttons dsn:flex dsn:gap-2">
-                              <?php if (dsn_get_syndified_show_action_btn()) : ?>
-                                  <?php if (dsn_get_syndified_show_reserve_btn()) : ?>
+                              <?php if (dsn_show_action_btn()) : ?>
+                                  <?php if (dsn_show_reserve_btn(get_the_ID())) : ?>
                                     <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->reserve_button); ?>">
                                       <span class="dsn:flex dsn:items-center">
                                         <?php dsn_icon('reserve', 'dsn:w-5 dsn:h-5'); ?>
                                       </span>
                                     </a>
-                                  <?php elseif (dsn_get_syndified_show_get_info_btn()) : ?>
+                                  <?php elseif (dsn_show_get_info_btn()) : ?>
                                     <a href="<?php echo esc_url(dsn_get_reserve_cta_url(get_the_ID())); ?>" class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->info_button); ?>">
                                       <span class="dsn:flex dsn:items-center">
                                         <?php dsn_icon('info', 'dsn:w-5 dsn:h-5'); ?>
@@ -129,7 +129,7 @@ $translatedText = dssLang($dssSiteLanguage);
                                   <?php endif;?>
                               <?php endif; ?>
 
-                              <?php if ( $product_price_html && dsn_get_syndified_show_add_to_cart(get_the_ID())) : ?>
+                              <?php if ( dsn_show_add_to_cart(get_the_ID())) : ?>
                                 <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo get_the_ID(); ?>" title="<?php echo esc_attr($translatedText->woocommerce_cart->add_to_cart_btn); ?>">
                                       <span class='dsn:flex dsn:items-center'>
                                         <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
