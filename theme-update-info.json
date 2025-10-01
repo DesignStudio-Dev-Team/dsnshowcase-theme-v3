@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.31",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.31",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.31/dsnshowcase.zip",
+  "version": "v3.5.32",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.32",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.32/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-09-30",
+  "last_updated": "2025-10-01",
   "sections": {
-    "changelog": "Merge pull request #110 from DesignStudio-Dev-Team/incorrect-button-display-for-syndicated-products-o-fix\n\nIncorrect button display for syndicated products on category template - Fix"
+    "changelog": "Merge pull request #111 from DesignStudio-Dev-Team/hot-fix-cta-button\n\nUses constant for 'on-reserve' stock status"
   }
 }
