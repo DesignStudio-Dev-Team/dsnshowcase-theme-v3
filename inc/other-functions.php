@@ -1545,7 +1545,7 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
     }else{
       $product = wc_get_product($productID);
 
-      if( $product->get_stock_status() === 'on-reserve' ||
+      if( $product->get_stock_status() === STOCK_STATUS_ON_RESERVE ||
         empty($product->get_price()) ||
         ($product->managing_stock() && $product->get_stock_quantity() === 0) ) {
         $show = true;

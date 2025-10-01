@@ -1,9 +1,6 @@
 <?php
 global $dssSiteLanguage;
 
-const ON_RESERVE_STOCK_STATUS = 'on_reserve';
-
-
 $translatedText = dssLang($dssSiteLanguage);
 /**
  * Custom DSN products loop the template used by AJAX ds_filtration and archive page.
