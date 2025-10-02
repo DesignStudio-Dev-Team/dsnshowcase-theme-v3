@@ -29,7 +29,7 @@ const SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY     = 'Syndified®_bra
 const SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY = 'Syndified®_ecomm_show_add_to_cart_btn_setting';
 const SYNDIFIED_ECOMM_SHOW_PRICE_SETTING_OPTION_KEY           = 'Syndified®_ecomm_show_price_setting';
 const SYNDIFIED_ECOMM_SHOW_ACTION_BTN_SETTING_OPTION_KEY      = 'Syndified®_ecomm_show_action_btn_setting';
-const SYNDIFIED_ECOMM_CTA_URL_SETTING_OPTION_KEY_PREFIX = 'Syndified®_ecomm_cta_url_setting_';
+const SYNDIFIED_ECOMM_CTA_URL_SETTING_OPTION_KEY_PREFIX       = 'Syndified®_ecomm_cta_url_setting_';
 
 const STOCK_STATUS_OUT_OF_STOCK       = 'outofstock';
 const STOCK_STATUS_ON_RESERVE         = 'on_reserve';
