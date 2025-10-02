@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.33",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.33",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.33/dsnshowcase.zip",
+  "version": "v3.5.34",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.34",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.34/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-10-02",
   "sections": {
-    "changelog": "Merge pull request #113 from DesignStudio-Dev-Team/implement-amazonstyle-add-to-cart-button-fix\n\nImplement Amazon-style "Add to Cart" Button - Fix"
+    "changelog": "Merge pull request #115 from DesignStudio-Dev-Team/enhance-syndicated-product-logic-to-check-perprodu-fix\n\nEnhance Syndicated Product Logic to Check Per-Product Meta Keys - Fix"
   }
 }
