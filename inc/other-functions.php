@@ -98,33 +98,34 @@ function dealer_add_to_cart_fragment($fragments)
     return $fragments;
 }
 
-function dsn_get_product_cart_wrapper_html($product_id) {
-    if (!class_exists('WooCommerce')) {
-        return '';
-    }
-    
-    global $dssSiteLanguage;
-    if (empty($dssSiteLanguage)) {
-        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
-    }
-    $translatedText = dssLang($dssSiteLanguage);
-    
-    ob_start();
-    
-    // Include the template part with the wrapper class
-    echo '<div class="ds-product-cart-wrapper ds-product-cart-wrapper-' . esc_attr($product_id) . '">';
-    wc_get_template(
-        'loop/ds-product-cart-actions.php',
-        array(
-            'postID' => $product_id,
-            'translatedText' => $translatedText
-        )
-    );
-    echo '</div>';
-    
-    return ob_get_clean();
-}
+if(! function_exists('dsn_get_product_cart_wrapper_html')) {
+  function dsn_get_product_cart_wrapper_html($product_id) {
+      if (!class_exists('WooCommerce')) {
+          return '';
+      }
 
+      global $dssSiteLanguage;
+      if (empty($dssSiteLanguage)) {
+          $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+      }
+      $translatedText = dssLang($dssSiteLanguage);
+
+      ob_start();
+
+      // Include the template part with the wrapper class
+      echo '<div class="ds-product-cart-wrapper ds-product-cart-wrapper-' . esc_attr($product_id) . '">';
+      wc_get_template(
+          'loop/ds-product-cart-actions.php',
+          array(
+              'postID' => $product_id,
+              'translatedText' => $translatedText
+          )
+      );
+      echo '</div>';
+
+      return ob_get_clean();
+  }
+}
 // Create pagination
 function foundation_pagination($query = '')
 {
