@@ -103,14 +103,12 @@ function dsn_get_product_cart_wrapper_html($product_id) {
         return '';
     }
     
-    // Get current language
     global $dssSiteLanguage;
     if (empty($dssSiteLanguage)) {
         $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
     }
     $translatedText = dssLang($dssSiteLanguage);
     
-    // Start output buffering
     ob_start();
     
     // Include the template part with the wrapper class
