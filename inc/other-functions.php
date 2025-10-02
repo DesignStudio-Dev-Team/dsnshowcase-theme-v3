@@ -504,9 +504,10 @@ function woocommerce_ajax_add_to_cart()
 add_action('wp_ajax_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
 add_action('wp_ajax_nopriv_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
 
-function dsn_update_cart_quantity() {
+if(!function_exists('dsn_update_cart_quantity')) {
+  function dsn_update_cart_quantity() {
     if (!class_exists('WooCommerce')) {
-        wp_send_json_error(['message' => 'WooCommerce not active']);
+      wp_send_json_error(['message' => 'WooCommerce not active']);
     }
 
     check_ajax_referer('dsn-cart-nonce', 'nonce');
@@ -515,47 +516,48 @@ function dsn_update_cart_quantity() {
     $quantity = absint($_POST['quantity']);
 
     if ($quantity < 0) {
-        wp_send_json_error(['message' => 'Invalid quantity']);
+      wp_send_json_error(['message' => 'Invalid quantity']);
     }
 
     $cart_updated = false;
 
     // If quantity is 0, remove from cart
     if ($quantity === 0) {
-        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-            if ($cart_item['product_id'] == $product_id) {
-                WC()->cart->remove_cart_item($cart_item_key);
-                $cart_updated = true;
-                break;
-            }
+      foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        if ($cart_item['product_id'] == $product_id) {
+          WC()->cart->remove_cart_item($cart_item_key);
+          $cart_updated = true;
+          break;
         }
+      }
     } else {
-        // Update cart quantity or add to cart
-        $found_in_cart = false;
-        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-            if ($cart_item['product_id'] == $product_id) {
-                WC()->cart->set_quantity($cart_item_key, $quantity);
-                $found_in_cart = true;
-                $cart_updated = true;
-                break;
-            }
+      // Update cart quantity or add to cart
+      $found_in_cart = false;
+      foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        if ($cart_item['product_id'] == $product_id) {
+          WC()->cart->set_quantity($cart_item_key, $quantity);
+          $found_in_cart = true;
+          $cart_updated = true;
+          break;
         }
-        
-        // If not in cart, add it
-        if (!$found_in_cart) {
-            WC()->cart->add_to_cart($product_id, $quantity);
-            $cart_updated = true;
-        }
+      }
+
+      // If not in cart, add it
+      if (!$found_in_cart) {
+        WC()->cart->add_to_cart($product_id, $quantity);
+        $cart_updated = true;
+      }
     }
 
     if ($cart_updated) {
-        // Return the same response structure as WooCommerce
-        WC_AJAX::get_refreshed_fragments();
+      // Return the same response structure as WooCommerce
+      WC_AJAX::get_refreshed_fragments();
     } else {
-        wp_send_json_error(['message' => 'Failed to update cart']);
+      wp_send_json_error(['message' => 'Failed to update cart']);
     }
-    
+
     wp_die();
+  }
 }
 
 add_action('wp_footer', 'custom_quantity_fields_script');
