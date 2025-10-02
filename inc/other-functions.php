@@ -63,6 +63,25 @@ function dealer_add_to_cart_fragment($fragments)
     global $dssSiteLanguage;
     global $woocommerce;
     $item_counter = $woocommerce->cart->cart_contents_count;
+    
+    // Update the-cart-quantity for header cart icon
+    $fragments['.the-cart-quantity'] = '<span class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">' . $item_counter . '</span>';
+    
+    // Update product cart wrappers for each product in the cart or on the page
+    // This allows individual product cart controls to update via fragments
+    if (isset($_POST['product_id'])) {
+        $product_id = absint($_POST['product_id']);
+        $fragments['.ds-product-cart-wrapper-' . $product_id] = dsn_get_product_cart_wrapper_html($product_id);
+    } else {
+        // On regular add to cart, update all visible products
+        // We'll generate fragments for products that might be on the page
+        foreach ($woocommerce->cart->get_cart() as $cart_item) {
+            $product_id = $cart_item['product_id'];
+            $fragments['.ds-product-cart-wrapper-' . $product_id] = dsn_get_product_cart_wrapper_html($product_id);
+        }
+    }
+    
+    // Keep legacy fragments for backward compatibility
     if ($item_counter == 0) {
         $fragments['.dealer-cart'] = ' <a href="' . wc_get_cart_url() . '" class="dealer-cart dsn:text-xl dsn:px-4 dsn:border-l"><span class="sr-only">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>';
         $fragments['.cart-counter'] = '<p class="cart-counter text-right uppercase font-semibold">the cart is empty</p>';
@@ -79,6 +98,34 @@ function dealer_add_to_cart_fragment($fragments)
     return $fragments;
 }
 
+if(! function_exists('dsn_get_product_cart_wrapper_html')) {
+  function dsn_get_product_cart_wrapper_html($product_id) {
+      if (!class_exists('WooCommerce')) {
+          return '';
+      }
+
+      global $dssSiteLanguage;
+      if (empty($dssSiteLanguage)) {
+          $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+      }
+      $translatedText = dssLang($dssSiteLanguage);
+
+      ob_start();
+
+      // Include the template part with the wrapper class
+      echo '<div class="ds-product-cart-wrapper ds-product-cart-wrapper-' . esc_attr($product_id) . '">';
+      wc_get_template(
+          'loop/ds-product-cart-actions.php',
+          array(
+              'postID' => $product_id,
+              'translatedText' => $translatedText
+          )
+      );
+      echo '</div>';
+
+      return ob_get_clean();
+  }
+}
 // Create pagination
 function foundation_pagination($query = '')
 {
@@ -450,6 +497,66 @@ function woocommerce_ajax_add_to_cart()
     }
     
     wp_die();
+}
+
+if(!function_exists('dsn_update_cart_quantity')) {
+  /* AJAX handler for updating cart item quantity */
+  add_action('wp_ajax_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
+  add_action('wp_ajax_nopriv_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
+
+  function dsn_update_cart_quantity() {
+    if (!class_exists('WooCommerce')) {
+      wp_send_json_error(['message' => 'WooCommerce not active']);
+    }
+
+    check_ajax_referer('dsn-cart-nonce', 'nonce');
+
+    $product_id = absint($_POST['product_id']);
+    $quantity = absint($_POST['quantity']);
+
+    if ($quantity < 0) {
+      wp_send_json_error(['message' => 'Invalid quantity']);
+    }
+
+    $cart_updated = false;
+
+    // If quantity is 0, remove from cart
+    if ($quantity === 0) {
+      foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        if ($cart_item['product_id'] == $product_id) {
+          WC()->cart->remove_cart_item($cart_item_key);
+          $cart_updated = true;
+          break;
+        }
+      }
+    } else {
+      // Update cart quantity or add to cart
+      $found_in_cart = false;
+      foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        if ($cart_item['product_id'] == $product_id) {
+          WC()->cart->set_quantity($cart_item_key, $quantity);
+          $found_in_cart = true;
+          $cart_updated = true;
+          break;
+        }
+      }
+
+      // If not in cart, add it
+      if (!$found_in_cart) {
+        WC()->cart->add_to_cart($product_id, $quantity);
+        $cart_updated = true;
+      }
+    }
+
+    if ($cart_updated) {
+      // Return the same response structure as WooCommerce
+      WC_AJAX::get_refreshed_fragments();
+    } else {
+      wp_send_json_error(['message' => 'Failed to update cart']);
+    }
+
+    wp_die();
+  }
 }
 
 add_action('wp_footer', 'custom_quantity_fields_script');
@@ -1570,5 +1677,64 @@ if ( ! function_exists('dsn_is_syndicated_content') ) {
   {
     return (bool) get_post_meta($productId, SYNDIFIED_CONSOLE_POST_META_KEY, true);
   }
+}
+
+if ( ! function_exists( 'dsn_get_cart_product_quantity' ) ) {
+  function dsn_get_cart_product_quantity( $product_id ) {
+    if ( ! WC()->cart ) {
+      return 0;
+    }
+    
+    foreach ( WC()->cart->get_cart() as $cart_item ) {
+      if ( $cart_item['product_id'] == $product_id ) {
+        return $cart_item['quantity'];
+      }
+    }
+    
+    return 0;
+  }
+}
+
+if ( ! function_exists( 'dsn_is_product_in_cart' ) ) {
+  function dsn_is_product_in_cart( $product_id ) {
+    return dsn_get_cart_product_quantity( $product_id ) > 0;
+  }
+}
+
+if ( ! function_exists('dsn_archive_product_template_scripts') ) {
+  function dsn_archive_product_template_scripts()
+  {
+    if ( ! is_post_type_archive('product') && ! is_tax('product_cat')
+      && ! is_tax('product_tag')
+    ) {
+      return;
+    }
+
+    wp_enqueue_style('dsn-archive-product-template',
+      get_template_directory_uri().'/assets/css/archive-product-template.css',
+      [],
+      filemtime(get_template_directory()
+        .'/assets/css/archive-product-template.css')
+    );
+
+    wp_enqueue_script(
+      'dsn-archive-product-template',
+      get_template_directory_uri().'/assets/js/archive-product-template.js',
+      ['jquery', 'wc-add-to-cart'], filemtime(get_template_directory()
+      .'/assets/js/archive-product-template.js'),
+      true
+    );
+
+    wp_localize_script(
+      'dsn-archive-product-template',
+      'dsnArchiveParams',
+      [
+        'nonce'           => wp_create_nonce('dsn-cart-nonce'),
+        'ajaxUrl'         => admin_url('admin-ajax.php'),
+        'currentCategory' => get_queried_object_id(), // Current category ID
+      ]
+    );
+  }
+  add_action('wp_enqueue_scripts', 'dsn_archive_product_template_scripts');
 }
 

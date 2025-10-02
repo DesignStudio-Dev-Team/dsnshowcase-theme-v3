@@ -110,33 +110,16 @@ $translatedText = dssLang($dssSiteLanguage);
                                 <?php echo $product_price_html; ?>
                               </div>
                             <?php endif; ?>
-                            <div class="ds-product__action_buttons dsn:flex dsn:gap-2">
-                              <?php if (dsn_show_action_btn()) : ?>
-                                  <?php if (dsn_show_reserve_btn($postID)) : ?>
-                                    <a href="<?php echo esc_url(dsn_get_reserve_cta_url($postID)); ?>" class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->reserve_button); ?>">
-                                      <span class="dsn:flex dsn:items-center">
-                                        <?php dsn_icon('reserve', 'dsn:w-5 dsn:h-5'); ?>
-                                      </span>
-                                    </a>
-                                  <?php elseif (dsn_show_get_info_btn()) : ?>
-                                    <a href="<?php echo esc_url(dsn_get_reserve_cta_url($postID)); ?>" class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" title="<?php echo esc_attr($translatedText->woocommerce_cart->info_button); ?>">
-                                      <span class="dsn:flex dsn:items-center">
-                                        <?php dsn_icon('info', 'dsn:w-5 dsn:h-5'); ?>
-                                      </span>
-                                    </a>
-                                  <?php endif;?>
-                              <?php endif; ?>
-
-                              <?php if ( dsn_show_add_to_cart($postID)) : ?>
-                                <button class="single_add_to_cart_button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2" value="<?php echo $postID; ?>" title="<?php echo esc_attr($translatedText->woocommerce_cart->add_to_cart_btn); ?>">
-                                      <span class='dsn:flex dsn:items-center'>
-                                        <?php dsn_icon('plus', 'dsn:w-4 dsn:h-4'); ?>
-                                      </span>
-                                  <span class="dsn:flex dsn:items-center dsn:hover:bg-gray-700 dsn:transition-colors dsn:duration-150">
-                                        <?php dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
-                                      </span>
-                                </button>
-                              <?php endif; ?>
+                            
+                            <div class="ds-product-cart-wrapper ds-product-cart-wrapper-<?php echo esc_attr($postID); ?>">
+                              <?php
+                                wc_get_template('loop/ds-product-cart-actions.php',
+                                array(
+                                    'postID' => $postID,
+                                    'translatedText' => $translatedText
+                                  )
+                                );
+                              ?>
                             </div>
                           </div>
                         </div>
