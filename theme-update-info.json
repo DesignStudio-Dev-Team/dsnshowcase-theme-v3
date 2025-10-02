@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.32",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.32",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.32/dsnshowcase.zip",
+  "version": "v3.5.33",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.33",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.33/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-10-01",
+  "last_updated": "2025-10-02",
   "sections": {
-    "changelog": "Merge pull request #111 from DesignStudio-Dev-Team/hot-fix-cta-button\n\nUses constant for 'on-reserve' stock status"
+    "changelog": "Merge pull request #113 from DesignStudio-Dev-Team/implement-amazonstyle-add-to-cart-button-fix\n\nImplement Amazon-style "Add to Cart" Button - Fix"
   }
 }
