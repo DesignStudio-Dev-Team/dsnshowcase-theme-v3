@@ -105,7 +105,7 @@ $translatedText = dssLang($dssSiteLanguage);
                         </h6>
                         <div class="ds-product__footer dsn:bg-gray-100 dsn:p-4">
                           <div class='ds-product__meta'>
-                            <?php if (dsn_show_price()) : ?>
+                            <?php if (dsn_show_price($postID)) : ?>
                               <div class='ds-product__price'>
                                 <?php echo $product_price_html; ?>
                               </div>

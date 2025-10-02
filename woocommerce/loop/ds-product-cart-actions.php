@@ -14,28 +14,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! isset( $postID ) ) {
     return;
 }
-
-// Check if we should show action buttons
-if ( ! dsn_show_action_btn() ) {
-    return;
-}
 ?>
 
 <div class="ds-product__action_buttons dsn:flex dsn:gap-2">
-    <?php if ( dsn_show_action_btn() ) : ?>
+    <?php if ( dsn_show_other_action_buttons( $postID ) ) : ?>
         <?php if ( dsn_show_reserve_btn( $postID ) ) : ?>
             <!-- Reserve Button -->
-            <a href="<?php echo esc_url( dsn_get_reserve_cta_url( $postID ) ); ?>" 
-               class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" 
+            <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
+               class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
                title="<?php echo esc_attr( $translatedText->woocommerce_cart->reserve_button ); ?>">
                 <span class="dsn:flex dsn:items-center">
                     <?php dsn_icon( 'reserve', 'dsn:w-5 dsn:h-5' ); ?>
                 </span>
             </a>
-        <?php elseif ( dsn_show_get_info_btn() ) : ?>
+        <?php elseif ( dsn_show_get_info_btn( $postID ) ) : ?>
             <!-- Get Info Button -->
-            <a href="<?php echo esc_url( dsn_get_reserve_cta_url( $postID ) ); ?>" 
-               class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:p-0 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded" 
+            <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
+               class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
                title="<?php echo esc_attr( $translatedText->woocommerce_cart->info_button ); ?>">
                 <span class="dsn:flex dsn:items-center">
                     <?php dsn_icon( 'info', 'dsn:w-5 dsn:h-5' ); ?>
