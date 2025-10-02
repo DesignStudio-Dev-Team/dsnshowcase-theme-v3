@@ -52,20 +52,20 @@ if ( ! dsn_show_action_btn() ) {
         
         <?php if ( $is_in_cart ) : ?>
             <!-- Quantity Controls (when product is in cart) -->
-            <div class="ds-product-quantity-controls dsn:flex dsn:items-center dsn:border dsn:border-gray-300 dsn:rounded dsn:bg-white" 
+            <div class="ds-product-quantity-controls dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:px-3 dsn:py-2 dsn:rounded"
                  data-product-id="<?php echo esc_attr( $postID ); ?>">
-                <button type="button" 
-                        class="ds-quantity-decrease dsn:w-9 dsn:h-9 dsn:flex dsn:items-center dsn:justify-center dsn:bg-gray-200 dsn:hover:bg-gray-300 dsn:rounded-l dsn:transition-colors" 
+                <button type="button"
+                        class="ds-quantity-decrease dsn:opacity-5 dsn:w-9 dsn:h-9 dsn:flex dsn:items-center dsn:justify-center dsn:hover:bg-gray-300 dsn:rounded dsn:transition-colors dsn:cursor-pointer"
                         data-product-id="<?php echo esc_attr( $postID ); ?>" 
                         aria-label="<?php esc_attr_e( 'Decrease quantity', 'dsnshowcase-theme-v3' ); ?>">
                     <?php dsn_icon( 'minus', 'dsn:w-4 dsn:h-4' ); ?>
                 </button>
-                <span class="ds-product-quantity dsn:w-12 dsn:text-center dsn:font-semibold dsn:text-base" 
+                <span class="ds-product-quantity dsn:w-12 dsn:px-2 dsn:text-center dsn:font-semibold dsn:text-base"
                       data-product-id="<?php echo esc_attr( $postID ); ?>">
                     <?php echo esc_html( $cart_quantity ); ?>
                 </span>
                 <button type="button" 
-                        class="ds-quantity-increase dsn:w-9 dsn:h-9 dsn:flex dsn:items-center dsn:justify-center dsn:bg-gray-200 dsn:hover:bg-gray-300 dsn:rounded-r dsn:transition-colors" 
+                        class="ds-quantity-increase dsn:opacity-5 dsn:w-9 dsn:h-9 dsn:flex dsn:items-center dsn:justify-center dsn:hover:bg-gray-300 dsn:rounded dsn:transition-colors dsn:cursor-pointer"
                         data-product-id="<?php echo esc_attr( $postID ); ?>" 
                         aria-label="<?php esc_attr_e( 'Increase quantity', 'dsnshowcase-theme-v3' ); ?>">
                     <?php dsn_icon( 'plus', 'dsn:w-4 dsn:h-4' ); ?>
@@ -74,7 +74,7 @@ if ( ! dsn_show_action_btn() ) {
         <?php else : ?>
             <!-- Add to Cart Button (when product is not in cart) -->
             <button type="button" 
-                    class="ds-add-to-cart-button dsw-primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:rounded dsn:transition-colors" 
+                    class="ds-add-to-cart-button dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:rounded dsn:transition-colors dsn:cursor-pointer"
                     data-product-id="<?php echo esc_attr( $postID ); ?>" 
                     title="<?php echo esc_attr( $translatedText->woocommerce_cart->add_to_cart_btn ); ?>">
                 <span class='dsn:flex dsn:items-center'>
