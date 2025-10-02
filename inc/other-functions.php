@@ -1719,11 +1719,9 @@ if ( ! function_exists('dsn_archive_product_template_scripts') ) {
     wp_enqueue_script(
       'dsn-archive-product-template',
       get_template_directory_uri().'/assets/js/archive-product-template.js',
-      ['jquery', 'wc-add-to-cart'],
-      // Dependencies: jQuery and WooCommerce add to cart
-      filemtime(get_template_directory()
-        .'/assets/js/archive-product-template.js'),// Version based on file time
-      true // Load in footer
+      ['jquery', 'wc-add-to-cart'], filemtime(get_template_directory()
+      .'/assets/js/archive-product-template.js'),
+      true
     );
 
     wp_localize_script(
