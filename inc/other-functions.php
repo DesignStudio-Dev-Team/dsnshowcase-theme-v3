@@ -498,13 +498,11 @@ function woocommerce_ajax_add_to_cart()
     wp_die();
 }
 
-/**
- * AJAX handler for updating cart item quantity
- */
-add_action('wp_ajax_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
-add_action('wp_ajax_nopriv_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
-
 if(!function_exists('dsn_update_cart_quantity')) {
+  /* AJAX handler for updating cart item quantity */
+  add_action('wp_ajax_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
+  add_action('wp_ajax_nopriv_dsn_update_cart_quantity', 'dsn_update_cart_quantity');
+
   function dsn_update_cart_quantity() {
     if (!class_exists('WooCommerce')) {
       wp_send_json_error(['message' => 'WooCommerce not active']);
