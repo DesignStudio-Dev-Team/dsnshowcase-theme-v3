@@ -1,8 +1,17 @@
 <?php
-require get_template_directory() . '/inc/acfs.php';
-require get_template_directory() . '/inc/nav-items.php';
-require get_template_directory() . '/inc/other-functions.php';
-require get_template_directory() . '/inc/woocommerce.php';
+/**
+ * Theme Constants
+ * Define paths following WordPress standards
+ */
+define( 'DSN_THEME_DIR', get_template_directory() );
+define( 'DSN_THEME_URI', get_template_directory_uri() );
+define( 'DSN_THEME_PATH', str_replace( ABSPATH, '/', DSN_THEME_DIR ) );
+
+require DSN_THEME_DIR . '/inc/acfs.php';
+require DSN_THEME_DIR . '/inc/nav-items.php';
+require DSN_THEME_DIR . '/inc/other-functions.php';
+require DSN_THEME_DIR . '/inc/wp-rocket-compatibility.php';
+require DSN_THEME_DIR . '/inc/woocommerce.php';
 
 // Custom debug logger for theme
 function dsn_theme_debug_log($message) {
