@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.35",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.35",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.35/dsnshowcase.zip",
+  "version": "v3.5.36",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.36",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.36/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-10-02",
+  "last_updated": "2025-10-03",
   "sections": {
-    "changelog": "Merge pull request #117 from DesignStudio-Dev-Team/category-template--wp-rocket-compatibility-fix\n\nCategory Template - WP Rocket compatibility - Fix"
+    "changelog": "Merge pull request #118 from DesignStudio-Dev-Team/category-template--wp-rocket-compatibility-fix\n\nImproves WP Rocket compatibility for category templates"
   }
 }
