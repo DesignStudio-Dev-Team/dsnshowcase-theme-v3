@@ -1759,21 +1759,17 @@ if ( ! function_exists('dsn_archive_product_template_scripts') ) {
     }
 
     wp_enqueue_style('dsn-archive-product-template',
-      get_template_directory_uri().'/assets/css/archive-product-template.css',
+      DSN_THEME_URI . '/assets/css/archive-product-template.css',
       [],
-      filemtime(get_template_directory()
-        .'/assets/css/archive-product-template.css')
+      filemtime( DSN_THEME_DIR . '/assets/css/archive-product-template.css' )
     );
 
     wp_register_script(
       'dsn-archive-product-template',
-      get_template_directory_uri().'/assets/js/archive-product-template.js',
+      DSN_THEME_URI . '/assets/js/archive-product-template.js',
       ['jquery', 'wc-add-to-cart', 'wc-cart-fragments'],
-      filemtime(get_template_directory().'/assets/js/archive-product-template.js'),
-      array(
-        'in_footer' => true,
-        'strategy'  => 'defer', // Use defer strategy for better compatibility
-      )
+      filemtime( DSN_THEME_DIR . '/assets/js/archive-product-template.js' ),
+      true
     );
 
     wp_localize_script(
