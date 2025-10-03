@@ -18,8 +18,6 @@ if ( ! defined( 'WP_ROCKET_VERSION' ) ) {
  * This prevents the script from being converted to rocketlazyloadscript
  * which would delay execution until user interaction on cached pages
  * 
- * jQuery must also be excluded since our script depends on it
- * 
  * Reference: https://docs.wp-rocket.me/article/1265-delay-javascript-execution
  */
 add_filter( 'rocket_delay_js_exclusions', function( $excluded ) {
@@ -30,6 +28,16 @@ add_filter( 'rocket_delay_js_exclusions', function( $excluded ) {
   $excluded[] = 'jquery-core';
   $excluded[] = 'jquery.min.js';
   $excluded[] = 'jquery.js';
+  
+  // Exclude js-cookie (Cookies library - required by cart-fragments)
+  $excluded[] = 'js-cookie';
+  $excluded[] = 'js.cookie';
+  
+  // Exclude WooCommerce dependencies
+  $excluded[] = 'wc-add-to-cart';
+  $excluded[] = 'add-to-cart.min.js';
+  $excluded[] = 'wc-cart-fragments';
+  $excluded[] = 'cart-fragments.min.js';
   
   // Exclude our script using theme constant
   $excluded[] = DSN_THEME_PATH . '/assets/js/archive-product-template.js';
@@ -56,7 +64,6 @@ add_filter( 'rocket_exclude_defer_js', function( $excluded ) {
 
 /**
  * Exclude from general JS minification/concatenation
- * Per WP Rocket docs: prevents issues with WooCommerce fragments
  */
 add_filter( 'rocket_exclude_js', function( $excluded ) {
   if ( ! is_array( $excluded ) ) {
