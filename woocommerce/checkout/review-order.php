@@ -30,22 +30,24 @@ global $dssSiteLanguage;
 
         if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) {
             ?>
-            <div class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item mb-4 pb-4 border-b', $cart_item, $cart_item_key)); ?>">
-                <a href="<?php echo get_permalink($cart_item['product_id']); ?>" class="flex mr-2 text-base">
-                    <span class="product-thumbnail mr-2">
+            <div class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item mb-4 pb-4 border-b flex justify-between items-center gap-4', $cart_item, $cart_item_key)); ?>">
+                <a href="<?php echo get_permalink($cart_item['product_id']); ?>" class="flex mr-2 text-base dsn:items-center dsn:gap-4">
+                    <span class="product-thumbnail dsn:w-[110px] dsn:h-[100px] dsn:min-w-[110px] dsn:min-h-[100px] dsn:bg-gray-100 dsn:rounded dsn:flex dsn:items-center dsn:justify-center dsn:shrink-0 dsn:overflow-hidden dsn:mr-2">
                         <?php
-                        $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
+                        // Constrain image to container using Tailwind classes
+                        $thumb_html = $_product->get_image('woocommerce_thumbnail', array('class' => 'dsn:w-full dsn:h-full dsn:object-contain'), true);
+                        $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $thumb_html, $cart_item, $cart_item_key);
                         echo $thumbnail; // PHPCS: XSS ok.
                         ?>
                     </span>
 
-                    <span class="product-name dsw-primary-site-link">
+                    <span class="product-name dsw-primary-site-link dsn:flex-1">
 						<?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
                         <?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity text-black">' . sprintf('&times;&nbsp;%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         <?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     </span>
                 </a>
-                <div class="product-total">
+                <div class="product-total dsn:text-right dsn:min-w-[120px]">
                     <?php  echo $_product->get_price_html(); //OG ?>
 					<?php //echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </div>
