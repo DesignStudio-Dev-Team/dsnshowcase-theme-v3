@@ -144,7 +144,11 @@
   display: none;
 }
 
-.woocommerce-cart .cart .quantity .qty_button, .woocommerce-cart .cart .quantity .qty_button:hover{
+.woocommerce-cart .cart .quantity .qty_button{
+  background-color: unset;
+}
+
+.woocommerce-cart .cart .quantity .qty_button:hover{
   background-color: unset;
 }
 
