@@ -186,46 +186,58 @@ global $dssSiteLanguage;
             <div class="w-full slick-slider cart-slider -mx-4 mt-4 md:mt-12 mb-12">
                 <?php while ($the_query->have_posts()) :
                     $the_query->the_post(); ?>
-                    <div class="w-1/4 cart-slide px-4">
+                    <div class="cart-slide px-4">
                         <a href="<?php echo get_the_permalink(); ?>" class="text-black hover:text-gray-500">
-                            <span class="block w-full relative cart-slide__thumb mb-4">
-                                <?php the_post_thumbnail('full', array('class' => 'absolute object-contain p-2')); ?>
+                            <span class="cart-slide__thumb">
+                                <?php the_post_thumbnail('full', array('class' => 'cart-slide__img')); ?>
                             </span>
-                            <span class="block font-bold m-0 text-lg mb-2"><?php the_title(); ?></span>
+                            <span class="cart-slide__title block font-bold m-0 text-lg mb-2"><?php the_title(); ?></span>
                             <?php $product = wc_get_product(get_the_ID()); ?>
-                            <span class="block space-x-1 text-base">
+                            <span class="cart-slide__price block space-x-1 text-base">
                                 <?php echo $product->get_price_html(); ?>
-                            </span>
+                            </span> 
                         </a>
                     </div>
                 <?php endwhile; ?>
             </div>
             <script>
-               jQuery('.cart-slider').slick({
-                    cssEase: 'ease',
-                    arrows: true,
-                    dots: false,
-                    infinite: true,
-                    autoplay: true,
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    variableWidth: false,
-                    responsive: [{
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 1,
-                            }
-                        },
-                        {
-                            breakpoint: 480,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1
-                            }
-                        }
-                    ]
-                })
+                jQuery(document).ready(function($) {
+                    if (typeof $.fn.slick !== 'undefined') {
+                      const $slider = jQuery('.cart-slider');
+
+                        $slider.slick({
+                            cssEase: 'ease',
+                            arrows: true,
+                            dots: false,
+                            infinite: true,
+                            autoplay: true,
+                            autoplaySpeed: 3000,
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                            variableWidth: false,
+                            adaptiveHeight: false,
+                            responsive: [{
+                                    breakpoint: 1024,
+                                    settings: {
+                                        slidesToShow: 2,
+                                        slidesToScroll: 1,
+                                        adaptiveHeight: false
+                                    }
+                                },
+                                {
+                                    breakpoint: 480,
+                                    settings: {
+                                        slidesToShow: 1,
+                                        slidesToScroll: 1,
+                                        adaptiveHeight: false
+                                    }
+                                }
+                            ]
+                        });
+                    } else {
+                        console.error('Slick slider is not loaded on cart page');
+                    }
+                });
             </script>
         <?php endif;
         wp_reset_query(); ?>

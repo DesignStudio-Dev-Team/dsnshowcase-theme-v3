@@ -39,8 +39,14 @@ add_filter( 'rocket_delay_js_exclusions', function( $excluded ) {
   $excluded[] = 'wc-cart-fragments';
   $excluded[] = 'cart-fragments.min.js';
   
-  // Exclude our script using theme constant
+  // Exclude Slick Slider (used on cart, product, and pages)
+  $excluded[] = 'slick.min.js';
+  $excluded[] = 'slick-carousel';
+  
+  // Exclude our scripts using theme constant
   $excluded[] = DSN_THEME_PATH . '/assets/js/archive-product-template.js';
+  $excluded[] = DSN_THEME_PATH . '/assets/js/custom-blocks-slider.js';
+  $excluded[] = DSN_THEME_PATH . '/assets/js/product-slider.js';
   
   return $excluded;
 } );
@@ -56,8 +62,14 @@ add_filter( 'rocket_exclude_defer_js', function( $excluded ) {
     $excluded = array();
   }
   
-  // Exclude our script using theme constant
+  // Exclude Slick Slider
+  $excluded[] = 'slick.min.js';
+  $excluded[] = 'slick-carousel';
+  
+  // Exclude our scripts using theme constant
   $excluded[] = DSN_THEME_PATH . '/assets/js/archive-product-template.js';
+  $excluded[] = DSN_THEME_PATH . '/assets/js/custom-blocks-slider.js';
+  $excluded[] = DSN_THEME_PATH . '/assets/js/product-slider.js';
   
   return $excluded;
 } );
@@ -70,8 +82,14 @@ add_filter( 'rocket_exclude_js', function( $excluded ) {
     $excluded = array();
   }
   
-  // Exclude our script using theme constant
+  // Exclude Slick Slider
+  $excluded[] = 'slick.min.js';
+  $excluded[] = 'slick-carousel';
+  
+  // Exclude our scripts using theme constant
   $excluded[] = DSN_THEME_PATH . '/assets/js/archive-product-template.js';
+  $excluded[] = DSN_THEME_PATH . '/assets/js/custom-blocks-slider.js';
+  $excluded[] = DSN_THEME_PATH . '/assets/js/product-slider.js';
   
   return $excluded;
 } );
