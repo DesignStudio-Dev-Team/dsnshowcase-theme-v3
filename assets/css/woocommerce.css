@@ -144,6 +144,10 @@
   display: none;
 }
 
+.woocommerce-cart .cart .quantity .qty_button{
+  background-color: unset;
+}
+
 .woocommerce.single-product .cart .quantity .qty_button:hover {
   background-color: var(--dealerColor);
 }
