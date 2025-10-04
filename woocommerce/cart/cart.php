@@ -201,7 +201,7 @@ global $dssSiteLanguage;
                 <?php endwhile; ?>
             </div>
             <script>
-                $('.cart-slider').slick({
+               jQuery('.cart-slider').slick({
                     cssEase: 'ease',
                     arrows: true,
                     dots: false,
