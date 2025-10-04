@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.39",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.39",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.39/dsnshowcase.zip",
+  "version": "v3.5.40",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.40",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.40/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-10-04",
   "sections": {
-    "changelog": "Merge pull request #122 from DesignStudio-Dev-Team/slick-slider-not-working-fix\n\nSlick slider and cart styles improvement"
+    "changelog": "Merge pull request #123 from DesignStudio-Dev-Team/slick-slider-not-working-fix\n\nSlick slider and cart styles improvement"
   }
 }
