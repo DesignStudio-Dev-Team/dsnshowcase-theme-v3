@@ -47,20 +47,22 @@ if ( ! isset( $postID ) ) {
         
         <?php if ( $is_in_cart ) : ?>
             <!-- Quantity Controls (when product is in cart) -->
-            <div class="ds-product-quantity-controls dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:px-3 dsn:py-2 dsn:rounded"
+            <div class="ds-product-quantity-controls dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:rounded"
                  data-product-id="<?php echo esc_attr( $postID ); ?>">
                 <button type="button"
-                        class="ds-quantity-decrease dsn:opacity-5 dsn:w-9 dsn:h-9 dsn:flex dsn:items-center dsn:justify-center dsn:hover:bg-gray-300 dsn:rounded dsn:transition-colors dsn:cursor-pointer"
+                        class="ds-quantity-decrease dsn:px-3 dsn:py-2 dsn:flex dsn:items-center dsn:justify-center dsn:rounded dsn:transition-colors dsn:cursor-pointer"
                         data-product-id="<?php echo esc_attr( $postID ); ?>" 
                         aria-label="<?php esc_attr_e( 'Decrease quantity', 'dsnshowcase-theme-v3' ); ?>">
                     <?php dsn_icon( 'minus', 'dsn:w-4 dsn:h-4' ); ?>
                 </button>
-                <span class="ds-product-quantity dsn:w-12 dsn:px-2 dsn:text-center dsn:font-semibold dsn:text-base"
+
+                <span class="ds-product-quantity dsn:px-2 dsn:text-center dsn:font-semibold dsn:text-base"
                       data-product-id="<?php echo esc_attr( $postID ); ?>">
                     <?php echo esc_html( $cart_quantity ); ?>
                 </span>
+
                 <button type="button" 
-                        class="ds-quantity-increase dsn:opacity-5 dsn:w-9 dsn:h-9 dsn:flex dsn:items-center dsn:justify-center dsn:hover:bg-gray-300 dsn:rounded dsn:transition-colors dsn:cursor-pointer"
+                        class="ds-quantity-increase dsn:px-3 dsn:py-2 dsn:flex dsn:items-center dsn:justify-center dsn:rounded dsn:transition-colors dsn:cursor-pointer"
                         data-product-id="<?php echo esc_attr( $postID ); ?>" 
                         aria-label="<?php esc_attr_e( 'Increase quantity', 'dsnshowcase-theme-v3' ); ?>">
                     <?php dsn_icon( 'plus', 'dsn:w-4 dsn:h-4' ); ?>
@@ -75,6 +77,7 @@ if ( ! isset( $postID ) ) {
                 <span class='dsn:flex dsn:items-center'>
                     <?php dsn_icon( 'plus', 'dsn:w-4 dsn:h-4' ); ?>
                 </span>
+
                 <span class="dsn:flex dsn:items-center">
                     <?php dsn_icon( 'shopping-cart', 'dsn:w-5 dsn:h-5' ); ?>
                 </span>
