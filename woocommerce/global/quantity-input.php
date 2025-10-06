@@ -27,7 +27,7 @@ if ( $max_value && $min_value === $max_value ) {
 	/* translators: %s: Quantity. */
 	$label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 'woocommerce' ), wp_strip_all_tags( $args['product_name'] ) ) : esc_html__( 'Quantity', 'woocommerce' );
 	?>
-	<div class="quantity dsn:primary-site-background dsn:text-white dsn:w-36 dsn:rounded">
+	<div class="quantity dsn:primary-site-background dsn:text-white dsn:w-36 dsn:mb-2 dsn:rounded">
 		<?php do_action( 'woocommerce_before_quantity_input_field' ); ?>
 		<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo esc_attr( $label ); ?></label>
         <input type="button" value="-" class="qty_button minus dsn:w-10 dsn:h-10 dsn:rounded dsn:cursor-pointer dsn:text-2xl" />
