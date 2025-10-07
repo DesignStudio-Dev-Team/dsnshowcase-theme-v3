@@ -23,10 +23,6 @@ if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
 
 global $dssSiteLanguage;
 ?>
-<!--<div class="woocommerce-form-coupon-toggle">-->
-<!--	--><?php //wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ); ?>
-<!--</div>-->
-
 <div class="dsn:flex dsn:justify-between dsn:items-center dsn:gap-4 dsn:mb-4">
     <label for="coupon_code" class="dsn:text-base dsn:font-medium dsn:shrink-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></label>
     

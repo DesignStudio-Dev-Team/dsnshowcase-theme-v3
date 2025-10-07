@@ -328,18 +328,13 @@
   width: 100%;
 }
 
-.woocommerce .woocommerce-checkout-review-order-table .cart_item .product-total {
-  display: flex;
-  flex-direction: column;
-}
-
 .woocommerce .woocommerce-checkout-review-order-table .cart_item .product-total del {
   color: gray;
 }
 
 .woocommerce .woocommerce-checkout-review-order-table .cart_item .product-total ins {
   text-decoration: none;
-  color: #76bf71;
+  color: var(--dealerColor);
 }
 
 /* Order Details and Addresses */

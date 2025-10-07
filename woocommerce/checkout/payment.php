@@ -27,7 +27,7 @@ if (!is_ajax()) {
 <div id="payment" class="woocommerce-checkout-payment">
 	<?php if (WC()->cart->needs_payment()) : ?>
 		<h4 class=" dsn:pb-8"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->payment_method_title ?? esc_html__('Payment Method', 'woocommerce'); ?></h4>
-		<ul class="wc_payment_methods payment_methods methods">
+		<ul class="wc_payment_methods payment_methods methods dsn:mb-12">
 			<?php
 			if (!empty($available_gateways)) {
 				foreach ($available_gateways as $gateway) {

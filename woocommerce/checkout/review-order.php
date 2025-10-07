@@ -55,7 +55,7 @@ global $dssSiteLanguage;
                         <?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     </span>
                 </a>
-                <div class="product-total dsn:shrink-0 dsn:flex dsn:flex-row dsn:gap-2 dsn:items-center dsn:text-right">
+                <div class="product-total">
                     <?php echo $_product->get_price_html(); ?>
                 </div>
             </div>
