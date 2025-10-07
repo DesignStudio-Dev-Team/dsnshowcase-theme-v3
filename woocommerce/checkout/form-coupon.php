@@ -26,7 +26,7 @@ global $dssSiteLanguage;
 <div class="dsn:flex dsn:justify-between dsn:items-center dsn:gap-4 dsn:mb-4">
     <label for="coupon_code" class="dsn:text-base dsn:font-medium dsn:shrink-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></label>
     
-    <form class="checkout_coupon woocommerce-form-coupon dsn:border dsn:border-gray-200 dsn:rounded dsn:flex dsn:overflow-hidden dsn:w-80" method="post">
+    <form class="checkout_coupon woocommerce-form-coupon dsn:border dsn:border-gray-200 dsn:rounded dsn:flex dsn:overflow-hidden" method="post">
         <input type="text" name="coupon_code" class="input-text dsn:px-3 dsn:py-2 dsn:flex-1 dsn-woocommerce-checkout-coupon-input"
                placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" id="coupon_code" value=""/>
 
