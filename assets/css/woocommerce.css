@@ -843,3 +843,46 @@ body.checkout .default-btn {
 .woocommerce-cart-form__cart-item a, .woocommerce-cart-form__cart-item bdi {
  color: var(--dealerColor);
 }
+
+/* Mobile Cart Table - Label/Value Grid Layout */
+@media (max-width: 767px) {
+  /* Make table rows stack as blocks on mobile */
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item {
+    display: block;
+    padding: 1rem 0;
+  }
+  
+  /* Create grid layout: label (120px) | value (1fr) */
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item td {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    text-align: left;
+  }
+  
+  /* Generate labels from data-title attribute */
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item td::before {
+    content: attr(data-title) ":";
+    font-weight: 600;
+    color: #1a202c;
+  }
+  
+  /* Product thumbnail: no label, centered, full width */
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item td.product-thumbnail {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-bottom: 1rem;
+  }
+  
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item td.product-thumbnail::before {
+    display: none;
+  }
+  
+  /* Prices and subtotal: align right in value column */
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item td.product-item-price,
+  .shop_table_responsive tbody tr.woocommerce-cart-form__cart-item td.product-subtotal {
+    text-align: right;
+  }
+}
