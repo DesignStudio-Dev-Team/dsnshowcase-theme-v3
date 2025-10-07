@@ -23,7 +23,7 @@ global $dssSiteLanguage;
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-	<h2 class="text-3xl mb-6 pb-4 border-b"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_summary_title; ?></h2>
+	<h4 class="mb-6 pb-4 border-b"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_summary_title; ?></h4>
 
 	<table cellspacing="0" class="shop_table shop_table_responsive">
 

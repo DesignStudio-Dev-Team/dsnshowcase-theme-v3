@@ -20,7 +20,16 @@ defined('ABSPATH') || exit;
 global $dssSiteLanguage;
 ?>
 <div class="shop_table woocommerce-checkout-review-order-table">
-    <p class="product-name text-bold mb-4"><?php esc_html_e('Product', 'woocommerce'); ?></p>
+    <h3 class="dsn:text-xl dsn:font-semibold dsn:flex dsn:flex-wrap dsn:justify-between dsn:items-center dsn:mb-6 dsn:pb-4 dsn:border-b">
+        <?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_summary_title; ?>
+        <?php $item_counter = WC()->cart->cart_contents_count; ?>
+        <span class="dsn:text-sm dsn:text-gray-600 dsn:font-normal">    
+            <?php 
+            if ($item_counter == 1) echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular; 
+            else echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural; 
+            ?>
+        </span>
+    </h3>
 
     <?php
     do_action('woocommerce_review_order_before_cart_contents');
@@ -30,26 +39,24 @@ global $dssSiteLanguage;
 
         if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) {
             ?>
-            <div class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item mb-4 pb-4 border-b flex justify-between items-center gap-4', $cart_item, $cart_item_key)); ?>">
-                <a href="<?php echo get_permalink($cart_item['product_id']); ?>" class="flex mr-2 text-base dsn:items-center dsn:gap-4">
-                    <span class="product-thumbnail dsn:w-[110px] dsn:h-[100px] dsn:min-w-[110px] dsn:min-h-[100px] dsn:bg-gray-100 dsn:rounded dsn:flex dsn:items-center dsn:justify-center dsn:shrink-0 dsn:overflow-hidden dsn:mr-2">
+            <div class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item dsn:mb-4 dsn:pb-4 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:gap-4', $cart_item, $cart_item_key)); ?>">
+                <a href="<?php echo get_permalink($cart_item['product_id']); ?>" class="dsn:flex dsn:text-base dsn:items-center dsn:gap-3 dsn:text-gray-600">
+                    <span class="product-thumbnail dsn:w-20 dsn:h-20 dsn:bg-gray-100 dsn:rounded dsn:flex dsn:items-center dsn:justify-center dsn:shrink-0 dsn:overflow-hidden">
                         <?php
-                        // Constrain image to container using Tailwind classes
                         $thumb_html = $_product->get_image('woocommerce_thumbnail', array('class' => 'dsn:w-full dsn:h-full dsn:object-contain'), true);
                         $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $thumb_html, $cart_item, $cart_item_key);
                         echo $thumbnail; // PHPCS: XSS ok.
                         ?>
                     </span>
 
-                    <span class="product-name dsw-primary-site-link dsn:flex-1">
-						<?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
-                        <?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity text-black">' . sprintf('&times;&nbsp;%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <span class="product-name">
+                        <?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
+                        <?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity dsn:text-black">' . sprintf('&times;&nbsp;%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         <?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     </span>
                 </a>
-                <div class="product-total dsn:text-right dsn:min-w-[120px]">
-                    <?php  echo $_product->get_price_html(); //OG ?>
-					<?php //echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                <div class="product-total">
+                    <?php echo $_product->get_price_html(); ?>
                 </div>
             </div>
             <?php
@@ -59,31 +66,53 @@ global $dssSiteLanguage;
     do_action('woocommerce_review_order_after_cart_contents');
     ?>
 
-    <div class="cart-subtotal flex justify-between text-lg mb-4 p-2">
-        <div><?php esc_html_e('Subtotal', 'woocommerce'); ?></div>
+    <div class="cart-subtotal dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2">
+        <div class="dsn:font-medium"><?php esc_html_e('Subtotal', 'woocommerce'); ?></div>
         <div><?php wc_cart_totals_subtotal_html(); ?></div>
     </div>
 
     <?php foreach (WC()->cart->get_coupons() as $code => $coupon) : ?>
-        <div class="flex justify-between text-lg mb-4 p-2 cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
-            <div><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_discounts;?></div>
-            <div><?php wc_cart_totals_coupon_html($coupon); ?></div>
+        <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2 cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
+            <div class="dsn:font-medium"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_discounts;?></div>
+            <div class="dsn:text-green-600"><?php wc_cart_totals_coupon_html($coupon); ?></div>
         </div>
     <?php endforeach; ?>
 
     <?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
-
         <?php do_action('woocommerce_review_order_before_shipping'); ?>
-        <div class="flex justify-between text-lg mb-4 p-2">
-            <?php wc_cart_totals_shipping_html(); ?>
-        </div>
+        
+        <?php foreach ( WC()->shipping()->get_packages() as $i => $package ) : ?>
+            <?php $chosen_method = isset( WC()->session->chosen_shipping_methods[ $i ] ) ? WC()->session->chosen_shipping_methods[ $i ] : ''; ?>
+            <?php $available_methods = $package['rates']; ?>
+            
+            <?php if ( 1 < count( $available_methods ) ) : ?>
+                <div class="dsn:flex dsn:justify-between dsn:items-start dsn:text-base dsn:mb-3 dsn:py-2">
+                    <div class="dsn:font-medium">Shipping</div>
+                    <div class="dsn:flex dsn:flex-col dsn:gap-2 dsn:text-right">
+                        <?php foreach ( $available_methods as $method ) : ?>
+                            <label class="dsn:flex dsn:items-center dsn:gap-2 dsn:cursor-pointer dsn:justify-end">
+                                <span><?php echo esc_html( $method->get_label() ); ?></span>
+                                <input type="radio" name="shipping_method[<?php echo esc_attr( $i ); ?>]" data-index="<?php echo esc_attr( $i ); ?>" id="shipping_method_<?php echo esc_attr( $i ); ?>_<?php echo esc_attr( sanitize_title( $method->id ) ); ?>" value="<?php echo esc_attr( $method->id ); ?>" class="dsn:w-4 dsn:h-4" <?php checked( $method->id, $chosen_method ); ?>>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php elseif ( 1 === count( $available_methods ) ) : ?>
+                <?php $method = current( $available_methods ); ?>
+                <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2">
+                    <div class="dsn:font-medium">Shipping</div>
+                    <div><?php echo esc_html( $method->get_label() ); ?></div>
+                </div>
+                <input type="hidden" name="shipping_method[<?php echo esc_attr( $i ); ?>]" data-index="<?php echo esc_attr( $i ); ?>" value="<?php echo esc_attr( $method->id ); ?>">
+            <?php endif; ?>
+        <?php endforeach; ?>
+        
         <?php do_action('woocommerce_review_order_after_shipping'); ?>
-
     <?php endif; ?>
 
     <?php foreach (WC()->cart->get_fees() as $fee) : ?>
-        <div class="flex justify-between text-lg mb-4 p-2 fee">
-            <div><?php echo esc_html($fee->name); ?></div>
+        <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2 fee">
+            <div class="dsn:font-medium"><?php echo esc_html($fee->name); ?></div>
             <div><?php wc_cart_totals_fee_html($fee); ?></div>
         </div>
     <?php endforeach; ?>
@@ -91,14 +120,14 @@ global $dssSiteLanguage;
     <?php if (wc_tax_enabled() && !WC()->cart->display_prices_including_tax()) : ?>
         <?php if ('itemized' === get_option('woocommerce_tax_total_display')) : ?>
             <?php foreach (WC()->cart->get_tax_totals() as $code => $tax) : // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited ?>
-                <div class="flex justify-between text-lg mb-4 p-2 tax-rate tax-rate-<?php echo esc_attr(sanitize_title($code)); ?>">
-                    <div><?php echo esc_html($tax->label); ?></div>
+                <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2 tax-rate tax-rate-<?php echo esc_attr(sanitize_title($code)); ?>">
+                    <div class="dsn:font-medium"><?php echo esc_html($tax->label); ?></div>
                     <div><?php echo wp_kses_post($tax->formatted_amount); ?></div>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <div class="flex justify-between text-lg mb-4 p-2 tax-total">
-                <div><?php echo esc_html(WC()->countries->tax_or_vat()); ?></div>
+            <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2 tax-total">
+                <div class="dsn:font-medium"><?php echo esc_html(WC()->countries->tax_or_vat()); ?></div>
                 <div><?php wc_cart_totals_taxes_total_html(); ?></div>
             </div>
         <?php endif; ?>
@@ -106,7 +135,7 @@ global $dssSiteLanguage;
 
     <?php do_action('woocommerce_review_order_before_order_total'); ?>
 
-    <div class="flex justify-between text-lg mb-4 order-total bg-gray-100 p-2">
+    <div class="dsn:flex dsn:justify-between dsn:text-lg dsn:font-semibold dsn:mt-4 dsn:pt-4 dsn:border-t order-total dsn:bg-gray-100 dsn:p-4 dsn:rounded">
         <div><?php esc_html_e('Total', 'woocommerce'); ?></div>
         <div><?php wc_cart_totals_order_total_html(); ?></div>
     </div>

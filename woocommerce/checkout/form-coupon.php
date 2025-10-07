@@ -23,19 +23,14 @@ if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
 
 global $dssSiteLanguage;
 ?>
-<!--<div class="woocommerce-form-coupon-toggle">-->
-<!--	--><?php //wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ); ?>
-<!--</div>-->
+<div class="dsn:flex dsn:justify-between dsn:items-center dsn:gap-4 dsn:mb-4">
+    <label for="coupon_code" class="dsn:text-base dsn:font-medium dsn:shrink-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></label>
+    
+    <form class="checkout_coupon woocommerce-form-coupon dsn:border dsn:border-gray-200 dsn:rounded dsn:flex dsn:overflow-hidden dsn:w-80" method="post">
+        <input type="text" name="coupon_code" class="input-text dsn:px-3 dsn:py-2 dsn:flex-1 dsn-woocommerce-checkout-coupon-input"
+               placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" id="coupon_code" value=""/>
 
-<p><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
-<form class="checkout_coupon woocommerce-form-coupon border rounded" method="post">
-
-
-    <input type="text" name="coupon_code" class="input-text px-3 w-full"
-           placeholder="<?php esc_attr_e('COUPONS', 'woocommerce'); ?>" id="coupon_code" value="" style="border: 0"/>
-
-    <button type="submit" class="button" name="apply_coupon"
-            value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_html_e('Apply', 'woocommerce'); ?></button>
-
-    <div class="clear"></div>
-</form>
+        <button type="submit" class="button dsn:px-4 dsn:py-2 dsn:primary-site-background dsn:text-white dsn:cursor-pointer dsn:border-0 dsn-woocommerce-checkout-coupon-button" name="apply_coupon"
+                value="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->apply_coupon); ?>"><?php echo esc_html(dssLang($dssSiteLanguage)->woocommerce_cart->apply_coupon); ?></button>
+    </form>
+</div>
