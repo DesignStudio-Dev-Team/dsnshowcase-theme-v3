@@ -18,12 +18,15 @@
 
 defined('ABSPATH') || exit;
 
+global $dssSiteLanguage;
+
 if (!is_ajax()) {
 	do_action('woocommerce_review_order_before_payment');
 }
 ?>
 <div id="payment" class="woocommerce-checkout-payment">
 	<?php if (WC()->cart->needs_payment()) : ?>
+		<h4 class=" dsn:pb-8"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->payment_method_title ?? esc_html__('Payment Method', 'woocommerce'); ?></h4>
 		<ul class="wc_payment_methods payment_methods methods">
 			<?php
 			if (!empty($available_gateways)) {

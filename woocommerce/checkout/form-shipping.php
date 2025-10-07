@@ -22,11 +22,11 @@ global $dssSiteLanguage;
 <div class="woocommerce-shipping-fields">
 	<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
 
-		<h3 id="ship-to-different-address" class="dsn:text-3xl dsn:font-semibold dsn:mt-8 dsn:mb-6">
+		<h4 id="ship-to-different-address" class="dsn:mt-8 dsn:mb-6">
 			<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox dsn:flex dsn:items-center dsn:gap-3 dsn:cursor-pointer">
 				<input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox dsn:w-5 dsn:h-5 dsn:cursor-pointer" <?php checked( apply_filters( 'woocommerce_ship_to_different_address_checked', 'shipping' === get_option( 'woocommerce_ship_to_destination' ) ? 1 : 0 ), 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" /> <span><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->shipping_different_question; ?></span>
 			</label>
-		</h3>
+		</h4>
 
 		<div class="shipping_address">
 
