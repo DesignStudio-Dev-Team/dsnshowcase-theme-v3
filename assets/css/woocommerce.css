@@ -364,7 +364,7 @@
 /* Checkout Button Styles */
 .woocommerce-checkout input.button.alt {
   margin-top: 2rem;
-  background-color: #ff9309;
+  background-color: var(--dealerColor);
   display: block;
   text-align: center;
   margin-bottom: 1em;
@@ -375,7 +375,7 @@
 }
 
 .woocommerce-checkout input.button.alt:hover {
-  background-color: #ff9309;
+  background-color: var(--dealerColor);
 }
 
 /* Payment Styles */
@@ -476,15 +476,13 @@
   display: flex;
 }
 
-.wc-proceed-to-checkout .coupon .button,
-.checkout_coupon.woocommerce-form-coupon .button {
+.wc-proceed-to-checkout .coupon .button {
   background: transparent;
   padding: 10px;
   width: auto;
 }
 
-.wc-proceed-to-checkout .coupon .button:before,
-.checkout_coupon.woocommerce-form-coupon .button:before {
+.wc-proceed-to-checkout .coupon .button:before {
   content: "";
   display: inline-block;
   width: 1px;
@@ -496,9 +494,7 @@
 }
 
 .wc-proceed-to-checkout .coupon .button:hover,
-.wc-proceed-to-checkout .coupon .button:focus,
-.checkout_coupon.woocommerce-form-coupon .button:hover,
-.checkout_coupon.woocommerce-form-coupon .button:focus {
+.wc-proceed-to-checkout .coupon .button:focus {
   background-color: transparent;
 }
 

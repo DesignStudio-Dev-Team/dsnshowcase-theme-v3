@@ -41,7 +41,7 @@ global $dssSiteLanguage;
                 <a class="dsn:uppercase dsn:text-sm dsw-primary-site-link" href="<?php echo wc_get_cart_url(); ?>">
                     <?php echo dssLang($dssSiteLanguage)->woocommerce_cart->back_link; ?>
                 </a>
-                <?php if (get_option('woocommerce_enable_checkout_login_reminder') == "yes" && !is_user_logged_in()) : ?>
+                <?php if (get_option('woocommerce_enable_checkout_login_reminder') === "yes" && !is_user_logged_in()) : ?>
                     <a href="#" class="dsn:uppercase dsn:text-sm dsw-primary-site-link showlogin">Customer Login</a>
                 <?php endif; ?>
             </div>
