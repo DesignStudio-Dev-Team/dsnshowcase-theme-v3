@@ -28,9 +28,9 @@ global $dssSiteLanguage;
     
     <form class="checkout_coupon woocommerce-form-coupon dsn:border dsn:border-gray-200 dsn:rounded dsn:flex dsn:overflow-hidden dsn:w-80" method="post">
         <input type="text" name="coupon_code" class="input-text dsn:px-3 dsn:py-2 dsn:flex-1 dsn-woocommerce-checkout-coupon-input"
-               placeholder="<?php esc_attr_e('sss', 'woocommerce'); ?>" id="coupon_code" value=""/>
+               placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" id="coupon_code" value=""/>
 
         <button type="submit" class="button dsn:px-4 dsn:py-2 dsn:primary-site-background dsn:text-white dsn:cursor-pointer dsn:border-0 dsn-woocommerce-checkout-coupon-button" name="apply_coupon"
-                value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_html_e('Apply', 'woocommerce'); ?></button>
+                value="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->apply_coupon); ?>"><?php echo esc_html(dssLang($dssSiteLanguage)->woocommerce_cart->apply_coupon); ?></button>
     </form>
 </div>
