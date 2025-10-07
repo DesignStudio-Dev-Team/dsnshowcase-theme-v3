@@ -212,14 +212,14 @@
 
 /* Update Cart Button Styles */
 .woocommerce button.wc_update_cart.button {
-  background-color: #ff9309;
+  background-color: var(--dealerColor);
   text-transform: uppercase;
   padding: 1rem 2rem;
   color: #fff;
 }
 
 .woocommerce button.wc_update_cart.button:hover {
-  background-color: #ff9309;
+  background-color: var(--dealerColor);
   color: #fff;
 }
 
@@ -229,7 +229,7 @@
 }
 
 .woocommerce button.wc_update_cart.button:disabled:hover {
-  background-color: #ff9309;
+  background-color: var(--dealerColor);
   color: #fff;
 }
 
