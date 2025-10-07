@@ -40,7 +40,7 @@ global $dssSiteLanguage;
         if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) {
             ?>
             <div class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item dsn:mb-4 dsn:pb-4 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:gap-4', $cart_item, $cart_item_key)); ?>">
-                <a href="<?php echo get_permalink($cart_item['product_id']); ?>" class="dsn:flex dsn:text-base dsn:items-center dsn:gap-4 dsn:text-gray-600 dsn:flex-1">
+                <a href="<?php echo get_permalink($cart_item['product_id']); ?>" class="dsn:flex dsn:text-base dsn:items-center dsn:gap-3 dsn:text-gray-600">
                     <span class="product-thumbnail dsn:w-20 dsn:h-20 dsn:bg-gray-100 dsn:rounded dsn:flex dsn:items-center dsn:justify-center dsn:shrink-0 dsn:overflow-hidden">
                         <?php
                         $thumb_html = $_product->get_image('woocommerce_thumbnail', array('class' => 'dsn:w-full dsn:h-full dsn:object-contain'), true);
@@ -49,13 +49,13 @@ global $dssSiteLanguage;
                         ?>
                     </span>
 
-                    <span class="product-name dsn:flex-1">
-						<?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
+                    <span class="product-name">
+                        <?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
                         <?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity dsn:text-black">' . sprintf('&times;&nbsp;%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         <?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     </span>
                 </a>
-                <div class="product-total dsn:text-right dsn:shrink-0">
+                <div class="product-total dsn:shrink-0 dsn:flex dsn:flex-row dsn:gap-2 dsn:items-center dsn:text-right">
                     <?php echo $_product->get_price_html(); ?>
                 </div>
             </div>
@@ -80,9 +80,33 @@ global $dssSiteLanguage;
 
     <?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
         <?php do_action('woocommerce_review_order_before_shipping'); ?>
-        <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2">
-            <?php wc_cart_totals_shipping_html(); ?>
-        </div>
+        
+        <?php foreach ( WC()->shipping()->get_packages() as $i => $package ) : ?>
+            <?php $chosen_method = isset( WC()->session->chosen_shipping_methods[ $i ] ) ? WC()->session->chosen_shipping_methods[ $i ] : ''; ?>
+            <?php $available_methods = $package['rates']; ?>
+            
+            <?php if ( 1 < count( $available_methods ) ) : ?>
+                <div class="dsn:flex dsn:justify-between dsn:items-start dsn:text-base dsn:mb-3 dsn:py-2">
+                    <div class="dsn:font-medium">Shipping</div>
+                    <div class="dsn:flex dsn:flex-col dsn:gap-2 dsn:text-right">
+                        <?php foreach ( $available_methods as $method ) : ?>
+                            <label class="dsn:flex dsn:items-center dsn:gap-2 dsn:cursor-pointer dsn:justify-end">
+                                <span><?php echo esc_html( $method->get_label() ); ?></span>
+                                <input type="radio" name="shipping_method[<?php echo esc_attr( $i ); ?>]" data-index="<?php echo esc_attr( $i ); ?>" id="shipping_method_<?php echo esc_attr( $i ); ?>_<?php echo esc_attr( sanitize_title( $method->id ) ); ?>" value="<?php echo esc_attr( $method->id ); ?>" class="dsn:w-4 dsn:h-4" <?php checked( $method->id, $chosen_method ); ?>>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php elseif ( 1 === count( $available_methods ) ) : ?>
+                <?php $method = current( $available_methods ); ?>
+                <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2">
+                    <div class="dsn:font-medium">Shipping</div>
+                    <div><?php echo esc_html( $method->get_label() ); ?></div>
+                </div>
+                <input type="hidden" name="shipping_method[<?php echo esc_attr( $i ); ?>]" data-index="<?php echo esc_attr( $i ); ?>" value="<?php echo esc_attr( $method->id ); ?>">
+            <?php endif; ?>
+        <?php endforeach; ?>
+        
         <?php do_action('woocommerce_review_order_after_shipping'); ?>
     <?php endif; ?>
 

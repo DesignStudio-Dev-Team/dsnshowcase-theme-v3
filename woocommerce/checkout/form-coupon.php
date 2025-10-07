@@ -27,11 +27,14 @@ global $dssSiteLanguage;
 <!--	--><?php //wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ); ?>
 <!--</div>-->
 
-<p class="dsn:text-base dsn:font-medium dsn:mb-2"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
-<form class="checkout_coupon woocommerce-form-coupon dsn:border dsn:border-gray-200 dsn:rounded dsn:flex dsn:overflow-hidden dsn:mb-4" method="post">
-    <input type="text" name="coupon_code" class="input-text dsn:px-3 dsn:py-2 dsn:flex-1 dsn:border-0"
-           placeholder="<?php esc_attr_e('sss', 'woocommerce'); ?>" id="coupon_code" value=""/>
+<div class="dsn:flex dsn:justify-between dsn:items-center dsn:gap-4 dsn:mb-4">
+    <label for="coupon_code" class="dsn:text-base dsn:font-medium dsn:shrink-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></label>
+    
+    <form class="checkout_coupon woocommerce-form-coupon dsn:border dsn:border-gray-200 dsn:rounded dsn:flex dsn:overflow-hidden dsn:w-80" method="post">
+        <input type="text" name="coupon_code" class="input-text dsn:px-3 dsn:py-2 dsn:flex-1 dsn-woocommerce-checkout-coupon-input"
+               placeholder="<?php esc_attr_e('sss', 'woocommerce'); ?>" id="coupon_code" value=""/>
 
-    <button type="submit" class="button dsn:px-4 dsn:py-2 dsn:primary-site-background dsn:text-white dsn:border-0 dsn:cursor-pointer" name="apply_coupon"
-            value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_html_e('Apply', 'woocommerce'); ?></button>
-</form>
+        <button type="submit" class="button dsn:px-4 dsn:py-2 dsn:primary-site-background dsn:text-white dsn:cursor-pointer dsn:border-0 dsn-woocommerce-checkout-coupon-button" name="apply_coupon"
+                value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_html_e('Apply', 'woocommerce'); ?></button>
+    </form>
+</div>

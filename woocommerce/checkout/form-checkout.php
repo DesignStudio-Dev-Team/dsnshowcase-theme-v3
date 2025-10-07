@@ -64,7 +64,7 @@ global $dssSiteLanguage;
 
             <!-- Order Summary -->
             <div class="dsn:w-full dsn:shrink-0 checkout-summary-section">
-                <div class="dsn:border dsn:border-gray-200 dsn:rounded-lg dsn:p-6 checkout-summary-box">
+                <div class="dsn:border dsn:rounded-lg dsn:p-6 checkout-summary-box">
                     <div id="order_review" class="woocommerce-checkout-review-order">
                         <?php do_action('woocommerce_checkout_order_review'); ?>
                     </div>

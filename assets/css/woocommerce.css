@@ -498,6 +498,15 @@
   background-color: transparent;
 }
 
+/* Coupon form button - no individual border radius */
+.checkout_coupon.woocommerce-form-coupon .dsn-woocommerce-checkout-coupon-input.input-text{
+  border-radius: 0;
+}
+
+.checkout_coupon.woocommerce-form-coupon .dsn-woocommerce-checkout-coupon-button.button {
+  border-radius: 0;
+}
+
 /* Product Quantity Styles */
 .product-quantity .quantity {
   white-space: nowrap;
