@@ -38,8 +38,16 @@ global $dssSiteLanguage;
         <div class="dsn:py-6 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8">
             <h1 class="dsn:text-3xl dsn:font-semibold dsn:tracking-tight"><?php the_title() ?></h1>
             <div class="dsn:flex dsn:items-center dsn:gap-4">
-                <a class="dsn:uppercase dsn:text-sm dsw-primary-site-link" href="<?php echo wc_get_cart_url(); ?>">
-                    <?php echo dssLang($dssSiteLanguage)->woocommerce_cart->back_link; ?>
+                <a class="dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:h-10 dsn:rounded dsn:transition-colors" 
+                   href="<?php echo wc_get_cart_url(); ?>"
+                   title="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>"
+                   aria-label="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>">
+                    <span class="dsn:flex dsn:items-center">
+                        <?php dsn_icon('arrow-left', 'dsn:w-4 dsn:h-4'); ?>
+                    </span>
+                    <span class="dsn:flex dsn:items-center">
+                        <?php dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
+                    </span>
                 </a>
                 <?php if (get_option('woocommerce_enable_checkout_login_reminder') === "yes" && !is_user_logged_in()) : ?>
                     <a href="#" class="dsn:uppercase dsn:text-sm dsw-primary-site-link showlogin">Customer Login</a>
