@@ -37,9 +37,8 @@ global $dssSiteLanguage;
         </p>
     </div>
 
-    <!-- Cart Items + Order Summary Row -->
     <div class="dsn:flex dsn:flex-col lg:dsn:flex-row dsn:gap-8 dsn:mb-12">
-        <!-- Cart Items (Left Column) -->
+        <!-- Cart Items -->
         <div class="dsn:flex-1">
         <form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
             <?php do_action('woocommerce_before_cart_table'); ?>
@@ -108,7 +107,7 @@ global $dssSiteLanguage;
                                 </td>
 
                                 <td class="product-quantity dsn:pr-4 dsn:align-middle" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
-                                    <div class="dsn:flex dsn:items-start dsn:gap-2">
+                                    <div class="dsn:flex dsn:items-start dsn:justify-end dsn:gap-2">
                                     <?php
                                     if ($_product->is_sold_individually()) {
                                         $product_quantity = sprintf('1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
@@ -153,13 +152,13 @@ global $dssSiteLanguage;
                                   </div>
                                 </td>
 
-                                <td class="product-item-price flex-grow-0 dsn:w-[110px] dsn:text-right dsn:align-middle" data-title="<?php esc_attr_e('Item Price', 'woocommerce'); ?>">
+                                <td class="product-item-price flex-grow-0 dsn:text-right dsn:align-middle" data-title="<?php esc_attr_e('Item Price', 'woocommerce'); ?>">
                                     <div class="dsn:flex dsn:flex-row dsn:items-center dsn:justify-end dsn:gap-2">
                                         <?php echo $_product->get_price_html(); ?>
                                     </div>
                                 </td>
 
-                                <td class="product-subtotal flex-grow-0 dsn:w-[110px] dsn:text-right text-gray-600 hover:text-gray-800 dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
+                                <td class="product-subtotal flex-grow-0 dsn:text-right text-gray-600 hover:text-gray-800 dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
                                     <?php echo get_woocommerce_currency_symbol () . number_format($_product->get_price() * $cart_item['quantity'], 2, '.', ''); ?>
                                 </td>
                             </tr>
