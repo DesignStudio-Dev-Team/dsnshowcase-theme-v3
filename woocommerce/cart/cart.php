@@ -24,22 +24,27 @@ global $dssSiteLanguage;
 
 ?>
 
-<div class="flex flex-wrap -mx-4 container">
-    <div class="w-full lg:w-8/12 px-4 lg:pr-12">
-        <div class="py-4 border-b flex justify-between items-center">
-            <h1 class="text-3xl"><?php the_title() ?></h1>
-            <?php $item_counter = WC()->cart->cart_contents_count; ?>
-            <p class="cart-counter text-right uppercase font-semibold">
-                <?php 
-                if ($item_counter == 1) echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular; 
-                else echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural; 
-                ?>
-            </p>
-        </div>
+<div class="dsn:container dsn:mx-auto dsn:px-4">
+    <!-- Page Header -->
+    <div class="dsn:py-6 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8">
+        <h1 class="dsn:text-3xl dsn:md:text-4xl dsn:font-semibold dsn:tracking-tight"><?php the_title() ?></h1>
+        <?php $item_counter = WC()->cart->cart_contents_count; ?>
+        <p class="cart-counter dsn:text-sm dsn:text-gray-600">
+            <?php 
+            if ($item_counter == 1) echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular; 
+            else echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural; 
+            ?>
+        </p>
+    </div>
+
+    <!-- Cart Items + Order Summary Row -->
+    <div class="dsn:flex dsn:flex-col lg:dsn:flex-row dsn:gap-8 dsn:mb-12">
+        <!-- Cart Items (Left Column) -->
+        <div class="dsn:flex-1">
         <form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
             <?php do_action('woocommerce_before_cart_table'); ?>
 
-            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents dsn:w-full" cellspacing="0">
                 <tbody>
                     <?php do_action('woocommerce_before_cart_contents'); ?>
 
@@ -51,11 +56,14 @@ global $dssSiteLanguage;
                         if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) {
                             $product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
                     ?>
-                            <tr class="woocommerce-cart-form__cart-item flex items-center <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
+                            <tr class="woocommerce-cart-form__cart-item dsn:align-middle dsn:py-4 dsn:border-b <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
 
-                                <td class="product-thumbnail w-32 h-32 flex-grow-0 flex items-center">
+                                <td class="product-thumbnail dsn:w-[80px] dsn:h-[80px] dsn:bg-gray-100 dsn:rounded dsn:flex dsn:items-center dsn:justify-center dsn:overflow-hidden dsn:align-middle dsn:border-0">
                                     <?php
-                                    $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
+                                    $thumbnail_args = array(
+                                        'class' => 'dsn:border-0'
+                                    );
+                                    $thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image('woocommerce_thumbnail', $thumbnail_args), $cart_item, $cart_item_key);
 
                                     if (!$product_permalink) {
                                         echo $thumbnail; // PHPCS: XSS ok.
@@ -65,46 +73,42 @@ global $dssSiteLanguage;
                                     ?>
                                 </td>
 
-                                <td class="product-name flex-grow h-32 flex justify-center flex-col" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
+                                <td class="product-name flex-grow dsn:px-4 dsn:leading-snug dsn:align-middle" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
+                                  <div class='dsn:flex-grow'>
                                     <?php
-                                    if (!$product_permalink) {
-                                        echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key) . '&nbsp;');
+                                    if ( ! $product_permalink) {
+                                      echo wp_kses_post(apply_filters('woocommerce_cart_item_name',
+                                          $_product->get_name(), $cart_item,
+                                          $cart_item_key).'&nbsp;');
                                     } else {
-                                        echo wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a class="text-xl mb-2 inline-block text-gray-600 hover:text-gray-800" href="%s">%s</a>', esc_url($product_permalink), $_product->get_name()), $cart_item, $cart_item_key));
+                                      echo wp_kses_post(apply_filters('woocommerce_cart_item_name',
+                                        sprintf('<a class="text-xl inline-block text-gray-600 hover:text-gray-800" href="%s">%s</a>',
+                                          esc_url($product_permalink),
+                                          $_product->get_name()), $cart_item,
+                                        $cart_item_key));
                                     }
 
-                                    do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
+                                    do_action('woocommerce_after_cart_item_name',
+                                      $cart_item, $cart_item_key);
 
                                     // Meta data.
                                     echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok.
 
                                     // Backorder notification.
-                                    if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
-                                        echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id));
+                                    if ($_product->backorders_require_notification()
+                                      && $_product->is_on_backorder($cart_item['quantity'])
+                                    ) {
+                                      echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification',
+                                        '<p class="backorder_notification">'
+                                        .esc_html__('Available on backorder',
+                                          'woocommerce').'</p>', $product_id));
                                     }
                                     ?>
-                                    <?php
-                                    echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                        'woocommerce_cart_item_remove_link',
-                                        sprintf(
-                                            '<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">' . dssLang($dssSiteLanguage)->woocommerce_cart->delete_link . '</a>',
-                                            esc_url(wc_get_cart_remove_url($cart_item_key)),
-                                            esc_html__('Remove this item', 'woocommerce'),
-                                            esc_attr($product_id),
-                                            esc_attr($_product->get_sku())
-                                        ),
-                                        $cart_item_key
-                                    );
-                                    ?>
+                                  </div>
                                 </td>
 
-                                <!-- <td class="product-price" data-title="<?php //esc_attr_e('Price', 'woocommerce'); 
-                                                                            ?>">
-                                <?php echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key); // PHPCS: XSS ok. 
-                                ?>
-                                </td> -->
-
-                                <td class="product-quantity flex-grow-0 h-32 flex items-center" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
+                                <td class="product-quantity dsn:pr-4 dsn:align-middle" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
+                                    <div class="dsn:flex dsn:items-start dsn:gap-2">
                                     <?php
                                     if ($_product->is_sold_individually()) {
                                         $product_quantity = sprintf('1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
@@ -124,15 +128,38 @@ global $dssSiteLanguage;
 
                                     echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item); // PHPCS: XSS ok.
                                     ?>
-                                </td>
 
-                                <td class="product-item-price flex-grow-0 w-48 h-32 flex items-center justify-end" data-title="<?php esc_attr_e('Item Price', 'woocommerce'); ?>">
-                                    <?php // echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key); // PHPCS: XSS ok. 
+                                  <div class='dsn-woocommerce-delete-item-container dsn:primary-site-background dsn:px-3 dsn:w-10 dsn:h-10 dsn:mb-2 dsn:rounded dsn:flex dsn:items-center'>
+                                    <?php
+                                    ob_start();
+                                    dsn_icon('trash',
+                                      'dsn:w-4 dsn:h-4 dsn:text-white');
+                                    $trash_icon = ob_get_clean();
+
+                                    echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                      'woocommerce_cart_item_remove_link',
+                                      sprintf(
+                                        '<a href="%s" class="remove dsn:flex dsn:items-center dsn:justify-center dsn:transition-colors dsn:cursor-pointer" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
+                                        esc_url(wc_get_cart_remove_url($cart_item_key)),
+                                        esc_html__('Remove this item',
+                                          'woocommerce'),
+                                        esc_attr($product_id),
+                                        esc_attr($_product->get_sku()),
+                                        $trash_icon
+                                      ),
+                                      $cart_item_key
+                                    );
                                     ?>
-                                    <?php echo $_product->get_price_html(); ?>
+                                  </div>
                                 </td>
 
-                                <td class="product-subtotal flex-grow-0 w-24 h-32 flex items-center justify-end text-gray-600 hover:text-gray-800" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
+                                <td class="product-item-price flex-grow-0 dsn:w-[110px] dsn:text-right dsn:align-middle" data-title="<?php esc_attr_e('Item Price', 'woocommerce'); ?>">
+                                    <div class="dsn:flex dsn:flex-row dsn:items-center dsn:justify-end dsn:gap-2">
+                                        <?php echo $_product->get_price_html(); ?>
+                                    </div>
+                                </td>
+
+                                <td class="product-subtotal flex-grow-0 dsn:w-[110px] dsn:text-right text-gray-600 hover:text-gray-800 dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
                                     <?php echo get_woocommerce_currency_symbol () . number_format($_product->get_price() * $cart_item['quantity'], 2, '.', ''); ?>
                                 </td>
                             </tr>
@@ -173,91 +200,93 @@ global $dssSiteLanguage;
             </table>
             <?php do_action('woocommerce_after_cart_table'); ?>
         </form>
-
-        <?php $arg = array(
-            'post_type' => 'product',
-            'order' => 'ASC',
-            'orderby' => 'rand',
-            'posts_per_page' => 12
-        );
-        $the_query = new WP_Query($arg);
-        if ($the_query->have_posts()) : ?>
-            <h3 class="text-3xl my-4"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->more_products_for_you;?></h3>
-            <div class="w-full slick-slider cart-slider -mx-4 mt-4 md:mt-12 mb-12">
-                <?php while ($the_query->have_posts()) :
-                    $the_query->the_post(); ?>
-                    <div class="cart-slide px-4">
-                        <a href="<?php echo get_the_permalink(); ?>" class="text-black hover:text-gray-500">
+        </div>
+        <?php do_action('woocommerce_before_cart_collaterals'); ?>
+      <!-- More Products Section (Full Width Below) -->
+      <?php $arg = array(
+        'post_type' => 'product',
+        'order' => 'ASC',
+        'orderby' => 'rand',
+        'posts_per_page' => 12
+      );
+      $the_query = new WP_Query($arg);
+      if ($the_query->have_posts()) : ?>
+        <div class="dsn:mb-12">
+          <h4 class="dsn:font-semibold dsn:tracking-tight dsn:mb-8"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->more_products_for_you;?></h4>
+          <div class="w-full slick-slider cart-slider -mx-4" role="region" aria-label="Recommended products">
+            <?php while ($the_query->have_posts()) :
+              $the_query->the_post(); ?>
+              <div class="cart-slide px-4">
+                <a href="<?php echo get_the_permalink(); ?>" class="text-black hover:text-gray-500">
                             <span class="cart-slide__thumb">
                                 <?php the_post_thumbnail('full', array('class' => 'cart-slide__img')); ?>
                             </span>
-                            <span class="cart-slide__title block font-bold m-0 text-lg mb-2"><?php the_title(); ?></span>
-                            <?php $product = wc_get_product(get_the_ID()); ?>
-                            <span class="cart-slide__price block space-x-1 text-base">
+                  <span class="cart-slide__title block font-bold m-0 text-lg mb-2"><?php the_title(); ?></span>
+                  <?php $product = wc_get_product(get_the_ID()); ?>
+                  <span class="cart-slide__price block space-x-1 text-base">
                                 <?php echo $product->get_price_html(); ?>
-                            </span> 
-                        </a>
-                    </div>
-                <?php endwhile; ?>
-            </div>
-            <script>
-                jQuery(document).ready(function($) {
-                    if (typeof $.fn.slick !== 'undefined') {
-                      const $slider = jQuery('.cart-slider');
+                            </span>
+                </a>
+              </div>
+            <?php endwhile; ?>
+          </div>
+          <script>
+            jQuery(document).ready(function($) {
+              if (typeof $.fn.slick !== 'undefined') {
+                const $slider = jQuery('.cart-slider');
 
-                        $slider.slick({
-                            cssEase: 'ease',
-                            arrows: true,
-                            dots: false,
-                            infinite: true,
-                            autoplay: true,
-                            autoplaySpeed: 3000,
-                            slidesToShow: 4,
-                            slidesToScroll: 1,
-                            variableWidth: false,
-                            adaptiveHeight: false,
-                            responsive: [{
-                                    breakpoint: 1024,
-                                    settings: {
-                                        slidesToShow: 2,
-                                        slidesToScroll: 1,
-                                        adaptiveHeight: false
-                                    }
-                                },
-                                {
-                                    breakpoint: 480,
-                                    settings: {
-                                        slidesToShow: 1,
-                                        slidesToScroll: 1,
-                                        adaptiveHeight: false
-                                    }
-                                }
-                            ]
-                        });
-                    } else {
-                        console.error('Slick slider is not loaded on cart page');
+                $slider.slick({
+                  cssEase: 'ease',
+                  arrows: true,
+                  dots: false,
+                  infinite: true,
+                  autoplay: true,
+                  autoplaySpeed: 3000,
+                  slidesToShow: 4,
+                  slidesToScroll: 1,
+                  variableWidth: false,
+                  adaptiveHeight: false,
+                  responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      adaptiveHeight: false
                     }
+                  },
+                    {
+                      breakpoint: 480,
+                      settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        adaptiveHeight: false
+                      }
+                    }
+                  ]
                 });
-            </script>
-        <?php endif;
-        wp_reset_query(); ?>
-    </div>
-
-    <?php do_action('woocommerce_before_cart_collaterals'); ?>
-    <div class="w-full lg:w-4/12 px-4">
-        <div class="cart-collaterals border rounded py-6 px-10">
-            <?php
-            /**
-             * Cart collaterals hook.
-             *
-             * @hooked woocommerce_cross_sell_display
-             * @hooked woocommerce_cart_totals - 10
-             */
-            do_action('woocommerce_cart_collaterals');
-            ?>
+              } else {
+                console.error('Slick slider is not loaded on cart page');
+              }
+            });
+          </script>
         </div>
+      <?php endif;
+      wp_reset_query(); ?>
+    </div>
+    <!-- Order Summary -->
+    <div class='dsn:w-full lg:dsn:w-[400px] dsn:shrink-0'>
+      <div class='dsn:border dsn:rounded-lg dsn:p-6 lg:dsn:sticky lg:dsn:top-4'>
+        <?php
+        /**
+         * Cart collaterals hook.
+         *
+         * @hooked woocommerce_cross_sell_display
+         * @hooked woocommerce_cart_totals - 10
+         */
+        do_action('woocommerce_cart_collaterals');
+        ?>
+      </div>
     </div>
 </div>
-
 
 <?php do_action('woocommerce_after_cart'); ?>
