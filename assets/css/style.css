@@ -806,9 +806,6 @@
   .dsn\:w-10\/12 {
     width: calc(10/12 * 100%);
   }
-  .dsn\:w-12 {
-    width: calc(var(--dsn-spacing) * 12);
-  }
   .dsn\:w-14 {
     width: calc(var(--dsn-spacing) * 14);
   }
@@ -823,15 +820,6 @@
   }
   .dsn\:w-24 {
     width: calc(var(--dsn-spacing) * 24);
-  }
-  .dsn\:w-27 {
-    width: calc(var(--dsn-spacing) * 27);
-  }
-  .dsn\:w-28 {
-    width: calc(var(--dsn-spacing) * 28);
-  }
-  .dsn\:w-30 {
-    width: calc(var(--dsn-spacing) * 30);
   }
   .dsn\:w-32 {
     width: calc(var(--dsn-spacing) * 32);
@@ -1024,9 +1012,6 @@
   .dsn\:gap-13 {
     gap: calc(var(--dsn-spacing) * 13);
   }
-  .dsn\:gap-15 {
-    gap: calc(var(--dsn-spacing) * 15);
-  }
   .dsn\:gap-20 {
     gap: calc(var(--dsn-spacing) * 20);
   }
@@ -1084,6 +1069,10 @@
   }
   .dsn\:rounded-md {
     border-radius: var(--dsn-radius-md);
+  }
+  .dsn\:rounded-r {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
   }
   .dsn\:rounded-b-2xl {
     border-bottom-right-radius: var(--dsn-radius-2xl);
@@ -1437,6 +1426,12 @@
   }
   .dsn\:pl-0 {
     padding-left: calc(var(--dsn-spacing) * 0);
+  }
+  .dsn\:pl-1 {
+    padding-left: calc(var(--dsn-spacing) * 1);
+  }
+  .dsn\:pl-2 {
+    padding-left: calc(var(--dsn-spacing) * 2);
   }
   .dsn\:pl-25 {
     padding-left: calc(var(--dsn-spacing) * 25);
@@ -1998,9 +1993,29 @@
       padding-inline: calc(var(--dsn-spacing) * 0);
     }
   }
+  .dsn\:sm\:px-4 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--dsn-spacing) * 4);
+    }
+  }
+  .dsn\:sm\:py-2 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--dsn-spacing) * 2);
+    }
+  }
+  .dsn\:sm\:py-4 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--dsn-spacing) * 4);
+    }
+  }
   .dsn\:sm\:py-8 {
     @media (width >= 40rem) {
       padding-block: calc(var(--dsn-spacing) * 8);
+    }
+  }
+  .dsn\:sm\:text-right {
+    @media (width >= 40rem) {
+      text-align: right;
     }
   }
   .dsn\:md\:absolute {
@@ -3351,7 +3366,6 @@
   margin-right: 0.25rem;
 }
 .woocommerce-checkout #payment ul.payment_methods .payment_method_paypal label, .woocommerce-checkout #payment ul.payment_methods .payment_method_bacs label {
-  padding-left: 1.5rem;
   background: url("../../images/icon-paypal.svg") left center no-repeat;
   background-size: contain;
 }
@@ -3362,7 +3376,6 @@
   display: none;
 }
 .woocommerce-checkout #payment ul.payment_methods .payment_method_bacs label {
-  padding-left: 2.5rem;
   background: url("../../images/icon-credit-card.svg") left center no-repeat;
   background-size: contain;
 }

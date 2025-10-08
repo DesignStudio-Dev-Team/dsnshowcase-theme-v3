@@ -31,53 +31,76 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 global $dssSiteLanguage;
 ?>
 <div class='dsn:container dsn:mx-auto dsn:px-4'>
-  <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
-        <!-- Page Header -->
-        <div class="dsn:py-6 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8">
-            <h1><?php the_title() ?></h1>
-            <div class="dsn:flex dsn:items-center dsn:gap-4">
-                <a class="dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:h-10 dsn:rounded dsn:transition-colors"
-                   href="<?php echo wc_get_cart_url(); ?>"
-                   title="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>"
-                   aria-label="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>">
+  <!-- Page Header -->
+  <div class='dsn:py-6 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8'>
+    <h1><?php
+      the_title() ?></h1>
+    <div class="dsn:flex dsn:items-center dsn:gap-4">
+      <a
+        class="dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:h-10 dsn:rounded dsn:transition-colors"
+        href="<?php
+        echo wc_get_cart_url(); ?>"
+        title="<?php
+        echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>"
+        aria-label="<?php
+        echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>">
                     <span class="dsn:flex dsn:items-center">
-                        <?php dsn_icon('arrow-left', 'dsn:w-4 dsn:h-4'); ?>
+                        <?php
+                        dsn_icon('arrow-left', 'dsn:w-4 dsn:h-4'); ?>
                     </span>
-                    <span class="dsn:flex dsn:items-center">
-                        <?php dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
+        <span class="dsn:flex dsn:items-center">
+                        <?php
+                        dsn_icon('shopping-cart', 'dsn:w-5 dsn:h-5'); ?>
                     </span>
-                </a>
-                <?php if (get_option('woocommerce_enable_checkout_login_reminder') === "yes" && !is_user_logged_in()) : ?>
-                    <a href="#" class="dsn:uppercase dsn:text-sm dsw-primary-site-link showlogin">Customer Login</a>
-                <?php endif; ?>
+      </a>
+      <?php
+      if (get_option('woocommerce_enable_checkout_login_reminder') === 'yes'
+        && ! is_user_logged_in()
+      ) : ?>
+        <a href="#"
+           class="dsn:uppercase dsn:text-sm dsw-primary-site-link showlogin">Customer
+          Login</a>
+      <?php
+      endif; ?>
+    </div>
+  </div>
+
+  <form name='checkout' method='post'
+        class="checkout woocommerce-checkout"
+        action='<?php
+        echo esc_url(wc_get_checkout_url()); ?>' enctype='multipart/form-data'>
+        <div class='dsn:sm:flex dsn:gap-13 dsn:pt-10 dsn:mb-12 checkout-layout'>
+          <!-- Checkout Form -->
+          <div class="dsn:sm:flex dsn:sm:flex-col dsn:gap-13 dsn:sm:w-2/3">
+            <?php if ($checkout->get_checkout_fields()) : ?>
+              <div class="dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
+                <?php do_action('woocommerce_checkout_before_customer_details'); ?>
+              </div>
+
+              <div class='dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200'>
+
+                <?php do_action('woocommerce_checkout_billing'); ?>
+
+                <?php do_action('woocommerce_checkout_shipping'); ?>
+              </div>
+
+              <?php do_action('woocommerce_checkout_after_customer_details'); ?>
+
+            <?php endif; ?>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="checkout-summary-section dsn:sm:p-10 dsn:sm:rounded dsn:sm:border dsn:sm:border-gray-200 dsn:sm:w-1/3">
+            <div class="checkout-summary-box">
+              <div id="order_review" class="woocommerce-checkout-review-order">
+                <?php
+                do_action('woocommerce_checkout_order_review'); ?>
+              </div>
+
+              <?php
+              do_action('woocommerce_checkout_after_order_review'); ?>
             </div>
-        </div>
-
-        <div class="dsn:flex dsn:flex-col dsn:gap-8 dsn:mb-12 dsn:pt-5 checkout-layout">
-            <!-- Checkout Form -->
-            <div class="dsn:flex-1 checkout-form-section">
-                <?php if ($checkout->get_checkout_fields()) : ?>
-                    <?php do_action('woocommerce_checkout_before_customer_details'); ?>
-
-                    <?php do_action('woocommerce_checkout_billing'); ?>
-
-                    <?php do_action('woocommerce_checkout_shipping'); ?>
-
-                    <?php do_action('woocommerce_checkout_after_customer_details'); ?>
-
-                <?php endif; ?>
-            </div>
-
-            <!-- Order Summary -->
-            <div class="dsn:w-full dsn:shrink-0 checkout-summary-section">
-                <div class="dsn:border dsn:rounded-lg dsn:p-6 checkout-summary-box">
-                    <div id="order_review" class="woocommerce-checkout-review-order">
-                        <?php do_action('woocommerce_checkout_order_review'); ?>
-                    </div>
-
-                    <?php do_action('woocommerce_checkout_after_order_review'); ?>
-                </div>
-            </div>
+          </div>
         </div>
   </form>
 </div>
