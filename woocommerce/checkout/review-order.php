@@ -20,16 +20,17 @@ defined('ABSPATH') || exit;
 global $dssSiteLanguage;
 ?>
 <div class="shop_table woocommerce-checkout-review-order-table">
-    <h3 class="dsn:text-xl dsn:font-semibold dsn:flex dsn:flex-wrap dsn:justify-between dsn:items-center dsn:mb-6 dsn:pb-4 dsn:border-b">
+    <h4 class="">
         <?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_summary_title; ?>
-        <?php $item_counter = WC()->cart->cart_contents_count; ?>
-        <span class="dsn:text-sm dsn:text-gray-600 dsn:font-normal">    
-            <?php 
-            if ($item_counter == 1) echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular; 
-            else echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural; 
-            ?>
-        </span>
-    </h3>
+    </h4>
+
+    <?php $item_counter = WC()->cart->cart_contents_count; ?>
+    <p class="dsn:text-sm dsn:text-gray-600 dsn:sm:py-4 dsn:sm:text-right">
+              <?php
+              if ($item_counter == 1) echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_singular;
+              else echo $item_counter . ' ' . dssLang($dssSiteLanguage)->woocommerce_cart->item_plural;
+              ?>
+    </p>
 
     <?php
     do_action('woocommerce_review_order_before_cart_contents');

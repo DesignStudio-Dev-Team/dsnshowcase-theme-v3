@@ -417,7 +417,6 @@
 
 .woocommerce-checkout #payment ul.payment_methods .payment_method_paypal label,
 .woocommerce-checkout #payment ul.payment_methods .payment_method_bacs label {
-  padding-left: 1.5rem;
   background: url("../../images/icon-paypal.svg") left center no-repeat;
   background-size: contain;
 }
@@ -432,7 +431,6 @@
 }
 
 .woocommerce-checkout #payment ul.payment_methods .payment_method_bacs label {
-  padding-left: 2.5rem;
   background: url("../../images/icon-credit-card.svg") left center no-repeat;
   background-size: contain;
 }
