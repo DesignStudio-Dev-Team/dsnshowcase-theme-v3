@@ -30,15 +30,13 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 global $dssSiteLanguage;
 ?>
-
-<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
-
-    <div class="dsn:container dsn:mx-auto dsn:px-4">
+<div class='dsn:container dsn:mx-auto dsn:px-4'>
+  <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
         <!-- Page Header -->
         <div class="dsn:py-6 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8">
             <h1><?php the_title() ?></h1>
             <div class="dsn:flex dsn:items-center dsn:gap-4">
-                <a class="dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:h-10 dsn:rounded dsn:transition-colors" 
+                <a class="dsn:primary-site-background dsn:text-white dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:px-3 dsn:py-2 dsn:h-10 dsn:rounded dsn:transition-colors"
                    href="<?php echo wc_get_cart_url(); ?>"
                    title="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>"
                    aria-label="<?php echo esc_attr(dssLang($dssSiteLanguage)->woocommerce_cart->back_link); ?>">
@@ -81,6 +79,6 @@ global $dssSiteLanguage;
                 </div>
             </div>
         </div>
-    </div>
-</form>
+  </form>
+</div>
 <?php do_action('woocommerce_after_checkout_form', $checkout); ?>
