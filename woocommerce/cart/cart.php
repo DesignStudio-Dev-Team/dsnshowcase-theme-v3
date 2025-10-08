@@ -29,10 +29,10 @@ global $dssSiteLanguage;
       <h1><?php the_title() ?></h1>
     </div>
 
-    <div class="dsn:sm:flex dsn:gap-15 dsn:pt-10 dsn:mb-12">
-        <div class="cart-page-wrapper-left dsn:sm:w-2/3 ">
+    <div class="dsn:sm:flex dsn:gap-13 dsn:pt-10 dsn:mb-12">
+        <div class="cart-page-wrapper-left dsn:sm:flex dsn:sm:flex-col dsn:gap-13 dsn:sm:w-2/3">
           <!-- Cart Wrapper -->
-          <div class='dsn-cart-items-wrapper'>
+          <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
             <h4 class="dsn:pb-4"><?php esc_html_e('Cart Items', 'woocommerce'); ?></h4>
 
             <?php
@@ -275,7 +275,7 @@ global $dssSiteLanguage;
             do_action('woocommerce_before_cart_collaterals'); ?>
           </div>
           <!-- More Products Section -->
-          <div class="dsn-more-products-wrapper">
+          <div class="dsn-more-products-wrapper dsn:sm:rounded dsn:sm:border dsn:sm:p-10 dsn:sm:border-gray-200">
             <?php $arg = array(
               'post_type' => 'product',
               'order' => 'ASC',
@@ -348,7 +348,7 @@ global $dssSiteLanguage;
           </div>
         </div>
 
-        <div class="cart-page-wrapper-right dsn:sm:w-1/3">
+        <div class="cart-page-wrapper-right dsn:sm:p-10 dsn:sm:rounded dsn:sm:border dsn:sm:border-gray-200 dsn:sm:w-1/3">
           <!-- Order Summary -->
           <div class="dsn-order-summary-wrapper">
               <?php
