@@ -78,7 +78,8 @@
         "customer_notes_for_order": "Notes about your order, e.g. special notes for delivery.",
         "payment_shipping_btn": "Submit Order",
         "payment_method_title": "Payment Method",
-        "apply_coupon": "Apply"
+        "apply_coupon": "Apply",
+        "cart_items": "Cart Items",
     },
     "woocommerce_thank_you": {
         "title": "Thank You For Your Order!",
