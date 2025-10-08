@@ -33,7 +33,7 @@ global $dssSiteLanguage;
         <div class="cart-page-wrapper-left dsn:sm:flex dsn:sm:flex-col dsn:gap-13 dsn:sm:w-2/3">
           <!-- Cart Wrapper -->
           <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
-            <h4 class="dsn:pb-4"><?php esc_html_e('Cart Items', 'woocommerce'); ?></h4>
+            <h4 class="dsn:pb-4"><?php dssLang($dssSiteLanguage)->woocommerce_cart->cart_items ?></h4>
 
             <?php
             $item_counter = WC()->cart->cart_contents_count; ?>

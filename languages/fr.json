@@ -78,7 +78,8 @@
         "customer_notes_for_order": "Remarques concernant votre commande, par ex. notes spéciales pour la livraison.",
         "payment_shipping_btn": "Soumettre la commande",
         "payment_method_title": "Mode de Paiement",
-        "apply_coupon": "Appliquer"
+        "apply_coupon": "Appliquer",
+        "cart_items": "Articles du Panier"
     },
     "woocommerce_thank_you": {
         "title": "Nous vous remercions de votre commande!",
