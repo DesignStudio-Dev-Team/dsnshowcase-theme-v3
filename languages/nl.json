@@ -79,7 +79,7 @@
         "payment_shipping_btn": "Bestelling Indienen",
         "payment_method_title": "Betaalmethode",
         "apply_coupon": "Toepassen",
-        "cart_items" : "Winkelwagen Artikelen",
+        "cart_items" : "Winkelwagen Artikelen"
     },
     "woocommerce_thank_you": {
         "title": "Bedankt Voor Je Bestelling!",
