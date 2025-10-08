@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.45",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.45",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.45/dsnshowcase.zip",
+  "version": "v3.5.46",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.46",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.46/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-10-08",
   "sections": {
-    "changelog": "Merge pull request #132 from DesignStudio-Dev-Team/ui-improvements--cart-and-checkout-page-templates-fix\n\nStyle Improvements :: Cart & Checkout Page"
+    "changelog": "Merge pull request #133 from DesignStudio-Dev-Team/ui-improvements--cart-and-checkout-page-templates-fix\n\nStyle Improvements :: Cart & Checkout Page"
   }
 }
