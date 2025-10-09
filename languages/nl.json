@@ -75,6 +75,7 @@
         "country": "Land",
         "shipping_different_question": "Verschilt het verzendadres van de factuur?",
         "shipping_notes": "Verzendnotities",
+        "shipping_time": "Levertijd (maximaal 5 werkdagen)",
         "customer_notes_for_order": "Opmerkingen over je bestelling, bijv. speciale notities voor levering.",
         "payment_shipping_btn": "Bestelling Indienen",
         "payment_method_title": "Betaalmethode",
