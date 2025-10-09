@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.48",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.48",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.48/dsnshowcase.zip",
+  "version": "v3.5.49",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.49",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.49/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-10-09",
   "sections": {
-    "changelog": "Merge pull request #136 from DesignStudio-Dev-Team/revert-unintended-change-to-wordpress-default-html-fix\n\nRevert Unintended Change to WordPress Default HTML Behavior - Fix"
+    "changelog": "Merge pull request #138 from DesignStudio-Dev-Team/add-shipping-time-in-cart-totals-fix\n\nAdd shipping time in cart totals - Fix"
   }
 }
