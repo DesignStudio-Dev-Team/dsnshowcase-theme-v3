@@ -264,40 +264,40 @@ function dss_toggle_admin_bar() {
     if (current_user_can('administrator')) {
         ?>
         <style>
-            /* Toggle is hidden by default (desktop). Mobile-specific tweaks below */
-            .dss-toggle-admin-bar { display: none; }
+          /* Toggle is hidden by default (desktop). Mobile-specific tweaks below */
+          .dss-toggle-admin-bar { display: none; }
 
-            @media screen and (max-width: 768px) {
-                html { margin-top: 0 !important; }
-                #wpadminbar {
-                    transform: translateY(-100%);
-                    transition: all 0.3s ease-in-out !important;
-                    opacity: 0;
-                    z-index: 999;
-                }
-                #wpadminbar.show { transform: translateY(0); opacity: 1; }
-
-                .dss-toggle-admin-bar {
-                    position: fixed;
-                    bottom: 32px;
-                    right: 32px;
-                    background-color: #0e0e0e;
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                    z-index: 999999;
-                }
-                .dss-toggle-admin-bar svg { transition: transform 0.3s ease, fill 0.3s ease; }
-                .dss-toggle-admin-bar:hover { background-color: #000; transform: scale(1.1); }
-                .dss-toggle-admin-bar svg { width: 16px; height: 16px; fill: #fff; }
-                body.admin-bar-visible { margin-top: 46px !important; }
+          @media screen and (max-width: 768px) {
+            html { margin-top: 0 !important; }
+            #wpadminbar {
+              transform: translateY(-100%);
+              transition: all 0.3s ease-in-out !important;
+              opacity: 0;
+              z-index: 999;
             }
+            #wpadminbar.show { transform: translateY(0); opacity: 1; }
+
+            .dss-toggle-admin-bar {
+              position: fixed;
+              bottom: 0px;
+              right: 32px;
+              background-color: #0e0e0e;
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s ease;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+              z-index: 999999;
+            }
+            .dss-toggle-admin-bar svg { transition: transform 0.3s ease, fill 0.3s ease; }
+            .dss-toggle-admin-bar:hover { background-color: #000; transform: scale(1.1); }
+            .dss-toggle-admin-bar svg { width: 16px; height: 16px; fill: #fff; }
+            body.admin-bar-visible { margin-top: 46px !important; }
+          }
         </style>
         <div class="dss-toggle-admin-bar" role="button" aria-label="Back to top">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -305,27 +305,27 @@ function dss_toggle_admin_bar() {
             </svg>
         </div>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toggleButton = document.querySelector('.dss-toggle-admin-bar');
-                const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+          document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.querySelector('.dss-toggle-admin-bar');
+            const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
-                function updateVisibility() {
-                    if (!toggleButton) return;
-                    toggleButton.style.display = isMobile() ? 'flex' : 'none';
-                }
+            function updateVisibility() {
+              if (!toggleButton) return;
+              toggleButton.style.display = isMobile() ? 'flex' : 'none';
+            }
 
-                updateVisibility();
-                window.addEventListener('resize', updateVisibility);
+            updateVisibility();
+            window.addEventListener('resize', updateVisibility);
 
-                if (toggleButton) {
-                    toggleButton.addEventListener('click', function(e) {
-                        if (!isMobile()) return;
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    });
-                }
-            });
-        </script>
+            if (toggleButton) {
+              toggleButton.addEventListener('click', function(e) {
+                if (!isMobile()) return;
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+            }
+          });
+      </script>
         <?php
     }
 }
