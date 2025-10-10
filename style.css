@@ -27,3 +27,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     background:#fff;
     border: 2px solid var(--dealerColor);
 }
+
+.woocommerce-page .sidebar {
+    display:none;
+}
