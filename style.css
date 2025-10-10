@@ -28,6 +28,6 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     border: 2px solid var(--dealerColor);
 }
 
-.woocommerce-page .sidebar {
-    display:none;
+.woocommerce-page #sidebar {
+    display:none !important;
 }
