@@ -13,6 +13,18 @@ require DSN_THEME_DIR . '/inc/other-functions.php';
 require DSN_THEME_DIR . '/inc/wp-rocket-compatibility.php';
 require DSN_THEME_DIR . '/inc/woocommerce.php';
 
+/**
+ * Enqueue Font Awesome for theme icons (only on front-end).
+ * Define DSN_DISABLE_FONT_AWESOME to true to skip loading if another plugin or theme provides it.
+ */
+if (!defined('DSN_DISABLE_FONT_AWESOME') || DSN_DISABLE_FONT_AWESOME !== true) {
+    add_action('wp_enqueue_scripts', function() {
+        // Use Font Awesome 5 (free) from CDN. Change version if you use a kit or different version.
+        wp_enqueue_style('dsn-fontawesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css', array(), '5.15.4');
+    }, 20);
+}
+
+
 // Custom debug logger for theme
 function dsn_theme_debug_log($message) {
     $log_file = get_template_directory() . '/debug.log';

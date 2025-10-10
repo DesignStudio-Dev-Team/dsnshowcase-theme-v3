@@ -217,7 +217,7 @@ class DSN_Walker_Nav_Menu extends Walker_Nav_Menu {
 
             if( in_array('menu-item-has-children', $classes) ){
                 if( $depth == 0 ) {
-                    $item_output .= '<i class="fa fa-bolt" aria-hidden="true"></i>';
+                    $item_output .= '<i class="fa fa-chevron-down" style="padding:0 10px" aria-hidden="true"></i>';
                 }
             }
 
