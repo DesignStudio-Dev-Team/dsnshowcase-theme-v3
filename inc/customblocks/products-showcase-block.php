@@ -33,27 +33,38 @@ foreach($set_of_products as $category => $value ) {
   <div class="slider product-slider-for">
     <?php 
     $AllProducts = array();
-    $Product_Showcase_all_products = array();
+    $product_showcase_all_products = array();
     if ($set_of_products) {
 	foreach($set_of_products as $all_category => $value ) { 
         $AllProducts[] = $value['products'];
     }
 }
 $get_all_products = call_user_func_array ('array_merge', $AllProducts);
-$get_all_products = array_values($get_all_products);
-foreach ( $get_all_products as $product) {
-    if ( ! in_array($product, $Product_Showcase_all_products)) {
-        $Product_Showcase_all_products[] = $product;
-    }
-}
-//print_r($Product_Showcase_all_products );
 ?> 
     <div class="all-products dsn:w-full" data-slide="0">
         <?php 
-        foreach ($Product_Showcase_all_products as $post):
-                    setup_postdata($post); 
+        // Build unique list of products for the "All" tab
+        $product_showcase_all_products = array();
+        if (!empty($get_all_products)) {
+            $get_all_products = array_values($get_all_products);
+            foreach ($get_all_products as $p) {
+                if (!in_array($p, $product_showcase_all_products, true)) {
+                    $product_showcase_all_products[] = $p;
+                }
+            }
+        }
+
+        foreach ($product_showcase_all_products as $post):
+                    setup_postdata($post);
                     $postID = $post->ID;
-                    $product = wc_get_product($postID); 
+                    $product = wc_get_product($postID);
+                    // Determine the product's primary category name to display per product in the All tab
+                    $prod_cat_name = '';
+                    $terms = get_the_terms($postID, 'product_cat');
+                    if ($terms && !is_wp_error($terms)) {
+                        // Prefer the first non-empty term name
+                        $prod_cat_name = $terms[0]->name;
+                    }
                     ?>
                     <div class="dsn:w-full dsn:mx-3 dsn:sm:mx-2 dsn:lg:mx-4 dsn:mb-4 dsn:relative product-box dsn:shadow-lg">
                         <a class="product-inner dsn:bg-white dsn:p-6 dsn:block" href="<?php echo get_permalink($postID); ?>">
@@ -64,7 +75,7 @@ foreach ( $get_all_products as $product) {
                                     <?php echo wc_placeholder_img(); ?>
                                 <?php endif; ?>
                             </div>
-                            <p class="dsn:text-black dsn:mb-0 dsn:uppercase dsn:text-sm product-category dsn:my-4"><?php echo $value['category_name']; ?></p>
+                            <p class="dsn:text-black dsn:mb-0 dsn:uppercase dsn:text-sm product-category dsn:my-4"><?php echo esc_html($prod_cat_name); ?></p>
                             <h3 class="dsn:text-left dsn:text-white product-title"><?php echo get_the_title($postID); ?></h3>
                         </a>
                        
