@@ -31,3 +31,8 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 .woocommerce-page #sidebar {
     display:none !important;
 }
+
+.woocommerce div.product {
+    min-height:850px;
+    display:block;
+}
