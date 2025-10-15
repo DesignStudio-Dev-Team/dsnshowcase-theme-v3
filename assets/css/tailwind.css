@@ -15,11 +15,7 @@
         max-width: none;
     }
 
-    @media (width >=100%) {
-        max-width: 100%;
-    }
-
-    @media (width >=100%) {
+    @media (width < 1200px) {
         max-width: 100%;
     }
 
@@ -303,7 +299,7 @@
     }
     
 
-    @screen lg {
+    @layer lg {
 
         .gform_wrapper input[type=color],
         .gform_wrapper input[type=date],

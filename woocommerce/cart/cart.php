@@ -30,7 +30,7 @@ global $dssSiteLanguage;
     </div>
 
     <div class="dsn:sm:flex dsn:gap-13 dsn:pt-10 dsn:mb-12">
-        <div class="cart-page-wrapper-left dsn:sm:flex dsn:sm:flex-col dsn:gap-13 dsn:sm:w-2/3">
+        <div class="cart-page-wrapper-left dsn:md:flex dsn:md:flex-col dsn:gap-13 dsn:md:w-2/3">
           <!-- Cart Wrapper -->
           <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
             <h4 class="dsn:pb-4"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
@@ -348,7 +348,7 @@ global $dssSiteLanguage;
           </div>
         </div>
 
-        <div class="cart-page-wrapper-right dsn:sm:p-10 dsn:sm:rounded dsn:sm:border dsn:sm:border-gray-200 dsn:sm:w-1/3">
+        <div class="cart-page-wrapper-right dsn:md:p-10 dsn:md:rounded dsn:md:border dsn:md:border-gray-200 dsn:md:w-1/3">
           <!-- Order Summary -->
           <div class="dsn-order-summary-wrapper">
               <?php
