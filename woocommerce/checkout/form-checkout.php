@@ -69,9 +69,9 @@ global $dssSiteLanguage;
         class="checkout woocommerce-checkout"
         action='<?php
         echo esc_url(wc_get_checkout_url()); ?>' enctype='multipart/form-data'>
-        <div class='dsn:sm:flex dsn:gap-13 dsn:pt-10 dsn:mb-12 checkout-layout'>
+        <div class='dsn:md:flex dsn:gap-13 dsn:pt-10 dsn:mb-12 checkout-layout'>
           <!-- Checkout Form -->
-          <div class="dsn:sm:flex dsn:sm:flex-col dsn:gap-13 dsn:sm:w-2/3">
+          <div class="dsn:md:flex dsn:md:flex-col dsn:gap-13 dsn:md:w-1/2 dsn:lg:w-2/3">
             <?php if ($checkout->get_checkout_fields()) : ?>
               <div class="dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
                 <?php do_action('woocommerce_checkout_before_customer_details'); ?>
@@ -90,7 +90,7 @@ global $dssSiteLanguage;
           </div>
 
           <!-- Order Summary -->
-          <div class="checkout-summary-section dsn:sm:p-10 dsn:sm:rounded dsn:sm:border dsn:sm:border-gray-200 dsn:sm:w-1/3">
+          <div class="checkout-summary-section dsn:md:p-10 dsn:md:rounded dsn:md:border dsn:md:border-gray-200 dsn:md:w-1/2 dsn:lg:w-1/3">
             <div class="checkout-summary-box">
               <div id="order_review" class="woocommerce-checkout-review-order">
                 <?php
