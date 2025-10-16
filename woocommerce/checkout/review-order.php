@@ -92,7 +92,7 @@ global $dssSiteLanguage;
                     <div class="dsn:flex dsn:flex-col dsn:gap-2 dsn:text-right">
                         <?php foreach ( $available_methods as $method ) : ?>
                             <label class="dsn:flex dsn:items-center dsn:gap-2 dsn:cursor-pointer dsn:justify-end">
-                                <span><?php echo esc_html( $method->get_label() ); ?></span>
+                                <span><?php echo wp_kses_post( wc_cart_totals_shipping_method_label( $method ) ); ?></span>
                                 <input type="radio" name="shipping_method[<?php echo esc_attr( $i ); ?>]" data-index="<?php echo esc_attr( $i ); ?>" id="shipping_method_<?php echo esc_attr( $i ); ?>_<?php echo esc_attr( sanitize_title( $method->id ) ); ?>" value="<?php echo esc_attr( $method->id ); ?>" class="dsn:w-4 dsn:h-4" <?php checked( $method->id, $chosen_method ); ?>>
                             </label>
                         <?php endforeach; ?>
@@ -102,7 +102,7 @@ global $dssSiteLanguage;
                 <?php $method = current( $available_methods ); ?>
                 <div class="dsn:flex dsn:justify-between dsn:text-base dsn:mb-3 dsn:py-2">
                     <div class="dsn:font-medium">Shipping</div>
-                    <div><?php echo esc_html( $method->get_label() ); ?></div>
+                    <div><?php echo wp_kses_post( wc_cart_totals_shipping_method_label( $method ) ); ?></div>
                 </div>
                 <input type="hidden" name="shipping_method[<?php echo esc_attr( $i ); ?>]" data-index="<?php echo esc_attr( $i ); ?>" value="<?php echo esc_attr( $method->id ); ?>">
             <?php endif; ?>
