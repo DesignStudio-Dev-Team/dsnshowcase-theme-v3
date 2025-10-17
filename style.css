@@ -4,7 +4,7 @@ Theme URI: https://DesignStudio.com
 Author: DesignStudio Network Inc.
 Author URI: https://designstudio.com/
 Description: Next Generation WordPress Theme for complex data syndication 
-Version: v3.5.25
+Version: v3.5.52
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: dsnshowcase
@@ -26,4 +26,13 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
     color: var(--dealerColor);
     background:#fff;
     border: 2px solid var(--dealerColor);
+}
+
+.woocommerce-page #sidebar {
+    display:none !important;
+}
+
+.woocommerce div.product {
+    min-height:850px;
+    display:block;
 }

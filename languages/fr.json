@@ -12,6 +12,13 @@
         "site_by": "Site par",
         "get_directions": "Obtenir des directions"
     },
+    "global_site_search": {
+        "search_title": "Rechercher sur notre site web",
+        "option_all": "Tout",
+        "option_products": "Produits",
+        "option_blog": "Blog",
+        "search_placeholder": "Chercher..."
+    },
     "search": {
         "results": "résultats de recherche",
         "view_link": "Voir",
@@ -42,7 +49,9 @@
         "sort_by_name_A_to_Z": "Nom (A-Z)",
         "sort_by_name_Z_to_A": "Nom (Z-A)",
         "back_to_top": "Retour au sommet",
-        "clear_filters_link_text": "Dégager"
+        "clear_filters_link_text": "Dégager",
+        "no_products_found": "Aucun produit trouvé",
+        "go_to_page": "Aller à la page"
     },
     "woocommerce_cart": {
         "back_link": "RETOUR",
@@ -54,19 +63,24 @@
         "order_sub_total": "Sous-total",
         "order_total": "Total",
         "coupon_discounts": "Remise",
-
         "coupon_code": "Code promo",
         "coupon_placeholder": "promo",
         "checkout_btn": "VÉRIFIER",
-
+        "reserve_button": "Réserver",
+        "add_to_cart_btn": "Ajouter au panier",
+        "info_button": "Plus d'informations",
         "payment_details": "Détails de paiement",
         "billing_details":"Détails de la facturation",
         "street_address": "Adresse de rue",
         "country": "Pays",
         "shipping_different_question": "Adresse de livraison différente de la facturation?",
         "shipping_notes": "Notes d'expédition",
+        "shipping_time": "Délai de livraison (max 5 jours ouvrés)",
         "customer_notes_for_order": "Remarques concernant votre commande, par ex. notes spéciales pour la livraison.",
-        "payment_shipping_btn": "Soumettre la commande"
+        "payment_shipping_btn": "Soumettre la commande",
+        "payment_method_title": "Mode de Paiement",
+        "apply_coupon": "Appliquer",
+        "cart_items": "Articles du Panier"
     },
     "woocommerce_thank_you": {
         "title": "Nous vous remercions de votre commande!",

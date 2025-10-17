@@ -24,7 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $dssSiteLanguage;
 ?>
 
-<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward">
-    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward dsn:w-full dsn:py-4 dsn:text-center dsn:rounded dsn:text-white dsn:primary-site-background dsn:hover:opacity-90 dsn:transition-opacity dsn:text-xl dsn:tracking-wide">
 	<?php echo dssLang($dssSiteLanguage)->woocommerce_cart->checkout_btn; ?>
 </a>

@@ -12,6 +12,13 @@
         "site_by": "Website door",
         "get_directions": "Routebeschrijving"
     },
+    "global_site_search": {
+        "search_title": "Zoek op onze website",
+        "option_all": "Alles",
+        "option_products": "Producten",
+        "option_blog": "Blog",
+        "search_placeholder": "Zoeken..."
+    },
     "search": {
         "results": "zoekresultaten",
         "view_link": "Bekijk",
@@ -42,7 +49,9 @@
         "sort_by_name_A_to_Z": "Naam (A-Z)",
         "sort_by_name_Z_to_A": "Naam (Z-A)",
         "back_to_top": "Terug naar Boven",
-        "clear_filters_link_text": "Wis"
+        "clear_filters_link_text": "Wis",
+        "no_products_found" : "Geen producten gevonden",
+        "go_to_page": "Ga naar pagina"
     },
     "woocommerce_cart": {
         "back_link": "TERUG",
@@ -57,15 +66,21 @@
         "coupon_code": "Couponcode",
         "coupon_placeholder": "coupon",
         "checkout_btn": "AFREKENEN",
-
+        "add_to_cart_btn": "In Winkelwagen",
+        "info_button": "Meer Informatie",
+        "reserve_button": "Reserveren",
         "payment_details": "Betalingsgegevens",
         "billing_details": "Factuurgegevens",
         "street_address": "Straatadres",
         "country": "Land",
         "shipping_different_question": "Verschilt het verzendadres van de factuur?",
         "shipping_notes": "Verzendnotities",
+        "shipping_time": "Levertijd (maximaal 5 werkdagen)",
         "customer_notes_for_order": "Opmerkingen over je bestelling, bijv. speciale notities voor levering.",
-        "payment_shipping_btn": "Bestelling Indienen"
+        "payment_shipping_btn": "Bestelling Indienen",
+        "payment_method_title": "Betaalmethode",
+        "apply_coupon": "Toepassen",
+        "cart_items" : "Winkelwagen Artikelen"
     },
     "woocommerce_thank_you": {
         "title": "Bedankt Voor Je Bestelling!",

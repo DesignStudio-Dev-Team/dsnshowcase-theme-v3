@@ -20,21 +20,21 @@ defined( 'ABSPATH' ) || exit;
 
 global $dssSiteLanguage;
 ?>
-<div class="woocommerce-billing-fields">
+<div class="woocommerce-billing-fields dsn:pt-10 dsn:pb-6">
 
     <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
-        <h3 class="mt-12 mb-6"><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
+        <h4><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h4>
 
     <?php else : ?>
 
-        <h3 class="mt-12 mb-6"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->billing_details; ?></h3>
+        <h4><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->billing_details; ?></h4>
 
     <?php endif; ?>
 
 	<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
 
-	<div class="woocommerce-billing-fields__field-wrapper">
+	<div class="woocommerce-billing-fields__field-wrapper dsn:pt-5">
 		<?php
 		$fields = $checkout->get_checkout_fields( 'billing' );
 

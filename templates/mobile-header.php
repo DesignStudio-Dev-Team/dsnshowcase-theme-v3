@@ -2,7 +2,7 @@
 	<div class="dsn:flex dsn:justify-between dsn:px-4 dsn:py-4 dsn:container dsn:mx-auto">
 		<div class="dsn-mobile-logo dsn:w-1/2"><a class="dsn:block dsn:relative dsn:text-center" href="<?php
 		echo esc_url(home_url('/'));
-		?>"><img class="dsn:w-48" src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> <span
+		?>"><img class="dsn:w-48" src="<?php echo isset($header_logo['url']) ? $header_logo['url'] : ''; ?>" alt="<?php bloginfo('name'); ?>" /> <span
 					class="dsn:hidden"> <?php bloginfo('name'); ?></span></a></div>
 		<div class="dsn-mobile-icons dsn:flex dsn:items-center dsn:justify-end dsn:gap-3 dsn:w-1/2">
 			<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
@@ -55,7 +55,7 @@
 				class="dsn:block"></span></a>
 		<div class="mobile-nav-right dsn:relative dsn:bg-white dsn:w-10/12 dsn:h-full dsn:float-right dsn:overflow-auto">
 			<div class="nav-open-logo dsn:block dsn:w-1/2 dsn:mx-auto dsn:py-4"><img class="dsn:w-full dsn:mx-auto"
-					src="<?php echo $header_logo['url']; ?>" alt="<?php bloginfo('name'); ?>" /> </div>
+					src="<?php echo isset($header_logo['url']) ? $header_logo['url'] : ''; ?>" alt="<?php bloginfo('name'); ?>" /> </div>
 			<div
 				class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:px-4 dsn:py-4 dsn:gap-3 dsn:border-1">
 

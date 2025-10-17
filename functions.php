@@ -1,8 +1,29 @@
 <?php
-require get_template_directory() . '/inc/acfs.php';
-require get_template_directory() . '/inc/nav-items.php';
-require get_template_directory() . '/inc/other-functions.php';
-require get_template_directory() . '/inc/woocommerce.php';
+/**
+ * Theme Constants
+ * Define paths following WordPress standards
+ */
+define( 'DSN_THEME_DIR', get_template_directory() );
+define( 'DSN_THEME_URI', get_template_directory_uri() );
+define( 'DSN_THEME_PATH', str_replace( ABSPATH, '/', DSN_THEME_DIR ) );
+
+require DSN_THEME_DIR . '/inc/acfs.php';
+require DSN_THEME_DIR . '/inc/nav-items.php';
+require DSN_THEME_DIR . '/inc/other-functions.php';
+require DSN_THEME_DIR . '/inc/wp-rocket-compatibility.php';
+require DSN_THEME_DIR . '/inc/woocommerce.php';
+
+/**
+ * Enqueue Font Awesome for theme icons (only on front-end).
+ * Define DSN_DISABLE_FONT_AWESOME to true to skip loading if another plugin or theme provides it.
+ */
+if (!defined('DSN_DISABLE_FONT_AWESOME') || DSN_DISABLE_FONT_AWESOME !== true) {
+    add_action('wp_enqueue_scripts', function() {
+        // Use Font Awesome 5 (free) from CDN. Change version if you use a kit or different version.
+        wp_enqueue_style('dsn-fontawesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css', array(), '5.15.4');
+    }, 20);
+}
+
 
 // Custom debug logger for theme
 function dsn_theme_debug_log($message) {
@@ -85,7 +106,7 @@ function dsn_wp_nav_menu_objects( $items, $args ) {
 }
 
 function enqueue_slick_slider_assets() {
-    if (is_page() || is_product()) { // Load on pages and single product pages
+    if (is_page() || is_product() || is_cart()) {
         // Slick Slider CSS
         wp_enqueue_style('slick-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
         wp_enqueue_style('slick-theme', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
@@ -252,105 +273,105 @@ function dsn_custom_theme_update($transient) {
 
 
 function dss_toggle_admin_bar() {
-    if (current_user_can('administrator')) {
-        ?>
-        <style>
-            html {
-                margin-top: 0 !important;
-            }
-            #wpadminbar {
-                transform: translateY(-100%);
-                transition: all 0.3s ease-in-out !important;
-                opacity: 0;
-            }
-            #wpadminbar.show {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            .dss-toggle-admin-bar {
-                position: fixed;
-                top: 0px;
-                right: 0px;
-                z-index: 99999;
-                background-color: #0e0e0e;
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                z-index: 999999999999999;
-            }
-            #wpadminbar {
-                z-index:  999;
-            }
-            .dss-toggle-admin-bar svg {
-                transition: transform 0.3s ease, fill 0.3s ease;
-            }
+  if (current_user_can('administrator')) {
+    ?>
+    <style>
+      html {
+        margin-top: 0 !important;
+      }
+      #wpadminbar {
+        transform: translateY(-100%);
+        transition: all 0.3s ease-in-out !important;
+        opacity: 0;
+      }
+      #wpadminbar.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .dss-toggle-admin-bar {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        z-index: 99999;
+        background-color: #0e0e0e;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        z-index: 999999999999999;
+      }
+      #wpadminbar {
+        z-index:  999;
+      }
+      .dss-toggle-admin-bar svg {
+        transition: transform 0.3s ease, fill 0.3s ease;
+      }
 
-            .dss-toggle-admin-bar:hover {
-                background-color: #000;
-                transform: scale(1.1);
-            }
-            .dss-toggle-admin-bar {
-                transform: rotate(180deg);
-            }
-            .dss-toggle-admin-bar.active {
-                transform: rotate(0deg);
-            }
-            .dss-toggle-admin-bar svg {
-                width: 16px;
-                height: 16px;
-                fill: #fff;
-            }
-            body.admin-bar-visible {
-                margin-top: 32px !important;
-            }
-            @media screen and (max-width: 782px) {
-                body.admin-bar-visible {
-                    margin-top: 46px !important;
-                }
-            }
-        </style>
-        <div class="dss-toggle-admin-bar">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
-            </svg>
-        </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toggleButton = document.querySelector('.dss-toggle-admin-bar');
-                const adminBar = document.getElementById('wpadminbar');
-                const body = document.body;
-                let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+      .dss-toggle-admin-bar:hover {
+        background-color: #000;
+        transform: scale(1.1);
+      }
+      .dss-toggle-admin-bar {
+        transform: rotate(180deg);
+      }
+      .dss-toggle-admin-bar.active {
+        transform: rotate(0deg);
+      }
+      .dss-toggle-admin-bar svg {
+        width: 16px;
+        height: 16px;
+        fill: #fff;
+      }
+      body.admin-bar-visible {
+        margin-top: 32px !important;
+      }
+      @media screen and (max-width: 782px) {
+        body.admin-bar-visible {
+          margin-top: 46px !important;
+        }
+      }
+    </style>
+    <div class="dss-toggle-admin-bar">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+        <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
+      </svg>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.querySelector('.dss-toggle-admin-bar');
+        const adminBar = document.getElementById('wpadminbar');
+        const body = document.body;
+        let isVisible = localStorage.getItem('adminBarVisible') === 'true';
 
-                function updateAdminBarState(visible) {
-                    if (visible) {
-                        adminBar.classList.add('show');
-                        toggleButton.classList.add('active');
-                        body.classList.add('admin-bar-visible');
-                    } else {
-                        adminBar.classList.remove('show');
-                        toggleButton.classList.remove('active');
-                        body.classList.remove('admin-bar-visible');
-                    }
-                }
+        function updateAdminBarState(visible) {
+          if (visible) {
+            adminBar.classList.add('show');
+            toggleButton.classList.add('active');
+            body.classList.add('admin-bar-visible');
+          } else {
+            adminBar.classList.remove('show');
+            toggleButton.classList.remove('active');
+            body.classList.remove('admin-bar-visible');
+          }
+        }
 
-                // Initialize state
-                updateAdminBarState(isVisible);
+        // Initialize state
+        updateAdminBarState(isVisible);
 
-                toggleButton.addEventListener('click', function() {
-                    isVisible = !isVisible;
-                    updateAdminBarState(isVisible);
-                    localStorage.setItem('adminBarVisible', isVisible);
-                });
-            });
-        </script>
-        <?php
-    }
+        toggleButton.addEventListener('click', function() {
+          isVisible = !isVisible;
+          updateAdminBarState(isVisible);
+          localStorage.setItem('adminBarVisible', isVisible);
+        });
+      });
+    </script>
+    <?php
+  }
 }
 add_action('wp_head', 'dss_toggle_admin_bar');
 

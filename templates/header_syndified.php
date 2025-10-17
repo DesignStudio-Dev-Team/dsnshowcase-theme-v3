@@ -1,7 +1,7 @@
 <?php
 
 /***
- Header 01 
+ Header Syndified 
  ****/
 
 $header_logo = '';
@@ -23,119 +23,170 @@ global $dssSiteLanguage;
 
 ?>
 
+ <!-- Create New Main Header with Syndified Logo and a Hamburger Menu -->
+        <div class="mainSHeader md:dsn:container dsn:w-full dsn:mx-auto dsn:left-0 dsn:right-0 dsn:px-5 dsn:py-10 dsn:relative dsn:flex dsn:items-center dsn:justify-between">
+            <a href="https://syndified.com/" class="custom-logo-link dsn:z-30" rel="home" title="Syndified" itemscope="">
+                <img alt="Homelife Syndified" class="pre-lazyload lazyloaded" style="max-width: 200px;" src="/wp-content/uploads/2024/08/syndified-logo-horizontal-color-no-tag.png" data-lazy-src="/wp-content/uploads/2024/08/syndified-logo-horizontal-color-no-tag.png" data-was-processed="true">
+                <noscript><img alt="Homelife Syndified" class="pre-lazyload" style="max-width: 200px;" src="/wp-content/uploads/2024/08/syndified-logo-horizontal-color-no-tag.png" /></noscript></a>
+        
+                <div id="header-icons" class="dsn:flex dsn:items-center">
+                    <a href="#request-quote" class="button scroll-to-demo dsn:rounded dsn:bg-green-500 hover:dsn:bg-green-700 dsn:text-base dsn:text-white active:dsn:text-white dsn:py-2 dsn:px-5 hover:dsn:text-white">Request a Quote</a>
+                    <div class="sMenuToggle dsn:pl-4 dsn:z-50 dsn:text-4xl dsn:cursor-pointer">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-times dsn:hidden!"></i>
+                    </div>
+                </div>
+
+
+               
+        </div>
+		 <!-- Syndified Menu -->
+                <div class="sMenu dsn:h-screen dsn:z-40 dsn:shadow-lg dsn:flex dsn:flex-col dsn:bg-white dsn:w-96 dsn:top-0 dsn:right-0 dsn:absolute dsn:py-15 dsn:px-10">
+                   <div class="dsn:flex dsn:gap-4">
+					    <a href="https://syndified.com/" class="custom-logo-link dsn:z-50 dsn:pt-10" rel="home" title="Syndified" itemscope="">
+                            <img alt="Homelife Menu" class="pre-lazyload lazyloaded" style="max-width: 200px;" src="/wp-content/uploads/2024/08/syndified-logo-horizontal-color-no-tag.png" data-lazy-src="/wp-content/uploads/2024/08/syndified-logo-horizontal-color-no-tag.png" data-was-processed="true"><noscript>
+                                <img alt="Homelife Menu" class="pre-lazyload" style="max-width: 200px;" src="/wp-content/uploads/2024/08/syndified-logo-horizontal-color-no-tag.png" /></noscript></a><div class="sMenuToggle dsn:pl-10 dsn:z-50 dsn:text-4xl dsn:pt-10 dsn:cursor-pointer">
+                        <i class="fas fa-times dsn:hidden"></i>
+					</div> </div>
+                    
+
+                
+                            <?php
+                            wp_nav_menu(array(
+                                'menu' => 'Syndified Menu',
+                                'menu_class' => 'syndified-menu',
+                                'container' => 'nav',
+                                'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                'depth' => 0,
+                            ));
+                            ?>
+                        
+                </div>
+        <script>
+            jQuery(document).ready(function() {
+                //when click using jquery on the button .sMenuToggle it will toggle the class .hidden on the div .sMenu 
+                jQuery('.sMenuToggle').click(function() {
+                    jQuery('.sMenu').toggleClass('menu-active');
+                   //hide fa-bars and show fa-times
+                    jQuery('.sMenuToggle .fa-bars').toggleClass('hidden');
+                    jQuery('.sMenuToggle .fa-times').toggleClass('hidden');
+                    jQuery('body').toggleClass('menu-open');
+                });
+            });
+
+
+        </script>
+        <style>
+            #menu-syndified-menu {
+                margin-top:35px;
+            }
+            #menu-syndified-menu li {
+                margin-bottom: 25px;
+            }
+            #menu-syndified-menu li a {
+                color: #030300;
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 1.2;
+                -webkit-transition: .3s;
+                transition: .3s;
+                font-family: Raleway,sans-serif;
+            }
+            #menu-syndified-menu li a:hover {
+                color: #00b48c;
+            }
+            .sMenu.menu-active {
+                -webkit-transform: translateX(0);
+                -ms-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
+				display: block;
+            }
+            .sMenu {
+                -webkit-transform: translateX(100%);
+                -ms-transform: translateX(100%);
+                transform: translateX(100%);
+                -webkit-transition: .5s ease-in-out;
+                transition: .5s ease-in-out;
+                opacity:0.0;
+				z-index: 99;
+				display: none;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+            body.menu-open:before {
+                -webkit-transform: translateX(0);
+                -ms-transform: translateX(0);
+                transform: translateX(0);
+            }
+            body:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                -webkit-transform: translateX(-100%);
+                -ms-transform: translateX(-100%);
+                transform: translateX(-100%);
+                background-color: #334050;
+                opacity: .9;
+                z-index: 40;
+                -webkit-transition: .5s ease-in-out;
+                transition: .5s ease-in-out;
+            }
+            .sMenuToggle.active:before {
+                font-weight: 900;
+                font-family: 'Font Awesome\ 5 Free';
+                content: "\f00d";
+            }
+            .sMenuToggle.active i, .sMenuToggle.active img {
+                display: none;
+            }
+			.sMenu .sub-menu {
+			  display: none;
+			}
+			.sMenu li.menu-item-has-children {
+			position: relative;
+		}
+		.sMenu li.menu-item-has-children span {
+			position: absolute;
+		  top: 2px;
+		  right: 0;
+		  padding: 0 1em;
+		  cursor: pointer;
+		}
+		.sMenu li.menu-item-has-children .sub-menu {
+			padding-top: 1em;
+			padding-left: 1em;
+		}
+		.sMenu li.menu-item-has-children .sub-menu a {
+			  font-size: 18px !important;
+			  font-weight: 500 !important;
+			}
+			
+        </style>
+	<script>
+		jQuery(".sMenu li.menu-item-has-children").append('<span class="dashicons dashicons-arrow-right-alt2"></span>');
+	jQuery(".sMenu li.menu-item-has-children span").click(function(){
+//   jQuery('li.menu-item-has-children > .sub-menu').toggle();
+		//jQuery(this).next(".sub-menu").toggle();
+		jQuery(this).closest('.sMenu li.menu-item-has-children').children('.sub-menu').toggle();
+}); </script>
 <header
-    class="header1 dsn:bg-white dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-50 dsn:lg:block <?php if ($header_sticky == "1") {
-                                                                                        echo "dsn:sticky dsn:top-0 sticky-header";
+    class="header1 dsn:bg-white dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-20 dsn:lg:block <?php if ($header_sticky == "1") {
+               
+               echo "dsn:sticky dsn:top-0 sticky-header";
                                                                                     } else {
                                                                                         echo "dsn:relative";
                                                                                     } ?>">
-    <div class="dsn-logo dsn:w-auto dsn:mx-4 dsn:hidden">
-        <a class="dsn:block dsn:relative dsn:text-center" href="<?php
-                                                                echo esc_url(home_url('/'));
-                                                                ?>"><img class="dsn:w-14 dsn:object-contain dsn:object-left dsn:mx-auto dsn:p-2"
-                src="<?php echo ''; ?>" alt="<?php bloginfo('name'); ?>" /> <span
-                class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
-    </div>
-    <div
-        class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
-        <div class="util-left-nav dsn:w-4/12">
-            <?php wp_nav_menu(array(
-                'theme_location' => 'utility_left',
-                'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
-                'link_class' => "dsn:text-lg dsn:py-2 dsn:block",
-            )); ?>
-        </div>
-        <div class="dsn-logo dsn:w-4/12">
-            <a class="dsn:block dsn:relative dsn:text-center" href="<?php
-                                                                    echo esc_url(home_url('/'));
-                                                                    ?>"><img class="dsn:max-w-48 dsn:md:max-w-80 dsn:mx-auto" src="<?php echo isset($header_logo['url']) ? $header_logo['url'] : ''; ?>"
-                    alt="<?php bloginfo('name'); ?>" /> <span class="dsn:hidden"> <?php bloginfo('name'); ?></span></a>
-        </div>
-        <div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
-            <?php
-            // wp_nav_menu(array(
-            //     'theme_location' => 'utility_right',
-            //     'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-            // 	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
-            // )); 
-            ?>
-            <div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3 dsn:z-50">
-                <?php
-
-                if ($dssLanguageOptions && count($dssLanguageOptions) > 1) {
-
-                ?>
-                    <!-- start language -->
-                    <div id="dssLangagePickerGroupContainer" class="dsn:hidden dsn:md:block dsn:relative dsn:cursor-pointer dsn:z-50">
-                        <a id="dssLangagePickerIcon" class="dssLanguage dsn:text-white dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="dsn:h-6 dsn:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                            </svg>
-                            <span class="dsn:hidden">Language Picker</span>
-                        </a>
-
-                        <div id="dssLangagePickerContainer" style="display: none;" class="dsn:absolute dsn:-right-16 dsn:w-44 dsn:z-50">
-
-                            <svg class="dsn:w-5 dsn:h-5 dsn:m-auto dsn:-mt-0.5" style="fill: #fff; stroke: black;" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M236.77344,211.97656a23.75471,23.75471,0,0,1-20.79688,12.01563H40.02344a23.9925,23.9925,0,0,1-20.76563-36.02344L107.23437,35.97656h-.00781a24.00413,24.00413,0,0,1,41.54688,0l87.96875,151.99219A23.744,23.744,0,0,1,236.77344,211.97656Z" />
-                            </svg>
-
-                            <div class="dsn:z-20 dsn:-mt-2 dsn:py-2 dsn:px-3 dsn:bg-white dsn:border dsn:border-gray-100 dsn:rounded-lg dsn:shadow-sm dsn:inline-block dsn:w-full">
-                                <?php foreach ($dssLanguageOptions as $lang) { ?>
-                                    <a href="<?php echo $lang['url']; ?>">
-                                        <div class="dsn:flex dsn:m-2">
-                                            <div class="dssLanguageSvgContainer dsn:border dsn:border-gray-200 dsn:mt-1.5" style="width: 24px; height: 18px;">
-                                                <?php echo $lang['svg_flag_wp']; ?>
-                                            </div>
-                                            <div class="dsn:ml-2"><?php echo $lang['native_name']; ?></div>
-                                        </div>
-                                    </a>
-                                <?php } ?>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- end language -->
-                <?php } ?>
 
 
-                <a
-                    class="the-search-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]"><svg
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                        class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-                        <path class="dsn:stroke-current dsn:fill-current"
-                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                    </svg></a>
-                <a href="/my-account/"
-                    class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                        class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-                        <path
-                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                    </svg>
-                </a>
-                <!-- <a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
-					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-						<path
-							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-					</svg>
-					<span
-						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
-						 -->
-                <a class="cart-icon dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
-                    href="<?php echo wc_get_cart_url();?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                        class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-                        <path class="dsn:stroke-current dsn:fill-current"
-                            d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                    </svg><span
-                        class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
-
-
+        <div class="dsn:container dsn:pb-10 dsn:mx-auto">        
+            <?php the_field('header_msg', 'options'); ?>
             </div>
-        </div>
-
-    </div>
+    
     <div class="primary-nav dsn:bg-gray-100 dsn:block dsn:relative dsn:mx-auto dsn:z-40">
 
         <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
@@ -143,7 +194,7 @@ global $dssSiteLanguage;
             <?php wp_nav_menu(array(
                 'theme_location' => 'primary',
                 'menu_id' => 'dsn-primary-menu',
-                'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
+                'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-black dsn:w-full dsn:!my-0 dsn:!px-0',
                 'container' => "nav",
                 'container_class' => "dsn:rounded-md dsn:relative",
                 'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
@@ -365,9 +416,9 @@ global $dssSiteLanguage;
             font-weight: 600;
         }
 
-        nav>ul>li {
+        /* nav>ul>li {
             border-top: 1px solid var(--dealerColor);
-        }
+        } */
 
         nav>ul>li:hover,
         .mega-menu-inner {

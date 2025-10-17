@@ -15,11 +15,7 @@
         max-width: none;
     }
 
-    @media (width >=100%) {
-        max-width: 100%;
-    }
-
-    @media (width >=100%) {
+    @media (width < 1200px) {
         max-width: 100%;
     }
 
@@ -68,7 +64,7 @@
     }
     /* Headings */
     h1 {
-        @apply dsn:text-4xl dsn:md:text-6xl dsn:font-bold dsn:lg:mb-15 dsn:leading-tight;
+        @apply dsn:text-4xl dsn:md:text-6xl dsn:font-bold dsn:lg:mb-6 dsn:leading-tight;
     }
 
     h2 {
@@ -85,6 +81,11 @@
 
     h5 {
         @apply dsn:text-base dsn:md:text-2xl dsn:font-medium dsn:mb-2 dsn:leading-normal;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
     }
 
     /* Paragraphs */
@@ -121,7 +122,7 @@
     @layer md { 
         /* Headings */
     h1 {
-        @apply dsn:text-6xl dsn:font-bold dsn:mb-15 dsn:leading-tight;
+        @apply dsn:text-6xl dsn:font-bold dsn:mb-6 dsn:leading-tight;
     }
 
     h2 {
@@ -298,7 +299,7 @@
     }
     
 
-    @screen lg {
+    @layer lg {
 
         .gform_wrapper input[type=color],
         .gform_wrapper input[type=date],
@@ -368,3 +369,14 @@ p a:hover {
 .aligncenter {
     @apply dsn:mx-auto;
 }
+
+@layer utilities {
+
+    .dsn\:primary-site-background {
+      background: var(--dealerColor);
+    }
+
+    .dsn\:primary-site-background:hover {
+        opacity: 0.85;
+    }
+  }

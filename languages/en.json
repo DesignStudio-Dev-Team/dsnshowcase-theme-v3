@@ -12,6 +12,13 @@
         "site_by": "Site by",
         "get_directions": "Get Directions"
     },
+    "global_site_search": {
+        "search_title": "Search Our Website",
+        "option_all": "All",
+        "option_products": "Products",
+        "option_blog": "Blog",
+        "search_placeholder": "Search..."
+    },
     "search": {
         "results": "search results",
         "view_link": "View",
@@ -42,7 +49,9 @@
         "sort_by_name_A_to_Z": "Name (A-Z)",
         "sort_by_name_Z_to_A": "Name (Z-A)",
         "back_to_top": "Back to Top",
-        "clear_filters_link_text": "Clear"
+        "clear_filters_link_text": "Clear",
+        "no_products_found": "No products were found.",
+        "go_to_page": "Go to page"
     },
     "woocommerce_cart": {
         "back_link": "BACK",
@@ -57,15 +66,21 @@
         "coupon_code": "Coupon Code",
         "coupon_placeholder": "coupon",
         "checkout_btn": "CHECKOUT",
-
+        "reserve_button": "Reserve",
+        "add_to_cart_btn": "Add to Cart",
+        "info_button": "Get Info",
         "payment_details": "Payment Details",
         "billing_details":"Billing Details",
         "street_address": "Street Address",
         "country": "Country",
         "shipping_different_question":"Shipping Address Different From Billing?",
         "shipping_notes": "Shipping Notes",
+        "shipping_time": "Delivery time (maximum 5 working days)",
         "customer_notes_for_order": "Notes about your order, e.g. special notes for delivery.",
-        "payment_shipping_btn": "Submit Order"
+        "payment_shipping_btn": "Submit Order",
+        "payment_method_title": "Payment Method",
+        "apply_coupon": "Apply",
+        "cart_items": "Cart Items"
     },
     "woocommerce_thank_you": {
         "title": "Thank You For Your Order!",
