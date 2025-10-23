@@ -24,7 +24,7 @@ global $dssSiteLanguage;
 ?>
 
 <header
-    class="header1 dsn:bg-white dsn:py-4 dsn:mb-10 dsn:hidden dsn:z-50 dsn:lg:block <?php if ($header_sticky == "1") {
+    class="header1 dsn:bg-white dsn:hidden dsn:z-50 dsn:lg:block <?php if ($header_sticky == "1") {
                                                                                         echo "dsn:sticky dsn:top-0 sticky-header";
                                                                                     } else {
                                                                                         echo "dsn:relative";
@@ -39,12 +39,12 @@ global $dssSiteLanguage;
     <div
         class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
         <div class="util-left-nav dsn:w-4/12">
-            <?php if ( has_nav_menu( 'utility_left' ) ) { 
+            <?php if (has_nav_menu('utility_left')) {
                 wp_nav_menu(array(
-                'theme_location' => 'utility_left',
-                'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
-                'link_class' => "dsn:text-lg dsn:py-2 dsn:block",
-            )); 
+                    'theme_location' => 'utility_left',
+                    'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
+                    'link_class' => "dsn:text-lg dsn:py-2 dsn:block",
+                ));
             } ?>
         </div>
         <div class="dsn-logo dsn:w-4/12">
@@ -55,16 +55,16 @@ global $dssSiteLanguage;
         </div>
         <div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
             <?php
-			if ( has_nav_menu( 'utility_right' ) ) {
-				wp_nav_menu(array(
-                'theme_location' => 'utility_right',
-                'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-            	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
-            )); 
-			} else {
-				// No menu is assigned to the 'primary' location
-				echo '';
-			}
+            if (has_nav_menu('utility_right')) {
+                wp_nav_menu(array(
+                    'theme_location' => 'utility_right',
+                    'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
+                    'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
+                ));
+            } else {
+                // No menu is assigned to the 'primary' location
+                echo '';
+            }
             ?>
             <div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3 dsn:z-50">
                 <?php
@@ -131,7 +131,7 @@ global $dssSiteLanguage;
 						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
 						 -->
                 <a class="cart-icon dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
-                    href="<?php echo wc_get_cart_url();?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                    href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                         class="dsn:stroke-current dsn:fill-current" width="20" height="20">
                         <path class="dsn:stroke-current dsn:fill-current"
                             d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
@@ -147,17 +147,17 @@ global $dssSiteLanguage;
 
         <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
 
-            <?php if ( has_nav_menu( 'primary' ) ) { 
+            <?php if (has_nav_menu('primary')) {
                 wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_id' => 'dsn-primary-menu',
-                'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
-                'container' => "nav",
-                'container_class' => "dsn:rounded-md dsn:relative",
-                'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
-                'depth' => 0,
-                'walker' => new DSN_Walker_Nav_Menu()
-            ));
+                    'theme_location' => 'primary',
+                    'menu_id' => 'dsn-primary-menu',
+                    'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
+                    'container' => "nav",
+                    'container_class' => "dsn:rounded-md dsn:relative",
+                    'link_class' => "dsn:px-2 dsn:py-3 dsn:w-full dsn:block dsn:relative",
+                    'depth' => 0,
+                    'walker' => new DSN_Walker_Nav_Menu()
+                ));
             } ?>
 
         </div>
@@ -301,24 +301,24 @@ global $dssSiteLanguage;
 
             </div>
             <div class="dsn:relative dsn:bg-white utility-sticky-nav dsn:mt-4">
-               <?php if ( has_nav_menu( 'utility_left' ) ) {
+                <?php if (has_nav_menu('utility_left')) {
                     wp_nav_menu(array(
-                    'theme_location' => 'utility_left',
-                    'container_class' => "utility_left dsn:w-full",
-                    'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
-                    'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
-                ));
-                } 
-                  ?>
-                <?php if ( has_nav_menu( 'utility_right' ) ) {
-                    wp_nav_menu(array(
-                    'theme_location' => 'utility_right',
-                    'container_class' => "utility_right dsn:w-full",
-                    'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
-                    'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
-                ));
+                        'theme_location' => 'utility_left',
+                        'container_class' => "utility_left dsn:w-full",
+                        'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
+                        'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
+                    ));
                 }
-                 ?>
+                ?>
+                <?php if (has_nav_menu('utility_right')) {
+                    wp_nav_menu(array(
+                        'theme_location' => 'utility_right',
+                        'container_class' => "utility_right dsn:w-full",
+                        'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
+                        'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
+                    ));
+                }
+                ?>
 
             </div>
         </div>

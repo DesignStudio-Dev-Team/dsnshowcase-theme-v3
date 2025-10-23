@@ -60,7 +60,7 @@ if (is_null($title_alignment) || empty($title_alignment)) {
         <?php }  ?>
     <?php } ?>
 
-    <div class="entry-content dsn:container dsn:mx-auto">
+    <div class="entry-content dsn:mx-auto">
         <?php the_content(); ?>
 
         <?php get_template_part('templates/content', 'two-columns'); ?>
