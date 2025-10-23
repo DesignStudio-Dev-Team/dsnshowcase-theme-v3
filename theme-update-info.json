@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.52",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.52",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.52/dsnshowcase.zip",
+  "version": "v3.5.53",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.53",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.53/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-10-15",
+  "last_updated": "2025-10-23",
   "sections": {
-    "changelog": "Merge pull request #142 from DesignStudio-Dev-Team/mark\n\nwoocommerce style updates"
+    "changelog": "Merge pull request #147 from DesignStudio-Dev-Team/mark\n\nUpdate style.css"
   }
 }
