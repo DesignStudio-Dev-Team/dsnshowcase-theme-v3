@@ -189,7 +189,7 @@ if ($title_overwrite) {
         ?>
 
         <?php if ($result->have_posts()) : ?>
-            <div class="dsn:container dsn:py-5">
+            <div class="dsn:container dsn:mx-auto dsn:py-5">
                 <div class="dsn:flex dsn:flex-wrap dsn:justify-center">
                     <?php while ($result->have_posts()):
                         $result->the_post();
@@ -222,7 +222,7 @@ if ($title_overwrite) {
 
 <?php if ($type_of_content_to_display === 'product'): ?>
     <?php if (!empty($set_of_products)): ?>
-        <div class="dsn:container dsn:py-5">
+        <div class="dsn:container dsn:mx-auto dsn:py-5">
             <div class="dsn:flex dsn:flex-wrap dsn:justify-center">
                 <?php foreach ($set_of_products as $post):
                     setup_postdata($post); ?>

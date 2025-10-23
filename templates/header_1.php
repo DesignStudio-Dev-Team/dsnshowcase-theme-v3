@@ -39,11 +39,13 @@ global $dssSiteLanguage;
     <div
         class="dsn:container dsn:mx-auto dsn:flex dsn:justify-between dsn:items-center dsn:px-6 dsn:py-4 dsn-header-top-container">
         <div class="util-left-nav dsn:w-4/12">
-            <?php wp_nav_menu(array(
+            <?php if ( has_nav_menu( 'utility_left' ) ) { 
+                wp_nav_menu(array(
                 'theme_location' => 'utility_left',
                 'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:relative dsn:!my-0',
                 'link_class' => "dsn:text-lg dsn:py-2 dsn:block",
-            )); ?>
+            )); 
+            } ?>
         </div>
         <div class="dsn-logo dsn:w-4/12">
             <a class="dsn:block dsn:relative dsn:text-center" href="<?php
@@ -53,11 +55,16 @@ global $dssSiteLanguage;
         </div>
         <div class="util-left-nav dsn:flex dsn:justify-end dsn:items-center dsn:gap-4 dsn:w-4/12">
             <?php
-            // wp_nav_menu(array(
-            //     'theme_location' => 'utility_right',
-            //     'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
-            // 	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
-            // )); 
+			if ( has_nav_menu( 'utility_right' ) ) {
+				wp_nav_menu(array(
+                'theme_location' => 'utility_right',
+                'menu_class' => 'dsn:flex dsn:items-center dsn:space-x-10 dsn:pr-4 dsn:relative dsn:!my-0',
+            	'link_class' => "dsn:text-[#0988c2] dsn:text-xl dsn:py-4",
+            )); 
+			} else {
+				// No menu is assigned to the 'primary' location
+				echo '';
+			}
             ?>
             <div class="cart-search-combo cf dsn:flex dsn:justify-end dsn:items-center dsn:gap-3 dsn:z-50">
                 <?php
@@ -140,7 +147,8 @@ global $dssSiteLanguage;
 
         <div class="dsn:container dsn:mx-auto dsn:relative nav-container dsn:w-full">
 
-            <?php wp_nav_menu(array(
+            <?php if ( has_nav_menu( 'primary' ) ) { 
+                wp_nav_menu(array(
                 'theme_location' => 'primary',
                 'menu_id' => 'dsn-primary-menu',
                 'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
@@ -149,7 +157,8 @@ global $dssSiteLanguage;
                 'link_class' => "dsn:px-2 dsn:py-6 dsn:w-full dsn:block dsn:relative",
                 'depth' => 0,
                 'walker' => new DSN_Walker_Nav_Menu()
-            )); ?>
+            ));
+            } ?>
 
         </div>
 
@@ -292,19 +301,24 @@ global $dssSiteLanguage;
 
             </div>
             <div class="dsn:relative dsn:bg-white utility-sticky-nav dsn:mt-4">
-
-                <?php wp_nav_menu(array(
+               <?php if ( has_nav_menu( 'utility_left' ) ) {
+                    wp_nav_menu(array(
                     'theme_location' => 'utility_left',
                     'container_class' => "utility_left dsn:w-full",
                     'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
                     'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
-                )); ?>
-                <?php wp_nav_menu(array(
+                ));
+                } 
+                  ?>
+                <?php if ( has_nav_menu( 'utility_right' ) ) {
+                    wp_nav_menu(array(
                     'theme_location' => 'utility_right',
                     'container_class' => "utility_right dsn:w-full",
                     'menu_class' => 'dsn:relative dsn:!my-0 dsn:!px-0',
                     'link_class' => "dsn:text-xl dsn:py-2 dsn:block dsn:text-left",
-                )); ?>
+                ));
+                }
+                 ?>
 
             </div>
         </div>

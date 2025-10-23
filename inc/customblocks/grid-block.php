@@ -10,7 +10,7 @@ $gridRowCount = count($gridContent);
 
 ?>
 
-<section id="grid-block-<?php echo $block_id; ?>" class="dsn:py-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
+<section id="grid-block-<?php echo $block_id; ?>" class="dsn:pb-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
