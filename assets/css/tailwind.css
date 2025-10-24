@@ -64,7 +64,7 @@
     }
     /* Headings */
     h1 {
-        @apply dsn:text-4xl dsn:md:text-6xl dsn:font-bold dsn:lg:mb-6 dsn:leading-tight;
+        @apply dsn:text-4xl dsn:md:text-6xl dsn:font-bold dsn:lg:mb-9 dsn:leading-tight;
     }
 
     h2 {
