@@ -18,7 +18,7 @@ if(function_exists('get_field')) {
     }
 }
 ?>
-<main class="dsn:container dsn:mx-auto dsn:mb-10 dsn:py-4 dsn:px-10">
+<main class="dsn:container dsn:mx-auto">
     <?php 
     if (have_posts()): while (have_posts()): the_post();
         get_template_part('templates/content', 'page');
