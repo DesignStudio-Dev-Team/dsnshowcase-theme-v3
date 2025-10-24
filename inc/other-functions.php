@@ -1535,11 +1535,12 @@ if ( ! function_exists('dsn_get_cta_url') ) {
     if ($productID === 0 || !dsn_is_syndicated_content($productID)) {
       return get_permalink($productID);
     }
+    $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
 
     if (isset($syndifiedPostMeta->{DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX}) && $syndifiedPostMeta->{DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX} !== '') {
-      $cta_url = $syndifiedPostMeta->{DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX.dsn_get_current_active_locale()};
+      $cta_url = $syndifiedPostMeta->{DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX.$syndifiedPostMeta->language};
     } else {
-      $cta_url = get_option(SYNDIFIED_ECOMM_CTA_URL_SETTING_OPTION_KEY_PREFIX.dsn_get_current_active_locale());
+      $cta_url = get_option(SYNDIFIED_ECOMM_CTA_URL_SETTING_OPTION_KEY_PREFIX. $syndifiedPostMeta->language);
     }
 
     if ($cta_url) {
