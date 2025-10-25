@@ -56,7 +56,9 @@ if (is_null($title_alignment) || empty($title_alignment)) {
                 <?php endif; ?>
 
         <?php if ($show_page_title) { ?>
-                <h1 class="dsn:text-<?php echo $title_alignment; ?> dsn:pb-10"><?php echo get_the_title(); ?></h1>
+            <div class="dsn:w-full dsn:my-8">
+                <h1 class="dsn:text-<?php echo $title_alignment; ?>"><?php echo get_the_title(); ?></h1>
+            </div>
         <?php }  ?>
     <?php } ?>
 
