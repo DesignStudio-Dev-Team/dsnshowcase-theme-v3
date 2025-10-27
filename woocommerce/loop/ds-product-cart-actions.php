@@ -19,21 +19,27 @@ if ( ! isset( $postID ) ) {
 <div class="ds-product__action_buttons dsn:flex dsn:gap-2">
     <?php if ( dsn_show_other_action_buttons( $postID ) ) : ?>
         <?php if ( dsn_show_reserve_btn( $postID ) ) : ?>
+            <?php 
+                $reserve_icon = get_option( 'Syndified®_ecomm_reserve_icon', 'reserve' );
+            ?>
             <!-- Reserve Button -->
             <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
                class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
                title="<?php echo esc_attr( $translatedText->woocommerce_cart->reserve_button ); ?>">
                 <span class="dsn:flex dsn:items-center">
-                    <?php dsn_icon( 'reserve', 'dsn:w-5 dsn:h-5' ); ?>
+                    <?php dsn_icon( $reserve_icon, 'dsn:w-5 dsn:h-5' ); ?>
                 </span>
             </a>
         <?php elseif ( dsn_show_get_info_btn( $postID ) ) : ?>
+            <?php 
+                $get_info_icon = get_option( 'Syndified®_ecomm_get_info_icon', 'info' );
+            ?>
             <!-- Get Info Button -->
             <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
                class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
                title="<?php echo esc_attr( $translatedText->woocommerce_cart->info_button ); ?>">
                 <span class="dsn:flex dsn:items-center">
-                    <?php dsn_icon( 'info', 'dsn:w-5 dsn:h-5' ); ?>
+                    <?php dsn_icon( $get_info_icon, 'dsn:w-5 dsn:h-5' ); ?>
                 </span>
             </a>
         <?php endif; ?>
