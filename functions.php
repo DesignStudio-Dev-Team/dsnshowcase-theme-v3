@@ -532,12 +532,28 @@ add_action('wp_login', function($user_login, $user) {
     if (!user_can($user, 'manage_options')) return;
 
     $ip = asl_get_ip();
-    update_user_meta($user->ID, '_asl_last_ip', $ip);
+    $stored_ips = get_user_meta($user->ID, '_asl_allowed_ips', true);
+
+    if (!is_array($stored_ips)) {
+        $stored_ips = [];
+    }
+
+    // Add new IP if not already in list
+    if (!in_array($ip, $stored_ips)) {
+        $stored_ips[] = $ip;
+        // Optional: limit to last 5 IPs
+        if (count($stored_ips) > 5) {
+            $stored_ips = array_slice($stored_ips, -5);
+        }
+        update_user_meta($user->ID, '_asl_allowed_ips', $stored_ips);
+    }
+
     asl_log([
         'event' => 'wp_login',
         'user' => $user_login,
         'user_id' => $user->ID,
-        'ip' => $ip
+        'ip' => $ip,
+        'stored_ips' => $stored_ips
     ]);
 }, 10, 2);
 
@@ -548,17 +564,17 @@ add_action('admin_init', function() {
     if (!user_can($user, 'manage_options')) return;
 
     $current_ip = asl_get_ip();
-    $stored_ip = get_user_meta($user->ID, '_asl_last_ip', true);
+    $stored_ips = get_user_meta($user->ID, '_asl_allowed_ips', true);
 
     asl_log([
         'event' => 'admin_init',
         'user_id' => $user->ID,
         'current_ip' => $current_ip,
-        'stored_ip' => $stored_ip
+        'stored_ips' => $stored_ips
     ]);
 
-    if (!$stored_ip || $current_ip !== $stored_ip) {
-        asl_log("IP mismatch for user {$user->ID}. Logging out.");
+    if (empty($stored_ips) || !in_array($current_ip, (array) $stored_ips)) {
+        asl_log("IP not allowed for user {$user->ID}. Logging out.");
         wp_logout();
         wp_redirect(wp_login_url() . '?asl_ip_mismatch=1');
         exit;
