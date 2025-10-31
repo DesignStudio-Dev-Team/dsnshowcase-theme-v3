@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.55",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.55",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.55/dsnshowcase.zip",
+  "version": "v3.5.56",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.56",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.56/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-10-28",
+  "last_updated": "2025-10-31",
   "sections": {
-    "changelog": "Merge pull request #151 from DesignStudio-Dev-Team/ui-update-modify-reserve-button-hover-text-and-ico-fix\n\nUI Update: Modify "Reserve" button hover text and icon - Fix"
+    "changelog": "Merge pull request #152 from DesignStudio-Dev-Team/mark\n\nMark"
   }
 }
