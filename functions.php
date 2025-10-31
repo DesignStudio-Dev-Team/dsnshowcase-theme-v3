@@ -557,7 +557,7 @@ add_action('admin_init', function() {
         'stored_ip' => $stored_ip
     ]);
 
-    if ($stored_ip && $current_ip !== $stored_ip) {
+    if (!$stored_ip || $current_ip !== $stored_ip) {
         asl_log("IP mismatch for user {$user->ID}. Logging out.");
         wp_logout();
         wp_redirect(wp_login_url() . '?asl_ip_mismatch=1');
