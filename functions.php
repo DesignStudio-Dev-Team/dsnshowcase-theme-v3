@@ -563,7 +563,25 @@ add_action('admin_init', function() {
     $user = wp_get_current_user();
     if (!user_can($user, 'manage_options')) return;
 
+    // Ignore local/cron/admin-ajax/REST requests
+    if (
+        (defined('DOING_CRON') && DOING_CRON) ||
+        (defined('DOING_AJAX') && DOING_AJAX) ||
+        (defined('REST_REQUEST') && REST_REQUEST)
+    ) {
+        asl_log("Skipping IP check for system/internal request.");
+        return;
+    }
+
     $current_ip = asl_get_ip();
+
+    // Ignore loopback IPs (local server)
+    $local_ips = ['127.0.0.1', '::1', $_SERVER['SERVER_ADDR'] ?? ''];
+    if (in_array($current_ip, $local_ips, true)) {
+        asl_log("Skipping IP check for local server IP: $current_ip");
+        return;
+    }
+
     $stored_ips = get_user_meta($user->ID, '_asl_allowed_ips', true);
 
     asl_log([
@@ -573,13 +591,14 @@ add_action('admin_init', function() {
         'stored_ips' => $stored_ips
     ]);
 
-    if (empty($stored_ips) || !in_array($current_ip, (array) $stored_ips)) {
+    if (empty($stored_ips) || !in_array($current_ip, (array) $stored_ips, true)) {
         asl_log("IP not allowed for user {$user->ID}. Logging out.");
         wp_logout();
         wp_redirect(wp_login_url() . '?asl_ip_mismatch=1');
         exit;
     }
 }, 10);
+
 
 add_action('login_message', function($msg) {
     if (isset($_GET['asl_ip_mismatch'])) {
