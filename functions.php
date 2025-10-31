@@ -488,4 +488,90 @@ add_filter('xmlrpc_methods', function () {
 
 add_filter('xmlrpc_enabled', '__return_false');
 
-?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------------
+// WP Admin Security: Prevent Session Sharing Across IPs
+// -------------------------
+function asl_log($msg) {
+    // $path = ABSPATH . 'asl_debug.log';
+    // $ts = date('Y-m-d H:i:s');
+    // if (is_array($msg) || is_object($msg)) $msg = print_r($msg, true);
+    // @error_log("[$ts] $msg\n", 3, $path);
+}
+
+function asl_get_ip() {
+    if (!empty($_SERVER['HTTP_CF_CONNECTING_IP'])) return trim($_SERVER['HTTP_CF_CONNECTING_IP']);
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        return trim($ips[0]);
+    }
+    return $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+}
+
+add_action('wp_login', function($user_login, $user) {
+    if (!user_can($user, 'manage_options')) return;
+
+    $ip = asl_get_ip();
+    update_user_meta($user->ID, '_asl_last_ip', $ip);
+    asl_log([
+        'event' => 'wp_login',
+        'user' => $user_login,
+        'user_id' => $user->ID,
+        'ip' => $ip
+    ]);
+}, 10, 2);
+
+add_action('admin_init', function() {
+    if (!is_user_logged_in()) return;
+
+    $user = wp_get_current_user();
+    if (!user_can($user, 'manage_options')) return;
+
+    $current_ip = asl_get_ip();
+    $stored_ip = get_user_meta($user->ID, '_asl_last_ip', true);
+
+    asl_log([
+        'event' => 'admin_init',
+        'user_id' => $user->ID,
+        'current_ip' => $current_ip,
+        'stored_ip' => $stored_ip
+    ]);
+
+    if ($stored_ip && $current_ip !== $stored_ip) {
+        asl_log("IP mismatch for user {$user->ID}. Logging out.");
+        wp_logout();
+        wp_redirect(wp_login_url() . '?asl_ip_mismatch=1');
+        exit;
+    }
+}, 10);
+
+add_action('login_message', function($msg) {
+    if (isset($_GET['asl_ip_mismatch'])) {
+        $msg = '<p class="message message-error">You were logged out because your login session was used from a different IP address.</p>';
+    }
+    return $msg;
+});
+
+add_action('password_reset', function($user, $new_pass) {
+    delete_user_meta($user->ID, '_asl_last_ip');
+}, 10, 2);
