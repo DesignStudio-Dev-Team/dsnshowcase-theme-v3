@@ -151,10 +151,12 @@ $pageContent = get_the_content();
       
         <div style="background:url('<?php echo $firstArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1
         dsn:relative dsn:w-full dsn:h-[400px] dsn:lg:h-[600px] dsn:lg:row-span-2 dns:col-span-5 dsn:lg:col-span-3 dsn:p-8 dsn:flex dsn:flex-col dsn:lg:order-1 dsn:justify-end">
-          <h2 class="dsn:text-3xl dsn:font-bold dsn:mb-0 dsn:text-white dsn:relative dsn:z-10">
-          <a href="<?php echo $firstArticle->permalink; ?>" aria-label="permalink" > <?php echo $firstArticle->post_title; ?> </a> </h2>
+         <a class="dsn:size-full dsn:p-6  dsn:flex dsn:items-end" href="<?php echo $firstArticle->permalink; ?>" aria-label="permalink" >
+
+        <h2 class="dsn:text-3xl dsn:font-bold dsn:mb-0 dsn:text-white dsn:relative dsn:z-10">
+          <?php echo $firstArticle->post_title; ?> </h2>
          <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 dsn:top-[67%]"></div>
-                
+            </a>
         </div>
         
         <div style="background:url('<?php echo $secondArticle->thumbnail; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:col-span-2 dsn:lg:h-full  dsn:lg:order-2">
