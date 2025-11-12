@@ -576,7 +576,7 @@ add_action('admin_init', function() {
     $current_ip = asl_get_ip();
 
     // Ignore loopback IPs (local server)
-    $local_ips = ['127.0.0.1', '::1', $_SERVER['SERVER_ADDR'] ?? ''];
+    $local_ips = ['127.0.0.1', '::1', $_SERVER['SERVER_ADDR'] ?? '', $_SERVER['HTTP_X_SERVER_ADDR'] ?? ''];
     if (in_array($current_ip, $local_ips, true)) {
         asl_log("Skipping IP check for local server IP: $current_ip");
         return;
