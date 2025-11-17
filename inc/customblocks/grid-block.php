@@ -10,11 +10,11 @@ $gridRowCount = count($gridContent);
 
 ?>
 
-<section id="grid-block-<?php echo $block_id; ?>" class="dsn:pb-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
+<section id="grid-block-<?php echo $block_id; ?>" class="dsn:py-10 dsn:px-5 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
-            <div class="dsn:mx-auto dsn:max-w-[900px]">
+            <div class="dsn:mx-auto dsn:py-4 dsn:max-w-[900px]">
                 <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
             </div>
         <?php } ?>
@@ -176,3 +176,14 @@ if($mainCTA) { ?>
 <?php } ?>
 <div class="dsn:hidden dsn:xl:grid-cols-1 dsn:xl:grid-cols-2 dsn:xl:grid-cols-3 dsn:xl:grid-cols-4 dsn:xl:grid-cols-5"></div>
 </section>
+<style>
+    #grid-block-<?php echo $block_id; ?> .grid-block-bottom {
+  background: linear-gradient(transparent 0%, #000000c9 100%);
+}
+#grid-block-<?php echo $block_id; ?> .grid-block6 a {
+    transition: all 0.5s;
+}
+#grid-block-<?php echo $block_id; ?> .grid-block6 a:hover {
+  transform: scale(1.05);
+}
+</style>
