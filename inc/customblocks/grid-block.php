@@ -6,8 +6,8 @@ $gridContent = $gridBlock['grid_content_rows'];
 $mainCTA = $gridBlock['cta'];
 $gridType = $gridBlock['grid_type'];
 $gridRowCount = count($gridContent);
-
-
+$gridSlider = $gridBlock['enable_grid_slider'];
+$gridSlideToShow = $gridBlock['slides_to_show'];
 ?>
 
 <section id="grid-block-<?php echo $block_id; ?>" class="dsn:py-10 dsn:px-5 dsn:md:px-0">
@@ -39,7 +39,7 @@ $gridRowCount = count($gridContent);
         <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
         <?php if($gridType == '5') { ?>
-        <div id="grid-block" class="grid-block5 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div id="grid-block" class="grid-block5 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5 <?php if($gridSlider == 1) { echo 'grid-block-slider';} ?>">
         <?php } ?>
          <?php if($gridType == '6') { ?>
         <div id="grid-block" class="grid-block6 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-4 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5 dsn:items-center dsn:items-stretch">
@@ -132,11 +132,11 @@ $gridRowCount = count($gridContent);
                 if($gridContentContent[0]['acf_fc_layout'] == 'card_with_stacked_logo') {
                     $cardImage = $gridContentContent[0]['card_image'];
                     $cardLogo = $gridContentContent[0]['card_logo'];
-                    $cardLink = $gridContentContent[0]['card_link']; 
+                    $cardLink = $gridContentContent[0]['card_link'];
                 ?>
                    <?php if($gridType == '5') { ?>
-                    <div class="dsn:relative dsn:h-74 dsn:lg:min-h-84 dsn:xl:min-h-120 dsn:mb-15">
-                        <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90 dsn:h-full dsn:w-full dsn:!bg-cover dsn:!bg-center dsn:flex dsn:items-end dsn:justify-center" style="background: url(<?php echo $cardImage['url']; ?>)">
+                    <div class="dsn:relative dsn:mb-15 dsn:p-4">
+                        <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90 dsn:w-full dsn:!bg-cover dsn:!bg-center dsn:flex dsn:items-end dsn:justify-center dsn:h-74" style="background: url(<?php echo $cardImage['url']; ?>)">
                     <div class="dsn:relative dsn:bg-white dsn:-mb-10 dsn:p-6 dsn:rounded-full dsn:w-10/12 dsn:shadow-lg">
                         <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:w-full dsn:h-10 dsn:object-contain">
                     </div>
@@ -186,4 +186,60 @@ if($mainCTA) { ?>
 #grid-block-<?php echo $block_id; ?> .grid-block6 a:hover {
   transform: scale(1.05);
 }
+s
+  /* the slides */
+  .grid-block-slider .slick-slide {
+      margin: 0 27px;
+  }
+
+  /* the parent */
+  .grid-block-slider .slick-list {
+      margin: 0 -27px;
+  }
 </style>
+<script>
+    jQuery(document).ready(function ($) {
+    //outdoor internal page bottom slider
+  if ($('.grid-block-slider').length > 0) {
+    $('.grid-block-slider').slick({
+        centerMode: true,       // Enables center mode
+        centerPadding: '0px',   // Ensures no neighboring slides are visible
+        slidesToShow: <?php echo $gridSlideToShow ?>,        // Displays only one slide at a time
+        slidesToScroll: 1,      // Scrolls one slide at a time
+        infinite: true,         // Enables infinite looping
+        arrows: true,           // Shows navigation arrows
+        dots: false,             // Shows navigation dots
+        autoplay: false,         // Enables automatic sliding
+        pauseOnHover: true,     // Pauses autoplay on hover
+        pauseOnFocus: true,     // Pauses autoplay on focus
+        responsive: [           //Responsive Breakpoint settings
+            {
+              breakpoint: 1024, 
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                arrows: true, 
+                infinite: true,
+              }
+            },
+            {
+              breakpoint: 600, 
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true,
+              }
+            },
+            {
+              breakpoint: 480, 
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true,
+              }
+            }]
+    });
+  }
+  });
+</script>

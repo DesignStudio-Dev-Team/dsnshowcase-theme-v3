@@ -1,4 +1,4 @@
-<?php 
+<?php
 add_action( 'acf/include_fields', function() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;
@@ -5141,6 +5141,66 @@ add_action( 'acf/include_fields', function() {
 					),
 					'return_format' => 'array',
 					'allow_in_bindings' => 0,
+				),
+				array(
+					'key' => 'field_691dd93341b43',
+					'label' => 'Enable Grid Slider',
+					'name' => 'enable_grid_slider',
+					'aria-label' => '',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_6802745009e5e',
+								'operator' => '==',
+								'value' => '5',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 0,
+					'allow_in_bindings' => 0,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+					'ui' => 1,
+				),
+				array(
+					'key' => 'field_691de01d88d26',
+					'label' => 'Slides To Show',
+					'name' => 'slides_to_show',
+					'aria-label' => '',
+					'type' => 'number',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_691dd93341b43',
+								'operator' => '==',
+								'value' => '1',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => 4,
+					'min' => '',
+					'max' => '',
+					'allow_in_bindings' => 0,
+					'placeholder' => '',
+					'step' => '',
+					'prepend' => '',
+					'append' => '',
 				),
 				array(
 					'key' => 'field_6802745009e5e',
