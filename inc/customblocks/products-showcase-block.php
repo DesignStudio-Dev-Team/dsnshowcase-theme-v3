@@ -8,13 +8,13 @@ $set_of_products = $productsShowcaseBlock['set_of_products'];
 
 <section id="product-showcase-<?php echo $block_id; ?>" class="dsn:my-20">
     <div class="product-showcase-title-block dsn:container dsn:mx-auto dsn:relative dsn:text-center">
-    <?php if ($title) { ?> <h2 class="dsn:mb-4"><?php echo $title; ?></h2> <?php } ?>
+    <?php if ($title) { ?> <h2 class="dsn:mb-10"><?php echo $title; ?></h2> <?php } ?>
     <?php if ($description) { ?>  <p class="dsn:mb-10"><?php echo $description; ?></p> <?php } ?>
     </div>
     <div class="product-showcase-inner dsn:py-10 dsn:md:py-10 dsn:px-4 dsn:md:px-10 dsn:text-white">
     <div class="dsn:container dsn:mx-auto dsn:relative">
-    <div class="dsn:pt-10 dsn:relative">
-    <?php if ($titleOfShowcase) { ?> <h3 class="dsn:text-left dsn:mb-10"><?php echo $titleOfShowcase; ?></h3> <?php } ?>    
+    <div class="dsn:relative">
+    <?php if ($titleOfShowcase) { ?> <h3 class="dsn:text-center dsn:mb-10"><?php echo $titleOfShowcase; ?></h3> <?php } ?>    
 <div class="slider product-slider-nav dsn:mb-8">
 
     <?php 
@@ -207,7 +207,7 @@ wp_reset_postdata();
     #product-showcase-<?php echo $block_id; ?> .all-products .slider-count {
         position: absolute;
         right: 27px;
-        bottom: -6px;
+        bottom: 5px;
         width: 44px;
     }
      #product-showcase-<?php echo $block_id; ?> .all-products  .slider-count p {

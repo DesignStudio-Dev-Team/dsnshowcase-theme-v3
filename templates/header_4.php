@@ -560,7 +560,7 @@ if(function_exists('get_field')) {
 
 				if (scroll >= 5) {
 					header.addClass("sticky-header-active dsn:bg-[#076594]");
-					header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+					header.removeClass("dsn:bg-white dsn:py-4");
 					$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
 					$('.primary-nav nav').addClass("dsn:bg-[#076594]");
 					$('.primary-nav nav').removeClass("dsn:bg-white");
@@ -574,7 +574,7 @@ if(function_exists('get_field')) {
 					
 				} else {
 					header.removeClass("sticky-header-active");
-					header.addClass("dsn:bg-[#076594] dsn:mb-10");
+					header.addClass("dsn:bg-[#076594]");
 					$('.primary-nav').removeClass("dsn:container");
 					$('.primary-nav nav').removeClass("dsn:bg-[#076594]");
 					$('.primary-nav nav').addClass("dsn:bg-white");

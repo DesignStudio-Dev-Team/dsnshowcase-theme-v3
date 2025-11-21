@@ -682,13 +682,13 @@ global $dssSiteLanguage;
 
                     if (scroll >= 5) {
                         header.addClass("sticky-header-active");
-                        header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+                        header.removeClass("dsn:bg-white");
                         $('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
                         $('.primary-nav').removeClass("dsn:bg-gray-100");
                         $('.nav-container').removeClass("dsn:container");
                     } else {
                         header.removeClass("sticky-header-active");
-                        header.addClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+                        header.addClass("dsn:bg-white");
                         $('.primary-nav').removeClass("dsn:container");
                         $('.primary-nav').addClass("dsn:bg-gray-100");
                         $('.nav-container').addClass("dsn:container");

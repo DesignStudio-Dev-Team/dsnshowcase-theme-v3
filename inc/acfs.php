@@ -60,6 +60,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -111,6 +112,8 @@ add_action( 'acf/include_fields', function() {
 			'ui' => 0,
 			'ajax' => 0,
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_67a3a8affd691',
@@ -163,6 +166,8 @@ add_action( 'acf/include_fields', function() {
 					'ui' => 0,
 					'ajax' => 0,
 					'placeholder' => '',
+					'create_options' => 0,
+					'save_options' => 0,
 				),
 				array(
 					'key' => 'field_67a9f6374c651',
@@ -191,6 +196,8 @@ add_action( 'acf/include_fields', function() {
 					'ui' => 0,
 					'ajax' => 0,
 					'placeholder' => '',
+					'create_options' => 0,
+					'save_options' => 0,
 				),
 			),
 		),
@@ -657,6 +664,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => 'string',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 						),
 						array(
 							'key' => 'field_67ec1efdf5b0c',
@@ -709,6 +719,8 @@ add_action( 'acf/include_fields', function() {
 							'ui' => 0,
 							'ajax' => 0,
 							'placeholder' => '',
+							'create_options' => 0,
+							'save_options' => 0,
 						),
 					),
 				),
@@ -1876,6 +1888,9 @@ add_action( 'acf/include_fields', function() {
 							'return_format' => 'string',
 							'allow_in_bindings' => 0,
 							'parent_repeater' => 'field_67d2ee0610d69',
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 						),
 					),
 				),
@@ -2344,6 +2359,8 @@ add_action( 'acf/include_fields', function() {
 					'ui' => 0,
 					'ajax' => 0,
 					'placeholder' => '',
+					'create_options' => 0,
+					'save_options' => 0,
 				),
 				array(
 					'key' => 'field_67fe478682853',
@@ -2866,6 +2883,8 @@ add_action( 'acf/include_fields', function() {
 							'ui' => 0,
 							'ajax' => 0,
 							'placeholder' => '',
+							'create_options' => 0,
+							'save_options' => 0,
 						),
 						array(
 							'key' => 'field_67f9e89e27a1f',
@@ -2894,6 +2913,8 @@ add_action( 'acf/include_fields', function() {
 							'ui' => 0,
 							'ajax' => 0,
 							'placeholder' => '',
+							'create_options' => 0,
+							'save_options' => 0,
 						),
 						array(
 							'key' => 'field_684af71f8a2ce',
@@ -3145,6 +3166,7 @@ add_action( 'acf/include_fields', function() {
 					'return_format' => 'Y-m-d H:i:s',
 					'first_day' => 1,
 					'allow_in_bindings' => 0,
+					'default_to_current_date' => 0,
 				),
 				array(
 					'key' => 'field_67d44673c2815',
@@ -3396,6 +3418,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => 'string',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 							'parent_repeater' => 'field_67d44686c2816',
 						),
 						array(
@@ -3416,6 +3441,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => 'string',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 							'parent_repeater' => 'field_67d44686c2816',
 						),
 						array(
@@ -3726,6 +3754,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => '',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 						),
 						array(
 							'key' => 'field_6866684dfcbb5',
@@ -3745,6 +3776,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => '',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 						),
 					),
 				),
@@ -3917,6 +3951,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => 'string',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 						),
 						array(
 							'key' => 'field_6866692cfcbbd',
@@ -3936,6 +3973,9 @@ add_action( 'acf/include_fields', function() {
 							'enable_opacity' => 0,
 							'return_format' => 'string',
 							'allow_in_bindings' => 0,
+							'custom_palette_source' => '',
+							'palette_colors' => '',
+							'show_color_wheel' => true,
 						),
 					),
 				),
@@ -5103,6 +5143,66 @@ add_action( 'acf/include_fields', function() {
 					'allow_in_bindings' => 0,
 				),
 				array(
+					'key' => 'field_691dd93341b43',
+					'label' => 'Enable Grid Slider',
+					'name' => 'enable_grid_slider',
+					'aria-label' => '',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_6802745009e5e',
+								'operator' => '==',
+								'value' => '5',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 0,
+					'allow_in_bindings' => 0,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+					'ui' => 1,
+				),
+				array(
+					'key' => 'field_691de01d88d26',
+					'label' => 'Slides To Show',
+					'name' => 'slides_to_show',
+					'aria-label' => '',
+					'type' => 'number',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_691dd93341b43',
+								'operator' => '==',
+								'value' => '1',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => 4,
+					'min' => '',
+					'max' => '',
+					'allow_in_bindings' => 0,
+					'placeholder' => '',
+					'step' => '',
+					'prepend' => '',
+					'append' => '',
+				),
+				array(
 					'key' => 'field_6802745009e5e',
 					'label' => 'Grid Type',
 					'name' => 'grid_type',
@@ -5132,6 +5232,8 @@ add_action( 'acf/include_fields', function() {
 					'ui' => 0,
 					'ajax' => 0,
 					'placeholder' => '',
+					'create_options' => 0,
+					'save_options' => 0,
 				),
 			),
 		),
@@ -5551,6 +5653,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -5630,6 +5733,8 @@ add_action( 'acf/include_fields', function() {
 					'ui' => 0,
 					'ajax' => 0,
 					'placeholder' => '',
+					'create_options' => 0,
+					'save_options' => 0,
 				),
 			),
 		),
@@ -5706,6 +5811,8 @@ add_action( 'acf/include_fields', function() {
 					'ui' => 0,
 					'ajax' => 0,
 					'placeholder' => '',
+					'create_options' => 0,
+					'save_options' => 0,
 				),
 			),
 		),
@@ -5742,6 +5849,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -5820,6 +5928,8 @@ add_action( 'acf/include_fields', function() {
 			'return_format' => 'value',
 			'ajax' => 0,
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_6227e644ade1f',
@@ -6186,6 +6296,8 @@ add_action( 'acf/include_fields', function() {
 			'return_format' => 'value',
 			'ajax' => 0,
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_55e5de804460c',
@@ -6395,6 +6507,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -6734,38 +6847,17 @@ add_action( 'acf/include_fields', function() {
 			'type' => 'repeater',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => array(
-				array(
-					array(
-						'field' => 'field_564bbc1ea7977',
-						'operator' => '==',
-						'value' => '2',
-					),
-				),
-				array(
-					array(
-						'field' => 'field_564bbc1ea7977',
-						'operator' => '==',
-						'value' => '4',
-					),
-				),
-				array(
-					array(
-						'field' => 'field_564bbc1ea7977',
-						'operator' => '==',
-						'value' => '5',
-					),
-				),
-			),
+			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
-			'collapsed' => '',
-			'min' => 0,
-			'max' => 5,
 			'layout' => 'block',
+			'pagination' => 0,
+			'min' => 0,
+			'max' => 0,
+			'collapsed' => '',
 			'button_label' => 'Add Row',
 			'rows_per_page' => 20,
 			'sub_fields' => array(
@@ -6875,6 +6967,8 @@ add_action( 'acf/include_fields', function() {
 							'readonly' => 0,
 							'return_format' => 'value',
 							'parent_repeater' => 'field_57238b8771007',
+							'create_options' => 0,
+							'save_options' => 0,
 						),
 						array(
 							'key' => 'field_57238bbc71008',
@@ -7218,31 +7312,17 @@ add_action( 'acf/include_fields', function() {
 			'type' => 'repeater',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => array(
-				array(
-					array(
-						'field' => 'field_564bbc1ea7977',
-						'operator' => '==',
-						'value' => '2',
-					),
-				),
-				array(
-					array(
-						'field' => 'field_564bbc1ea7977',
-						'operator' => '==',
-						'value' => '4',
-					),
-				),
-			),
+			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
-			'collapsed' => '',
-			'min' => 0,
-			'max' => 5,
 			'layout' => 'block',
+			'pagination' => 0,
+			'min' => 0,
+			'max' => 0,
+			'collapsed' => '',
 			'button_label' => 'Add Row',
 			'rows_per_page' => 20,
 			'sub_fields' => array(
@@ -7352,6 +7432,8 @@ add_action( 'acf/include_fields', function() {
 							'readonly' => 0,
 							'return_format' => 'value',
 							'parent_repeater' => 'field_5723a25205711',
+							'create_options' => 0,
+							'save_options' => 0,
 						),
 						array(
 							'key' => 'field_5723a25205713',
@@ -7906,6 +7988,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -7959,6 +8042,8 @@ add_action( 'acf/include_fields', function() {
 			'return_format' => 'value',
 			'ajax' => 0,
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_61f2c4f0ecaa0',
@@ -8107,6 +8192,8 @@ add_action( 'acf/include_fields', function() {
 			'disabled' => 0,
 			'readonly' => 0,
 			'return_format' => 'value',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_57360107419e3',
@@ -8407,6 +8494,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -8682,6 +8770,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -8740,6 +8829,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -8781,6 +8871,7 @@ add_action( 'acf/include_fields', function() {
 			'display_format' => 'm/d/Y',
 			'return_format' => 'F j, Y',
 			'first_day' => 1,
+			'default_to_current_date' => 0,
 		),
 		array(
 			'key' => 'field_602d38deb205e',
@@ -8799,6 +8890,7 @@ add_action( 'acf/include_fields', function() {
 			'display_format' => 'm/d/Y',
 			'return_format' => 'F j, Y',
 			'first_day' => 1,
+			'default_to_current_date' => 0,
 		),
 		array(
 			'key' => 'field_602d3909b205f',
@@ -8949,6 +9041,8 @@ add_action( 'acf/include_fields', function() {
 			'ajax' => 0,
 			'return_format' => 'value',
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_63209b5bf529d',
@@ -8976,6 +9070,8 @@ add_action( 'acf/include_fields', function() {
 			'return_format' => 'value',
 			'ajax' => 0,
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_6012fede5f607',
@@ -9076,6 +9172,8 @@ add_action( 'acf/include_fields', function() {
 			'return_format' => 'value',
 			'ajax' => 0,
 			'placeholder' => '',
+			'create_options' => 0,
+			'save_options' => 0,
 		),
 		array(
 			'key' => 'field_63209d2ce4361',
@@ -9262,6 +9360,9 @@ add_action( 'acf/include_fields', function() {
 			'default_value' => '',
 			'enable_opacity' => false,
 			'return_format' => 'string',
+			'custom_palette_source' => '',
+			'palette_colors' => '',
+			'show_color_wheel' => true,
 		),
 		array(
 			'key' => 'field_60118cb0b984c',
@@ -9293,6 +9394,9 @@ add_action( 'acf/include_fields', function() {
 			'default_value' => '',
 			'enable_opacity' => false,
 			'return_format' => 'string',
+			'custom_palette_source' => '',
+			'palette_colors' => '',
+			'show_color_wheel' => true,
 		),
 	),
 	'location' => array(
@@ -9313,6 +9417,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 
 	acf_add_local_field_group( array(
@@ -9576,6 +9681,7 @@ add_action( 'acf/include_fields', function() {
 	'active' => true,
 	'description' => '',
 	'show_in_rest' => 0,
+	'display_title' => '',
 ) );
 } );
 
