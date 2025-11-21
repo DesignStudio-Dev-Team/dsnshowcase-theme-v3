@@ -6847,29 +6847,7 @@ add_action( 'acf/include_fields', function() {
 			'type' => 'repeater',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => array(
-				array(
-					array(
-						'field' => 'field_67e68d21166c8',
-						'operator' => '==',
-						'value' => '1',
-					),
-				),
-				array(
-					array(
-						'field' => 'field_67e68d21166c8',
-						'operator' => '==',
-						'value' => '1',
-					),
-				),
-				array(
-					array(
-						'field' => 'field_67e68d21166c8',
-						'operator' => '==',
-						'value' => '1',
-					),
-				),
-			),
+			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -6878,7 +6856,7 @@ add_action( 'acf/include_fields', function() {
 			'layout' => 'block',
 			'pagination' => 0,
 			'min' => 0,
-			'max' => 10,
+			'max' => 0,
 			'collapsed' => '',
 			'button_label' => 'Add Row',
 			'rows_per_page' => 20,
@@ -7334,22 +7312,7 @@ add_action( 'acf/include_fields', function() {
 			'type' => 'repeater',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => array(
-				array(
-					array(
-						'field' => 'field_67e68d21166c8',
-						'operator' => '==',
-						'value' => '1',
-					),
-				),
-				array(
-					array(
-						'field' => 'field_67e68d21166c8',
-						'operator' => '==',
-						'value' => '1',
-					),
-				),
-			),
+			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -7358,7 +7321,7 @@ add_action( 'acf/include_fields', function() {
 			'layout' => 'block',
 			'pagination' => 0,
 			'min' => 0,
-			'max' => 10,
+			'max' => 0,
 			'collapsed' => '',
 			'button_label' => 'Add Row',
 			'rows_per_page' => 20,
