@@ -331,6 +331,7 @@ if(function_exists('get_field')) {
 		
 		.header4 ul li ul a {
 			font-size: 16px;
+			font-weight: 400;
 		}
 
 		.header4 .dropdown-content a {

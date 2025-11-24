@@ -228,6 +228,7 @@ if(function_exists('get_field')) {
 		header.header3 ul li ul a {
 			font-size: 16px;
 			width: 100%;
+			font-weight: 400;
 		}
 		.header3 .open > .sub-menu {
 			display: block;

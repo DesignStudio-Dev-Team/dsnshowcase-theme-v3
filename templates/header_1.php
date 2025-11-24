@@ -445,6 +445,7 @@ global $dssSiteLanguage;
 
         header ul li ul a {
             font-size: 16px;
+            font-weight: 400;
         }
 
         .dropdown-content a {
