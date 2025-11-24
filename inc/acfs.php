@@ -9626,16 +9626,18 @@ add_action( 'init', function() {
 } );
 
 add_action( 'acf/init', function() {
-	acf_add_options_page( array(
-	'page_title' => 'Theme Settings',
-	'menu_slug' => 'theme-settings',
-	'position' => '',
-	'redirect' => false,
-	'menu_icon' => array(
-		'type' => 'dashicons',
-		'value' => 'dashicons-admin-generic',
-	),
-	'icon_url' => 'dashicons-admin-generic',
-) );
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		acf_add_options_page( array(
+			'page_title' => 'Theme Settings',
+			'menu_slug' => 'theme-settings',
+			'position' => '',
+			'redirect' => false,
+			'menu_icon' => array(
+				'type' => 'dashicons',
+				'value' => 'dashicons-admin-generic',
+			),
+			'icon_url' => 'dashicons-admin-generic',
+		) );
+	}
 } );
 
