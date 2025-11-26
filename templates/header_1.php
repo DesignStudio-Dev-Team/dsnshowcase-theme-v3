@@ -154,7 +154,7 @@ global $dssSiteLanguage;
                     'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
                     'container' => "nav",
                     'container_class' => "dsn:rounded-md dsn:relative",
-                    'link_class' => "dsn:px-2 dsn:py-3 dsn:w-full dsn:block dsn:relative",
+                    'link_class' => "dsn:px-2 dsn:py-1 dsn:w-full dsn:block dsn:relative",
                     'depth' => 0,
                     'walker' => new DSN_Walker_Nav_Menu()
                 ));
@@ -449,7 +449,7 @@ global $dssSiteLanguage;
         }
 
         .dropdown-content a {
-            padding: 0.5em 0;
+            padding: 0.25em 0;
         }
 
         .mega-menucolumn>a {

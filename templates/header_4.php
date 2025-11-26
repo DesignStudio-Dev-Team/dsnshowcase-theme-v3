@@ -335,7 +335,7 @@ if(function_exists('get_field')) {
 		}
 
 		.header4 .dropdown-content a {
-			padding: 0.5em 0;
+			padding: 0.25em 0;
 		}
 
 		.header4 .mega-menucolumn>a {

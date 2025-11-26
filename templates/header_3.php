@@ -260,7 +260,7 @@ if(function_exists('get_field')) {
 		}
 		
 		.header3 .dropdown-content a {
-			padding: 0.5em 0;
+			padding: 0.25em 0;
 		}
 		.header3 .mega-menucolumn > a {
 			pointer-events: none;

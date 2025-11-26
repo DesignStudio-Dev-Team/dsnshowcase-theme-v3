@@ -190,7 +190,7 @@ if(function_exists('get_field')) {
 		}
 
 		.dropdown-content a {
-			padding: 0.5em 0;
+			padding: 0.25em 0;
 		}
 
 		.mega-menucolumn>a {
