@@ -14,8 +14,8 @@ $gridSlideToShow = $gridBlock['slides_to_show'];
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
-            <div class="dsn:mx-auto dsn:py-4 dsn:max-w-[900px]">
-                <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
+            <div class="dsn:mx-auto dsn:pb-2 dsn:max-w-[900px]">
+                <p class="dsn:text-center"><?php echo $description; ?></p>
             </div>
         <?php } ?>
         
@@ -153,8 +153,8 @@ $gridSlideToShow = $gridBlock['slides_to_show'];
                     <?php if($gridType == '6') { ?>
               
                <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:border-2 dsn:rounded-md dsn:flex dsn:items-center dsn:justify-start dsn:gap-4 dsn:p-2 dsn:min-h-30">
-                 <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:h-15 dsn:object-contain dsn:w-3/12">
-                 <p class="dsn:text-black dsn:w-9/12 dsn:mb-0 dsn:text-xl dsn:text-base"><?php echo $cardTitle; ?></p>
+                 <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:h-15 dsn:object-contain dsn:w-2/12">
+                 <p class="dsn:text-black dsn:w-10/12 dsn:mb-0 dsn:text-xl dsn:text-base"><?php echo $cardTitle; ?></p>
                 </a>
               
                     <?php } ?>
@@ -196,6 +196,13 @@ s
   .grid-block-slider .slick-list {
       margin: 0 -27px;
   }
+  #grid-block-<?php echo $block_id; ?> .grid-block-slider .slick-slide
+ {
+    height: auto;
+}
+.grid-block6 p {
+    font-size: 18px;
+}
 </style>
 <script>
     jQuery(document).ready(function ($) {

@@ -7,14 +7,15 @@ $set_of_products = $productsShowcaseBlock['set_of_products'];
 ?>
 
 <section id="product-showcase-<?php echo $block_id; ?>" class="dsn:my-20">
-    <div class="product-showcase-title-block dsn:container dsn:mx-auto dsn:relative dsn:text-center">
-    <?php if ($title) { ?> <h2 class="dsn:mb-10"><?php echo $title; ?></h2> <?php } ?>
-    <?php if ($description) { ?>  <p class="dsn:mb-10"><?php echo $description; ?></p> <?php } ?>
-    </div>
+    
     <div class="product-showcase-inner dsn:py-10 dsn:md:py-10 dsn:px-4 dsn:md:px-10 dsn:text-white">
     <div class="dsn:container dsn:mx-auto dsn:relative">
     <div class="dsn:relative">
-    <?php if ($titleOfShowcase) { ?> <h3 class="dsn:text-center dsn:mb-10"><?php echo $titleOfShowcase; ?></h3> <?php } ?>    
+        <div class="product-showcase-title-block dsn:container dsn:mx-auto dsn:relative dsn:text-center">
+    <?php if ($title) { ?> <h2 class="dsn:mb-4"><?php echo $title; ?></h2> <?php } ?>
+    <?php if ($description) { ?>  <p class="dsn:mb-4"><?php echo $description; ?></p> <?php } ?>
+    </div>
+    <?php if ($titleOfShowcase) { ?> <h3 class="dsn:text-center dsn:mb-4"><?php echo $titleOfShowcase; ?></h3> <?php } ?>    
 <div class="slider product-slider-nav dsn:mb-8">
 
     <?php 
@@ -67,36 +68,36 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                     }
                     ?>
                     <div class="dsn:w-full dsn:mx-3 dsn:sm:mx-2 dsn:lg:mx-4 dsn:mb-4 dsn:relative product-box dsn:shadow-lg">
-                        <a class="product-inner dsn:bg-white dsn:p-6 dsn:block" href="<?php echo get_permalink($postID); ?>">
-                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:h-[300px]">
+                        <a class="product-inner dsn:bg-white dsn:p-4 dsn:block" href="<?php echo get_permalink($postID); ?>">
+                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:h-[200px]">
                                 <?php if (has_post_thumbnail($postID)): ?>
                                     <?php echo get_the_post_thumbnail($postID, 'medium'); ?>
                                 <?php else: ?>
                                     <?php echo wc_placeholder_img(); ?>
                                 <?php endif; ?>
                             </div>
-                            <p class="dsn:text-black dsn:mb-0 dsn:uppercase dsn:text-sm product-category dsn:my-4"><?php echo esc_html($prod_cat_name); ?></p>
+                            <p class="dsn:text-black dsn:mb-0 dsn:uppercase dsn:text-sm product-category dsn:mt-2"><?php echo esc_html($prod_cat_name); ?></p>
                             <h3 class="dsn:text-left dsn:text-white product-title"><?php echo get_the_title($postID); ?></h3>
                         </a>
                        
-                        <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-4 dsn:text-black dsn:md:h-20">
+                        <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-4 dsn:text-black dsn:md:h-14">
                              <?php 
                              $price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) );
                               if ($product->get_price_html() || $price) { ?>
                                 <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { echo $price; } ?></span><span>
                                     <?php if($product->get_price_html() && $price) { ?>
-                                        <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:px-4 dsn:py-2 dsn:rounded-md"
+                                        <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:p-2 dsn:rounded-md"
                                                     value="<?php echo $postID; ?>">
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate add-to-cart-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
+                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
                                             <span class="loading-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" fill="#fff" /></svg></span>
-                                            </button><?php } else { ?><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:px-4 dsn:py-2 dsn:rounded-md" >
+                                            </button><?php } else { ?><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:p-2 dsn:rounded-md" >
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
+                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
                                             </a> <?php } ?></span>
-                        <?php } else { ?><span class="product-prices">Request price</span><span><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:px-4 dsn:py-2 dsn:rounded-md" >
+                        <?php } else { ?><span class="product-prices">Request price</span><span><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:p-2 dsn:rounded-md" >
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
+                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
                                             </a></span> <?php } ?></div>
                     </div>
                 <?php endforeach; ?>
@@ -119,36 +120,36 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                     $product = wc_get_product($postID); 
                     ?>
                     <div class="dsn:w-full dsn:mx-3 dsn:sm:mx-2 dsn:lg:mx-4 dsn:mb-4 dsn:relative product-box dsn:shadow-lg">
-                        <a class="product-inner dsn:bg-white dsn:p-6 dsn:block" href="<?php echo get_permalink($postID); ?>">
-                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:h-[300px]">
+                        <a class="product-inner dsn:bg-white dsn:p-4 dsn:block" href="<?php echo get_permalink($postID); ?>">
+                            <div class="dsn:text-center thumbnail dsn-ps-thumbnail dsn:h-[200px]">
                                 <?php if (has_post_thumbnail($postID)): ?>
                                     <?php echo get_the_post_thumbnail($postID, 'medium'); ?>
                                 <?php else: ?>
                                     <?php echo wc_placeholder_img(); ?>
                                 <?php endif; ?>
                             </div>
-                            <p class="dsn:text-black dsn:mb-0 dsn:uppercase dsn:text-sm product-category dsn:my-4"><?php echo $value['category_name']; ?></p>
+                            <p class="dsn:text-black dsn:mb-0 dsn:uppercase dsn:text-sm product-category dsn:mt-2"><?php echo $value['category_name']; ?></p>
                             <h3 class="dsn:text-left dsn:text-white product-title"><?php echo get_the_title($postID); ?></h3>
                         </a>
                        
-                        <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-2 dsn:text-black dsn:md:h-20">
+                        <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-2 dsn:text-black dsn:md:h-14">
                               <?php 
                               $price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) );
                               if ($product->get_price_html() || $price) { ?>
                                 <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { echo $price; } ?></span><span>
                                      <?php if($product->get_price_html() && $price) { ?>
-                                        <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:px-4 dsn:py-2 dsn:rounded-md"
+                                        <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:p-2 dsn:rounded-md"
                                                     value="<?php echo $postID; ?>">
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate add-to-cart-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
+                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
                                             <span class="loading-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" fill="#fff" /></svg></span>
-                                            </button><?php } else { ?><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:px-4 dsn:py-2 dsn:rounded-md" >
+                                            </button><?php } else { ?><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:p-2 dsn:rounded-md" >
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
+                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
                                             </a> <?php } ?></span>
-                        <?php } else { ?><span class="product-prices"><?php echo $price; ?>Request price</span><span><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:px-4 dsn:py-2 dsn:rounded-md" >
+                        <?php } else { ?><span class="product-prices"><?php echo $price; ?>Request price</span><span><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:p-2 dsn:rounded-md" >
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
+                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span>
                                             </a></span> <?php } ?></div>
                     </div>
                 <?php endforeach; ?>
@@ -178,7 +179,8 @@ wp_reset_postdata();
 }
 #product-showcase-<?php echo $block_id; ?> .product-title {
     color: #007437;
-    height: 130px;
+    height: 80px;
+    font-size: 24px;
 }
 #product-showcase-<?php echo $block_id; ?> .product-slider-nav:before {
     content: "";
@@ -220,6 +222,7 @@ wp_reset_postdata();
         padding-bottom: 4em;
         margin-left: 0;
         margin-right: 0;
+        height: auto;
     }
     #product-showcase-<?php echo $block_id; ?> .product-slider-for {
        margin-left: 0;
@@ -235,6 +238,7 @@ wp_reset_postdata();
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
+    height: auto;
    }
 #product-showcase-<?php echo $block_id; ?> .sr-only {
   position: absolute;
@@ -262,6 +266,7 @@ wp_reset_postdata();
     #product-showcase-<?php echo $block_id; ?> .product-slider-nav .slide-nav-label {
         text-align: center;
         cursor: pointer;
+        height: auto;
     }
     #product-showcase-<?php echo $block_id; ?> .slide-nav-label.slick-slide.slick-current.slick-active:after {
     content: "";
@@ -312,9 +317,10 @@ wp_reset_postdata();
     margin-bottom: 0 !important;
 }
 #product-showcase-<?php echo $block_id; ?> a.product-inner .thumbnail img {
-    height: 170px;
+    height: 200px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: top;
 }
 #product-showcase-<?php echo $block_id; ?> .slider-count p {
     font-size: 18px;
@@ -369,14 +375,18 @@ wp_reset_postdata();
         margin-left: 5px;
         margin-right: 5px;
     }
-    #product-showcase-<?php echo $block_id; ?> a.product-inner .thumbnail img {
+    /* #product-showcase-<?php echo $block_id; ?> a.product-inner .thumbnail img {
     height: 250px;
-}
+} */
 }
 @media only screen and (max-width: 1024px) {
     #product-showcase-<?php echo $block_id; ?> .all-products {
         margin-left: 20px;
         margin-right: 20px;
+        height: auto;
+    }
+    #product-showcase-<?php echo $block_id; ?> .product-title {
+        font-size: 18px;
     }
     #product-showcase-<?php echo $block_id; ?> .progress {
         width: 70%;
@@ -407,7 +417,7 @@ wp_reset_postdata();
     z-index: 99;
 }
 }
-..all-products, .product-slider-nav, .product-slider-for {
+.all-products, .product-slider-nav, .product-slider-for {
     opacity: 0;
     visibility: hidden;
 	display: none;
@@ -415,7 +425,7 @@ wp_reset_postdata();
     -webkit-transition: opacity 1s ease;
 }
 
-..all-products.slick-initialized, .product-slider-nav.slick-initialized, .product-slider-for.slick-initialized {
+.all-products.slick-initialized, .product-slider-nav.slick-initialized, .product-slider-for.slick-initialized {
     visibility: visible;
     opacity: 1;   
 	display: block;
