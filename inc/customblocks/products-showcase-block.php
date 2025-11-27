@@ -181,6 +181,7 @@ wp_reset_postdata();
     color: #007437;
     height: 80px;
     font-size: 24px;
+    line-height: 28px;
 }
 #product-showcase-<?php echo $block_id; ?> .product-slider-nav:before {
     content: "";
