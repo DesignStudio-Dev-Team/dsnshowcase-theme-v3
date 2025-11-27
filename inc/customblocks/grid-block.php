@@ -110,7 +110,7 @@ $gridSlideToShow = $gridBlock['slides_to_show'];
                     <div class="dsn:relative">
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
-                        <div class="grid-block-bottom dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/3 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
+                        <div class="grid-block-bottom dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/4 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
                             <h3 class="dsn:text-white dsn:text-left dsn:mb-0"><?php echo $title; ?></h3>
 
                             <?php 
