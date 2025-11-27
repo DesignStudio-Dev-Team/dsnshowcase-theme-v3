@@ -44,7 +44,7 @@
         <iframe class="dsn:absolute dsn:left-0 dsn:top-0 dsn:object-cover dsn:w-full dsn:h-full" src="https://www.youtube.com/embed/<?php echo $primaryBG_YouTube_ID; ?>?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1" frameborder="0" allowfullscreen></iframe>
           </div>
             <?php } ?>
-            <div class="perfect-hot-tub dsn:p-10 dsn:flex dsn:flex-wrap dsn:items-center dsn:gap-4">
+            <div class="perfect-hot-tub dsn:p-10 dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:gap-4">
           <h1 class="dsn:text-4xl dsn:font-bold dsn:my-0 dsn:text-white dsn:relative dsn:z-10">
            <?php echo $primaryTitle; ?>
           </h1>
