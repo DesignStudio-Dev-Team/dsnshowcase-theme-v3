@@ -88,7 +88,7 @@ $locations = !empty($content) && is_array($content)
                                     <img class="dsn:w-full" src="<?php echo esc_html($location['location_image']['url']); ?>" alt="<?php echo $location['tab_title']; ?>" />
                                 <?php endif; ?>
                             <h4 class="dsn:mt-4 dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:md:min-h-30 dsn:2xl:min-h-20 dsn:md:w-105 dsn:mx-auto dsn:text-center"><?php echo esc_html($location['tab_title']); ?></h4>
-                            <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:flex-wrap dsn:gap-6 dsn:justify-between">
+                            <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:gap-6 dsn:justify-between">
 								<div class="footer-address-body dsn:w-full dsn:md:w-5/12">
                                         <div class="dsn:mt-4 dsn:md:mt-4 dsn:text-base dsn:lg:text-xl dsn:w-full">
 											<p class="dsn:m-0 dsn:text-base dsn:font-normal dsn:lg:text-xl dsn:mb-2">
@@ -131,7 +131,7 @@ $locations = !empty($content) && is_array($content)
                                     <?php 
                                     $hours = $location['hours'];
                                     if($hours): ?>
-                                    <div class="dsn:relative dsn:w-full dsn:md:w-6/12 dsn:mt-4 dsn:md:mt-4 dsn:text-base dsn:lg:text-xl hours">
+                                    <div class="dsn:relative dsn:w-full dsn:md:w-7/12 dsn:mt-4 dsn:md:mt-4 dsn:text-base dsn:lg:text-xl hours">
                                     <p class="dsn:m-0 dsn:text-base dsn:font-normal dsn:lg:text-xl dsn:mb-2">
 												HOURS:
 											</p>
