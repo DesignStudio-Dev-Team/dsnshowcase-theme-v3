@@ -61,7 +61,7 @@ if ($title_overwrite) {
             <?php the_content(); ?>
         </div>
     </div>
-    <?php get_template_part('template/content', 'two-columns'); ?>
+    <?php get_template_part('templates/content', 'two-columns'); ?>
 
     <?php
     //static Menu Links
