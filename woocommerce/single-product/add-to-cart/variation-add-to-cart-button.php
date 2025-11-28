@@ -28,7 +28,7 @@ global $product;
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
 
-		<button type="submit" name="add-to-cart" class="single_add_to_cart_button button alt disabled dsn:primary-site-background"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+		<button type="submit" name="add-to-cart" class="single_add_to_cart_button button alt disabled dsn:primary-site-background dsn:h-10"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 		<!--<a href="#" class="button alt dsn:primary-site-background">Get a Quote</a>-->
 
 	<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
