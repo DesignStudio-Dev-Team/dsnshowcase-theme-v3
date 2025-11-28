@@ -128,13 +128,13 @@ if ($productImage && $productImage[0])
 else
     $productImage = '';
 
-$productDescription =  str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->short_description)  ), 0, 200)));
+$productDescription =  str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->get_short_description())  ), 0, 200)));
 
 
 if (!$productDescription)
     $productDescription = str_replace ('"', '\"', trim(preg_replace('/\s\s+/', ' ', strip_tags(get_the_excerpt()))));;  
 if (!$productDescription)
-    $productDescription = str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->description)  ), 0, 200))); 
+    $productDescription = str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->get_description())  ), 0, 200))); 
     
 
 $brand = '';
@@ -152,7 +152,7 @@ foreach ($terms as $term)
     {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": "<?php echo $product->name; ?>",
+        "name": "<?php echo $product->get_name(); ?>",
         "image": [
           "<?php echo $productImage; ?>"
          ],
