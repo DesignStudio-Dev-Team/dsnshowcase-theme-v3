@@ -30,7 +30,7 @@ $gridSlideToShow = $gridBlock['slides_to_show'];
         <div id="grid-block" class="grid-block1 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
         <?php if($gridType == '2') { ?>
-        <div id="grid-block" class="dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-2 dsn:md:order-2 dsn:overflow-hidden">
+        <div id="grid-block" class="dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:overflow-hidden dsn:container dsn:mx-auto">
         <?php } ?>
         <?php if($gridType == '3') { ?>
         <div id="grid-block" class="grid-block3 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
@@ -78,7 +78,7 @@ $gridSlideToShow = $gridBlock['slides_to_show'];
                     <?php } ?>
 
                 <?php if($gridType == '2') { ?>
-                    <div class="dsn:flex-auto dsn:w-full dsn:h-60 dsn:2xl:h-100 dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center dsn:order-2 dsn:md:order-2">
+                    <div class="dsn:flex-auto dsn:w-full dsn:h-60 dsn:md:h-90 dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center grid-2-column">
                         <a href="<?php echo !empty($cta['url']) ? $cta['url'] : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:h-full">
                     <div class="dsn:relative dsn:h-full">
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-full dsn:object-cover">
