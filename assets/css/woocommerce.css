@@ -141,7 +141,7 @@
 
 .woocommerce.single-product .cart .quantity .qty_button {
   background-color: var(--dealerColor);
-  display: none;
+  /*display: none;*/
 }
 
 .woocommerce-cart .cart .quantity .qty_button{
