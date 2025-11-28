@@ -13,8 +13,7 @@ global $product;
 ?>
 <div class="woocommerce-variation-add-to-cart variations_button">
 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-	
-	<div class="dsn:flex dsn:flex-wrap dsn:items-center dsn:gap-4">
+
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
 
@@ -31,7 +30,6 @@ global $product;
 
 		<button type="submit" name="add-to-cart" class="single_add_to_cart_button button alt disabled dsn:primary-site-background"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 		<!--<a href="#" class="button alt dsn:primary-site-background">Get a Quote</a>-->
-	</div>
 
 	<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 
