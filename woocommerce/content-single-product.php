@@ -32,52 +32,69 @@ if (post_password_required()) {
 }
 ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('dsn:container dsn:m-auto dsn:md:pt-10', $product); ?>>
-    <div class="woocommerce-product-gallery dsn:flex woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images">
-        <?php
-        /**
-         * Hook: woocommerce_before_single_product_summary.
-         *
-         * @hooked woocommerce_show_product_sale_flash - 10
-         * @hooked woocommerce_show_product_images - 20
-         */
-        do_action('woocommerce_before_single_product_summary');
+    <?php if ($product->is_type('variable')) : ?>
+        <!-- Variable Product: Use standard WooCommerce gallery for variation support -->
+        <div class="dsn:w-full dsn:md:w-1/2">
+            <?php
+            /**
+             * Hook: woocommerce_before_single_product_summary.
+             *
+             * @hooked woocommerce_show_product_sale_flash - 10
+             * @hooked woocommerce_show_product_images - 20
+             */
+            do_action('woocommerce_before_single_product_summary');
+            ?>
+        </div>
+    <?php else : ?>
+        <!-- Simple Product: Use custom slider -->
+        <div class="woocommerce-product-gallery dsn:flex woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images">
+            <?php
+            /**
+             * Hook: woocommerce_before_single_product_summary (for sale flash).
+             *
+             * @hooked woocommerce_show_product_sale_flash - 10
+             */
+            remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
+            do_action('woocommerce_before_single_product_summary');
+            add_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
 
-        $attachment_ids = $product->get_gallery_image_ids();
-        ?>
-
-        <?php
-        if ($attachment_ids && $product->get_image_id()) { ?>
-            <div id="single_product_image_thumbnail_slider" class="dsn:w-1/5">
-
-            <?php echo wp_get_attachment_image($product->get_image_id()) ?>
+            $attachment_ids = $product->get_gallery_image_ids();
+            ?>
 
             <?php
-            foreach ($attachment_ids as $attachment_id) { ?>
+            if ($attachment_ids && $product->get_image_id()) { ?>
+                <div id="single_product_image_thumbnail_slider" class="dsn:w-1/5">
 
-                <?php echo wp_get_attachment_image($attachment_id) ?>
-
-            <?php }
-            ?>
-            </div>
-           <div id="single_product_image_slider" class="dsn:w-4/5">
-
-                <?php echo wp_get_attachment_image($product->get_image_id(), 'full'); ?>
+                <?php echo wp_get_attachment_image($product->get_image_id()) ?>
 
                 <?php
                 foreach ($attachment_ids as $attachment_id) { ?>
 
-                    <?php echo wp_get_attachment_image($attachment_id, 'full') ?>
+                    <?php echo wp_get_attachment_image($attachment_id) ?>
 
                 <?php }
                 ?>
-            </div>
-        <?php
-        } else { ?>
-            <div>
-                <?php echo wp_get_attachment_image($product->get_image_id(), 'full') ?>
-            </div>
-        <?php } ?>
-    </div>
+                </div>
+               <div id="single_product_image_slider" class="dsn:w-4/5">
+
+                    <?php echo wp_get_attachment_image($product->get_image_id(), 'full'); ?>
+
+                    <?php
+                    foreach ($attachment_ids as $attachment_id) { ?>
+
+                        <?php echo wp_get_attachment_image($attachment_id, 'full') ?>
+
+                    <?php }
+                    ?>
+                </div>
+            <?php
+            } else { ?>
+                <div>
+                    <?php echo wp_get_attachment_image($product->get_image_id(), 'full') ?>
+                </div>
+            <?php } ?>
+        </div>
+    <?php endif; ?>
     <style>
         #single_product_image_thumbnail_slider {
             padding:0px !important;
@@ -128,13 +145,13 @@ if ($productImage && $productImage[0])
 else
     $productImage = '';
 
-$productDescription =  str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->short_description)  ), 0, 200)));
+$productDescription =  str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->get_short_description())  ), 0, 200)));
 
 
 if (!$productDescription)
     $productDescription = str_replace ('"', '\"', trim(preg_replace('/\s\s+/', ' ', strip_tags(get_the_excerpt()))));;  
 if (!$productDescription)
-    $productDescription = str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->description)  ), 0, 200))); 
+    $productDescription = str_replace ('"', '\"', trim(substr (preg_replace('/\s\s+/', ' ', strip_tags ($product->get_description())  ), 0, 200))); 
     
 
 $brand = '';
@@ -152,7 +169,7 @@ foreach ($terms as $term)
     {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": "<?php echo $product->name; ?>",
+        "name": "<?php echo $product->get_name(); ?>",
         "image": [
           "<?php echo $productImage; ?>"
          ],

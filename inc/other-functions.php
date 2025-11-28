@@ -887,7 +887,6 @@ function ds_get_gallery_image_html($attachment_id, $main_image = false)
         . '</div>';
 }
 
-remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);

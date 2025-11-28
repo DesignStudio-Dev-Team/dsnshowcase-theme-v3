@@ -373,7 +373,7 @@ p a:hover {
 @layer utilities {
 
     .dsn\:primary-site-background {
-      background: var(--dealerColor);
+      background: var(--dealerColor) !important;
     }
 
     .dsn\:primary-site-background:hover {
