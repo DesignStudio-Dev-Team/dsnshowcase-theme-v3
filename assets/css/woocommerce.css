@@ -134,9 +134,9 @@
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  width: 3em;
+  /*  width: 3em;
   height: 3em;
-  margin-right: 1rem;
+  margin-right: 1rem;*/
 }
 
 .woocommerce.single-product .cart .quantity .qty_button {
