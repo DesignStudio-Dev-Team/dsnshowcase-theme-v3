@@ -138,7 +138,7 @@ $arg = array(
                               </div>
                           <?php endif; ?>
                           <?php $clear_filter_label = get_field('clear_filter_label', 'options'); ?>
-                          <a href="<?php echo get_permalink(); ?>"><?php echo $clear_filter_label ? $clear_filter_label : 'Clear'; ?></a>
+                          <a href="<?php echo get_permalink(); ?>"><?php echo $clear_filter_label ?: 'Clear'; ?></a>
                           <div id="accordion" class="accordion-container">
                               <?php while (have_rows('filter', 'options')) : the_dsn:row();
 
