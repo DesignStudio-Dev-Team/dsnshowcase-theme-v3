@@ -854,5 +854,7 @@ body.checkout .default-btn {
 .woocommerce div.product form.cart .variations select{
   min-width: unset;
   border: 1px solid;
-  padding: .75em;
+  padding-left: 1em;
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
