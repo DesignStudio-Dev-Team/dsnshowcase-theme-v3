@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.61",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.61",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.61/dsnshowcase.zip",
+  "version": "v3.5.62",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.62",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.62/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2025-12-01",
   "sections": {
-    "changelog": "Merge pull request #174 from DesignStudio-Dev-Team/enhancement-implement-localized-request-pricing-la-fix\n\nEnhancement: Implement localized "Request Pricing" label for unpriced products in Category Template - Fix"
+    "changelog": "Merge pull request #177 from DesignStudio-Dev-Team/uiux-refinements-for-variations-dropdown-menu-stro-fix\n\nUI/UX Refinements for Variations Drop-down Menu (Stroke & Width) - Fix"
   }
 }
