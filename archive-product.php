@@ -9,11 +9,21 @@
  * @version     8.6.0
  */
 
-const DSN_ALLOWED_PAGINATION_VALUES = ['24', '36', '72'];
-const DSN_DEFAULT_PAGINATION_VALUE  = 36;
-const DSN_ARCHIVE_DESCRIPTION_NUM_WORDS = 25;
-const DSN_DEFAULT_ORDER = 'ASC';
-const DSN_DEFAULT_ORDER_BY = 'menu_order';
+if (!defined('DSN_ALLOWED_PAGINATION_VALUES')) {
+	define('DSN_ALLOWED_PAGINATION_VALUES', ['24', '36', '72']);
+}
+if (!defined('DSN_DEFAULT_PAGINATION_VALUE')) {
+	define('DSN_DEFAULT_PAGINATION_VALUE', 36);
+}
+if (!defined('DSN_ARCHIVE_DESCRIPTION_NUM_WORDS')) {
+	define('DSN_ARCHIVE_DESCRIPTION_NUM_WORDS', 25);
+}
+if (!defined('DSN_DEFAULT_ORDER')) {
+	define('DSN_DEFAULT_ORDER', 'ASC');
+}
+if (!defined('DSN_DEFAULT_ORDER_BY')) {
+	define('DSN_DEFAULT_ORDER_BY', 'menu_order');
+}
 
 if ( ! defined('ABSPATH')) {
     exit;
@@ -128,7 +138,7 @@ $arg = array(
                               </div>
                           <?php endif; ?>
                           <?php $clear_filter_label = get_field('clear_filter_label', 'options'); ?>
-                          <a href="<?php echo get_permalink(); ?>"><?php echo $clear_filter_label ? $clear_filter_label : 'Clear'; ?></a>
+                          <a href="<?php echo get_permalink(); ?>"><?php echo $clear_filter_label ?: 'Clear'; ?></a>
                           <div id="accordion" class="accordion-container">
                               <?php while (have_rows('filter', 'options')) : the_dsn:row();
 
@@ -315,7 +325,12 @@ $arg = array(
 <?php
   function dsn_get_archive_description_excerpt(): string
 {
-  return wp_trim_words(wp_strip_all_tags(get_the_archive_description()),
-    DSN_ARCHIVE_DESCRIPTION_NUM_WORDS, '...');
+  $description = wp_strip_all_tags(get_the_archive_description());
+
+  if (DSN_ARCHIVE_DESCRIPTION_NUM_WORDS === 0) {
+    return $description;
+  }
+
+  return wp_trim_words($description, DSN_ARCHIVE_DESCRIPTION_NUM_WORDS, '...');
 }
 ?>

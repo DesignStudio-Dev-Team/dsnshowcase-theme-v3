@@ -51,7 +51,8 @@
         "back_to_top": "Retour au sommet",
         "clear_filters_link_text": "Dégager",
         "no_products_found": "Aucun produit trouvé",
-        "go_to_page": "Aller à la page"
+        "go_to_page": "Aller à la page",
+        "request_pricing": "Demande de prix"
     },
     "woocommerce_cart": {
         "back_link": "RETOUR",
