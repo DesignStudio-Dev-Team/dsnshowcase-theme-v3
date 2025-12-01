@@ -51,7 +51,8 @@
         "back_to_top": "Back to Top",
         "clear_filters_link_text": "Clear",
         "no_products_found": "No products were found.",
-        "go_to_page": "Go to page"
+        "go_to_page": "Go to page",
+        "request_pricing": "Request Pricing"
     },
     "woocommerce_cart": {
         "back_link": "BACK",

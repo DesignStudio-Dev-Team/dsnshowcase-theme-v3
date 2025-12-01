@@ -51,7 +51,8 @@
         "back_to_top": "Terug naar Boven",
         "clear_filters_link_text": "Wis",
         "no_products_found" : "Geen producten gevonden",
-        "go_to_page": "Ga naar pagina"
+        "go_to_page": "Ga naar pagina",
+        "request_pricing": "Vraag prijs op"
     },
     "woocommerce_cart": {
         "back_link": "TERUG",
