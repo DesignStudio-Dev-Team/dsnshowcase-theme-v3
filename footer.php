@@ -23,12 +23,6 @@ if($footer) {
     get_template_part('templates/footer_1');
 }
 ?>
-<?php 
-// Include Syndified Call to Action Modal for product reservation/inquiry functionality
-if ( function_exists('syndified_include_cta_modal') ) {
-    syndified_include_cta_modal();
-}
-?>
 <?php wp_footer(); ?>
 </body>
 </html>
