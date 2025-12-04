@@ -21,27 +21,56 @@ if ( ! isset( $postID ) ) {
         <?php if ( dsn_show_reserve_btn( $postID ) ) : ?>
             <?php 
                 $reserve_icon = get_option( 'Syndified®_ecomm_reserve_icon', 'reserve' );
+                $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
             ?>
-            <!-- Reserve Button -->
-            <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
-               class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
-               title="<?php echo esc_attr( $translatedText->woocommerce_cart->reserve_button ); ?>">
-                <span class="dsn:flex dsn:items-center">
-                    <?php dsn_icon( $reserve_icon, 'dsn:w-5 dsn:h-5' ); ?>
-                </span>
-            </a>
+            
+            <?php if ( $use_modal ) : ?>
+                <!-- Reserve Button - Triggers Syndified CTA Modal -->
+                <button type="button"
+                        <?php echo function_exists('syndified_render_cta_button_attrs') ? syndified_render_cta_button_attrs( $postID ) : ''; ?>
+                        class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded dsn:cursor-pointer"
+                        title="<?php echo esc_attr( $translatedText->woocommerce_cart->reserve_button ); ?>">
+                    <span class="dsn:flex dsn:items-center">
+                        <?php dsn_icon( $reserve_icon, 'dsn:w-5 dsn:h-5' ); ?>
+                    </span>
+                </button>
+            <?php else : ?>
+                <!-- Reserve Button - Direct URL (Fallback when Syndified modal is not available) -->
+                <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
+                   class="ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
+                   title="<?php echo esc_attr( $translatedText->woocommerce_cart->reserve_button ); ?>">
+                    <span class="dsn:flex dsn:items-center">
+                        <?php dsn_icon( $reserve_icon, 'dsn:w-5 dsn:h-5' ); ?>
+                    </span>
+                </a>
+            <?php endif; ?>
+            
         <?php elseif ( dsn_show_get_info_btn( $postID ) ) : ?>
             <?php 
                 $get_info_icon = get_option( 'Syndified®_ecomm_get_info_icon', 'info' );
+                $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
             ?>
-            <!-- Get Info Button -->
-            <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
-               class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
-               title="<?php echo esc_attr( $translatedText->woocommerce_cart->info_button ); ?>">
-                <span class="dsn:flex dsn:items-center">
-                    <?php dsn_icon( $get_info_icon, 'dsn:w-5 dsn:h-5' ); ?>
-                </span>
-            </a>
+            
+            <?php if ( $use_modal ) : ?>
+                <!-- Get Info Button - Triggers Syndified CTA Modal -->
+                <button type="button"
+                        <?php echo function_exists('syndified_render_cta_button_attrs') ? syndified_render_cta_button_attrs( $postID ) : ''; ?>
+                        class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded dsn:cursor-pointer"
+                        title="<?php echo esc_attr( $translatedText->woocommerce_cart->info_button ); ?>">
+                    <span class="dsn:flex dsn:items-center">
+                        <?php dsn_icon( $get_info_icon, 'dsn:w-5 dsn:h-5' ); ?>
+                    </span>
+                </button>
+            <?php else : ?>
+                <!-- Get Info Button - Direct URL (Fallback when Syndified modal is not available) -->
+                <a href="<?php echo esc_url( dsn_get_cta_url( $postID ) ); ?>"
+                   class="ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-1 dsn:ml-2 dsn:w-10 dsn:h-9 dsn:px-3 dsn:py-2 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"
+                   title="<?php echo esc_attr( $translatedText->woocommerce_cart->info_button ); ?>">
+                    <span class="dsn:flex dsn:items-center">
+                        <?php dsn_icon( $get_info_icon, 'dsn:w-5 dsn:h-5' ); ?>
+                    </span>
+                </a>
+            <?php endif; ?>
         <?php endif; ?>
     <?php endif; ?>
 
