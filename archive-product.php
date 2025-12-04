@@ -319,6 +319,13 @@ $arg = array(
   </div>
 </div>
 
+<?php
+// Include Syndified Call to Action Modal for product reservation/inquiry functionality
+// Only included on product archive pages where CTA buttons are displayed
+if ( function_exists('syndified_include_cta_modal') ) {
+    syndified_include_cta_modal();
+}
+?>
 
 <?php get_footer(); ?>
 
