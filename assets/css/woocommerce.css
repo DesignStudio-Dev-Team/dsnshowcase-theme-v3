@@ -850,3 +850,11 @@ body.checkout .default-btn {
 .woocommerce-cart-form__cart-item a, .woocommerce-cart-form__cart-item bdi {
  color: var(--dealerColor);
 }
+
+.woocommerce div.product form.cart .variations select{
+  min-width: unset;
+  border: 1px solid;
+  padding-left: 1em;
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
