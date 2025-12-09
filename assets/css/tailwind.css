@@ -5,6 +5,7 @@
     --breakpoint-max: 1800px;
     --text-h2: 48px;
     --color-black-500: #000;
+    --color-stihl-orange: #F37A1F;
 }
 
 @utility container {

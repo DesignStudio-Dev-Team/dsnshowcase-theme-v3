@@ -53,7 +53,7 @@ global $dssSiteLanguage;
               }
               
               if ($has_vip_pricing): ?>
-                  <div class="syndified-vip-cart-banner dsn:text-black dsn:px-4 dsn:py-2 dsn:rounded-lg dsn:font-semibold dsn:text-sm dsn:whitespace-nowrap" style="background:var(--color-stihl-orange,#ff9900);">
+                  <div class="syndified-vip-cart-banner dsn:bg-stihl-orange dsn:text-black dsn:px-4 dsn:py-2 dsn:rounded-full dsn:font-semibold dsn:text-sm dsn:whitespace-nowrap">
                       De onderstaande prijzen zijn uw gereduceerde professionele prijzen.
                   </div>
               <?php endif; ?>
