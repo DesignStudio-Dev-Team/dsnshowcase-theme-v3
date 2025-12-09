@@ -228,7 +228,16 @@ global $dssSiteLanguage;
                         <div
                           class="dsn:flex dsn:flex-row dsn:items-center dsn:justify-end dsn:gap-2">
                           <?php
-                          echo $_product->get_price_html(); ?>
+                          $regular_price = $_product->get_regular_price();
+                          $active_price  = $_product->get_price(); // This already has the discount applied in the cart context
+
+                          if ( (float) $active_price < (float) $regular_price ) {
+                              echo '<del aria-hidden="true">' . wc_price( $regular_price ) . '</del>';
+                              echo '<ins>' . wc_price( $active_price ) . '</ins>';
+                          } else {
+                              echo wc_price( $active_price );
+                          }
+                          ?>
                         </div>
                       </td>
 
