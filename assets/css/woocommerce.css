@@ -858,3 +858,7 @@ body.checkout .default-btn {
   padding-top: .5em;
   padding-bottom: .5em;
 }
+
+.woocommerce div.product.product-type-variable div.images.woocommerce-product-gallery{
+  width: 100%;
+}
