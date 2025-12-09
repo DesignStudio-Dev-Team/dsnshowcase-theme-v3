@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.63",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.63",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.63/dsnshowcase.zip",
+  "version": "v3.5.64",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.64",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.64/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-12-01",
+  "last_updated": "2025-12-09",
   "sections": {
-    "changelog": "Merge pull request #178 from DesignStudio-Dev-Team/uiux-refinements-for-variations-dropdown-menu-stro-fix\n\nRefines style of variations dropdown menu"
+    "changelog": "Merge pull request #183 from DesignStudio-Dev-Team/mark\n\nMark"
   }
 }
