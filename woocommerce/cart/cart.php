@@ -33,7 +33,31 @@ global $dssSiteLanguage;
         <div class="cart-page-wrapper-left dsn:md:flex dsn:md:flex-col dsn:gap-13 dsn:md:w-2/3">
           <!-- Cart Wrapper -->
           <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
-            <h4 class="dsn:pb-4"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
+            <div class="dsn:flex dsn:items-center dsn:gap-4 dsn:pb-4 dsn:justify-between">
+              <h4 class="dsn:m-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
+              
+              <?php
+              // Display VIP pricing banner inline with heading
+              $has_vip_pricing = false;
+              
+              if (function_exists('syndified_get_product_discount') && WC()->cart) {
+                  foreach (WC()->cart->get_cart() as $cart_item) {
+                      $product_id = $cart_item['product_id'];
+                      $discount_info = syndified_get_product_discount($product_id);
+                      
+                      if ($discount_info && isset($discount_info['value']) && $discount_info['value'] > 0) {
+                          $has_vip_pricing = true;
+                          break;
+                      }
+                  }
+              }
+              
+              if ($has_vip_pricing): ?>
+                  <div class="syndified-vip-cart-banner dsn:bg-stihl-orange dsn:text-white dsn:px-4 dsn:py-2 dsn:rounded-full dsn:font-semibold dsn:text-sm dsn:whitespace-nowrap">
+                    <?php echo dssLang($dssSiteLanguage)->woocommerce_cart->vip_discount_banner_text; ?>
+                  </div>
+              <?php endif; ?>
+            </div>
 
             <?php
             $item_counter = WC()->cart->cart_contents_count; ?>
@@ -204,7 +228,16 @@ global $dssSiteLanguage;
                         <div
                           class="dsn:flex dsn:flex-row dsn:items-center dsn:justify-end dsn:gap-2">
                           <?php
-                          echo $_product->get_price_html(); ?>
+                          $regular_price = $_product->get_regular_price();
+                          $active_price  = $_product->get_price(); // This already has the discount applied in the cart context
+
+                          if ( (float) $active_price < (float) $regular_price ) {
+                              echo '<del aria-hidden="true">' . wc_price( $regular_price ) . '</del>';
+                              echo '<ins>' . wc_price( $active_price ) . '</ins>';
+                          } else {
+                              echo wc_price( $active_price );
+                          }
+                          ?>
                         </div>
                       </td>
 
