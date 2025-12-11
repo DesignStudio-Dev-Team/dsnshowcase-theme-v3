@@ -13,23 +13,24 @@ global $product;
 ?>
 <div class="woocommerce-variation-add-to-cart variations_button">
 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-    <label for="quantity" class="mr-4">Qty</label>
-	<?php
-	do_action( 'woocommerce_before_add_to_cart_quantity' );
 
-	woocommerce_quantity_input(
-		array(
-			'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-			'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
-			'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
-		)
-	);
+		<?php
+		do_action( 'woocommerce_before_add_to_cart_quantity' );
 
-	do_action( 'woocommerce_after_add_to_cart_quantity' );
-	?>
+		woocommerce_quantity_input(
+			array(
+				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
+			)
+		);
 
-	<button type="submit" class="single_add_to_cart_button button alt disabled"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-    <a href="#" class="button alt">Get a Quote</a>
+		do_action( 'woocommerce_after_add_to_cart_quantity' );
+		?>
+
+		<button type="submit" name="add-to-cart" class="single_add_to_cart_button button alt disabled dsn:primary-site-background dsn:h-10"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+		<!--<a href="#" class="button alt dsn:primary-site-background">Get a Quote</a>-->
+
 	<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 
 	<input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />

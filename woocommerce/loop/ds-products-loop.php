@@ -82,7 +82,7 @@ $translatedText = dssLang($dssSiteLanguage);
                 <?php
                   $postID             = get_the_ID();
                   $product            = wc_get_product($postID);
-                  $product_price_html = $product->get_price_html();
+                  $product_price_html = $product->get_price_html() ?: $translatedText->template_store->request_pricing;
                   $stock_status       = $product->get_stock_status();
                 ?>
                 <div>

@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.58",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.58",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.58/dsnshowcase.zip",
+  "version": "v3.5.64",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.64",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.64/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-11-07",
+  "last_updated": "2025-12-09",
   "sections": {
-    "changelog": "Merge pull request #158 from DesignStudio-Dev-Team/juan\n\nfix blog main feature now has the link correctly"
+    "changelog": "Merge pull request #183 from DesignStudio-Dev-Team/mark\n\nMark"
   }
 }

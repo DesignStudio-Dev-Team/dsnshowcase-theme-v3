@@ -42,6 +42,9 @@ function dsnshowcase_setup() {
 
     // Add Woocommerce support
     add_theme_support('woocommerce');
+    add_theme_support( 'wc-product-gallery-zoom' );
+    add_theme_support( 'wc-product-gallery-lightbox' );
+    add_theme_support( 'wc-product-gallery-slider' );
 
     // Register navigation menus
     register_nav_menus(array(
@@ -614,10 +617,10 @@ add_action('password_reset', function($user, $new_pass) {
 
 
 // -------------------------
-// Limit Number cron jobs to run just once every hour
+// Limit Number cron jobs to run just once 5 minutes
 // -------------------------
 add_filter( 'cron_request', function( $cron_request ) {
-    $interval = 60*60; // 1 hour
+    $interval = 5*60; // 5 minutes
     $doing_cron_transient = '_transient_doing_cron';
     $last = get_option( $doing_cron_transient );
 
