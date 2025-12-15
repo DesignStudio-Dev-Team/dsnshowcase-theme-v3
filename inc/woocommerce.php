@@ -217,8 +217,8 @@ function dsn_reserve_button() {
     }
     $translatedText = dssLang($dssSiteLanguage);
 
-    // Get reserve icon from settings
-    $reserve_icon = get_option('Syndified®_ecomm_reserve_icon', 'reserve');
+    // Get reserve icon from Syndified settings
+    $reserve_icon = function_exists('syndified_get_reserve_icon') ? syndified_get_reserve_icon() : 'reserve';
     $button_title = $translatedText->woocommerce_cart->reserve_button;
 
     // Check if Syndified modal is available
@@ -266,8 +266,8 @@ function dsn_get_info_button() {
     }
     $translatedText = dssLang($dssSiteLanguage);
 
-    // Get info icon from settings
-    $get_info_icon = get_option('Syndified®_ecomm_get_info_icon', 'info');
+    // Get info icon from Syndified settings
+    $get_info_icon = function_exists('syndified_get_info_icon') ? syndified_get_info_icon() : 'info';
     $button_title = $translatedText->woocommerce_cart->info_button;
 
     // Check if Syndified modal is available
