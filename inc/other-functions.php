@@ -1512,7 +1512,7 @@ if ( ! function_exists( 'dsn_get_term_meta' ) ) {
 if ( ! function_exists('dsn_get_cta_url') ) {
   function dsn_get_cta_url(int $productID = 0)
   {
-    if ($productID === 0 || !dsn_is_syndicated_content($productID)) {
+    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
       return get_permalink($productID);
     }
     $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
@@ -1565,7 +1565,7 @@ if ( ! function_exists('dsn_get_current_active_locale')) {
 
 if ( ! function_exists('dsn_show_add_to_cart') ) {
   function dsn_show_add_to_cart(int $productID): bool {
-    if(dsn_is_syndicated_content($productID)) {
+    if( function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
 
       if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ADD_TO_CART_BTN_SETTING_ACCESSOR}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ADD_TO_CART_BTN_SETTING_ACCESSOR} !== '') {
@@ -1616,7 +1616,7 @@ if ( ! function_exists('dsn_show_add_to_cart') ) {
 if ( ! function_exists('dsn_show_price') ) {
   function dsn_show_price(int $productID = 0): bool
   {
-    if ($productID === 0 || !dsn_is_syndicated_content($productID)) {
+    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
       $setting = get_option( SYNDIFIED_ECOMM_SHOW_PRICE_SETTING_OPTION_KEY );
       return $setting === SYNDIFIED_YES;
     }
@@ -1640,7 +1640,7 @@ if ( ! function_exists('dsn_show_other_action_buttons') ) {
       return false;
     }
 
-    if ($productID === 0 || !dsn_is_syndicated_content($productID)) {
+    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
       $setting = syndified_get_action_button_setting();
       return $setting !== SYNDIFIED_NO;
     }
@@ -1665,7 +1665,7 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
 
     $show = false;
 
-    if(dsn_is_syndicated_content($productID)){
+    if( function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)){
       $syndifiedPostMeta = json_decode(get_post_meta($productID,
         SYNDIFIED_FIELDS_POST_META_KEY, true), false);
 
@@ -1700,7 +1700,7 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
       return false;
     }
 
-    if ($productID === 0 || !dsn_is_syndicated_content($productID)) {
+    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
       $setting = syndified_get_action_button_setting();
       return $setting === 'show_get_info_btn';
     }
@@ -1713,13 +1713,6 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
 
     $setting = syndified_get_action_button_setting();
     return $setting === 'show_get_info_btn';
-  }
-}
-
-if ( ! function_exists('dsn_is_syndicated_content') ) {
-  function dsn_is_syndicated_content(int $productId): bool
-  {
-    return (bool) get_post_meta($productId, SYNDIFIED_CONSOLE_POST_META_KEY, true);
   }
 }
 
