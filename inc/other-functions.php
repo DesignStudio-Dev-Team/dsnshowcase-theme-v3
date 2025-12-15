@@ -1658,61 +1658,43 @@ if ( ! function_exists('dsn_show_other_action_buttons') ) {
 
 if ( ! function_exists('dsn_show_reserve_btn') ) {
   function dsn_show_reserve_btn(int $productID): bool {
-    // Require Syndified plugin
-    if (!function_exists('syndified_get_action_button_setting')) {
+    // Delegate to Syndified plugin when active
+    if (function_exists('syndified_show_reserve_btn')) {
+      return syndified_show_reserve_btn($productID);
+    }
+
+    // Fallback for when plugin is deactivated
+    // Only check non-syndicated products based on stock status
+    if (!function_exists('wc_get_product')) {
       return false;
     }
 
-    $show = false;
-
-    if( function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)){
-      $syndifiedPostMeta = json_decode(get_post_meta($productID,
-        SYNDIFIED_FIELDS_POST_META_KEY, true), false);
-
-      if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR} !== '') {
-        $setting = $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR};
-      } else {
-        $setting = syndified_get_action_button_setting();
-      }
-
-      if($setting === 'show_reserve_btn'){
-        $show = true;
-      }
-    }else{
-      $product = wc_get_product($productID);
-
-      if( $product->get_stock_status() === STOCK_STATUS_ON_RESERVE ||
-        empty($product->get_price()) ||
-        ($product->managing_stock() && $product->get_stock_quantity() === 0) ) {
-        $show = true;
-      }
+    $product = wc_get_product($productID);
+    if (!$product) {
+      return false;
     }
 
-    return $show;
+    // Show reserve button if product is on reserve, has no price, or is out of stock
+    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE ||
+        empty($product->get_price()) ||
+        ($product->managing_stock() && $product->get_stock_quantity() === 0)) {
+      return true;
+    }
+
+    return false;
   }
 }
 
 if ( ! function_exists('dsn_show_get_info_btn') ) {
   function dsn_show_get_info_btn(int $productID = 0): bool
   {
-    // Require Syndified plugin
-    if (!function_exists('syndified_get_action_button_setting')) {
-      return false;
+    // Delegate to Syndified plugin when active
+    if (function_exists('syndified_show_get_info_btn')) {
+      return syndified_show_get_info_btn($productID);
     }
 
-    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
-      $setting = syndified_get_action_button_setting();
-      return $setting === 'show_get_info_btn';
-    }
-
-    $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
-
-    if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR} !== '') {
-      return $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR} === 'show_get_info_btn';
-    }
-
-    $setting = syndified_get_action_button_setting();
-    return $setting === 'show_get_info_btn';
+    // Fallback: get info button is a Syndified feature, return false when plugin is deactivated
+    return false;
   }
 }
 
