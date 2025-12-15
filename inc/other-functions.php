@@ -1512,38 +1512,12 @@ if ( ! function_exists( 'dsn_get_term_meta' ) ) {
 if ( ! function_exists('dsn_get_cta_url') ) {
   function dsn_get_cta_url(int $productID = 0)
   {
-    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
-      return get_permalink($productID);
-    }
-    $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
-
-    if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX} !== '') {
-      $cta_url = $syndifiedPostMeta->{SYNDIFIED_DEALER_CTA_URL_SETTING_ACCESSOR_PREFIX.$syndifiedPostMeta->language};
-    } else {
-      $cta_url = get_option(SYNDIFIED_ECOMM_CTA_URL_SETTING_OPTION_KEY_PREFIX. $syndifiedPostMeta->language);
+    // Delegate to Syndified plugin when active
+    if (function_exists('syndified_get_cta_url')) {
+      return syndified_get_cta_url($productID);
     }
 
-    if ($cta_url) {
-      // Add product name and article ID parameters like in Syndified templates
-      $product = wc_get_product($productID);
-
-      if ($product) {
-        $product_title = $product->get_name();
-
-        // Add product name parameter
-        $cta_url = add_query_arg('pn', urlencode($product_title), $cta_url);
-
-        // Add article ID if available (from Syndified plugin)
-        $article_id = get_post_meta($productID, 'console_id', true);
-        if ($article_id) {
-          $cta_url = add_query_arg('an', urlencode($article_id), $cta_url);
-        }
-      }
-
-      return $cta_url;
-    }
-
-    // Fallback to product permalink if no CTA URL is configured
+    // Fallback: return product permalink
     return get_permalink($productID);
   }
 }
@@ -1565,94 +1539,39 @@ if ( ! function_exists('dsn_get_current_active_locale')) {
 
 if ( ! function_exists('dsn_show_add_to_cart') ) {
   function dsn_show_add_to_cart(int $productID): bool {
-    if( function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
-      $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
-
-      if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ADD_TO_CART_BTN_SETTING_ACCESSOR}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ADD_TO_CART_BTN_SETTING_ACCESSOR} !== '') {
-        $show = $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ADD_TO_CART_BTN_SETTING_ACCESSOR} === SYNDIFIED_YES;
-      } else {
-        $show = get_option(SYNDIFIED_ECOMM_SHOW_ADD_TO_CART_BTN_SETTING_OPTION_KEY) === SYNDIFIED_YES;
-      }
-
-      // Brand approval (stored as product meta or option fallback)
-      $brandApproved = $syndifiedPostMeta->{SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_SETTING_ACCESSOR};
-      if (empty($brandApproved)) {
-        $brandApproved = get_option(SYNDIFIED_BRAND_APPROVES_PRODUCT_TO_SELL_OPTION_KEY);
-      }
-      if ($brandApproved === '0' || $brandApproved === false) {
-        $show = false;
-      }
-
-      // Stock-related logic
-      $stockStatus = get_post_meta($productID, STOCK_STATUS_POST_META_KEY, true);
-      $manageStock = get_post_meta($productID, MANAGE_STOCK_POST_META_KEY, true);
-      $stockQty = get_post_meta($productID, STOCK_POST_META_KEY, true);
-      $backordersMode = get_post_meta($productID, BACKORDERS_POST_META_KEY, true);
-
-      $stockQty = empty($stockQty) ? null : (int) $stockQty;
-
-      // Out of stock (no managed stock)
-      if ($show && $stockStatus === STOCK_STATUS_OUT_OF_STOCK && $manageStock === SYNDIFIED_NO) {
-        $show = false;
-      }
-
-      // Managed stock but no quantity and backorders not allowed
-      if ($show && $manageStock === SYNDIFIED_YES && $backordersMode === SYNDIFIED_NO && ($stockQty === null || $stockQty <= 0)) {
-        $show = false;
-      }
-
-      // Custom reserve state
-      if ($show && $stockStatus === STOCK_STATUS_ON_RESERVE) {
-        $show = false;
-      }
-    }else{
-      $show = !dsn_show_reserve_btn($productID);
+    // Delegate to Syndified plugin when active
+    if (function_exists('syndified_show_add_to_cart')) {
+      return syndified_show_add_to_cart($productID);
     }
 
-    return (bool)apply_filters('dsn_show_add_to_cart_filter', $show, $productID);
+    // Fallback: show add-to-cart if not showing reserve button
+    return !dsn_show_reserve_btn($productID);
   }
 }
 
 if ( ! function_exists('dsn_show_price') ) {
   function dsn_show_price(int $productID = 0): bool
   {
-    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
-      $setting = get_option( SYNDIFIED_ECOMM_SHOW_PRICE_SETTING_OPTION_KEY );
-      return $setting === SYNDIFIED_YES;
+    // Delegate to Syndified plugin when active
+    if (function_exists('syndified_show_price')) {
+      return syndified_show_price($productID);
     }
 
-    $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
-
-    if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_PRICE_SETTING_ACCESSOR}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_PRICE_SETTING_ACCESSOR} !== '') {
-      return $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_PRICE_SETTING_ACCESSOR} === SYNDIFIED_YES;
-    }
-
-    $setting = get_option( SYNDIFIED_ECOMM_SHOW_PRICE_SETTING_OPTION_KEY );
-    return $setting === SYNDIFIED_YES;
+    // Fallback: show price by default when plugin is deactivated
+    return true;
   }
 }
 
 if ( ! function_exists('dsn_show_other_action_buttons') ) {
   function dsn_show_other_action_buttons(int $productID = 0): bool
   {
-    // Require Syndified plugin
-    if (!function_exists('syndified_get_action_button_setting')) {
-      return false;
+    // Delegate to Syndified plugin when active
+    if (function_exists('syndified_show_other_action_buttons')) {
+      return syndified_show_other_action_buttons($productID);
     }
 
-    if ($productID === 0 || ( function_exists('syndified_is_syndicated_content') && !syndified_is_syndicated_content($productID))) {
-      $setting = syndified_get_action_button_setting();
-      return $setting !== SYNDIFIED_NO;
-    }
-
-    $syndifiedPostMeta = json_decode(get_post_meta($productID, SYNDIFIED_FIELDS_POST_META_KEY, true), false);
-
-    if (isset($syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR}) && $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR} !== '') {
-      return $syndifiedPostMeta->{SYNDIFIED_DEALER_SHOW_ACTION_BTN_SETTING_ACCESSOR} !== SYNDIFIED_NO;
-    }
-
-    $setting = syndified_get_action_button_setting();
-    return $setting !== SYNDIFIED_NO;
+    // Fallback: return false (action buttons are Syndified feature)
+    return false;
   }
 }
 
