@@ -615,19 +615,21 @@ add_action('password_reset', function($user, $new_pass) {
 }, 10, 2);
 
 
-
 // -------------------------
-// Limit Number cron jobs to run just once 5 minutes
+// Limit Number cron jobs to run just once every 5 minutes
 // -------------------------
 add_filter( 'cron_request', function( $cron_request ) {
-    $interval = 5*60; // 5 minutes
-    $doing_cron_transient = '_transient_doing_cron';
-    $last = get_option( $doing_cron_transient );
 
-    if ( $last && ( time() - $last ) < $interval ) {
-        // Skip if last cron was within the interval
+    $interval = (60 + rand (0,59)) * 60; // 60 minutes + 
+    $option_name = 'my_last_cron_run';
+    $last_run = get_option( $option_name, 0 );
+    $now = time();
+
+    if ( $last_run && ( $now - $last_run ) < $interval ) {
+
         return false;
     }
 
+    update_option( $option_name, $now );
     return $cron_request;
 });
