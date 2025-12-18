@@ -179,11 +179,22 @@ function dsn_stock_status_reserve() {
             return;
         }
 
+        $product_id = $product->get_id();
         $stock_status = $product->get_stock_status();
 
+        // Handle reserve button for products with on_reserve stock status
         if ($stock_status == 'on_reserve') {
             remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
-
+            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
+        }
+        // Handle get info button for syndicated products configured to show get info
+        elseif (dsn_show_get_info_btn($product_id) && !dsn_show_add_to_cart($product_id)) {
+            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+            add_action('woocommerce_single_product_summary', 'dsn_get_info_button', 30);
+        }
+        // Handle reserve button for syndicated products configured to show reserve
+        elseif (dsn_show_reserve_btn($product_id) && !dsn_show_add_to_cart($product_id)) {
+            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
             add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
         }
     }
@@ -192,37 +203,106 @@ add_action('woocommerce_single_product_summary', 'dsn_stock_status_reserve', 1);
 
 function dsn_reserve_button() {
     global $product;
+    global $dssSiteLanguage;
 
     if (!$product) {
         return;
     }
-    $product_name = $product->get_name();
 
-    $base_field_name = 'Syndified®_ecomm_cta_url_setting';
-    $reserve_url_base = get_option( $base_field_name );
+    $postID = $product->get_id();
 
+    // Get translated text
+    if (empty($dssSiteLanguage)) {
+        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+    }
+    $translatedText = dssLang($dssSiteLanguage);
 
-  // WPML Support
-        if ( function_exists( 'wpml_get_current_language' ) ) {
-            $current_language = wpml_get_current_language();
-            if ( $current_language && $current_language !== wpml_get_default_language() ) {
-    
-                $translated_field_name = $base_field_name . '_' . $current_language . '_BE';
-                $translated_field_value = get_option( $translated_field_name );
-                
-                if ( ! empty( $translated_field_value ) ) {
-                    $reserve_url_base = $translated_field_value;
-                }
-            }
-        }
+    // Get reserve icon from Syndified settings
+    $reserve_icon = function_exists('syndified_get_reserve_icon') ? syndified_get_reserve_icon() : 'reserve';
+    $button_title = $translatedText->woocommerce_cart->reserve_button;
 
+    // Check if Syndified modal is available
+    $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
 
-
- if ( $reserve_url_base ) {
-            $product_name_encoded = urlencode( $product->get_name() );
-            $reserve_url = $reserve_url_base . '?pn=' . $product_name_encoded;
-        echo '<a href="' . esc_url($reserve_url) . '" class="button alt">' . __('Reserve', 'dsnshowcase') . '</a>';
+    if ($use_modal) {
+        // Reserve Button - Triggers Syndified CTA Modal
+        echo '<button type="button" ';
+        echo function_exists('syndified_render_cta_button_attrs') ? syndified_render_cta_button_attrs($postID) : '';
+        echo ' class="button alt ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-2 dsn:px-6 dsn:py-3 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded dsn:cursor-pointer"';
+        echo ' title="' . esc_attr($button_title) . '">';
+        echo '<span class="dsn:flex dsn:items-center">';
+        dsn_icon($reserve_icon, 'dsn:w-5 dsn:h-5');
+        echo '</span>';
+        echo '<span>' . esc_html($button_title) . '</span>';
+        echo '</button>';
     } else {
-        echo '<p>' . __('Contact us to reserve this product', 'dsnshowcase') . '</p>';
+        // Reserve Button - Direct URL (Fallback when Syndified modal is not available)
+        $cta_url = dsn_get_cta_url($postID);
+
+        echo '<a href="' . esc_url($cta_url) . '"';
+        echo ' class="button alt ds-reserve-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-2 dsn:px-6 dsn:py-3 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"';
+        echo ' title="' . esc_attr($button_title) . '">';
+        echo '<span class="dsn:flex dsn:items-center">';
+        dsn_icon($reserve_icon, 'dsn:w-5 dsn:h-5');
+        echo '</span>';
+        echo '<span>' . esc_html($button_title) . '</span>';
+        echo '</a>';
     }
 }
+
+function dsn_get_info_button() {
+    global $product;
+    global $dssSiteLanguage;
+
+    if (!$product) {
+        return;
+    }
+
+    $postID = $product->get_id();
+
+    // Get translated text
+    if (empty($dssSiteLanguage)) {
+        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+    }
+    $translatedText = dssLang($dssSiteLanguage);
+
+    // Get info icon from Syndified settings
+    $get_info_icon = function_exists('syndified_get_info_icon') ? syndified_get_info_icon() : 'info';
+    $button_title = $translatedText->woocommerce_cart->info_button;
+
+    // Check if Syndified modal is available
+    $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
+
+    if ($use_modal) {
+        // Get Info Button - Triggers Syndified CTA Modal
+        echo '<button type="button" ';
+        echo function_exists('syndified_render_cta_button_attrs') ? syndified_render_cta_button_attrs($postID) : '';
+        echo ' class="button alt ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-2 dsn:px-6 dsn:py-3 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded dsn:cursor-pointer"';
+        echo ' title="' . esc_attr($button_title) . '">';
+        echo '<span class="dsn:flex dsn:items-center">';
+        dsn_icon($get_info_icon, 'dsn:w-5 dsn:h-5');
+        echo '</span>';
+        echo '<span>' . esc_html($button_title) . '</span>';
+        echo '</button>';
+    } else {
+        // Get Info Button - Direct URL (Fallback when Syndified modal is not available)
+        $cta_url = dsn_get_cta_url($postID);
+
+        echo '<a href="' . esc_url($cta_url) . '"';
+        echo ' class="button alt ds-info-button dsn:primary-site-background dsn:flex dsn:items-center dsn:justify-center dsn:gap-2 dsn:px-6 dsn:py-3 dsn:text-white dsn:transition-colors dsn:duration-150 dsn:rounded"';
+        echo ' title="' . esc_attr($button_title) . '">';
+        echo '<span class="dsn:flex dsn:items-center">';
+        dsn_icon($get_info_icon, 'dsn:w-5 dsn:h-5');
+        echo '</span>';
+        echo '<span>' . esc_html($button_title) . '</span>';
+        echo '</a>';
+    }
+}
+
+// Include Syndified CTA modal on single product pages
+function dsn_include_syndified_modal_on_product_pages() {
+    if (is_product() && function_exists('syndified_include_cta_modal')) {
+        syndified_include_cta_modal();
+    }
+}
+add_action('wp_footer', 'dsn_include_syndified_modal_on_product_pages');
