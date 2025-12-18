@@ -82,9 +82,11 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                        
                         <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-4 dsn:text-black dsn:md:h-14">
                              <?php 
+                             $regular_price = wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
+                             
                              $price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) );
                               if ($product->get_price_html() || $price) { ?>
-                                <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { echo $price; } ?></span><span>
+                                <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { if($regular_price == 0) {/*doNoting*/} else {echo $price;} } ?></span><span>
                                     <?php if($product->get_price_html() && $price) { ?>
                                         <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:p-2 dsn:rounded-md"
                                                     value="<?php echo $postID; ?>">
@@ -134,9 +136,10 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                        
                         <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-2 dsn:text-black dsn:md:h-14">
                               <?php 
+                              $regular_price = wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
                               $price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) );
                               if ($product->get_price_html() || $price) { ?>
-                                <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { echo $price; } ?></span><span>
+                                <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { if($regular_price == 0) {/*doNoting*/} else {echo $price;} } ?></span><span>
                                      <?php if($product->get_price_html() && $price) { ?>
                                         <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:p-2 dsn:rounded-md"
                                                     value="<?php echo $postID; ?>">
