@@ -27,22 +27,22 @@ $gridRowCount = count($gridContent);
     ?>
 
         <?php if($gridType == '1') { ?>
-        <div id="grid-block" class="grid-block1 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div class="grid-block1 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
         <?php if($gridType == '2') { ?>
-        <div id="grid-block" class="grid-block2 dsn:container dsn:mb-5 dsn:mx-auto dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3">
+        <div class="grid-block2 dsn:container dsn:mb-5 dsn:mx-auto dsn:flex dsn:flex-col dsn:w-full dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3">
         <?php } ?>
         <?php if($gridType == '3') { ?>
-        <div id="grid-block" class="grid-block3 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div class="grid-block3 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
           <?php if($gridType == '4') { ?>
-        <div id="grid-block" class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div class="grid-block4 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
         <?php } ?>
         <?php if($gridType == '5') { ?>
-        <div id="grid-block" class="grid-block5 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-3 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5">
+        <div class="grid-block5 dsn-logo-slider dsn:container dsn:mb-5 dsn:mx-auto">
         <?php } ?>
          <?php if($gridType == '6') { ?>
-        <div id="grid-block" class="grid-block6 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-4 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5 dsn:items-center dsn:items-stretch">
+        <div class="grid-block6 dsn:container dsn:mb-5 dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-4 dsn:xl:grid-cols-<?php echo $gridCoumnsCount; ?> dsn:gap-5 dsn:items-center dsn:items-stretch">
         <?php } ?>
             <?php 
             foreach($gridColumns as $gridColumn){ 
