@@ -1,4 +1,6 @@
 @import 'tailwindcss' prefix(dsn);
+@source "../../**/*.php";
+@source "../../**/*.js";
 @import './woocommerce.css';
 
 @theme {

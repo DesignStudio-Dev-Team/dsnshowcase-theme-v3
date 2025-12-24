@@ -11,7 +11,7 @@ $gridRowCount = count($gridContent);
 ?>
 
 <section id="grid-block-<?php echo $block_id; ?>" class="dsn:pb-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
-    <div class="dsn:text-center dsn:mb-10">
+    <div class="dsn:text-center dsn:py-10 dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
             <div class="dsn:mx-auto dsn:max-w-[900px]">
@@ -137,11 +137,11 @@ $gridRowCount = count($gridContent);
                    <?php if($gridType == '5') { ?>
                     <div class="dsn:relative dsn:h-74 dsn:lg:min-h-84 dsn:xl:min-h-120 dsn:mb-15">
                         <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90 dsn:h-full dsn:w-full dsn:!bg-cover dsn:!bg-center dsn:flex dsn:items-end dsn:justify-center" style="background: url(<?php echo $cardImage['url']; ?>)">
-                    <div class="dsn:relative dsn:bg-white dsn:-mb-10 dsn:p-6 dsn:rounded-full dsn:w-10/12 dsn:shadow-lg">
-                        <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:w-full dsn:h-10 dsn:object-contain">
+                            <div class="dsn:relative dsn:bg-white dsn:-mb-10 dsn:p-6 dsn:rounded-full dsn:w-10/12 dsn:shadow-lg">
+                                <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:w-full dsn:h-10 dsn:object-contain">
+                            </div>
+                        </a>
                     </div>
-                </a>
-                </div>
                     <?php } ?>
                <?php } ?>
                <?php
