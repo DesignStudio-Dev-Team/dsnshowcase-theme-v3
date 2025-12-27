@@ -50,7 +50,7 @@
         "sort_by_name_Z_to_A": "Naam (Z-A)",
         "back_to_top": "Terug naar Boven",
         "clear_filters_link_text": "Wis",
-        "no_products_found" : "Geen producten gevonden",
+        "no_products_found": "Geen producten gevonden",
         "go_to_page": "Ga naar pagina",
         "request_pricing": "Vraag prijs op"
     },
@@ -81,7 +81,8 @@
         "payment_shipping_btn": "Bestelling Indienen",
         "payment_method_title": "Betaalmethode",
         "apply_coupon": "Toepassen",
-        "cart_items" : "Winkelwagen Artikelen"
+        "cart_items": "Winkelwagen Artikelen",
+        "vip_discount_banner_text": "De onderstaande prijzen zijn uw gereduceerde professionele prijzen."
     },
     "woocommerce_thank_you": {
         "title": "Bedankt Voor Je Bestelling!",

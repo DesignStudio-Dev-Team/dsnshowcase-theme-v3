@@ -71,7 +71,7 @@
         "add_to_cart_btn": "Ajouter au panier",
         "info_button": "Plus d'informations",
         "payment_details": "Détails de paiement",
-        "billing_details":"Détails de la facturation",
+        "billing_details": "Détails de la facturation",
         "street_address": "Adresse de rue",
         "country": "Pays",
         "shipping_different_question": "Adresse de livraison différente de la facturation?",
@@ -81,7 +81,8 @@
         "payment_shipping_btn": "Soumettre la commande",
         "payment_method_title": "Mode de Paiement",
         "apply_coupon": "Appliquer",
-        "cart_items": "Articles du Panier"
+        "cart_items": "Articles du Panier",
+        "vip_discount_banner_text": "Les prix ci-dessous sont vos prix professionnels réduits."
     },
     "woocommerce_thank_you": {
         "title": "Nous vous remercions de votre commande!",
@@ -138,5 +139,4 @@
             "new_password": "Nouveau mot de passe"
         }
     }
-    
-} 
+}
