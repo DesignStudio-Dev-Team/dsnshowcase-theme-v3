@@ -1,11 +1,11 @@
 {
-  "version": "v3.5.65",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.65",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.65/dsnshowcase.zip",
+  "version": "v3.6",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-12-16",
+  "last_updated": "2025-12-27",
   "sections": {
-    "changelog": "Merge pull request #187 from DesignStudio-Dev-Team/mark\n\nUpdate functions.php"
+    "changelog": "Merge pull request #190 from DesignStudio-Dev-Team/juan\n\nfix grid blocks"
   }
 }
