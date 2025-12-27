@@ -481,9 +481,11 @@
   background: transparent;
   padding: 10px;
   width: auto;
+  background-color: var(--dealerColor);
+  border-radius: 0;
 }
 
-.wc-proceed-to-checkout .coupon .button:before {
+/* .wc-proceed-to-checkout .coupon .button:before {
   content: "";
   display: inline-block;
   width: 1px;
@@ -492,11 +494,11 @@
   margin-left: -10px;
   background-color: #e2e8f0;
   position: absolute;
-}
+} */
 
 .wc-proceed-to-checkout .coupon .button:hover,
 .wc-proceed-to-checkout .coupon .button:focus {
-  background-color: transparent;
+  opacity: 0.9;
 }
 
 /* Coupon form button - no individual border radius */

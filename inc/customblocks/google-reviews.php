@@ -8,7 +8,7 @@ $description = $googleReviews['description'];
     <h2 class="dsn:text-center"><?php echo $title; ?></h2>
    <?php if($description) { ?>
     <div class="dsn:mx-auto dsn:max-w-[900px]">
-        <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
+        <p class="dsn:py-1 dsn:text-center"><?php echo $description; ?></p>
     </div>
    <?php } ?>
     <div class="dsn:relative dsn:text-center dsn:block dsn:md:absolute dsn:md:-top-2 dsn:md:right-0 dsn:z-10">
@@ -22,10 +22,10 @@ $description = $googleReviews['description'];
             </svg>
     </div>
 
-    <div id="gr-content" class="dsn:relative dsn:h-full dsn:block dsn:mx-0">
+    <div id="gr-content" class="dsn:relative dsn:h-auto dsn:block dsn:mx-0">
         <?php foreach($googleReviews['reviews'] as $review): ?>
 
-        <div class="dsn:block dsn:h-full dsn:m-5">
+        <div class="dsn:block dsn:h-auto dsn:m-5">
             <div class="dsn:bg-white dsn:relative dsn:block dsn:shadow-lg dsn:rounded-lg dsn:mt-10 dsn:h-full dsn:p-7">
             <!-- Stars -->
             <div class="dsn:flex dsn:flex-row dsn:justify-self-center dsn:justify-center dsn:justify-items-center dsn:gap-5 dsn:mb-8">
@@ -127,6 +127,9 @@ $description = $googleReviews['description'];
 }
 #google-reviews-<?php echo $block_id; ?> button.slick-next:before, #google-reviews-<?php echo $block_id; ?> button.slick-prev:before {
 color: var(--dealerColor) !important;
+}
+#google-reviews-<?php echo $block_id; ?> .slick-slide {
+    height: auto;
 }
 
 @media only screen and (max-width: 700px) {

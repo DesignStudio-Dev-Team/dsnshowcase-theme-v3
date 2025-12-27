@@ -613,21 +613,3 @@ add_action('login_message', function($msg) {
 add_action('password_reset', function($user, $new_pass) {
     delete_user_meta($user->ID, '_asl_last_ip');
 }, 10, 2);
-
-
-
-// -------------------------
-// Limit Number cron jobs to run just once 5 minutes
-// -------------------------
-add_filter( 'cron_request', function( $cron_request ) {
-    $interval = 5*60; // 5 minutes
-    $doing_cron_transient = '_transient_doing_cron';
-    $last = get_option( $doing_cron_transient );
-
-    if ( $last && ( time() - $last ) < $interval ) {
-        // Skip if last cron was within the interval
-        return false;
-    }
-
-    return $cron_request;
-});

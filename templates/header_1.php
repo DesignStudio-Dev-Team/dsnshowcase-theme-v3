@@ -121,15 +121,6 @@ global $dssSiteLanguage;
                             d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                     </svg>
                 </a>
-                <!-- <a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
-					href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-						<path
-							d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-					</svg>
-					<span
-						class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
-						 -->
                 <a class="cart-icon dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
                     href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                         class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -154,7 +145,7 @@ global $dssSiteLanguage;
                     'menu_class' => 'dsn:flex dsn:justify-between dsn:items-stretch dsn:w-full dsn:text-white dsn:w-full dsn:!my-0 dsn:!px-0',
                     'container' => "nav",
                     'container_class' => "dsn:rounded-md dsn:relative",
-                    'link_class' => "dsn:px-2 dsn:py-3 dsn:w-full dsn:block dsn:relative",
+                    'link_class' => "dsn:px-2 dsn:py-1 dsn:w-full dsn:block dsn:relative",
                     'depth' => 0,
                     'walker' => new DSN_Walker_Nav_Menu()
                 ));
@@ -219,14 +210,6 @@ global $dssSiteLanguage;
                     d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
             </svg>
         </a>
-        <!-- <a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
-			href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-				class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-				<path
-					d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-			</svg>
-			<span
-				class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a> -->
         <a class="cart-icon dsn:border-2 dsn:border-white dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
             href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                 class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -282,14 +265,6 @@ global $dssSiteLanguage;
                             d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                     </svg>
                 </a>
-                <!-- <a class="wishlist dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
-                    href="/wishlist/" title="Wishlist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                        class="dsn:stroke-current dsn:fill-current" width="20" height="20">
-                        <path
-                            d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                    </svg>
-                    <span
-                        class="the-wishlist-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a> -->
                 <a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
                     href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                         class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -445,10 +420,11 @@ global $dssSiteLanguage;
 
         header ul li ul a {
             font-size: 16px;
+            font-weight: 400;
         }
 
         .dropdown-content a {
-            padding: 0.5em 0;
+            padding: 0.25em 0;
         }
 
         .mega-menucolumn>a {
@@ -682,13 +658,13 @@ global $dssSiteLanguage;
 
                     if (scroll >= 5) {
                         header.addClass("sticky-header-active");
-                        header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+                        header.removeClass("dsn:bg-white");
                         $('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
                         $('.primary-nav').removeClass("dsn:bg-gray-100");
                         $('.nav-container').removeClass("dsn:container");
                     } else {
                         header.removeClass("sticky-header-active");
-                        header.addClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+                        header.addClass("dsn:bg-white");
                         $('.primary-nav').removeClass("dsn:container");
                         $('.primary-nav').addClass("dsn:bg-gray-100");
                         $('.nav-container').addClass("dsn:container");
