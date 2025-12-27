@@ -225,6 +225,7 @@ if(function_exists('get_field')) {
 		header.header3 ul li ul a {
 			font-size: 16px;
 			width: 100%;
+			font-weight: 400;
 		}
 		.header3 .open > .sub-menu {
 			display: block;
@@ -256,7 +257,7 @@ if(function_exists('get_field')) {
 		}
 		
 		.header3 .dropdown-content a {
-			padding: 0.5em 0;
+			padding: 0.25em 0;
 		}
 		.header3 .mega-menucolumn > a {
 			pointer-events: none;
@@ -593,12 +594,12 @@ if(function_exists('get_field')) {
 
 						if (scroll >= 5) {
 							header.addClass("sticky-header-active dsn:bg-[#076594]");
-							header.removeClass("dsn:bg-white dsn:py-4 dsn:mb-10");
+							header.removeClass("dsn:bg-white dsn:py-4");
 							$('.primary-nav').addClass("dsn:container dsn:flex dsn:items-center dsn:justify-between");
 							$('.nav-container').removeClass("dsn:container");
 						} else {
 							header.removeClass("sticky-header-active dsn:bg-[#076594]");
-							header.addClass("dsn:bg-white dsn:mb-10");
+							header.addClass("dsn:bg-white");
 							$('.primary-nav').removeClass("dsn:container");
 							$('.nav-container').addClass("dsn:container");
 							$('.the-navigation').hide();

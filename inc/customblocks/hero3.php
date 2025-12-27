@@ -29,10 +29,10 @@
 
         
 
-        <section id="hero-block-<?php echo $block_id; ?>" class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15">
+        <section id="hero-block-<?php echo $block_id; ?>" class="dsn:container dsn:mx-auto dsn:px-4 dsn:mb-15 dsn:mt-5">
         <div class="dsn:flex dsn:flex-col dsn:lg:flex-row dsn:gap-5">
       
-        <div style="background:url('<?php if($primaryBGtype == 'img') { echo $primaryBGImg['url']; }?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1 dsn:lg:order-1 dsn:relative dsn:w-full dsn:h-full dsn:min-h-[400px] dsn:lg:min-h-[600px] dsn:lg:w-7/12 dsn:lg:row-span-2 dsn:p-0 dsn:flex dsn:flex-col dsn:lg:order-1 dsn:justify-end dsn:overflow-hidden">
+        <div style="background:url('<?php if($primaryBGtype == 'img') { echo $primaryBGImg['url']; }?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-1 dsn:lg:order-1 dsn:relative dsn:w-full dsn:h-full dsn:min-h-[400px] dsn:lg:min-h-[600px] dsn:lg:w-7/12 dsn:lg:row-span-2 dsn:p-0 dsn:flex dsn:flex-col dsn:lg:order-1 dsn:justify-end dsn:overflow-hidden left-col">
           <?php  if($primaryBGtype == 'video' && $primaryBGvideoType == "mp4") { ?>
          <video autoplay muted loop class="dsn:absolute dsn:left-0 dsn:top-0 dsn:object-cover dsn:w-full dsn:h-full">
             <source src="<?php echo $primaryBG_MP4; ?>" type="video/mp4">
@@ -44,8 +44,8 @@
         <iframe class="dsn:absolute dsn:left-0 dsn:top-0 dsn:object-cover dsn:w-full dsn:h-full" src="https://www.youtube.com/embed/<?php echo $primaryBG_YouTube_ID; ?>?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1" frameborder="0" allowfullscreen></iframe>
           </div>
             <?php } ?>
-            <div class="perfect-hot-tub dsn:p-10">
-          <h1 class="dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:text-white dsn:relative dsn:z-10">
+            <div class="perfect-hot-tub dsn:p-10 dsn:flex dsn:flex-wrap dsn:items-center dsn:justify-center dsn:gap-4">
+          <h1 class="dsn:text-4xl dsn:font-bold dsn:my-0 dsn:text-white dsn:relative dsn:z-10">
            <?php echo $primaryTitle; ?>
           </h1>
           <div class="dsn:space-x-4 dsn:flex dsn:items-center dsn:relative dsn:z-10">
@@ -73,10 +73,10 @@
                 <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:h-1/3 dsn:z-0 dsn:top-[67%]"></div>
 
         </div>
-        <div class="dsn:lg:w-5/12 dsn:flex dsn:flex-col dsn:gap-5 dsn:h-[400px] dsn:lg:h-[600px] dsn:order-2">
+        <div class="dsn:lg:w-5/12 dsn:flex dsn:flex-col dsn:gap-5 dsn:h-[400px] dsn:lg:h-[600px] dsn:order-2 right-col">
         <div style="background:url('<?php echo $secondaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:lg:order-2  dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full">
         <a class="dsn:size-full dsn:p-6 dsn:flex dsn:items-end" href="<?php echo $secondaryLink; ?>" role="button">
-            <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
+            <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white dsn:my-0">
             <?php echo $secondaryTitle; ?>
           </h2>
           
@@ -90,7 +90,7 @@
         <div style="background:url('<?php echo $thirdBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-3 dsn:lg:order-3 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full">
         <a class="dsn:size-full dsn:p-6 dsn:flex dsn:items-end" href="<?php echo $thirdLink; ?>" role="button">
 
-            <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
+            <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10 dsn:my-0">
             <?php echo $thirdTitle; ?>
           </h2>
           
@@ -150,6 +150,22 @@
 }
 .gform_wrapper .gform_previous_button, .gform_wrapper .gform_next_button {
     margin: 0 !important;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  #hero-block-<?php echo $block_id; ?> .left-col {
+    min-height: 400px;
+  }
+  #hero-block-<?php echo $block_id; ?> .right-col { 
+    height: 400px;
+  }
+}
+@media only screen and (min-width: 1401px) and (max-width: 1800px) {
+  #hero-block-<?php echo $block_id; ?> .left-col {
+    min-height: 500px;
+  }
+  #hero-block-<?php echo $block_id; ?> .right-col { 
+    height: 500px;
+  }
 }
 </style>
 

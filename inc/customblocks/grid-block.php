@@ -6,16 +6,16 @@ $gridContent = $gridBlock['grid_content_rows'];
 $mainCTA = $gridBlock['cta'];
 $gridType = $gridBlock['grid_type'];
 $gridRowCount = count($gridContent);
-
-
+$gridSlider = $gridBlock['enable_grid_slider'];
+$gridSlideToShow = $gridBlock['slides_to_show'];
 ?>
 
-<section id="grid-block-<?php echo $block_id; ?>" class="dsn:pb-20 dsn:mb-10 dsn:px-5 dsn:md:px-0">
+<section id="grid-block-<?php echo $block_id; ?>" class="dsn:py-10 dsn:px-5 dsn:md:px-0">
     <div class="dsn:text-center dsn:mb-10">
         <h2><?php echo $title; ?></h2>
         <?php if($description) { ?>
-            <div class="dsn:mx-auto dsn:max-w-[900px]">
-                <p class="dsn:py-3 dsn:text-center"><?php echo $description; ?></p>
+            <div class="dsn:mx-auto dsn:pb-2 dsn:max-w-[900px]">
+                <p class="dsn:text-center"><?php echo $description; ?></p>
             </div>
         <?php } ?>
         
@@ -78,12 +78,12 @@ $gridRowCount = count($gridContent);
                     <?php } ?>
 
                 <?php if($gridType == '2') { ?>
-                    <div class="dsn:flex-auto dsn:w-full dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center">
-                        <a href="<?php echo !empty($cta['url']) ? $cta['url'] : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90">
-                    <div class="dsn:relative">
-                        <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
+                    <div class="dsn:flex-auto dsn:w-full dsn:h-60 dsn:md:h-90 dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center grid-2-column">
+                        <a href="<?php echo !empty($cta['url']) ? $cta['url'] : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:h-full">
+                    <div class="dsn:relative dsn:h-full">
+                        <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-full dsn:object-cover">
                         <?php if($title) { ?>
-                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/2 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:flex dsn:items-end dsn:justify-center dsn:pb-6">
+                        <div class="dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:h-1/2 dsn:bg-gradient-to-t dsn:from-black dsn:to-transparent dsn:flex dsn:items-end dsn:justify-center dsn:pb-6 title-box">
                             <h3 class="dsn:text-white dsn:text-center dsn:px-4"><?php echo $title; ?></h3>
                         </div>
                         <?php } ?>
@@ -110,7 +110,7 @@ $gridRowCount = count($gridContent);
                     <div class="dsn:relative">
                         <img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" class="dsn:w-full dsn:h-auto">
                         <?php if($title) { ?>
-                        <div class="grid-block-bottom dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/3 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
+                        <div class="grid-block-bottom dsn:absolute dsn:bottom-0 dsn:left-0 dsn:right-0 dsn:px-4 dsn:h-1/4 dsn:bg-black-500/50 dsn:flex dsn:flex-row dsn:items-center dsn:justify-between dsn:pb-0">
                             <h3 class="dsn:text-white dsn:text-left dsn:mb-0"><?php echo $title; ?></h3>
 
                             <?php 
@@ -132,11 +132,11 @@ $gridRowCount = count($gridContent);
                 if($gridContentContent[0]['acf_fc_layout'] == 'card_with_stacked_logo') {
                     $cardImage = $gridContentContent[0]['card_image'];
                     $cardLogo = $gridContentContent[0]['card_logo'];
-                    $cardLink = $gridContentContent[0]['card_link']; 
+                    $cardLink = $gridContentContent[0]['card_link'];
                 ?>
                    <?php if($gridType == '5') { ?>
-                    <div class="dsn:relative dsn:h-74 dsn:lg:min-h-84 dsn:xl:min-h-120 dsn:mb-15">
-                        <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90 dsn:h-full dsn:w-full dsn:!bg-cover dsn:!bg-center dsn:flex dsn:items-end dsn:justify-center" style="background: url(<?php echo $cardImage['url']; ?>)">
+                    <div class="dsn:relative dsn:mb-15 dsn:p-4">
+                        <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:block dsn:transition-all dsn:duration-300 dsn:hover:opacity-90 dsn:w-full dsn:!bg-cover dsn:!bg-center dsn:flex dsn:items-end dsn:justify-center dsn:h-74" style="background: url(<?php echo $cardImage['url']; ?>)">
                     <div class="dsn:relative dsn:bg-white dsn:-mb-10 dsn:p-6 dsn:rounded-full dsn:w-10/12 dsn:shadow-lg">
                         <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:w-full dsn:h-10 dsn:object-contain">
                     </div>
@@ -152,9 +152,9 @@ $gridRowCount = count($gridContent);
                 ?>
                     <?php if($gridType == '6') { ?>
               
-               <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:border-2 dsn:rounded-md dsn:flex dsn:items-center dsn:justify-start dsn:gap-4 dsn:p-2 dsn:min-h-30">
-                 <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:h-15 dsn:object-contain dsn:w-3/12">
-                 <p class="dsn:text-black dsn:w-9/12 dsn:mb-0 dsn:text-xl dsn:text-base"><?php echo $cardTitle; ?></p>
+               <a href="<?php echo !empty($cardLink) ? $cardLink : '#'; ?>" class="dsn:border-2 dsn:rounded-md dsn:flex dsn:items-center dsn:justify-start dsn:gap-2 dsn:p-2 dsn:min-h-30">
+                 <img src="<?php echo $cardLogo['url']; ?>" alt="<?php echo "stacked Logo"; ?>" class="dsn:h-15 dsn:object-contain dsn:w-2/12">
+                 <p class="dsn:text-black dsn:w-10/12 dsn:mb-0 dsn:text-xl dsn:text-base"><?php echo $cardTitle; ?></p>
                 </a>
               
                     <?php } ?>
@@ -176,3 +176,77 @@ if($mainCTA) { ?>
 <?php } ?>
 <div class="dsn:hidden dsn:xl:grid-cols-1 dsn:xl:grid-cols-2 dsn:xl:grid-cols-3 dsn:xl:grid-cols-4 dsn:xl:grid-cols-5"></div>
 </section>
+<style>
+    #grid-block-<?php echo $block_id; ?> .grid-block-bottom {
+  background: linear-gradient(transparent 0%, #000000c9 100%);
+}
+#grid-block-<?php echo $block_id; ?> .grid-block6 a {
+    transition: all 0.5s;
+}
+#grid-block-<?php echo $block_id; ?> .grid-block6 a:hover {
+  transform: scale(1.05);
+}
+s
+  /* the slides */
+  .grid-block-slider .slick-slide {
+      margin: 0 27px;
+  }
+
+  /* the parent */
+  .grid-block-slider .slick-list {
+      margin: 0 -27px;
+  }
+  #grid-block-<?php echo $block_id; ?> .grid-block-slider .slick-slide
+ {
+    height: auto;
+}
+.grid-block6 p {
+    font-size: 18px;
+}
+</style>
+<script>
+    jQuery(document).ready(function ($) {
+    //outdoor internal page bottom slider
+  if ($('.grid-block-slider').length > 0) {
+    $('.grid-block-slider').slick({
+        centerMode: true,       // Enables center mode
+        centerPadding: '0px',   // Ensures no neighboring slides are visible
+        slidesToShow: <?php echo $gridSlideToShow ?>,        // Displays only one slide at a time
+        slidesToScroll: 1,      // Scrolls one slide at a time
+        infinite: true,         // Enables infinite looping
+        arrows: true,           // Shows navigation arrows
+        dots: false,             // Shows navigation dots
+        autoplay: false,         // Enables automatic sliding
+        pauseOnHover: true,     // Pauses autoplay on hover
+        pauseOnFocus: true,     // Pauses autoplay on focus
+        responsive: [           //Responsive Breakpoint settings
+            {
+              breakpoint: 1024, 
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                arrows: true, 
+                infinite: true,
+              }
+            },
+            {
+              breakpoint: 600, 
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true,
+              }
+            },
+            {
+              breakpoint: 480, 
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true,
+              }
+            }]
+    });
+  }
+  });
+</script>
