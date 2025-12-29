@@ -613,3 +613,6 @@ add_action('login_message', function($msg) {
 add_action('password_reset', function($user, $new_pass) {
     delete_user_meta($user->ID, '_asl_last_ip');
 }, 10, 2);
+
+// Disable activity log weekly email reports
+add_filter( 'wsal_disable_weekly_report', '__return_true' );
