@@ -18,8 +18,8 @@ $dateTime = $timerBlock['date_time'];
         <?php if($topUrgentMsg) { ?>
             <span class="dsn:text-[#D20000] dsn:font-bold"><?php echo $topUrgentMsg; ?></span>
         <?php } ?>
-        <h2><?php echo $title; ?></h2>
-        <p><?php echo $description; ?></p>
+        <?php if($title) { ?> <h2><?php echo $title; ?></h2> <?php } ?>
+        <?php if($description) { ?>  <p><?php echo $description; ?></p><?php } ?>
         <div class="dsn:flex dsn:flex-col dsn:md:flex-row dsn:gap-10 dsn:my-5">
             <a class="btn" href="<?php echo $cta['url']; ?>" role="button"><?php echo $cta['title']; ?></a>
     <div id="dsnCountdownTimer" class="dsn:flex dsn:gap-3 dsn:items-center">
