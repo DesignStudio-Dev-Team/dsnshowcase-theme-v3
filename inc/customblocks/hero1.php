@@ -88,9 +88,9 @@ $configuration = get_field('configuration', $block_id);
         
         <?php
         echo ' dsn:lg:order-' . $primaryCard . ' ' . $primaryTL; ?>">
-          <h1 class="dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:text-white dsn:relative dsn:z-10">
+           <?php if($primaryTitle) { ?><h1 class="dsn:text-4xl dsn:font-bold dsn:mb-6 dsn:text-white dsn:relative dsn:z-10">
            <?php echo $primaryTitle; ?>
-          </h1>
+          </h1><?php } ?>
           <div class="dsn:space-x-4 dsn:flex dsn:items-center dsn:relative dsn:z-10">
             <a href="<?php echo $mainCTA['url']; ?>" target="<?php echo $mainCTA['target']; ?>" class="dsn:bg-orange-500 dsn:border dsn:rounded-lg dsn:border-white dsn:text-white dsn:px-8 dsn:py-3 dsn:font-medium" role="button">
             <?php echo $mainCTA['title']; ?>
@@ -114,9 +114,9 @@ $configuration = get_field('configuration', $block_id);
         
         <div style="background:url('<?php echo $secondaryBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-2 dsn:lg:order-2  dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $secondaryCard; ?>">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $secondaryLink; ?>" role="button">
-            <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
+              <?php if($secondaryTitle) { ?><h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $secondaryTitle; ?>
-          </h2>
+          </h2><?php } ?>
           
           <?php if($textLocation === 'Top') { ?>
           <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
@@ -131,10 +131,10 @@ $configuration = get_field('configuration', $block_id);
        
         <div style="background:url('<?php echo $thirdBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-3 dsn:lg:order-3 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $thirdCard; ?> ">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $thirdLink; ?>" role="button">
-
-            <h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
+                <?php if($thirdTitle) { ?><h2 class="dsn:text-2xl dsn:font-semibold dsn:text-white dsn:relative dsn:z-10">
             <?php echo $thirdTitle; ?>
-          </h2>
+          </h2><?php } ?>
+            
           <?php if($textLocation === 'Top') { ?>
           <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
             <?php } if($textLocation === 'Bottom') { ?>
@@ -148,10 +148,10 @@ $configuration = get_field('configuration', $block_id);
        
         <div style="background:url('<?php echo $fourthBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-4 dsn:lg:order-4 dsn:relative dsn:w-full dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fourthCard; ?> ">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fourthLink; ?>" role="button">
-       
-          <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
+       <?php if($fourthTitle) { ?><h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $fourthTitle; ?>
-          </h2>
+          </h2><?php } ?>
+          
           <?php if($textLocation === 'Top') { ?>
           <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
             <?php } if($textLocation === 'Bottom') { ?>
@@ -165,10 +165,10 @@ $configuration = get_field('configuration', $block_id);
     
         <div style="background:url('<?php echo $fifthBGImg; ?>'); background-size:cover; background-repeat:no-repeat; background-position:50%;" class="dsn:order-5 dsn:lg:order-5 dsn:relative dsn:w-full  dsn:h-[280px] dsn:lg:h-full <?php  echo ' dsn:lg:order-' . $fifthCard; ?>">
         <a class="dsn:size-full dsn:p-6 dsn:flex <?php echo $otherCardsTL; ?>" href="<?php echo $fifthLink; ?>" role="button">
-        
-        <h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
+        <?php if($fifthTitle) { ?><h2 class="dsn:relative dsn:z-10 dsn:text-2xl dsn:font-semibold dsn:text-white">
             <?php echo $fifthTitle; ?>
-          </h2>
+          </h2><?php } ?>
+        
           <?php if($textLocation === 'Top') { ?>
           <div class="dsn:absolute dsn:inset-0 dsn:bg-gradient-to-t dsn:from-transparent dsn:to-black dsn:h-1/3 dsn:z-0 <?php echo $shadowLocation; ?>"></div>
             <?php } if($textLocation === 'Bottom') { ?>

@@ -11,8 +11,8 @@ $bgImg = $processList['background_image'];
 <section id="process-list-<?php echo $block_id; ?>" class="dsn:mb-10 dsn:py-25 dsn:px-10 dsn:md:px-0" style="background: url('<?php echo $bgImg; ?>') no-repeat center center; background-size: cover;">
 <div class="dsn:container dsn:mx-auto">
     <div class="dsn:w-full dsn:md:w-1/2 dsn:mx-auto dsn:text-center">
-        <h2><?php echo $title; ?></h2>
-        <p><?php echo $description; ?></p>
+        <?php if($title) { ?> <h2><?php echo $title; ?></h2> <?php } ?>
+        <?php if($description) { ?>  <p><?php echo $description; ?></p><?php } ?>
     </div>
     <div class="dsn:block dsn:lg:flex dsn:flex-row dsn:justify-center dsn:items-center dsn:py-10 dsn:w-full dsn:2xl:w-[1415px] dsn:mx-auto">
         <div class="mainImgHover dsn:w-full dsn:lg:w-1/2 dsn:lg:pr-20">

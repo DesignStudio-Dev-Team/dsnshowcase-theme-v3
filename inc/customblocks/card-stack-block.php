@@ -15,7 +15,7 @@ $cards = $cardStack['cards'];
 
         <!-- Title -->
         <div class="dsn:container dsn:mx-auto dsn:text-center dsn:py-20">
-            <h2 class="dsn:text-white"><?php echo $title; ?></h2>
+            <?php if($title) { ?><h2 class="dsn:text-white"><?php echo $title; ?></h2><?php } ?>
         </div>
 
         <!-- Cards -->

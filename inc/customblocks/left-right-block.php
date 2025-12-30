@@ -57,8 +57,8 @@ $right_background_color = $right_content['background_color'];
        <div class="dsn:w-full dsn:flex dsn:flex-col dsn:md:flex-row <?php echo $gap; ?> dsn:my-10 dsn:justify-between dsn:items-stretch">
         <div class="dsn-left-content-<?php echo $block_id; ?> dsn:relative dsn:w-full dsn:p-10 dsn:md:p-15 dsn:text-center dsn:md:text-left dsn:flex dsn:flex-col dsn:justify-center dsn:gap-10 <?php echo $order1 . ' ' . $dclass1; ?>">
             <div class="dsn:z-40 dsn:flex dsn:flex-col dsn:order-2 dsn:md:order-1">
-            <h2><?php echo $left_title; ?></h2>
-            <p><?php echo $left_description; ?></p>
+            <?php if($left_title) { ?> <h2><?php echo $left_title; ?></h2> <?php } ?>
+            <?php if($left_description) { ?> <p><?php echo $left_description; ?></p> <?php } ?>
             <?php if ($left_cta) { ?>
             <a class="btn dsn:mt-5 dsn::md:justify-start dsn:md:self-start dsn:md:block" href="<?php echo $left_cta['url']; ?>"><?php echo $left_cta['title']; ?></a>
             <?php } ?>
@@ -71,8 +71,8 @@ $right_background_color = $right_content['background_color'];
         </div>
         <div class="dsn-right-content-<?php echo $block_id; ?> dsn:relative dsn:p-0 dsn:w-full dsn:flex dsn:items-center dsn:flex-col dsn:md:flex-row dsn:p-10 dsn:md:p-15 dsn:text-center dsn:md:text-left dsn:gap-10 <?php echo $order2 . ' ' . $dclass2; ?>">
             <div class="dsn:z-40 dsn:flex dsn:flex-col dsn:order-2 dsn:md:order-1">
-            <h2><?php echo $right_title; ?></h2>
-            <p><?php echo $right_description; ?></p>
+            <?php if($right_title) { ?> <h2><?php echo $right_title; ?></h2> <?php } ?>
+            <?php if($right_description) { ?> <p><?php echo $right_description; ?></p> <?php } ?>
             <?php if ($right_cta) { ?>
             <a class="btn dsn:mt-5 dsn::md:justify-start dsn:md:self-start dsn:md:block" href="<?php echo $right_cta['url']; ?>"><?php echo $right_cta['title']; ?></a>
             <?php } ?>

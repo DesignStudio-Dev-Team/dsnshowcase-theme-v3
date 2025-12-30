@@ -5,7 +5,7 @@ $description = $googleReviews['description'];
 
 ?>
 <section id="google-reviews-<?php echo $block_id; ?>" class="dsn:container dsn:relative dsn:px-5 dsn:md:px-0 dsn:mx-auto dsn:pt-10 dsn:mb-20">
-    <h2 class="dsn:text-center"><?php echo $title; ?></h2>
+     <?php if($title) { ?><h2><?php echo $title; ?></h2> <?php } ?>
    <?php if($description) { ?>
     <div class="dsn:mx-auto dsn:max-w-[900px]">
         <p class="dsn:py-1 dsn:text-center"><?php echo $description; ?></p>
