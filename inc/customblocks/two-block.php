@@ -33,8 +33,8 @@ $twoBlockContent = $twoBlock['two_block_content'];
               ?>
        <div class="dsn:w-full dsn:flex dsn:flex-col dsn:md:flex-row <?php echo $gap; ?> dsn:my-10 dsn:justify-between dsn:items-stretch">
         <div class="dsn-twoblock-content-<?php echo $block_id; ?> dsn:w-full dsn:p-15 dsn:md:p-15 dsn:text-center dsn:md:text-left dsn:flex dsn:flex-col dsn:justify-center <?php echo $order1 . ' ' . $dclass1; ?>">
-            <h2><?php echo $block['title']; ?></h2>
-            <p><?php echo $block['description']; ?></p>
+            <?php if($block['title']) { ?> <h2><?php echo $block['title']; ?></h2> <?php } ?>
+            <?php if($block['description']) { ?> <p><?php echo $block['description']; ?></p> <?php } ?>
             <?php if ($block['cta']) { ?>
             <a class="btn dsn:mt-5 dsn::md:justify-start dsn:md:self-start dsn:md:block" href="<?php echo $block['cta']['url']; ?>"><?php echo $block['cta']['title']; ?></a>
             <?php } ?>

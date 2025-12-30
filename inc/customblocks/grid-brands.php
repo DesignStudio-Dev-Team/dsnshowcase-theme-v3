@@ -8,7 +8,7 @@ $brands = $gridBrands['brands'];
 
 <section id="gridBrands-<?php echo $block_id; ?>" class="dsn:pb-20 dsn:px-0">
     <div class="dsn:text-left dsn:md:text-center dsn:mb-15">
-        <h2><?php echo $title; ?></h2>
+        <?php if($title) { ?><h2><?php echo $title; ?></h2> <?php } ?>
     </div>
 <?php if($brands) { ?>
     <div id="grid-brands" class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:lg:grid-cols-2 dsn:xl:grid-cols-4 dsn:grid-rows-4 dsn:gap-5">
@@ -31,7 +31,7 @@ $brands = $gridBrands['brands'];
                         </div></a>
                     </div>
                     <div class="pt-5">
-                        <h3 class="dsn:py-5"><a href="<?php echo $brand['link']; ?>"><?php echo $brand['name']; ?></a></h3>
+                       <?php if($brand) { ?> <h3 class="dsn:py-5"><a href="<?php echo $brand['link']; ?>"><?php echo $brand['name']; ?></a></h3> <?php } ?>
                     </div>
              
                 

@@ -45,7 +45,7 @@ $cta_buttons = !empty($iconBlockCtaBtns) && is_array($iconBlockCtaBtns)
 
 <div id="icon-block-<?php echo $block_id; ?>" class="get-footer dsn:relative">
 		 <div class="dsn:container dsn:mx-auto dsn:block dsn:relative dsn:text-white">
-			    <h4 class="dsn:font-bold m-0 dsn:text-3xl dsn:text-center"><?php echo $title; ?></h4>
+			   <?php if($title) { ?> <h4 class="dsn:font-bold m-0 dsn:text-3xl dsn:text-center"><?php echo $title; ?></h4> <?php } ?>
 			 <div class="dsn:flex dsn:flex-wrap dsn:items-start dsn:justify-center dsn:mt-8 dsn:gap-10">
                 <div class="dsn:block dsn:relative dsn:h-full dsn:w-36 dsn:after:absolute dsn:after:h-full dsn:after:w-[1px] dsn:after:bg-white dsn:after:top-0 dsn:after:-right-5">
                     <a href="<?php echo $iconBlockLogoLink; ?>"><img class="dsn:w-full" src="<?php echo $iconBlockLogo['url']; ?>" alt="footer logo" /></a>

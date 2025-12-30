@@ -42,7 +42,7 @@ if($videoType == 'youtube') {
         </div>
         <div id="right-col-<?php echo $block_id; ?>" class="dsn:p-0 dsn:text-left dsn:col-span-4 dsn:md:col-span-2  dsn:flex dsn:flex-col">
          <div class="dsn:bg-[#F1F0EC] dsn:p-4 dsn:md:py-10 dsn:md:px-5">
-            <h2 class="dsn:text-center"><?php echo $title; ?></h2>
+           <?php if ($title) { ?> <h2 class="dsn:text-center"><?php echo $title; ?></h2> <?php } ?>
             <ul class="dsn:pl-0">
                 <?php if($list) { 
                     foreach($list as $item) { ?>
