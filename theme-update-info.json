@@ -1,11 +1,11 @@
 {
-  "version": "v3.6",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6/dsnshowcase.zip",
+  "version": "v3.6.1",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.1",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.1/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2025-12-27",
+  "last_updated": "2026-01-02",
   "sections": {
-    "changelog": "Merge pull request #190 from DesignStudio-Dev-Team/juan\n\nfix grid blocks"
+    "changelog": "Merge pull request #193 from DesignStudio-Dev-Team/dspuneet\n\nAdded Selling Online Button in Theme Options"
   }
 }
