@@ -7,6 +7,7 @@ if(function_exists('get_field')) {
 	$header_logo = get_field('header_logo', 'options');
 	$header_sticky_logo = get_field('header_sticky_logo', 'options');
 	$header_sticky = get_field('sticky_header', 'options');
+	 $header_selling_online = get_field('selling_online', 'options');
 }
 ?>
 
@@ -54,7 +55,8 @@ if(function_exists('get_field')) {
 						<path class="dsn:stroke-current dsn:fill-current"
 							d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
 					</svg></a>
-				<a href="/my-account/"
+					<?php if($header_selling_online == 'yes') { ?>
+				<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"
 					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -63,11 +65,12 @@ if(function_exists('get_field')) {
 				</a>
 				
 				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[46px]"
-					href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+					href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
 							d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-					</svg><span class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
+					</svg><span class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
+					<?php } ?>
 			</div>
 		</div>
 
@@ -98,8 +101,8 @@ if(function_exists('get_field')) {
 				<path class="dsn:stroke-current dsn:fill-current"
 					d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
 			</svg></a>
-
-		<a href="/my-account/"
+			<?php if($header_selling_online == 'yes') { ?>
+		<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"
 			class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:hidden dsn:2xl:flex dsn:items-center dsn:justify-center dsn:w-[46px] dsn:h-[46px]">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="dsn:stroke-current dsn:fill-current"
 				width="20" height="20">
@@ -109,13 +112,13 @@ if(function_exists('get_field')) {
 		</a>
 		
 		<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[46px]"
-			href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+			href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 				class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 				<path class="dsn:stroke-current dsn:fill-current"
 					d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
 			</svg><span
-				class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
-
+				class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
+				<?php } ?>
 		<div
 			class="dsn-mobile-hamburger dsn:cursor-pointer  dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full">
 			<span style="width: 25.927px; height: auto; display: none;"></span><svg
@@ -152,8 +155,8 @@ if(function_exists('get_field')) {
 
 		<div class="the-navigation dsn:hidden dsn:absolute dsn:right-0 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
 			<div class="cart-search-combo cf dsn:flex dsn:justify-center dsn:items-center dsn:gap-3 dsn:px-6 dsn:my-4">
-
-				<a href="/my-account/"
+				<?php if($header_selling_online == 'yes') { ?>
+				<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"
 					class="my-account-icon dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full dsn:block dsn:2xl:hidden">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
@@ -163,13 +166,13 @@ if(function_exists('get_field')) {
 				</a>
 				
 				<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:2xl:hidden"
-					href="/cart/" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+					href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
 						class="dsn:stroke-current dsn:fill-current" width="20" height="20">
 						<path class="dsn:stroke-current dsn:fill-current"
 							d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
 					</svg><span
-						class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold">0</span></a>
-
+						class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
+					<?php } ?>
 
 			</div>
 			<div class="dsn:relative dsn:bg-white dsn:bg-white utility-sticky-nav dsn:mt-4">
