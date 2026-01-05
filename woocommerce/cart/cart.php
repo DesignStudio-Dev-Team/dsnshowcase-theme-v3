@@ -309,12 +309,8 @@ global $dssSiteLanguage;
           </div>
           <!-- More Products Section -->
           <div class="dsn-more-products-wrapper dsn:sm:rounded dsn:sm:border dsn:sm:p-10 dsn:sm:border-gray-200">
-            <?php $arg = array(
-              'post_type' => 'product',
-              'order' => 'ASC',
-              'orderby' => 'rand',
-              'posts_per_page' => 12
-            );
+            <?php
+            $arg = dsn_get_cart_recommendations_query_args(12);
             $the_query = new WP_Query($arg);
             if ($the_query->have_posts()) : ?>
               <div class="dsn:mb-12">
