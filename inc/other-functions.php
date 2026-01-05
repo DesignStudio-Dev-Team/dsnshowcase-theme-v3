@@ -1708,7 +1708,7 @@ function dsn_get_cart_cross_sell_ids() {
   return array_unique($cross_sell_ids);
 }
 
-function dsn_get_cart_category_ids() {
+function dsn_get_most_specific_cart_categories() {
   if (!WC()->cart) {
     return array();
   }
@@ -1719,8 +1719,22 @@ function dsn_get_cart_category_ids() {
     $terms = get_the_terms($cart_item['product_id'], 'product_cat');
 
     if ($terms && !is_wp_error($terms)) {
+      $most_specific_term = null;
+      $min_count = PHP_INT_MAX;
+
       foreach ($terms as $term) {
-        $category_ids[] = $term->term_id;
+        $children = get_term_children($term->term_id, 'product_cat');
+
+        if (empty($children) || is_wp_error($children)) {
+          if ($term->count < $min_count) {
+            $min_count = $term->count;
+            $most_specific_term = $term->term_id;
+          }
+        }
+      }
+
+      if ($most_specific_term) {
+        $category_ids[] = $most_specific_term;
       }
     }
   }
@@ -1742,7 +1756,7 @@ function dsn_get_cart_recommendations_query_args($posts_per_page = 12) {
     );
   }
 
-  $category_ids = dsn_get_cart_category_ids();
+  $category_ids = dsn_get_most_specific_cart_categories();
 
   if (!empty($category_ids)) {
     return array(
