@@ -82,12 +82,21 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                        
                         <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-4 dsn:text-black dsn:md:h-14">
                              <?php 
-                             $regular_price = wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
-                             
-                             $price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) );
-                              if ($product->get_price_html() || $price) { ?>
-                                <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { if($regular_price == 0) {/*doNoting*/} else {echo $price;} } ?></span><span>
-                                    <?php if($product->get_price_html() && $price) { ?>
+                             // Determine displayable price or request text
+                             $price_html = $product->get_price_html();
+                             $raw_price = $product->get_price();
+                             $has_numeric_price = ($raw_price !== '' && floatval($raw_price) > 0);
+                             if (!empty($price_html)) {
+                                $display_price = $price_html;
+                             } elseif ($has_numeric_price) {
+                                $display_price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_price() ) ) );
+                             } else {
+                                global $dssSiteLanguage;
+                                $display_price = dssLang($dssSiteLanguage)->template_store->request_pricing;
+                             }
+                             ?>
+                                <span class="product-prices"><?php echo $display_price; ?></span><span>
+                                    <?php if(!empty($price_html)) { ?>
                                         <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:p-2 dsn:rounded-md"
                                                     value="<?php echo $postID; ?>" aria-label="Add To Cart">
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate add-to-cart-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
@@ -97,10 +106,7 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
                                             <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span> Cart
                                             </a> <?php } ?></span>
-                        <?php } else { ?><span class="product-prices">Request price</span><span><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:p-2 dsn:rounded-md" >
-                                                <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span> Cart
-                                            </a></span> <?php } ?></div>
+                        </div>
                     </div>
                 <?php endforeach; ?>
     </div>
@@ -136,11 +142,21 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                        
                         <div class="product-bottom dsn:flex dsn:items-center dsn:justify-between dsn:lg:p-4 dsn:p-2 dsn:text-black dsn:md:h-14">
                               <?php 
-                              $regular_price = wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
-                              $price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) ) );
-                              if ($product->get_price_html() || $price) { ?>
-                                <span class="product-prices"><?php if($product->get_price_html() && $price) { echo $product->get_price_html(); } else { if($regular_price == 0) {/*doNoting*/} else {echo $price;} } ?></span><span>
-                                     <?php if($product->get_price_html() && $price) { ?>
+                              // Determine displayable price or request text
+                              $price_html = $product->get_price_html();
+                              $raw_price = $product->get_price();
+                              $has_numeric_price = ($raw_price !== '' && floatval($raw_price) > 0);
+                              if (!empty($price_html)) {
+                                $display_price = $price_html;
+                              } elseif ($has_numeric_price) {
+                                $display_price = wc_price( wc_get_price_to_display( $product, array( 'price' => $product->get_price() ) ) );
+                              } else {
+                                global $dssSiteLanguage;
+                                $display_price = dssLang($dssSiteLanguage)->template_store->request_pricing;
+                              }
+                              ?>
+                                <span class="product-prices"><?php echo $display_price; ?></span><span>
+                                     <?php if(!empty($price_html)) { ?>
                                         <button class="single_add_to_cart_button product_shocase_add_to_cart dsn:p-2 dsn:rounded-md"
                                                     value="<?php echo $postID; ?>" aria-label="Add To Cart">
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate add-to-cart-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
@@ -150,10 +166,7 @@ $get_all_products = call_user_func_array ('array_merge', $AllProducts);
                                                 <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
                                             <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span> Cart
                                             </a> <?php } ?></span>
-                        <?php } else { ?><span class="product-prices"><?php echo $price; ?>Request price</span><span><a href="<?php echo get_permalink($postID); ?>" class="product_shocase_add_to_cart dsn:p-2 dsn:rounded-md" aria-label="Add To Cart">
-                                                <span class="dsn:normal-case dsn:no-underline dsn:text-base md:dsn:text-lg dsn:cursor-pointer dsn:px-2 lg:dsn:px-4 dsn:py-1 lg:dsn:py-1 dsn:primary-site-btn dsn:font-dsw dsn:font-normal dsn:rounded-md dsn:mx-auto dsn:w-full dsn:text-center dsn:truncate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="dsn:w-5 dsn:inline-flex dsn:align-text-top dsn:text-white"><path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"></path></svg>
-                                            <svg class="dsn:w-5 dsn:mt-0.5 dsn:-ml-1 dsn:inline-flex dsn:align-text-top dsn:text-white" fill="currentColor" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg></span> Cart
-                                            </a></span> <?php } ?></div>
+                        </div>
                     </div>
                 <?php endforeach; ?>
     <?php endif; ?>
