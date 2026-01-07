@@ -1,11 +1,11 @@
 {
-  "version": "v3.6.1",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.1",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.1/dsnshowcase.zip",
+  "version": "v3.6.2",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.2",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.2/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-01-02",
+  "last_updated": "2026-01-07",
   "sections": {
-    "changelog": "Merge pull request #193 from DesignStudio-Dev-Team/dspuneet\n\nAdded Selling Online Button in Theme Options"
+    "changelog": "Merge pull request #197 from DesignStudio-Dev-Team/display-vraag-prijs-op-instead-of-000-for-products-fix\n\nDisplay "Vraag prijs op" instead of "0,00€" for products without a defined price - Fix"
   }
 }
