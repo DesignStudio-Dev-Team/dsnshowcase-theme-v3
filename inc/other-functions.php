@@ -1678,5 +1678,107 @@ if ( ! function_exists('dsn_archive_product_template_scripts') ) {
   add_action('wp_enqueue_scripts', 'dsn_archive_product_template_scripts', 20);
 }
 
+function dsn_get_cart_product_ids() {
+  if (!WC()->cart) {
+    return array();
+  }
+
+  return array_column(WC()->cart->get_cart(), 'product_id');
+}
+
+function dsn_get_cart_cross_sell_ids() {
+  if (!WC()->cart) {
+    return array();
+  }
+
+  $cross_sell_ids = array();
+
+  foreach (WC()->cart->get_cart() as $cart_item) {
+    $product = wc_get_product($cart_item['product_id']);
+
+    if ($product) {
+      $cross_sells = $product->get_cross_sell_ids();
+
+      if (!empty($cross_sells)) {
+        $cross_sell_ids = array_merge($cross_sell_ids, $cross_sells);
+      }
+    }
+  }
+
+  return array_unique($cross_sell_ids);
+}
+
+function dsn_get_most_specific_cart_categories() {
+  if (!WC()->cart) {
+    return array();
+  }
+
+  $category_ids = array();
+
+  foreach (WC()->cart->get_cart() as $cart_item) {
+    $terms = get_the_terms($cart_item['product_id'], 'product_cat');
+
+    if ($terms && !is_wp_error($terms)) {
+      $most_specific_term = null;
+      $min_count = PHP_INT_MAX;
+
+      foreach ($terms as $term) {
+        $children = get_term_children($term->term_id, 'product_cat');
+
+        if (empty($children) || is_wp_error($children)) {
+          if ($term->count < $min_count) {
+            $min_count = $term->count;
+            $most_specific_term = $term->term_id;
+          }
+        }
+      }
+
+      if ($most_specific_term) {
+        $category_ids[] = $most_specific_term;
+      }
+    }
+  }
+
+  return array_unique($category_ids);
+}
+
+function dsn_get_cart_recommendations_query_args($posts_per_page = 12) {
+  $cart_product_ids = dsn_get_cart_product_ids();
+  $cross_sell_ids = dsn_get_cart_cross_sell_ids();
+  $cross_sell_ids = array_diff($cross_sell_ids, $cart_product_ids);
+
+  if (!empty($cross_sell_ids)) {
+    return array(
+      'post_type'      => 'product',
+      'posts_per_page' => $posts_per_page,
+      'post__in'       => $cross_sell_ids,
+      'orderby'        => 'post__in'
+    );
+  }
+
+  $category_ids = dsn_get_most_specific_cart_categories();
+
+  if (!empty($category_ids)) {
+    return array(
+      'post_type'      => 'product',
+      'posts_per_page' => $posts_per_page,
+      'post__not_in'   => $cart_product_ids,
+      'tax_query'      => array(
+        array(
+          'taxonomy' => 'product_cat',
+          'field'    => 'term_id',
+          'terms'    => $category_ids,
+          'operator' => 'IN'
+        )
+      )
+    );
+  }
+
+  return array(
+    'post_type'      => 'product',
+    'posts_per_page' => $posts_per_page,
+    'orderby'        => 'rand'
+  );
+}
 
 
