@@ -27,7 +27,7 @@ if ($bar_position == 'bottom') {
 
 
 <div
-    id="hero-block-<?php echo $block_id; ?>" class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15 dsn:px-4 dsn:md:px-0">
+    class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15 dsn:px-4 dsn:md:px-0">
     
 
     <?php
@@ -51,7 +51,7 @@ if ($bar_position == 'bottom') {
                             <div
                                 class="dsn:flex-auto dsn:w-full dsn:h-60 dsn:2xl:h-90 dsn:flex-grow-1 dsn:md:w-1/3 dsn:basis-50 dsn:md:basis-0 dsn:transition-all dsn:duration-1000 dsn:hover:flex-grow-2 dsn:relative dsn:!bg-cover dsn:!bg-center dsn:order-2 dsn:md:<?php echo $top_row_order; ?>"
                                 style="background: url(<?php echo $card_image['url']; ?>);">
-                                <a id="<?php echo strtolower(str_replace(' ', '-', trim($card_title))); ?>" class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
+                                <a id="<?php echo strtolower(str_replace(' ', '-', trim(preg_replace('/[^a-zA-Z0-9\s]/', '', $card_title)))); ?>" class="dsn:flex dsn:w-full dsn:h-full dsn:text-white dsn:items-end dsn:justify-center dsn:p-4 dsn:before:absolute dsn:before:w-full dsn:before:h-full dsn:before:left-0 dsn:before:top-0 dsn:before:opacity-80 dsn:before:bg-linear-to-b dsn:before:from-transparent dsn:before:to-black dsn:before:from-70%"
                                     href="<?php echo $card_link['url']; ?>" role="button"><span class="dsn:z-10 dsn:text-xl dsn:xl:text-3xl"><?php echo $card_title; ?></span></a>
                             </div>
                         <?php endwhile;
