@@ -217,6 +217,11 @@ function dsn_reserve_button() {
     }
     $translatedText = dssLang($dssSiteLanguage);
 
+    // Display stock status message
+    if (isset($translatedText->woocommerce_cart->available_on_backorder)) {
+        echo '<p class="stock on-backorder dsn:text-gray-500 dsn:mb-4">' . esc_html($translatedText->woocommerce_cart->available_on_backorder) . '</p>';
+    }
+
     // Get reserve icon from Syndified settings
     $reserve_icon = function_exists('syndified_get_reserve_icon') ? syndified_get_reserve_icon() : 'reserve';
     $button_title = $translatedText->woocommerce_cart->reserve_button;

@@ -68,6 +68,7 @@
         "coupon_placeholder": "promo",
         "checkout_btn": "VÉRIFIER",
         "reserve_button": "Réserver",
+        "available_on_backorder": "En rupture de stock, peut être commandé",
         "add_to_cart_btn": "Ajouter au panier",
         "info_button": "Plus d'informations",
         "payment_details": "Détails de paiement",

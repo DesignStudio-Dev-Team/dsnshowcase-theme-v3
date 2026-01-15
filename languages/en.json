@@ -68,6 +68,7 @@
         "coupon_placeholder": "coupon",
         "checkout_btn": "CHECKOUT",
         "reserve_button": "Reserve",
+        "available_on_backorder": "Available on backorder",
         "add_to_cart_btn": "Add to Cart",
         "info_button": "Get Info",
         "payment_details": "Payment Details",
