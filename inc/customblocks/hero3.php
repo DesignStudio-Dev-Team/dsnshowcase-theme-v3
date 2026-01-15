@@ -135,22 +135,6 @@
   }
 }
 
-.gform_wrapper .ginput_container.ginput_container_radio, .gform_wrapper .ginput_container.ginput_container_checkbox {
-    width: max-content;
-    margin: 0 auto;
-}
-.gform_wrapper .gform-page-footer.gform_page_footer.top_label, .gform_wrapper h3 {
-    text-align: center;
-}
-.gform_wrapper .gform-page-footer.gform_page_footer.top_label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-}
-.gform_wrapper .gform_previous_button, .gform_wrapper .gform_next_button {
-    margin: 0 !important;
-}
 @media only screen and (min-width: 1024px) and (max-width: 1400px) {
   #hero-block-<?php echo $block_id; ?> .left-col {
     min-height: 400px;
