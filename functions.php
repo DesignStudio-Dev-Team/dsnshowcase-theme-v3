@@ -491,21 +491,82 @@ add_filter('xmlrpc_methods', function () {
 
 add_filter('xmlrpc_enabled', '__return_false');
 
+/* Custom WP Login Page */
+function dsn_custom_login_logo() { 
+    $website_logo = get_field('header_logo', 'options');
+    ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo $website_logo['url']; ?>);
+            background-size: contain !important;
+            background-position: center;
+            height: 76px;
+            width: 300px;
+            background-size: 300px 100px;
+            background-repeat: no-repeat;
+            padding-bottom: 10px;
+            padding-bottom: 0;
+            margin-bottom: 10px;
+        }
+            Body.login {
+                background-color: #f7f7f7;
+            }
+            .login form {
+                box-shadow: none !important;
+                padding: 20px !important;
+                border: 0 !important;
+                margin-top: 0px !important;
+                margin-bottom: 0px !important;
+            }
+                #login {
+                background: #FFF;
+                margin: 50px auto !important;
+                padding: 40px 20px !important;
+                width: 400px !important;
+                box-shadow: 0px 0px 3px 0px #ddd;
+                }
+                .login label {
+                color: #555;
+                font-size: 14px;
+                }
+                .login form .forgetmenot{
+                float:none;
+                }
+                .login h3 {
+                    font-size: 24px;
+                    text-align: center;
+                    font-weight: 600;
+                }
+                p#backtoblog{
+                    display: none;
+                    }
+                #login form p.submit input[type="submit"] {
+                    width: 100%;
+                }
+                .login #nav {
+                    margin: 0 !important;
+                }
+    </style>
+<?php 
+}
+add_action('login_enqueue_scripts', 'dsn_custom_login_logo');
 
+add_action('login_message', 'dsn_sign_in_text');
 
+function dsn_sign_in_text() {
+   ?> <h3> <?php  _e('Sign In', 'wordpress'); ?> </h3> <?php
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+function dsn_change_lost_your_password_text ($text) {
+  if ($text == 'Lost your password?') {
+    $text = 'Forgot Password?'; // Change "Forgot Your Password?" to your desired text
+  }
+  if ($text == 'Username or Email Address') {
+    $text = 'Email or Username'; // Change "Forgot Your Password?" to your desired text
+  }
+  return $text;
+}
+add_filter('gettext', 'dsn_change_lost_your_password_text');
 
 
 
