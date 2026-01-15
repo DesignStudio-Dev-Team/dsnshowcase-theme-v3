@@ -70,6 +70,7 @@
         "add_to_cart_btn": "In Winkelwagen",
         "info_button": "Meer Informatie",
         "reserve_button": "Reserveren",
+        "available_on_backorder": "Niet op voorraad, kan besteld worden",
         "payment_details": "Betalingsgegevens",
         "billing_details": "Factuurgegevens",
         "street_address": "Straatadres",
