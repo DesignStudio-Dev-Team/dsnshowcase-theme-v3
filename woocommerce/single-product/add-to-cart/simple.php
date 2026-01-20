@@ -45,7 +45,7 @@ if ( $product->is_in_stock() ) : ?>
 
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button alt dsn:mb-2"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
         <!-- <a href="#" class="alt dsw-primary-site-btn text-base md:text-lg lg:text-xl cursor-pointer px-4 lg:px-8 py-2 lg:py-3 mx-2">Get a Quote</a> -->
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 
