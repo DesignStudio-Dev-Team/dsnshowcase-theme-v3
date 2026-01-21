@@ -213,7 +213,7 @@ function dsn_reserve_button() {
 
     // Get translated text
     if (empty($dssSiteLanguage)) {
-        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+        $dssSiteLanguage = dssGetSiteLanguage();
     }
     $translatedText = dssLang($dssSiteLanguage);
 
@@ -267,7 +267,7 @@ function dsn_get_info_button() {
 
     // Get translated text
     if (empty($dssSiteLanguage)) {
-        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+        $dssSiteLanguage = dssGetSiteLanguage();
     }
     $translatedText = dssLang($dssSiteLanguage);
 

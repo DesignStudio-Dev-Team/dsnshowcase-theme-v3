@@ -98,7 +98,7 @@ if(! function_exists('dsn_get_product_cart_wrapper_html')) {
 
       global $dssSiteLanguage;
       if (empty($dssSiteLanguage)) {
-          $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+          $dssSiteLanguage = dssGetSiteLanguage();
       }
       $translatedText = dssLang($dssSiteLanguage);
 
@@ -1274,11 +1274,34 @@ add_action('template_redirect', 'dss_remove_add_promotions');
 
 
 /* languages */
-$dssSiteLanguage = apply_filters( 'wpml_current_language', NULL );
-if (!$dssSiteLanguage)
-    $dssSiteLanguage = 'en';
-  
-// example for language:  echo dssLang($dssSiteLanguage)->footer->get_directions;     
+
+/**
+ * Get the current site language code.
+ * Checks WPML first, then falls back to WordPress locale.
+ *
+ * @return string Language code (e.g., 'en', 'fr', 'nl')
+ */
+function dssGetSiteLanguage(): string
+{
+    // First, try WPML
+    $lang = apply_filters('wpml_current_language', null);
+
+    if (!$lang) {
+        // WPML not installed - use WordPress site locale
+        $wp_locale = get_locale(); // e.g., 'fr_FR', 'es_ES', 'nl_NL'
+        $lang_code = explode('_', $wp_locale)[0]; // Extract language code, e.g., 'fr'
+
+        // Check if language file exists, otherwise fallback to 'en'
+        $lang_file = locate_template("languages/" . $lang_code . ".json");
+        $lang = $lang_file ? $lang_code : 'en';
+    }
+
+    return $lang;
+}
+
+$dssSiteLanguage = dssGetSiteLanguage();
+
+// example for language:  echo dssLang($dssSiteLanguage)->footer->get_directions;
 function dssLang($dssSiteLanguage = 'en')
 {
     $data = file_get_contents(locate_template("languages/" . $dssSiteLanguage . ".json"), true);
