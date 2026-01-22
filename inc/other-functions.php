@@ -1622,7 +1622,7 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
     }
 
     // Show reserve button if product is on reserve, has no price, or is out of stock
-    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE || empty($product->get_price()))
+    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE)
     {
       return true;
     }
@@ -1643,6 +1643,10 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
     $product = wc_get_product($productID);
     if (!$product) {
       return false;
+    }
+
+    if(empty($product->get_price())) {
+      return true;
     }
 
     return $product->backorders_allowed();
