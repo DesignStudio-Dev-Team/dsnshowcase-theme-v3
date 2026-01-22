@@ -170,7 +170,6 @@ function add_description_below_add_to_cart() {
 }
 add_action('woocommerce_single_product_summary', 'add_description_below_add_to_cart', 125);
 
-//Check if Stock Status is on_reserve and remove cart button and change it to a button to reserve
 function dsn_stock_status_reserve() {
     if (class_exists('WooCommerce')) {
         global $product;
@@ -183,19 +182,14 @@ function dsn_stock_status_reserve() {
         $stock_status = $product->get_stock_status();
 
         // Handle reserve button for products with on_reserve stock status
-        if ($stock_status == 'on_reserve') {
-            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+        if ($stock_status === 'on_reserve') {
             add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
-        }
-        // Handle get info button for syndicated products configured to show get info
-        elseif (dsn_show_get_info_btn($product_id) && !dsn_show_add_to_cart($product_id)) {
-            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+        }elseif (dsn_show_get_info_btn($product_id)) {
             add_action('woocommerce_single_product_summary', 'dsn_get_info_button', 30);
         }
-        // Handle reserve button for syndicated products configured to show reserve
-        elseif (dsn_show_reserve_btn($product_id) && !dsn_show_add_to_cart($product_id)) {
+
+        if(!dsn_show_add_to_cart($product_id)){
             remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
-            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
         }
     }
 }
@@ -216,11 +210,6 @@ function dsn_reserve_button() {
         $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
     }
     $translatedText = dssLang($dssSiteLanguage);
-
-    // Display stock status message
-    if (isset($translatedText->woocommerce_cart->available_on_backorder)) {
-        echo '<p class="stock on-backorder dsn:text-gray-500 dsn:mb-4">' . esc_html($translatedText->woocommerce_cart->available_on_backorder) . '</p>';
-    }
 
     // Get reserve icon from Syndified settings
     $reserve_icon = function_exists('syndified_get_reserve_icon') ? syndified_get_reserve_icon() : 'reserve';

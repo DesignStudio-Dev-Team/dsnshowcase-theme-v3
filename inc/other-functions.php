@@ -1540,12 +1540,17 @@ if ( ! function_exists('dsn_get_current_active_locale')) {
 if ( ! function_exists('dsn_show_add_to_cart') ) {
   function dsn_show_add_to_cart(int $productID): bool {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_add_to_cart')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_add_to_cart($productID);
     }
 
-    // Fallback: show add-to-cart if not showing reserve button
-    return !dsn_show_reserve_btn($productID);
+    // Fallback: show add-to-cart if not showing the reserve button
+    $product = wc_get_product($productID);
+    if (!$product) {
+      return false;
+    }
+
+    return $product->is_purchasable();
   }
 }
 
@@ -1578,25 +1583,21 @@ if ( ! function_exists('dsn_show_other_action_buttons') ) {
 if ( ! function_exists('dsn_show_reserve_btn') ) {
   function dsn_show_reserve_btn(int $productID): bool {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_reserve_btn')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_reserve_btn($productID);
     }
 
-    // Fallback for when plugin is deactivated
-    // Only check non-syndicated products based on stock status
-    if (!function_exists('wc_get_product')) {
-      return false;
-    }
-
+    // Fallback for when the plugin is deactivated
     $product = wc_get_product($productID);
     if (!$product) {
       return false;
     }
 
     // Show reserve button if product is on reserve, has no price, or is out of stock
-    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE ||
-        empty($product->get_price()) ||
-        ($product->managing_stock() && $product->get_stock_quantity() === 0)) {
+    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE
+      || empty($product->get_price())
+      || ($product->managing_stock() && $product->get_stock_quantity() === 0))
+    {
       return true;
     }
 
