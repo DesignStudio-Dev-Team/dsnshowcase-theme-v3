@@ -179,13 +179,13 @@ function dsn_handle_product_action_buttons() {
         }
 
         $product_id = $product->get_id();
-        $stock_status = $product->get_stock_status();
 
-        // Handle reserve button for products with on_reserve stock status
-        if ($stock_status === 'on_reserve') {
+        if (dsn_show_reserve_btn($product_id)){
             add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
             remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
-        }elseif (dsn_show_get_info_btn($product_id)) {
+        }
+
+        if(dsn_show_get_info_btn($product_id)) {
             add_action('woocommerce_single_product_summary', 'dsn_get_info_button', 30);
         }
 

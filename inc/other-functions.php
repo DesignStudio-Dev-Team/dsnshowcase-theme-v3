@@ -1617,9 +1617,7 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
     }
 
     // Show reserve button if product is on reserve, has no price, or is out of stock
-    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE
-      || empty($product->get_price())
-      || ($product->managing_stock() && $product->get_stock_quantity() === 0))
+    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE || empty($product->get_price()))
     {
       return true;
     }
@@ -1632,12 +1630,17 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
   function dsn_show_get_info_btn(int $productID = 0): bool
   {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_get_info_btn')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_get_info_btn($productID);
     }
 
-    // Fallback: get info button is a Syndified feature, return false when plugin is deactivated
-    return false;
+    // Show only if the product allows backorders
+    $product = wc_get_product($productID);
+    if (!$product) {
+      return false;
+    }
+
+    return $product->backorders_allowed();
   }
 }
 
