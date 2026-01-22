@@ -170,7 +170,7 @@ function add_description_below_add_to_cart() {
 }
 add_action('woocommerce_single_product_summary', 'add_description_below_add_to_cart', 125);
 
-function dsn_stock_status_reserve() {
+function dsn_handle_product_action_buttons() {
     if (class_exists('WooCommerce')) {
         global $product;
 
@@ -194,7 +194,8 @@ function dsn_stock_status_reserve() {
         }
     }
 }
-add_action('woocommerce_single_product_summary', 'dsn_stock_status_reserve', 1);
+
+add_action('woocommerce_single_product_summary', 'dsn_handle_product_action_buttons', 1);
 
 function dsn_reserve_button() {
     global $product;
