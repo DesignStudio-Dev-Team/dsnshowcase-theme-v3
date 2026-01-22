@@ -1,11 +1,11 @@
 {
-  "version": "v3.6.3",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.3",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.3/dsnshowcase.zip",
+  "version": "v3.6.4",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.4",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.4/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-01-21",
+  "last_updated": "2026-01-22",
   "sections": {
-    "changelog": "Merge pull request #205 from DesignStudio-Dev-Team/stock-status-text-is-not-translated-to-site-langua-fix\n\nStock status text is not translated to site language - Fix"
+    "changelog": "Merge pull request #211 from DesignStudio-Dev-Team/stock-status-text-is-not-translated-to-site-langua-fix\n\nNon syndicated products shouldn't consider Syndifided v3 settings"
   }
 }
