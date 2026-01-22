@@ -1599,12 +1599,12 @@ if ( ! function_exists('dsn_show_other_action_buttons') ) {
   function dsn_show_other_action_buttons(int $productID = 0): bool
   {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_other_action_buttons')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_other_action_buttons($productID);
     }
 
     // Fallback: return false (action buttons are Syndified feature)
-    return false;
+    return true;
   }
 }
 
