@@ -1567,7 +1567,12 @@ if ( ! function_exists('dsn_show_add_to_cart') ) {
       return syndified_show_add_to_cart($productID);
     }
 
-    // Fallback: show add-to-cart if not showing the reserve button
+    // Don't show add-to-cart when the reserve button is shown
+    if (dsn_show_reserve_btn($productID)) {
+      return false;
+    }
+
+    // Fallback: show add-to-cart if the product is purchasable
     $product = wc_get_product($productID);
     if (!$product) {
       return false;
@@ -1594,12 +1599,12 @@ if ( ! function_exists('dsn_show_other_action_buttons') ) {
   function dsn_show_other_action_buttons(int $productID = 0): bool
   {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_other_action_buttons')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_other_action_buttons($productID);
     }
 
     // Fallback: return false (action buttons are Syndified feature)
-    return false;
+    return true;
   }
 }
 
@@ -1616,10 +1621,8 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
       return false;
     }
 
-    // Show reserve button if product is on reserve, has no price, or is out of stock
-    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE
-      || empty($product->get_price())
-      || ($product->managing_stock() && $product->get_stock_quantity() === 0))
+    // Show reserve button if product is on reserve and has a price.
+    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE && $product->is_purchasable())
     {
       return true;
     }
@@ -1632,11 +1635,24 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
   function dsn_show_get_info_btn(int $productID = 0): bool
   {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_get_info_btn')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_get_info_btn($productID);
     }
 
-    // Fallback: get info button is a Syndified feature, return false when plugin is deactivated
+    // Show only if the product allows backorders
+    $product = wc_get_product($productID);
+    if (!$product) {
+      return false;
+    }
+
+    if(empty($product->get_price())) {
+      return true;
+    }
+
+    if($product->is_on_backorder() || $product->backorders_allowed()){
+      return true;
+    }
+
     return false;
   }
 }
