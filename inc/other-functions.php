@@ -1649,7 +1649,11 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
       return true;
     }
 
-    return $product->backorders_allowed();
+    if($product->is_on_backorder() || $product->backorders_allowed()){
+      return true;
+    }
+
+    return false;
   }
 }
 
