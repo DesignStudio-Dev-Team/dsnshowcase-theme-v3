@@ -14,11 +14,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! isset( $postID ) ) {
     return;
 }
+
+// Determine which buttons to show - matching single product page logic
+$show_reserve = dsn_show_reserve_btn( $postID );
+$show_get_info = dsn_show_get_info_btn( $postID );
+$show_add_to_cart = dsn_show_add_to_cart( $postID );
+
+// If reserve button is shown, don't show add to cart (matches single product page behavior)
+if ( $show_reserve ) {
+    $show_add_to_cart = false;
+}
 ?>
 
 <div class="ds-product__action_buttons dsn:flex dsn:gap-2">
     <?php if ( dsn_show_other_action_buttons( $postID ) ) : ?>
-        <?php if ( dsn_show_reserve_btn( $postID ) ) : ?>
+        <?php if ( $show_reserve ) : ?>
             <?php 
                 $reserve_icon = get_option( 'Syndified®_ecomm_reserve_icon', 'reserve' );
                 $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
@@ -45,7 +55,7 @@ if ( ! isset( $postID ) ) {
                 </a>
             <?php endif; ?>
             
-        <?php elseif ( dsn_show_get_info_btn( $postID ) ) : ?>
+        <?php elseif ( $show_get_info ) : ?>
             <?php 
                 $get_info_icon = get_option( 'Syndified®_ecomm_get_info_icon', 'info' );
                 $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
@@ -74,7 +84,7 @@ if ( ! isset( $postID ) ) {
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php if ( dsn_show_add_to_cart( $postID ) ) : ?>
+    <?php if ( $show_add_to_cart ) : ?>
         <?php 
             $cart_quantity = dsn_get_cart_product_quantity( $postID );
             $is_in_cart = $cart_quantity > 0;
