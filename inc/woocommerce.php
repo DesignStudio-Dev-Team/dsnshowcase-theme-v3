@@ -170,7 +170,7 @@ function add_description_below_add_to_cart() {
 }
 add_action('woocommerce_single_product_summary', 'add_description_below_add_to_cart', 125);
 
-function dsn_stock_status_reserve() {
+function dsn_handle_product_action_buttons() {
     if (class_exists('WooCommerce')) {
         global $product;
 
@@ -179,12 +179,13 @@ function dsn_stock_status_reserve() {
         }
 
         $product_id = $product->get_id();
-        $stock_status = $product->get_stock_status();
 
-        // Handle reserve button for products with on_reserve stock status
-        if ($stock_status === 'on_reserve') {
-            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
-        }elseif (dsn_show_get_info_btn($product_id)) {
+        if (dsn_show_reserve_btn($product_id)){
+            add_action('woocommerce_single_product_summary', 'dsn_reserve_button');
+            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+        }
+
+        if(dsn_show_get_info_btn($product_id)) {
             add_action('woocommerce_single_product_summary', 'dsn_get_info_button', 30);
         }
 
@@ -193,7 +194,8 @@ function dsn_stock_status_reserve() {
         }
     }
 }
-add_action('woocommerce_single_product_summary', 'dsn_stock_status_reserve', 1);
+
+add_action('woocommerce_single_product_summary', 'dsn_handle_product_action_buttons', 1);
 
 function dsn_reserve_button() {
     global $product;
