@@ -15,15 +15,10 @@ if ( ! isset( $postID ) ) {
     return;
 }
 
-// Determine which buttons to show - matching single product page logic
+// Determine which buttons to show
 $show_reserve = dsn_show_reserve_btn( $postID );
 $show_get_info = dsn_show_get_info_btn( $postID );
 $show_add_to_cart = dsn_show_add_to_cart( $postID );
-
-// If reserve button is shown, don't show add to cart (matches single product page behavior)
-if ( $show_reserve ) {
-    $show_add_to_cart = false;
-}
 ?>
 
 <div class="ds-product__action_buttons dsn:flex dsn:gap-2">

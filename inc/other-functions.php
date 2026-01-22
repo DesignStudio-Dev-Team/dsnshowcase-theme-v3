@@ -1567,7 +1567,12 @@ if ( ! function_exists('dsn_show_add_to_cart') ) {
       return syndified_show_add_to_cart($productID);
     }
 
-    // Fallback: show add-to-cart if not showing the reserve button
+    // Don't show add-to-cart when the reserve button is shown
+    if (dsn_show_reserve_btn($productID)) {
+      return false;
+    }
+
+    // Fallback: show add-to-cart if the product is purchasable
     $product = wc_get_product($productID);
     if (!$product) {
       return false;
