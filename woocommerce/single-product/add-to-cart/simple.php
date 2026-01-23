@@ -30,9 +30,8 @@ if ( $product->is_in_stock() ) : ?>
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 	<form class="cart2" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
-		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-        <label for="quantity" class="dsn:mr-4">Qty</label>
 		<?php
+    do_action( 'woocommerce_before_add_to_cart_button' );
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
 
 		woocommerce_quantity_input(
