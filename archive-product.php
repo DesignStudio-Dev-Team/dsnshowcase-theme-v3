@@ -47,6 +47,11 @@ $all_categories = get_queried_object_id();
 $this_obj = get_queried_object();
 $thumbnail_id = dsn_get_term_meta($all_categories, 'thumbnail_id', true);
 $image = wp_get_attachment_url($thumbnail_id);
+
+// Get hero image (separate from thumbnail)
+$hero_image_id = get_term_meta($all_categories, 'category_hero_image_id', true);
+$hero_image = $hero_image_id ? wp_get_attachment_url($hero_image_id) : '';
+
 $paged = (get_query_var('paged')) ?: 1;
 $orderby = DSN_DEFAULT_ORDER_BY;
 $order = DSN_DEFAULT_ORDER;
@@ -93,27 +98,38 @@ $arg = array(
 ?>
 
 <div class="dsn-template-wrapper dsn:px-5">
-  <?php if ($image): ?>
-    <div class="ds-archive-banner" style="background-image: url('<?php echo $image ?>')">
-          <div class="dsn:container">
-              <div class="dsn:flex dsn:justify-center">
-                  <div class="dsn:w-full dsn:md:w-3/4 dsn:lg:w-1/2">
-                      <h1 class="dsn:text-center dsn:text-white"><?php woocommerce_page_title(); ?></h1>
-
-                      <div class="ds-estore-search">
-                          <form role="search" class="blog-search" method="get" action="<?= esc_url(home_url('/')); ?>">
-
-                              <input type="search" size="16" value="" name="s" class="search-field form-control" placeholder="SEARCH" required>
-
-                              <input type="hidden" name="post_type" value="blog-posts" /> <!-- // hidden 'blog-posts' value -->
-
-                          </form>
-                      </div>
-                  </div>
-              </div>
+  <?php if ($hero_image): ?>
+    <!-- New Hero Banner Section (hero image set) - image above, title below -->
+    <div class="ds-category-hero" style="background-image: url('<?php echo esc_url($hero_image); ?>')"></div>
+    <div class="ds-category-header dsn:container dsn:mx-auto">
+      <h1 class="dsn-taxonomy-title dsn:text-center"><?php woocommerce_page_title(); ?></h1>
+      <?php
+      $description = dsn_get_archive_description_excerpt();
+      if (!empty($description)): ?>
+        <div class="dsn-taxonomy-description dsn:py-4 dsn:text-center">
+          <?php echo $description; ?>
+        </div>
+      <?php endif; ?>
+    </div>
+  <?php elseif ($image): ?>
+    <!-- Original Banner (thumbnail set) - title inside banner -->
+    <div class="ds-archive-banner" style="background-image: url('<?php echo esc_url($image); ?>')">
+      <div class="dsn:container">
+        <div class="dsn:flex dsn:justify-center">
+          <div class="dsn:w-full dsn:md:w-3/4 dsn:lg:w-1/2">
+            <h1 class="dsn:text-center dsn:text-white"><?php woocommerce_page_title(); ?></h1>
+            <div class="ds-estore-search">
+              <form role="search" class="blog-search" method="get" action="<?= esc_url(home_url('/')); ?>">
+                <input type="search" size="16" value="" name="s" class="search-field form-control" placeholder="SEARCH" required>
+                <input type="hidden" name="post_type" value="blog-posts" />
+              </form>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   <?php else: ?>
+    <!-- No image - just title and description -->
     <div class="dsn-header-container dsn:container dsn:mx-auto dsn:pt-5 dsn:md:pt-0">
         <h1 class="dsn-taxonomy-title dsn:text-center"><?php woocommerce_page_title(); ?></h1>
         <div class="dsn-taxonomy-description dsn:py-8">
