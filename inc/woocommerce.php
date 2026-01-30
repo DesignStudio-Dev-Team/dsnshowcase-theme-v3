@@ -319,6 +319,15 @@ function dsn_add_category_hero_image_field() {
         <button type="button" class="button" id="remove_hero_image_button" style="display: none;"><?php _e('Remove Image', 'dsnshowcase'); ?></button>
         <p class="description"><?php _e('Upload a wide banner image for the category page hero. Recommended size: 1920x500px.', 'dsnshowcase'); ?></p>
     </div>
+    <div class="form-field">
+        <label><?php _e('Hero Image Position', 'dsnshowcase'); ?></label>
+        <select name="hero_image_position_y" id="hero_image_position_y">
+            <option value="top"><?php _e('Top', 'dsnshowcase'); ?></option>
+            <option value="center" selected><?php _e('Center', 'dsnshowcase'); ?></option>
+            <option value="bottom"><?php _e('Bottom', 'dsnshowcase'); ?></option>
+        </select>
+        <p class="description"><?php _e('Choose which part of the image to focus on vertically.', 'dsnshowcase'); ?></p>
+    </div>
     <?php
 }
 
@@ -329,6 +338,7 @@ add_action('product_cat_edit_form_fields', 'dsn_edit_category_hero_image_field',
 function dsn_edit_category_hero_image_field($term) {
     $hero_image_id = get_term_meta($term->term_id, 'category_hero_image_id', true);
     $hero_image_url = $hero_image_id ? wp_get_attachment_url($hero_image_id) : '';
+    $position_y = get_term_meta($term->term_id, 'hero_image_position_y', true) ?: 'center';
     ?>
     <tr class="form-field">
         <th scope="row"><label><?php _e('Hero Image', 'dsnshowcase'); ?></label></th>
@@ -342,6 +352,17 @@ function dsn_edit_category_hero_image_field($term) {
             <p class="description"><?php _e('Upload a wide banner image for the category page hero. Recommended size: 1920x500px.', 'dsnshowcase'); ?></p>
         </td>
     </tr>
+    <tr class="form-field">
+        <th scope="row"><label><?php _e('Hero Image Position', 'dsnshowcase'); ?></label></th>
+        <td>
+            <select name="hero_image_position_y" id="hero_image_position_y">
+                <option value="top" <?php selected($position_y, 'top'); ?>><?php _e('Top', 'dsnshowcase'); ?></option>
+                <option value="center" <?php selected($position_y, 'center'); ?>><?php _e('Center', 'dsnshowcase'); ?></option>
+                <option value="bottom" <?php selected($position_y, 'bottom'); ?>><?php _e('Bottom', 'dsnshowcase'); ?></option>
+            </select>
+            <p class="description"><?php _e('Choose which part of the image to focus on vertically.', 'dsnshowcase'); ?></p>
+        </td>
+    </tr>
     <?php
 }
 
@@ -353,6 +374,9 @@ function dsn_save_category_hero_image($term_id, $tt_id) {
     if (isset($_POST['category_hero_image_id'])) {
         update_term_meta($term_id, 'category_hero_image_id', absint($_POST['category_hero_image_id']));
     }
+    if (isset($_POST['hero_image_position_y'])) {
+        update_term_meta($term_id, 'hero_image_position_y', sanitize_text_field($_POST['hero_image_position_y']));
+    }
 }
 
 /**
@@ -362,6 +386,9 @@ add_action('edited_product_cat', 'dsn_update_category_hero_image', 10, 2);
 function dsn_update_category_hero_image($term_id, $tt_id) {
     if (isset($_POST['category_hero_image_id'])) {
         update_term_meta($term_id, 'category_hero_image_id', absint($_POST['category_hero_image_id']));
+    }
+    if (isset($_POST['hero_image_position_y'])) {
+        update_term_meta($term_id, 'hero_image_position_y', sanitize_text_field($_POST['hero_image_position_y']));
     }
 }
 

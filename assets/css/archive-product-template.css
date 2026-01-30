@@ -834,7 +834,6 @@ body .ds-estore-banner-wrap {
   width: 100%;
   height: clamp(200px, 30vh, 500px);
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   position: relative;
 }

@@ -51,6 +51,8 @@ $image = wp_get_attachment_url($thumbnail_id);
 // Get hero image (separate from thumbnail)
 $hero_image_id = get_term_meta($all_categories, 'category_hero_image_id', true);
 $hero_image = $hero_image_id ? wp_get_attachment_url($hero_image_id) : '';
+$hero_position_y = get_term_meta($all_categories, 'hero_image_position_y', true) ?: 'center';
+$hero_position = 'center ' . esc_attr($hero_position_y);
 
 $paged = (get_query_var('paged')) ?: 1;
 $orderby = DSN_DEFAULT_ORDER_BY;
@@ -100,7 +102,7 @@ $arg = array(
 <div class="dsn-template-wrapper dsn:px-5">
   <?php if ($hero_image): ?>
     <!-- New Hero Banner Section (hero image set) - image above, title below -->
-    <div class="ds-category-hero" style="background-image: url('<?php echo esc_url($hero_image); ?>')"></div>
+    <div class="ds-category-hero" style="background-image: url('<?php echo esc_url($hero_image); ?>'); background-position: <?php echo $hero_position; ?>;"></div>
     <div class="ds-category-header dsn:container dsn:mx-auto">
       <h1 class="dsn-taxonomy-title dsn:text-center"><?php woocommerce_page_title(); ?></h1>
       <?php
