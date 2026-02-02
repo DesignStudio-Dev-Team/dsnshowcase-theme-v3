@@ -33,8 +33,9 @@ global $dssSiteLanguage;
         <div class="cart-page-wrapper-left dsn:md:flex dsn:md:flex-col dsn:gap-13 dsn:md:w-2/3">
           <!-- Cart Wrapper -->
           <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
-            <div class="dsn:pb-4">
+            <div class="dsn:flex dsn:items-center dsn:gap-4 dsn:pb-4 dsn:justify-between">
               <h4 class="dsn:m-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
+              <?php do_action( 'dsn_cart_after_title' ); ?>
             </div>
 
             <?php
