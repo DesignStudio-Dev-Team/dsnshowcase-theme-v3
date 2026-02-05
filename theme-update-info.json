@@ -1,11 +1,11 @@
 {
-  "version": "v3.6.5",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.5",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.5/dsnshowcase.zip",
+  "version": "v3.5.66",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.5.66",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.5.66/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-01-23",
+  "last_updated": "2026-02-05",
   "sections": {
-    "changelog": "Merge pull request #213 from DesignStudio-Dev-Team/remove-qty-label-from-woocommerce-product-template-fix\n\nRemove "Qty" Label from WooCommerce Product Template - Fix"
+    "changelog": "Merge pull request #217 from DesignStudio-Dev-Team/mark\n\nMark"
   }
 }
