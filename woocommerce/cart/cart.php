@@ -35,28 +35,7 @@ global $dssSiteLanguage;
           <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
             <div class="dsn:flex dsn:items-center dsn:gap-4 dsn:pb-4 dsn:justify-between">
               <h4 class="dsn:m-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
-              
-              <?php
-              // Display VIP pricing banner inline with heading
-              $has_vip_pricing = false;
-              
-              if (function_exists('syndified_get_product_discount') && WC()->cart) {
-                  foreach (WC()->cart->get_cart() as $cart_item) {
-                      $product_id = $cart_item['product_id'];
-                      $discount_info = syndified_get_product_discount($product_id);
-                      
-                      if ($discount_info && isset($discount_info['value']) && $discount_info['value'] > 0) {
-                          $has_vip_pricing = true;
-                          break;
-                      }
-                  }
-              }
-              
-              if ($has_vip_pricing): ?>
-                  <div class="syndified-vip-cart-banner dsn:bg-stihl-orange dsn:text-white dsn:px-4 dsn:py-2 dsn:rounded-full dsn:font-semibold dsn:text-sm dsn:whitespace-nowrap">
-                    <?php echo dssLang($dssSiteLanguage)->woocommerce_cart->vip_discount_banner_text; ?>
-                  </div>
-              <?php endif; ?>
+              <?php do_action( 'dsn_cart_after_title' ); ?>
             </div>
 
             <?php
