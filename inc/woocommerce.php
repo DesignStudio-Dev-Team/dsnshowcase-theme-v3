@@ -170,8 +170,7 @@ function add_description_below_add_to_cart() {
 }
 add_action('woocommerce_single_product_summary', 'add_description_below_add_to_cart', 125);
 
-//Check if Stock Status is on_reserve and remove cart button and change it to a button to reserve
-function dsn_stock_status_reserve() {
+function dsn_handle_product_action_buttons() {
     if (class_exists('WooCommerce')) {
         global $product;
 
@@ -180,26 +179,23 @@ function dsn_stock_status_reserve() {
         }
 
         $product_id = $product->get_id();
-        $stock_status = $product->get_stock_status();
 
-        // Handle reserve button for products with on_reserve stock status
-        if ($stock_status == 'on_reserve') {
+        if (dsn_show_reserve_btn($product_id)){
+            add_action('woocommerce_single_product_summary', 'dsn_reserve_button');
             remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
-            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
         }
-        // Handle get info button for syndicated products configured to show get info
-        elseif (dsn_show_get_info_btn($product_id) && !dsn_show_add_to_cart($product_id)) {
-            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+
+        if(dsn_show_get_info_btn($product_id)) {
             add_action('woocommerce_single_product_summary', 'dsn_get_info_button', 30);
         }
-        // Handle reserve button for syndicated products configured to show reserve
-        elseif (dsn_show_reserve_btn($product_id) && !dsn_show_add_to_cart($product_id)) {
+
+        if(!dsn_show_add_to_cart($product_id)){
             remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
-            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', 30);
         }
     }
 }
-add_action('woocommerce_single_product_summary', 'dsn_stock_status_reserve', 1);
+
+add_action('woocommerce_single_product_summary', 'dsn_handle_product_action_buttons', 1);
 
 function dsn_reserve_button() {
     global $product;
@@ -213,7 +209,7 @@ function dsn_reserve_button() {
 
     // Get translated text
     if (empty($dssSiteLanguage)) {
-        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+        $dssSiteLanguage = dssGetSiteLanguage();
     }
     $translatedText = dssLang($dssSiteLanguage);
 
@@ -262,7 +258,7 @@ function dsn_get_info_button() {
 
     // Get translated text
     if (empty($dssSiteLanguage)) {
-        $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+        $dssSiteLanguage = dssGetSiteLanguage();
     }
     $translatedText = dssLang($dssSiteLanguage);
 
@@ -306,3 +302,143 @@ function dsn_include_syndified_modal_on_product_pages() {
     }
 }
 add_action('wp_footer', 'dsn_include_syndified_modal_on_product_pages');
+
+/**
+ * Add Hero Image field to product category add form
+ */
+add_action('product_cat_add_form_fields', 'dsn_add_category_hero_image_field');
+function dsn_add_category_hero_image_field() {
+    ?>
+    <div class="form-field">
+        <label><?php _e('Hero Image', 'dsnshowcase'); ?></label>
+        <div id="category_hero_image_wrapper">
+            <img id="category_hero_image_preview" src="" style="max-width: 300px; display: none;" />
+        </div>
+        <input type="hidden" id="category_hero_image_id" name="category_hero_image_id" value="" />
+        <button type="button" class="button" id="upload_hero_image_button"><?php _e('Upload/Add Image', 'dsnshowcase'); ?></button>
+        <button type="button" class="button" id="remove_hero_image_button" style="display: none;"><?php _e('Remove Image', 'dsnshowcase'); ?></button>
+        <p class="description"><?php _e('Upload a wide banner image for the category page hero. Recommended size: 1920x500px.', 'dsnshowcase'); ?></p>
+    </div>
+    <div class="form-field">
+        <label><?php _e('Hero Image Position', 'dsnshowcase'); ?></label>
+        <select name="hero_image_position_y" id="hero_image_position_y">
+            <option value="top"><?php _e('Top', 'dsnshowcase'); ?></option>
+            <option value="center" selected><?php _e('Center', 'dsnshowcase'); ?></option>
+            <option value="bottom"><?php _e('Bottom', 'dsnshowcase'); ?></option>
+        </select>
+        <p class="description"><?php _e('Choose which part of the image to focus on vertically.', 'dsnshowcase'); ?></p>
+    </div>
+    <?php
+}
+
+/**
+ * Add Hero Image field to product category edit form
+ */
+add_action('product_cat_edit_form_fields', 'dsn_edit_category_hero_image_field', 10, 1);
+function dsn_edit_category_hero_image_field($term) {
+    $hero_image_id = get_term_meta($term->term_id, 'category_hero_image_id', true);
+    $hero_image_url = $hero_image_id ? wp_get_attachment_url($hero_image_id) : '';
+    $position_y = get_term_meta($term->term_id, 'hero_image_position_y', true) ?: 'center';
+    ?>
+    <tr class="form-field">
+        <th scope="row"><label><?php _e('Hero Image', 'dsnshowcase'); ?></label></th>
+        <td>
+            <div id="category_hero_image_wrapper">
+                <img id="category_hero_image_preview" src="<?php echo esc_url($hero_image_url); ?>" style="max-width: 300px; <?php echo $hero_image_url ? '' : 'display: none;'; ?>" />
+            </div>
+            <input type="hidden" id="category_hero_image_id" name="category_hero_image_id" value="<?php echo esc_attr($hero_image_id); ?>" />
+            <button type="button" class="button" id="upload_hero_image_button"><?php _e('Upload/Add Image', 'dsnshowcase'); ?></button>
+            <button type="button" class="button" id="remove_hero_image_button" style="<?php echo $hero_image_url ? '' : 'display: none;'; ?>"><?php _e('Remove Image', 'dsnshowcase'); ?></button>
+            <p class="description"><?php _e('Upload a wide banner image for the category page hero. Recommended size: 1920x500px.', 'dsnshowcase'); ?></p>
+        </td>
+    </tr>
+    <tr class="form-field">
+        <th scope="row"><label><?php _e('Hero Image Position', 'dsnshowcase'); ?></label></th>
+        <td>
+            <select name="hero_image_position_y" id="hero_image_position_y">
+                <option value="top" <?php selected($position_y, 'top'); ?>><?php _e('Top', 'dsnshowcase'); ?></option>
+                <option value="center" <?php selected($position_y, 'center'); ?>><?php _e('Center', 'dsnshowcase'); ?></option>
+                <option value="bottom" <?php selected($position_y, 'bottom'); ?>><?php _e('Bottom', 'dsnshowcase'); ?></option>
+            </select>
+            <p class="description"><?php _e('Choose which part of the image to focus on vertically.', 'dsnshowcase'); ?></p>
+        </td>
+    </tr>
+    <?php
+}
+
+/**
+ * Save Hero Image field when category is created
+ */
+add_action('created_product_cat', 'dsn_save_category_hero_image', 10, 2);
+function dsn_save_category_hero_image($term_id, $tt_id) {
+    if (isset($_POST['category_hero_image_id'])) {
+        update_term_meta($term_id, 'category_hero_image_id', absint($_POST['category_hero_image_id']));
+    }
+    if (isset($_POST['hero_image_position_y'])) {
+        update_term_meta($term_id, 'hero_image_position_y', sanitize_text_field($_POST['hero_image_position_y']));
+    }
+}
+
+/**
+ * Save Hero Image field when category is updated
+ */
+add_action('edited_product_cat', 'dsn_update_category_hero_image', 10, 2);
+function dsn_update_category_hero_image($term_id, $tt_id) {
+    if (isset($_POST['category_hero_image_id'])) {
+        update_term_meta($term_id, 'category_hero_image_id', absint($_POST['category_hero_image_id']));
+    }
+    if (isset($_POST['hero_image_position_y'])) {
+        update_term_meta($term_id, 'hero_image_position_y', sanitize_text_field($_POST['hero_image_position_y']));
+    }
+}
+
+/**
+ * Enqueue media uploader script for category hero image
+ */
+add_action('admin_enqueue_scripts', 'dsn_category_hero_image_scripts');
+function dsn_category_hero_image_scripts($hook) {
+    if ($hook !== 'edit-tags.php' && $hook !== 'term.php') {
+        return;
+    }
+    if (!isset($_GET['taxonomy']) || $_GET['taxonomy'] !== 'product_cat') {
+        return;
+    }
+
+    wp_enqueue_media();
+    wp_add_inline_script('jquery', "
+        jQuery(document).ready(function($) {
+            var mediaUploader;
+
+            $('#upload_hero_image_button').on('click', function(e) {
+                e.preventDefault();
+
+                if (mediaUploader) {
+                    mediaUploader.open();
+                    return;
+                }
+
+                mediaUploader = wp.media({
+                    title: 'Select Hero Image',
+                    button: { text: 'Use this image' },
+                    multiple: false
+                });
+
+                mediaUploader.on('select', function() {
+                    var attachment = mediaUploader.state().get('selection').first().toJSON();
+                    $('#category_hero_image_id').val(attachment.id);
+                    $('#category_hero_image_preview').attr('src', attachment.url).show();
+                    $('#remove_hero_image_button').show();
+                });
+
+                mediaUploader.open();
+            });
+
+            $('#remove_hero_image_button').on('click', function(e) {
+                e.preventDefault();
+                $('#category_hero_image_id').val('');
+                $('#category_hero_image_preview').attr('src', '').hide();
+                $(this).hide();
+            });
+        });
+    ");
+}

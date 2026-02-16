@@ -52,7 +52,7 @@
         "clear_filters_link_text": "Wis",
         "no_products_found": "Geen producten gevonden",
         "go_to_page": "Ga naar pagina",
-        "request_pricing": "Vraag prijs op"
+        "request_pricing": "Prijs op aanvraag"
     },
     "woocommerce_cart": {
         "back_link": "TERUG",
@@ -70,6 +70,7 @@
         "add_to_cart_btn": "In Winkelwagen",
         "info_button": "Meer Informatie",
         "reserve_button": "Reserveren",
+        "available_on_backorder": "Niet op voorraad, kan besteld worden",
         "payment_details": "Betalingsgegevens",
         "billing_details": "Factuurgegevens",
         "street_address": "Straatadres",

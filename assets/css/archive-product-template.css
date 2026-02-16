@@ -828,6 +828,50 @@ body .ds-estore-banner-wrap {
   font-weight: 400;
   color: #fff
 }
+
+/* Product Category Hero Banner */
+.ds-category-hero {
+  width: 100%;
+  height: clamp(200px, 30vh, 500px);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .ds-category-hero {
+    height: clamp(200px, 55vh, 500px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ds-category-hero {
+    height: clamp(200px, 45vh, 500px);
+  }
+}
+
+.ds-category-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+  pointer-events: none;
+}
+
+.ds-category-header {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.ds-category-header .dsn-taxonomy-description {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .ds-back-link {
   display: inline-block;
   background: url(../img/ardsn:row.png) 0 no-repeat;

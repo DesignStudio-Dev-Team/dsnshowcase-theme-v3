@@ -98,7 +98,7 @@ if(! function_exists('dsn_get_product_cart_wrapper_html')) {
 
       global $dssSiteLanguage;
       if (empty($dssSiteLanguage)) {
-          $dssSiteLanguage = apply_filters('wpml_current_language', null) ?: 'en';
+          $dssSiteLanguage = dssGetSiteLanguage();
       }
       $translatedText = dssLang($dssSiteLanguage);
 
@@ -1274,11 +1274,34 @@ add_action('template_redirect', 'dss_remove_add_promotions');
 
 
 /* languages */
-$dssSiteLanguage = apply_filters( 'wpml_current_language', NULL );
-if (!$dssSiteLanguage)
-    $dssSiteLanguage = 'en';
-  
-// example for language:  echo dssLang($dssSiteLanguage)->footer->get_directions;     
+
+/**
+ * Get the current site language code.
+ * Checks WPML first, then falls back to WordPress locale.
+ *
+ * @return string Language code (e.g., 'en', 'fr', 'nl')
+ */
+function dssGetSiteLanguage(): string
+{
+    // First, try WPML
+    $lang = apply_filters('wpml_current_language', null);
+
+    if (!$lang) {
+        // WPML not installed - use WordPress site locale
+        $wp_locale = get_locale(); // e.g., 'fr_FR', 'es_ES', 'nl_NL'
+        $lang_code = explode('_', $wp_locale)[0]; // Extract language code, e.g., 'fr'
+
+        // Check if language file exists, otherwise fallback to 'en'
+        $lang_file = locate_template("languages/" . $lang_code . ".json");
+        $lang = $lang_file ? $lang_code : 'en';
+    }
+
+    return $lang;
+}
+
+$dssSiteLanguage = dssGetSiteLanguage();
+
+// example for language:  echo dssLang($dssSiteLanguage)->footer->get_directions;
 function dssLang($dssSiteLanguage = 'en')
 {
     $data = file_get_contents(locate_template("languages/" . $dssSiteLanguage . ".json"), true);
@@ -1540,12 +1563,22 @@ if ( ! function_exists('dsn_get_current_active_locale')) {
 if ( ! function_exists('dsn_show_add_to_cart') ) {
   function dsn_show_add_to_cart(int $productID): bool {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_add_to_cart')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_add_to_cart($productID);
     }
 
-    // Fallback: show add-to-cart if not showing reserve button
-    return !dsn_show_reserve_btn($productID);
+    // Don't show add-to-cart when the reserve button is shown
+    if (dsn_show_reserve_btn($productID)) {
+      return false;
+    }
+
+    // Fallback: show add-to-cart if the product is purchasable
+    $product = wc_get_product($productID);
+    if (!$product) {
+      return false;
+    }
+
+    return $product->is_purchasable();
   }
 }
 
@@ -1566,37 +1599,31 @@ if ( ! function_exists('dsn_show_other_action_buttons') ) {
   function dsn_show_other_action_buttons(int $productID = 0): bool
   {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_other_action_buttons')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_other_action_buttons($productID);
     }
 
     // Fallback: return false (action buttons are Syndified feature)
-    return false;
+    return true;
   }
 }
 
 if ( ! function_exists('dsn_show_reserve_btn') ) {
   function dsn_show_reserve_btn(int $productID): bool {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_reserve_btn')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_reserve_btn($productID);
     }
 
-    // Fallback for when plugin is deactivated
-    // Only check non-syndicated products based on stock status
-    if (!function_exists('wc_get_product')) {
-      return false;
-    }
-
+    // Fallback for when the plugin is deactivated
     $product = wc_get_product($productID);
     if (!$product) {
       return false;
     }
 
-    // Show reserve button if product is on reserve, has no price, or is out of stock
-    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE ||
-        empty($product->get_price()) ||
-        ($product->managing_stock() && $product->get_stock_quantity() === 0)) {
+    // Show reserve button if product is on reserve and has a price.
+    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE && $product->is_purchasable())
+    {
       return true;
     }
 
@@ -1608,11 +1635,24 @@ if ( ! function_exists('dsn_show_get_info_btn') ) {
   function dsn_show_get_info_btn(int $productID = 0): bool
   {
     // Delegate to Syndified plugin when active
-    if (function_exists('syndified_show_get_info_btn')) {
+    if (function_exists('syndified_is_syndicated_content') && syndified_is_syndicated_content($productID)) {
       return syndified_show_get_info_btn($productID);
     }
 
-    // Fallback: get info button is a Syndified feature, return false when plugin is deactivated
+    // Show only if the product allows backorders
+    $product = wc_get_product($productID);
+    if (!$product) {
+      return false;
+    }
+
+    if(empty($product->get_price())) {
+      return true;
+    }
+
+    if($product->is_on_backorder() || $product->backorders_allowed()){
+      return true;
+    }
+
     return false;
   }
 }
