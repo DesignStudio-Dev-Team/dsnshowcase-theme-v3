@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Theme Constants
  * Define paths following WordPress standards
  */
-define( 'DSN_THEME_DIR', get_template_directory() );
-define( 'DSN_THEME_URI', get_template_directory_uri() );
-define( 'DSN_THEME_PATH', str_replace( ABSPATH, '/', DSN_THEME_DIR ) );
+define('DSN_THEME_DIR', get_template_directory());
+define('DSN_THEME_URI', get_template_directory_uri());
+define('DSN_THEME_PATH', str_replace(ABSPATH, '/', DSN_THEME_DIR));
 
 require DSN_THEME_DIR . '/inc/acfs.php';
 require DSN_THEME_DIR . '/inc/nav-items.php';
@@ -18,7 +19,7 @@ require DSN_THEME_DIR . '/inc/woocommerce.php';
  * Define DSN_DISABLE_FONT_AWESOME to true to skip loading if another plugin or theme provides it.
  */
 if (!defined('DSN_DISABLE_FONT_AWESOME') || DSN_DISABLE_FONT_AWESOME !== true) {
-    add_action('wp_enqueue_scripts', function() {
+    add_action('wp_enqueue_scripts', function () {
         // Use Font Awesome 5 (free) from CDN. Change version if you use a kit or different version.
         wp_enqueue_style('dsn-fontawesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css', array(), '5.15.4');
     }, 20);
@@ -26,14 +27,16 @@ if (!defined('DSN_DISABLE_FONT_AWESOME') || DSN_DISABLE_FONT_AWESOME !== true) {
 
 
 // Custom debug logger for theme
-function dsn_theme_debug_log($message) {
+function dsn_theme_debug_log($message)
+{
     $log_file = get_template_directory() . '/debug.log';
     $date = date('Y-m-d H:i:s');
     $formatted = "[$date] $message\n";
     file_put_contents($log_file, $formatted, FILE_APPEND | LOCK_EX);
 }
 
-function dsnshowcase_setup() {
+function dsnshowcase_setup()
+{
     // Enable featured images
     add_theme_support('post-thumbnails');
 
@@ -42,9 +45,9 @@ function dsnshowcase_setup() {
 
     // Add Woocommerce support
     add_theme_support('woocommerce');
-    add_theme_support( 'wc-product-gallery-zoom' );
-    add_theme_support( 'wc-product-gallery-lightbox' );
-    add_theme_support( 'wc-product-gallery-slider' );
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
 
     // Register navigation menus
     register_nav_menus(array(
@@ -60,14 +63,15 @@ function dsnshowcase_setup() {
 add_action('after_setup_theme', 'dsnshowcase_setup');
 
 
-function dsnshowcase_enqueue_styles() {
+function dsnshowcase_enqueue_styles()
+{
     wp_enqueue_style(
         'tailwindcss',
         get_template_directory_uri() . '/assets/css/style.css',
         array(),
         filemtime(get_template_directory() . '/assets/css/style.css')
     );
-        wp_enqueue_style(
+    wp_enqueue_style(
         'stylesheet',
         get_template_directory_uri() . '/style.css',
         array(),
@@ -76,39 +80,40 @@ function dsnshowcase_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'dsnshowcase_enqueue_styles');
 
-function dsnshowcase_get_template($slug, $name = null) {
+function dsnshowcase_get_template($slug, $name = null)
+{
     get_template_part('templates/' . $slug, $name);
 }
 
 //Add mega menu logo and banner using ACF
 add_filter('wp_nav_menu_objects', 'dsn_wp_nav_menu_objects', 10, 2);
 
-function dsn_wp_nav_menu_objects( $items, $args ) {
-  
-  // loop
-  foreach( $items as $item ) {
-    
-    // vars
-    $brand_logo_button = get_field('brand_logo', $item);
-    $brand_logo = get_field('menu_brand_logo', $item);
-    $banner_button = get_field('menu_banner', $item);
-    $banner_image = get_field('menu_banner_image', $item);
-    
-    // append icon
-    if( $brand_logo && $brand_logo_button == 'true' ) {
-        $item->title .= '<img class="dsn:w-48 dsn:h-20 dsn:object-contain dsn:bg-gray-200 dsn:p-4 dsn:-mt-6 dsn:z-10 dsn:relative" src="'.$brand_logo['url'].'" />';
-    } elseif( $banner_image && $banner_button == 'true' ) {
-        $item->title .= '<img class="dsn:w-48 dsn:-mt-6 dsn:z-10 dsn:relative" src="'.$banner_image['url'].'" />';
+function dsn_wp_nav_menu_objects($items, $args)
+{
+
+    // loop
+    foreach ($items as $item) {
+
+        // vars
+        $brand_logo_button = get_field('brand_logo', $item);
+        $brand_logo = get_field('menu_brand_logo', $item);
+        $banner_button = get_field('menu_banner', $item);
+        $banner_image = get_field('menu_banner_image', $item);
+
+        // append icon
+        if ($brand_logo && $brand_logo_button == 'true') {
+            $item->title .= '<img class="dsn:w-48 dsn:h-20 dsn:object-contain dsn:bg-gray-200 dsn:p-4 dsn:-mt-6 dsn:z-10 dsn:relative" src="' . $brand_logo['url'] . '" />';
+        } elseif ($banner_image && $banner_button == 'true') {
+            $item->title .= '<img class="dsn:w-48 dsn:-mt-6 dsn:z-10 dsn:relative" src="' . $banner_image['url'] . '" />';
+        }
     }
-    
-  }
-  
-  // return
-  return $items;
-  
+
+    // return
+    return $items;
 }
 
-function enqueue_slick_slider_assets() {
+function enqueue_slick_slider_assets()
+{
     if (is_page() || is_product() || is_cart()) {
         // Slick Slider CSS
         wp_enqueue_style('slick-slider', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
@@ -130,30 +135,33 @@ function enqueue_slick_slider_assets() {
 add_action('wp_enqueue_scripts', 'enqueue_slick_slider_assets');
 
 add_shortcode('hello_code', 'custom_shortcode');
-function custom_shortcode () {
+function custom_shortcode()
+{
     echo "Form goes here...";
 }
 
-add_filter( 'posts_search_orderby', function( $search_orderby ) {
+add_filter('posts_search_orderby', function ($search_orderby) {
     global $wpdb;
-    
+
     $orderby = "{$wpdb->posts}.post_type LIKE 'product' DESC";
-    
-    if ( ! empty( $search_orderby ) ) {
+
+    if (! empty($search_orderby)) {
         $orderby .= ", {$search_orderby}";
     }
-    
+
     return $orderby;
 });
 
 // Hook theme updater early
-function dsn_init_theme_updater() {
+function dsn_init_theme_updater()
+{
     error_log('[Theme Update] Initializing theme updater hooks');
     add_filter('pre_set_site_transient_update_themes', 'dsn_custom_theme_update', 10, 1);
 }
 
 // Force theme update check
-function dsn_force_theme_update_check() {
+function dsn_force_theme_update_check()
+{
     error_log('[Theme Update] Manually forcing theme update check');
     delete_site_transient('update_themes');
     wp_update_themes();
@@ -165,7 +173,8 @@ add_action('init', 'dsn_init_theme_updater');
 add_action('admin_init', 'dsn_init_theme_updater');
 
 // Add a temporary admin menu item to force update check
-function dsn_add_force_update_menu() {
+function dsn_add_force_update_menu()
+{
     add_submenu_page(
         'themes.php',
         'Force Theme Update Check',
@@ -177,8 +186,9 @@ function dsn_add_force_update_menu() {
 }
 add_action('admin_menu', 'dsn_add_force_update_menu');
 
-function dsn_custom_theme_update($transient) {
-  
+function dsn_custom_theme_update($transient)
+{
+
     if (!is_object($transient)) {
         dsn_theme_debug_log('[Theme Update] $transient is not an object: ' . print_r($transient, true));
         return $transient;
@@ -191,20 +201,20 @@ function dsn_custom_theme_update($transient) {
 
     $theme_slug = 'dsnshowcase';
     $current_version = wp_get_theme($theme_slug)->get('Version');
-  
+
     // First try GitHub update info
     $github_update_file = 'https://raw.githubusercontent.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/main/theme-update-info.json';
     dsn_theme_debug_log('[Theme Update] Checking GitHub update file: ' . $github_update_file);
-    
+
     // Use WordPress HTTP API instead of file_get_contents
     $response = wp_safe_remote_get($github_update_file);
-    
+
     if (is_wp_error($response)) {
         dsn_theme_debug_log('[Theme Update] GitHub request failed: ' . $response->get_error_message());
         // Fallback to local file
         $local_update_file = get_theme_root($theme_slug) . '/' . $theme_slug . '/theme-update-info.json';
         dsn_theme_debug_log('[Theme Update] Trying local file: ' . $local_update_file);
-        
+
         if (!file_exists($local_update_file)) {
             dsn_theme_debug_log('[Theme Update] Local update file not found');
             return $transient;
@@ -268,113 +278,124 @@ function dsn_custom_theme_update($transient) {
             dsn_theme_debug_log('[Theme Update] Invalid or empty JSON in theme-update-info.json');
             dsn_theme_debug_log('[Theme Update] Raw file contents: ' . $response_body);
         }
-    } 
+    }
     return $transient;
 }
 
 
 
 
-function dss_toggle_admin_bar() {
-  if (current_user_can('administrator')) {
-    ?>
-    <style>
-      html {
-        margin-top: 0 !important;
-      }
-      #wpadminbar {
-        transform: translateY(-100%);
-        transition: all 0.3s ease-in-out !important;
-        opacity: 0;
-      }
-      #wpadminbar.show {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      .dss-toggle-admin-bar {
-        position: fixed;
-        top: 0px;
-        right: 0px;
-        z-index: 99999;
-        background-color: #0e0e0e;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        z-index: 999999999999999;
-      }
-      #wpadminbar {
-        z-index:  999;
-      }
-      .dss-toggle-admin-bar svg {
-        transition: transform 0.3s ease, fill 0.3s ease;
-      }
+function dss_toggle_admin_bar()
+{
+    if (current_user_can('administrator')) {
+?>
+        <style>
+            html {
+                margin-top: 0 !important;
+            }
 
-      .dss-toggle-admin-bar:hover {
-        background-color: #000;
-        transform: scale(1.1);
-      }
-      .dss-toggle-admin-bar {
-        transform: rotate(180deg);
-      }
-      .dss-toggle-admin-bar.active {
-        transform: rotate(0deg);
-      }
-      .dss-toggle-admin-bar svg {
-        width: 16px;
-        height: 16px;
-        fill: #fff;
-      }
-      body.admin-bar-visible {
-        margin-top: 32px !important;
-      }
-      @media screen and (max-width: 782px) {
-        body.admin-bar-visible {
-          margin-top: 46px !important;
-        }
-      }
-    </style>
-    <div class="dss-toggle-admin-bar">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-        <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
-      </svg>
-    </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const toggleButton = document.querySelector('.dss-toggle-admin-bar');
-        const adminBar = document.getElementById('wpadminbar');
-        const body = document.body;
-        let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+            #wpadminbar {
+                transform: translateY(-100%);
+                transition: all 0.3s ease-in-out !important;
+                opacity: 0;
+            }
 
-        function updateAdminBarState(visible) {
-          if (visible) {
-            adminBar.classList.add('show');
-            toggleButton.classList.add('active');
-            body.classList.add('admin-bar-visible');
-          } else {
-            adminBar.classList.remove('show');
-            toggleButton.classList.remove('active');
-            body.classList.remove('admin-bar-visible');
-          }
-        }
+            #wpadminbar.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
 
-        // Initialize state
-        updateAdminBarState(isVisible);
+            .dss-toggle-admin-bar {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                z-index: 99999;
+                background-color: #0e0e0e;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                z-index: 999999999999999;
+            }
 
-        toggleButton.addEventListener('click', function() {
-          isVisible = !isVisible;
-          updateAdminBarState(isVisible);
-          localStorage.setItem('adminBarVisible', isVisible);
-        });
-      });
-    </script>
-    <?php
-  }
+            #wpadminbar {
+                z-index: 999;
+            }
+
+            .dss-toggle-admin-bar svg {
+                transition: transform 0.3s ease, fill 0.3s ease;
+            }
+
+            .dss-toggle-admin-bar:hover {
+                background-color: #000;
+                transform: scale(1.1);
+            }
+
+            .dss-toggle-admin-bar {
+                transform: rotate(180deg);
+            }
+
+            .dss-toggle-admin-bar.active {
+                transform: rotate(0deg);
+            }
+
+            .dss-toggle-admin-bar svg {
+                width: 16px;
+                height: 16px;
+                fill: #fff;
+            }
+
+            body.admin-bar-visible {
+                margin-top: 32px !important;
+            }
+
+            @media screen and (max-width: 782px) {
+                body.admin-bar-visible {
+                    margin-top: 46px !important;
+                }
+            }
+        </style>
+        <div class="dss-toggle-admin-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+            </svg>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggleButton = document.querySelector('.dss-toggle-admin-bar');
+                const adminBar = document.getElementById('wpadminbar');
+                const body = document.body;
+                let isVisible = localStorage.getItem('adminBarVisible') === 'true';
+
+                function updateAdminBarState(visible) {
+                    if (visible) {
+                        adminBar.classList.add('show');
+                        toggleButton.classList.add('active');
+                        body.classList.add('admin-bar-visible');
+                    } else {
+                        adminBar.classList.remove('show');
+                        toggleButton.classList.remove('active');
+                        body.classList.remove('admin-bar-visible');
+                    }
+                }
+
+                // Initialize state
+                updateAdminBarState(isVisible);
+
+                toggleButton.addEventListener('click', function() {
+                    isVisible = !isVisible;
+                    updateAdminBarState(isVisible);
+                    localStorage.setItem('adminBarVisible', isVisible);
+                });
+            });
+        </script>
+<?php
+    }
 }
 add_action('wp_head', 'dss_toggle_admin_bar');
 
@@ -385,7 +406,8 @@ add_action('wp_head', 'dss_toggle_admin_bar');
  * @param string $plugin_slug The plugin slug/path relative to plugins directory
  * @return bool|WP_Error True on success, WP_Error on failure
  */
-function dss_deactivate_and_delete_plugin($plugin_slug) {
+function dss_deactivate_and_delete_plugin($plugin_slug)
+{
     // Check if user has sufficient permissions
     if (!current_user_can('delete_plugins')) {
         return new WP_Error('insufficient_permissions', __('You do not have sufficient permissions to delete plugins.'));
@@ -412,7 +434,7 @@ function dss_deactivate_and_delete_plugin($plugin_slug) {
         // Deactivate plugin if active
         if (is_plugin_active($plugin_slug)) {
             deactivate_plugins($plugin_slug, true); // Second parameter true means network wide if applicable
-            
+
             // Verify deactivation was successful
             if (is_plugin_active($plugin_slug)) {
                 return new WP_Error('deactivation_failed', __('Failed to deactivate plugin.'));
@@ -436,7 +458,7 @@ function dss_deactivate_and_delete_plugin($plugin_slug) {
 }
 
 // Hook for admin initialization
-add_action('admin_init', function() {
+add_action('admin_init', function () {
     // Only run if we're in the admin area
     if (!is_admin()) {
         return;
@@ -444,7 +466,7 @@ add_action('admin_init', function() {
 
     // Deactivate and delete the Admin Bar Toggle plugin
     $result = dss_deactivate_and_delete_plugin('admin-bar-toggle/jck-adminbar-toggle.php');
-    
+
     if (is_wp_error($result)) {
         // Log error or handle it appropriately
         error_log('Plugin deactivation/deletion failed: ' . $result->get_error_message());
@@ -453,7 +475,7 @@ add_action('admin_init', function() {
 
 
 // For Yoast SEO so the titles are not too long
-add_filter('wpseo_title', function($title) {
+add_filter('wpseo_title', function ($title) {
     if (strlen($title) > 60) {
         $title = substr($title, 0, 57) . '…';
     }
@@ -461,11 +483,11 @@ add_filter('wpseo_title', function($title) {
 });
 
 // Prevent Google indexing of pages that start with /wp-content/ or /wp-json
-add_action( 'template_redirect', function() {
+add_action('template_redirect', function () {
     $request_uri = $_SERVER['REQUEST_URI'];
 
-    if ( strpos( $request_uri, '/wp-content/' ) === 0 || strpos( $request_uri, '/wp-json' ) === 0 ) {
-        header( 'X-Robots-Tag: noindex, nofollow', true );
+    if (strpos($request_uri, '/wp-content/') === 0 || strpos($request_uri, '/wp-json') === 0) {
+        header('X-Robots-Tag: noindex, nofollow', true);
     }
 });
 
@@ -480,14 +502,16 @@ add_filter('xmlrpc_enabled', '__return_false');
 // -------------------------
 // WP Admin Security: Prevent Session Sharing Across IPs
 // -------------------------
-function asl_log($msg) {
+function asl_log($msg)
+{
     // $path = ABSPATH . 'asl_debug.log';
     // $ts = date('Y-m-d H:i:s');
     // if (is_array($msg) || is_object($msg)) $msg = print_r($msg, true);
     // @error_log("[$ts] $msg\n", 3, $path);
 }
 
-function asl_get_ip() {
+function asl_get_ip()
+{
     if (!empty($_SERVER['HTTP_CF_CONNECTING_IP'])) return trim($_SERVER['HTTP_CF_CONNECTING_IP']);
     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
@@ -496,7 +520,7 @@ function asl_get_ip() {
     return $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
 }
 
-add_action('wp_login', function($user_login, $user) {
+add_action('wp_login', function ($user_login, $user) {
     if (!user_can($user, 'manage_options')) return;
 
     $ip = asl_get_ip();
@@ -525,7 +549,7 @@ add_action('wp_login', function($user_login, $user) {
     ]);
 }, 10, 2);
 
-add_action('admin_init', function() {
+add_action('admin_init', function () {
     if (!is_user_logged_in()) return;
 
     $user = wp_get_current_user();
@@ -568,59 +592,16 @@ add_action('admin_init', function() {
 }, 10);
 
 
-add_action('login_message', function($msg) {
+add_action('login_message', function ($msg) {
     if (isset($_GET['asl_ip_mismatch'])) {
         $msg = '<p class="message message-error">You were logged out because your login session was used from a different IP address.</p>';
     }
     return $msg;
 });
 
-add_action('password_reset', function($user, $new_pass) {
+add_action('password_reset', function ($user, $new_pass) {
     delete_user_meta($user->ID, '_asl_last_ip');
 }, 10, 2);
 
 // Disable activity log weekly email reports
-add_filter( 'wsal_disable_weekly_report', '__return_true' );
-
-//For adding gravity from page url hidden field to all forms.
-add_filter( 'gform_pre_render', 'dsn_add_page_url_hidden_field' );
- 
-// Note: when changing choice values, we also need to use the gform_pre_validation so that the new values are available when validating the field.
-add_filter( 'gform_pre_validation', 'dsn_add_page_url_hidden_field' );
- 
-// Note: when changing choice values, we also need to use the gform_admin_pre_render so that the right values are displayed when editing the entry.
-add_filter( 'gform_admin_pre_render', 'dsn_add_page_url_hidden_field' );
- 
-// Note: this will allow for the labels to be used during the submission process in case values are enabled
-add_filter( 'gform_pre_submission_filter', 'dsn_add_page_url_hidden_field' );
-function dsn_add_page_url_hidden_field($form) {
-        foreach ( $form['fields'] as $field ) {
-        if ( isset( $field->inputName ) && strpos( $field->inputName, 'page_url' ) !== false ) {
-            return $form;
-        }
-    }
-        $current_url = esc_url( home_url( add_query_arg( null, null ) ) );
-                $new_field_id = GFFormsModel::get_next_field_id( $form['fields'] );
-                $new_field_id = 0;
-                foreach( $form['fields'] as $field ) {
-                    if( $field->id > $new_field_id ) {
-                        $new_field_id = $field->id;
-                    }
-                }
-                $new_field_id++;
-                $props = array(
-                    'id' => $new_field_id,
-                    'label' => 'Page URL',
-                    'inputName' => 'page_url',
-                    'defaultValue' =>  $current_url,
-                    'visibility'   => 'hidden',
-                    'type' => 'text'
-                );
-                $field = GF_Fields::create( $props );
-                //array_push( $form['fields'], $field );
-                array_unshift( $form['fields'], $field );
-                GFAPI::update_form( $form );
-    return $form;
-}
-
-//end gravity form URL function.
+add_filter('wsal_disable_weekly_report', '__return_true');
