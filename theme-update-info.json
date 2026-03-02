@@ -1,11 +1,11 @@
 {
-  "version": "v3.6.8",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.8",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.8/dsnshowcase.zip",
+  "version": "v3.6.9",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.9",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.9/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2026-03-02",
   "sections": {
-    "changelog": "Merge pull request #220 from DesignStudio-Dev-Team/mark\n\ndisable including URL in form since code is not working perfectly"
+    "changelog": "Merge pull request #221 from DesignStudio-Dev-Team/fix-archive-wording\n\nAllows full archive descriptions"
   }
 }
