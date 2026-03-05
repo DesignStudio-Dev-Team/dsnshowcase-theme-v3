@@ -605,3 +605,61 @@ add_action('password_reset', function ($user, $new_pass) {
 
 // Disable activity log weekly email reports
 add_filter('wsal_disable_weekly_report', '__return_true');
+
+
+
+//For adding gravity from page url hidden field to all forms.
+add_filter( 'gform_pre_render', 'dsn_add_page_url_hidden_field' );
+ 
+// Note: when changing choice values, we also need to use the gform_pre_validation so that the new values are available when validating the field.
+add_filter( 'gform_pre_validation', 'dsn_add_page_url_hidden_field' );
+ 
+// Note: when changing choice values, we also need to use the gform_admin_pre_render so that the right values are displayed when editing the entry.
+add_filter( 'gform_admin_pre_render', 'dsn_add_page_url_hidden_field' );
+ 
+// Note: this will allow for the labels to be used during the submission process in case values are enabled
+add_filter( 'gform_pre_submission_filter', 'dsn_add_page_url_hidden_field' );
+function dsn_add_page_url_hidden_field($form) {
+        foreach ( $form['fields'] as $field ) {
+        if ( isset( $field->inputName ) && strpos( $field->inputName, 'current_page_url' ) !== false ) {
+            return $form;
+        }
+    }
+       // $current_url = esc_url( home_url( add_query_arg( null, null ) ) );
+                $new_field_id = GFFormsModel::get_next_field_id( $form['fields'] );
+                $new_field_id = 0;
+                foreach( $form['fields'] as $field ) {
+                    if( $field->id > $new_field_id ) {
+                        $new_field_id = $field->id;
+                    }
+                }
+                $new_field_id++;
+                $props = array(
+                    'id' => $new_field_id,
+                    'label' => 'Page URL',
+                    'inputName' => 'current_page_url',
+                    'allowsPrepopulate' => true,
+                    'visibility'   => 'hidden',
+                    'type' => 'text'
+                );
+                $field = GF_Fields::create( $props );
+                //array_push( $form['fields'], $field );
+                array_unshift( $form['fields'], $field );
+                GFAPI::update_form( $form );
+    return $form;
+}
+
+add_filter( 'gform_field_value_current_page_url', 'populate_current_page_url' );
+function populate_current_page_url( $value ) {
+
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+
+    $url = $protocol . $_SERVER['HTTP_HOST'] . strtok($_SERVER["REQUEST_URI"], '?');
+
+    if (strpos ($url, 'wp-admin') !== false) {
+        $url = $protocol . $_SERVER['HTTP_HOST'] . '/{UNKNOWN_URL}';
+    }
+
+    return rtrim( esc_url_raw( $url ), '?' );
+}
+//end gravity form URL function.
