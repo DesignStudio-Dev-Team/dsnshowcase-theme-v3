@@ -607,7 +607,9 @@ add_action('password_reset', function ($user, $new_pass) {
 add_filter('wsal_disable_weekly_report', '__return_true');
 
 
-
+// -------------------------------
+// GRAVITY FORMS: Add hidden field with current page URL to all forms
+// -------------------------------
 //For adding gravity from page url hidden field to all forms.
 add_filter( 'gform_pre_render', 'dsn_add_page_url_hidden_field' );
  
@@ -662,4 +664,6 @@ function populate_current_page_url( $value ) {
 
     return rtrim( esc_url_raw( $url ), '?' );
 }
-//end gravity form URL function.
+// -------------------------------
+// END GRAVITY FORMS: Add hidden field with current page URL to all forms
+// -------------------------------
