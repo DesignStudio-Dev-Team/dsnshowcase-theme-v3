@@ -13,6 +13,7 @@ require DSN_THEME_DIR . '/inc/nav-items.php';
 require DSN_THEME_DIR . '/inc/other-functions.php';
 require DSN_THEME_DIR . '/inc/wp-rocket-compatibility.php';
 require DSN_THEME_DIR . '/inc/woocommerce.php';
+require_once DSN_THEME_DIR . '/mobile-menu/mobile-menu.php';
 
 /**
  * Enqueue Font Awesome for theme icons (only on front-end).
