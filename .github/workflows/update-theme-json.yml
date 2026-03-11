@@ -11,9 +11,11 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Important to get all history
+          fetch-depth: 0
+          submodules: recursive
+          ssh-key: ${{ secrets.SUBMODULE_SSH_KEY }}
 
       - name: Set version from tag
         id: version
