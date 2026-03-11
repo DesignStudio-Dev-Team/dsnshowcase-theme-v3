@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0 # Important to get all history
           submodules: recursive
-          ssh-key: ${{ secrets.SUBMODULE_SSH_KEY }}
+          ssh-key: ${{ secrets.MOBILE_MENU_SUBMODULE_SSH_KEY }}
 
       - name: Set version from tag
         id: version
