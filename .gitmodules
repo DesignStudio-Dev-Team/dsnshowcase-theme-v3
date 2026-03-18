@@ -1,0 +1,3 @@
+[submodule "mobile-menu"]
+	path = mobile-menu
+	url = git@github.com:DesignStudio-Dev-Team/dsn-mobile-menu.git
