@@ -132,6 +132,7 @@ global $dssSiteLanguage;
                         class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
                     <?php } ?>
 
+                <?php echo apply_filters( 'dsn_header_extra_icons', '' ); ?>
             </div>
         </div>
 
@@ -221,6 +222,7 @@ global $dssSiteLanguage;
                 class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
                 <?php } ?>
 
+                <?php echo apply_filters( 'dsn_header_extra_icons', '' ); ?>
         <div
             class="dsn-mobile-hamburger dsn:border-2 dsn:border-white dsn:cursor-pointer  dsn:text-white dsn:p-2 dsn:rounded-full">
             <span style="width: 25.927px; height: auto; display: none;"></span><svg
