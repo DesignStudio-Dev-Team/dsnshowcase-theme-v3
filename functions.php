@@ -15,6 +15,25 @@ require DSN_THEME_DIR . '/inc/wp-rocket-compatibility.php';
 require DSN_THEME_DIR . '/inc/woocommerce.php';
 require_once DSN_THEME_DIR . '/mobile-menu/mobile-menu.php';
 
+// Pass ACF brand colors to the mobile menu as CSS custom properties.
+add_action( 'wp_enqueue_scripts', function() {
+	if ( ! function_exists( 'get_field' ) ) return;
+
+	$panel_bg      = get_field( 'mobile_menu_bg', 'option' )
+	              ?: get_field( 'header_primary_background', 'option' )
+	              ?: get_field( 'primary_color', 'option' );
+	$trigger_color = $panel_bg ?: '#1a3a5c';
+	$link_color    = get_field( 'mobile_link_color', 'option' ) ?: '#ffffff';
+
+	$css = ':root{'
+		. '--dsn-mm-trigger-color:' . esc_attr( $trigger_color ) . ';'
+		. '--dsn-mm-panel-bg:'      . esc_attr( $panel_bg )      . ';'
+		. '--dsn-mm-item-text:'     . esc_attr( $link_color )     . ';'
+		. '}';
+
+	wp_add_inline_style( 'dsn-mobile-menu', $css );
+}, 20 );
+
 /**
  * Enqueue Font Awesome for theme icons (only on front-end).
  * Define DSN_DISABLE_FONT_AWESOME to true to skip loading if another plugin or theme provides it.
