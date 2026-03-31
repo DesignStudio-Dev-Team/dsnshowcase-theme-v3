@@ -19,8 +19,8 @@ require_once DSN_THEME_DIR . '/mobile-menu/mobile-menu.php';
 add_action( 'wp_enqueue_scripts', function() {
 	if ( ! function_exists( 'get_field' ) ) return;
 
-	$panel_bg   = get_field( 'mobile_menu_bg', 'option' ) ?: '#333333';
-	$link_color = get_field( 'mobile_link_color', 'option' ) ?: '#ffffff';
+	$panel_bg   = get_field( 'mobile_menu_bg', 'option' ) ?: 'var(--dealerColor, #333333)';
+	$link_color = get_field( 'mobile_link_color', 'option' ) ?: 'var(--dealerLinkColor, #ffffff)';
 
 	$css = ':root{'
 		. '--dsn-mm-panel-bg:'      . esc_attr( $panel_bg )   . ';'

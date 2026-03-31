@@ -8014,7 +8014,7 @@ add_action( 'acf/include_fields', function() {
 			'name' => 'mobile_menu_bg',
 			'aria-label' => '',
 			'type' => 'color_picker',
-			'instructions' => 'Background colour for the slide-out mobile menu panel and hamburger icon. Falls back to #333333 if not set.',
+			'instructions' => 'Background colour for the slide-out mobile menu panel and hamburger icon. Falls back to the child theme --dealerColor variable, then #333333 if neither is set.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
@@ -8035,7 +8035,7 @@ add_action( 'acf/include_fields', function() {
 			'name' => 'mobile_link_color',
 			'aria-label' => '',
 			'type' => 'color_picker',
-			'instructions' => 'Text colour for navigation items inside the mobile menu panel. Defaults to #ffffff if not set.',
+			'instructions' => 'Text colour for navigation items inside the mobile menu panel. Falls back to the child theme --dealerLinkColor variable, then #ffffff if neither is set.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(

@@ -67,8 +67,8 @@ Colours are applied automatically via `wp_add_inline_style` in `functions.php`, 
 
 | ACF field | Drives | Fallback |
 |-----------|--------|---------|
-| `mobile_menu_bg` | `--dsn-mm-panel-bg`, `--dsn-mm-trigger-color` | `#333333` |
-| `mobile_link_color` | `--dsn-mm-item-text` | `#ffffff` |
+| `mobile_menu_bg` | `--dsn-mm-panel-bg`, `--dsn-mm-trigger-color` | `var(--dealerColor, #333333)` |
+| `mobile_link_color` | `--dsn-mm-item-text` | `var(--dealerLinkColor, #ffffff)` |
 
 No manual CSS is needed as long as the ACF fields are set. If you need to override for a specific site, add the variables to the child theme's `style.css` — avoid Customizer → Additional CSS.
 
