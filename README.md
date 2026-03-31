@@ -47,6 +47,10 @@ npm install
 8. Yoast SEO
 9. Classic Editor
 
+## Docs
+
+- [Mobile Menu Update Guide](docs/mobile-menu-update.md)
+
 ## Support
 
 Use github issues to report any issues or contact us at our website https://designstudio.com

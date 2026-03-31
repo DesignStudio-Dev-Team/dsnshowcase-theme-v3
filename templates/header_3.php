@@ -122,7 +122,7 @@ if(function_exists('get_field')) {
 	</div>
 </header>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header-3.php"); ?>
+<?php get_template_part( 'templates/mobile-header' ); ?>
 
 <style>
 @media only screen and (min-width: 1024px) {
@@ -294,19 +294,6 @@ if(function_exists('get_field')) {
 		.header3.sticky-header-active .cart-search-combo { 
 		display: flex;
 		}
-		.header3 .nav-close svg {
-			display: none;
-		}
-		.header3 .nav-close span {
-			display: flex !important;
-			height: 28.927px !important;
-        	width: 30px !important;
-			align-items: center;
-		}
-		.header3 .dsn-mobile-hamburger {
-			height: 46px;
-		}
-		
 		header.header3 ul li ul a:hover {
 			opacity: 0.80;
 		}
@@ -347,69 +334,6 @@ if(function_exists('get_field')) {
 			top: 50%;
 			transform: translateY(-50%);
 		}
-		.dsn-mobile-hamburger > svg {
-            visibility: visible;
-            opacity: 1;
-            transform: rotate(0deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-        }
-        .dsn-mobile-hamburger > a {
-            visibility: hidden;
-            opacity: 0;
-            transform: rotate(180deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-        }
-        .dsn-mobile-hamburger.is-active > svg {
-            visibility: hidden;
-            transform: rotate(90deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-            opacity: 0;
-        }
-        .dsn-mobile-hamburger.is-active > a {
-            visibility: visible;
-            width: 30px;
-            height: 30px;
-            transform: rotate(90deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-            opacity: 1;
-        }
-        .nav-close span::before {
-		  cursor: pointer;
-		  border-radius: 1px;
-		  height: 3px;
-		  width: 30px;
-		  background: #fff;
-		  position: absolute;
-		  display: block;
-		  content: '';
-          transition: transform 0.5s;
-		  transform: rotate(-45deg);
-		}
-		.nav-close span::after {
-		  cursor: pointer;
-		  border-radius: 1px;
-		  height: 3px;
-		  width: 30px;
-		  background: #fff;
-		  position: absolute;
-		  display: block;
-		  content: '';
-          transition: transform 0.5s;
-		  transform: rotate(45deg);
-		}
-        .dsn-desktop-hamburger.is-active > .nav-close span::after {
-            transform: rotate(-45deg);
-            transition: transform 0.5s;
-        }
-        .dsn-desktop-hamburger.is-active > .nav-close span::before {
-            transform: rotate(45deg);
-            transition: transform 0.5s;
-        }
-        .is-active > a span {
-            position: absolute;
-            top: 36px;
-        }
-		
 }
 @media only screen and (min-width: 2460px) {
 	
@@ -530,20 +454,6 @@ if(function_exists('get_field')) {
                   });
                 }
 
-                $('.dsn-mobile-hamburger svg').click(function() {
-                  $('.dsn-mobile-hamburger').toggleClass('is-active');
-				  $(this).toggleClass("nav-close");
-                  $('.the-navigation').fadeToggle();
-				  jQuery('#dsnHTML').toggleClass('dsnOpen');
-            		jQuery('.the-navigation').toggleClass('dsnMobileOpen');
-                });
-				 $('.dsn-mobile-hamburger .nav-close').click(function() {
-                  $('.dsn-mobile-hamburger').toggleClass('is-active');
-				  $('.dsn-mobile-hamburger').toggleClass('nav-close');
-				  jQuery('#dsnHTML').toggleClass('dsnOpen');
-				  jQuery('.the-navigation').toggleClass('dsnMobileOpen');
-                  $('.the-navigation').fadeToggle();
-                });
 				
 				$('div.form-wrapper').hide();
 
@@ -607,7 +517,6 @@ if(function_exists('get_field')) {
 							$('.primary-nav').removeClass("dsn:container");
 							$('.nav-container').addClass("dsn:container");
 							$('.the-navigation').hide();
-							$('.dsn-mobile-hamburger').removeClass('nav-close');
 						}
 					});
 				}
