@@ -64,11 +64,11 @@ While it is technically possible to override the mobile bar by creating `{child-
 
 ## CSS customisation
 
-Colours are applied automatically via `wp_add_inline_style` in `functions.php`, which reads these ACF option fields:
+Colours are applied automatically via `wp_add_inline_style` in `functions.php`, which reads these ACF option fields (set under **Theme Settings → Mobile Menu**):
 
 | ACF field | Drives | Fallback |
 |-----------|--------|---------|
-| `mobile_menu_bg` → `header_primary_background` → `primary_color` | `--dsn-mm-panel-bg`, `--dsn-mm-trigger-color` | `#1a3a5c` |
+| `mobile_menu_bg` | `--dsn-mm-panel-bg`, `--dsn-mm-trigger-color` | `#333333` |
 | `mobile_link_color` | `--dsn-mm-item-text` | `#ffffff` |
 
 No manual CSS is needed as long as the ACF fields are set. If you need to override for a specific site, use **Customizer → Additional CSS** as a last resort:

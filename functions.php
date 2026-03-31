@@ -19,16 +19,13 @@ require_once DSN_THEME_DIR . '/mobile-menu/mobile-menu.php';
 add_action( 'wp_enqueue_scripts', function() {
 	if ( ! function_exists( 'get_field' ) ) return;
 
-	$panel_bg      = get_field( 'mobile_menu_bg', 'option' )
-	              ?: get_field( 'header_primary_background', 'option' )
-	              ?: get_field( 'primary_color', 'option' );
-	$trigger_color = $panel_bg ?: '#1a3a5c';
-	$link_color    = get_field( 'mobile_link_color', 'option' ) ?: '#ffffff';
+	$panel_bg   = get_field( 'mobile_menu_bg', 'option' ) ?: '#333333';
+	$link_color = get_field( 'mobile_link_color', 'option' ) ?: '#ffffff';
 
 	$css = ':root{'
-		. '--dsn-mm-trigger-color:' . esc_attr( $trigger_color ) . ';'
-		. '--dsn-mm-panel-bg:'      . esc_attr( $panel_bg )      . ';'
-		. '--dsn-mm-item-text:'     . esc_attr( $link_color )     . ';'
+		. '--dsn-mm-panel-bg:'      . esc_attr( $panel_bg )   . ';'
+		. '--dsn-mm-trigger-color:' . esc_attr( $panel_bg )   . ';'
+		. '--dsn-mm-item-text:'     . esc_attr( $link_color ) . ';'
 		. '}';
 
 	wp_add_inline_style( 'dsn-mobile-menu', $css );
