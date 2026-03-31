@@ -348,7 +348,7 @@ global $dssSiteLanguage;
 </header>
 <div class="dsn:hidden dsn:shadow-xl"></div>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header.php"); ?>
+<?php get_template_part( 'templates/mobile-header' ); ?>
 
 <style>
     .cart-icon,

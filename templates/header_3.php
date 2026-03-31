@@ -122,7 +122,7 @@ if(function_exists('get_field')) {
 	</div>
 </header>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header-3.php"); ?>
+<?php get_template_part( 'templates/mobile-header-3' ); ?>
 
 <style>
 @media only screen and (min-width: 1024px) {

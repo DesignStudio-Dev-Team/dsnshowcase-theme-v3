@@ -100,7 +100,7 @@ if(function_exists('get_field')) {
 	</div>
 </header>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header.php"); ?>
+<?php get_template_part( 'templates/mobile-header' ); ?>
 <?php include("get-started.php"); ?>
 
 <style>
