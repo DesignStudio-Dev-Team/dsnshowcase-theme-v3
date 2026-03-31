@@ -93,3 +93,4 @@ No manual CSS is needed as long as the ACF fields are set. If you need to overri
 | Show search icon | Toggles search button |
 | Show cart icon | Requires WooCommerce |
 | Show account icon | Requires WooCommerce |
+| Show language switcher | Toggles the WPML language switcher icon. This setting only appears in the Customizer when WPML is active. The icon renders only when WPML is active **and** at least 2 languages are configured. |
