@@ -11,8 +11,7 @@ The mobile menu submodule lives at `mobile-menu/` inside the theme. DSNShowcase 
 | File | Purpose |
 |------|---------|
 | `functions.php` | Loads the submodule: `require_once DSN_THEME_DIR . '/mobile-menu/mobile-menu.php';` |
-| `templates/mobile-header.php` | Mobile bar template (logo + trigger). Used by most header layouts. |
-| `templates/mobile-header-3.php` | Variant used specifically by `header_3.php`. |
+| `templates/mobile-header.php` | Mobile bar template (logo + trigger). Shared by all header layouts. |
 | `templates/header_1.php` … `header_5.php`, `header_syndified.php` | Each calls `get_template_part('templates/mobile-header')` at the point where the mobile bar appears. |
 
 The theme uses a `dsn:` Tailwind prefix. Desktop sections are hidden on mobile with `hidden dsn:lg:block` (or `absolute hidden dsn:lg:block` depending on the header layout).
