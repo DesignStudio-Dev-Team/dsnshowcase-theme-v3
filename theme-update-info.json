@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.0",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.0",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.0/dsnshowcase.zip",
+  "version": "v3.7.5",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.5",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.5/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-03-05",
+  "last_updated": "2026-04-09",
   "sections": {
-    "changelog": "Merge pull request #224 from DesignStudio-Dev-Team/mark\n\ninclude "page url" in all forms to give the dealer more info"
+    "changelog": "Merge pull request #232 from DesignStudio-Dev-Team/feature/dsn-mobile-menu-submodule\n\nSet git remote URL with token for workflow push"
   }
 }
