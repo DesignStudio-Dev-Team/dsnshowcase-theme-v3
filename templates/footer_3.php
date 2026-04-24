@@ -172,7 +172,7 @@ $locations = !empty($content) && is_array($content)
                                     </a>
                                     <?php } elseif ($network == 'Pinterest') {?>
                                     <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
-                                    <img class="dsn:w-14" src="/wp-content/uploads/theme-assets/social/pin.webp" alt="<?php echo $network; ?>" />
+                                    <img class="dsn:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/pinterest.svg" alt="<?php echo $network; ?>" />
                                     </a>
                                     <?php } ?>
                                 </div>
