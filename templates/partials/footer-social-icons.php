@@ -3,27 +3,27 @@
     <?php foreach ($social_icons as $social_icon) : ?>
         <?php if ($social_icon === 'Facebook') : ?>
             <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>" target="_blank"><?php dsn_icon('facebook', 'dsn:w-12 dsn:h-12'); ?></a>
+                <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>" target="_blank"><?php dsn_icon('facebook', 'dsn:w-10 dsn:h-10'); ?></a>
             </div>
         <?php elseif ($social_icon === 'Instagram') : ?>
             <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>" target="_blank"><?php dsn_icon('instagram', 'dsn:w-12 dsn:h-12'); ?></a>
+                <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>" target="_blank"><?php dsn_icon('instagram', 'dsn:w-10 dsn:h-10'); ?></a>
             </div>
         <?php elseif ($social_icon === 'Youtube') : ?>
             <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>" target="_blank"><?php dsn_icon('youtube', 'dsn:w-12 dsn:h-12'); ?></a>
+                <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>" target="_blank"><?php dsn_icon('youtube', 'dsn:w-10 dsn:h-10'); ?></a>
             </div>
         <?php elseif ($social_icon === 'Pinterest') : ?>
             <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>" target="_blank"><?php dsn_icon('pinterest', 'dsn:w-12 dsn:h-12'); ?></a>
+                <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>" target="_blank"><?php dsn_icon('pinterest', 'dsn:w-10 dsn:h-10'); ?></a>
             </div>
         <?php elseif ($social_icon === 'Twitter') : ?>
             <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>" target="_blank"><?php dsn_icon('x', 'dsn:w-12 dsn:h-12'); ?></a>
+                <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>" target="_blank"><?php dsn_icon('x', 'dsn:w-10 dsn:h-10'); ?></a>
             </div>
         <?php elseif ($social_icon === 'Houzz') : ?>
             <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                <a href="<?php echo esc_url_raw(get_field('houzz_url', 'option')); ?>" target="_blank"><?php dsn_icon('houzz', 'dsn:w-12 dsn:h-12'); ?></a>
+                <a href="<?php echo esc_url_raw(get_field('houzz_url', 'option')); ?>" target="_blank"><?php dsn_icon('houzz', 'dsn:w-10 dsn:h-10'); ?></a>
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
