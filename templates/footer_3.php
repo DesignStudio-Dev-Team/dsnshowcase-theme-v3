@@ -179,7 +179,7 @@ $locations = !empty($content) && is_array($content)
                                     <?php } ?>
                                 </div>
                             <?php endforeach; ?>
-                        <?php endif; ?>>
+                        <?php endif; ?>
                     </div>
                 </div>
 				</div>
