@@ -169,31 +169,29 @@ $locations = !empty($content) && is_array($content)
  <div id="footer-copyright" class="copyright dsn:py-4">
  <div id="social-link" class="dsn:flex dsn:flex-wrap dsn:justify-center dsn:gap-4 dsn:items-start dsn:mt-4 dsn:md:mt-4">
                       
-                      <?php if ($social_networks) : ?>
+                      <?php if (isset($social_networks)) : ?>
                           <?php foreach ($social_networks as $network) : ?>
-                              <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start">
-                                  <?php // echo $network; ?>
-                              <?php if($network == 'Facebook') { ?>
-                                  <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
-                                  <!-- <img src="<?php echo  get_template_directory() . '\assets\svg\social\facebook.webp'; ?>" /> -->
-                                  <img class="dsn:w-10 dsn:md:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/facebook.svg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Instagram') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/instagram.svg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Youtube') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/youtube.svg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Pinterest') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/pinterest.svg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Twitter') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/x.svg" alt="X" />
-                                  </a>
+                              <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
+                                 <?php if($network === 'Facebook') { ?>
+                                      <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
+                                          <?php dsn_icon( 'facebook', 'dsn:w-12 dsn:h-12' ); ?>
+                                      </a>
+                                  <?php } elseif ($network === 'Instagram') {?>
+                                      <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
+                                            <?php dsn_icon( 'instagram', 'dsn:w-12 dsn:h-12' ); ?>
+                                      </a>
+                                  <?php } elseif ($network === 'Youtube') {?>
+                                      <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
+                                            <?php dsn_icon( 'youtube', 'dsn:w-12 dsn:h-12' ); ?>
+                                      </a>
+                                  <?php } elseif ($network === 'Pinterest') {?>
+                                      <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
+                                            <?php dsn_icon( 'pinterest', 'dsn:w-12 dsn:h-12' ); ?>
+                                      </a>
+                                  <?php } elseif ($network === 'Twitter') {?>
+                                      <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>">
+                                            <?php dsn_icon( 'x', 'dsn:w-12 dsn:h-12' ); ?>
+                                      </a>
                                   <?php } ?>
                               </div>
                           <?php endforeach; ?>
