@@ -159,7 +159,7 @@ $locations = !empty($content) && is_array($content)
 
 </footer>
  <div id="footer-copyright" class="copyright dsn:py-4">
-                  <?php get_template_part('templates/partials/footer-social-icons', null, ['networks' => $social_networks ?? []]); ?>
+                  <?php get_template_part('templates/partials/footer-social-icons', null, ['social_icons' => $social_networks ?? []]); ?>
                   <?php
 
                 wp_nav_menu(

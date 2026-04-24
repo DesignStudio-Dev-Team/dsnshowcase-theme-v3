@@ -151,7 +151,7 @@ $locations = !empty($content) && is_array($content)
                 <div class="dsn:sm:w-full dsn:mx-auto dsn:md:px-10">
 					<div class="dsn:w-3/4 dsn:md:w-full dsn:mx-auto dsn:mt-8">
                             <h4 class="dsn:font-bold dsn:m-0 dsn:text-base dsn:lg:text-2xl dsn:text-left dsn:md:text-left"><?php echo "Follow Us"; ?></h4>
-                    <?php get_template_part('templates/partials/footer-social-icons', null, ['networks' => $social_networks ?? []]); ?>
+                    <?php get_template_part('templates/partials/footer-social-icons', null, ['social_icons' => $social_networks ?? []]); ?>
                 </div>
 				</div>
             </div>
