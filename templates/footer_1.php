@@ -176,7 +176,7 @@ $locations = !empty($content) && is_array($content)
                               <?php if($network == 'Facebook') { ?>
                                   <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
                                   <!-- <img src="<?php echo  get_template_directory() . '\assets\svg\social\facebook.webp'; ?>" /> -->
-                                  <img class="dsn:w-10 dsn:md:w-14" src="./wp-content/uploads/theme-assets/social/footer-1-facebook-icon.jpg" alt="<?php echo $network; ?>" />
+                                  <img class="dsn:w-10 dsn:md:w-14" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/facebook.svg" alt="<?php echo $network; ?>" />
                                   </a>
                                   <?php } elseif ($network == 'Instagram') {?>
                                   <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
