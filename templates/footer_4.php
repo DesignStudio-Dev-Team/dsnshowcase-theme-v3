@@ -240,7 +240,7 @@ $locations = !empty($content) && is_array($content)
                                     </a>
                                     <?php } elseif ($network == 'Instagram') {?>
                                     <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
-                                    <img class="dsn:w-10" src="/wp-content/uploads/theme-assets/social/insta.webp" alt="<?php echo $network; ?>" />
+                                    <img class="dsn:w-10" src="<?php echo get_template_directory_uri(); ?>/assets/svg/social/instagram.svg" alt="<?php echo $network; ?>" />
                                     </a>
                                     <?php } elseif ($network == 'Youtube') {?>
                                     <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
