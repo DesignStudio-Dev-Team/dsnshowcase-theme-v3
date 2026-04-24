@@ -1622,7 +1622,7 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
     }
 
     // Show reserve button if product is on reserve and has a price.
-    if ($product->get_stock_status() === STOCK_STATUS_ON_RESERVE && $product->is_purchasable())
+    if ($product->get_stock_status() === 'on_reserve' && $product->is_purchasable())
     {
       return true;
     }
