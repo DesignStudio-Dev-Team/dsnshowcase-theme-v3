@@ -252,6 +252,10 @@ $locations = !empty($content) && is_array($content)
                                         <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>">
                                             <?php dsn_icon( 'x', 'dsn:w-12 dsn:h-12' ); ?>
                                         </a>
+                                    <?php } elseif ($network === 'Houzz') {?>
+                                        <a href="<?php echo esc_url_raw(get_field('houzz_url', 'option')); ?>">
+                                            <?php dsn_icon( 'houzz', 'dsn:w-12 dsn:h-12' ); ?>
+                                        </a>
                                     <?php } ?>
                                 </div>
                             <?php endforeach; ?>
