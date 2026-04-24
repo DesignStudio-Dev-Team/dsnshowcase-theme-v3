@@ -151,55 +151,14 @@ $locations = !empty($content) && is_array($content)
                 <div class="dsn:sm:w-full dsn:mx-auto dsn:md:px-10">
 					<div class="dsn:w-3/4 dsn:md:w-full dsn:mx-auto dsn:mt-8">
                             <h4 class="dsn:font-bold dsn:m-0 dsn:text-base dsn:lg:text-2xl dsn:text-left dsn:md:text-left"><?php echo "Follow Us"; ?></h4>
-                    <div id="social-link" class="dsn:flex dsn:flex-wrap dsn:justify-start dsn:gap-4 dsn:items-start dsn:mt-4 dsn:md:mt-4">
-
-                        <?php if (isset($social_networks)) : ?>
-                            <?php foreach ($social_networks as $network) : ?>
-                                <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start dsn:text-white">
-                                    <?php if($network === 'Facebook') { ?>
-                                        <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
-                                            <?php dsn_icon( 'facebook', 'dsn:w-12 dsn:h-12' ); ?>
-                                        </a>
-                                    <?php } elseif ($network === 'Instagram') {?>
-                                        <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
-                                            <?php dsn_icon( 'instagram', 'dsn:w-12 dsn:h-12' ); ?>
-                                        </a>
-                                    <?php } elseif ($network === 'Youtube') {?>
-                                        <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
-                                            <?php dsn_icon( 'youtube', 'dsn:w-12 dsn:h-12' ); ?>
-                                        </a>
-                                    <?php } elseif ($network === 'Pinterest') {?>
-                                        <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
-                                            <?php dsn_icon( 'pinterest', 'dsn:w-12 dsn:h-12' ); ?>
-                                        </a>
-                                    <?php } elseif ($network === 'Twitter') {?>
-                                        <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>">
-                                            <?php dsn_icon( 'x', 'dsn:w-12 dsn:h-12' ); ?>
-                                        </a>
-                                    <?php } elseif ($network === 'Houzz') {?>
-                                        <a href="<?php echo esc_url_raw(get_field('houzz_url', 'option')); ?>">
-                                            <?php dsn_icon( 'houzz', 'dsn:w-12 dsn:h-12' ); ?>
-                                        </a>
-                                    <?php } ?>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+                    <?php get_template_part('templates/partials/footer-social-icons', null, ['networks' => $social_networks ?? []]); ?>
                 </div>
 				</div>
             </div>
                 </div>
 		
             
-<script>
-    
-   jQuery(document).on('click', '#social-link a', function(e){ 
-    e.preventDefault(); 
-    var url = jQuery(this).attr('href'); 
-    window.open(url, '_blank');
-});
-</script>
-	</div> 
+	</div>
 
 </footer>
  <div id="footer-copyright" class="copyright dsn:py-4">
