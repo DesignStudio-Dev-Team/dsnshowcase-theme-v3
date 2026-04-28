@@ -227,46 +227,11 @@ $locations = !empty($content) && is_array($content)
                 <div class="dsn:sm:w-full dsn:mx-auto">
 					<div class="dsn:w-2/3 dsn:mx-auto dsn:md:mx-0 dsn:md:w-full dsn:mx-auto dsn:mt-4 dsn:md:mt-8">
 						<h4 class="dsn:font-bold m-0 dsn:text-base dsn:lg:text-2xl dsn:mx-auto dsn:text-left dsn:uppercase"><?php echo "Social"; ?></h4>
-                    <div id="social-link" class="dsn:flex dsn:flex-wrap dsn:justify-start dsn:gap-4 dsn:items-start dsn:mt-4 dsn:md:mt-4">
-                      
-                        <?php if ($social_networks) : ?>
-                            <?php foreach ($social_networks as $network) : ?>
-                                <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start">
-                                    <?php // echo $network; ?>
-                                <?php if($network == 'Facebook') { ?>
-                                    <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
-                                    <!-- <img src="<?php echo  get_template_directory() . '\assets\svg\social\facebook.webp'; ?>" /> -->
-                                    <img class="dsn:w-10" src="/wp-content/uploads/theme-assets/social/facebook.webp" alt="<?php echo $network; ?>" />
-                                    </a>
-                                    <?php } elseif ($network == 'Instagram') {?>
-                                    <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
-                                    <img class="dsn:w-10" src="/wp-content/uploads/theme-assets/social/insta.webp" alt="<?php echo $network; ?>" />
-                                    </a>
-                                    <?php } elseif ($network == 'Youtube') {?>
-                                    <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
-                                    <img class="dsn:w-10" src="/wp-content/uploads/theme-assets/social/youtube.webp" alt="<?php echo $network; ?>" />
-                                    </a>
-                                    <?php } elseif ($network == 'Pinterest') {?>
-                                    <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
-                                    <img class="dsn:w-10" src="/wp-content/uploads/theme-assets/social/pin.webp" alt="<?php echo $network; ?>" />
-                                    </a>
-                                    <?php } ?>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+                    <?php get_template_part('templates/partials/footer-social-icons', null, ['social_icons' => $social_networks ?? []]); ?>
                 </div>
 				</div>
             </div>
-<script>
-    
-   jQuery(document).on('click', '#social-link a', function(e){ 
-    e.preventDefault(); 
-    var url = jQuery(this).attr('href'); 
-    window.open(url, '_blank');
-});
-</script>
-	</div> 
+	</div>
 
 </footer>
  <div id="footer-copyright" class="copyright dsn:py-4">

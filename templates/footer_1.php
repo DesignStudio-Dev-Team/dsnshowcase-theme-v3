@@ -155,50 +155,11 @@ $locations = !empty($content) && is_array($content)
                 </div>
 		
             
-<script>
-    
-   jQuery(document).on('click', '#social-link a', function(e){ 
-    e.preventDefault(); 
-    var url = jQuery(this).attr('href'); 
-    window.open(url, '_blank');
-});
-</script>
-	</div> 
+	</div>
 
 </footer>
  <div id="footer-copyright" class="copyright dsn:py-4">
- <div id="social-link" class="dsn:flex dsn:flex-wrap dsn:justify-center dsn:gap-4 dsn:items-start dsn:mt-4 dsn:md:mt-4">
-                      
-                      <?php if ($social_networks) : ?>
-                          <?php foreach ($social_networks as $network) : ?>
-                              <div class="dsn:flex dsn:items-center dsn:pb-5 dsn:md:pb-4 dsn:w-auto dsn:justify-start dsn:md:justify-start">
-                                  <?php // echo $network; ?>
-                              <?php if($network == 'Facebook') { ?>
-                                  <a href="<?php echo esc_url_raw(get_field('facebook_url', 'option')); ?>">
-                                  <!-- <img src="<?php echo  get_template_directory() . '\assets\svg\social\facebook.webp'; ?>" /> -->
-                                  <img class="dsn:w-10 dsn:md:w-14" src="./wp-content/uploads/theme-assets/social/footer-1-facebook-icon.jpg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Instagram') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('insta_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="./wp-content/uploads/theme-assets/social/footer-1-insta-icon.jpg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Youtube') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('youtube_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="./wp-content/uploads/theme-assets/social/footer-1-youtube-icon.jpg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Pinterest') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('pinterest_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="./wp-content/uploads/theme-assets/social/footer-1-pin-icon.jpg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } elseif ($network == 'Twitter') {?>
-                                  <a href="<?php echo esc_url_raw(get_field('twitter_url', 'option')); ?>">
-                                  <img class="dsn:w-10 dsn:md:w-14" src="./wp-content/uploads/theme-assets/social/footer-1-twitter-icon.jpg" alt="<?php echo $network; ?>" />
-                                  </a>
-                                  <?php } ?>
-                              </div>
-                          <?php endforeach; ?>
-                      <?php endif; ?>
-                  </div>
+                  <?php get_template_part('templates/partials/footer-social-icons', null, ['social_icons' => $social_networks ?? []]); ?>
                   <?php
 
                 wp_nav_menu(
