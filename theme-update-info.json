@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.6",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.6",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.6/dsnshowcase.zip",
+  "version": "v3.7.7",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.7",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.7/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-04-23",
+  "last_updated": "2026-04-28",
   "sections": {
-    "changelog": "Merge pull request #236 from DesignStudio-Dev-Team/fix/undefined-stock-status-on-reserve-constant\n\nFix undefined STOCK_STATUS_ON_RESERVE in reserve button fallback"
+    "changelog": "Merge pull request #234 from DesignStudio-Dev-Team/feature/twitter-to-x-rebrand\n\nChange Footer Social Icons to use SVG"
   }
 }
