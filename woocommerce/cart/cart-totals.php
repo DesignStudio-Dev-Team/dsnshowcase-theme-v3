@@ -19,17 +19,17 @@ defined( 'ABSPATH' ) || exit;
 
 global $dssSiteLanguage;
 ?>
-<div class="cart_totals <?php echo ( WC()->customer->has_calculated_shipping() ) ? 'calculated_shipping' : ''; ?>">
+<div class="cart_totals <?php echo ( WC()->customer->has_calculated_shipping() ) ? 'calculated_shipping' : ''; ?> dsn:bg-white dsn:border dsn:border-gray-200 dsn:shadow-sm">
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-	<h4 class="dsn:pb-4"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_total; ?></h4>
+	<h4 class="dsn:mb-0 dsn:text-xl dsn:font-semibold dsn:text-gray-900 dsn:bg-gray-100 dsn:border-b dsn:border-gray-300 dsn:p-4 dsn:mt-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_total; ?></h4>
 
-	<table cellspacing="0" class="shop_table shop_table_responsive">
+	<table cellspacing="0" class="shop_table shop_table_responsive dsn:w-full dsn:p-4">
 
-		<tr class="cart-subtotal">
-			<th class="text-lg"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_sub_total; ?></th>
-			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>" class="text-lg"><?php wc_cart_totals_subtotal_html(); ?></td>
+		<tr class="cart-subtotal dsn:border-b dsn:border-gray-200">
+			<th class="text-lg dsn:py-4 dsn:text-gray-700"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_sub_total; ?></th>
+			<td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>" class="text-lg dsn:py-4 dsn:text-right dsn:text-gray-900"><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
@@ -93,32 +93,31 @@ global $dssSiteLanguage;
 
 		<?php do_action( 'woocommerce_cart_totals_before_order_total' ); ?>
 
-		<tr class="order-total bg-gray-100 text-lg">
-			<th><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_total; ?></th>
-			<td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
+		<tr class="order-total dsn:border-t dsn:border-gray-200 dsn:text-lg">
+			<th class="dsn:py-4 dsn:text-gray-700"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->order_total; ?></th>
+			<td class="dsn:py-4 dsn:text-right" data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 
 		<?php do_action( 'woocommerce_cart_totals_after_order_total' ); ?>
 
 	</table>
 
-<!--    --><?php //if (wc_coupons_enabled()) { ?>
-<!--        <div class="coupon">-->
-<!--            <label for="coupon_code">--><?php //esc_html_e('Coupon:', 'woocommerce'); ?><!--</label>-->
-<!--            <input-->
-<!--                    type="text" name="coupon_code" class="input-text" id="coupon_code" value=""-->
-<!--                    placeholder="--><?php //esc_attr_e('Coupon code', 'woocommerce'); ?><!--"/>-->
-<!--            <button type="submit" class="button" name="apply_coupon"-->
-<!--                    value="--><?php //esc_attr_e('Apply coupon', 'woocommerce'); ?><!--">--><?php //esc_attr_e('Apply coupon', 'woocommerce'); ?><!--</button>-->
-<!--            --><?php //do_action('woocommerce_cart_coupon'); ?>
-<!--        </div>-->
-<!--    --><?php //} ?>
+	<div class="dsn:mt-6 dsn:border-t dsn:border-gray-200 dsn:p-4">
+		<p class="dsn:text-sm dsn:text-gray-600 dsn:mb-2 dsn:font-medium"><?php esc_html_e('Do you have a gift card?', 'woocommerce'); ?></p>
+		<form class="cart-voucher-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+			<div class="voucher-input-wrapper">
+				<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e('GIFT VOUCHER NUMBER', 'woocommerce'); ?>" />
+				<button type="submit" class="voucher-apply-btn" name="apply_coupon" value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_html_e('APPLY', 'woocommerce'); ?></button>
+			</div>
+			<?php do_action('woocommerce_cart_coupon'); ?>
+		</form>
+	</div>
 
 	<div class="wc-proceed-to-checkout">
 		<?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
 	</div>
 
-	<?php do_action( 'woocommerce_after_cart_totals' ); ?>
+</div>
 
 </div>
 

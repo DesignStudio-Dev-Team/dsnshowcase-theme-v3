@@ -627,8 +627,8 @@ function bbloomer_display_coupon_form_below_proceed_checkout()
     <form class="woocommerce-coupon-form dsn:mb-6" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
         <?php if (wc_coupons_enabled()) { ?>
 
-            <p class="dsn:mb-4 dsn:mt-8 dsn:text-lg"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
-            <div class="coupon dsn:under-proceed dsn:border dsn:rounded dsn:h-12">
+            <p class="dsn:mb-2 dsn:mt-8 dsn:text-lg"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_code; ?></p>
+            <div class="coupon dsn:under-proceed dsn:border dsn:border-gray-200 dsn:h-12">
                 <input type="text" name="coupon_code" class="input-text dsn:text-lg dsn:px-3 dsn:ml-1 dsn:uppercase" id="coupon_code" value="" placeholder="<?php echo dssLang($dssSiteLanguage)->woocommerce_cart->coupon_placeholder; ?>" style="width: 100%" />
                 <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_attr_e('Apply', 'woocommerce'); ?></button>
             </div>

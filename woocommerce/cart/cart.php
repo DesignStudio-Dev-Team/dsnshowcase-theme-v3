@@ -31,8 +31,8 @@ global $dssSiteLanguage;
 
     <div class="dsn:sm:flex dsn:gap-10 dsn:mb-12">
         <div class="cart-page-wrapper-left dsn:md:flex dsn:md:flex-col dsn:gap-4 dsn:md:w-2/3">
-          <div class="dsn:px-4 dsn:py-3 dsn:bg-stihl-orange dsn:text-white dsn:text-sm dsn:border-orange-500 dsn:font-medium dsn:text-center dsn:shadow-sm">
-            <?php esc_html_e('The prices shown below include your discounted STIHL professional prices.', 'woocommerce'); ?>
+          <div class="dsn:px-1 dsn:py-1 dsn:bg-stihl-orange dsn:text-white dsn:text-sm  dsn:font-medium dsn:text-center">
+             <?php do_action( 'dsn_cart_after_title' ); ?>
           </div>
 
           <!-- Cart Wrapper -->
@@ -215,7 +215,7 @@ global $dssSiteLanguage;
                       <?php if (wc_coupons_enabled()) : ?>
                         <div class="dsn:flex dsn:gap-3 dsn:flex-1">
                           <div class="dsn:flex dsn:justify-between dsn:py-2 dsn:px-2 dsn:border dsn:border-gray-200 dsn:items-center dsn:gap-2">
-                            <input type="text" name="coupon_code" class="dsn:px-4 dsn:text-sm dsn:uppercase" id="coupon_code" value="" placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" />
+                            <input type="text" name="coupon_code" class="code dsn:px-4 dsn:text-sm dsn:uppercase" id="coupon_code" value="" placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" />
                             <button type="submit" class="button coupon-link" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>"><?php esc_html_e('Apply coupon', 'woocommerce'); ?></button>
                           </div>
                           <?php do_action('woocommerce_cart_coupon'); ?>
