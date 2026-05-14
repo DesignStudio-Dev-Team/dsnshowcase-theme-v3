@@ -103,20 +103,22 @@ global $dssSiteLanguage;
 	</table>
 
 	<div class="dsn:mt-6 dsn:border-t dsn:border-gray-200 dsn:p-4">
-		<p class="dsn:text-sm dsn:text-gray-600 dsn:mb-2 dsn:font-medium"><?php esc_html_e('Do you have a gift card?', 'woocommerce'); ?></p>
+		<?php if (wc_coupons_enabled()) { ?>
+		<p class="dsn:text-sm dsn:text-gray-600 dsn:mb-3"><?php esc_html_e('Have a coupon?', 'woocommerce'); ?></p>
 		<form class="cart-voucher-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
 			<div class="voucher-input-wrapper">
-				<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e('GIFT VOUCHER NUMBER', 'woocommerce'); ?>" />
-				<button type="submit" class="voucher-apply-btn" name="apply_coupon" value="<?php esc_attr_e('Apply', 'woocommerce'); ?>"><?php esc_html_e('APPLY', 'woocommerce'); ?></button>
+				<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" />
+				<button type="submit" class="voucher-apply-btn" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>"><?php esc_html_e('Apply coupon', 'woocommerce'); ?></button>
 			</div>
 			<?php do_action('woocommerce_cart_coupon'); ?>
 		</form>
+		<?php } ?>
 	</div>
 
 	<div class="wc-proceed-to-checkout">
 		<?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
 	</div>
-
+	<?php do_action( 'woocommerce_after_cart_totals' ); ?>
 </div>
 
 </div>

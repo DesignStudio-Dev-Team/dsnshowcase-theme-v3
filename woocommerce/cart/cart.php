@@ -21,7 +21,9 @@ defined('ABSPATH') || exit;
 do_action('woocommerce_before_cart'); 
 
 global $dssSiteLanguage;
-
+ob_start();
+do_action( 'dsn_cart_after_title' );
+$cart_after_title_output = ob_get_clean();
 ?>
 <div class="dsn:container dsn:mx-auto dsn:px-4">
     <!-- Page Header -->
@@ -30,18 +32,18 @@ global $dssSiteLanguage;
     </div>
 
     <div class="dsn:sm:flex dsn:gap-10 dsn:mb-12">
-        <div class="cart-page-wrapper-left dsn:md:flex dsn:md:flex-col dsn:gap-4 dsn:md:w-2/3">
-          <div class="dsn:px-1 dsn:py-1 dsn:bg-stihl-orange dsn:text-white dsn:text-sm  dsn:font-medium dsn:text-center">
-             <?php do_action( 'dsn_cart_after_title' ); ?>
+        <div class="cart-page-wrapper-left dsn:w-full dsn:md:w-2/3 dsn:md:flex dsn:md:flex-col dsn:gap-4">
+        <?php if ($cart_after_title_output) : ?>
+        <div class="dsn:px-1 dsn:py-1 dsn:bg-stihl-orange dsn:text-white dsn:text-sm  dsn:font-medium dsn:text-center">
+             <?php
+              echo $cart_after_title_output;
+             
+             ?>
           </div>
+          <?php endif; ?>
 
           <!-- Cart Wrapper -->
-          <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:border-gray-200 dsn:shadow-sm">
-            
-            <?php /* <div class="dsn:flex dsn:items-center dsn:gap-4 dsn:pb-4 dsn:justify-between">
-              <h4 class="dsn:m-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
-              <?php do_action( 'dsn_cart_after_title' ); ?>
-            </div> */ ?>
+          <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:border-gray-200 dsn:shadow-sm dsn:mb-8">
 
             <form class="woocommerce-cart-form" action="<?php
             echo esc_url(wc_get_cart_url()); ?>" method="post">
@@ -91,7 +93,12 @@ global $dssSiteLanguage;
 
                       <td class="product-remove dsn:px-4 dsn:align-middle dsn:py-4">
                         <?php
-                          $remove_icon = '<svg class="dsn:w-4 dsn:h-" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#d1d5db"><path d="M4.5 4.5l11 11M15.5 4.5l-11 11"/></svg>';
+                          $remove_icon = function_exists('dsn_get_remove_icon') ? dsn_get_remove_icon() : 'close';
+
+                          ob_start();
+                          dsn_icon($remove_icon, 'dsn:w-4 dsn:h-4');
+                          $remove_icon_svg = ob_get_clean();
+                          $remove_icon_svg = str_replace('<svg', '<svg style="color:#d1d5db"', $remove_icon_svg);
 
                           echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                             'woocommerce_cart_item_remove_link',
@@ -101,7 +108,7 @@ global $dssSiteLanguage;
                               esc_html__('Remove this item', 'woocommerce'),
                               esc_attr($product_id),
                               esc_attr($_product->get_sku()),
-                              $remove_icon
+                              $remove_icon_svg
                             ),
                             $cart_item_key
                           );
@@ -126,7 +133,7 @@ global $dssSiteLanguage;
                               printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
                             }
                             ?>
-                          </div>
+                          </div>  
                           <div class="dsn:flex-1 dsn:space-y-2">
                             <div class="dsn:text-sm dsn:font-semibold dsn:text-gray-800 dsn:mb-2">
                               <?php
@@ -141,12 +148,33 @@ global $dssSiteLanguage;
                               }
                               ?>
                             </div>
-                            <?php if ($_product->get_sku()) : ?>
+                            <?php 
+                            $post_id = $_product->get_id();
+                            $article_id = null;
+                            $dss_syndified_meta = null;
+                            $console_id = get_post_meta($post_id, 'console_id', true);
+
+                            if ($console_id) {
+                              $dss_syndified_meta = get_post_meta($post_id, 'dss_syndified', true);
+                            }
+                            
+                            if ($dss_syndified_meta) {
+                              $syndified_data = json_decode($dss_syndified_meta, true);
+                              if (is_array($syndified_data) && isset($syndified_data['article_id'])) {
+                                $article_id = $syndified_data['article_id'];
+                              }
+                            }
+                            
+                            if ($article_id) : 
+                            ?>
                               <div class="dsn:text-sm dsn:text-black dsn:font-medium dsn:bg-gray-100 dsn:px-2 dsn:py-2 dsn:rounded dsn:inline-block">
-                                <?php esc_html_e('Article Number:', 'woocommerce'); ?> <?php echo esc_html($_product->get_sku()); ?>
+                                <?php esc_html_e('Article Number:', 'woocommerce'); ?> <?php echo esc_html($article_id); ?>
                               </div>
                             <?php endif; ?>
                             <?php echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok. ?>
+                            <?php if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) : ?>
+                              <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id)); ?>
+                            <?php endif; ?>
                           </div>
                         </div>
                       </td>
@@ -312,7 +340,7 @@ global $dssSiteLanguage;
         </div>
 
         <!-- <div class="cart-page-wrapper-right dsn:md:p-10 dsn:md:rounded dsn:md:border dsn:md:border-gray-200 dsn:md:w-1/3"> -->
-        <div class="">
+        <div class="dsn:w-full dsn:md:w-1/3 dsn:mt-8 dsn:md:mt-0">
           <!-- Order Summary -->
           <div class="dsn-order-summary-wrapper">
               <?php
