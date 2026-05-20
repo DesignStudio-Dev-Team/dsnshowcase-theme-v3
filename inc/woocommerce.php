@@ -77,6 +77,11 @@ function woo_rename_tabs($tabs)
             'priority' => 1,
             'callback' => 'woo_new_product_tab_more'
         );
+    } else {
+        global $product;
+        if (!$product || (!$product->has_weight() && !$product->has_dimensions())) {
+            unset($tabs['additional_information']);
+        }
     }
 
     if (get_field('custom_block_content')) {
