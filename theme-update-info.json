@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.7",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.7",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.7/dsnshowcase.zip",
+  "version": "v3.7.8",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.8",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.8/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-04-28",
+  "last_updated": "2026-05-20",
   "sections": {
-    "changelog": "Merge pull request #234 from DesignStudio-Dev-Team/feature/twitter-to-x-rebrand\n\nChange Footer Social Icons to use SVG"
+    "changelog": "Merge pull request #239 from DesignStudio-Dev-Team/fix/reserve-button-variable-on-reserve-238\n\nShow Reserve button on variable products with on_reserve variations"
   }
 }

@@ -1621,10 +1621,18 @@ if ( ! function_exists('dsn_show_reserve_btn') ) {
       return false;
     }
 
-    // Show reserve button if product is on reserve and has a price.
     if ($product->get_stock_status() === 'on_reserve' && $product->is_purchasable())
     {
       return true;
+    }
+
+    if ($product->is_type('variable')) {
+      foreach ($product->get_children() as $variation_id) {
+        $variation = wc_get_product($variation_id);
+        if ($variation && $variation->get_stock_status() === 'on_reserve' && $variation->is_purchasable()) {
+          return true;
+        }
+      }
     }
 
     return false;
