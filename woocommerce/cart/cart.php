@@ -146,9 +146,11 @@ $cart_after_title_output = ob_get_clean();
                                     esc_url($product_permalink),
                                     $_product->get_name()), $cart_item, $cart_item_key));
                               }
+
+                              do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
                               ?>
                             </div>
-                            <?php 
+                            <?php
                             $post_id = $_product->get_id();
                             $article_id = null;
                             $dss_syndified_meta = null;
@@ -220,7 +222,7 @@ $cart_after_title_output = ob_get_clean();
                         </div>
                       </td>
 
-                      <td class="product-subtotal dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle">
+                      <td class="product-subtotal dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
                         <span class="dsn:text-sm dsn:font-semibold dsn:text-gray-900">
                           <?php
                           echo wc_price($_product->get_price() * $cart_item['quantity']);
