@@ -32,7 +32,7 @@ if ( $max_value && $min_value === $max_value ) {
 
 		<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo esc_attr( $label ); ?></label>
 
-    <input type="button" value="-" class="qty_button minus" />
+    <input type="button" value="-" class="qty_button minus dsn:rounded dsn:cursor-pointer" />
 
     <input
 			type="number"
@@ -51,7 +51,7 @@ if ( $max_value && $min_value === $max_value ) {
 
 		<?php do_action( 'woocommerce_after_quantity_input_field' ); ?>
 
-    <input type="button" value="+" class="qty_button plus" />
+    <input type="button" value="+" class="qty_button plus dsn:rounded dsn:cursor-pointer" />
 	</div>
 	<?php
 }
