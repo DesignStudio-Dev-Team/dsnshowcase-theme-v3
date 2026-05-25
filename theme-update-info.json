@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.9",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.9",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.9/dsnshowcase.zip",
+  "version": "v3.7.10",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.10",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.10/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2026-05-25",
   "sections": {
-    "changelog": "Merge pull request #242 from DesignStudio-Dev-Team/fix/mobile-menu-collapsible\n\nFixes mobile menu collapsible behavior"
+    "changelog": "Merge pull request #244 from DesignStudio-Dev-Team/products-hidden-from-category-archives-due-to-unst-fix\n\nProducts hidden from category archives due to unstable pagination - Fix"
   }
 }
