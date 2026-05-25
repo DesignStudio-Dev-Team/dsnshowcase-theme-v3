@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.8",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.8",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.8/dsnshowcase.zip",
+  "version": "v3.7.9",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.9",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.9/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-05-20",
+  "last_updated": "2026-05-25",
   "sections": {
-    "changelog": "Merge pull request #239 from DesignStudio-Dev-Team/fix/reserve-button-variable-on-reserve-238\n\nShow Reserve button on variable products with on_reserve variations"
+    "changelog": "Merge pull request #242 from DesignStudio-Dev-Team/fix/mobile-menu-collapsible\n\nFixes mobile menu collapsible behavior"
   }
 }
