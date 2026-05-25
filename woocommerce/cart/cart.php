@@ -150,29 +150,7 @@ $cart_after_title_output = ob_get_clean();
                               do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
                               ?>
                             </div>
-                            <?php
-                            $post_id = $_product->get_id();
-                            $article_id = null;
-                            $dss_syndified_meta = null;
-                            $console_id = get_post_meta($post_id, 'console_id', true);
-
-                            if ($console_id) {
-                              $dss_syndified_meta = get_post_meta($post_id, 'dss_syndified', true);
-                            }
-                            
-                            if ($dss_syndified_meta) {
-                              $syndified_data = json_decode($dss_syndified_meta, true);
-                              if (is_array($syndified_data) && isset($syndified_data['article_id'])) {
-                                $article_id = $syndified_data['article_id'];
-                              }
-                            }
-                            
-                            if ($article_id) : 
-                            ?>
-                              <div class="dsn:text-sm dsn:text-black dsn:font-medium dsn:bg-gray-100 dsn:px-2 dsn:py-2 dsn:rounded dsn:inline-block">
-                                <?php esc_html_e('Article Number:', 'woocommerce'); ?> <?php echo esc_html($article_id); ?>
-                              </div>
-                            <?php endif; ?>
+                            <?php do_action('dsn_after_cart_item_name', $_product, $cart_item, $cart_item_key); ?>
                             <?php echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok. ?>
                             <?php if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) : ?>
                               <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id)); ?>
