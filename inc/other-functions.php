@@ -397,7 +397,7 @@ function ds_filtration($categories = null, $specials = null, $featured_image = n
     $final_args = [
         'post_type' => ['product'],
         'post__in'  => $post_ids,
-        'orderby'   => $order_by,
+        'orderby'   => $order_by === 'dsn_price' ? $order_by : [$order_by => $order, 'ID' => 'ASC'],
         'order'     => $order,
     ];
 
