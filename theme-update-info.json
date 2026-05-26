@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.10",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.10",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.10/dsnshowcase.zip",
+  "version": "v3.7.11",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.11",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.11/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-05-25",
+  "last_updated": "2026-05-26",
   "sections": {
-    "changelog": "Merge pull request #244 from DesignStudio-Dev-Team/products-hidden-from-category-archives-due-to-unst-fix\n\nProducts hidden from category archives due to unstable pagination - Fix"
+    "changelog": "Merge pull request #246 from DesignStudio-Dev-Team/add-dsnshowcase-cta-settings-tab-to-wc-product-dat-fix\n\nAdd DSNShowcase CTA Settings tab to WC Product Data with Button Text and Form Shortcode overrides - Fix"
   }
 }
