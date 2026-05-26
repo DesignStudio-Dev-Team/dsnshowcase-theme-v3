@@ -1,5 +1,7 @@
 <?php 
 
+require_once __DIR__ . '/woocommerce-cta-settings-tab.php';
+
 //remove the need for a sidebar in products / woocommerce templates
 function remove_sidebar() {
     if (class_exists('WooCommerce')) {
@@ -241,6 +243,10 @@ function dsn_reserve_button() {
     $reserve_icon = function_exists('syndified_get_reserve_icon') ? syndified_get_reserve_icon() : 'reserve';
     $button_title = $translatedText->woocommerce_cart->reserve_button;
 
+    if (function_exists('dsn_get_cta_button_text')) {
+        $button_title = dsn_get_cta_button_text($postID) ?: $button_title;
+    }
+
     // Check if Syndified modal is available
     $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
 
@@ -289,6 +295,10 @@ function dsn_get_info_button() {
     // Get info icon from Syndified settings
     $get_info_icon = function_exists('syndified_get_info_icon') ? syndified_get_info_icon() : 'info';
     $button_title = $translatedText->woocommerce_cart->info_button;
+
+    if (function_exists('dsn_get_cta_button_text')) {
+        $button_title = dsn_get_cta_button_text($postID) ?: $button_title;
+    }
 
     // Check if Syndified modal is available
     $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
