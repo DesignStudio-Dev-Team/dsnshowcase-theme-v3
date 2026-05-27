@@ -57,7 +57,7 @@ global $dssSiteLanguage;
                     </span>
                 </a>
                 <div class="product-total">
-                    <?php echo $_product->get_price_html(); ?>
+                    <?php echo WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ); ?>
                 </div>
             </div>
             <?php
