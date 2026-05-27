@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.13",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.13",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.13/dsnshowcase.zip",
+  "version": "v3.7.14",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.14",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.14/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2026-05-27",
   "sections": {
-    "changelog": "Merge pull request #248 from DesignStudio-Dev-Team/bug-discrepancy-in-line-item-pricing-between-cart-fix\n\nBug: Discrepancy in line item pricing between Cart and Checkout order summary - Fix"
+    "changelog": "Merge pull request #250 from DesignStudio-Dev-Team/fatal-error-on-woocommerce-order-received-page-fix\n\nFatal Error on WooCommerce Order Received Page - Fix"
   }
 }
