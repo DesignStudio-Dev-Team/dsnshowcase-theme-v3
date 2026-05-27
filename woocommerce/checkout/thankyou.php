@@ -155,9 +155,10 @@ global $dssSiteLanguage;
 
             $image_url = 'https://dswaves.s3.us-west-1.amazonaws.com/images/wordpress/checkout-truck.gif';
             $acf_truck_image = get_field('delivery_truck_replacement_image', 'options');
-            if ($acf_truck_image && $acf_truck_image['url'])
-            {
+            if (is_array($acf_truck_image) && !empty($acf_truck_image['url'])) {
                 $image_url = $acf_truck_image['url'];
+            } elseif (is_string($acf_truck_image) && $acf_truck_image !== '') {
+                $image_url = $acf_truck_image;
             }
 
             $support_number = get_field('order_check_out_support_phone_number', 'options');
