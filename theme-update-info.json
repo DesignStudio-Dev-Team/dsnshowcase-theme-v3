@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.11",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.11",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.11/dsnshowcase.zip",
+  "version": "v3.7.12",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.12",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.12/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-05-26",
+  "last_updated": "2026-05-27",
   "sections": {
-    "changelog": "Merge pull request #246 from DesignStudio-Dev-Team/add-dsnshowcase-cta-settings-tab-to-wc-product-dat-fix\n\nAdd DSNShowcase CTA Settings tab to WC Product Data with Button Text and Form Shortcode overrides - Fix"
+    "changelog": "Merge pull request #237 from DesignStudio-Dev-Team/shopping_cart_stihl\n\nCart page and Order summary design updates"
   }
 }
