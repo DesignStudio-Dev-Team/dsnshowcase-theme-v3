@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.12",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.12",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.12/dsnshowcase.zip",
+  "version": "v3.7.13",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.13",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.13/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2026-05-27",
   "sections": {
-    "changelog": "Merge pull request #237 from DesignStudio-Dev-Team/shopping_cart_stihl\n\nCart page and Order summary design updates"
+    "changelog": "Merge pull request #248 from DesignStudio-Dev-Team/bug-discrepancy-in-line-item-pricing-between-cart-fix\n\nBug: Discrepancy in line item pricing between Cart and Checkout order summary - Fix"
   }
 }
