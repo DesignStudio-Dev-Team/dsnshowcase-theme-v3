@@ -21,36 +21,30 @@ defined('ABSPATH') || exit;
 do_action('woocommerce_before_cart'); 
 
 global $dssSiteLanguage;
-
+ob_start();
+do_action( 'dsn_cart_after_title' );
+$cart_after_title_output = ob_get_clean();
 ?>
 <div class="dsn:container dsn:mx-auto dsn:px-4">
     <!-- Page Header -->
-    <div class='dsn:py-6 dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8'>
+    <div class='dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8'>
       <h1><?php the_title() ?></h1>
     </div>
 
-    <div class="dsn:sm:flex dsn:gap-13 dsn:pt-10 dsn:mb-12">
-        <div class="cart-page-wrapper-left dsn:md:flex dsn:md:flex-col dsn:gap-13 dsn:md:w-2/3">
-          <!-- Cart Wrapper -->
-          <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:p-10  dsn:sm:border-gray-200">
-            <div class="dsn:flex dsn:items-center dsn:gap-4 dsn:pb-4 dsn:justify-between">
-              <h4 class="dsn:m-0"><?php echo dssLang($dssSiteLanguage)->woocommerce_cart->cart_items; ?></h4>
-              <?php do_action( 'dsn_cart_after_title' ); ?>
-            </div>
+    <div class="dsn:sm:flex dsn:gap-10 dsn:mb-12">
+        <div class="cart-page-wrapper-left dsn:w-full dsn:md:w-2/3 dsn:md:flex dsn:md:flex-col dsn:gap-4">
+        <?php if ($cart_after_title_output) : ?>
+        <div class="dsn:px-1 dsn:py-1 dsn:bg-stihl-orange dsn:text-white dsn:text-sm  dsn:font-medium dsn:text-center">
+             <?php
+              echo $cart_after_title_output;
+             
+             ?>
+          </div>
+          <?php endif; ?>
 
-            <?php
-            $item_counter = WC()->cart->cart_contents_count; ?>
-            <p class="cart-counter dsn:text-sm dsn:text-gray-600">
-              <?php
-              if ($item_counter === 1) {
-                echo $item_counter.' '
-                  .dssLang($dssSiteLanguage)->woocommerce_cart->item_singular;
-              } else {
-                echo $item_counter.' '
-                  .dssLang($dssSiteLanguage)->woocommerce_cart->item_plural;
-              }
-              ?>
-            </p>
+          <!-- Cart Wrapper -->
+          <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:border-gray-200 dsn:shadow-sm dsn:mb-8">
+
             <form class="woocommerce-cart-form" action="<?php
             echo esc_url(wc_get_cart_url()); ?>" method="post">
               <?php
@@ -59,6 +53,15 @@ global $dssSiteLanguage;
               <table
                 class="shop_table shop_table_responsive cart woocommerce-cart-form__contents dsn:w-full"
                 cellspacing="0">
+                <thead>
+                  <tr class="dsn:border-b dsn:border-gray-200 dsn:text-left">
+                    <th class="dsn:w-[60px] dsn:px-4 dsn:py-3"></th>
+                    <th class="dsn:px-4 dsn:py-3 dsn:text-sm dsn:font-semibold dsn:text-gray-700"><?php esc_html_e('Product', 'woocommerce'); ?></th>
+                    <th class="dsn:px-4 dsn:py-3 dsn:text-sm dsn:font-semibold dsn:text-gray-700"><?php esc_html_e('Price', 'woocommerce'); ?></th>
+                    <th class="dsn:px-4 dsn:py-3 dsn:text-sm dsn:font-semibold dsn:text-gray-700"><?php esc_html_e('Quantity', 'woocommerce'); ?></th>
+                    <th class="dsn:px-4 dsn:py-3 dsn:text-sm dsn:font-semibold dsn:text-gray-700"><?php esc_html_e('Total', 'woocommerce'); ?></th>
+                  </tr>
+                </thead>
                 <tbody>
                 <?php
                 do_action('woocommerce_before_cart_contents'); ?>
@@ -84,78 +87,101 @@ global $dssSiteLanguage;
                       $cart_item_key);
                     ?>
                     <tr
-                      class="woocommerce-cart-form__cart-item dsn:align-middle dsn:py-4 dsn:border-b <?php
+                      class="woocommerce-cart-form__cart-item dsn:align-middle dsn:py-4 <?php
                       echo esc_attr(apply_filters('woocommerce_cart_item_class',
                         'cart_item', $cart_item, $cart_item_key)); ?>">
 
-                      <td
-                        class="product-thumbnail dsn:w-[80px] dsn:h-[80px] dsn:bg-gray-100 dsn:rounded dsn:flex dsn:items-center dsn:justify-center dsn:overflow-hidden dsn:align-middle dsn:border-0">
+                      <td class="product-remove dsn:px-4 dsn:align-middle dsn:py-4">
                         <?php
-                        $thumbnail_args = [
-                          'class' => 'dsn:border-0'
-                        ];
-                        $thumbnail
-                                        = apply_filters('woocommerce_cart_item_thumbnail',
-                          $_product->get_image('woocommerce_thumbnail',
-                            $thumbnail_args), $cart_item, $cart_item_key);
+                          $remove_icon = function_exists('dsn_get_remove_icon') ? dsn_get_remove_icon() : 'close';
 
-                        if ( ! $product_permalink) {
-                          echo $thumbnail; // PHPCS: XSS ok.
-                        } else {
-                          printf('<a href="%s">%s</a>',
-                            esc_url($product_permalink),
-                            $thumbnail); // PHPCS: XSS ok.
-                        }
+                          ob_start();
+                          dsn_icon($remove_icon, 'dsn:w-4 dsn:h-4');
+                          $remove_icon_svg = ob_get_clean();
+                          $remove_icon_svg = str_replace('<svg', '<svg style="color:#d1d5db"', $remove_icon_svg);
+
+                          echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            'woocommerce_cart_item_remove_link',
+                            sprintf(
+                              '<a href="%s" class="remove dsn:inline-flex dsn:items-center dsn:justify-center dsn:w-11 dsn:h-11 dsn:rounded-full dsn:border dsn:border-gray-300 dsn:bg-white dsn:text-gray-300 dsn:transition-colors dsn:duration-150 hover:dsn:bg-gray-100" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
+                              esc_url(wc_get_cart_remove_url($cart_item_key)),
+                              esc_html__('Remove this item', 'woocommerce'),
+                              esc_attr($product_id),
+                              esc_attr($_product->get_sku()),
+                              $remove_icon_svg
+                            ),
+                            $cart_item_key
+                          );
                         ?>
                       </td>
 
-                      <td
-                        class="product-name flex-grow dsn:px-4 dsn:leading-snug dsn:align-middle"
-                        data-title="<?php
+                      <td class="product-name dsn:px-4 dsn:py-4 dsn:align-middle" data-title="<?php
                         esc_attr_e('Product', 'woocommerce'); ?>">
-                        <div class='dsn:flex-grow'>
+                        <div class="dsn:flex dsn:items-start dsn:gap-4 dsn:flex-nowrap">
+                          <div class="dsn:w-[80px] dsn:h-[80px] dsn:flex dsn:items-center dsn:justify-center dsn:overflow-hidden dsn:border" style="border-color:#d1d5db;">
+                            <?php
+                            $thumbnail_args = [
+                              'class' => 'dsn:border-0 dsn:rounded-[0px]',
+                            ];
+                            $thumbnail = apply_filters('woocommerce_cart_item_thumbnail',
+                              $_product->get_image('woocommerce_thumbnail', $thumbnail_args),
+                              $cart_item, $cart_item_key);
+
+                            if (!$product_permalink) {
+                              echo $thumbnail; // PHPCS: XSS ok.
+                            } else {
+                              printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
+                            }
+                            ?>
+                          </div>  
+                          <div class="dsn:flex-1 dsn:space-y-2">
+                            <div class="dsn:text-sm dsn:font-semibold dsn:text-gray-800 dsn:mb-2">
+                              <?php
+                              if (!$product_permalink) {
+                                echo wp_kses_post(apply_filters('woocommerce_cart_item_name',
+                                  $_product->get_name(), $cart_item, $cart_item_key));
+                              } else {
+                                echo wp_kses_post(apply_filters('woocommerce_cart_item_name',
+                                  sprintf('<a class="dsn:text-base dsn:text-gray-800 hover:dsn:text-gray-900" href="%s">%s</a>',
+                                    esc_url($product_permalink),
+                                    $_product->get_name()), $cart_item, $cart_item_key));
+                              }
+
+                              do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
+                              ?>
+                            </div>
+                            <?php do_action('dsn_after_cart_item_name', $_product, $cart_item, $cart_item_key); ?>
+                            <?php echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok. ?>
+                            <?php if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) : ?>
+                              <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id)); ?>
+                            <?php endif; ?>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="product-item-price dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle" data-title="<?php
+                        esc_attr_e('Item Price', 'woocommerce'); ?>">
+                        <div class="dsn:flex dsn:items-center dsn:justify-start dsn:gap-2 dsn:flex-wrap dsn:text-sm">
                           <?php
-                          if ( ! $product_permalink) {
-                            echo wp_kses_post(apply_filters('woocommerce_cart_item_name',
-                                $_product->get_name(), $cart_item,
-                                $cart_item_key).'&nbsp;');
+                          $regular_price = $_product->get_regular_price();
+                          $active_price  = $_product->get_price();
+
+                          if ((float) $active_price < (float) $regular_price) {
+                            echo '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price) . '</del>';
+                            echo '<ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price) . '</ins>';
                           } else {
-                            echo wp_kses_post(apply_filters('woocommerce_cart_item_name',
-                              sprintf('<a class="text-xl inline-block text-gray-600 hover:text-gray-800" href="%s">%s</a>',
-                                esc_url($product_permalink),
-                                $_product->get_name()), $cart_item,
-                              $cart_item_key));
-                          }
-
-                          do_action('woocommerce_after_cart_item_name',
-                            $cart_item, $cart_item_key);
-
-                          // Meta data.
-                          echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok.
-
-                          // Backorder notification.
-                          if ($_product->backorders_require_notification()
-                            && $_product->is_on_backorder($cart_item['quantity'])
-                          ) {
-                            echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification',
-                              '<p class="backorder_notification">'
-                              .esc_html__('Available on backorder',
-                                'woocommerce').'</p>', $product_id));
+                            echo '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price) . '</span>';
                           }
                           ?>
                         </div>
                       </td>
 
-                      <td class="product-quantity dsn:pr-4 dsn:align-middle"
-                          data-title="<?php
-                          esc_attr_e('Quantity', 'woocommerce'); ?>">
-                        <div
-                          class="dsn:flex dsn:items-start dsn:justify-end dsn:gap-2">
+                      <td class="product-quantity dsn:px-4 dsn:py-4 dsn:align-middle" data-title="<?php
+                        esc_attr_e('Quantity', 'woocommerce'); ?>">
+                        <div class="dsn:flex dsn:items-center dsn:justify-start dsn:gap-2 dsn:flex-wrap">
                           <?php
                           if ($_product->is_sold_individually()) {
-                            $product_quantity
-                              = sprintf('1 <input type="hidden" name="cart[%s][qty]" value="1" />',
-                              $cart_item_key);
+                            $product_quantity = sprintf('1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key);
                           } else {
                             $product_quantity = woocommerce_quantity_input(
                               [
@@ -169,65 +195,17 @@ global $dssSiteLanguage;
                               false
                             );
                           }
-
-                          echo apply_filters('woocommerce_cart_item_quantity',
-                            $product_quantity, $cart_item_key,
-                            $cart_item); // PHPCS: XSS ok.
-                          ?>
-
-                          <div
-                            class='dsn-woocommerce-delete-item-container dsn:primary-site-background dsn:px-3 dsn:w-10 dsn:h-10 dsn:mb-2 dsn:rounded dsn:flex dsn:items-center'>
-                            <?php
-                            ob_start();
-                            dsn_icon('trash',
-                              'dsn:w-4 dsn:h-4 dsn:text-white');
-                            $trash_icon = ob_get_clean();
-
-                            echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                              'woocommerce_cart_item_remove_link',
-                              sprintf(
-                                '<a href="%s" class="remove dsn:flex dsn:items-center dsn:justify-center dsn:transition-colors dsn:cursor-pointer" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
-                                esc_url(wc_get_cart_remove_url($cart_item_key)),
-                                esc_html__('Remove this item',
-                                  'woocommerce'),
-                                esc_attr($product_id),
-                                esc_attr($_product->get_sku()),
-                                $trash_icon
-                              ),
-                              $cart_item_key
-                            );
-                            ?>
-                          </div>
-                      </td>
-
-                      <td
-                        class="product-item-price flex-grow-0 dsn:text-right dsn:align-middle"
-                        data-title="<?php
-                        esc_attr_e('Item Price', 'woocommerce'); ?>">
-                        <div
-                          class="dsn:flex dsn:flex-row dsn:items-center dsn:justify-end dsn:gap-2">
-                          <?php
-                          $regular_price = $_product->get_regular_price();
-                          $active_price  = $_product->get_price(); // This already has the discount applied in the cart context
-
-                          if ( (float) $active_price < (float) $regular_price ) {
-                              echo '<del aria-hidden="true">' . wc_price( $regular_price ) . '</del>';
-                              echo '<ins>' . wc_price( $active_price ) . '</ins>';
-                          } else {
-                              echo wc_price( $active_price );
-                          }
+                          echo apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item); // PHPCS: XSS ok.
                           ?>
                         </div>
                       </td>
 
-                      <td
-                        class="product-subtotal flex-grow-0 dsn:text-right text-gray-600 hover:text-gray-800 dsn:align-middle"
-                        data-title="<?php
-                        esc_attr_e('Subtotal', 'woocommerce'); ?>">
-                        <?php
-                        echo get_woocommerce_currency_symbol()
-                          .number_format($_product->get_price()
-                            * $cart_item['quantity'], 2, '.', ''); ?>
+                      <td class="product-subtotal dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
+                        <span class="dsn:text-sm dsn:font-semibold dsn:text-gray-900">
+                          <?php
+                          echo wc_price($_product->get_price() * $cart_item['quantity']);
+                          ?>
+                        </span>
                       </td>
                     </tr>
                     <?php
@@ -238,41 +216,26 @@ global $dssSiteLanguage;
                 <?php
                 do_action('woocommerce_cart_contents'); ?>
 
-                <tr>
-                  <td colspan="6" class="actions">
-                    <!-- <?php
-                    if (wc_coupons_enabled()) :
-                      ?>
-                              <div class="coupon">
-                                  <label for="coupon_code">
-                                      <?php
-                      esc_html_e('Coupon:', 'woocommerce');
-                      ?>
-                                  </label>
-                                  <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php
-                      esc_attr_e('Coupon code', 'woocommerce'); ?>" />
-                                  <button type="submit" class="button" name="apply_coupon" value="<?php
-                      esc_attr_e('Apply coupon', 'woocommerce'); ?>">
-                                      <?php
-                      esc_attr_e('Apply coupon', 'woocommerce'); ?>
-                                  </button>
-                                  <?php
-                      do_action('woocommerce_cart_coupon'); ?>
-                              </div>
-                              <?php
-                    endif; ?> -->
+                <tr class="dsn:border-t dsn:border-gray-200">
+                  <td class="dsn:w-[60px] dsn:px-4 dsn:py-3"></td>
+                  <td colspan="4" class="actions dsn:px-4">
+                    <div class="dsn:flex dsn:justify-between dsn:items-center dsn:gap-4">
+                      <?php if (wc_coupons_enabled()) : ?>
+                        <div class="dsn:flex dsn:gap-3 dsn:flex-1">
+                          <div class="dsn:flex dsn:justify-between dsn:py-2 dsn:px-2 dsn:border dsn:border-gray-200 dsn:items-center dsn:gap-2">
+                            <input type="text" name="coupon_code" class="code dsn:px-4 dsn:text-sm dsn:uppercase" id="coupon_code" value="" placeholder="<?php esc_attr_e('Coupon code', 'woocommerce'); ?>" />
+                            <button type="submit" class="button coupon-link" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'woocommerce'); ?>"><?php esc_html_e('Apply coupon', 'woocommerce'); ?></button>
+                          </div>
+                          <?php do_action('woocommerce_cart_coupon'); ?>
+                        </div>
+                      <?php endif; ?>
+                      <div class="dsn:flex dsn:justify-end">
+                        <button type="submit" class="button wc_update_cart" name="update_cart" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Update cart', 'woocommerce'); ?></button>
+                      </div>
+                    </div>
 
-                    <button type="submit" class="button wc_update_cart"
-                            name="update_cart" value="<?php
-                    esc_attr_e('Update cart', 'woocommerce'); ?>"><?php
-                      esc_html_e('Update cart', 'woocommerce'); ?></button>
-
-                    <?php
-                    do_action('woocommerce_cart_actions'); ?>
-
-                    <?php
-                    wp_nonce_field('woocommerce-cart',
-                      'woocommerce-cart-nonce'); ?>
+                    <?php do_action('woocommerce_cart_actions'); ?>
+                    <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
                   </td>
                 </tr>
 
@@ -356,7 +319,8 @@ global $dssSiteLanguage;
           </div>
         </div>
 
-        <div class="cart-page-wrapper-right dsn:md:p-10 dsn:md:rounded dsn:md:border dsn:md:border-gray-200 dsn:md:w-1/3">
+        <!-- <div class="cart-page-wrapper-right dsn:md:p-10 dsn:md:rounded dsn:md:border dsn:md:border-gray-200 dsn:md:w-1/3"> -->
+        <div class="dsn:w-full dsn:md:w-1/3 dsn:mt-8 dsn:md:mt-0">
           <!-- Order Summary -->
           <div class="dsn-order-summary-wrapper">
               <?php

@@ -44,7 +44,7 @@ $calculator_text          = '';
 				<?php endforeach; ?>
 			</ul>
 			<?php if ( is_cart() ) : ?>
-				<p class="woocommerce-shipping-destination text-lg">
+				<p class="woocommerce-shipping-destination text-lg dsn:text-sm dsn:font-medium">
 					<?php
 					if ( $formatted_destination ) {
 						// Translators: $s shipping destination.
