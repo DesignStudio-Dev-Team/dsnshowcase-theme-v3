@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.14",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.14",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.14/dsnshowcase.zip",
+  "version": "v3.7.15",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.15",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.15/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-05-27",
+  "last_updated": "2026-06-23",
   "sections": {
-    "changelog": "Merge pull request #250 from DesignStudio-Dev-Team/fatal-error-on-woocommerce-order-received-page-fix\n\nFatal Error on WooCommerce Order Received Page - Fix"
+    "changelog": "Merge pull request #251 from DesignStudio-Dev-Team/update-mobile-menu\n\nUpdate mobile menu"
   }
 }
