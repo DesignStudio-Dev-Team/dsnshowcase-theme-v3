@@ -82,7 +82,7 @@ do_action('woocommerce_before_shipping_calculator'); ?>
 			<?php endif; ?>
 
 			<?php if (apply_filters('woocommerce_shipping_calculator_enable_postcode', true)) : ?>
-				<div class="coupon under-proceed border rounded w-1/2 h-12">
+				<div class="coupon under-proceed border rounded w-1/2 h-12 dsn:pl-2 dsn:border dsn:border-gray-200 ">
 					<input type="text" class="input-text text-lg px-3 ml-1 uppercase" name="calc_shipping_postcode" id="calc_shipping_postcode" value="<?php echo esc_attr(WC()->customer->get_shipping_postcode()); ?>" placeholder="<?php esc_attr_e('Zip Code', 'woocommerce'); ?>" style="width: 100%" />
 					<button type="submit" class="button" name="calc_shipping" value="1"><?php esc_attr_e('Update', 'woocommerce'); ?></button>
 				</div>

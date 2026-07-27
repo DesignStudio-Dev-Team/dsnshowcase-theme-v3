@@ -45,10 +45,11 @@ if(function_exists('get_field')) {
             <a class="cart-icon dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:h-[40px]" href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20"><path class="dsn:stroke-current dsn:fill-current" d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg><span class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
 			 <?php } ?>
 
+			<?php echo apply_filters( 'dsn_header_extra_icons', '' ); ?>
             </div>
 			</div>
 		</div>
-		
+
     </div>
 	<div class="primary-nav dsn:block dsn:relative dsn:mx-auto dsn:relative">
 	
@@ -81,6 +82,7 @@ if(function_exists('get_field')) {
 								
 								<a class="cart dsn:relative dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:py-2 dsn:px-4 dsn:rounded-full dsn:flex dsn:items-center dsn:justify-center dsn:hidden dsn:2xl:flex dsn:h-[40px]" href="<?php echo wc_get_cart_url(); ?>" title="Cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="dsn:stroke-current dsn:fill-current" width="20" height="20"><path class="dsn:stroke-current dsn:fill-current" d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg><span class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
 								  <?php } ?>
+									<?php echo apply_filters( 'dsn_header_extra_icons', '' ); ?>
 									<div class="dsn-desktop-hamburger dsn:cursor-pointer  dsn:cursor-pointer dsn:text-white dsn:bg-[#0988c2] dsn:p-2 dsn:rounded-full"><span style="width: 25.927px; height: auto; display: none;"></span><svg class="dsn:stroke-current dsn:fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" preserveAspectRatio="xMidYMid meet"><defs> <clipPath id="__lottie_element_2"><rect width="24" height="24" x="0" y="0"></rect></clipPath></defs><g class="dsn:stroke-current dsn:fill-current" clip-path="url(#__lottie_element_2)"><g transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(0.7071067690849304,0.7071067690849304,-0.7071067690849304,0.7071067690849304,12,18)"><path class="dsn:stroke-current dsn:fill-current" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0"  stroke-opacity="1" stroke-width="2" d=" M6,-6 C6,-6 -6,6 -6,6"></path></g><g opacity="1" transform="matrix(0.7071067690849304,0.7071067690849304,-0.7071067690849304,0.7071067690849304,12,12)"><path class="dsn:stroke-current dsn:fill-current" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0" stroke="rgb(0,0,0)" stroke-opacity="1" stroke-width="2" d=" M6,-6 C6,-6 -6,6 -6,6"></path></g><g opacity="1" transform="matrix(0.7071067690849304,0.7071067690849304,-0.7071067690849304,0.7071067690849304,12,6)"><path class="dsn:stroke-current dsn:fill-current" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0" stroke-opacity="1" stroke-width="2" d=" M6,-6 C6,-6 -6,6 -6,6"></path></g></g></g></svg></div>
 
 							<div class="the-navigation dsn:hidden dsn:absolute dsn:right-0 dsn:shadow-md dsn:top-full dsn:bg-white dsn:py-4">
@@ -120,7 +122,7 @@ if(function_exists('get_field')) {
 	</div>
 </header>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header-3.php"); ?>
+<?php get_template_part( 'templates/mobile-header' ); ?>
 
 <style>
 @media only screen and (min-width: 1024px) {
@@ -292,19 +294,6 @@ if(function_exists('get_field')) {
 		.header3.sticky-header-active .cart-search-combo { 
 		display: flex;
 		}
-		.header3 .nav-close svg {
-			display: none;
-		}
-		.header3 .nav-close span {
-			display: flex !important;
-			height: 28.927px !important;
-        	width: 30px !important;
-			align-items: center;
-		}
-		.header3 .dsn-mobile-hamburger {
-			height: 46px;
-		}
-		
 		header.header3 ul li ul a:hover {
 			opacity: 0.80;
 		}
@@ -345,69 +334,6 @@ if(function_exists('get_field')) {
 			top: 50%;
 			transform: translateY(-50%);
 		}
-		.dsn-mobile-hamburger > svg {
-            visibility: visible;
-            opacity: 1;
-            transform: rotate(0deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-        }
-        .dsn-mobile-hamburger > a {
-            visibility: hidden;
-            opacity: 0;
-            transform: rotate(180deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-        }
-        .dsn-mobile-hamburger.is-active > svg {
-            visibility: hidden;
-            transform: rotate(90deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-            opacity: 0;
-        }
-        .dsn-mobile-hamburger.is-active > a {
-            visibility: visible;
-            width: 30px;
-            height: 30px;
-            transform: rotate(90deg);
-            transition: visibility 0s, opacity 0.5s linear, transform 2s;
-            opacity: 1;
-        }
-        .nav-close span::before {
-		  cursor: pointer;
-		  border-radius: 1px;
-		  height: 3px;
-		  width: 30px;
-		  background: #fff;
-		  position: absolute;
-		  display: block;
-		  content: '';
-          transition: transform 0.5s;
-		  transform: rotate(-45deg);
-		}
-		.nav-close span::after {
-		  cursor: pointer;
-		  border-radius: 1px;
-		  height: 3px;
-		  width: 30px;
-		  background: #fff;
-		  position: absolute;
-		  display: block;
-		  content: '';
-          transition: transform 0.5s;
-		  transform: rotate(45deg);
-		}
-        .dsn-desktop-hamburger.is-active > .nav-close span::after {
-            transform: rotate(-45deg);
-            transition: transform 0.5s;
-        }
-        .dsn-desktop-hamburger.is-active > .nav-close span::before {
-            transform: rotate(45deg);
-            transition: transform 0.5s;
-        }
-        .is-active > a span {
-            position: absolute;
-            top: 36px;
-        }
-		
 }
 @media only screen and (min-width: 2460px) {
 	
@@ -528,20 +454,6 @@ if(function_exists('get_field')) {
                   });
                 }
 
-                $('.dsn-mobile-hamburger svg').click(function() {
-                  $('.dsn-mobile-hamburger').toggleClass('is-active');
-				  $(this).toggleClass("nav-close");
-                  $('.the-navigation').fadeToggle();
-				  jQuery('#dsnHTML').toggleClass('dsnOpen');
-            		jQuery('.the-navigation').toggleClass('dsnMobileOpen');
-                });
-				 $('.dsn-mobile-hamburger .nav-close').click(function() {
-                  $('.dsn-mobile-hamburger').toggleClass('is-active');
-				  $('.dsn-mobile-hamburger').toggleClass('nav-close');
-				  jQuery('#dsnHTML').toggleClass('dsnOpen');
-				  jQuery('.the-navigation').toggleClass('dsnMobileOpen');
-                  $('.the-navigation').fadeToggle();
-                });
 				
 				$('div.form-wrapper').hide();
 
@@ -605,7 +517,6 @@ if(function_exists('get_field')) {
 							$('.primary-nav').removeClass("dsn:container");
 							$('.nav-container').addClass("dsn:container");
 							$('.the-navigation').hide();
-							$('.dsn-mobile-hamburger').removeClass('nav-close');
 						}
 					});
 				}

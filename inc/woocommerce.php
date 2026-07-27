@@ -1,5 +1,7 @@
 <?php 
 
+require_once __DIR__ . '/woocommerce-cta-settings-tab.php';
+
 //remove the need for a sidebar in products / woocommerce templates
 function remove_sidebar() {
     if (class_exists('WooCommerce')) {
@@ -179,10 +181,16 @@ function dsn_handle_product_action_buttons() {
         }
 
         $product_id = $product->get_id();
+        $is_variable = $product->is_type('variable');
 
         if (dsn_show_reserve_btn($product_id)){
-            add_action('woocommerce_single_product_summary', 'dsn_reserve_button');
-            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+            add_action('woocommerce_single_product_summary', 'dsn_reserve_button', $is_variable ? 35 : 10);
+            if ($is_variable) {
+                remove_action('woocommerce_after_variations_form', 'woocommerce_single_variation_add_to_cart_button', 20);
+                add_action('woocommerce_after_variations_form', 'dsn_render_variation_hidden_inputs_only', 20);
+            } else {
+                remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+            }
         }
 
         if(dsn_show_get_info_btn($product_id)) {
@@ -190,9 +198,27 @@ function dsn_handle_product_action_buttons() {
         }
 
         if(!dsn_show_add_to_cart($product_id)){
-            remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+            if ($is_variable) {
+                remove_action('woocommerce_after_variations_form', 'woocommerce_single_variation_add_to_cart_button', 20);
+                add_action('woocommerce_after_variations_form', 'dsn_render_variation_hidden_inputs_only', 20);
+            } else {
+                remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+            }
         }
     }
+}
+
+function dsn_render_variation_hidden_inputs_only() {
+    global $product;
+    if (!$product) {
+        return;
+    }
+    $product_id = absint($product->get_id());
+    echo '<div class="woocommerce-variation-add-to-cart variations_button dsn-variation-hidden-inputs-only">';
+    echo '<input type="hidden" name="add-to-cart" value="' . $product_id . '" />';
+    echo '<input type="hidden" name="product_id" value="' . $product_id . '" />';
+    echo '<input type="hidden" name="variation_id" class="variation_id" value="0" />';
+    echo '</div>';
 }
 
 add_action('woocommerce_single_product_summary', 'dsn_handle_product_action_buttons', 1);
@@ -216,6 +242,10 @@ function dsn_reserve_button() {
     // Get reserve icon from Syndified settings
     $reserve_icon = function_exists('syndified_get_reserve_icon') ? syndified_get_reserve_icon() : 'reserve';
     $button_title = $translatedText->woocommerce_cart->reserve_button;
+
+    if (function_exists('dsn_get_cta_button_text')) {
+        $button_title = dsn_get_cta_button_text($postID) ?: $button_title;
+    }
 
     // Check if Syndified modal is available
     $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();
@@ -265,6 +295,10 @@ function dsn_get_info_button() {
     // Get info icon from Syndified settings
     $get_info_icon = function_exists('syndified_get_info_icon') ? syndified_get_info_icon() : 'info';
     $button_title = $translatedText->woocommerce_cart->info_button;
+
+    if (function_exists('dsn_get_cta_button_text')) {
+        $button_title = dsn_get_cta_button_text($postID) ?: $button_title;
+    }
 
     // Check if Syndified modal is available
     $use_modal = function_exists('syndified_is_cta_modal_available') && syndified_is_cta_modal_available();

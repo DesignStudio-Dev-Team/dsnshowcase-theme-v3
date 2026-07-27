@@ -1,11 +1,11 @@
 {
-  "version": "v3.6.6",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.6.6",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.6.6/dsnshowcase.zip",
+  "version": "v3.7.16",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.16",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.16/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-02-05",
+  "last_updated": "2026-06-25",
   "sections": {
-    "changelog": "Update theme version info for v3.5.66"
+    "changelog": "Merge pull request #252 from DesignStudio-Dev-Team/add-padding-bottom-android-navbar\n\nAdds Android navbar bottom padding"
   }
 }

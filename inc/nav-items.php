@@ -9,6 +9,10 @@ function dsn_nav_class($classes, $item){
 
  add_filter( 'nav_menu_css_class', 'dsn_add_class_nav_primary', 10, 3 );
 function dsn_add_class_nav_primary( $atts, $item, $args ) {
+   // Don't inject desktop Tailwind classes into the mobile menu.
+   if ( isset( $args->menu_class ) && $args->menu_class === 'dsn-mm-nav' ) {
+       return $atts;
+   }
    if($args->theme_location == "primary") {
     if ( (int) $item->menu_item_parent === 0 ) {
         $class = 'dsn:w-full mega-menu dsn:text-center dsn:hover:bg-white dsn:text-2xl dsn:relative dsn:font-bold dsn:list-none';

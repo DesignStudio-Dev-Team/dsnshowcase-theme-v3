@@ -75,6 +75,7 @@ if(function_exists('get_field')) {
 						class="the-cart-quantity dsn:relative dsn:w-6 dsn:rounded-full dsn:text-white dsn:text-center dsn:ml-1 dsn:font-bold"><?php echo WC()->cart->get_cart_contents_count(); ?></span></a>
 					<?php } ?>
 
+				<?php echo apply_filters( 'dsn_header_extra_icons', '' ); ?>
 			</div>
 		</div>
 
@@ -99,7 +100,7 @@ if(function_exists('get_field')) {
 	</div>
 </header>
 <?php include("search-form.php"); ?>
-<?php include("mobile-header.php"); ?>
+<?php get_template_part( 'templates/mobile-header' ); ?>
 <?php include("get-started.php"); ?>
 
 <style>

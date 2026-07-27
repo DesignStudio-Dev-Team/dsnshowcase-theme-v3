@@ -133,7 +133,7 @@ $social_networks = !empty($content['social_icons']) && is_array($content['social
                             <?php foreach ($social_networks as $network) : ?>
                                 <div class="dsn:flex dsn:items-center dsn:pb-10 dsn:md:pb-8 dsn:w-1/3 dsn:justify-center dsn:md:justify-start">
                                     <a href="<?php echo esc_url_raw($network['url']); ?>">
-                                        <img class="dsn:h-10 dsn:w-auto dsn:md:h-12" src="<?php echo esc_url_raw($network['icon_url']); ?>" alt="<?php echo esc_html($network['social_network']); ?>">
+                                        <?php dsn_icon( $network['social_network'] === 'Twitter' ? 'x' : $network['social_network'] , 'dsn:w-12 dsn:h-12' ); ?>
                                     </a>
                                 </div>
                             <?php endforeach; ?>
