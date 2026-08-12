@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.17",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.17",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.17/dsnshowcase.zip",
+  "version": "v3.7.18",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.18",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.18/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-07-31",
+  "last_updated": "2026-08-12",
   "sections": {
-    "changelog": "Merge pull request #254 from DesignStudio-Dev-Team/add-alt-tags-to-promotions-post-types-fix\n\nAdd alt tags to promotions post types - Fix"
+    "changelog": "Merge pull request #256 from DesignStudio-Dev-Team/show-a-button-url-override-instead-of-form-shortco-fix\n\nShow a Button URL override instead of Form Shortcode when Syndified v3 isn't active - Fix"
   }
 }
