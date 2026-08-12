@@ -1535,6 +1535,13 @@ if ( ! function_exists( 'dsn_get_term_meta' ) ) {
 if ( ! function_exists('dsn_get_cta_url') ) {
   function dsn_get_cta_url(int $productID = 0)
   {
+    if (function_exists('dsn_get_cta_button_url')) {
+      $override = dsn_get_cta_button_url($productID);
+      if ('' !== $override) {
+        return $override;
+      }
+    }
+
     // Delegate to Syndified plugin when active
     if (function_exists('syndified_get_cta_url')) {
       return syndified_get_cta_url($productID);
