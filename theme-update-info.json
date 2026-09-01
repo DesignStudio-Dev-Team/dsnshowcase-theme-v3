@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.16",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.16",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.16/dsnshowcase.zip",
+  "version": "v3.7.17",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.17",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.17/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-06-25",
+  "last_updated": "2026-07-31",
   "sections": {
-    "changelog": "Merge pull request #252 from DesignStudio-Dev-Team/add-padding-bottom-android-navbar\n\nAdds Android navbar bottom padding"
+    "changelog": "Merge pull request #254 from DesignStudio-Dev-Team/add-alt-tags-to-promotions-post-types-fix\n\nAdd alt tags to promotions post types - Fix"
   }
 }

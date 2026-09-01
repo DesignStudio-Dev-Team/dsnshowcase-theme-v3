@@ -77,9 +77,12 @@ if ($hasPDF) {
                                     <!-- start -->
 
                                     <div class="<?php if ($showForm) { ?> dsn:md:hidden <?php } ?> dsn:relative dsn:text-white dsn:md:border-8 dsn:md:border-white dsn:overflow-hidden dsn:mx-auto dsn:border">
+                                        <?php
+                                            $featured_img_id = get_post_thumbnail_id(get_the_ID());
+                                            $alt_text = get_post_meta($featured_img_id, '_wp_attachment_image_alt', true);
+                                        ?>
 
-
-                                        <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="dsn:w-full promotion-details-image" style="height:unset;" />
+                                        <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="dsn:w-full promotion-details-image" style="height:unset;" alt="<?php echo $alt_text ?>"/>
                                         <?php //the_post_thumbnail( 'full' ); 
                                         ?>
                                         <div class="dsn:absolute dsn:top-0 dsn:w-full dsn:h-full gradient_card">
@@ -172,7 +175,11 @@ if ($hasPDF) {
 
                                             <?php if (get_field('promotion_show_image_on') == 'left') { ?>
                                                 <div class="dsn:hidden dsn:md:block dsn:w-full dsn:relative dsn:text-white dsn:md:border-8 dsn:md:border-white dsn:overflow-hidden dsn:max-w-fit dsn:mx-auto dsn:border">
-                                                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="w-full promotion-details-image" style="height:unset;" />
+                                                    <?php
+                                                        $featured_img_id = get_post_thumbnail_id(get_the_ID());
+                                                        $alt_text = get_post_meta($featured_img_id, '_wp_attachment_image_alt', true);
+                                                    ?>
+                                                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="w-full promotion-details-image" style="height:unset;" alt="<?php echo $alt_text ?>"/>
                                                     <?php //the_post_thumbnail( 'full' ); 
                                                     ?>
                                                     <div class="dsn:absolute dsn:top-0 dsn:w-full dsn:h-full gradient_card">
@@ -260,8 +267,12 @@ if ($hasPDF) {
                                         <!-- start -->
                                         <?php if (get_field('promotion_show_image_on') == 'right' || !get_field('promotion_show_image_on')) { ?>
                                             <div class="dsn:hidden dsn:md:block dsn:w-full dsn:relative dsn:text-white dsn:md:border-8 dsn:md:border-white dsn:overflow-hidden dsn:max-w-fit dsn:mx-auto dsn:border">
-                                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="dsn:w-full promotion-details-image" style="height:unset;" />
-                                                <?php //the_post_thumbnail( 'full' ); 
+                                                <?php
+                                                    $featured_img_id = get_post_thumbnail_id(get_the_ID());
+                                                    $alt_text = get_post_meta($featured_img_id, '_wp_attachment_image_alt', true);
+                                                ?>
+                                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="dsn:w-full promotion-details-image" style="height:unset;" alt="<?php echo $alt_text ?>"/>
+                                                <?php //the_post_thumbnail( 'full' );
                                                 ?>
                                                 <div class="dsn:absolute dsn:top-0 dsn:w-full dsn:h-full gradient_card">
                                                     <?php
