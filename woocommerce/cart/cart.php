@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Cart Page
  *
@@ -15,11 +14,8 @@
  * @package WooCommerce\Templates
  * @version 7.9.0
  */
-
 defined('ABSPATH') || exit;
-
-do_action('woocommerce_before_cart'); 
-
+do_action('woocommerce_before_cart');
 global $dssSiteLanguage;
 ob_start();
 do_action( 'dsn_cart_after_title' );
@@ -30,26 +26,22 @@ $cart_after_title_output = ob_get_clean();
     <div class='dsn:border-b dsn:flex dsn:justify-between dsn:items-center dsn:mb-8'>
       <h1><?php the_title() ?></h1>
     </div>
-
     <div class="dsn:sm:flex dsn:gap-10 dsn:mb-12">
         <div class="cart-page-wrapper-left dsn:w-full dsn:md:w-2/3 dsn:md:flex dsn:md:flex-col dsn:gap-4">
         <?php if ($cart_after_title_output) : ?>
         <div class="dsn:px-1 dsn:py-1 dsn:bg-stihl-orange dsn:text-white dsn:text-sm  dsn:font-medium dsn:text-center">
              <?php
               echo $cart_after_title_output;
-             
+
              ?>
           </div>
           <?php endif; ?>
-
           <!-- Cart Wrapper -->
           <div class="dsn-cart-items-wrapper dsn:sm:border dsn:sm:border-gray-200 dsn:shadow-sm dsn:mb-8">
-
             <form class="woocommerce-cart-form" action="<?php
             echo esc_url(wc_get_cart_url()); ?>" method="post">
               <?php
               do_action('woocommerce_before_cart_table'); ?>
-
               <table
                 class="shop_table shop_table_responsive cart woocommerce-cart-form__contents dsn:w-full"
                 cellspacing="0">
@@ -65,7 +57,6 @@ $cart_after_title_output = ob_get_clean();
                 <tbody>
                 <?php
                 do_action('woocommerce_before_cart_contents'); ?>
-
                 <?php
                 foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item)
                 {
@@ -74,7 +65,6 @@ $cart_after_title_output = ob_get_clean();
                   $product_id
                             = apply_filters('woocommerce_cart_item_product_id',
                     $cart_item['product_id'], $cart_item, $cart_item_key);
-
                   if ($_product && $_product->exists()
                     && $cart_item['quantity'] > 0
                     && apply_filters('woocommerce_cart_item_visible', true,
@@ -90,16 +80,13 @@ $cart_after_title_output = ob_get_clean();
                       class="woocommerce-cart-form__cart-item dsn:align-middle dsn:py-4 <?php
                       echo esc_attr(apply_filters('woocommerce_cart_item_class',
                         'cart_item', $cart_item, $cart_item_key)); ?>">
-
                       <td class="product-remove dsn:px-4 dsn:align-middle dsn:py-4">
                         <?php
                           $remove_icon = function_exists('dsn_get_remove_icon') ? dsn_get_remove_icon() : 'close';
-
                           ob_start();
                           dsn_icon($remove_icon, 'dsn:w-4 dsn:h-4');
                           $remove_icon_svg = ob_get_clean();
                           $remove_icon_svg = str_replace('<svg', '<svg style="color:#d1d5db"', $remove_icon_svg);
-
                           echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                             'woocommerce_cart_item_remove_link',
                             sprintf(
@@ -114,7 +101,6 @@ $cart_after_title_output = ob_get_clean();
                           );
                         ?>
                       </td>
-
                       <td class="product-name dsn:px-4 dsn:py-4 dsn:align-middle" data-title="<?php
                         esc_attr_e('Product', 'woocommerce'); ?>">
                         <div class="dsn:flex dsn:items-start dsn:gap-4 dsn:flex-nowrap">
@@ -126,14 +112,13 @@ $cart_after_title_output = ob_get_clean();
                             $thumbnail = apply_filters('woocommerce_cart_item_thumbnail',
                               $_product->get_image('woocommerce_thumbnail', $thumbnail_args),
                               $cart_item, $cart_item_key);
-
                             if (!$product_permalink) {
                               echo $thumbnail; // PHPCS: XSS ok.
                             } else {
                               printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
                             }
                             ?>
-                          </div>  
+                          </div>
                           <div class="dsn:flex-1 dsn:space-y-2">
                             <div class="dsn:text-sm dsn:font-semibold dsn:text-gray-800 dsn:mb-2">
                               <?php
@@ -146,7 +131,6 @@ $cart_after_title_output = ob_get_clean();
                                     esc_url($product_permalink),
                                     $_product->get_name()), $cart_item, $cart_item_key));
                               }
-
                               do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
                               ?>
                             </div>
@@ -158,24 +142,40 @@ $cart_after_title_output = ob_get_clean();
                           </div>
                         </div>
                       </td>
-
                       <td class="product-item-price dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle" data-title="<?php
                         esc_attr_e('Item Price', 'woocommerce'); ?>">
                         <div class="dsn:flex dsn:items-center dsn:justify-start dsn:gap-2 dsn:flex-wrap dsn:text-sm">
                           <?php
+                          // Get the raw (unadjusted) prices, used only to detect whether the item is on sale.
                           $regular_price = $_product->get_regular_price();
                           $active_price  = $_product->get_price();
 
-                          if ((float) $active_price < (float) $regular_price) {
-                            echo '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price) . '</del>';
-                            echo '<ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price) . '</ins>';
+                          // Adjust both prices for tax the same way WooCommerce's own cart
+                          // does (WC_Cart::get_product_price()), i.e. respecting the
+                          // WooCommerce > Settings > Tax > "Display prices during cart and
+                          // checkout" option, instead of showing the raw stored price.
+                          if ($_product->is_taxable()) {
+                            if (WC()->cart->display_prices_including_tax()) {
+                              $regular_price_display = wc_get_price_including_tax($_product, array('price' => $regular_price));
+                              $active_price_display  = wc_get_price_including_tax($_product, array('price' => $active_price));
+                            } else {
+                              $regular_price_display = wc_get_price_excluding_tax($_product, array('price' => $regular_price));
+                              $active_price_display  = wc_get_price_excluding_tax($_product, array('price' => $active_price));
+                            }
                           } else {
-                            echo '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price) . '</span>';
+                            $regular_price_display = $regular_price;
+                            $active_price_display  = $active_price;
+                          }
+
+                          if ((float) $active_price < (float) $regular_price) {
+                            echo '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price_display) . '</del>';
+                            echo '<ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</ins>';
+                          } else {
+                            echo '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</span>';
                           }
                           ?>
                         </div>
                       </td>
-
                       <td class="product-quantity dsn:px-4 dsn:py-4 dsn:align-middle" data-title="<?php
                         esc_attr_e('Quantity', 'woocommerce'); ?>">
                         <div class="dsn:flex dsn:items-center dsn:justify-start dsn:gap-2 dsn:flex-wrap">
@@ -199,11 +199,13 @@ $cart_after_title_output = ob_get_clean();
                           ?>
                         </div>
                       </td>
-
                       <td class="product-subtotal dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
                         <span class="dsn:text-sm dsn:font-semibold dsn:text-gray-900">
                           <?php
-                          echo wc_price($_product->get_price() * $cart_item['quantity']);
+                          // Use WooCommerce's own cart subtotal calculation so the line total
+                          // respects the "Display prices during cart and checkout" tax setting,
+                          // instead of multiplying the raw product price by quantity.
+                          echo WC()->cart->get_product_subtotal($_product, $cart_item['quantity']); // PHPCS: XSS ok.
                           ?>
                         </span>
                       </td>
@@ -212,10 +214,8 @@ $cart_after_title_output = ob_get_clean();
                   }
                 }
                 ?>
-
                 <?php
                 do_action('woocommerce_cart_contents'); ?>
-
                 <tr class="dsn:border-t dsn:border-gray-200">
                   <td class="dsn:w-[60px] dsn:px-4 dsn:py-3"></td>
                   <td colspan="4" class="actions dsn:px-4">
@@ -233,12 +233,10 @@ $cart_after_title_output = ob_get_clean();
                         <button type="submit" class="button wc_update_cart" name="update_cart" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Update cart', 'woocommerce'); ?></button>
                       </div>
                     </div>
-
                     <?php do_action('woocommerce_cart_actions'); ?>
                     <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
                   </td>
                 </tr>
-
                 <?php
                 do_action('woocommerce_after_cart_contents'); ?>
                 </tbody>
@@ -278,7 +276,6 @@ $cart_after_title_output = ob_get_clean();
                   jQuery(document).ready(function($) {
                     if (typeof $.fn.slick !== 'undefined') {
                       const $slider = jQuery('.cart-slider');
-
                       $slider.slick({
                         cssEase: 'ease',
                         arrows: true,
@@ -318,7 +315,6 @@ $cart_after_title_output = ob_get_clean();
             wp_reset_query(); ?>
           </div>
         </div>
-
         <!-- <div class="cart-page-wrapper-right dsn:md:p-10 dsn:md:rounded dsn:md:border dsn:md:border-gray-200 dsn:md:w-1/3"> -->
         <div class="dsn:w-full dsn:md:w-1/3 dsn:mt-8 dsn:md:mt-0">
           <!-- Order Summary -->
@@ -336,5 +332,4 @@ $cart_after_title_output = ob_get_clean();
         </div>
     </div>
 </div>
-
 <?php do_action('woocommerce_after_cart'); ?>
