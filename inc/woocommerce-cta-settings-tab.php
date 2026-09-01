@@ -120,6 +120,12 @@ if ( ! function_exists( 'dsn_cta_get_syndified_meta_array' ) ) {
     }
 }
 
+if ( ! function_exists( 'dsn_cta_has_syndified_v3' ) ) {
+    function dsn_cta_has_syndified_v3(): bool {
+        return function_exists( 'syndified_is_cta_modal_available' );
+    }
+}
+
 if ( ! function_exists( 'dsn_cta_read_setting' ) ) {
     function dsn_cta_read_setting( array $meta, string $base, array $suffix_candidates ): string {
         $seen = [];
@@ -172,6 +178,26 @@ if ( ! function_exists( 'dsn_get_cta_form_shortcode' ) ) {
         return dsn_cta_read_setting(
             $meta,
             'dealer_cta_form_shortcode_setting',
+            [ $lang_code, strtolower( get_locale() ) ]
+        );
+    }
+}
+
+if ( ! function_exists( 'dsn_get_cta_button_url' ) ) {
+    function dsn_get_cta_button_url( int $productID, string $lang_code = '' ): string {
+        if ( $productID <= 0 ) {
+            return '';
+        }
+        if ( '' === $lang_code ) {
+            $lang_code = dsn_cta_current_lang_code();
+        }
+        if ( '' === $lang_code ) {
+            return '';
+        }
+        $meta = dsn_cta_get_syndified_meta_array( $productID );
+        return dsn_cta_read_setting(
+            $meta,
+            'dealer_cta_url_setting',
             [ $lang_code, strtolower( get_locale() ) ]
         );
     }
@@ -237,11 +263,19 @@ function dsn_cta_render_product_data_panel() {
             <?php endforeach; ?>
         </div>
 
+        <?php $has_syndified_v3 = dsn_cta_has_syndified_v3(); ?>
+
         <div class="options_group">
             <p class="form-field">
-                <strong><?php esc_html_e( 'CTA Form Shortcode Overrides', 'dsnshowcase' ); ?></strong><br>
+                <strong>
+                    <?php echo esc_html( $has_syndified_v3
+                        ? __( 'CTA Form Shortcode Overrides', 'dsnshowcase' )
+                        : __( 'CTA Button URL Overrides', 'dsnshowcase' ) ); ?>
+                </strong><br>
                 <span class="description">
-                    <?php esc_html_e( 'Optional. Shortcode rendered inside the Syndified CTA modal for this product. The modal itself is rendered by the Syndified plugin.', 'dsnshowcase' ); ?>
+                    <?php echo esc_html( $has_syndified_v3
+                        ? __( 'Optional. Shortcode rendered inside the Syndified CTA modal for this product. The modal itself is rendered by the Syndified plugin.', 'dsnshowcase' )
+                        : __( 'Optional. Destination the reserve / get-info button links to for this product. Leave empty to use the default CTA URL.', 'dsnshowcase' ) ); ?>
                 </span>
             </p>
             <?php foreach ( $languages as $lang ) :
@@ -249,24 +283,42 @@ function dsn_cta_render_product_data_panel() {
                 $label_str = $lang['label'];
                 $value     = dsn_cta_read_setting(
                     $meta,
-                    'dealer_cta_form_shortcode_setting',
+                    $has_syndified_v3 ? 'dealer_cta_form_shortcode_setting' : 'dealer_cta_url_setting',
                     [ $lang_code, strtolower( $lang['full_locale'] ) ]
                 );
-                $field_id  = 'dsn_cta_form_shortcode_' . sanitize_key( $lang_code );
-                $field_label = $multilingual
-                    ? sprintf( __( 'Form Shortcode (%s)', 'dsnshowcase' ), $label_str )
-                    : __( 'Form Shortcode', 'dsnshowcase' );
+                $field_id  = ( $has_syndified_v3 ? 'dsn_cta_form_shortcode_' : 'dsn_cta_button_url_' ) . sanitize_key( $lang_code );
+                if ( $has_syndified_v3 ) {
+                    $field_label = $multilingual
+                        ? sprintf( __( 'Form Shortcode (%s)', 'dsnshowcase' ), $label_str )
+                        : __( 'Form Shortcode', 'dsnshowcase' );
+                } else {
+                    $field_label = $multilingual
+                        ? sprintf( __( 'Button URL (%s)', 'dsnshowcase' ), $label_str )
+                        : __( 'Button URL', 'dsnshowcase' );
+                }
                 ?>
                 <p class="form-field">
                     <label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field_label ); ?></label>
-                    <textarea
-                        rows="3"
-                        class="short"
-                        style="width: 50%;"
-                        id="<?php echo esc_attr( $field_id ); ?>"
-                        name="dsn_cta_form_shortcode[<?php echo esc_attr( $lang_code ); ?>]"
-                        placeholder="<?php echo esc_attr( '[gravityform id="1" title="false" description="false"]' ); ?>"
-                    ><?php echo esc_textarea( $value ); ?></textarea>
+                    <?php if ( $has_syndified_v3 ) : ?>
+                        <textarea
+                            rows="3"
+                            class="short"
+                            style="width: 50%;"
+                            id="<?php echo esc_attr( $field_id ); ?>"
+                            name="dsn_cta_form_shortcode[<?php echo esc_attr( $lang_code ); ?>]"
+                            placeholder="<?php echo esc_attr( '[gravityform id="1" title="false" description="false"]' ); ?>"
+                        ><?php echo esc_textarea( $value ); ?></textarea>
+                    <?php else : ?>
+                        <input
+                            type="url"
+                            class="short"
+                            style="width: 50%;"
+                            id="<?php echo esc_attr( $field_id ); ?>"
+                            name="dsn_cta_button_url[<?php echo esc_attr( $lang_code ); ?>]"
+                            value="<?php echo esc_attr( $value ); ?>"
+                            placeholder="<?php esc_attr_e( 'https://example.com/contact', 'dsnshowcase' ); ?>"
+                        />
+                    <?php endif; ?>
                 </p>
             <?php endforeach; ?>
         </div>
@@ -283,8 +335,9 @@ function dsn_cta_save_product_data_panel( $post_id ) {
 
     $has_button_text    = isset( $_POST['dsn_cta_button_text'] ) && is_array( $_POST['dsn_cta_button_text'] );
     $has_form_shortcode = isset( $_POST['dsn_cta_form_shortcode'] ) && is_array( $_POST['dsn_cta_form_shortcode'] );
+    $has_button_url     = isset( $_POST['dsn_cta_button_url'] ) && is_array( $_POST['dsn_cta_button_url'] );
 
-    if ( ! $has_button_text && ! $has_form_shortcode ) {
+    if ( ! $has_button_text && ! $has_form_shortcode && ! $has_button_url ) {
         return;
     }
 
@@ -309,6 +362,18 @@ function dsn_cta_save_product_data_panel( $post_id ) {
                 continue;
             }
             $meta->{ 'dealer_cta_form_shortcode_setting_' . $suffix } = (string) $value;
+        }
+    }
+
+    if ( $has_button_url ) {
+        $submitted = wp_unslash( $_POST['dsn_cta_button_url'] );
+        foreach ( $submitted as $lang_code => $value ) {
+            $suffix = sanitize_key( (string) $lang_code );
+            if ( '' === $suffix ) {
+                continue;
+            }
+            $value = trim( (string) $value );
+            $meta->{ 'dealer_cta_url_setting_' . $suffix } = '' === $value ? '' : esc_url_raw( $value );
         }
     }
 
