@@ -170,14 +170,14 @@ $cart_after_title_output = ob_get_clean();
                             ? 'wc_get_price_including_tax'
                             : 'wc_get_price_excluding_tax';
 
-                          $regular_price_display = $to_display($_product, array('price' => $regular_price));
-                          $active_price_display  = $to_display($_product, array('price' => $active_price));
+                          $active_price_display = $to_display($_product, array('price' => $active_price));
 
                           if ((float) $active_price < (float) $regular_price) {
-                            echo '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price_display) . '</del>';
-                            echo '<ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</ins>';
+                            $regular_price_display = $to_display($_product, array('price' => $regular_price));
+                            echo apply_filters('woocommerce_cart_item_price', '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price_display) . '</del><span class="screen-reader-text">' . esc_html__('Original price', 'woocommerce') . '</span>', $cart_item, $cart_item_key); // PHPCS: XSS ok.
+                            echo apply_filters('woocommerce_cart_item_price', '<span class="screen-reader-text">' . esc_html__('Sale price', 'woocommerce') . '</span><ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</ins>', $cart_item, $cart_item_key); // PHPCS: XSS ok.
                           } else {
-                            echo '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</span>';
+                            echo apply_filters('woocommerce_cart_item_price', '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</span>', $cart_item, $cart_item_key); // PHPCS: XSS ok.
                           }
                           ?>
                         </div>
