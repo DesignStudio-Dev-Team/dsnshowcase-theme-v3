@@ -27,6 +27,7 @@ if ($bar_position == 'bottom') {
 
 
 <div
+    id="hero-block-<?php echo esc_attr($block_id); ?>"
     class="dsn:container dsn:mx-auto dsn:grid dsn:grid-cols-1 dsn:mb-15 dsn:px-4 dsn:md:px-0">
     
 
@@ -81,7 +82,7 @@ if ($bar_position == 'bottom') {
     <?php
 
     if (have_rows('hero_2_content', $block_id)): ?> 
-        <div id="hero-block-<?php echo $block_id; ?>" class="dsn:flex dsn:w-full dsn:flex-col dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-3 dsn:md:<?php echo $bottom_row_order; ?>">
+        <div class="dsn:flex dsn:w-full dsn:flex-col dsn:md:flex-row dsn:flex-grow-1 dsn:basis-full dsn:py-2 dsn:gap-4 dsn:justify-center dsn:items-center dsn:px-0 dsn:md:px-0 dsn:col-span-1 dsn:sm:col-span-2 dsn:md:col-span-3 dsn:order-3 dsn:md:<?php echo $bottom_row_order; ?>">
         <?php 
         while (have_rows('hero_2_content', $block_id)):
             the_row();
