@@ -166,11 +166,18 @@ $cart_after_title_output = ob_get_clean();
                           $regular_price = $_product->get_regular_price();
                           $active_price  = $_product->get_price();
 
+                          $to_display = WC()->cart->display_prices_including_tax()
+                            ? 'wc_get_price_including_tax'
+                            : 'wc_get_price_excluding_tax';
+
+                          $active_price_display = $to_display($_product, array('price' => $active_price));
+
                           if ((float) $active_price < (float) $regular_price) {
-                            echo '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price) . '</del>';
-                            echo '<ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price) . '</ins>';
+                            $regular_price_display = $to_display($_product, array('price' => $regular_price));
+                            echo apply_filters('woocommerce_cart_item_price', '<del aria-hidden="true" class="dsn:text-gray-500 dsn:font-medium">' . wc_price($regular_price_display) . '</del><span class="screen-reader-text">' . esc_html__('Original price', 'woocommerce') . '</span>', $cart_item, $cart_item_key);
+                            echo apply_filters('woocommerce_cart_item_price', '<span class="screen-reader-text">' . esc_html__('Sale price', 'woocommerce') . '</span><ins class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</ins>', $cart_item, $cart_item_key);
                           } else {
-                            echo '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price) . '</span>';
+                            echo apply_filters('woocommerce_cart_item_price', '<span class="dsn:text-green-800 dsn:font-medium">' . wc_price($active_price_display) . '</span>', $cart_item, $cart_item_key);
                           }
                           ?>
                         </div>
@@ -203,7 +210,7 @@ $cart_after_title_output = ob_get_clean();
                       <td class="product-subtotal dsn:px-4 dsn:py-4 dsn:text-left dsn:align-middle" data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>">
                         <span class="dsn:text-sm dsn:font-semibold dsn:text-gray-900">
                           <?php
-                          echo wc_price($_product->get_price() * $cart_item['quantity']);
+                          echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key);
                           ?>
                         </span>
                       </td>
