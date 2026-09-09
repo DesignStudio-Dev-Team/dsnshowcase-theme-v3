@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.18",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.18",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.18/dsnshowcase.zip",
+  "version": "v3.7.19",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.19",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.19/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-08-12",
+  "last_updated": "2026-09-09",
   "sections": {
-    "changelog": "Merge pull request #256 from DesignStudio-Dev-Team/show-a-button-url-override-instead-of-form-shortco-fix\n\nShow a Button URL override instead of Form Shortcode when Syndified v3 isn't active - Fix"
+    "changelog": "Merge pull request #257 from DesignStudio-Dev-Team/dspuneet\n\nDspuneet"
   }
 }
