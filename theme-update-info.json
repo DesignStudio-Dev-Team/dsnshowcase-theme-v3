@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.19",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.19",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.19/dsnshowcase.zip",
+  "version": "v3.7.20",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.20",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.20/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-09-09",
+  "last_updated": "2026-09-22",
   "sections": {
-    "changelog": "Merge pull request #257 from DesignStudio-Dev-Team/dspuneet\n\nDspuneet"
+    "changelog": "Merge pull request #263 from DesignStudio-Dev-Team/fix/product-search-shop-archive-template\n\nFix product search falling back to the shop archive template"
   }
 }
