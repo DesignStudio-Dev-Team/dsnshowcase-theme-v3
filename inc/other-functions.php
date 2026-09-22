@@ -1471,6 +1471,17 @@ function prioritize_products($orderby, $query) {
 }
 add_filter('posts_orderby', 'prioritize_products', 10, 2);
 
+function prefer_search_template_over_product_shop_archive($template) {
+    if (!is_search()) {
+        return $template;
+    }
+
+    $searchTemplate = get_search_template();
+
+    return $searchTemplate ?: $template;
+}
+add_filter('template_include', 'prefer_search_template_over_product_shop_archive', 20);
+
 
 
 //prevent emails being sent to site admin on every plugin update
