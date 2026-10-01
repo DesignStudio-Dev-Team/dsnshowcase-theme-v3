@@ -985,3 +985,5 @@ function dsn_render_upsell_card($p) {
 add_action('wp', function () {
     remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 });
+
+remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display');
