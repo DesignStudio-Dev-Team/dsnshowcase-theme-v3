@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.21",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.21",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.21/dsnshowcase.zip",
+  "version": "v3.7.22",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.22",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.22/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-10-07",
+  "last_updated": "2026-10-28",
   "sections": {
-    "changelog": "Merge pull request #265 from DesignStudio-Dev-Team/read-syndified-site-settings-through-plugin\n\nRead Syndified site settings through the plugin"
+    "changelog": "Merge pull request #266 from DesignStudio-Dev-Team/update-mobile-menu\n\nUpdate the mobile menu: keep its CSS when WP Rocket removes unused CSS"
   }
 }
