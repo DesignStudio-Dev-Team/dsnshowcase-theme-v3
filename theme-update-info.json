@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.22",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.22",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.22/dsnshowcase.zip",
+  "version": "v3.7.23",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.23",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.23/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
   "last_updated": "2026-10-28",
   "sections": {
-    "changelog": "Merge pull request #266 from DesignStudio-Dev-Team/update-mobile-menu\n\nUpdate the mobile menu: keep its CSS when WP Rocket removes unused CSS"
+    "changelog": "Merge pull request #267 from DesignStudio-Dev-Team/keep-attributes-not-in-the-dropdown\n\nKeep the attributes the variation dropdown doesn't show in Additional information"
   }
 }
