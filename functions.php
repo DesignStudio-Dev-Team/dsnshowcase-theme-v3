@@ -684,3 +684,306 @@ function populate_current_page_url( $value ) {
 // -------------------------------
 // END GRAVITY FORMS: Add hidden field with current page URL to all forms
 // -------------------------------
+
+/**
+ * Add an "Upsells" tab right after the "More details" tab.
+ */
+add_filter('woocommerce_product_tabs', function ($tabs) {
+    global $product;
+
+    if (!$product || empty($product->get_upsell_ids())) {
+        return $tabs;
+    }
+
+    // Find the "More details" tab and place the new tab right after it.
+    $priority = 25; // fallback
+    foreach ($tabs as $tab) {
+        if (isset($tab['title']) && strcasecmp(trim(wp_strip_all_tags($tab['title'])), 'More details') === 0) {
+            $priority = (int) $tab['priority'] + 1;
+            break;
+        }
+    }
+
+    $tabs['upsells'] = [
+        'title'    => __('You may also like', 'your-textdomain'),
+        'priority' => $priority,
+        'callback' => 'dsn_upsells_tab_content',
+    ];
+
+    return $tabs;
+}, 98);
+
+/**
+ * Upsells tab content: custom cards, slider when more than 4.
+ */
+function dsn_upsells_tab_content() {
+    global $product;
+
+    $upsells = array_filter(array_map('wc_get_product', $product->get_upsell_ids()), 'wc_products_array_filter_visible');
+    if (empty($upsells)) {
+        return;
+    }
+    $is_slider = count($upsells) > 4;
+    ?>
+    <div class="dsn-upsells<?php echo $is_slider ? ' dsn-upsells--slider' : ''; ?>">
+        <?php if ($is_slider) : ?>
+            <button type="button" class="dsn-upsells__nav dsn-upsells__prev" aria-label="<?php esc_attr_e('Previous', 'your-textdomain'); ?>">&#8249;</button>
+            <button type="button" class="dsn-upsells__nav dsn-upsells__next" aria-label="<?php esc_attr_e('Next', 'your-textdomain'); ?>">&#8250;</button>
+        <?php endif; ?>
+
+        <div class="dsn-upsells__track">
+            <?php foreach ($upsells as $upsell) {
+                dsn_render_upsell_card($upsell);
+            } ?>
+        </div>
+    </div>
+
+    <style>
+        .dsn-upsells { position: relative; --dsn-green: #146c34; --dsn-border: #dcdcdc; }
+        .dsn-upsells__track {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 0 0 1px 1px; /* room for the overlapping borders */
+        }
+        @media (max-width: 768px) {
+            .dsn-upsells__track { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Card */
+        .dsn-upsell-card {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid var(--dsn-border);
+            margin: 0 0 -1px -1px; /* collapse neighbouring borders */
+            min-width: 0;
+        }
+        .dsn-upsell-card__image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 4 / 3;
+            padding: 20px;
+        }
+        .dsn-upsell-card__image img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .dsn-upsell-card__body { padding: 0 12px 20px; }
+        .dsn-upsell-card__brand {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .dsn-upsell-card__title {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .dsn-upsell-card__title a { color: var(--dsn-green); text-decoration: none; }
+        .dsn-upsell-card__title a:hover { text-decoration: underline; }
+        .dsn-upsell-card__cat {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--dsn-green);
+        }
+
+        /* Grey footer */
+        .dsn-upsell-card__footer {
+            margin-top: auto;
+            background: #f1f2f4;
+            padding: 36px 12px 10px;
+            text-align: center;
+        }
+        .dsn-upsell-card__price { font-size: 16px; color: #222; margin-bottom: 4px; }
+        .dsn-upsell-card__price del { opacity: .6; margin-right: 4px; }
+        .dsn-upsell-card__price ins { text-decoration: none; }
+        .dsn-upsell-card__actions { display: flex; justify-content: center; gap: 8px; }
+        .dsn-upsell-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 76px;
+            height: 32px;
+            background: var(--dsn-green);
+            color: #fff !important;
+            border-radius: 2px;
+            text-decoration: none !important;
+            transition: background .2s;
+        }
+        .dsn-upsell-btn:hover { background: #0e5528; }
+        .dsn-upsell-btn svg { width: 16px; height: 16px; fill: currentColor; }
+        .dsn-upsell-btn.loading { opacity: .6; pointer-events: none; }
+        .dsn-upsell-card .added_to_cart { display: none !important; } /* hide WC's "View cart" link */
+
+        /* Slider mode */
+        .dsn-upsells--slider .dsn-upsells__track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+        .dsn-upsells--slider .dsn-upsells__track::-webkit-scrollbar { display: none; }
+        .dsn-upsells--slider .dsn-upsell-card {
+            flex: 0 0 calc(25% + 1px);
+            scroll-snap-align: start;
+        }
+        @media (max-width: 768px) {
+            .dsn-upsells--slider .dsn-upsell-card { flex-basis: calc(50% + 1px); }
+        }
+        .dsn-upsells__nav {
+            position: absolute;
+            top: 30%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--dsn-border);
+            background: #fff;
+            color: var(--dsn-green);
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,.12);
+        }
+        .dsn-upsells__prev { left: 8px; }
+        .dsn-upsells__next { right: 8px; }
+        .dsn-upsells__nav:disabled { opacity: .3; cursor: default; }
+    </style>
+
+    <?php if ($is_slider) : ?>
+    <script>
+        (function () {
+            document.querySelectorAll('.dsn-upsells--slider').forEach(function (slider) {
+                var track = slider.querySelector('.dsn-upsells__track');
+                var prev  = slider.querySelector('.dsn-upsells__prev');
+                var next  = slider.querySelector('.dsn-upsells__next');
+                if (!track) return;
+
+                function step() {
+                    var card = track.querySelector('.dsn-upsell-card');
+                    return card ? card.offsetWidth - 1 : track.clientWidth;
+                }
+                function update() {
+                    prev.disabled = track.scrollLeft <= 1;
+                    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+                }
+
+                prev.addEventListener('click', function () { track.scrollBy({ left: -step() }); });
+                next.addEventListener('click', function () { track.scrollBy({ left: step() }); });
+                track.addEventListener('scroll', update, { passive: true });
+                window.addEventListener('resize', update);
+
+                // Tab is hidden on load; recalc when a tab is opened.
+                document.querySelectorAll('.wc-tabs a').forEach(function (a) {
+                    a.addEventListener('click', function () { setTimeout(update, 50); });
+                });
+
+                update();
+            });
+        })();
+    </script>
+    <?php endif;
+}
+
+/**
+ * One product card.
+ */
+function dsn_render_upsell_card($p) {
+    $link = $p->get_permalink();
+
+    // Category shown under the title (first assigned category).
+    $cats = get_the_terms($p->get_id(), 'product_cat');
+    $cat  = ($cats && !is_wp_error($cats)) ? $cats[0] : null;
+
+    // Brand: WooCommerce Brands taxonomy if present, otherwise the top-level parent category (e.g. "STIHL").
+    $brand = '';
+    if (taxonomy_exists('product_brand')) {
+        $brands = get_the_terms($p->get_id(), 'product_brand');
+        if ($brands && !is_wp_error($brands)) {
+            $brand = $brands[0]->name;
+        }
+    }
+    if (!$brand && $cat) {
+        $ancestors = get_ancestors($cat->term_id, 'product_cat');
+        if ($ancestors) {
+            $top = get_term(end($ancestors), 'product_cat');
+            if ($top && !is_wp_error($top)) {
+                $brand = $top->name;
+            }
+        }
+    }
+
+    // Add-to-cart button (AJAX for simple, in-stock products; otherwise links to the product).
+    $can_buy = $p->is_purchasable() && $p->is_in_stock();
+    $classes = array_filter([
+        'dsn-upsell-btn',
+        'product_type_' . $p->get_type(),
+        $can_buy ? 'add_to_cart_button' : '',
+        $can_buy && $p->supports('ajax_add_to_cart') ? 'ajax_add_to_cart' : '',
+    ]);
+    ?>
+    <div class="dsn-upsell-card">
+        <a class="dsn-upsell-card__image" href="<?php echo esc_url($link); ?>">
+            <?php echo $p->get_image('woocommerce_thumbnail'); ?>
+        </a>
+
+        <div class="dsn-upsell-card__body">
+            <?php if ($brand) : ?>
+                <div class="dsn-upsell-card__brand"><?php echo esc_html($brand); ?></div>
+            <?php endif; ?>
+
+            <h3 class="dsn-upsell-card__title">
+                <a href="<?php echo esc_url($link); ?>" title="<?php echo esc_attr($p->get_name()); ?>"><?php echo esc_html($p->get_name()); ?></a>
+            </h3>
+
+            <?php if ($cat) : ?>
+                <div class="dsn-upsell-card__cat"><?php echo esc_html($cat->name); ?></div>
+            <?php endif; ?>
+        </div>
+
+        <div class="dsn-upsell-card__footer">
+            <div class="dsn-upsell-card__price"><?php echo $p->get_price_html(); ?></div>
+
+            <div class="dsn-upsell-card__actions">
+                <a href="<?php echo esc_url($link); ?>" class="dsn-upsell-btn" aria-label="<?php esc_attr_e('View details', 'your-textdomain'); ?>">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h6.3a6.5 6.5 0 0 1-1.1-2H6V4h7v5h5v2.1a6.5 6.5 0 0 1 2 .6V8l-6-6zM8 12h6v2H8v-2zm0 4h3v2H8v-2zm9.5-3a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm.5 7h-1v-3h1v3zm0-4h-1v-1h1v1z"/></svg>
+                </a>
+
+                <a href="<?php echo esc_url($p->add_to_cart_url()); ?>"
+                   data-quantity="1"
+                   data-product_id="<?php echo esc_attr($p->get_id()); ?>"
+                   data-product_sku="<?php echo esc_attr($p->get_sku()); ?>"
+                   class="<?php echo esc_attr(implode(' ', $classes)); ?>"
+                   aria-label="<?php echo esc_attr($p->add_to_cart_description()); ?>"
+                   rel="nofollow">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h2v2h2v2H7v2H5V8H3V6h2V4z"/><path d="M8.2 11l.7 3.5h9.3L20 8h-9V6h12l-2.6 10.5H7.3L5.9 9.6 8.2 11zM9 18.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm9 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+/**
+ * Remove the default upsell section below the tabs so it isn't shown twice.
+ */
+add_action('wp', function () {
+    remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
+});
+
+remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display');
