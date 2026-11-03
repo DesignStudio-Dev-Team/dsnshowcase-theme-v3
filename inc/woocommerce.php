@@ -79,6 +79,11 @@ function woo_rename_tabs($tabs)
             'priority' => 1,
             'callback' => 'woo_new_product_tab_more'
         );
+    } else {
+        global $product;
+        if (!$product || (!$product->has_weight() && !$product->has_dimensions() && !dsn_attributes_shown_only_in_additional_information($product))) {
+            unset($tabs['additional_information']);
+        }
     }
 
     if (get_field('custom_block_content')) {
@@ -92,6 +97,44 @@ function woo_rename_tabs($tabs)
     }
 
     return $tabs;
+}
+
+// Variation attributes already show in the variation dropdown; every other attribute only shows here, so it stays
+add_filter('woocommerce_display_product_attributes', 'dsn_strip_variation_attribute_rows_from_additional_information', 99, 2);
+function dsn_strip_variation_attribute_rows_from_additional_information($product_attributes, $product)
+{
+    foreach (dsn_attributes_shown_in_variation_dropdown($product) as $attribute) {
+        unset($product_attributes['attribute_' . sanitize_title_with_dashes($attribute->get_name())]);
+    }
+    return $product_attributes;
+}
+
+function dsn_attributes_shown_in_variation_dropdown($product)
+{
+    if (!$product || !$product->is_type('variable')) {
+        return array();
+    }
+
+    $shown = array();
+    foreach ($product->get_attributes() as $attribute) {
+        if ($attribute->get_variation()) {
+            $shown[] = $attribute;
+        }
+    }
+    return $shown;
+}
+
+function dsn_attributes_shown_only_in_additional_information($product)
+{
+    $in_dropdown = dsn_attributes_shown_in_variation_dropdown($product);
+
+    $shown = array();
+    foreach ($product->get_attributes() as $attribute) {
+        if ($attribute->get_visible() && !in_array($attribute, $in_dropdown, true)) {
+            $shown[] = $attribute;
+        }
+    }
+    return $shown;
 }
 
 function woo_new_product_tab_more()

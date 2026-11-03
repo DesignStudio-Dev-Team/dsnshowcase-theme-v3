@@ -1310,6 +1310,23 @@ function dssLang($dssSiteLanguage = 'en')
     return $data;
 }
 
+function dssGetSyndicationSiteSettings()
+{
+    if (function_exists('syndified_site_settings')) {
+        return syndified_site_settings();
+    }
+
+    $legacySiteSettingsFile = WP_PLUGIN_DIR . '/syndified/website-content/json/site.json';
+
+    if (!is_file($legacySiteSettingsFile)) {
+        return [];
+    }
+
+    $siteSettings = json_decode(file_get_contents($legacySiteSettingsFile), true);
+
+    return is_array($siteSettings) ? $siteSettings : [];
+}
+
 function dssGetLanguageOptions(): array
 {
 
@@ -1321,21 +1338,14 @@ function dssGetLanguageOptions(): array
     // get the list of languages with the url for the page that loaded
     $languages = apply_filters( 'wpml_active_languages', NULL, 'skip_missing=0&orderby=code' );
 
-    //check if file exists
-    if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/wp-content/plugins/syndified/website-content/json/site.json'))
-    {
-        $syndication_json = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/wp-content/plugins/syndified/website-content/json/site.json');
-        $syndication_json_data = json_decode($syndication_json, true);
-    }
-    else
-    {
-        $syndication_json_data = [];
-    }
-    // $syndication_json = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/wp-content/plugins/syndified/website-content/json/site.json');
-
-    // $syndication_json_data = json_decode($syndication_json, true);
+    $syndication_json_data = dssGetSyndicationSiteSettings();
 
     $useLanguages = [];
+
+    if (empty($syndication_json_data['main_language'])) {
+        return $useLanguages;
+    }
+
     // site's main language
     if(is_array($languages)) {
     foreach ($languages as $language)
@@ -1350,7 +1360,7 @@ function dssGetLanguageOptions(): array
     // site's secondary languages
     foreach ($languages as $language)
     {
-        foreach ($syndication_json_data['languages'] as $console_lang)
+        foreach ($syndication_json_data['languages'] ?? [] as $console_lang)
         {
             if (explode ('_', $language['default_locale'])[0] == explode ('_', $console_lang['abbreviated_name'])[0])
             {
