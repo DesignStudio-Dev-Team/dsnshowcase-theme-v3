@@ -1,5 +1,6 @@
 @import 'tailwindcss' prefix(dsn);
 @import './woocommerce.css';
+@import './faq.css';
 
 @theme {
     --breakpoint-max: 1800px;

@@ -1,0 +1,221 @@
+/*
+ * FAQs (inc/faq.php, templates/faq/*, single-dsn_faq.php, assets/js/faq*.js).
+ * Imported into assets/css/tailwind.css; rebuild with `npm run build`.
+ *
+ * Ported from the DesignStudio v4 theme. Colours follow the dealer colour
+ * (--dealerColor); the templates use them through the dsn:*-faq-* utilities
+ * (dsn:bg-faq-primary/10, dsn:text-faq-ink…) and the faq-* components below.
+ */
+
+@theme inline {
+	--color-faq-primary: var(--faq-primary);
+	--color-faq-accent: var(--faq-accent);
+	--color-faq-ink: var(--faq-ink);
+	--color-faq-surface: var(--faq-surface);
+	--color-faq-action: var(--faq-action);
+	--color-faq-on-accent: var(--faq-on-accent);
+	--radius-faq-card: var(--faq-radius);
+	--radius-faq-btn: var(--faq-radius-btn);
+	--shadow-faq-soft: 0 1px 2px rgb(0 0 0 / .04), 0 8px 24px -12px rgb(22 32 43 / .12);
+	--shadow-faq-lift: 0 2px 4px rgb(0 0 0 / .04), 0 24px 48px -16px rgb(22 32 43 / .22);
+	--font-faq-display: var(--faq-font-display);
+	--font-faq-body: var(--faq-font-body);
+}
+
+:root {
+	--faq-primary: var(--dealerColor, #1f3a5f);
+	--faq-accent: var(--faq-primary);
+	--faq-action: var(--faq-primary);
+	--faq-ink: #16202b;
+	--faq-surface: #f5f6f8;
+	--faq-on-accent: #fff;
+	--faq-radius: 14px;
+	--faq-radius-btn: 10px;
+	--faq-font-display: 'Lato', ui-sans-serif, system-ui, sans-serif;
+	--faq-font-body: inherit;
+}
+
+@layer base {
+	.dsn-faq {
+		font-family: var(--faq-font-body);
+		font-size: 16px;
+		line-height: 1.5;
+		color: var(--faq-ink);
+	}
+	/* The theme styles bare p, ul, li and headings (sizes, margins, bullets):
+	   the FAQ markup sets its own with utilities, the full answer uses .faq-prose. */
+	.dsn-faq :where(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, figure, blockquote):not(:where(.faq-prose *)) {
+		margin: 0;
+		padding: 0;
+		font-size: inherit;
+		line-height: inherit;
+		font-weight: inherit;
+		list-style: none;
+	}
+	.dsn-faq :where(h1, h2, h3, h4):not(:where(.faq-prose *)) {
+		font-family: var(--faq-font-display);
+		font-weight: 500;
+	}
+	/* The theme gives every ul `!text-2xl` (in the nested base.md layer). For
+	   important rules the earlier layer wins, so this sublayer (declared
+	   before base.md, as this file is imported first) lets lists take the
+	   FAQ sizes. */
+	@layer faq {
+		.dsn-faq :where(ul, ol) {
+			font-size: inherit !important;
+		}
+	}
+	/* Links take their colour from the FAQ markup, not `.page-content a`. */
+	.dsn-faq a:not(.faq-prose a) {
+		color: inherit;
+		text-decoration: inherit;
+	}
+	.dsn-faq [hidden] {
+		display: none !important;
+	}
+}
+
+@layer components {
+	.faq-container { width: 100%; max-width: 1360px; margin-inline: auto; padding-inline: 1rem; }
+	.faq-section { padding-block: 4rem; }
+	@media (width >= 40rem) {
+		.faq-container { padding-inline: 1.5rem; }
+		.faq-section { padding-block: 5rem; }
+	}
+	@media (width >= 64rem) {
+		.faq-container { padding-inline: 2rem; }
+		.faq-section { padding-block: 7rem; }
+	}
+	.faq-eyebrow { font-size: .75rem; line-height: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; }
+
+	.faq-btn {
+		display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: .5rem;
+		padding: 0 1.5rem; border: 0; border-radius: var(--faq-radius-btn);
+		font-size: 15px; font-weight: 600; line-height: 1; letter-spacing: .01em; white-space: nowrap; text-decoration: none;
+		cursor: pointer; transition: all .2s ease;
+	}
+	.faq-btn:active { transform: scale(.98); }
+	.faq-btn-sm { min-height: 40px; padding: 0 1rem; font-size: .875rem; }
+	.faq-btn-accent { background: var(--faq-accent); color: var(--faq-on-accent); box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--faq-accent) 60%, transparent); }
+	.faq-btn-accent:hover { color: var(--faq-on-accent); transform: translateY(-1px); filter: brightness(1.1); }
+	.faq-btn-primary { background: var(--faq-primary); color: #fff; }
+	.faq-btn-primary:hover { background: var(--faq-ink); color: #fff; }
+	.faq-btn-outline { border: 1px solid color-mix(in srgb, var(--faq-ink) 15%, transparent); background: #fff; color: var(--faq-ink); }
+	.faq-btn-outline:hover { border-color: var(--faq-ink); background: var(--faq-ink); color: #fff; }
+	.faq-btn-ghost-light { border: 1px solid rgb(255 255 255 / .3); background: rgb(255 255 255 / .05); color: #fff; }
+	.faq-btn-ghost-light:hover { border-color: #fff; background: #fff; color: var(--faq-ink); }
+	.faq-icon-btn { display: grid; height: 2.75rem; width: 2.75rem; place-items: center; border: 0; border-radius: 9999px; background: transparent; color: var(--faq-ink); cursor: pointer; transition: background .2s ease; }
+	.faq-icon-btn:hover { background: color-mix(in srgb, var(--faq-ink) 5%, transparent); }
+
+	.faq-chip {
+		display: inline-flex; flex-shrink: 0; align-items: center; gap: .375rem; white-space: nowrap;
+		padding: .5rem 1rem; border: 1px solid color-mix(in srgb, var(--faq-ink) 10%, transparent); border-radius: 9999px;
+		font-size: .875rem; font-weight: 500; color: color-mix(in srgb, var(--faq-ink) 80%, transparent); text-decoration: none; transition: all .2s ease;
+	}
+	.faq-chip:hover { border-color: var(--faq-primary); color: var(--faq-primary); }
+	.faq-chip--active, .faq-chip--active:hover { border-color: var(--faq-ink); background: var(--faq-ink); color: #fff; }
+
+	/* Compact topic chips on the FAQ product cards (templates/faq/landing-concierge.php). */
+	.faq-topic {
+		display: inline-flex; min-height: 2.25rem; align-items: center; gap: .375rem;
+		padding: .375rem .75rem; border: 1px solid color-mix(in srgb, var(--faq-ink) 10%, transparent); border-radius: 9999px;
+		background: var(--faq-surface); font-size: 13px; font-weight: 500; line-height: 1.25; text-decoration: none;
+		color: color-mix(in srgb, var(--faq-ink) 80%, transparent); transition: all .2s ease;
+	}
+	.faq-topic svg { color: var(--faq-primary); }
+	.faq-topic:hover, .faq-topic:focus-visible { border-color: currentColor; background: #fff; color: var(--faq-action); }
+	.faq-topic:hover svg { color: var(--faq-action); }
+	.faq-topic--more { border-style: dashed; background: transparent; font-weight: 600; color: var(--faq-action); }
+
+	.faq-input {
+		display: block; width: 100%; padding: .75rem 1rem;
+		border: 1px solid color-mix(in srgb, var(--faq-ink) 15%, transparent); border-radius: var(--faq-radius-btn);
+		background: #fff; font-size: 15px; color: var(--faq-ink); box-shadow: inset 0 1px 2px rgb(0 0 0 / .03); transition: all .2s ease;
+	}
+	.faq-input::placeholder { color: color-mix(in srgb, var(--faq-ink) 35%, transparent); }
+	.faq-input:focus { border-color: var(--faq-primary); outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--faq-primary) 15%, transparent); }
+
+	.faq-no-scrollbar { scrollbar-width: none; }
+	.faq-no-scrollbar::-webkit-scrollbar { display: none; }
+	.faq-hero-in { animation: dsn-faq-rise .8s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--d, 0ms); }
+
+	/* The full answer on a single FAQ. */
+	.faq-prose { font-size: 17px; line-height: 1.75; color: color-mix(in srgb, var(--faq-ink) 80%, transparent); }
+	.faq-prose > * + * { margin-top: 1.25rem; }
+	.faq-prose p, .faq-prose li { font-size: inherit; line-height: inherit; font-weight: 400; margin-bottom: 0; }
+	.faq-prose h2 { margin-top: 3rem; font-family: var(--faq-font-display); font-size: 1.875rem; font-weight: 500; line-height: 1.25; color: var(--faq-ink); }
+	.faq-prose h3 { margin-top: 2.5rem; font-family: var(--faq-font-display); font-size: 1.5rem; font-weight: 500; line-height: 1.375; color: var(--faq-ink); }
+	.faq-prose h4 { margin-top: 2rem; font-size: 1.125rem; font-weight: 600; color: var(--faq-ink); }
+	.faq-prose a { font-weight: 500; color: var(--faq-action); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--faq-action) 30%, transparent); text-underline-offset: 4px; }
+	.faq-prose a:hover { text-decoration-color: currentColor; }
+	.faq-prose ul { margin-block: 0; padding-left: 1.5rem; list-style: disc; font-size: inherit; }
+	.faq-prose ol { display: block; margin-block: 0; padding-left: 1.5rem; list-style: decimal; font-size: inherit; }
+	.faq-prose li::marker { color: var(--faq-primary); }
+	.faq-prose li + li { margin-top: .5rem; }
+	.faq-prose blockquote { border-left: 4px solid var(--faq-accent); padding-left: 1.5rem; font-family: var(--faq-font-display); font-size: 1.25rem; font-style: italic; color: var(--faq-ink); }
+	.faq-prose img, .faq-prose figure { border-radius: var(--faq-radius); }
+	.faq-prose table { width: 100%; text-align: left; font-size: 15px; }
+	.faq-prose th, .faq-prose td { padding: .625rem .75rem; border-bottom: 1px solid color-mix(in srgb, var(--faq-ink) 10%, transparent); }
+	.faq-prose strong { font-weight: 600; color: var(--faq-ink); }
+}
+
+/* The theme's unlayered `p a` rule (blue links) beats every layer: hand link
+   colours in FAQ paragraphs back to the layered styles (utilities, .faq-prose). */
+.dsn-faq p a,
+.dsn-faq p a:hover { color: revert-layer; }
+
+/* Accent text on the dark (ink) sections: lightened, so a dark dealer colour stays readable. */
+.dsn-faq [class*="bg-faq-ink"] [class*="text-faq-accent"],
+.dsn-faq [class*="bg-faq-ink"][class*="text-white"] .faq-eyebrow[class*="text-faq-accent"] { color: color-mix(in oklab, var(--faq-accent) 50%, white); }
+/* ...and accent buttons get an outline there, in case the dealer colour is as dark as the panel. */
+.dsn-faq [class*="bg-faq-ink"] .faq-btn-accent { box-shadow: 0 0 0 1px rgb(255 255 255 / .35); }
+
+/* Expanders (templates/faq/item.php). */
+.faq-details[open] { box-shadow: 0 0 0 1px color-mix(in srgb, var(--faq-primary) 50%, transparent), 0 24px 48px -20px rgb(22 32 43 / .25); }
+.faq-details summary::-webkit-details-marker { display: none; }
+.faq-item .faq-icon svg { transition: transform .25s ease; }
+.faq-details[open] .faq-icon { background: var(--faq-primary); color: #fff; }
+.faq-details[open] .faq-icon svg { transform: rotate(45deg); }
+.faq-details[open] .faq-panel { animation: dsn-faq-drop .25s ease; }
+.faq-item mark { background: color-mix(in srgb, var(--faq-accent) 30%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
+.faq-details summary:focus-visible, .faq-item button:focus-visible, .dsn-faq [data-faq-clear]:focus-visible { outline: 2px solid var(--faq-primary); outline-offset: 2px; }
+
+/* Explorer landing page (templates/faq/landing-explorer.php). */
+.faq-suggestion.is-active { background: var(--faq-surface); box-shadow: inset 3px 0 0 var(--faq-accent); }
+.faq-suggestion mark { background: color-mix(in srgb, var(--faq-accent) 22%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+.faq-tabpanel:not([hidden]) { animation: dsn-faq-rise .4s cubic-bezier(.2, .8, .2, 1); }
+
+/* Concierge landing page (templates/faq/landing-concierge.php + assets/js/faq.js). */
+.cc-bot, .cc-user { display: flex; animation: dsn-faq-rise .35s cubic-bezier(.2, .8, .2, 1); }
+.cc-user { justify-content: flex-end; }
+.cc-bubble { max-width: 88%; margin: 0; padding: .75rem 1rem; border-radius: 1.25rem; font-size: 15px; line-height: 1.625; font-weight: 400; }
+.cc-bot .cc-bubble { border-top-left-radius: .375rem; background: #fff; color: var(--faq-ink); box-shadow: 0 1px 2px rgb(0 0 0 / .04), 0 8px 24px -12px rgb(22 32 43 / .12), 0 0 0 1px color-mix(in srgb, var(--faq-ink) 10%, transparent); }
+.cc-user .cc-bubble { border-top-right-radius: .375rem; background: var(--faq-primary); color: #fff; }
+.cc-lead { display: block; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--faq-primary); }
+.cc-choices { display: flex; flex-wrap: wrap; gap: .5rem; padding-left: .25rem; animation: dsn-faq-rise .35s cubic-bezier(.2, .8, .2, 1); }
+.cc-chip {
+	display: inline-flex; max-width: 100%; align-items: center; gap: .5rem; padding: .5rem 1rem;
+	border: 1px solid color-mix(in srgb, var(--faq-primary) 25%, transparent); border-radius: 9999px; background: #fff;
+	font-size: .875rem; font-weight: 600; line-height: 1.375; text-align: left; text-decoration: none; color: var(--faq-primary); cursor: pointer; transition: all .2s ease;
+}
+.cc-chip:hover { border-color: var(--faq-primary); background: var(--faq-primary); color: #fff; }
+.cc-chip--quiet { border-color: color-mix(in srgb, var(--faq-ink) 15%, transparent); color: color-mix(in srgb, var(--faq-ink) 70%, transparent); }
+.cc-chip--quiet:hover { border-color: var(--faq-ink); background: var(--faq-ink); color: #fff; }
+.cc-choices.is-done .cc-chip { pointer-events: none; opacity: .4; }
+.cc-choices.is-done .cc-chip.is-chosen { border-color: var(--faq-primary); background: var(--faq-primary); color: #fff; opacity: 1; }
+.cc-typing { display: inline-flex; align-items: center; gap: .25rem; padding-block: 1rem; }
+.cc-typing i { height: .5rem; width: .5rem; border-radius: 9999px; background: color-mix(in srgb, var(--faq-ink) 30%, transparent); animation: dsn-faq-dot 1s infinite ease-in-out; }
+.cc-typing i:nth-child(2) { animation-delay: .15s; }
+.cc-typing i:nth-child(3) { animation-delay: .3s; }
+
+/* "Link copied" notice (assets/js/faq-toc.js). */
+.faq-toast { position: fixed; bottom: 2rem; left: 50%; z-index: 95; margin: 0; padding: .75rem 1.25rem; transform: translateX(-50%); border-radius: 9999px; background: var(--faq-ink); color: #fff; font-size: .875rem; font-weight: 500; box-shadow: 0 25px 50px -12px rgb(0 0 0 / .25); animation: dsn-faq-rise .3s ease; }
+.faq-toast[hidden] { display: none; }
+
+@keyframes dsn-faq-drop { from { opacity: 0; translate: 0 -8px; } to { opacity: 1; translate: 0 0; } }
+@keyframes dsn-faq-rise { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+@keyframes dsn-faq-dot { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+@media (prefers-reduced-motion: reduce) {
+	.dsn-faq *, .dsn-faq *::before, .dsn-faq *::after, .faq-toast { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
