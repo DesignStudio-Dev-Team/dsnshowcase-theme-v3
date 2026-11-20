@@ -1409,8 +1409,22 @@ add_filter('comments_open', 'disable_comments_status', 20, 2);
 add_filter('pings_open', 'disable_comments_status', 20, 2);
 
 
-// Disable plugin update email notifications
-add_filter( 'auto_plugin_update_send_email', '__return_false' );
+// Disable plugin, theme and core auto-update email notifications
+add_filter( 'auto_plugin_update_send_email', '__return_false', PHP_INT_MAX );
+add_filter( 'auto_theme_update_send_email', '__return_false', PHP_INT_MAX );
+add_filter( 'auto_core_update_send_email', '__return_false', PHP_INT_MAX );
+add_filter( 'send_core_update_notification_email', '__return_false', PHP_INT_MAX );
+add_filter( 'automatic_updates_send_debug_email', '__return_false', PHP_INT_MAX );
+
+// Safety net: drop any remaining automatic update emails by subject
+add_filter( 'wp_mail', function ( $args ) {
+	$subject = isset( $args['subject'] ) ? $args['subject'] : '';
+	if ( preg_match( '/(plugins?|themes?|WordPress)\s.*(updated|updates|update failed)|automatic update|Some plugins|Some themes/i', $subject )
+		&& preg_match( '/(Your Site Is Updating|have (automatically )?been updated|automatic updates?)/i', $subject . ' ' . ( $args['message'] ?? '' ) ) ) {
+		$args['to'] = array();
+	}
+	return $args;
+}, PHP_INT_MAX );
 
 
 // Register Custom Post Type
