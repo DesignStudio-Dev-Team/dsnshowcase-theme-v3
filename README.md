@@ -55,7 +55,22 @@ npm install
 
 Use github issues to report any issues or contact us at our website https://designstudio.com
 
+## FAQs
+
+Turn on under **Theme Settings → FAQs → Enable FAQs** (off by default).
+
+- Adds **FAQs** to the admin menu: the title is the question, "Quick answer" is the short answer, the editor is the full answer.
+- The first time it's turned on, starter FAQs for hot tubs, swim spas, saunas, cold plunge and your company are added — edit or delete them freely.
+- Pages: `/faqs/` (Concierge or Explorer layout), one page per product and topic (`/faqs/hot-tubs/`), and one page per question that follows its categories (`/faqs/hot-tubs/buyer/how-much-does-a-hot-tub-cost/`). Old `/faq/…` and `/faqs/<topic>/` links redirect to the new addresses.
+- To edit the landing page texts, create a page with the **FAQs** template; its "FAQ page" box has the headings, and `/faqs/` then goes to that page.
+- Choose the Gravity Form for the "Still curious?" band, plus the phone, showroom address and hours, in the same tab.
+- Show FAQs on any page with `[dsn_faqs category="hot-tubs" limit="6" title="Hot tub questions"]`.
+- Turning it off hides the FAQ pages but keeps your FAQs. Same post type and fields as the v4 theme, so FAQs carry over.
+- Code: `inc/faq-options.php`, `inc/faq.php`, `inc/faq-helpers.php`, `inc/faq-sample-data.php`, `templates/faq/*`, `archive-dsn_faq.php`, `taxonomy-dsn_faq_category.php`, `single-dsn_faq.php`, `template-faqs.php`, `assets/js/faq.js`, `assets/js/faq-toc.js`, `assets/css/faq.css`.
+
 ## Changelog
+### Unreleased
+- FAQs (ported from the v4 theme) with an on/off switch in Theme Settings
 ### 3.5.1
 - New Custom Blocks
 - Update WooCommerce Category Page
