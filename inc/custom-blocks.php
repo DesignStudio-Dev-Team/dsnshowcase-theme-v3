@@ -23,64 +23,64 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
 
         //if block type is hero1 then lets do hero1 or hero2 ect
         if($block_type === 'Hero 1'){
-           include get_template_directory() . '/inc/customblocks/hero1.php';
+           locate_template('/inc/customblocks/hero1.php');
         }
         if($block_type === 'Hero 2'){
-            include get_template_directory() . '/inc/customblocks/hero2.php';
+            locate_template('/inc/customblocks/hero2.php');
         }
         if($block_type === 'Hero 3'){
-            include get_template_directory() . '/inc/customblocks/hero3.php';
+            locate_template('/inc/customblocks/hero3.php');
         }
         if($block_type === 'Google Reviews') {
-            include get_template_directory() . '/inc/customblocks/google-reviews.php';
+            locate_template('/inc/customblocks/google-reviews.php');
         }
         if($block_type === 'Grid Reasons') {
-            include get_template_directory() . '/inc/customblocks/grid-reasons.php';
+            locate_template('/inc/customblocks/grid-reasons.php');
         } 
         if($block_type === 'Grid Brands') {
-            include get_template_directory() . '/inc/customblocks/grid-brands.php';
+            locate_template('/inc/customblocks/grid-brands.php');
         }
         if($block_type === 'Grid Block') {
-            include get_template_directory() . '/inc/customblocks/grid-block.php';
+            locate_template('/inc/customblocks/grid-block.php');
         }
         if($block_type === 'Process List') {
-            include get_template_directory() . '/inc/customblocks/process-list.php';
+            locate_template('/inc/customblocks/process-list.php');
         }
         if($block_type === 'Grid Categories') {
-            include get_template_directory() . '/inc/customblocks/grid-categories.php';
+            locate_template('/inc/customblocks/grid-categories.php');
         }
         if($block_type === 'Video Block') {
-            include get_template_directory() . '/inc/customblocks/video-block.php';
+            locate_template('/inc/customblocks/video-block.php');
         }
         if($block_type === 'Visual Block') {
-            include get_template_directory() . '/inc/customblocks/visual-block.php';
+            locate_template('/inc/customblocks/visual-block.php');
         }
         if($block_type === 'Timer Block') {
-            include get_template_directory() . '/inc/customblocks/timer-block.php';
+            locate_template('/inc/customblocks/timer-block.php');
         }
         if($block_type === 'Two Block') {
-            include get_template_directory() . '/inc/customblocks/two-block.php';
+            locate_template('/inc/customblocks/two-block.php');
         }
         if($block_type === 'Reviews Block') {
-            include get_template_directory() . '/inc/customblocks/reviews-block.php';
+            locate_template('/inc/customblocks/reviews-block.php');
         }
         if($block_type === 'CTAs Block') {
-            include get_template_directory() . '/inc/customblocks/ctas-block.php';
+            locate_template('/inc/customblocks/ctas-block.php');
         }
         if($block_type === 'Card Stack Block') {
-            include get_template_directory() . '/inc/customblocks/card-stack-block.php';
+            locate_template('/inc/customblocks/card-stack-block.php');
         }
         if($block_type === 'Icon Block') {
-            include get_template_directory() . '/inc/customblocks/icon-block.php';
+            locate_template('/inc/customblocks/icon-block.php');
         }
         if($block_type === 'Logo Slider') {
-            include get_template_directory() . '/inc/customblocks/logo-slider-block.php';
+            locate_template('/inc/customblocks/logo-slider-block.php');
         }
         if($block_type === 'Products Showcase') {
-            include get_template_directory() . '/inc/customblocks/products-showcase-block.php';
+            locate_template('/inc/customblocks/products-showcase-block.php');
         }
         if($block_type === 'Left Right Block') {
-            include get_template_directory() . '/inc/customblocks/left-right-block.php';
+            include locate_template('/inc/customblocks/left-right-block.php');
         }
     }
   echo '</div>'; ?>
