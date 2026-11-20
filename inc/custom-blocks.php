@@ -23,61 +23,61 @@ function render_custom_blocks($blocks, $display_type = 'stack') {
 
         //if block type is hero1 then lets do hero1 or hero2 ect
         if($block_type === 'Hero 1'){
-           locate_template('/inc/customblocks/hero1.php');
+           include locate_template('/inc/customblocks/hero1.php');
         }
         if($block_type === 'Hero 2'){
-            locate_template('/inc/customblocks/hero2.php');
+            include locate_template('/inc/customblocks/hero2.php');
         }
         if($block_type === 'Hero 3'){
-            locate_template('/inc/customblocks/hero3.php');
+            include locate_template('/inc/customblocks/hero3.php');
         }
         if($block_type === 'Google Reviews') {
-            locate_template('/inc/customblocks/google-reviews.php');
+            include locate_template('/inc/customblocks/google-reviews.php');
         }
         if($block_type === 'Grid Reasons') {
-            locate_template('/inc/customblocks/grid-reasons.php');
+            include locate_template('/inc/customblocks/grid-reasons.php');
         } 
         if($block_type === 'Grid Brands') {
-            locate_template('/inc/customblocks/grid-brands.php');
+            include locate_template('/inc/customblocks/grid-brands.php');
         }
         if($block_type === 'Grid Block') {
-            locate_template('/inc/customblocks/grid-block.php');
+            include locate_template('/inc/customblocks/grid-block.php');
         }
         if($block_type === 'Process List') {
-            locate_template('/inc/customblocks/process-list.php');
+            include locate_template('/inc/customblocks/process-list.php');
         }
         if($block_type === 'Grid Categories') {
-            locate_template('/inc/customblocks/grid-categories.php');
+            include locate_template('/inc/customblocks/grid-categories.php');
         }
         if($block_type === 'Video Block') {
-            locate_template('/inc/customblocks/video-block.php');
+            include locate_template('/inc/customblocks/video-block.php');
         }
         if($block_type === 'Visual Block') {
-            locate_template('/inc/customblocks/visual-block.php');
+            include locate_template('/inc/customblocks/visual-block.php');
         }
         if($block_type === 'Timer Block') {
-            locate_template('/inc/customblocks/timer-block.php');
+            include locate_template('/inc/customblocks/timer-block.php');
         }
         if($block_type === 'Two Block') {
-            locate_template('/inc/customblocks/two-block.php');
+            include locate_template('/inc/customblocks/two-block.php');
         }
         if($block_type === 'Reviews Block') {
-            locate_template('/inc/customblocks/reviews-block.php');
+            include locate_template('/inc/customblocks/reviews-block.php');
         }
         if($block_type === 'CTAs Block') {
-            locate_template('/inc/customblocks/ctas-block.php');
+            include locate_template('/inc/customblocks/ctas-block.php');
         }
         if($block_type === 'Card Stack Block') {
-            locate_template('/inc/customblocks/card-stack-block.php');
+            include locate_template('/inc/customblocks/card-stack-block.php');
         }
         if($block_type === 'Icon Block') {
-            locate_template('/inc/customblocks/icon-block.php');
+            include locate_template('/inc/customblocks/icon-block.php');
         }
         if($block_type === 'Logo Slider') {
-            locate_template('/inc/customblocks/logo-slider-block.php');
+            include locate_template('/inc/customblocks/logo-slider-block.php');
         }
         if($block_type === 'Products Showcase') {
-            locate_template('/inc/customblocks/products-showcase-block.php');
+            include locate_template('/inc/customblocks/products-showcase-block.php');
         }
         if($block_type === 'Left Right Block') {
             include locate_template('/inc/customblocks/left-right-block.php');
