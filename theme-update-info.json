@@ -1,11 +1,11 @@
 {
-  "version": "v3.7.23",
-  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.23",
-  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.23/dsnshowcase.zip",
+  "version": "v3.7.24",
+  "details_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/tag/v3.7.24",
+  "download_url": "https://github.com/DesignStudio-Dev-Team/dsnshowcase-theme-v3/releases/download/v3.7.24/dsnshowcase.zip",
   "requires": "5.0",
   "tested": "6.5",
-  "last_updated": "2026-10-28",
+  "last_updated": "2026-11-25",
   "sections": {
-    "changelog": "Merge pull request #267 from DesignStudio-Dev-Team/keep-attributes-not-in-the-dropdown\n\nKeep the attributes the variation dropdown doesn't show in Additional information"
+    "changelog": "Merge pull request #271 from DesignStudio-Dev-Team/stop-truncating-yoast-titles\n\nStop truncating Yoast titles to 60 bytes"
   }
 }
